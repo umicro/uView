@@ -1,0 +1,753 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	// "condition": { //模式配置，仅开发期间生效
+	// 	"current": 0, //当前激活的模式(list 的索引项)
+	// 	"list": [{
+	// 		"name": "test", //模式名称
+	// 		"path": "pages/componentsB/upload/index", //启动页面，必选
+	// 		"query": "id=1&name=2" //启动参数，在页面的-+onLoad函数里面得到
+	// 	}]
+	// },
+	"pages": [
+		// 演示-组件 
+		{
+			"path": "pages/example/components",
+			"style": {
+				"navigationBarTitleText": "组件" 
+			}
+		},
+		// avatarCropper-头像裁剪
+		{
+			"path": "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+			"style": {
+				"navigationBarTitleText": "头像裁剪",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		},
+		// 演示-工具
+		{
+			"path": "pages/example/js",
+			"style": {
+				"navigationBarTitleText": "工具"
+			}
+		},
+		// 演示-模板
+		{
+			"path": "pages/example/template",
+			"style": {
+				"navigationBarTitleText": "模板"
+			}
+		},
+		// fullScreen-压窗屏
+		{
+			"path": "uview-ui/components/u-full-screen/u-full-screen",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "fade-in",
+					"background": "transparent",
+					"backgroundColor": "rgba(0,0,0,0)",
+					"popGesture": "none"
+				}
+			}
+		}
+	],
+	"subPackages": [{
+			"root": "pages/componentsC",
+			"pages": [
+				// test-测试
+				{
+					"path": "test/index",
+					"style": {
+						// "navigationBarTitleText": "navbar-自定义导航栏",
+						"navigationStyle": "custom" ,// 隐藏系统导航栏
+						"navigationBarTextStyle": "white" // 状态栏字体为白色
+					}
+				},
+				// gap-间隔槽
+				{
+					"path": "gap/index",
+					"style": {
+						"navigationBarTitleText": "gap-间隔槽"
+					}
+				},
+				// subsection分段器
+				{
+					"path": "subsection/index",
+					"style": {
+						"navigationBarTitleText": "subsection-分段器"
+					}
+				},
+				// section 查看更多
+				{
+					"path": "section/index",
+					"style": {
+						"navigationBarTitleText": "section-查看更多"
+					}
+				},
+				// link链接
+				{
+					"path": "link/index",
+					"style": {
+						"navigationBarTitleText": "link-链接"
+					}
+				},
+				// mask遮罩层
+				{
+					"path": "mask/index",
+					"style": {
+						"navigationBarTitleText": "mask-遮罩层"
+					}
+				},
+				// countTo数字滚动
+				{
+					"path": "countTo/index",
+					"style": {
+						"navigationBarTitleText": "countTo-数字滚动"
+					}
+				},
+				// color颜色
+				{
+					"path": "color/index",
+					"style": {
+						"navigationBarTitleText": "color-颜色"
+					}
+				},
+				// countDown倒计时
+				{
+					"path": "countDown/index",
+					"style": {
+						"navigationBarTitleText": "countDown-倒计时"
+					}
+				},
+				// progress进度条
+				{
+					"path": "progress/index",
+					"style": {
+						"navigationBarTitleText": "progress-进度条"
+					}
+				},
+				// alertTips警告提示
+				{
+					"path": "alertTips/index",
+					"style": {
+						"navigationBarTitleText": "alertTips-警告提示"
+					}
+				},
+				// badge 徽标数
+				{
+					"path": "badge/index",
+					"style": {
+						"navigationBarTitleText": "badge-徽标数"
+					}
+				},
+				// button按钮   
+				{
+					"path": "button/index",
+					"style": {
+						"navigationBarTitleText": "button-按钮"
+					}
+				},
+				// collapse折叠面板
+				{
+					"path": "collapse/index",
+					"style": {
+						"navigationBarTitleText": "collapse-折叠面板"
+					}
+				},
+				// actionSheet操作菜单
+				{
+					"path": "actionSheet/index",
+					"style": {
+						"navigationBarTitleText": "actionSheet-操作菜单"
+					}
+				},
+				// messageInput验证码输入
+				{
+					"path": "messageInput/index",
+					"style": {
+						"navigationBarTitleText": "messageInput-验证码输入"
+					}
+				},
+				// popup弹窗
+				{
+					"path": "popup/index",
+					"style": {
+						"navigationBarTitleText": "popup-弹窗"
+					}
+				},
+				// listCell
+				{
+					"path": "cell/index",
+					"style": {
+						"navigationBarTitleText": "listCell-列表"
+					}
+				},
+				// numberBox数字输入框
+				{
+					"path": "numberBox/index",
+					"style": {
+						"navigationBarTitleText": "numberBox-步进器"
+					}
+				},
+				// grid宫格布局
+				{
+					"path": "grid/index",
+					"style": {
+						"navigationBarTitleText": "grid-宫格布局"
+					}
+				},
+				// layout栅格布局
+				{
+					"path": "layout/index",
+					"style": {
+						"navigationBarTitleText": "layout-栅格布局"
+					}
+				},
+				// 加载更多
+				{
+					"path": "loadmore/index",
+					"style": {
+						"navigationBarTitleText": "loadmore-加载更多"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/template",
+			"pages": [
+				// mallMenu商城分类
+				{
+					"path": "mallMenu/index2",
+					"style": {
+						"navigationBarTitleText": "mallMenu-商城分类"
+					}
+				},
+				// mallMenu商城分类
+				{
+					"path": "mallMenu/index1",
+					"style": {
+						"navigationBarTitleText": "mallMenu-商城分类"
+					}
+				},
+				// coupon优惠券
+				{
+					"path": "coupon/index",
+					"style": {
+						"navigationBarTitleText": "coupon-优惠券"
+					}
+				},
+				{
+					"path": "login/index",
+					"style": {
+						"navigationBarTitleText": "美团登录"
+					}
+				},
+				// SubmitBar提交订单栏
+				{
+					"path": "submitBar/index",
+					"style": {
+						"navigationBarTitleText": "提交订单栏"
+					}
+				},
+				// comment评论
+				{
+					"path": "comment/index",
+					"style": {
+						"navigationBarTitleText": "评论"
+					}
+				},
+				// comment评论详情
+				{
+					"path": "comment/reply",
+					"style": {
+						"navigationBarTitleText": "评论详情"
+					}
+				},
+				// order订单
+				{
+					"path": "order/index",
+					"style": {
+						"navigationBarTitleText": "订单"
+					}
+				},
+				// login登录获取验证码
+				{
+					"path": "login/code",
+					"style": {
+						"navigationBarTitleText": "登录获取验证码"
+					}
+				},
+				// address用户地址
+				{
+					"path": "address/index",
+					"style": {
+						"navigationBarTitleText": "用户地址"
+					}
+				},
+				// address添加用户地址
+				{
+					"path": "address/addSite",
+					"style": {
+						"navigationBarTitleText": "添加用户地址"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/library",
+			"pages": [
+				// getRect-元素节点
+				{
+					"path": "getRect/index",
+					"style": {
+						"navigationBarTitleText": "getRect-元素节点"
+					}
+				},
+				// timeFrom-多久之前
+				{
+					"path": "timeFrom/index",
+					"style": {
+						"navigationBarTitleText": "timeFrom-多久之前"
+					}
+				},
+				// globalData-全局变量
+				{
+					"path": "globalVariable/globalData",
+					"style": {
+						"navigationBarTitleText": "globalData-全局变量"
+					}
+				},
+				// prototype-全局变量
+				{
+					"path": "globalVariable/prototype",
+					"style": {
+						"navigationBarTitleText": "prototype-全局变量"
+					}
+				},
+				// vuex-全局变量
+				{
+					"path": "globalVariable/vuex",
+					"style": {
+						"navigationBarTitleText": "vuex-全局变量"
+					}
+				},
+				// globalVariable-全局变量
+				{
+					"path": "globalVariable/index",
+					"style": {
+						"navigationBarTitleText": "globalVariable-全局变量"
+					}
+				},
+				// http-请求
+				{
+					"path": "http/index",
+					"style": {
+						"navigationBarTitleText": "http-请求"
+					}
+				},
+				// test-规则验证
+				{
+					"path": "test/index",
+					"style": {
+						"navigationBarTitleText": "test-规则验证"
+					}
+				},
+				// mpShare-小程序分享
+				{
+					"path": "mpShare/index",
+					"style": {
+						"navigationBarTitleText": "mpShare-小程序分享"
+					}
+				},
+				// color-JS调用颜色
+				{
+					"path": "color/index",
+					"style": {
+						"navigationBarTitleText": "color-JS调用颜色"
+					}
+				},
+				// trim-去除空格
+				{
+					"path": "trim/index",
+					"style": {
+						"navigationBarTitleText": "trim-去除空格"
+					}
+				},
+				// random-随机数生成
+				{
+					"path": "random/index",
+					"style": {
+						"navigationBarTitleText": "random-随机数生成"
+					}
+				},
+				// md5加密
+				{
+					"path": "md5/index",
+					"style": {
+						"navigationBarTitleText": "md5-加密"
+					}
+				},
+				// colorSwitch颜色转换
+				{
+					"path": "colorSwitch/index",
+					"style": {
+						"navigationBarTitleText": "colorSwitch-颜色转换"
+					}
+				},
+				// randomArray数组乱序
+				{
+					"path": "randomArray/index",
+					"style": {
+						"navigationBarTitleText": "randomArray-数组乱序"
+					}
+				},
+				// guid全局唯一标识符
+				{
+					"path": "guid/index",
+					"style": {
+						"navigationBarTitleText": "guid-全局唯一标识符"
+					}
+				},
+				// timeFormat时间格式化
+				{
+					"path": "timeFormat/index",
+					"style": {
+						"navigationBarTitleText": "timeFormat-时间格式化"
+					}
+				}, // route-路由
+				{
+					"path": "route/index",
+					"style": {
+						"navigationBarTitleText": "route-路由"
+					}
+				},
+				// route-路由跳转
+				{
+					"path": "route/routeTo",
+					"style": {
+						"navigationBarTitleText": "route-路由跳转"
+					}
+				},
+				// queryParams-对象转URL参数
+				{
+					"path": "queryParams/index",
+					"style": {
+						"navigationBarTitleText": "queryParams-对象转URL参数"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/componentsA",
+			"pages": [
+				// slider-滑动选择器
+				{
+					"path": "slider/index",
+					"style": {
+						"navigationBarTitleText": "slider-滑动选择器"
+					}
+				},
+				// fullScreen-压窗屏
+				{
+					"path": "fullScreen/index",
+					"style": {
+						"navigationBarTitleText": "fullScreen-压窗屏"
+					}
+				},
+				// navbar-自定义导航栏
+				{
+					"path": "navbar/index",
+					"style": {
+						// "navigationBarTitleText": "navbar-自定义导航栏",
+						"navigationStyle": "custom" ,// 隐藏系统导航栏
+						"navigationBarTextStyle": "white" // 状态栏字体为白色
+					}
+				},
+				// field-输入框
+				{
+					"path": "field/index",
+					"style": {
+						"navigationBarTitleText": "field-输入框"
+					}
+				},
+				// modal-模态框
+				{
+					"path": "modal/index",
+					"style": {
+						"navigationBarTitleText": "modal-模态框"
+					}
+				},
+				// indexList索引列表
+				{
+					"path": "indexList/index",
+					"style": {
+						"navigationBarTitleText": "indexList-索引列表"
+					}
+				},
+				// empty内容为空
+				{
+					"path": "empty/index",
+					"style": {
+						"navigationBarTitleText": "empty-内容为空"
+					}
+				},
+				// avatarCropper-头像裁剪
+				{
+					"path": "avatarCropper/index",
+					"style": {
+						"navigationBarTitleText": "avatarCropper-头像裁剪"
+					}
+				}, // noNetwork没有网络
+				{
+					"path": "noNetwork/index",
+					"style": {
+						"navigationBarTitleText": "noNetwork-没有网络"
+					}
+				}, // icon字体图标
+				{
+					"path": "icon/index",
+					"style": {
+						"navigationBarTitleText": "icon-字体图标"
+					}
+				}, // avatar-用户头像展示 
+				{
+					"path": "avatar/index",
+					"style": {
+						"navigationBarTitleText": "avatar-用户头像展示"
+					}
+				}, // keyboard键盘
+				{
+					"path": "keyboard/index",
+					"style": {
+						"navigationBarTitleText": "keyboard-键盘"
+					}
+				}, // 图片懒加载
+				{
+					"path": "lazyLoad/index",
+					"style": {
+						"navigationBarTitleText": "lazyLoad-懒加载"
+					}
+				},
+				// tabs切换
+				{
+					"path": "tabs/index",
+					"style": {
+						"navigationBarTitleText": "Tabs-切换"
+					}
+				},
+				// tag标签
+				{
+					"path": "tag/index",
+					"style": {
+						"navigationBarTitleText": "tag-标签"
+					}
+				},
+				// timeLine时间轴
+				{
+					"path": "timeLine/index",
+					"style": {
+						"navigationBarTitleText": "timeLine-时间轴"
+					}
+				},
+				// toast轻提示
+				{
+					"path": "toast/index",
+					"style": {
+						"navigationBarTitleText": "toast-轻提示"
+					}
+				},
+				// topTips消息提示
+				{
+					"path": "topTips/index",
+					"style": {
+						"navigationBarTitleText": "topTips-消息提示"
+					}
+				},
+				// Code-验证码倒计时
+				{
+					"path": "verificationCode/index",
+					"style": {
+						"navigationBarTitleText": "Code-验证码倒计时"
+					}
+				}
+			]
+		},
+		{
+			"root": "pages/componentsB",
+			"pages": [
+				// divider-分割线
+				{
+					"path": "divider/index",
+					"style": {
+						"navigationBarTitleText": "divider-分割线"
+					}
+				},
+				// picker选择器
+				{
+					"path": "picker/index",
+					"style": {
+						"navigationBarTitleText": "picker-选择器"
+					}
+				}, // noticeBar通告栏
+				{
+					"path": "noticeBar/index",
+					"style": {
+						"navigationBarTitleText": "noticeBar-通告栏"
+					}
+				},
+				// checkbox-复选框
+				{
+					"path": "checkbox/index",
+					"style": {
+						"navigationBarTitleText": "checkbox-复选框"
+					}
+				},
+				// radio-单选框
+				{
+					"path": "radio/index",
+					"style": {
+						"navigationBarTitleText": "radio-单选框"
+					}
+				},
+				// loading-加载动画
+				{
+					"path": "loading/index",
+					"style": {
+						"navigationBarTitleText": "loading-加载动画"
+					}
+				},
+				// switch-开关选择器
+				{
+					"path": "switch/index",
+					"style": {
+						"navigationBarTitleText": "switch-开关选择器"
+					}
+				},
+				// 骨架屏
+				{
+					"path": "skeleton/index",
+					"style": {
+						"navigationBarTitleText": "skeleton-骨架屏"
+					}
+				}, // upload上传
+				{
+					"path": "upload/index",
+					"style": {
+						"navigationBarTitleText": "upload-上传"
+					}
+				}, // validation表单验证
+				{
+					"path": "validation/index",
+					"style": {
+						"navigationBarTitleText": "validation-表单验证"
+					}
+				}, // waterfall瀑布流
+				{
+					"path": "waterfall/index",
+					"style": {
+						"navigationBarTitleText": "waterfall-瀑布流"
+					}
+				},
+				// table表格
+				{
+					"path": "table/index",
+					"style": {
+						"navigationBarTitleText": "table-表格"
+					}
+				},
+				// rate评分
+				{
+					"path": "rate/index",
+					"style": {
+						"navigationBarTitleText": "rate-评分"
+					}
+				},
+				// readMore显示更多
+				{
+					"path": "readMore/index",
+					"style": {
+						"navigationBarTitleText": "readMore-查看更多"
+					}
+				},
+				// search搜索框
+				{
+					"path": "search/index",
+					"style": {
+						"navigationBarTitleText": "search-搜索框"
+					}
+				},
+				// steps步骤条
+				{
+					"path": "steps/index",
+					"style": {
+						"navigationBarTitleText": "steps-步骤条"
+					}
+				},
+				// sticky吸顶
+				{
+					"path": "sticky/index",
+					"style": {
+						"navigationBarTitleText": "sticky-吸顶"
+					}
+				},
+				// swiper轮播图
+				{
+					"path": "swiper/index",
+					"style": {
+						"navigationBarTitleText": "swiper-轮播图"
+					}
+				},
+				// swipeAction-左滑删除
+				{
+					"path": "swipeAction/index",
+					"style": {
+						"navigationBarTitleText": "swipeAction-左滑删除"
+					}
+				}
+			]
+		}
+	],
+	"preloadRule": {
+		"pages/example/components": {
+			"network": "all",
+			"packages": ["pages/componentsA", "pages/componentsB", "pages/componentsC"]
+		}
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uView",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color": "#909399",
+		"selectedColor": "#303133",
+		"backgroundColor": "#FFFFFF",
+		// #ifdef APP-PLUS
+		"blurEffect": "light",
+		// #endif
+		"borderStyle": "black",
+		"list": [{
+				"pagePath": "pages/example/components",
+				"iconPath": "static/uview/example/component.png",
+				"selectedIconPath": "static/uview/example/component_select.png",
+				"text": "组件"
+			},
+			{
+				"pagePath": "pages/example/js",
+				"iconPath": "static/uview/example/js.png",
+				"selectedIconPath": "static/uview/example/js_select.png",
+				"text": "工具"
+			},
+			{
+				"pagePath": "pages/example/template",
+				"iconPath": "static/uview/example/template.png",
+				"selectedIconPath": "static/uview/example/template_select.png",
+				"text": "模板"
+			}
+		]
+	}
+}
