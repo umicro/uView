@@ -71,7 +71,7 @@ Vue.use(uView);
 
 ```html
 <template>
-	<u-buton>按钮</u-buton>
+	<u-button>按钮</u-button>
 </template>
 ```
 
