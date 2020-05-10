@@ -35,32 +35,32 @@
 				<picker-view v-else :value="valueArr" @change="change" class="u-picker-view">
 					<picker-view-column v-if="!reset && params.year">
 						<view class="u-column-item" v-for="(item,index) in years" :key="index">
-							{{ item }}<text class="u-text">年</text>
+							{{ item }}<text class="u-text" v-if="showTimeTag">年</text>
 						</view>
 					</picker-view-column>
 					<picker-view-column v-if="!reset && params.month">
 						<view class="u-column-item" v-for="(item,index) in months" :key="index">
-							{{ formatNumber(item)}}<text class="u-text">月</text>
+							{{ formatNumber(item)}}<text class="u-text" v-if="showTimeTag">月</text>
 						</view>
 					</picker-view-column>
 					<picker-view-column v-if="!reset && params.day">
 						<view class="u-column-item" v-for="(item,index) in days" :key="index">
-							{{ formatNumber(item) }}<text class="u-text">日</text>
+							{{ formatNumber(item) }}<text class="u-text" v-if="showTimeTag">日</text>
 						</view>
 					</picker-view-column>
 					<picker-view-column v-if="!reset && params.hour">
 						<view class="u-column-item" v-for="(item,index) in hours" :key="index">
-							{{ formatNumber(item) }}<text class="u-text">时</text>
+							{{ formatNumber(item) }}<text class="u-text" v-if="showTimeTag">时</text>
 						</view>
 					</picker-view-column>
 					<picker-view-column v-if="!reset && params.minute">
 						<view class="u-column-item" v-for="(item,index) in minutes" :key="index">
-							{{ formatNumber(item) }}<text class="u-text">分</text>
+							{{ formatNumber(item) }}<text class="u-text" v-if="showTimeTag">分</text>
 						</view>
 					</picker-view-column>
 					<picker-view-column v-if="!reset && params.second">
 						<view class="u-column-item" v-for="(item,index) in seconds" :key="index">
-							{{ formatNumber(item) }}<text class="u-text">秒</text>
+							{{ formatNumber(item) }}<text class="u-text" v-if="showTimeTag">秒</text>
 						</view>
 					</picker-view-column>
 				</picker-view>
@@ -83,6 +83,7 @@
 	 * @property {String Number} start-year 可选的开始年份，mode=time时有效（默认1950）
 	 * @property {String Number} end-year 可选的结束年份，mode=time时有效（默认2050）
 	 * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
+	 * @property {Boolean} show-time-tag 时间模式时，是否显示后面的年月日中文提示
 	 * @property {String} cancel-color 取消按钮的颜色（默认#606266）
 	 * @property {String} confirm-color 确认按钮的颜色（默认#2979ff）
 	 * @property {String} default-time 默认选中的时间，mode=time时有效
@@ -150,6 +151,11 @@
 				default () {
 					return [];
 				}
+			},
+			// 时间模式时，是否显示后面的年月日中文提示
+			showTimeTag: {
+				type: Boolean,
+				default: true
 			},
 			// 默认显示地区的编码，defaultRegion和areaCode同时存在，areaCode优先，可传类似["13", "1303", "130304"]
 			areaCode: {
