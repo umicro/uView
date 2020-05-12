@@ -1,6 +1,12 @@
 <template>
 	<view>
-		<u-popup :zoom="zoom" mode="center" :z-index="uZIndex" v-model="value" :length="width" :mask-close-able="false" :border-radius="borderRadius">
+		<u-popup :zoom="zoom" 
+			mode="center" :popup="false" 
+			:z-index="uZIndex" v-model="value" 
+			:length="width" :mask-close-able="maskCloseAble" 
+			:border-radius="borderRadius"
+			@close="popupClose"
+		>
 			<view class="u-model">
 				<view v-if="showTitle" class="u-model-title u-line-1" :style="[titleStyle]">{{ title }}</view>
 				<view class="u-model-content">
@@ -23,19 +29,22 @@
 					<view
 						v-if="showConfirmButton"
 						:hover-stay-time="100"
-						hover-class="btn-hover"
+						:hover-class="asyncClose ? 'none' : 'btn-hover'" 
 						class="u-model-footer-button hairline-left"
 						:style="[confirmBtnStyle]"
 						@tap="confirm"
 					>
-						{{confirmText}}
+						<u-loading mode="circle" :color="confirmColor" v-if="loading"></u-loading>
+						<block v-else>
+							{{confirmText}}
+						</block>
 					</view>
 				</view>
 			</view>
 		</u-popup>
 	</view>
 </template>
-
+		
 <script>
 /**
  * modal 模态框
@@ -47,8 +56,10 @@
  * @property {String | Number} width 模态框宽度（默认600）
  * @property {String} content 模态框内容（默认"内容"）
  * @property {Boolean} show-title 是否显示标题（默认true）
+ * @property {Boolean} async-close 是否异步关闭，只对确定按钮有效（默认false）
  * @property {Boolean} show-confirm-button 是否显示确认按钮（默认true）
  * @property {Boolean} show-cancel-button 是否显示取消按钮（默认false）
+ * @property {Boolean} mask-close-able 是否允许点击遮罩关闭modal（默认false）
  * @property {String} confirm-text 确认按钮的文字内容（默认"确认"）
  * @property {String} cancel-text 取消按钮的文字内容（默认"取消"）
  * @property {String} cancel-color 取消按钮的颜色（默认"#606266"）
@@ -169,8 +180,22 @@ export default {
 		contentSlot: {
 			type: Boolean,
 			default: false
+		},
+		// 是否异步关闭，只对确定按钮有效
+		asyncClose: {
+			type: Boolean,
+			default: false
+		},
+		// 是否允许点击遮罩关闭modal
+		maskCloseAble: {
+			type: Boolean,
+			default: false
 		}
-		
+	},
+	data() {
+		return {
+			loading: false, // 确认按钮是否正在加载中
+		}
 	},
 	computed: {
 		cancelBtnStyle() {
@@ -183,13 +208,34 @@ export default {
 			return this.zIndex ? this.zIndex : this.$u.zIndex.popup;
 		}
 	},
+	watch: {
+		// 如果是异步关闭时，外部修改v-model的值为false时，重置内部的loading状态
+		// 避免下次打开的时候，状态混乱
+		value(n) {
+			if(n === true) this.loading = false;
+		}
+	},
 	methods: {
 		confirm() {
 			this.$emit('confirm');
-			this.$emit('input', false);
+			// 异步关闭
+			if(this.asyncClose) {
+				this.loading = true;
+			} else {
+				this.$emit('input', false);
+			}
 		},
 		cancel() {
 			this.$emit('cancel');
+			this.$emit('input', false);
+			// 目前popup弹窗关闭有一个延时操作，此处做一个延时
+			// 避免确认按钮文字变成了"确定"字样，modal还没消失，造成视觉不好的效果
+			setTimeout(() => {
+				this.loading = false;
+			}, 300);
+		},
+		// 点击遮罩关闭modal，设置v-model的值为false，否则无法第二次弹起modal
+		popupClose() {
 			this.$emit('input', false);
 		}
 	}

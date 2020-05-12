@@ -216,7 +216,7 @@
 		computed: {
 			propsChange() {
 				// 引用这几个变量，是为了监听其变化
-				return `${this.mode}-${this.defaultTime}-${this.startYear}-${this.endYear}-${this.defaultRegion}-${this.defaultCode}`;
+				return `${this.mode}-${this.defaultTime}-${this.startYear}-${this.endYear}-${this.defaultRegion}-${this.areaCode}`;
 			},
 			regionChange() {
 				// 引用这几个变量，是为了监听其变化

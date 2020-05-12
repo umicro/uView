@@ -77,7 +77,7 @@ function route(options = {}, params = false) {
 	}
 	if (config.type == 'navigateBack' || config.type == 'back') {
 		return uni.navigateBack({
-			delta: parseInt(this.delta)
+			delta: parseInt(config.delta ? config.delta : this.delta)
 		});
 	}
 }

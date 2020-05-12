@@ -203,6 +203,7 @@
 		text-align: left;
 		z-index: 9;
 		opacity: 1;
+		background: none;
 	}
 
 	.u-char-item {

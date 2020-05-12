@@ -17,6 +17,8 @@
 	 * @property {String Number} size 开关尺寸，单位rpx（默认50）
 	 * @property {String} active-color 打开时的背景色（默认#2979ff）
 	 * @property {Boolean} inactive-color 关闭时的背景色（默认#ffffff）
+	 * @property {Boolean | Number | String} active-value 打开选择器时通过change事件发出的值（默认true）
+	 * @property {Boolean | Number | String} inactive-value 关闭选择器时通过change事件发出的值（默认false）
 	 * @event {Function} change 在switch打开或关闭时触发
 	 * @example <u-switch v-model="checked" active-color="red" inactive-color="#eee"></u-switch>
 	 */
@@ -57,7 +59,17 @@
 			vibrateShort: {
 				type: Boolean,
 				default: false
-			}
+			},
+			// 打开选择器时的值
+			activeValue: {
+				type: [Number, String, Boolean],
+				default: true
+			},
+			// 关闭选择器时的值
+			inactiveValue: {
+				type: [Number, String, Boolean],
+				default: false
+			},
 		},
 		data() {
 			return {
@@ -83,7 +95,7 @@
 					this.$emit('input', !this.value);
 					// 放到下一个生命周期，因为双向绑定的value修改父组件状态需要时间，且是异步的
 					this.$nextTick(function() {
-						this.$emit('change', this.value);
+						this.$emit('change', this.value ? this.activeValue : this.inactiveValue);
 					})
 				}
 			}

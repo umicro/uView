@@ -22,6 +22,16 @@
 					<u-icon name="arrow-down-fill" color="#ffffff" size="22"></u-icon>
 				</view>
 			</view>
+			<view class="navbar-right" slot="right" v-if="slotRight">
+				<view class="message-box right-item">
+					<u-icon name="chat" size="38"></u-icon>
+					<u-badge count="18" size="mini" :offset="[-15, -15]"></u-badge>
+				</view>
+				<view class="dot-box right-item">
+					<u-icon name="calendar-fill" size="38"></u-icon>
+					<u-badge size="mini" :is-dot="true" :offset="[-6, -6]"></u-badge>
+				</view>
+			</view>
 		</u-navbar>
 		<view class="u-demo">
 			<view class="u-demo-wrap">
@@ -48,7 +58,11 @@
 					<u-subsection current="1" vibrateShort :list="['是', '否']" @change="leftChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
-					<view class="u-item-title">传入slot</view>
+					<view class="u-item-title">自定义右侧内容</view>
+					<u-subsection :current="slotRightCurrent" vibrateShort :list="['是', '否']" @change="rightChange"></u-subsection>
+				</view>
+				<view class="u-config-item">
+					<view class="u-item-title">传入整体slot</view>
 					<u-subsection vibrateShort :list="['无', '搜索框', '搜索+按钮', '搜索+图标']" @change="searchChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
@@ -82,7 +96,18 @@
 				search: false,
 				custom: false,
 				isFixed: true,
-				keyword: ''
+				keyword: '',
+				// #ifdef MP
+				slotRight: false,
+				// #endif
+				// #ifndef MP
+				slotRight: true
+				// #endif
+			}
+		},
+		computed: {
+			slotRightCurrent() {
+				return this.slotRight ? 0 : 1;
 			}
 		},
 		methods: {
@@ -107,21 +132,25 @@
 				if(index == 0) {
 					this.title = '新闻';
 					this.useSlot = false;
+					this.rightSlot = false;
 				} else if(index == 1) {
 					this.showAction = false;
 					this.useSlot = true;
 					this.rightSlot = false;
 					this.search = true;
+					this.slotRight = false;
 				} else if(index == 2) {
 					this.useSlot = true;
 					this.showAction = true;
 					this.rightSlot = false;
 					this.search = true;
+					this.slotRight = false;
 				} else {
 					this.useSlot = true;
 					this.search = true;
 					this.showAction = false;
 					this.rightSlot = true;
+					this.slotRight = false;
 				}
 			},
 			backChange(index) {
@@ -140,6 +169,14 @@
 					}
 				}
 				
+			},
+			rightChange(index) {
+				if(index == 0) {
+					this.slotRight = true;
+					this.useSlot = false;
+				} else {
+					this.slotRight = false;
+				}
 			},
 			customChange(index) {
 				this.search = false;

@@ -297,6 +297,9 @@
 					// 获取元素节点信息，请查看uniapp相关文档
 					// https://uniapp.dcloud.io/api/ui/nodes-info?id=nodesrefboundingclientrect
 					queryInfo = uni.createSelectorQuery().in(this);
+					//#ifdef MP-ALIPAY
+					queryInfo = uni.createSelectorQuery();
+					//#endif
 					queryInfo.select('.u-btn').boundingClientRect();
 					queryInfo.exec((data) => {
 						resolve(data)

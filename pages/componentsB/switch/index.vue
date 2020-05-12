@@ -7,6 +7,8 @@
 					:size="size" @change="change" 
 					:active-color="activeColor"
 					:disabled="disabled"
+					:activeValue="100"
+					:inactiveValue="1"
 				></u-switch>
 			</view>
 		</view>
@@ -100,7 +102,7 @@
 				})
 			},
 			change(value) {
-				// console.log(value);
+				// console.log(value, this.checked);
 			}
 		}
 	}

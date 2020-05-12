@@ -31,8 +31,8 @@
 	 * alertTips 警告提示
 	 * @description 警告提示，展现需要关注的信息
 	 * @tutorial https://uviewui.com/components/alertTips.html
-	 * @property {String} title 辅助性文字，颜色比title浅一点，字号也小一点，可选
-	 * @property {String} description 显示的标题文字
+	 * @property {String} title 显示的标题文字
+	 * @property {String} description 辅助性文字，颜色比title浅一点，字号也小一点，可选
 	 * @property {String} type 关闭按钮(默认为叉号icon图标)
 	 * @property {String} close-able 用文字替代关闭图标，close-able为true时有效
 	 * @property {Boolean} show-icon 是否显示左边的辅助图标

@@ -17,6 +17,9 @@
 				<view class="u-slot-content">
 					<slot></slot>
 				</view>
+				<view class="u-slot-right">
+					<slot name="right"></slot>
+				</view>
 			</view>
 		</view>
 		<!-- 解决fixed定位后导航栏塌陷的问题 -->
