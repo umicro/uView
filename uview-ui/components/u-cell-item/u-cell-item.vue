@@ -76,17 +76,17 @@ export default {
 		},
 		// 左侧标题
 		title: {
-			type: String,
+			type: [String, Number],
 			default: ''
 		},
 		// 右侧内容
 		value: {
-			type: String,
+			type: [String, Number],
 			default: ''
 		},
 		// 标题下方的描述信息
 		label: {
-			type: String,
+			type: [String, Number],
 			default: ''
 		},
 		// 是否显示内边框

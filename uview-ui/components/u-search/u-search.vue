@@ -18,6 +18,7 @@
 				@input="inputChange"
 				:disabled="disabled"
 				@focus="getFocus"
+				:maxlength="getMaxlength"
 				:focus="focus"
 				placeholder-class="u-placeholder-class"
 				:placeholder="placeholder"
@@ -144,6 +145,11 @@ export default {
 			default() {
 				return {}
 			}
+		},
+		// 输入框最大能输入的长度，-1为不限制长度(来自uniapp文档)
+		maxlength: {
+			type: [Number, String],
+			default: -1
 		}
 	},
 	data() {
@@ -180,6 +186,10 @@ export default {
 		borderStyle() {
 			if (this.borderColor) return `1px solid ${this.borderColor}`;
 			else return 'none';
+		},
+		// 将maxlength转为数值
+		getMaxlength() {
+			return Number(this.maxlength);
 		}
 	},
 	methods: {

@@ -16,8 +16,6 @@
 </template>
 
 <script>
-	// observer最终赋值的是个对象，不能放到data中，vue会报错（浏览器），也不能在用到的地方let定义，某些安卓也报错……
-	let observer = {};
 	/**
 	 * lazyLoad 懒加载
 	 * @description 懒加载使用的场景为：页面有很多图片时，APP会同时加载所有的图片，导致页面卡顿，各个位置的图片出现前后不一致等.
@@ -116,8 +114,12 @@
 			},
 			// 计算图片的高度，可能为auto，带%，或者直接数值
 			imgHeight() {
-				return this.height == 'auto' ? 'auto' : this.height.indexOf('%') != -1 ? this.height : this.height + 'rpx';
+				return this.height == 'auto' ? 'auto' : String(this.height).indexOf('%') != -1 ? this.height : this.height + 'rpx';
 			}
+		},
+		created() {
+			// 由于一些特殊原因，不能将此变量放到data中定义
+			this.observer = {};
 		},
 		watch: {
 			isShow(nVal) {
@@ -166,7 +168,11 @@
 			// 图片加载失败
 			loadError() {
 				this.isError = true;
-			}
+			},
+			disconnectObserver(observerName) {
+				const observer = this[observerName];
+				observer && observer.disconnect();
+			},
 		},
 		beforeDestroy() {
 			// 销毁页面时，可能还没触发某张很底部的懒加载图片，所以把这个事件给去掉
@@ -180,25 +186,23 @@
 				});
 			})
 			// mounted的时候，不一定挂载了这个元素，延时30ms，否则会报错或者不报错，但是也没有效果
-			let that = this;
-			//let observer = null;
 			setTimeout(() => {
 				// 这里是组件内获取布局状态，不能用uni.createIntersectionObserver，而必须用this.createIntersectionObserver
-				// 因为这样可以把选择器的选取范围定义在自定义组件内
-				// 否则某些安卓机型报错，也不能加this(如createIntersectionObserver(this))，否则某些机型也报错
-				observer = uni.createIntersectionObserver(this);
+				this.disconnectObserver('contentObserver');
+				const contentObserver = uni.createIntersectionObserver(this);
 				// 要理解这里怎么计算的，请看这个：
 				// https://blog.csdn.net/qq_25324335/article/details/83687695
-				observer.relativeToViewport({
-					bottom: that.getThreshold,
-				}).observe('.u-lazy-item-' + that.elIndex, (res) => {
+				contentObserver.relativeToViewport({
+					bottom: this.getThreshold,
+				}).observe('.u-lazy-item-' + this.elIndex, (res) => {
 					if (res.intersectionRatio > 0) {
 						// 懒加载状态改变
-						that.isShow = true;
+						this.isShow = true;
 						// 如果图片已经加载，去掉监听，减少性能的消耗
-						observer.disconnect();
+						this.disconnectObserver('contentObserver');
 					}
 				})
+				this.contentObserver = contentObserver;
 			}, 30)
 		}
 	}

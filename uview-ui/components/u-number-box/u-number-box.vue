@@ -114,8 +114,8 @@
 				// 为了让用户能够删除所有输入值，重新输入内容，删除所有值后，内容为空字符串
 				if (v1 == '') return;
 				let value = 0;
-				// 首先判断是否正整数，并且在min和max之间，如果不是，使用原来值
-				let tmp = /(^\d+$)/.test(v1) && value[0] != 0;
+				// 首先判断是否正整数，并且第一位数字不为0，并且在min和max之间，如果不是，使用原来值
+				let tmp = /(^\d+$)/.test(v1) && String(v1)[0] != 0;
 				if (tmp && v1 >= this.min && v1 <= this.max) value = v1;
 				else value = v2;
 				this.handleChange(value, 'change');
