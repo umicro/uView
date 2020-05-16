@@ -1,7 +1,7 @@
 <template>
 	<u-popup mode="bottom" :border-radius="borderRadius" :popup="false" v-model="value" :maskCloseAble="maskCloseAble"
 	 length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose" :z-index="uZIndex">
-		<view class="u-tips u-border-bottom" v-if="tips.text" :style="tipsStyle">
+		<view class="u-tips u-border-bottom" v-if="tips.text" :style="[tipsStyle]">
 			{{tips.text}}
 		</view>
 		<block v-for="(item, index) in list" :key="index">

@@ -170,5 +170,6 @@ export default {
 	contains,
 	range,
 	rangeLength,
-	empty
+	empty,
+	isEmpty: empty
 }

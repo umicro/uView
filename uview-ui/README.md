@@ -46,7 +46,7 @@ Vue.use(uView);
 3. `uni.scss`引入全局scss变量文件
 ```css
 /* uni.scss */
-@import "uview-ui/themb.scss";
+@import "uview-ui/theme.scss";
 ```
 
 4. `pages.json`配置easycom规则(按需引入)

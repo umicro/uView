@@ -46,7 +46,7 @@
 				default: '#2979ff'
 			},
 			// 关闭时的背景颜色
-			unactiveColor: {
+			inactiveColor: {
 				type: String,
 				default: '#ffffff'
 			},
@@ -80,7 +80,7 @@
 			switchStyle() {
 				let style = {};
 				style.fontSize = this.size + 'rpx';
-				style.backgroundColor = this.value ? this.activeColor : this.unactiveColor;
+				style.backgroundColor = this.value ? this.activeColor : this.inactiveColor;
 				return style;
 			},
 			loadingColor() {

@@ -30,7 +30,6 @@
 
 .u-flex {
 	display: flex;
-	flex-wrap: wrap;
 	flex-direction: row;
 	align-items: center;
 }
@@ -114,40 +113,40 @@
 }
 
 // 定义内外边距，历遍1-80
-@for $i from 1 through 80 {
+@for $i from 0 through 80 {
 	// 只要双数和能被5除尽的数
 	@if $i % 2 == 0 or $i % 5 == 0 {
 		// 得出：u-margin-30或者u-m-30
 		.u-margin-#{$i}, .u-m-#{$i} {
-			margin: $i + rpx;
+			margin: $i + rpx!important;
 		}
 		
 		// 得出：u-padding-30或者u-p-30
 		.u-padding-#{$i}, .u-p-#{$i} {
-			padding: $i + rpx;
+			padding: $i + rpx!important;
 		}
 		
 		@each $short, $long in l left, t top, r right, b bottom {
 			// 缩写版，结果如： u-m-l-30
 			// 定义外边距
 			.u-m-#{$short}-#{$i} {
-				margin-#{$long}: $i + rpx;
+				margin-#{$long}: $i + rpx!important;
 			}
 			
 			// 定义内边距
 			.u-p-#{$short}-#{$i} {
-				padding-#{$long}: $i + rpx;
+				padding-#{$long}: $i + rpx!important;
 			}
 			
 			// 完整版，结果如：u-margin-left-30
 			// 定义外边距
 			.u-margin-#{$long}-#{$i} {
-				margin-#{$long}: $i + rpx;
+				margin-#{$long}: $i + rpx!important;
 			}
 			
 			// 定义内边距
 			.u-padding-#{$long}-#{$i} {
-				padding-#{$long}: $i + rpx;
+				padding-#{$long}: $i + rpx!important;
 			}
 		}
 	}

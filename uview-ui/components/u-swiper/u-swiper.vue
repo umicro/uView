@@ -197,6 +197,7 @@
 	.u-swiper-wrap {
 		position: relative;
 		overflow: hidden;
+		transform: translateY(0);
 	}
 
 	.u-swiper-image {

@@ -100,7 +100,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding-top: 30%;
+		height: 100%;
 	}
 
 	.u-image {

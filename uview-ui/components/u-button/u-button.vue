@@ -26,7 +26,7 @@
 		@opensetting="opensetting"
 		@launchapp="launchapp"
 		:style="[buttonStyle]"
-		@tap="click($event)"
+		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"
 	>

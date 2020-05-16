@@ -4,8 +4,10 @@
 			width: width + 'rpx',
 			height: width + 'rpx'
 		}">
-			<view v-if="deletable" class="u-delete-icon" @tap.stop="deleteItem(index)">
-				<u-icon class="u-icon" name="close" size="20" color="#ffffff"></u-icon>
+			<view v-if="deletable" class="u-delete-icon" @tap.stop="deleteItem(index)" :style="{
+				background: delBgColor
+			}">
+				<u-icon class="u-icon" :name="delIcon" size="20" :color="delColor"></u-icon>
 			</view>
 			<u-line-progress v-if="showProgress && item.progress > 0 && !item.error" :show-percent="false" height="16" class="u-progress" :percent="item.progress"></u-line-progress>
 			<view @tap.stop="retry(index)" v-if="item.error" class="u-error-btn">点击重试</view>
@@ -37,6 +39,9 @@
 	 * @property {Boolean} show-progress 是否显示进度条（默认true）
 	 * @property {Boolean} disabled 是否启用(显示/移仓)组件（默认false）
 	 * @property {String} image-mode 预览图片等显示模式，可选值为uni的image的mode属性值（默认aspectFill）
+	 * @property {String} del-icon 右上角删除图标名称，只能为uView内置图标
+	 * @property {String} del-bg-color 右上角关闭按钮的背景颜色
+	 * @property {String} del-color 右上角关闭按钮图标的颜色
 	 * @property {Object} header 上传携带的头信息，对象形式
 	 * @property {Object} form-data 上传额外携带的参数
 	 * @property {String} name 上传文件的字段名，供后端获取使用（默认file）
@@ -178,6 +183,21 @@
 			width: {
 				type: [String, Number],
 				default: 200
+			},
+			// 右上角关闭按钮的背景颜色
+			delBgColor: {
+				type: String,
+				default: '#fa3534'
+			},
+			// 右上角关闭按钮的叉号图标的颜色
+			delColor: {
+				type: String,
+				default: '#ffffff'
+			},
+			// 右上角删除图标名称，只能为uView内置图标
+			delIcon: {
+				type: String,
+				default: 'close'
 			}
 		},
 		mounted() {

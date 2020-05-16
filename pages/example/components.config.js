@@ -146,6 +146,14 @@ export default [{
 	}, {
 		groupName: '布局组件',
 		list: [{
+			path: '/pages/componentsB/line/index',
+			icon: 'line',
+			title: 'Line 线条',
+		},{
+			path: '/pages/componentsB/card/index',
+			icon: 'card',
+			title: 'Card 卡片',
+		}, {
 			path: '/pages/componentsC/mask/index',
 			icon: 'mask',
 			title: 'Mask 遮罩层',

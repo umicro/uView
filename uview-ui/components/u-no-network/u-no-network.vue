@@ -60,6 +60,10 @@
 			}
 		},
 		mounted() {
+			uni.setNavigationBarColor({
+			    frontColor: '#000000',
+			    backgroundColor: '#ffffff',
+			})
 			this.isIOS = (uni.getSystemInfoSync().platform === 'ios');
 			uni.onNetworkStatusChange((res) => {
 				this.isConnected = res.isConnected;
@@ -187,10 +191,12 @@
 	}
 
 	.u-inner {
-		padding-top: 200rpx;
+		height: 100vh;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
+		margin-top: -15%;
 	}
 
 	.u-tips {

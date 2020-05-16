@@ -7,7 +7,7 @@
 			}">
 			<u-icon name="minus" :size="size"></u-icon>
 		</view>
-		<input :disabled="disabled" :class="{ 'u-input-disabled': disabled }" v-model="inputVal" class="u-number-input" @blur="onBlur"
+		<input :disabled="disabledInput || disabled" :class="{ 'u-input-disabled': disabled }" v-model="inputVal" class="u-number-input" @blur="onBlur"
 		 type="number" :style="{
 				color: color,
 				fontSize: size + 'rpx',
@@ -36,6 +36,7 @@
 	 * @property {Number} max 用户可输入的最大值（默认99999）
 	 * @property {Number} step 步长，每次加或减的值（默认1）
 	 * @property {Boolean} disabled 是否禁用操作，禁用后无法加减或手动修改输入框的值（默认false）
+	 * @property {Boolean} disabled-input 是否禁止输入框手动输入值（默认false）
 	 * @property {String Number} size 输入框文字和按钮字体大小，单位rpx（默认26）
 	 * @property {String} color 输入框文字和加减按钮图标的颜色（默认#323233）
 	 * @property {String Number} input-width 输入框宽度，单位rpx（默认80）
@@ -104,6 +105,12 @@
 			index: {
 				type: [Number, String],
 				default: ''
+			},
+			// 是否禁用输入框，与disabled作用于输入框时，为OR的关系，即想要禁用输入框，又可以加减的话
+			// 设置disabled为false，disabledInput为true即可
+			disabledInput: {
+				type: Boolean,
+				default: false
 			}
 		},
 		watch: {

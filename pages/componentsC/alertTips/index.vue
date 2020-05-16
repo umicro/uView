@@ -1,21 +1,4 @@
 <template>
-	<!-- <view class="wrap">
-		<view class="item">
-			<u-alert-tips @close="close" closeText="close" :closeAble="true" :show="show" type="primary" :title="title" :description="description"></u-alert-tips>
-		</view>
-		<view class="item">
-			<u-alert-tips type="warning" :showIcon="false" :closeAble="true" :title="title" :description="description"></u-alert-tips>
-		</view>
-		<view class="item">
-			<u-alert-tips type="success" :title="title" :closeAble="false" :description="description"></u-alert-tips>
-		</view>
-		<view class="item">
-			<u-alert-tips type="error" :title="title" closeText="close" :closeAble="true"></u-alert-tips>
-		</view>
-		<view class="item">
-			<u-alert-tips type="info" :title="title"></u-alert-tips>
-		</view>
-	</view> -->
 	<view class="u-demo">
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>

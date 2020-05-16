@@ -170,11 +170,11 @@ export default {
 		},
 		onTouchEnd() {
 			if (this.disabled) return;
-			this.status = 'end';
 			if (this.status === 'moving') {
 				this.updateValue(this.newValue, false);
 				this.$emit('end');
 			}
+			this.status = 'end';
 		},
 		updateValue(value, drag) {
 			// 去掉小数部分，同时也是对step步进的处理

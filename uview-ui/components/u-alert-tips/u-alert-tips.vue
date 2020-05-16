@@ -98,16 +98,6 @@
 			return {
 			}
 		},
-		watch: {
-			show(val) {
-				if (val == false) {
-					// 先opacity隐藏，再移除
-					setTimeout(() => {
-						this.showAlert = false;
-					}, 300);
-				}
-			}
-		},
 		computed: {
 			// 计算字体颜色，如果没有自定义的，就用uview主题颜色
 			computeColor() {
