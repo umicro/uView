@@ -51,6 +51,7 @@ export interface $u {
   http: Request
   toast: Toast
   version: string
+  v:string
   zIndex: ZIndex
   mpShare: mpShare
   getRect(selector:string,all?:boolean):Promise<Res> | Promise<any> | Error
