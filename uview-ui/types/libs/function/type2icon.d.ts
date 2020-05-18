@@ -1,0 +1,1 @@
+export declare type Type2icon=(type?:string,fill?:boolean)=>string

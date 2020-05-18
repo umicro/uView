@@ -1,0 +1,1 @@
+export declare type Toast=(title:string,duration?:number)=>void
