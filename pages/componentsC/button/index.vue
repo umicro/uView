@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-button @tap="btnClick" :loading="loading" :plain="plain" :shape="shape" :size="size" :ripple="ripple" :hairLine="hairLine" :type="type">山川异域，风月同天</u-button>
+				<u-button @click="btnClick" :loading="loading" :plain="plain" :shape="shape" :size="size" :ripple="ripple" :hairLine="hairLine" :type="type">山川异域，风月同天</u-button>
 			</view>
 		</view>
 		<view class="u-config-wrap">

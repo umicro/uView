@@ -66,11 +66,13 @@
 				// #endif
 				// #ifdef MP
 				uni.setClipboardData({
-					data: this.href
+					data: this.href,
+					success() {
+						uni.hideToast();
+					}
 				});
-				uni.showToast({
-					title: this.mpTips,
-					icon: 'none'
+				this.$nextTick(() => {
+					this.$u.toast(this.mpTips);
 				})
 				// #endif
 			}

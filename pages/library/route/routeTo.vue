@@ -7,7 +7,7 @@
 					收到的参数为：{{paramsStr}}
 				</view>
 				<view class="u-btn-wrap">
-					<u-button @tap="back">返回</u-button>
+					<u-button @click="back">返回</u-button>
 				</view>
 			</view>
 		</view>

@@ -17,7 +17,7 @@
 			@tap="headClick"
 		>
 			<view v-if="!$slots.head" class="u-flex u-row-between">
-				<view class="u-card__head--left u-flex" v-if="title">
+				<view class="u-card__head--left u-flex u-line-1" v-if="title">
 					<image
 						:src="thumb"
 						class="u-card__head--left__thumb"
@@ -39,7 +39,7 @@
 						{{ title }}
 					</text>
 				</view>
-				<view class="u-card__head--right" v-if="subTitle">
+				<view class="u-card__head--right u-line-1" v-if="subTitle">
 					<text
 						class="u-card__head__title__text"
 						:style="{
@@ -260,6 +260,7 @@ export default {
 
 		&--right {
 			color: $u-tips-color;
+			margin-left: 6rpx;
 		}
 	}
 

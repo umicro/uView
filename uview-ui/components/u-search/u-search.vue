@@ -1,5 +1,7 @@
 <template>
-	<view class="u-search">
+	<view class="u-search" :style="{
+		margin: margin,
+	}">
 		<view
 			class="u-content"
 			:style="{
@@ -9,7 +11,7 @@
 				height: height + 'rpx'
 			}"
 		>
-			<view class="u-icon-wrap"><u-icon class="u-clear-icon" :size="30" name="search" color="#909399"></u-icon></view>
+			<view class="u-icon-wrap"><u-icon class="u-clear-icon" :size="30" name="search" :color="searchIconColor ? searchIconColor : color"></u-icon></view>
 			<input
 				confirm-type="search"
 				@blur="blur"
@@ -22,10 +24,12 @@
 				:focus="focus"
 				placeholder-class="u-placeholder-class"
 				:placeholder="placeholder"
+				:placeholder-style="`color: ${placeholderColor}`"
 				class="u-input"
 				type="text"
 				:style="[{
-					textAlign: inputAlign
+					textAlign: inputAlign,
+					color: color
 				}, inputStyle]"
 			/>
 			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @touchstart="clear">
@@ -55,6 +59,10 @@
  * @property {Object} action-style 右侧控件的样式，对象形式
  * @property {String} input-align 输入框内容水平对齐方式（默认left）
  * @property {Boolean} disabled 是否启用输入框（默认false）
+ * @property {String} search-icon-color 搜索图标的颜色，默认同输入框字体颜色
+ * @property {String} color 输入框字体颜色（默认#606266）
+ * @property {String} placeholder-color placeholder的颜色（默认#909399）
+ * @property {String} margin 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"
  * @property {Boolean} animation 是否开启动画，见上方说明（默认false）
  * @property {String} value 输入框初始值
  * @property {Boolean} input-style input输入框的样式，可以定义文字颜色，大小等，对象形式
@@ -150,6 +158,26 @@ export default {
 		maxlength: {
 			type: [Number, String],
 			default: -1
+		},
+		// 搜索图标的颜色，默认同输入框字体颜色
+		searchIconColor: {
+			type: String,
+			default: ''
+		},
+		// 输入框字体颜色
+		color: {
+			type: String,
+			default: '#606266'
+		},
+		// placeholder的颜色
+		placeholderColor: {
+			type: String,
+			default: '#909399'
+		},
+		// 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"、"30rpx 20rpx"等写法
+		margin: {
+			type: String,
+			default: '0'
 		}
 	},
 	data() {

@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-button @tap="showAction">唤起ActionSheet</u-button>
+				<u-button @click="showAction">唤起ActionSheet</u-button>
 				<u-action-sheet :cancel-btn="cancel" :mask-close-able="maskClick" :tips="tips" 
 				@click="click" :list="list" v-model="show" :safe-area-inset-bottom="true"></u-action-sheet>
 			</view> 

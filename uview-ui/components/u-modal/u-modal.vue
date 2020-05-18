@@ -237,6 +237,10 @@ export default {
 		// 点击遮罩关闭modal，设置v-model的值为false，否则无法第二次弹起modal
 		popupClose() {
 			this.$emit('input', false);
+		},
+		// 
+		clearLoading() {
+			this.loading = false;
 		}
 	}
 };

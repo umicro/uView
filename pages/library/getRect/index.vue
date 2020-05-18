@@ -12,7 +12,7 @@
 					<view class="u-demo-result-line">{{ JSON.stringify(result) }}</view>
 				</view>
 				<view class="jump-to-top">
-					<u-button @tap="scrollToTop" :style="{
+					<u-button @click="scrollToTop" :style="{
 						display: top ? 'block' : 'none'
 					}">
 						点我自动滚动到顶部

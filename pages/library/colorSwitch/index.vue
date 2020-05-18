@@ -22,7 +22,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">颜色渐变(rgb(21,21,21)-rgb(56,56,56)，分10份)</view>
-				<u-button @tap="colorGradientChange">执行</u-button>
+				<u-button @click="colorGradientChange">执行</u-button>
 			</view>
 		</view>
 	</view>

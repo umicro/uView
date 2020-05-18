@@ -16,7 +16,7 @@
 				<view class="u-item-title">操作</view>
 				<u-subsection vibrateShort :list="['min=0, max=5', 'min=541, max=8164']" @change="paramsChange"></u-subsection>
 				<view class="u-btn-wrap">
-					<u-button @tap="getResult">执行</u-button>
+					<u-button @click="getResult">执行</u-button>
 				</view>
 			</view>
 		</view>

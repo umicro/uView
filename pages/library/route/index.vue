@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-button @tap="openPage">点击跳转</u-button>
+				<u-button @click="openPage">点击跳转</u-button>
 			</view>
 		</view>
 		<view class="u-config-wrap">

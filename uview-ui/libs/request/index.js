@@ -88,6 +88,7 @@ class Request {
 						title: this.config.loadingText,
 						mask: this.config.loadingMask
 					})
+					this.config.timer = null;
 				}, this.config.loadingTime);
 			}
 			uni.request(options);

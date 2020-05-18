@@ -7,7 +7,7 @@
 				<view class="u-avatar-wrap">
 					<image @tap="preAvatar" class="u-avatar-demo" v-if="avatar" :src="avatar" mode="aspectFill"></image>
 				</view>
-				<u-button @tap="chooseAvatar">选择图片</u-button>
+				<u-button @click="chooseAvatar">选择图片</u-button>
 			</view>
 		</view>
 		<!-- <view class="u-config-wrap">

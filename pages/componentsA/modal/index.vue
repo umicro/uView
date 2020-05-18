@@ -5,7 +5,10 @@
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
 				<view class="u-no-demo-here">请点击弹出弹窗查看效果</view>
-				<u-modal v-model="show" :show-cancel-button="true" :show-title="showTitle" :content-slot="contentSlot">
+				<u-modal ref="uModal" v-model="show" :show-cancel-button="true" 
+					:show-title="showTitle" :content-slot="contentSlot" :async-close="asyncClose"
+					@confirm="confirm"
+				>
 					<view class="warp" style="margin: 30rpx;" v-if="content">
 						<image class="logo" src="https://uviewui.com/common/logo.png" style="width: 220rpx;" mode="widthFix"></image>
 					</view>
@@ -22,10 +25,13 @@
 				<view class="u-item-title">是否显示标题</view>
 				<u-subsection vibrateShort current="0" :list="['是', '否']" @change="titleChange"></u-subsection>
 			</view>
-			
 			<view class="u-config-item">
 				<view class="u-item-title">自定义内容</view>
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">异步关闭</view>
+				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="asyncChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -39,7 +45,8 @@
 				zoom: false,
 				content: false,
 				showTitle: true,
-				contentSlot: false
+				contentSlot: false,
+				asyncClose: false
 			};
 		},
 		computed: {
@@ -59,6 +66,15 @@
 				this.contentSlot = !index;
 				this.content = !index;
 				this.show = true;
+			},
+			asyncChange(index) {
+				this.show = true;
+				this.asyncClose = !index;
+			},
+			confirm() {
+				setTimeout(() => {
+					this.show = false;
+				}, 2000)
 			}
 		}
 	};

@@ -16,8 +16,8 @@
 						<image src="https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg" mode="aspectFill"></image>
 					</view>
 				</view>
-				<view class="" slot="foot" v-if="bottomSlot">
-					<u-icon name="chat-fill" size="34" color="" label="30评论"></u-icon>
+				<view class="" slot="foot">
+					<u-icon v-if="bottomSlot" name="chat-fill" size="34" color="" label="30评论"></u-icon>
 				</view>
 			</u-card>
 		</view>

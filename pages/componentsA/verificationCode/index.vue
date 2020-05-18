@@ -7,7 +7,7 @@
 				<u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" 
 				@change="codeChange" :startText="startText" :changeText="changeText" 
 				:endText="endText"></u-verification-code>
-				<u-button @tap="getCode">{{tips}}</u-button>
+				<u-button @click="getCode">{{tips}}</u-button>
 				<u-button :custom-style="{marginTop: '30rpx'}" @tap="reset" style="margin-top: 30rpx;">重置</u-button>
 			</view>
 		</view>
