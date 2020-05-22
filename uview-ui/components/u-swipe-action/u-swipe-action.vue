@@ -12,13 +12,13 @@
 				width: movableViewWidth
 			}"
 		>
-			<view class="u-swipe-content" @tap.stop="contentClick"><slot></slot></view>
 			<view
-				class="u-swipe-del"
-				@tap.stop="btnClick(index)"
-				:style="[btnStyle(item.style)]"
-				v-for="(item, index) in options" :key="index"
+				class="u-swipe-content"
+				@tap.stop="contentClick"
 			>
+				<slot></slot>
+			</view>
+			<view class="u-swipe-del" @tap.stop="btnClick(index)" :style="[btnStyle(item.style)]" v-for="(item, index) in options" :key="index">
 				<view class="u-btn-text">{{ item.text }}</view>
 			</view>
 		</movable-view>
@@ -115,11 +115,11 @@ export default {
 			return uni.upx2px(this.btnWidth) * this.options.length;
 		},
 		btnStyle() {
-			return (style) => {
+			return style => {
 				let css = {};
 				style.width = this.btnWidth + 'rpx';
 				return style;
-			}
+			};
 		}
 	},
 	mounted() {
@@ -202,7 +202,7 @@ export default {
 		// 点击内容触发事件
 		contentClick() {
 			// 点击内容时，如果当前为打开状态，收起组件
-			if(this.status == true) {
+			if (this.status == true) {
 				this.status = 'close';
 				this.moveX = 0;
 			}

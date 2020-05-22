@@ -56,7 +56,7 @@
 			},
 			// 当前活动tab的索引
 			current: {
-				type: Number,
+				type: [Number, String],
 				default: 0
 			},
 			// 导航栏的高度和行高
@@ -143,12 +143,15 @@
 				parentLeft: 0, // 父元素(tabs组件)到屏幕左边的距离
 				id: this.$u.guid(), // id值
 				currentIndex: this.current,
+				barFirstTimeMove: true, // 滑块第一次移动时(页面刚生成时)，无需动画，否则给人怪异的感觉
 			};
 		},
 		watch: {
 			// 监听tab的变化，重新计算tab菜单的布局信息，因为实际使用中菜单可能是通过
 			// 后台获取的（如新闻app顶部的菜单），获取返回需要一定时间，所以list变化时，重新获取布局信息
 			list(n, o) {
+				// list变动时，重制内部索引，否则可能导致超出数组边界的情况
+				this.currentIndex = 0;
 				// 用$nextTick等待视图更新完毕后再计算tab的局部信息，否则可能因为tab还没生成就获取，就会有问题
 				this.$nextTick(() => {
 					this.init();
@@ -156,7 +159,7 @@
 			},
 			current: {
 				immediate: true,
-				handler(nVal) {
+				handler(nVal, oVal) {
 					// 视图更新后再执行移动操作
 					this.$nextTick(() => {
 						this.currentIndex = nVal;
@@ -171,7 +174,8 @@
 				let style = {
 					width: this.barWidth + 'rpx',
 					transform: `translate(${this.scrollBarLeft}px, -100%)`,
-					'transition-duration': `${this.duration}s`,
+					// 滑块在页面渲染后第一次滑动时，无需动画效果
+					'transition-duration': `${this.barFirstTimeMove ? 0 : this.duration }s`,
 					'background-color': this.activeColor,
 					height: this.barHeight + 'rpx',
 					// 设置一个很大的值，它会自动取能用的最大值，不用高度的一半，是因为高度可能是单数，会有小数出现
@@ -217,6 +221,8 @@
 			},
 			// 点击某一个tab菜单
 			clickTab(index) {
+				// 点击当前活动tab，不触发事件
+				if(index == this.currentIndex) return ;
 				// 发送事件给父组件
 				this.$emit('change', index);
 			},
@@ -257,6 +263,13 @@
 				let left = tabInfo.left + tabInfo.width / 2 - this.parentLeft;
 				// 计算当前活跃item到组件左边的距离
 				this.scrollBarLeft = left - uni.upx2px(this.barWidth) / 2;
+				// 第一次移动滑块的时候，barFirstTimeMove为true，放到延时中将其设置false
+				// 延时是因为scrollBarLeft作用于computed计算时，需要一个过程需，否则导致出错
+				if(this.barFirstTimeMove == true) {
+					setTimeout(() => {
+						this.barFirstTimeMove = false;
+					}, 100)
+				}
 			}
 		},
 		mounted() {

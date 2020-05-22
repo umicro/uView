@@ -65,8 +65,9 @@
  * @property {String} margin 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"
  * @property {Boolean} animation 是否开启动画，见上方说明（默认false）
  * @property {String} value 输入框初始值
+ * @property {String | Number} maxlength 输入框最大能输入的长度，-1为不限制长度
  * @property {Boolean} input-style input输入框的样式，可以定义文字颜色，大小等，对象形式
- * @property {String Number} height 输入框高度，单位rpx（默认64）
+ * @property {String | Number} height 输入框高度，单位rpx（默认64）
  * @event {Function} change 输入框内容发生变化时触发
  * @event {Function} search 用户确定搜索时触发，用户按回车键，或者手机键盘右下角的"搜索"键时触发
  * @event {Function} custom 用户点击右侧控件时触发

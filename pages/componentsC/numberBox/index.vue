@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-number-box :value="value" :bg-color="bgColor" :color="color" 
+				<u-number-box :value="value" :bg-color="bgColor" :color="color" :min="0"
 				:step="step" :disabled="disabled"></u-number-box>
 			</view>
 		</view>

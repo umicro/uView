@@ -1,13 +1,13 @@
 <template>
 	<view class="u-numberbox">
-		<view class="u-icon-minus" @tap="minus" :class="{ 'u-icon-disabled': disabled || inputVal <= min }" :style="{
+		<view class="u-icon-minus" @tap.stop="minus" :class="{ 'u-icon-disabled': disabled || inputVal <= min }" :style="{
 				background: bgColor,
 				height: inputHeight + 'rpx',
 				color: color
 			}">
 			<u-icon name="minus" :size="size"></u-icon>
 		</view>
-		<input :disabled="disabledInput || disabled" :class="{ 'u-input-disabled': disabled }" v-model="inputVal" class="u-number-input" @blur="onBlur"
+		<input :disabled="disabledInput || disabled" :cursor-spacing="getCursorSpacing" :class="{ 'u-input-disabled': disabled }" v-model="inputVal" class="u-number-input" @blur="onBlur"
 		 type="number" :style="{
 				color: color,
 				fontSize: size + 'rpx',
@@ -15,7 +15,7 @@
 				height: inputHeight + 'rpx',
 				width: inputWidth + 'rpx'
 			}" />
-		<view class="u-icon-plus" @tap="plus" :class="{ 'u-icon-disabled': disabled || inputVal >= max }" :style="{
+		<view class="u-icon-plus" @tap.stop="plus" :class="{ 'u-icon-disabled': disabled || inputVal >= max }" :style="{
 				background: bgColor,
 				height: inputHeight + 'rpx',
 				color: color
@@ -37,11 +37,12 @@
 	 * @property {Number} step 步长，每次加或减的值（默认1）
 	 * @property {Boolean} disabled 是否禁用操作，禁用后无法加减或手动修改输入框的值（默认false）
 	 * @property {Boolean} disabled-input 是否禁止输入框手动输入值（默认false）
-	 * @property {String Number} size 输入框文字和按钮字体大小，单位rpx（默认26）
+	 * @property {String | Number} size 输入框文字和按钮字体大小，单位rpx（默认26）
 	 * @property {String} color 输入框文字和加减按钮图标的颜色（默认#323233）
-	 * @property {String Number} input-width 输入框宽度，单位rpx（默认80）
-	 * @property {String Number} input-height 输入框和按钮的高度，单位rpx（默认50）
-	 * @property {String Number} index 事件回调时用以区分当前发生变化的是哪个输入框
+	 * @property {String | Number} input-width 输入框宽度，单位rpx（默认80）
+	 * @property {String | Number} input-height 输入框和按钮的高度，单位rpx（默认50）
+	 * @property {String | Number} index 事件回调时用以区分当前发生变化的是哪个输入框
+	 * @property {String | Number} cursor-spacing 指定光标于键盘的距离，避免键盘遮挡输入框，单位rpx（默认200）
 	 * @event {Function} change 输入框内容发生变化时触发，对象形式
 	 * @event {Function} blur 输入框失去焦点时触发，对象形式
 	 * @event {Function} minus 点击减少按钮时触发(按钮可点击情况下)，对象形式
@@ -111,6 +112,11 @@
 			disabledInput: {
 				type: Boolean,
 				default: false
+			},
+			// 输入框于键盘之间的距离
+			cursorSpacing: {
+				type: [Number, String],
+				default: 100
 			}
 		},
 		watch: {
@@ -121,8 +127,8 @@
 				// 为了让用户能够删除所有输入值，重新输入内容，删除所有值后，内容为空字符串
 				if (v1 == '') return;
 				let value = 0;
-				// 首先判断是否正整数，并且第一位数字不为0，并且在min和max之间，如果不是，使用原来值
-				let tmp = /(^\d+$)/.test(v1) && String(v1)[0] != 0;
+				// 首先判断是否正整数，并且在min和max之间，如果不是，使用原来值
+				let tmp = /(^\d+$)/.test(v1);
 				if (tmp && v1 >= this.min && v1 <= this.max) value = v1;
 				else value = v2;
 				this.handleChange(value, 'change');
@@ -138,6 +144,12 @@
 		},
 		created() {
 			this.inputVal = +this.value;
+		},
+		computed: {
+			getCursorSpacing() {
+				// 先将值转为px单位，再转为数值
+				return Number(uni.upx2px(this.cursorSpacing));
+			}
 		},
 		methods: {
 			minus() {

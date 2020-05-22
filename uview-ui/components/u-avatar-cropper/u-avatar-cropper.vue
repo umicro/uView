@@ -24,7 +24,12 @@
 			></canvas>
 		</view>
 		<view class="cropper-buttons safe-area-padding" :style="{ height: bottomNavHeight + 'px' }">
+			<!-- #ifdef H5 -->
+			<view class="upload" @tap="uploadTap">选择图片</view>
+			<!-- #endif -->
+			<!-- #ifndef H5 -->
 			<view class="upload" @tap="uploadTap">重新选择</view>
+			<!-- #endif -->
 			<view class="getCropperImage" @tap="getCropperImage(false)">确定</view>
 		</view>
 	</view>

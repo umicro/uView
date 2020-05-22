@@ -12,7 +12,12 @@
 					</view>
 				</view>
 				<view class="u-navbar-content-title" v-if="title" :style="[titleStyle]">
-					<view class="u-title u-line-1">{{title}}</view>
+					<view class="u-title u-line-1" :style="{
+						color: titleColor,
+						fontSize: titleSize + 'rpx'
+					}">
+						{{title}}
+					</view>
 				</view>
 				<view class="u-slot-content">
 					<slot></slot>
@@ -173,8 +178,6 @@ export default {
 		// 导航中间的标题的样式
 		titleStyle() {
 			let style = {};
-			style.color = this.titleColor;
-			style.fontSize = this.titleSize + 'rpx';
 			// #ifndef MP
 			style.left = (systemInfo.windowWidth - uni.upx2px(this.titleWidth)) / 2 + 'px';
 			style.right = (systemInfo.windowWidth - uni.upx2px(this.titleWidth)) / 2 + 'px';

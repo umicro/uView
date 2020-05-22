@@ -129,6 +129,7 @@
 			},
 			// 键盘关闭
 			popupClose() {
+				console.log(333);
 				// 通过发送input这个特殊的事件名，可以修改父组件传给props的value的变量，也即双向绑定
 				this.$emit('input', false);
 			},

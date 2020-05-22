@@ -21,7 +21,7 @@
 						animationPlayState: animationPlayState,
 					}"
 				>
-					<text class="u-notice-text" @tap="click(index)" :style="{
+					<text class="u-notice-text" @tap="click" :style="{
 						fontSize: fontSize + 'rpx',
 					}">{{showText}}</text>
 				</view>
@@ -185,7 +185,7 @@ export default {
 		},
 		// 点击通告栏
 		click(index) {
-			this.$emit('click', index);
+			this.$emit('click');
 		},
 		// 点击关闭按钮
 		close() {

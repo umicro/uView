@@ -23,7 +23,7 @@
 				<u-subsection vibrateShort :current="current" :list="['线型', '圆型']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">增减(圆型时只能增，不能减)</view>
+				<view class="u-item-title">增减</view>
 				<u-subsection vibrateShort :list="['减少30%', '增加30%']" @change="calcChange"></u-subsection>
 			</view>
 			<view class="u-config-item">

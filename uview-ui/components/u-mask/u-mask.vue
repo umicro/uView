@@ -88,12 +88,10 @@
 		right: 0;
 		bottom: 0;
 		opacity: 0;
-		visibility: hidden;
 	}
 
 	.u-mask-show {
 		opacity: 1;
-		visibility: visible;
 		transform: scale(1);
 	}
 </style>

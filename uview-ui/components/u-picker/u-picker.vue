@@ -32,7 +32,7 @@
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else :value="valueArr" @change="change" class="u-picker-view">
+				<picker-view v-else-if="mode == 'time'" :value="valueArr" @change="change" class="u-picker-view">
 					<picker-view-column v-if="!reset && params.year">
 						<view class="u-column-item" v-for="(item,index) in years" :key="index">
 							{{ item }}<text class="u-text" v-if="showTimeTag">年</text>
@@ -64,6 +64,24 @@
 						</view>
 					</picker-view-column>
 				</picker-view>
+				<picker-view v-else-if="mode == 'selector'" :value="defaultSelector" @change="change" class="u-picker-view">
+					<picker-view-column>
+						<view class="u-column-item" v-for="(item,index) in range" :key="index">
+							<view class="u-line-1">
+								{{getItemValue(item)}}
+							</view>
+						</view>
+					</picker-view-column>
+				</picker-view>
+				<picker-view v-else-if="mode == 'multiSelector'" :value="defaultSelector" @change="change" class="u-picker-view">
+					<picker-view-column v-for="(item,index) in range" :key="index">
+						<view class="u-column-item" v-for="(item1,index1) in item" :key="index1">
+							<view class="u-line-1">
+								{{getItemValue(item1)}}
+							</view>
+						</view>
+					</picker-view-column>
+				</picker-view>
 			</view>
 		</view>
 	</u-popup>
@@ -91,6 +109,9 @@
 	 * @property {String} default-code 默认选中的地区，编号形式，mode=region时有效
 	 * @property {Boolean} mask-close-able 是否允许通过点击遮罩关闭Picker（默认true）
 	 * @property {String Number} z-index 弹出时的z-index值（默认1075）
+	 * @property {Array} default-selector 数组形式，其中每一项表示选择了range对应项中的第几个
+	 * @property {Array} range 自定义选择的数据，mode=selector或mode=multiSelector时有效
+	 * @property {String} range-key 当range参数的元素为对象时，指定Object中的哪个key的值作为选择器显示内容
 	 * @event {Function} confirm 点击确定按钮，返回当前选择的值
 	 * @event {Function} cancel 点击取消按钮，返回当前选择的值
 	 * @example <u-picker v-model="show" mode="time"></u-picker>
@@ -115,7 +136,26 @@
 					}
 				}
 			},
-			// 模式选择，region-地区类型，time-时间类型
+			// 当mode=selector或者mode=multiSelector时，提供的数组
+			range: {
+				type: Array,
+				default() {
+					return []
+				}
+			},
+			// 当mode=selector或者mode=multiSelector时，提供的默认选中的下标
+			defaultSelector: {
+				type: Array,
+				default() {
+					return [0]
+				}
+			},
+			// 当 range 是一个 Array＜Object＞ 时，通过 range-key 来指定 Object 中 key 的值作为选择器显示内容
+			rangeKey: {
+				type: String,
+				default: ''
+			},
+			// 模式选择，region-地区类型，time-时间类型，selector-单列模式，multiSelector-多列模式
 			mode: {
 				type: String,
 				default: 'time'
@@ -207,7 +247,8 @@
 				areas: areas[0][0],
 				province: 0,
 				city: 0,
-				area: 0
+				area: 0,
+				multiSelectorValue: [], // 多列时，保存上一次的列选择，用于对下一次变更时，对比是哪一列发生了变化
 			}
 		},
 		mounted() {
@@ -245,17 +286,19 @@
 			yearAndMonth(val) {
 				if (this.params.year) this.setDays();
 			},
-			// 微信和QQ小程序由于一些奇怪的原因，需要重新初始化才能显示正确的值
+			// 微信和QQ小程序由于一些奇怪的原因(故同时对所有平台均初始化一遍)，需要重新初始化才能显示正确的值
 			value(n) {
 				if (n) {
-					// #ifdef MP-WEIXIN || MP-QQ
 					this.reset = true;
 					setTimeout(() => this.init(), 10);
-					// #endif
 				}
 			}
 		},
 		methods: {
+			// 对单列和多列形式的判断是否有传入变量的情况
+			getItemValue(item) {
+				return typeof item == 'object' ? item[this.rangeKey] : item
+			},
 			// 小于10前面补0，用于月份，日期，时分秒等
 			formatNumber(num) {
 				return +num < 10 ? '0' + num : String(num);
@@ -318,7 +361,7 @@
 						this.valueArr.push(0);
 						this.setSeconds();
 					}
-				} else {
+				} else if(this.mode == 'region') {
 					if (this.params.province) {
 						this.valueArr.push(0);
 						this.setProvinces();
@@ -331,6 +374,11 @@
 						this.valueArr.push(0);
 						this.setAreas();
 					}
+				} else if(this.mode == 'selector') {
+					this.valueArr = this.defaultSelector;
+				} else if(this.mode == 'multiSelector') {
+					this.valueArr = this.defaultSelector;
+					this.multiSelectorValue = this.defaultSelector;
 				}
 				this.$forceUpdate();
 			},
@@ -443,11 +491,25 @@
 					if (this.params.hour) this.hour = this.hours[this.valueArr[i++]];
 					if (this.params.minute) this.minute = this.minutes[this.valueArr[i++]];
 					if (this.params.second) this.second = this.seconds[this.valueArr[i++]];
-				} else {
+				} else if(this.mode == 'region') {
 					if (this.params.province) this.province = this.valueArr[i++];
 					if (this.params.city) this.city = this.valueArr[i++];
 					if (this.params.area) this.area = this.valueArr[i++];
-				}
+				} else if(this.mode == 'multiSelector') {
+					let index = 0;
+					// 对比前后两个数组，寻找变更的是哪一列，如果某一个元素不同，即可判定该列发生了变化
+					this.multiSelectorValue.map((val, idx) => {
+						if(val != this.valueArr[idx]) index = idx;
+					})
+					// 保存当前最新的数组，便于下次进行对比
+					// this.multiSelectorValue = e.detail.value;
+					// 模仿uniapp的picker组件为multiSelector模式时，对外抛出的参数，保持一致，同时也是为了让用户对多列
+					// 变化时，对动态设置其他列的变更
+					this.$emit('columnchange', {
+						column: index,
+						index: this.valueArr[index]
+					})
+				} 
 			},
 			// 用户点击确定按钮
 			getResult(event = null) {
@@ -460,10 +522,14 @@
 					if (this.params.hour) result.hour = this.formatNumber(this.hour || 0);
 					if (this.params.minute) result.minute = this.formatNumber(this.minute || 0);
 					if (this.params.second) result.second = this.formatNumber(this.second || 0);
-				} else {
+				} else if (this.mode == 'region') {
 					if (this.params.province) result.province = provinces[this.province];
 					if (this.params.city) result.city = citys[this.province][this.city];
 					if (this.params.area) result.area = areas[this.province][this.city][this.area];
+				} else if (this.mode == 'selector') {
+					result = this.valueArr;
+				} else if (this.mode == 'multiSelector') {
+					result = this.valueArr;
 				}
 				if (event) this.$emit(event, result);
 				this.close();

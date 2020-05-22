@@ -115,7 +115,7 @@
 				// tag的背景颜色（如果有此值，会覆盖type值的颜色）
 				if(this.bgColor) style.backgroundColor = this.bgColor+"!important";
 				// 如果是镂空型tag，没有传递边框颜色（borderColor）的话，使用文字的颜色（color属性）
-				if(this.plain && this.color && !this.borderColor) style.borderColor = this.color;
+				if(this.mode == 'plain' && this.color && !this.borderColor) style.borderColor = this.color;
 				else style.borderColor = this.borderColor;
 				return style;
 			},

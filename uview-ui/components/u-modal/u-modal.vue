@@ -76,8 +76,8 @@
  * @example <u-modal :src="title" :content="content"></u-modal>
  */
 export default {
+	name: 'u-modal',
 	props: {
-		name: 'u-modal',
 		// 是否显示Modal
 		value: {
 			type: Boolean,

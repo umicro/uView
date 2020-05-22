@@ -76,33 +76,34 @@
 			// 整个圆环进度区域的背景色
 			bgColor: {
 				type: String,
-				default: "#ffffff"
+				default: "#ffffff" 
 			}
 		},
 		data() {
 			return {
-				elBgId: this.$u.guid(),
-				elId: this.$u.guid(),
-				ctxBg: '', // 背景canvas实例
-				ctx: '', // 前景(激活时候)canvas的实例
-				count: 0, // 计数器
-				timer: null, // 定时器
-				times: 0, // 总共要执行的动画次数，setInterval的次数
-				time: 0, // 执行整个动画的时间
+				elBgId: 'uCircleProgressBgId', // 微信小程序中不能使用this.$u.guid()形式动态生成id值，否则会报错
+				elId: 'uCircleProgressElId',
 				widthPx: uni.upx2px(this.width), // 转成px后的整个组件的背景宽度
 				borderWidthPx: uni.upx2px(this.borderWidth), // 转成px后的圆环的宽度
-				mode: 'more', // more-percent增加，less-percent减少
+				startAngle: -Math.PI / 2, // canvas画圆的起始角度，默认为3点钟方向，定位到12点钟方向
+				progressContext: null, // 活动圆的canvas上下文
+				newPercent: 0, // 当动态修改进度值的时候，保存进度值的变化前后值，用于比较用
+				oldPercent: 0, // 当动态修改进度值的时候，保存进度值的变化前后值，用于比较用
 			}
 		},
 		watch: {
 			percent: {
 				immediate: true,
 				handler(nVal, oVal = 0) {
-					this.mode = nVal > oVal ? 'more' : 'less';
-					this.times = Math.ceil(nVal * 3.6);
-					this.time = Math.ceil(this.duration / 360 * this.times);
+					if(nVal > 100) nVal = 100;
+					if(nVal < 0) oVal = 0;
+					// 此值其实等于this.percent，命名一个新
+					this.newPercent = nVal;
+					this.oldPercent = oVal;
 					setTimeout(() => {
-						this.countInterval();
+						// 无论是百分比值增加还是减少，需要操作还是原来的旧的百分比值
+						// 将此值减少或者新增到新的百分比值
+						this.drawCircleByProgress(oVal);
 					}, 50)
 				}
 			}
@@ -115,53 +116,63 @@
 			}
 		},
 		mounted() {
-			this.ctxBg = uni.createCanvasContext(this.elBgId, this);
-			this.ctx = uni.createCanvasContext(this.elId, this);
 			// 在h5端，必须要做一点延时才起作用，this.$nextTick()无效(HX2.4.7)
 			setTimeout(() => {
 				this.drawProgressBg();
+				this.drawCircleByProgress(0);
 			}, 50)
 		},
 		methods: {
 			drawProgressBg() {
-				this.ctxBg.setLineWidth(this.borderWidthPx); // 设置圆环宽度
-				this.ctxBg.setStrokeStyle(this.inactiveColor); // 线条颜色
-				this.ctxBg.setLineCap('round'); // 圆环端点的形状为圆形
-				this.ctxBg.beginPath(); // 开始描绘路径
+				let ctx = uni.createCanvasContext(this.elBgId, this);
+				ctx.setLineWidth(this.borderWidthPx); // 设置圆环宽度
+				ctx.setStrokeStyle(this.inactiveColor); // 线条颜色
+				ctx.beginPath(); // 开始描绘路径
 				// 设置一个原点(110,110)，半径为100的圆的路径到当前路径
-				this.ctxBg.arc(this.widthPx / 2, this.widthPx / 2, this.widthPx / 2 - this.borderWidthPx / 2 - 1, 0, 2 * Math.PI,
-					false);
-				this.ctxBg.stroke(); // 对路径进行描绘
-				this.ctxBg.draw();
+				let radius = this.widthPx / 2;
+				ctx.arc(radius, radius, radius - this.borderWidthPx, 0, 2 * Math.PI,false);
+				ctx.stroke(); // 对路径进行描绘
+				ctx.draw();
 			},
-			drawCircle(step) {
-				this.ctx.setLineWidth(this.borderWidthPx);
-				this.ctx.setStrokeStyle(this.circleColor);
-				this.ctx.setLineCap('round');
-				this.ctx.beginPath();
-				// 参数step 为绘制的圆环周长，从0到2为一周 。 -Math.PI / 2 将起始角设在12点钟位置 ，结束角 通过改变 step 的值确定
-				if (this.mode == 'more') {
-					this.ctx.arc(this.widthPx / 2, this.widthPx / 2, this.widthPx / 2 - this.borderWidthPx / 2 - 1, -Math.PI / 2, step *
-						Math.PI - Math.PI / 2, false);
-				} else {
-					this.ctx.arc(this.widthPx / 2, this.widthPx / 2, this.widthPx / 2 - this.borderWidthPx / 2 - 1, -Math.PI / 2, Math
-						.PI / 2 - step *
-						Math.PI, false);
+			drawCircleByProgress(progress) {
+				// 第一次操作进度环时将上下文保存到了this.data中，直接使用即可
+				let ctx = this.progressContext;
+				if (!ctx) {
+					ctx = uni.createCanvasContext(this.elId, this);
+					this.progressContext = ctx;
 				}
-				this.ctx.stroke();
-				this.ctx.draw()
-			},
-			countInterval() {
-				this.countTimer = setInterval(() => {
-					if (this.count <= this.times) {
-						// 全一个圆时候，值为2，这里求出每一份的值为2/360
-						this.drawCircle(this.count * 2 / 360);
-						this.count++;
-					} else {
-						clearInterval(this.countTimer);
-					}
-				}, Math.ceil(this.duration / 360)); // 总过渡时间分为360份，这里为每一份的时间
-			},
+				// 表示进度的两端为圆形
+				ctx.setLineCap('round');
+				// 设置线条的宽度和颜色
+				ctx.setLineWidth(this.borderWidthPx);
+				ctx.setStrokeStyle(this.circleColor);
+				// 将总过渡时间除以100，得出每修改百分之一进度所需的时间
+				let time = Math.floor(this.duration / 100);
+				// 结束角的计算依据为：将2π分为100份，乘以当前的进度值，得出终止点的弧度值，加起始角，为整个圆从默认的
+				// 3点钟方向开始画图，转为更好理解的12点钟方向开始作图，这需要起始角和终止角同时加上this.startAngle值
+				let endAngle =  ((2 * Math.PI) / 100) * progress + this.startAngle;
+				ctx.beginPath();
+				// 半径为整个canvas宽度的一半
+				let radius = this.widthPx / 2;
+				ctx.arc(radius, radius, radius - this.borderWidthPx, this.startAngle, endAngle, false);
+				ctx.stroke();
+				ctx.draw();
+				// 如果变更后新值大于旧值，意味着增大了百分比
+				if(this.newPercent > this.oldPercent) {
+					// 每次递增百分之一
+					progress ++;
+					// 如果新增后的值，大于需要设置的值百分比值，停止继续增加
+					if (progress > this.newPercent) return;
+				} else {
+					// 同理于上面
+					progress --;
+					if (progress < this.newPercent) return ;
+				}
+				setTimeout(() => {
+					// 定时器，每次操作间隔为time值，为了让进度条有动画效果
+					this.drawCircleByProgress(progress);
+				}, time);
+			}
 		}
 	}
 </script>

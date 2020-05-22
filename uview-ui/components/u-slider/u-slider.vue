@@ -166,6 +166,8 @@ export default {
 			// 否则造成通信阻塞，需要每改变一个step值时修改一次视图
 			this.newValue = (this.distanceX / this.sliderRect.width) * 100;
 			this.status = 'moving';
+			// 发出moving事件
+			this.$emit('moving');
 			this.updateValue(this.newValue, true);
 		},
 		onTouchEnd() {

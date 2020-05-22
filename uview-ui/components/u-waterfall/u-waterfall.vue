@@ -17,7 +17,7 @@
 export default {
 	name: "u-waterfall",
 	props: {
-		flowList: {
+		value: {
 			// 瀑布流数据
 			type: Array,
 			required: true,
@@ -57,7 +57,7 @@ export default {
 			let startIndex = Array.isArray(oVal) && oVal.length > 0 ? oVal.length : 0;
 			this.tempList = this.cloneData(nVal.slice(startIndex));
 			this.splitData();
-		},
+		}
 	},
 	mounted() {
 		this.tempList = this.cloneData(this.copyFlowList);
@@ -66,7 +66,7 @@ export default {
 	computed: {
 		// 破坏flowList变量的引用，否则watch的结果新旧值是一样的
 		copyFlowList() {
-			return this.cloneData(this.flowList);
+			return this.cloneData(this.value);
 		}
 	},
 	methods: {
@@ -109,8 +109,10 @@ export default {
 		clear() {
 			this.leftList = [];
 			this.rightList = [];
+			// 同时清除父组件列表中的数据
+			this.$emit('input', []);
 		},
-		// 清除某一条制定的数据，根据id实现
+		// 清除某一条指定的数据，根据id实现
 		remove(id) {
 			let tmp = false;
 			// 如果findIndex找不到合适的条件，就会返回-1
@@ -124,6 +126,9 @@ export default {
 				index = this.rightList.findIndex(val => val[this.idKey] == id);
 				if(index != -1) this.rightList.splice(index, 1);
 			}
+			// 同时清除父组件的数据中的对应id的条目
+			index = this.value.findIndex(val => val[this.idKey] == id);
+			if(index != -1) this.$emit('input', this.value.splice(index, 1));
 		}
 	}
 }

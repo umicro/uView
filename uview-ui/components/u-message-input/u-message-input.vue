@@ -1,7 +1,7 @@
 <template>
 	<view class="u-char-box">
 		<view class="u-char-flex">
-			<input :value="valueModel" type="number" :focus="focus" :maxlength="maxlength" class="u-input" @input="getVal" />
+			<input :disabled="disabledKeyboard" :value="valueModel" type="number" :focus="focus" :maxlength="maxlength" class="u-input" @input="getVal"/>
 			<view v-for="(item, index) in maxlength" :key="index">
 				<view :class="[breathe && charArrLength == index ? 'u-breathe' : '', 'u-char-item', 
 				charArrLength === index && mode == 'box' ? 'u-box-active' : '',
@@ -48,6 +48,7 @@
 	 * @property {String} active-color 当前激活输入框的样式（默认#2979ff）
 	 * @property {String} focus 非激活输入框的样式，文字颜色同此值（默认#606266）
 	 * @property {String | Number} width 输入框宽度，单位rpx，高等于宽（默认80）
+	 * @property {Boolean} disabled-keyboard 禁止点击输入框唤起系统键盘（默认false）
 	 * @event {Function} change 输入内容发生改变时触发，具体见官网说明
 	 * @event {Function} finish 输入字符个数达maxlength值时触发，见官网说明
 	 * @example <u-message-input mode="bottomLine"></u-message-input>
@@ -109,6 +110,11 @@
 			width: {
 				type: [Number, String],
 				default: '80'
+			},
+			// 是否隐藏原生键盘，如果想用自定义键盘的话，需设置此参数为true
+			disabledKeyboard: {
+				type: Boolean,
+				default: false
 			}
 		},
 		watch: {
@@ -197,12 +203,12 @@
 	.u-input {
 		position: absolute;
 		top: 0;
-		left: -100%;
-		width: 200%;
+		left: 0;
+		width: 100%;
 		height: 100%;
 		text-align: left;
 		z-index: 9;
-		opacity: 1;
+		opacity: 0;
 		background: none;
 	}
 

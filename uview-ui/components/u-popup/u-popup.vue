@@ -15,11 +15,27 @@
 			:style="[style]"
 		>
 			<view class="u-mode-center-box" @tap.stop.prevent @touchmove.stop.prevent v-if="mode == 'center'" :style="[centerStyle]">
-				<u-icon @click="close" v-if="closeable" class="u-close" :class="['u-close--' + closeIconPos]" :name="closeIcon" :color="closeIconColor" :size="closeIconSize"></u-icon>
+				<u-icon
+					@click="close"
+					v-if="closeable"
+					class="u-close"
+					:class="['u-close--' + closeIconPos]"
+					:name="closeIcon"
+					:color="closeIconColor"
+					:size="closeIconSize"
+				></u-icon>
 				<slot />
 			</view>
 			<block v-else><slot /></block>
-			<u-icon v-if="mode != 'center' && closeable" @click="close" class="u-close" :class="['u-close--' + closeIconPos]" :name="closeIcon" :color="closeIconColor" :size="closeIconSize"></u-icon>
+			<u-icon
+				v-if="mode != 'center' && closeable"
+				@click="close"
+				class="u-close"
+				:class="['u-close--' + closeIconPos]"
+				:name="closeIcon"
+				:color="closeIconColor"
+				:size="closeIconSize"
+			></u-icon>
 		</view>
 	</view>
 </template>
@@ -247,14 +263,13 @@ export default {
 		// 此处的原理是，关闭时先通过动画隐藏弹窗和遮罩，再移除整个组件
 		// 打开时，先渲染组件，延时一定时间再让遮罩和弹窗的动画起作用
 		change(param1, param2, status) {
-			// 如果this.popup为false，以为着为picker，actionsheet等组件调用了popup组件
+			// 如果this.popup为false，意味着为picker，actionsheet等组件调用了popup组件
 			if (this.popup == true) this.$emit('input', status);
 			this[param1] = status;
 			if (this.timer) {
 				clearTimeout(this.timer);
 			}
-			this.timer = setTimeout(
-				() => {
+			this.timer = setTimeout(() => {
 					this[param2] = status;
 					this.$emit(status ? 'open' : 'close');
 				},

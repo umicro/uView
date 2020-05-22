@@ -1,6 +1,6 @@
 <template>
 	<view class="wrap">
-		<u-waterfall :flowList="flowList" ref="uWaterfall">
+		<u-waterfall v-model="flowList" ref="uWaterfall">
 			<template v-slot:left="{ leftList }">
 				<view class="demo-warter" v-for="(item, index) in leftList" :key="index">
 					<!-- 警告：微信小程序不支持嵌入lazyload组件，请自行如下使用image标签 -->
