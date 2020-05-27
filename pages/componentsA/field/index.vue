@@ -21,7 +21,7 @@
 						:required="required"
 						:icon="icon2"
 					>
-						<u-button v-if="showBtn" slot="button" size="mini" type="success">发送验证码</u-button>
+						<u-button v-if="showBtn" slot="right" size="mini" type="success">发送验证码</u-button>
 					</u-field>
 				</u-cell-group>
 			</view>

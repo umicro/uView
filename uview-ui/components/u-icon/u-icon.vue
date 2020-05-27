@@ -1,6 +1,6 @@
 <template>
 	<view class="u-icon" :class="[labelPos == 'bottom' ? 'u-flex-col u-row-center' : 'u-flex u-col-center']">
-		<text class="u-icon__icon" :class="customClass" :style="[iconStyle]" @tap.stop="click" :hover-class="hoverClass" @touchstart.stop="touchstart"></text>
+		<text class="u-icon__icon" :class="customClass" :style="[iconStyle]" @tap.stop.prevent="click" :hover-class="hoverClass" @touchstart.stop.prevent="touchstart"></text>
 		<text v-if="label" class="u-icon__label" :style="{
 			color: labelColor,
 			fontSize: labelSize + 'rpx',

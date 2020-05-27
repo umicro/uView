@@ -203,8 +203,8 @@
 	.u-input {
 		position: absolute;
 		top: 0;
-		left: 0;
-		width: 100%;
+		left: -100%;
+		width: 200%;
 		height: 100%;
 		text-align: left;
 		z-index: 9;
