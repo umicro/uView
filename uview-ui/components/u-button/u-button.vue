@@ -382,8 +382,8 @@ export default {
 	transform-origin: 0 0;
 	left: 0;
 	top: 0;
-	width: 200%;
-	height: 200%;
+	width: 200.1%;
+	height: 200.1%;
 	-webkit-transform: scale(0.5, 0.5);
 	transform: scale(0.5, 0.5);
 	border: 1px solid currentColor;

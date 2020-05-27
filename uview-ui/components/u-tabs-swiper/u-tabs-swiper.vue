@@ -277,7 +277,7 @@
 			countLine3Dx() {
 				const tab = this.tabsInfo[this.animationFinishCurrent];
 				// 让滑块中心点和当前tab中心重合
-				if (tab) this.line3Dx = tab.left + tab.width / 2 - this.barWidthPx / 2;
+				if (tab) this.line3Dx = tab.left + tab.width / 2 - this.barWidthPx / 2 - this.tabsInfo[0].left;
 			},
 			countPx() {
 				// swiper宽度由rpx转为px单位，因为dx等，都是px单位

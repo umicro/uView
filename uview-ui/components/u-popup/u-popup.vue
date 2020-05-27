@@ -300,7 +300,7 @@ export default {
 	/* #endif */
 	position: absolute;
 	z-index: 1003;
-	transition: all 0.25s linear;
+	transition: all 0.3s linear;
 }
 
 .u-drawer-left {
@@ -367,27 +367,6 @@ export default {
 
 .u-drawer-content-visible {
 	transform: translate3D(0px, 0px, 0px) !important;
-}
-
-.u-drawer-mask {
-	/* #ifndef APP-NVUE */
-	display: block;
-	/* #endif */
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.4);
-	transition: opacity 0.25s;
-}
-
-.u-drawer-mask-visible {
-	/* #ifndef APP-NVUE */
-	display: block;
-	/* #endif */
-	opacity: 1;
 }
 
 .u-close {

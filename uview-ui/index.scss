@@ -47,6 +47,12 @@ u-icon {
 	display: flex;
 	align-items: center;
 }
+
+// 各家小程序宫格组件外层设置为100%，避免受到父元素display: flex;的影响
+u-grid {
+	width: 100%;
+	flex: 0 0 100%;
+}
 /* #endif */
 /* end-微信小程序编译后页面有组件名的元素，特别处理--end */
 
@@ -118,35 +124,20 @@ u-icon {
 .u-border-top-bottom:after,
 .u-border-top:after,
 .u-border:after {
-	content: " ";
+	content: ' ';
 	position: absolute;
+	left: 0;
+	top: 0;
 	pointer-events: none;
-	// 设置为border-box，意味着下面的scale缩小为0.5，实际上缩小的是伪元素的内容（border-box意味着内容不含border）
-	box-sizing: border-box; 
-	// 中心点作为变形(scale())的原点
-	-webkit-transform-origin: center;
-	transform-origin: center;
-	top: -50%;
-	left: -50%;
-	right: -50%;
-	bottom: -50%;
-	-webkit-transform: scale(.5);
-	transform: scale(.5);
+	box-sizing: border-box;
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	// 多加0.1%，能解决有时候边框缺失的问题
+	width: 200.1%;
+	height: 200.1%;
+	transform: scale(0.5, 0.5);
 	border: 0 solid $u-border-color;
-	z-index: 0;
-	// content: ' ';
-	// position: absolute;
-	// left: 0;
-	// pointer-events: none;
-	// box-sizing: border-box;
-	// -webkit-transform-origin: 0 0;
-	// transform-origin: 0 0;
-	// width: 200%;
-	// height: 200%;
-	// -webkit-transform: scale(0.5, 0.5);
-	// transform: scale(0.5, 0.5);
-	// border: 0 solid $u-border-color;
-	// z-index: 0;
+	z-index: 1;
 }
 
 .u-border-top:after {

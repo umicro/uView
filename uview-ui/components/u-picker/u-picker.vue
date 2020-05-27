@@ -68,7 +68,7 @@
 					<picker-view-column>
 						<view class="u-column-item" v-for="(item,index) in range" :key="index">
 							<view class="u-line-1">
-								{{getItemValue(item)}}
+								{{getItemValue(item, 'selector')}}
 							</view>
 						</view>
 					</picker-view-column>
@@ -77,7 +77,7 @@
 					<picker-view-column v-for="(item,index) in range" :key="index">
 						<view class="u-column-item" v-for="(item1,index1) in item" :key="index1">
 							<view class="u-line-1">
-								{{getItemValue(item1)}}
+								{{getItemValue(item1, 'multiSelector')}}
 							</view>
 						</view>
 					</picker-view-column>
@@ -248,7 +248,6 @@
 				province: 0,
 				city: 0,
 				area: 0,
-				multiSelectorValue: [], // 多列时，保存上一次的列选择，用于对下一次变更时，对比是哪一列发生了变化
 			}
 		},
 		mounted() {
@@ -296,8 +295,12 @@
 		},
 		methods: {
 			// 对单列和多列形式的判断是否有传入变量的情况
-			getItemValue(item) {
-				return typeof item == 'object' ? item[this.rangeKey] : item
+			getItemValue(item, mode) {
+				// 目前(2020-05-25)uni-app对微信小程序编译有错误，导致v-if为false中的内容也执行，错误导致
+				// 单列模式或者多列模式中的getItemValue同时被执行，故在这里再加一层判断
+				if(this.mode == mode) {
+					return typeof item == 'object' ? item[this.rangeKey] : item
+				}
 			},
 			// 小于10前面补0，用于月份，日期，时分秒等
 			formatNumber(num) {
@@ -496,19 +499,18 @@
 					if (this.params.city) this.city = this.valueArr[i++];
 					if (this.params.area) this.area = this.valueArr[i++];
 				} else if(this.mode == 'multiSelector') {
-					let index = 0;
+					let index = null;
 					// 对比前后两个数组，寻找变更的是哪一列，如果某一个元素不同，即可判定该列发生了变化
-					this.multiSelectorValue.map((val, idx) => {
-						if(val != this.valueArr[idx]) index = idx;
+					this.defaultSelector.map((val, idx) => {
+						if(val != e.detail.value[idx]) index = idx;
 					})
-					// 保存当前最新的数组，便于下次进行对比
-					// this.multiSelectorValue = e.detail.value;
-					// 模仿uniapp的picker组件为multiSelector模式时，对外抛出的参数，保持一致，同时也是为了让用户对多列
-					// 变化时，对动态设置其他列的变更
-					this.$emit('columnchange', {
-						column: index,
-						index: this.valueArr[index]
-					})
+					// 为了让用户对多列变化时，对动态设置其他列的变更
+					if(index != null) {
+						this.$emit('columnchange', {
+							column: index,
+							index: e.detail.value[index]
+						})
+					}
 				} 
 			},
 			// 用户点击确定按钮

@@ -81,20 +81,5 @@
 </script>
 
 <style scoped lang="scss">
-	.warp {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 100%;
-	}
-
-	.rect {
-		width: 120px;
-		height: 120px;
-		background-color: #fff;
-	}
 	
-	.logo {
-		height: auto;
-	}
 </style>

@@ -58,7 +58,8 @@
 			maskStyle() {
 				let style = {};
 				style.backgroundColor = "rgba(0, 0, 0, 0.6)";
-				style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.mask;
+				if(this.show) style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.mask;
+				else style.zIndex = -1;
 				style.transition = `all ${this.duration / 1000}s ease-in-out`;
 				// 缩放
 				if (this.zoom == true) style.transform = 'scale(1.2, 1.2)';

@@ -1,10 +1,10 @@
 <template>
-	<view class="u-grid-item" :class="[showBorder ? 'u-border-right u-border-bottom' : '']" :hover-class="hoverClass"
+	<view class="u-grid-item" :hover-class="hoverClass"
 	 :hover-stay-time="200" @tap="click" :style="{
 			background: bgColor,
-			width: width + 'px'
+			width: width,
 		}">
-		<view class="u-grid-item-box">
+		<view class="u-grid-item-box" :class="[showBorder ? 'u-border-right u-border-bottom' : '']">
 			<slot />
 		</view>
 	</view>
@@ -51,7 +51,7 @@
 			},
 			// 每个grid-item的宽度
 			width() {
-				return this.uGrid.width / this.uGrid.col;
+				return 100 / Number(this.uGrid.col) + '%';
 			},
 			// 是否显示边框
 			// 为了迎合演示的需要，从created生命周期移到此，以为演示中可能需要动态修改有无边框
@@ -77,7 +77,11 @@
 		justify-content: center;
 		position: relative;
 		flex-direction: column;
+		
+		/* #ifdef MP */
 		position: relative;
+		float: left;
+		/* #endif */
 	}
 
 	.u-grid-item-hover {
@@ -100,5 +104,8 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
+		flex: 1;
+		width: 100%;
+		height: 100%;
 	}
 </style>

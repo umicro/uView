@@ -40,6 +40,10 @@ export default [
 				path: 'address',
 				icon: 'address',
 				title: 'Address 收货地址',
+			},{
+				path: 'citySelect',
+				icon: 'citySelect',
+				title: 'citySelect 城市选择',
 			}
 		]
 	}

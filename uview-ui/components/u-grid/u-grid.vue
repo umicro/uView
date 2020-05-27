@@ -1,5 +1,5 @@
 <template>
-	<view :id="elId" class="u-grid" :class="{'u-border-top u-border-left': border}" :style="[gridStyle]"><slot /></view>
+	<view class="u-grid" :class="{'u-border-top u-border-left': border}" :style="[gridStyle]"><slot /></view>
 </template>
 
 <script>
@@ -40,19 +40,12 @@ export default {
 	data() {
 		return {
 			index: 0,
-			elId: this.$u.guid(),
-			// grid组件宽度，这里不用flex布局，是因为在微信小程序上，组件体现形式为
-			// 页面上带上了组件结构元素，导致状态错乱
-			width: 0, 
 		}
 	},
 	provide() {
 		return {
 			uGrid: this
 		}
-	},
-	mounted() {
-		this.getGridRect();
 	},
 	computed: {
 		// 宫格对齐方式
@@ -76,11 +69,6 @@ export default {
 	methods: {
 		click(index) {
 			this.$emit('click', index);
-		},
-		async getGridRect() {
-			let rect = await this.$uGetRect(`#${this.elId}`);
-			// 小米和华为手机可能会导致宽度计算问题(特定机型)，宫格布局变乱，故在这里减少两个像素
-			this.width = rect.width - 2;
 		}
 	}
 	
@@ -89,9 +77,17 @@ export default {
 
 <style scoped lang="scss">
 .u-grid {
-	display: flex;
 	width: 100%;
-	align-items: center;
+	/* #ifdef MP */
+	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
+	/* #endif */
+	
+	/* #ifndef MP */
+	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
+	/* #endif */
 }
 </style>

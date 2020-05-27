@@ -92,7 +92,7 @@ class Request {
 				}, this.config.loadingTime);
 			}
 			uni.request(options);
-		})
+		}).catch(e => {})
 	}
 
 	constructor() {

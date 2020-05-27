@@ -133,7 +133,7 @@ export default {
 		},
 		columnchange(e) {
 			let column = e.column, index = e.index;
-			this.defaultSelector.splice(column, 1, index)
+			this.defaultSelector[column] = index;
 			switch (column) {
 				case 0: 
 					switch (index) {

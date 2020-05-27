@@ -38,7 +38,7 @@
 					/>
 				</view>
 				<u-icon :size="clearSize" v-if="clearable && value && focused" name="close-circle-fill" color="#c0c4cc" class="u-clear-icon" @touchstart="onClear"/>
-				<view class="u-button-wrap"><slot name="button" /></view>
+				<view class="u-button-wrap"><slot name="right" /></view>
 				<u-icon v-if="rightIcon" @click="rightIconClick" :name="rightIcon" color="#c0c4cc" :style="[rightIconStyle]" size="26" class="u-arror-right" />
 			</view>
 		</view>
