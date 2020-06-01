@@ -1,7 +1,7 @@
 <template>
-	<view class="u-radio">
+	<view class="u-radio" :style="[radioStyle]">
 		<view class="u-radio__icon-wrap" @tap="toggle">
-			<u-icon :class="iconClass" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-radio__icon" :style="[iconStyle]" />
+			<u-icon @tap="toggle" :class="iconClass" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-radio__icon" :style="[iconStyle]" />
 		</view>
 		<view class="u-label-class u-radio__label" @tap="onClickLabel" :style="{
 			fontSize: labelSize + 'rpx'
@@ -18,7 +18,6 @@
 	 * @tutorial https://www.uviewui.com/components/radio.html
 	 * @property {String Number} icon-size 图标大小，单位rpx（默认24）
 	 * @property {String Number} label-size label字体大小，单位rpx（默认28）
-	 * @property {String Number} size 组件整体的大小，单位rpx（默认40）
 	 * @property {String Number} name radio组件的标示符
 	 * @property {String} shape 形状，见上方说明（默认circle）
 	 * @property {Boolean} disabled 是否禁用（默认false）
@@ -58,7 +57,7 @@
 			// 图标的大小，单位rpx
 			iconSize: {
 				type: [String, Number],
-				default: 24
+				default: 20
 			},
 			// label的字体大小，rpx单位
 			labelSize: {
@@ -103,6 +102,28 @@
 			// 本组件的activeColor值优先
 			radioActiveColor() {
 				return this.activeColor ? this.activeColor : this.radioGroup.activeColor;
+			},
+			radioStyle() {
+				let style = {};
+				if(this.radioGroup.width) {
+					style.width = this.radioGroup.width;
+					// #ifdef MP
+					// 各家小程序因为它们特殊的编译结构，使用float布局
+					style.float = 'left';
+					// #endif
+					// #ifndef MP
+					// H5和APP使用flex布局
+					style.flex = `0 0 ${this.radioGroup.width}`;
+					// #endif
+				}
+				if(this.radioGroup.wrap) {
+					style.width = '100%';
+					// #ifndef MP
+					// H5和APP使用flex布局，将宽度设置100%，即可自动换行
+					style.flex = '0 0 100%';
+					// #endif
+				}
+				return style;
 			}
 		},
 		methods: {
@@ -134,6 +155,7 @@
 		overflow: hidden;
 		-webkit-user-select: none;
 		user-select: none;
+		line-height: 1.8;
 	}
 
 	.u-radio__icon-wrap,
@@ -190,7 +212,7 @@
 	.u-radio__label {
 		word-wrap: break-word;
 		margin-left: 10rpx;
-		margin-right: 18rpx;
+		margin-right: 24rpx;
 		color: $u-content-color;
 		font-size: 30rpx;
 	}

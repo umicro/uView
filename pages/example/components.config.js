@@ -33,6 +33,10 @@ export default [{
 	{
 		groupName: '表单组件',
 		list: [{
+			path: '/pages/componentsA/select/index',
+			icon: 'select',
+			title: 'Select 列选择器',
+		},{
 			path: '/pages/componentsA/keyboard/index',
 			icon: 'keyboard',
 			title: 'Keyboard 键盘',

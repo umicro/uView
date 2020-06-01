@@ -50,6 +50,8 @@ import random from './libs/function/random.js'
 import trim from './libs/function/trim.js'
 // toast提示，对uni.showToast的封装
 import toast from './libs/function/toast.js'
+// 对象和数组的深度克隆
+import deepClone from './libs/function/deepClone.js'
 
 // 配置信息
 import config from './libs/config/config.js'
@@ -76,6 +78,7 @@ const $u = {
 	rgbToHex: colorGradient.rgbToHex,
 	test,
 	random,
+	deepClone,
 	trim,
 	type: ['primary', 'success', 'error', 'warning', 'info'],
 	http,

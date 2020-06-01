@@ -55,7 +55,8 @@ export default {
 		copyFlowList(nVal, oVal) {
 			// 取差值，即这一次数组变化新增的部分
 			let startIndex = Array.isArray(oVal) && oVal.length > 0 ? oVal.length : 0;
-			this.tempList = this.cloneData(nVal.slice(startIndex));
+			// 拼接上原有数据
+			this.tempList = this.tempList.concat(this.cloneData(nVal.slice(startIndex)));
 			this.splitData();
 		}
 	},
@@ -114,7 +115,6 @@ export default {
 		},
 		// 清除某一条指定的数据，根据id实现
 		remove(id) {
-			let tmp = false;
 			// 如果findIndex找不到合适的条件，就会返回-1
 			let index = -1; 
 			index = this.leftList.findIndex(val => val[this.idKey] == id);
@@ -129,6 +129,30 @@ export default {
 			// 同时清除父组件的数据中的对应id的条目
 			index = this.value.findIndex(val => val[this.idKey] == id);
 			if(index != -1) this.$emit('input', this.value.splice(index, 1));
+		},
+		// 修改某条数据的某个属性
+		modify(id, key, value) {
+			// 如果findIndex找不到合适的条件，就会返回-1
+			let index = -1; 
+			index = this.leftList.findIndex(val => val[this.idKey] == id);
+			if(index != -1) {
+				// 如果index不等于-1，说明已经找到了要找的id，修改对应key的值
+				this.leftList[key] = value;
+			} else {
+				// 同理于上方面的方法
+				index = this.rightList.findIndex(val => val[this.idKey] == id);
+				if(index != -1) this.leftList[key] = value;
+			}
+			// 修改父组件的数据中的对应id的条目
+			index = this.value.findIndex(val => val[this.idKey] == id);
+			if(index != -1) {
+				// 首先复制一份value的数据
+				let data = this.cloneData(this.value);
+				// 修改对应索引的key属性的值为value
+				data[index][key] = value;
+				// 修改父组件通过v-model绑定的变量的值
+				this.$emit('input', data);
+			}
 		}
 	}
 }

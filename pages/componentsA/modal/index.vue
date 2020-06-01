@@ -6,12 +6,14 @@
 				<u-toast ref="uToast"></u-toast>
 				<view class="u-no-demo-here">请点击弹出弹窗查看效果</view>
 				<u-modal ref="uModal" v-model="show" :show-cancel-button="true" 
-					:show-title="showTitle" :content-slot="contentSlot" :async-close="asyncClose"
-					@confirm="confirm"
+					:show-title="showTitle" :async-close="asyncClose"
+					@confirm="confirm" :content="content"
 				>
-					<view class="warp" style="margin: 30rpx;" v-if="content">
+					<!-- #ifndef MP-WEIXIN -->
+					<view class="warp" style="margin: 30rpx;" v-if="contentSlot">
 						<image class="logo" src="https://uviewui.com/common/logo.png" style="width: 220rpx;" mode="widthFix"></image>
 					</view>
+					<!-- #endif -->
 				</u-modal>
 			</view>
 		</view>
@@ -25,10 +27,12 @@
 				<view class="u-item-title">是否显示标题</view>
 				<u-subsection vibrateShort current="0" :list="['是', '否']" @change="titleChange"></u-subsection>
 			</view>
+			<!-- #ifndef MP-WEIXIN -->
 			<view class="u-config-item">
 				<view class="u-item-title">自定义内容</view>
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
 			</view>
+			<!-- #endif -->
 			<view class="u-config-item">
 				<view class="u-item-title">异步关闭</view>
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="asyncChange"></u-subsection>
@@ -43,10 +47,10 @@
 			return {
 				show: false,
 				zoom: false,
-				content: false,
-				showTitle: true,
+				content: '慈母手中线，游子身上衣',
 				contentSlot: false,
-				asyncClose: false
+				showTitle: true,
+				asyncClose: false,
 			};
 		},
 		computed: {
@@ -64,7 +68,6 @@
 			},
 			contentChange(index) {
 				this.contentSlot = !index;
-				this.content = !index;
 				this.show = true;
 			},
 			asyncChange(index) {
@@ -81,5 +84,8 @@
 </script>
 
 <style scoped lang="scss">
-	
+	.logo {
+		height: auto;
+		will-change: transform;
+	}
 </style>

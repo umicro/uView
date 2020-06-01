@@ -1,6 +1,7 @@
 <template>
 	<view class="u-swiper-wrap" :style="{
 		borderRadius: `${borderRadius}rpx`,
+		backgroundColor: bgColor
 	}">
 		<swiper @change="change" @animationfinish="animationfinish" :interval="interval" :circular="circular" :duration="duration" :autoplay="autoplay"
 		 :previous-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'" :next-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'"
@@ -61,6 +62,7 @@
 	 * @property {Boolean} autoplay 是否自动播放（默认true）
 	 * @property {String Number} interval 自动轮播时间间隔，单位ms（默认2500）
 	 * @property {Boolean} circular 是否衔接播放，见官网说明（默认true）
+	 * @property {String} bg-color 背景颜色（默认#f3f4f6）
 	 * @property {String Number} border-radius 轮播图圆角值，单位rpx（默认8）
 	 * @property {Object} title-style 自定义标题样式
 	 * @property {String Number} effect3d-previous-margin mode = true模式的情况下，激活项与前后项之间的距离，单位rpx（默认50）
@@ -149,6 +151,11 @@
 			name: {
 				type: String,
 				default: 'image'
+			},
+			// 背景颜色
+			bgColor: {
+				type: String,
+				default: '#f3f4f6'
 			}
 		},
 		data() {

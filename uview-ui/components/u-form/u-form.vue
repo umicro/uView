@@ -32,6 +32,7 @@ export default {
 		};
 	},
 	created() {
+		console.log(this.rules);
 		// 存储当前form下的所有u-form-item的实例
 		// 不能定义在data中，否则微信小程序会造成循环引用而报错
 		this.fields = [];

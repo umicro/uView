@@ -518,7 +518,7 @@
 				let result = {};
 				// 只返回用户在this.params中配置了为true的字段
 				if (this.mode == 'time') {
-					if (this.params.year) result.year = this.formatNumber(this.year || 0);;
+					if (this.params.year) result.year = this.formatNumber(this.year || 0);
 					if (this.params.month) result.month = this.formatNumber(this.month || 0);
 					if (this.params.day) result.day = this.formatNumber(this.day || 0);
 					if (this.params.hour) result.hour = this.formatNumber(this.hour || 0);

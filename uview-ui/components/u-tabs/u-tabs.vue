@@ -151,7 +151,7 @@
 			// 后台获取的（如新闻app顶部的菜单），获取返回需要一定时间，所以list变化时，重新获取布局信息
 			list(n, o) {
 				// list变动时，重制内部索引，否则可能导致超出数组边界的情况
-				this.currentIndex = 0;
+				if(n.length !== o.length) this.currentIndex = 0;
 				// 用$nextTick等待视图更新完毕后再计算tab的局部信息，否则可能因为tab还没生成就获取，就会有问题
 				this.$nextTick(() => {
 					this.init();

@@ -10,9 +10,10 @@
 			<view class="u-model">
 				<view v-if="showTitle" class="u-model-title u-line-1" :style="[titleStyle]">{{ title }}</view>
 				<view class="u-model-content">
-					<slot v-if="contentSlot">
-					</slot>
-					<view v-else class="u-model-content-meeeage" :style="[contentStyle]">{{ content }}</view>
+					<view :style="[contentStyle]" v-if="$slots.default">
+						<slot />
+					</view>
+					<view v-else class="u-model-content-message" :style="[contentStyle]">{{ content }}</view>
 				</view>
 				<view class="u-model-footer u-border-top">
 					<view
@@ -70,7 +71,6 @@
  * @property {Object} cancel-style 自定义取消按钮样式，对象形式
  * @property {Object} confirm-style 自定义确认按钮样式，对象形式
  * @property {Boolean} zoom 是否开启缩放模式（默认true）
- * @property {Boolean} contentSlot 是否传入自定义的slot内容（默认false）
  * @event {Function} confirm 确认按钮被点击
  * @event {Function} cancel 取消按钮被点击
  * @example <u-modal :src="title" :content="content"></u-modal>
@@ -176,11 +176,6 @@ export default {
 			type: Boolean,
 			default: true
 		},
-		// 是否传入自定义的slot内容，因为微信小程序无法在<slot></slot>中插入内容
-		contentSlot: {
-			type: Boolean,
-			default: false
-		},
 		// 是否异步关闭，只对确定按钮有效
 		asyncClose: {
 			type: Boolean,
@@ -238,7 +233,7 @@ export default {
 		popupClose() {
 			this.$emit('input', false);
 		},
-		// 
+		// 清除加载中的状态
 		clearLoading() {
 			this.loading = false;
 		}
@@ -280,7 +275,7 @@ export default {
 	}
 
 	&-content {
-		&-meeeage {
+		&-message {
 			padding: 48rpx;
 			font-size: 30rpx;
 			text-align: center;

@@ -1,6 +1,7 @@
 <template>
-	<view class="u-icon" :class="[labelPos == 'bottom' ? 'u-flex-col u-row-center' : 'u-flex u-col-center']">
-		<text class="u-icon__icon" :class="customClass" :style="[iconStyle]" @tap.stop.prevent="click" :hover-class="hoverClass" @touchstart.stop.prevent="touchstart"></text>
+	<view class="u-icon" @tap.stop.prevent="click" :class="[labelPos == 'bottom' ? 'u-flex-col u-row-center' : 'u-flex u-col-center']">
+		<image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]"></image>
+		<text v-else class="u-icon__icon" :class="customClass" :style="[iconStyle]" :hover-class="hoverClass" @touchstart="touchstart"></text>
 		<text v-if="label" class="u-icon__label" :style="{
 			color: labelColor,
 			fontSize: labelSize + 'rpx',
@@ -97,6 +98,11 @@ export default {
 		marginTop: {
 			type: [String, Number],
 			default: '6'
+		},
+		// 图片的mode
+		imgMode: {
+			type: String,
+			default: 'widthFix'
 		}
 	},
 	data() {
@@ -122,6 +128,15 @@ export default {
 			};
 			if (this.color) style.color = this.color;
 			return style;
+		},
+		// 判断传入的name属性，是否图片路径，只要带有"/"均认为是图片形式
+		isImg() {
+			return this.name.indexOf('/') !== -1;
+		},
+		imgStyle() {
+			let style = {};
+			style.width = this.size + 'rpx';
+			return style;
 		}
 	},
 	methods: {
@@ -143,7 +158,8 @@ export default {
 	align-items: center;
 }
 
-.u-icon__label {
-	
+.u-icon__img {
+	height: auto;
+	will-change: transform;
 }
 </style>

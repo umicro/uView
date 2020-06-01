@@ -457,6 +457,13 @@
 						"navigationBarTitleText": "form-表单"
 					}
 				},
+				// select-列选择器
+				{
+					"path": "select/index",
+					"style": {
+						"navigationBarTitleText": "select-列选择器"
+					}
+				},
 				// slider-滑动选择器
 				{
 					"path": "slider/index",
@@ -754,9 +761,6 @@
 		"color": "#909399",
 		"selectedColor": "#303133",
 		"backgroundColor": "#FFFFFF",
-		// #ifdef APP-PLUS
-		"blurEffect": "light",
-		// #endif
 		"borderStyle": "black",
 		"list": [{
 				"pagePath": "pages/example/components",

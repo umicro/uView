@@ -13,7 +13,7 @@
 		<view class="u-gab" v-if="cancelBtn">
 		</view>
 		<view @touchmove.stop.prevent class="u-actionsheet-cancel u-action-sheet-item" hover-class="u-hover-class"
-		 :hover-stay-time="150" v-if="cancelBtn" @tap="close">取消</view>
+		 :hover-stay-time="150" v-if="cancelBtn" @tap="close">{{cancelText}}</view>
 	</u-popup>
 </template>
 
@@ -24,6 +24,7 @@
 	 * @tutorial https://www.uviewui.com/components/actionSheet.html
 	 * @property {Array<Object>} list 按钮的文字数组，见官方文档示例
 	 * @property {Object} tips 顶部的提示文字，见官方文档示例
+	 * @property {String} cancel-text 取消按钮的提示文字
 	 * @property {Boolean} cancel-btn 是否显示底部的取消按钮（默认true）
 	 * @property {Number String} border-radius 弹出部分顶部左右的圆角值，单位rpx（默认0）
 	 * @property {Boolean} mask-close-able 点击遮罩是否可以关闭（默认true）
@@ -89,6 +90,11 @@
 			zIndex: {
 				type: [String, Number],
 				default: 0
+			},
+			// 取消按钮的文字提示
+			cancelText: {
+				type: String,
+				default: '取消'
 			}
 		},
 		computed: {

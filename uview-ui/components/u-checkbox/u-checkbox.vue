@@ -1,7 +1,7 @@
 <template>
-	<view class="u-checkbox">
+	<view class="u-checkbox" :style="[checkboxStyle]">
 		<view class="u-checkbox__icon-wrap" @tap="toggle">
-			<u-icon :class="iconClass" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-checkbox__icon" :style="[iconStyle]" />
+			<u-icon :class="iconClass" @click="toggle" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-checkbox__icon" :style="[iconStyle]" />
 		</view>
 		<view class="u-label-class u-checkbox__label" @tap="onClickLabel" :style="{
 			fontSize: labelSize + 'rpx'
@@ -62,15 +62,36 @@
 			// 图标的大小，单位rpx
 			iconSize: {
 				type: [String, Number],
-				default: 24
+				default: 20
 			},
 			// label的字体大小，rpx单位
 			labelSize: {
 				type: [String, Number],
 				default: 28
 			},
+			// 组件的整体大小
+			size: {
+				type: [String, Number],
+				default: 34
+			},
 		},
-		inject: ['checkboxGroup'],
+		inject: {
+			checkboxGroup: {
+				// 添加默认值，是为了能让u-checkbox组件无需u-checkbox-group组件嵌套时单独使用
+				default() {
+					return {
+						disabled: false,
+						children: [],
+						size: 34,
+						activeColor: '#2979ff',
+						max: 999999,
+						emitEvent: () => {},
+						width: '',
+						wrap: false
+					}
+				}
+			}
+		},
 		data() {
 			return {
 				parentDisabled: false,
@@ -106,6 +127,28 @@
 			// 本组件的activeColor值优先
 			checkboxActiveColor() {
 				return this.activeColor ? this.activeColor : this.checkboxGroup.activeColor;
+			},
+			checkboxStyle() {
+				let style = {};
+				if(this.checkboxGroup.width) {
+					style.width = this.checkboxGroup.width;
+					// #ifdef MP
+					// 各家小程序因为它们特殊的编译结构，使用float布局
+					style.float = 'left';
+					// #endif
+					// #ifndef MP
+					// H5和APP使用flex布局
+					style.flex = `0 0 ${this.checkboxGroup.width}`;
+					// #endif
+				}
+				if(this.checkboxGroup.wrap) {
+					style.width = '100%';
+					// #ifndef MP
+					// H5和APP使用flex布局，将宽度设置100%，即可自动换行
+					style.flex = '0 0 100%';
+					// #endif
+				}
+				return style;
 			}
 		},
 		methods: {
@@ -163,8 +206,9 @@
 		overflow: hidden;
 		-webkit-user-select: none;
 		user-select: none;
+		line-height: 1.8;
 	}
-
+	
 	.u-checkbox__icon-wrap,
 	.u-checkbox__label {
 		color: $u-content-color;
@@ -219,7 +263,7 @@
 	.u-checkbox__label {
 		word-wrap: break-word;
 		margin-left: 10rpx;
-		margin-right: 18rpx;
+		margin-right: 24rpx;
 		color: $u-content-color;
 		font-size: 30rpx;
 	}

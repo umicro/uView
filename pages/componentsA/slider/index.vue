@@ -7,7 +7,9 @@
 				<u-slider :step="step" :height="height" :block-width="blockWidth" 
 					:active-color="activeColor" :value="30" 
 					:use-slot="useSlot" v-model="value"
-					:min="min" :max="max"
+					:min="min" :max="max" 
+					@end="end"
+					@moving="moving"
 				>
 					<view class="">
 						<view class="badge-button" v-if="useSlot">
@@ -98,6 +100,12 @@
 					this.min = 40;
 					this.max = 80;
 				}
+			},
+			end() {
+				// console.log('end');
+			},
+			moving() {
+				// console.log('moving');
 			}
 		}
 	};

@@ -4,8 +4,8 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<view class="">
-					<u-checkbox-group :size="size" :max="max" @change="checkboxGroupChange" :activeColor="activeColor">
-						<u-checkbox @change="checkboxChange" 
+					<u-checkbox-group :size="size" :width="width" :wrap="wrap" :max="max" @change="checkboxGroupChange" :activeColor="activeColor">
+						<u-checkbox @change="checkboxChange"
 							v-model="item.checked" v-for="(item, index) in list" 
 							:key="index" :name="item.name"
 							:shape="shape" :disabled="item.disabled"
@@ -38,6 +38,14 @@
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="defaultChooseChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
+				<view class="u-item-title">每个占一行</view>
+				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="wrapChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">每个宽度50%</view>
+				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="widthChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
 				<view class="u-item-title">最大选择数量</view>
 				<u-subsection vibrateShort current="2" :list="['1', '2', '3']" @change="maxChange"></u-subsection>
 			</view>
@@ -55,17 +63,22 @@
 			return {
 				list: [
 					{
-						name: 'apple',
+						name: '荔枝',
 						checked: false,
 						disabled: false
 					},
 					{
-						name: 'banner',
+						name: '香蕉',
 						checked: false,
 						disabled: false
 					},
 					{
-						name: 'orange',
+						name: '橙子',
+						checked: false,
+						disabled: false
+					},
+					{
+						name: '草莓',
 						checked: false,
 						disabled: false
 					}
@@ -76,7 +89,9 @@
 				shape: 'square',
 				max: 3,
 				activeColor: '#2979ff',
-				size: 40
+				size: 34,
+				wrap: false,
+				width: ''
 			}
 		},
 		computed: {
@@ -126,6 +141,12 @@
 			checkboxGroupChange(e) {
 				this.result = e;
 				// console.log(this.result);
+			},
+			widthChange(index) {
+				this.width = index == 0 ? '50%' : '';
+			},
+			wrapChange(index) {
+				this.wrap = !index;
 			}
 		}
 	}

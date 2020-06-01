@@ -144,7 +144,7 @@ export default {
 		// 打开按钮的状态
 		open() {
 			if (this.disabled) return;
-			this.moveX = -this.btnWidth;
+			this.moveX = -this.allBtnWidth;
 			this.status = true;
 		},
 		// 用户手指离开movable-view元素，停止触摸

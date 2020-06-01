@@ -2,7 +2,7 @@
 	<view class="u-demo">
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
-			<view class="u-demo-area">
+			<view class="u-demo-area u-flex u-row-center">
 				<u-line color="red" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
 			</view>
 		</view>
@@ -53,7 +53,7 @@
 </script>
 
 <style scoped lang="scss">
-	.u-demo {
+	.u-demo-area {
 		
 	}
 </style>

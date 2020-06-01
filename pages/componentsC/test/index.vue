@@ -1,11 +1,7 @@
 <template>
 	<view class="u-demo">
 		<view class="u-demo-wrap">
-			<view class="u-demo-title">演示效果</view>
-			<view class="u-demo-area">
-				<city-select v-model="value" @city-change="cityChange"></city-select>
-				<view class="u-demo-result-line">{{ input ? input : 'Picker值' }}</view>
-			</view>
+			<u-icon label="uView" size="40" name="https://cdn.uviewui.com/uview/example/button.png"></u-icon>
 		</view>
 		<view class="u-config-wrap">
 			<view class="u-config-title u-border-bottom">参数配置</view>

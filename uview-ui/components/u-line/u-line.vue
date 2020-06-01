@@ -69,6 +69,5 @@
 <style scoped lang="scss">
 	.u-line {
 		vertical-align: middle;
-		display: inline-flex;
 	}
 </style>

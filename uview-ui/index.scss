@@ -53,6 +53,10 @@ u-grid {
 	width: 100%;
 	flex: 0 0 100%;
 }
+
+// u-checkbox {
+// 	display: inline-block;
+// }
 /* #endif */
 /* end-微信小程序编译后页面有组件名的元素，特别处理--end */
 
@@ -100,6 +104,7 @@ u-grid {
 
 .u-line-2, .u-line-3, .u-line-4, .u-line-5 {
     overflow: hidden;
+	word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box; // 弹性伸缩盒
     -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式

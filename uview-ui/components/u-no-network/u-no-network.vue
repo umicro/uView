@@ -60,10 +60,6 @@
 			}
 		},
 		mounted() {
-			uni.setNavigationBarColor({
-			    frontColor: '#000000',
-			    backgroundColor: '#ffffff',
-			})
 			this.isIOS = (uni.getSystemInfoSync().platform === 'ios');
 			uni.onNetworkStatusChange((res) => {
 				this.isConnected = res.isConnected;

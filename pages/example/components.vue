@@ -9,9 +9,6 @@
 			</u-cell-group>
 		</view>
 		<u-gap height="70"></u-gap>
-		<!-- #ifdef APP-PLUS -->
-		<view class="u-blur-effect-inset"></view>  
-		<!-- #endif -->
 	</view>
 </template>
 
@@ -22,7 +19,6 @@
 			return {
 				list: list,
 				desc: '众多组件覆盖开发过程的各个需求，组件功能丰富，多端兼容。让你快速集成，开箱即用。',
-				username: '44444'
 			}
 		},
 		computed: {

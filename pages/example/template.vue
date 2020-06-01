@@ -9,9 +9,6 @@
 			</u-cell-group>
 		</view>
 		<u-gap height="70"></u-gap>
-		<!-- #ifdef APP-PLUS -->
-		<view class="u-blur-effect-inset"></view>  
-		<!-- #endif -->
 	</view>
 </template>
 

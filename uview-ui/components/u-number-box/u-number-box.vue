@@ -121,7 +121,7 @@
 		},
 		watch: {
 			value(val) {
-				this.inputVal = +val;
+				this.inputVal = Number(val);
 			},
 			inputVal(v1, v2) {
 				// 为了让用户能够删除所有输入值，重新输入内容，删除所有值后，内容为空字符串
@@ -143,7 +143,7 @@
 			};
 		},
 		created() {
-			this.inputVal = +this.value;
+			this.inputVal = Number(this.value);
 		},
 		computed: {
 			getCursorSpacing() {
