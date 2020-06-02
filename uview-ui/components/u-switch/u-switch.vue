@@ -94,7 +94,7 @@
 					if(this.vibrateShort) uni.vibrateShort();
 					this.$emit('input', !this.value);
 					// 放到下一个生命周期，因为双向绑定的value修改父组件状态需要时间，且是异步的
-					this.$nextTick(function() {
+					this.$nextTick(() => {
 						this.$emit('change', this.value ? this.activeValue : this.inactiveValue);
 					})
 				}

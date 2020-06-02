@@ -343,7 +343,8 @@ var types = {
 			return false;
 		}
 
-		return typeof value === 'number';
+		// 修改源码，将字符串数值先转为数值
+		return typeof +value === 'number';
 	},
 	object: function object(value) {
 		return typeof value === 'object' && !types.array(value);

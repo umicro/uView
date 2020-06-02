@@ -177,7 +177,6 @@ export default {
 			let type = ['single-column', 'mutil-column', 'mutil-column-auto'];
 			this.mode = type[index];
 			this.list = index == 0 ? this.list1 : index == 1 ? this.list2 : this.list3;
-			console.log(this.list);
 			this.show = true;
 		},
 		confirm(e) {

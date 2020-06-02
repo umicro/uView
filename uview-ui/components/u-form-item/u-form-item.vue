@@ -1,30 +1,37 @@
 <template>
-	<view class="u-form-item" :class="{'u-border-bottom': borderBottom}">
-		<view class="u-flex u-list-item__body">
+	<view class="u-form-item" :class="{'u-border-bottom': borderBottom, 'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom')}">
+		<view class="u-form-item__body" :style="{
+			flexDirection: labelPosition == 'left' ? 'row' : 'column'
+		}">
 			<view class="u-form-item--left" :style="{
-				width: labelWidth + 'rpx',
-				flex: `0 0 ${labelWidth}rpx`
+				width: labelPosition == 'left' ? labelWidth + 'rpx' : '100%',
+				flex: `0 0 ${labelPosition == 'left' ? labelWidth + 'rpx' : '100%'}`,
+				marginBottom: labelPosition == 'left' ? 0 : '10rpx'
 			}">
 				<!-- 为了块对齐 -->
 				<view class="u-form-item--left__content">
 					<!-- nvue不支持伪元素before -->
 					<text v-if="isRequired" class="u-form-item--left__content--required">*</text>
-					<u-icon v-if="leftIcon" :name="leftIcon"></u-icon>
-					<view class="u-form-item--left__content__label">
+					<view class="u-form-item--left__content__icon" v-if="leftIcon">
+						<u-icon :name="leftIcon"></u-icon>
+					</view>
+					<view class="u-form-item--left__content__label" :style="[labelStyle]">
 						{{label}}
 					</view>
 				</view>
 			</view>
 			<view class="u-form-item--right">
 				<view class="u-form-item--right__content">
-					<slot />
+					<view class="u-form-item--right__content__slot">
+						<slot />
+					</view>
 					<u-icon v-if="rightIcon" :name="rightIcon"></u-icon>
 					<slot name="right" />
 				</view>
 			</view>
 		</view>
-		<view class="u-form-item__message" v-if="validateState==='error' && errorType == 'message'" :style="{
-			paddingLeft: labelWidth + 'rpx',
+		<view class="u-form-item__message" v-if="validateState === 'error' && showError('message')" :style="{
+			paddingLeft: labelPosition == 'left' ? `${labelWidth}rpx` : '0',
 		}">{{validateMessage}}</view>
 	</view>
 </template>
@@ -64,6 +71,13 @@ export default {
 			type: [String, Number],
 			default: 90
 		},
+		// lable的样式，对象形式
+		labelStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
 		// 右侧图标
 		rightIcon: {
 			type: String,
@@ -74,10 +88,13 @@ export default {
 			type: String,
 			default: ''
 		},
-		// 错误信息的提示方式，message-输入框下方提示，toast-toast提示，none-无提示
+		// 有错误时的提示方式，message-提示信息，border-下边框呈现红色，
+		// all-所有提示方式同时起效，toast-只对提交表单时有效，none-无提示
 		errorType: {
-			type: String,
-			default: 'message'
+			type: Array,
+			default() {
+				return ['message', 'border', 'border-bottom']
+			}
 		}
 	},
 	data() {
@@ -88,10 +105,28 @@ export default {
 			validateMessage: '' // 校验失败的提示语
 		};
 	},
+	watch: {
+		validateState(val) {
+			// 箱子组件发出事件，第三个参数为true或者false，true代表有错误
+			if(this.showError('border')) {
+				this.broadcast('u-input', 'on-form-item-error', val === 'error');
+			}
+			
+		}
+	},
 	computed: {
 		fieldValue() {
 			return this.uForm.model[this.prop];
-		}
+		},
+		showError() {
+			return type => {
+				// 如果errorType数组中含有none，就不提示错误信息
+				if(this.errorType.indexOf('none') >= 0) return false;
+				else if(this.errorType.indexOf(type) >= 0) return true;
+				else return false;
+			}
+		},
+		
 	},
 	methods: {
 		// 判断是否需要required校验
@@ -139,14 +174,13 @@ export default {
 			// 历遍判断规则是否有对应的事件，比如blur，change触发等的事件
 			// return rules.filter(res => res.trigger == triggerType);
 			// 使用indexOf判断，是因为某些时候设置的验证规则的trigger属性可能为多个，比如"blur,change"
-			return rules.filter(res => res=>!res.trigger || res.trigger.indexOf(triggerType) !== -1);
+			return rules.filter(res => !res.trigger || res.trigger.indexOf(triggerType) !== -1);
 		},
 
 		// 校验数据
 		validation(trigger, callback = () => {}) {
 			// blur和change是否有当前方式的校验规则
 			let rules = this.getFilteredRule(trigger);
-			console.log(rules);
 			// 判断是否有验证规则
 			if (!rules || rules.length === 0) return;
 			// 设置当前的装填，标识为校验中
@@ -195,8 +229,16 @@ export default {
 		font-size: 28rpx;
 		color: $u-main-color;
 		box-sizing: border-box;
-		line-height: $u-form-item-height;
+		// line-height: $u-form-item-height;
 		flex-direction: column;
+		
+		&__border-bottom--error:after {
+			border-color: $u-type-error;
+		}
+		
+		&__body {
+			display: flex;
+		}
 		
 		&--left {
 			display: flex;
@@ -207,6 +249,10 @@ export default {
 				display: flex;
 				align-items: center;
 				padding-right: 10rpx;
+				
+				&__icon {
+					margin-right: 4rpx;
+				}
 				
 				&--required {
 					position: absolute;
@@ -225,6 +271,15 @@ export default {
 		
 		&--right {
 			flex: 1;
+			
+			&__content {
+				display: flex;
+				align-items: center;
+				
+				&__slot {
+					flex: 1;
+				}
+			}
 		}
 		
 		&__message {

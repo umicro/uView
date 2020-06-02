@@ -14,12 +14,12 @@ export default {
 			}
 		},
 		// 验证规则
-		rules: {
-			type: Object,
-			default() {
-				return {};
-			}
-		}
+		// rules: {
+		// 	type: [Object, Function, Array],
+		// 	default() {
+		// 		return {};
+		// 	}
+		// }
 	},
 	provide() {
 		return {
@@ -28,11 +28,10 @@ export default {
 	},
 	data() {
 		return {
-			
+			rules: {}
 		};
 	},
 	created() {
-		console.log(this.rules);
 		// 存储当前form下的所有u-form-item的实例
 		// 不能定义在data中，否则微信小程序会造成循环引用而报错
 		this.fields = [];
@@ -53,11 +52,14 @@ export default {
 		});
 	},
 	methods: {
+		setRules(rules) {
+			this.rules = rules;
+		},
 		// 清空所有u-form-item组件的内容，本质上是调用了u-form-item组件中的resetField()方法
 		resetFields() {
 			this.fields.map(field => {
 				field.resetField();
-			})
+			});
 		},
 		// 校验全部数据
 		validate(callback) {
@@ -69,16 +71,16 @@ export default {
 					// 调用每一个u-form-item实例的validation的校验方法
 					field.validation('', error => {
 						// 如果任意一个u-form-item校验不通过，就意味着整个表单不通过
-						if(error) valid = false;
+						if (error) valid = false;
 						// 当历遍了所有的u-form-item时，调用promise的then方法
-						if(++count === this.fields.length) {
+						if (++count === this.fields.length) {
 							resolve(valid); // 进入promise的then方法
 							// 调用回调方法
-							if(typeof callback == 'function') callback(valid); 
+							if (typeof callback == 'function') callback(valid);
 						}
-					})
-				})
-			})
+					});
+				});
+			});
 		}
 	}
 };

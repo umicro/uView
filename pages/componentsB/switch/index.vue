@@ -102,7 +102,7 @@
 				})
 			},
 			change(value) {
-				// console.log(value, this.checked);
+				// console.log(value);
 			}
 		}
 	}

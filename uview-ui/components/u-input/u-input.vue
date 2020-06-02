@@ -2,7 +2,8 @@
 	<view
 		class="u-input"
 		:class="{
-			'u-input--border': border
+			'u-input--border': border,
+			'u-input--error': validateState
 		}"
 		:style="{
 			padding: `0 ${border ? 20 : 0}rpx`
@@ -12,7 +13,7 @@
 		<textarea
 			v-if="type == 'textarea'"
 			class="u-input__input u-input__textarea"
-			:style="[fieldStyle]"
+			:style="[getStyle]"
 			:value="value"
 			:placeholder="placeholder"
 			:placeholderStyle="placeholderStyle"
@@ -26,12 +27,12 @@
 			@confirm="onConfirm"
 		/>
 		<input
-			v-if="type == 'text' || type == 'select'"
+			v-else
 			class="u-input__input"
-			:style="[fieldStyle]"
+			:style="[getStyle]"
 			:type="type"
 			:value="defaultValue"
-			:password="password || type === 'password'"
+			:password="(type == 'password' || password) && showPassword"
 			:placeholder="placeholder"
 			:placeholderStyle="placeholderStyle"
 			:disabled="disabled || type === 'select'"
@@ -43,10 +44,18 @@
 			@input="handleInput"
 			@confirm="onConfirm"
 		/>
-		<view class="u-input--select" v-if="type=='select'" :class="{
-			'u-input--select--reverse': selectOpen
-		}">
-			<u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
+		<view class="u-input__right-icon u-flex">
+			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && value && focused">
+				<u-icon size="32" name="close-circle-fill" color="#c0c4cc" @touchstart="onClear"/>
+			</view>
+			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="type == 'password' || password">
+				<u-icon size="32" :name="showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword"/>
+			</view>
+			<view class="u-input__right-icon--select u-input__right-icon__item" v-if="type=='select'" :class="{
+				'u-input__right-icon--select--reverse': selectOpen
+			}">
+				<u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
+			</view>
 		</view>
 	</view>
 </template>
@@ -88,14 +97,14 @@ export default {
 		},
 		placeholderStyle: {
 			type: String,
-			default: ''
+			default: 'color: #c0c4cc;'
 		},
 		confirmType: {
 			type: String,
 			default: 'done'
 		},
 		// 输入框的自定义样式
-		fieldStyle: {
+		customStyle: {
 			type: Object,
 			default() {
 				return {};
@@ -125,11 +134,26 @@ export default {
 		selectOpen: {
 			type: Boolean,
 			default: false
-		}
+		},
+		// 高度，单位rpx
+		height: {
+			type: [Number, String],
+			default: ''
+		},
+		// 是否可清空
+		clearable: {
+			type: Boolean,
+			default: true
+		},
 	},
 	data() {
 		return {
-			defaultValue: this.value
+			defaultValue: this.value,
+			inputHeight: 70, // input的高度
+			textareaHeight: 100, // textarea的高度
+			validateState: false, // 当前input的验证状态，用于错误时，边框是否改为红色
+			focused: false, // 当前是否处于获得焦点的状态
+			showPassword: this.password, // 是否预览密码
 		};
 	},
 	watch: {
@@ -141,13 +165,24 @@ export default {
 					value: nVal
 				}
 			})
-		}
+		},
 	},
 	computed: {
 		// 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，给用户可以传入字符串数值
 		inputMaxlength() {
 			return Number(this.maxlength);
+		},
+		getStyle() {
+			let style = {};
+			// 如果没有自定义高度，就根据type为input还是textare来分配一个默认的高度
+			style.minHeight = this.height ? this.height + 'rpx' : this.type == 'textarea' ? 
+				this.textareaHeight + 'rpx' : this.inputHeight + 'rpx';
+			style = Object.assign(style, this.customStyle);
+			return style;
 		}
+	},
+	created() {
+		this.$on('on-form-item-error', this.onFormItemError);
 	},
 	methods: {
 		/**
@@ -171,12 +206,16 @@ export default {
 		 * @param event
 		 */
 		handleBlur(event) {
+			this.focused = false;
 			// vue 原生的方法 return 出去
 			this.$emit('blur', event.detail.value);
 			this.$nextTick(() => {
 				// 将当前的值发送到 u-form-item 进行校验
 				this.dispatch('u-form-item', 'on-form-blur', event.detail.value);
 			});
+		},
+		onFormItemError(status) {
+			this.validateState = status;
 		},
 		onFocus(event) {
 			this.focused = true;
@@ -198,19 +237,19 @@ export default {
 <style lang="scss" scoped>
 .u-input {
 	position: relative;
-
+	
 	&__input {
-		height: $u-form-item-height;
+		//height: $u-form-item-height;
 		font-size: 28rpx;
 		color: $u-main-color;
 	}
 	
 	&__textarea {
-		min-height: 96rpx;
 		width: auto;
 		font-size: 28rpx;
 		color: $u-main-color;
 		padding: 10rpx 0;
+		line-height: normal;
 	}
 
 	&--border {
@@ -219,16 +258,27 @@ export default {
 		border: 1px solid $u-form-item-border-color;
 	}
 	
-	&--select {
+	&--error {
+		border-color: $u-type-error;
+	}
+	
+	&__right-icon {
 		position: absolute;
 		right: 20rpx;
 		top: 50%;
-		transition: transform .4s;
-		transform: translateY(-50%);
 		z-index: 1;
+		transform: translateY(-50%);
 		
-		&--reverse {
-			transform: rotate(-180deg) translateY(50%);
+		&__item {
+			margin-left: 10rpx;
+		}
+		
+		&--select {
+			transition: transform .4s;
+			
+			&--reverse {
+				transform: rotate(-180deg);
+			}
 		}
 	}
 }

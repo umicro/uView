@@ -171,7 +171,16 @@ export default {
 			default: 34
 		}
 	},
-	inject: ['uCellGroup'],
+	inject: {
+		uCellGroup: {
+			// 添加默认值，是为了能让u-cell-item组件无需u-cell-group组件嵌套亦可单独使用
+			default() {
+				return {
+					index: 0
+				}
+			}
+		}
+	},
 	data() {
 		return {
 			itemIndex: 0
