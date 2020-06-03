@@ -1,44 +1,77 @@
 <template>
-	<view class="u-demo">
-		<view class="u-demo-wrap">
-			<u-icon label="uView" size="40" name="https://cdn.uviewui.com/uview/example/button.png"></u-icon>
-		</view>
-		<view class="u-config-wrap">
-			<view class="u-config-title u-border-bottom">参数配置</view>
-			<view class="u-config-item">
-				<view class="u-item-title">状态</view>
-				<u-button @click="value = true">打开Picker</u-button>
-			</view>
-		</view>
-	</view>
+	<u-select v-model="show" mode="mutil-column-auto" :list="list" @confirm="confirm"></u-select>
 </template>
 
 <script>
-import citySelect from './u-city-select.vue';
-export default {
-	components: {
-		citySelect
-	},
-	data() {
-		return {
-			height: 30,
-			bgColor: this.$u.color.bgColor,
-			marginTop: 30,
-			marginBottom: 30,
-			value: false,
-			input: '',
-		};
-	},
-	methods: {
-		cityChange(e) {
-			this.input = e.province.label + '-' + e.city.label + '-' + e.area.label;
+	export default {
+		data() {
+			return {
+				show: true,
+				list: [
+					{
+						value: 1,
+						label: '中国',
+						children: [
+							{
+								value: 2,
+								label: '广东',
+								children: [
+									{
+										value: 3,
+										label: '深圳'
+									},
+									{
+										value: 4,
+										label: '广州'
+									}
+								]
+							},
+							{
+								value: 5,
+								label: '广西',
+								children: [
+									{
+										value: 6,
+										label: '南宁'
+									},
+									{
+										value: 7,
+										label: '桂林'
+									}
+								]
+							}
+						]
+					},
+					{
+						value: 8,
+						label: '美国',
+						children: [
+							{
+								value: 9,
+								label: '纽约',
+								children: [
+									{
+										value: 10,
+										label: '皇后街区'
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		methods: {
+			confirm(e) {
+				console.log(e);
+			}
 		}
 	}
-};
 </script>
 
-<style scoped>
-	.btn-wrap {
-		margin: 100rpx 30rpx;
+<style lang="scss">
+	.money{
+		font-size: 80rpx;
+		color: $u-type-primary;
 	}
 </style>

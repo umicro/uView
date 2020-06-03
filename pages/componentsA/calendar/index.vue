@@ -3,9 +3,11 @@
 		<view class="u-demo-wrap" style="background-color: #FFFFFF;">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-calendar isFixed :minDate="minDate" :maxDate="maxDate" :btnType="btnType" :activeBgColor="activeBgColor"
+				<u-calendar v-model="show" :minDate="minDate" :maxDate="maxDate" :btnType="btnType" :activeBgColor="activeBgColor"
 				 :rangeBgColor="rangeBgColor" :rangeColor="rangeColor" :startText="startText" :endText="endText" :arrowType="arrowType"
-				 :type="type" ref="calendar" @change="change"></-calendar>
+				 :mode="mode" ref="calendar" @change="change">
+					
+				</u-calendar>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -13,8 +15,8 @@
 				参数配置
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">右侧按钮</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="showBtnChange"></u-subsection>
+				<view class="u-item-title">状态</view>
+				<u-subsection vibrateShort :current="showBtnStatus" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示错误信息</view>
@@ -40,23 +42,28 @@
 	export default {
 		data() {
 			return {
-				type: 1,
-				status: [],
+				show: true,
+				mode: 'range',
 				arrowType: 1,
 				minDate: "1920-01-01",
 				maxDate: "",
 				btnType: "primary",
-				activeBgColor: "#5677fc",
-				rangeBgColor: "rgba(86,119,252,0.1)",
-				rangeColor: "#5677fc",
+				activeBgColor: "#2979ff",
+				rangeBgColor: "rgba(41,121,255,0.13)",
+				rangeColor: "#2979ff",
 				startText: "开始",
 				endText: "结束",
 				result: ""
 			}
 		},
+		computed: {
+			showBtnStatus() {
+				return this.show ? 0 : 1;
+			}
+		},
 		methods: {
-			showBtnChange(index) {
-				this.showBtn = index == 0 ? true : false;
+			showChange(index) {
+				this.show = !index;
 			},
 			errorMessageChange(index) {
 				this.errorMessage = index == 0 ? '手机号有误' : false
@@ -77,6 +84,14 @@
 			},
 			textareaChange(index) {
 				this.type = index == 0 ? 'textarea' : 'text';
+			},
+			change(e) {
+				console.log(e)
+				if (this.type == 1) {
+					this.result = e.result
+				} else {
+					this.result = `${e.startDate} 至 ${e.endDate}`
+				}
 			}
 		}
 	}

@@ -15,6 +15,12 @@
 			return {
 				iconList: [
 					{
+						name: 'arrow-left-double'
+					},
+					{
+						name: 'arrow-right-double'
+					},
+					{
 						name: 'chat'
 					},
 					{

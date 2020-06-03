@@ -33,6 +33,10 @@ export default [{
 	{
 		groupName: '表单组件',
 		list: [{
+			path: '/pages/componentsA/calendar/index',
+			icon: 'calendar',
+			title: 'Calendar 日历',
+		},{
 			path: '/pages/componentsA/select/index',
 			icon: 'select',
 			title: 'Select 列选择器',

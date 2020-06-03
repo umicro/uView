@@ -97,7 +97,7 @@ export default {
 				return [0];
 			}
 		},
-		// 模式选择
+		// 模式选择，single-column-单列，mutil-column-多列，mutil-column-auto-多列联动
 		mode: {
 			type: String,
 			default: 'single-column'
