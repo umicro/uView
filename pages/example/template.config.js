@@ -13,6 +13,21 @@ export default [
 		groupName: '页面',
 		list: [
 			{
+				path: '/pages/template/wxCenter/index',
+				icon: 'wxCenter',
+				title: 'WxCenter 仿微信个人中心',
+			},
+			// {
+			// 	path: '/pages/template/douyin/index',
+			// 	icon: 'douyin',
+			// 	title: 'Douyin 仿抖音',
+			// },
+			{
+				path: '/pages/template/keyboardPay/index',
+				icon: 'keyboardPay',
+				title: 'KeyboardPay 自定义键盘支付模板',
+			},
+			{
 				path: '/pages/template/mallMenu/index1',
 				icon: 'mall_menu_1',
 				title: 'MallMenu 垂直分类(左右独立)',

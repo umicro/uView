@@ -1,5 +1,5 @@
 <template>
-	<view class="u-collapse-item">
+	<view class="u-collapse-item" :style="[itemStyle]">
 		<view :hover-stay-time="200" class="u-collapse-head" @tap.stop="headClick" :hover-class="hoverClass" :style="[headStyle]">
 			<view class="u-collapse-title u-line-1" :style="[{ textAlign: align ? align : 'left' }, 
 				isShow && activeStyle && !arrow ? activeStyle : '']">
@@ -12,8 +12,8 @@
 		</view>
 		<view class="u-collapse-body" :style="[{
 				height: isShow ? height + 'px' : '0'
-			}, bodyStyle]">
-			<view class="u-collapse-content" :id="elId">
+			}]">
+			<view class="u-collapse-content" :id="elId" :style="[bodyStyle]">
 				<slot></slot>
 			</view>
 		</view>
@@ -84,7 +84,8 @@
 				height: 0, // body内容的高度
 				headStyle: {}, // 头部样式，对象形式
 				bodyStyle: {}, // 主体部分样式
-				arrowColor: '',
+				//itemStyle: {}, // 每个item的整体样式
+				arrowColor: '', // 箭头的颜色
 				hoverClass: '', // 头部按下时的效果样式类
 			};
 		},
@@ -102,11 +103,15 @@
 			arrow() {
 				return this.uCollapse.arrow;
 			},
+			itemStyle() {
+				return this.uCollapse.itemStyle;
+			}
 		},
 		created() {
 			this.isShow = this.open;
 			this.nameSync = this.name ? this.name : this.uCollapse.childrens.length;
 			this.uCollapse.childrens.push(this);
+			//this.itemStyle = this.uCollapse.itemStyle;
 			this.headStyle = this.uCollapse.headStyle;
 			this.bodyStyle = this.uCollapse.bodyStyle;
 			this.arrowColor = this.uCollapse.arrowColor;
@@ -127,7 +132,7 @@
 
 				this.isShow = !this.isShow;
 				// 触发本组件的事件
-				this.$emit('change', {
+				uni.$emit('change', {
 					index: this.index,
 					show: this.isShow
 				})
@@ -138,19 +143,11 @@
 			},
 			// 查询内容高度
 			queryRect() {
-				const query = uni.createSelectorQuery().in(this);
-				query
-					.select('#' + this.elId)
-					.boundingClientRect(data => {
-						if (!data.height) {
-							setTimeout(() => {
-								this.queryRect();
-							}, 10);
-							return;
-						}
-						this.height = data.height;
-					})
-					.exec();
+				// $uGetRect为uView自带的节点查询简化方法，详见文档介绍：https://www.uviewui.com/js/getRect.html
+				// 组件内部一般用this.$uGetRect，对外的为this.$u.getRect，二者功能一致，名称不同
+				this.$uGetRect('#' + this.elId).then(res => {
+					this.height = res.height;
+				})
 			}
 		}
 	};
@@ -163,17 +160,16 @@
 		justify-content: space-between;
 		align-items: center;
 		color: $u-main-color;
+		font-size: 30rpx;
+		line-height: 1;
+		padding: 24rpx 0;
+		text-align: left;
 	}
 
 	.u-collapse-title {
 		flex: 1;
 		overflow: hidden;
 		margin-right: 14rpx;
-		font-size: 30rpx;
-		color: $u-main-color;
-		line-height: 1;
-		padding: 24rpx 0;
-		text-align: left;
 	}
 
 	.u-arrow-down-icon {

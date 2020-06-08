@@ -120,7 +120,7 @@ export default {
 				if (this.params.year) this.input += e.year;
 				if (this.params.month) this.input += '-' + e.month;
 				if (this.params.day) this.input += '-' + e.day;
-				if (this.params.hour) this.input += ' ' + e.day;
+				if (this.params.hour) this.input += ' ' + e.hour;
 				if (this.params.minute) this.input += ':' + e.minute;
 				if (this.params.second) this.input += ':' + e.second;
 			} else if (this.mode == 'region') {

@@ -40,6 +40,13 @@
 					return {}
 				}
 			},
+			// 每一个item的样式
+			itemStyle: {
+				type: Object,
+				default () {
+					return {}
+				}
+			},
 			// 是否显示右侧的箭头
 			arrow: {
 				type: Boolean,

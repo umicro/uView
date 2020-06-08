@@ -1,5 +1,5 @@
 <template>
-	<view class="u-icon" @tap.stop.prevent="click" :class="[labelPos == 'bottom' ? 'u-flex-col u-row-center' : 'u-flex u-col-center']">
+	<view :style="[customStyle]" class="u-icon" @tap="click" :class="[labelPos == 'bottom' ? 'u-flex-col u-row-center' : 'u-flex u-col-center']">
 		<image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]"></image>
 		<text v-else class="u-icon__icon" :class="customClass" :style="[iconStyle]" :hover-class="hoverClass" @touchstart="touchstart"></text>
 		<text v-if="label" class="u-icon__label" :style="{
@@ -103,6 +103,13 @@ export default {
 		imgMode: {
 			type: String,
 			default: 'widthFix'
+		},
+		// 自定义样式
+		customStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
 		}
 	},
 	data() {
@@ -115,7 +122,9 @@ export default {
 			// uView的自定义图标类名为u-iconfont
 			if (this.customPrefix == 'uicon') classes.push('u-iconfont');
 			else classes.push(this.customPrefix);
-			//#ifdef MP-ALIPAY
+			// 阿里，头条，百度小程序通过数组绑定类名时，无法直接使用[a, b, c]的形式，否则无法识别
+			// 故需将其拆成一个字符串的形式，通过空格隔开各个类名
+			//#ifdef MP-ALIPAY || MP-TOUTIAO || MP-BAIDU
 			classes = classes.join(' ');
 			//#endif
 			return classes;

@@ -41,6 +41,10 @@ import color from './libs/function/color.js'
 import type2icon from './libs/function/type2icon.js'
 // 打乱数组的顺序
 import randomArray from './libs/function/randomArray.js'
+// 对象和数组的深度克隆
+import deepClone from './libs/function/deepClone.js'
+// 对象深度拷贝
+import deepMerge from './libs/function/deepMerge.js'
 
 // 规则检验
 import test from './libs/function/test.js'
@@ -50,8 +54,7 @@ import random from './libs/function/random.js'
 import trim from './libs/function/trim.js'
 // toast提示，对uni.showToast的封装
 import toast from './libs/function/toast.js'
-// 对象和数组的深度克隆
-import deepClone from './libs/function/deepClone.js'
+
 
 // 配置信息
 import config from './libs/config/config.js'
@@ -79,6 +82,7 @@ const $u = {
 	test,
 	random,
 	deepClone,
+	deepMerge,
 	trim,
 	type: ['primary', 'success', 'error', 'warning', 'info'],
 	http,

@@ -1,7 +1,7 @@
 <template>
 	<view class="u-radio" :style="[radioStyle]">
 		<view class="u-radio__icon-wrap" @tap="toggle">
-			<u-icon @tap="toggle" :class="iconClass" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-radio__icon" :style="[iconStyle]" />
+			<u-icon :class="iconClass" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-radio__icon" :style="[iconStyle]" />
 		</view>
 		<view class="u-label-class u-radio__label" @tap="onClickLabel" :style="{
 			fontSize: labelSize + 'rpx'

@@ -4,11 +4,9 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-collapse event-type="close" :arrow="arrow" :accordion="accordion" @change="change">
+				<u-collapse :item-style="itemStyle" event-type="close" :arrow="arrow" :accordion="accordion" @change="change">
 					<u-collapse-item :index="index" @change="itemChange" :title="item.head" v-for="(item, index) in itemList" :key="index">
-						<view class="">
-							{{item.body}}
-						</view>
+						{{item.body}}
 					</u-collapse-item>
 				</u-collapse>
 			</view>
@@ -24,6 +22,10 @@
 			<view class="u-config-item">
 				<view class="u-item-title">右侧箭头</view>
 				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="arrowChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">自定义样式</view>
+				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -56,7 +58,8 @@
 				}],
 				accordion: true,
 				arrow: true,
-				hoverClass: 'hover2'
+				hoverClass: 'hover2',
+				itemStyle: {}
 			}
 		},
 		methods: {
@@ -65,6 +68,17 @@
 			},
 			arrowChange(index) {
 				this.arrow = index == 0 ? true : false;
+			},
+			styleChange(index) {
+				if(index == 0) {
+					this.itemStyle = {
+						border: '1px solid rgb(230, 230, 230)',
+						marginTop: '20px',
+						padding: '0 8rpx'
+					}
+				} else {
+					this.itemStyle = {}
+				}
 			},
 			change(index) {
 				let str = '';
@@ -82,7 +96,7 @@
 				})
 			},
 			itemChange(e) {
-				// console.log(e);
+				console.log(e);
 			}
 		}
 	}

@@ -1,12 +1,10 @@
+import deepMerge from "../function/deepMerge";
+import validate from "../function/test";
 class Request {
-	// 判断是否http|https开头的URL
-	static isHttp(url) {
-		return /(http|https):\/\/([\w.]+\/?)\S*/.test(url)
-	}
-
 	// 设置全局默认配置
 	setConfig(customConfig) {
-		this.config = Object.assign(this.config, customConfig);
+		// 深度合并对象，否则会造成对象深层属性丢失
+		this.config = deepMerge(this.config, customConfig);
 	}
 
 	// 主要请求部分
@@ -57,7 +55,7 @@ class Request {
 							if (resInterceptors !== false) {
 								resolve(resInterceptors);
 							} else {
-								reject(response);
+								reject(resInterceptors);
 							}
 						} else {
 							// 如果不是返回原始数据(originalData=false)，且没有拦截器的情况下，返回纯数据给then回调
@@ -75,8 +73,8 @@ class Request {
 				}
 			}
 
-			// 判断用户传递的URL是否/开头,如果不是,加上/
-			options.url = Request.isHttp(options.url) ? options.url : (this.config.baseUrl + (options.url.indexOf('/') == 0 ?
+			// 判断用户传递的URL是否/开头,如果不是,加上/，这里使用了uView的test.js验证库的url()方法
+			options.url = validate.url(options.url) ? options.url : (this.config.baseUrl + (options.url.indexOf('/') == 0 ?
 				options.url : '/' + options.url));
 			
 			// 是否显示loading
@@ -92,7 +90,7 @@ class Request {
 				}, this.config.loadingTime);
 			}
 			uni.request(options);
-		}).catch(e => {})
+		})
 	}
 
 	constructor() {
@@ -100,7 +98,8 @@ class Request {
 			baseUrl: '', // 请求的根域名
 			// 默认的请求头
 			header: {
-				'content-type': 'application/json;charset=UTF-8'
+				'content-type': 'application/json;charset=UTF-8',
+				'version': 1
 			},
 			method: 'POST',
 			// 设置为json，返回后uni.request会对数据进行一次JSON.parse

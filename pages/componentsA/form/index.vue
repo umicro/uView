@@ -1,7 +1,7 @@
 <template>
 	<view class="wrap">
-		<u-form :model="model" :rules="rules" ref="uForm">
-			<u-form-item left-icon="map" label-width="120" :label-position="labelPosition" label="姓名" prop="name">
+		<u-form :model="model" :rules="rules" ref="uForm" :errorType="errorType">
+			<u-form-item :leftIconStyle="{color: '#888', fontSize: '32rpx'}" left-icon="account" label-width="120" :label-position="labelPosition" label="姓名" prop="name">
 				<u-input :border="border" placeholder="请输入姓名" v-model="model.name" type="text"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="性别" prop="sex">
@@ -11,10 +11,10 @@
 				<u-input type="textarea" :border="border" placeholder="请填写简介" v-model="model.intro" />
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="密码" prop="password">
-				<u-input :border="border" type="text" :password="true" v-model="model.password" placeholder="请输入密码"></u-input>
+				<u-input :border="border" type="password" :password="true" v-model="model.password" placeholder="请输入密码"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="确认密码" label-width="150" prop="rePassword">
-				<u-input :border="border" type="text" :password="true" v-model="model.rePassword" placeholder="请确认密码"></u-input>
+				<u-input :border="border" type="password" :password="true" v-model="model.rePassword" placeholder="请确认密码"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="水果品种" label-width="150" prop="likeFruit">
 				<u-checkbox-group @change="checkboxGroupChange" :width="radioCheckWidth" :wrap="radioCheckWrap">
@@ -32,12 +32,19 @@
 			<u-form-item :label-position="labelPosition" label="商品类型" prop="goodsType" label-width="150">
 				<u-input :border="border" type="select" :select-open="selectShow" v-model="model.goodsType" placeholder="请选择商品类型" @click="selectShow = true"></u-input>
 			</u-form-item>
-			<u-form-item :label-position="labelPosition" label="手机号码" prop="phone" label-width="150">
+			<u-form-item :rightIconStyle="{color: '#888', fontSize: '32rpx'}" right-icon="kefu-ermai" :label-position="labelPosition" label="手机号码" prop="phone" label-width="150">
 				<u-input :border="border" placeholder="请输入手机号" v-model="model.phone" type="number"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="验证码" prop="code" label-width="150">
 				<u-input :border="border" placeholder="请输入验证码" v-model="model.code" type="text"></u-input>
 				<u-button slot="right" type="success" size="mini" @click="getCode">{{codeTips}}</u-button>
+			</u-form-item>
+			<!-- 此处switch的slot为right，如果不填写slot名，也即<u-switch v-model="model.remember"></u-switch>，将会左对齐 -->
+			<u-form-item :label-position="labelPosition" label="记住密码" prop="remember" label-width="150">
+				<u-switch v-model="model.remember" slot="right"></u-switch>
+			</u-form-item>
+			<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
+				<u-upload width="160"></u-upload>
 			</u-form-item>
 		</u-form>
 		<view class="agreement">
@@ -61,23 +68,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">边框</view>
-				<u-subsection vibrateShort current="1" :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
+				<u-subsection vibrateShort :current="borderCurrent" :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">radio、checkbox样式</view>
 				<u-subsection vibrateShort :list="['自适应', '换行', '50%宽度']" @change="radioCheckboxChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">打乱顺序</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="randomChange"></u-subsection>
-			</view>
-			<view class="u-config-item">
-				<view class="u-item-title">上方工具条</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="tooltipChange"></u-subsection>
-			</view>
-			<view class="u-config-item">
-				<view class="u-item-title">是否显示遮罩</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="maskChange"></u-subsection>
+				<view class="u-item-title">错误提示方式</view>
+				<u-subsection vibrateShort :list="['文字', '下划线', '输入框', '下划线+文字']" @change="errorChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -101,7 +100,8 @@ export default {
 				code: '',
 				password: '',
 				rePassword: '',
-				
+				remember: false,
+				photo: ''
 			},
 			selectList: [
 				{
@@ -128,7 +128,7 @@ export default {
 						min: 3, 
 						max: 5, 
 						message: '姓名长度在3到5个字符', 
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					},
 					{
 						validator: (rule, value, callback) => {
@@ -137,7 +137,7 @@ export default {
 						},
 						message: '姓名必须为中文',
 						// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					}
 				],
 				sex: [
@@ -197,7 +197,7 @@ export default {
 					{
 						required: true, 
 						message: '请输入手机号',
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					},
 					{
 						validator: (rule, value, callback) => {
@@ -206,46 +206,46 @@ export default {
 						},
 						message: '手机号码不正确',
 						// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					}
 				],
 				code: [
 					{
 						required: true, 
 						message: '请输入验证码',
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					},
 					{
 						type: 'number',
 						message: '验证码只能为数字',
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					}
 				],
 				password: [
 					{
 						required: true, 
 						message: '请输入密码',
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					},
 					{
 						// 正则不能含有两边的引号
 						pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]+\S{6,12}$/,
 						message: '需同时含有字母和数字，长度在6-12之间',
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					}
 				],
 				rePassword: [
 					{
 						required: true, 
 						message: '请重新输入密码',
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					},
 					{
 						validator: (rule, value, callback) => {
 							return value === this.model.password;
 						},
 						message: '两次输入的密码不相等',
-						trigger: 'change,blur',
+						trigger: ['change','blur'],
 					}
 				],
 			},
@@ -315,12 +315,16 @@ export default {
 			radioCheckWrap: false,
 			labelPosition: 'left',
 			codeTips: '',
-			
-			
+			errorType: ['message'],
 		};
 	},
 	onLoad() {
 		
+	},
+	computed: {
+		borderCurrent() {
+			return this.border ? 0 : 1;
+		}
 	},
 	onReady() {
 		this.$refs.uForm.setRules(this.rules);
@@ -338,6 +342,7 @@ export default {
 		},
 		// 点击actionSheet回调
 		actionSheetCallback(index) {
+			uni.hideKeyboard();
 			this.model.sex = this.actionSheetList[index].text;
 		},
 		// checkbox选择发生变化
@@ -402,6 +407,15 @@ export default {
 				this.$u.toast('倒计时结束后再发送');
 			}
 		},
+		errorChange(index) {
+			if(index == 0) this.errorType = ['message'];
+			if(index == 1) this.errorType = ['border-bottom'];
+			if(index == 2) {
+				this.errorType = ['border'];
+				this.border = true;
+			}
+			if(index == 3) this.errorType = ['message', 'border-bottom'];
+		}
 	}
 };
 </script>

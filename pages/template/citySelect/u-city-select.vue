@@ -1,12 +1,12 @@
 <template>
 	<u-popup v-model="value" mode="bottom" :popup="false" :mask="true" :closeable="true" :safe-area-inset-bottom="true"
 	 close-icon-color="#ffffff" :z-index="uZIndex" :maskCloseAble="maskCloseAble" @close="close">
-		<u-tabs :list="genTabsList" :is-scroll="true" :current="tabsIndex" @change="tabsChange"></u-tabs>
+		<u-tabs :list="genTabsList" :is-scroll="true" :current="tabsIndex" @change="tabsChange" ref="tabs"></u-tabs>
 		<view class="area-box">
 			<view class="u-flex" :class="{ 'change':isChange }">
 				<view class="area-item">
 					<view class="u-padding-10 u-bg-gray" style="height: 100%;">
-						<scroll-view :scroll-y="true">
+						<scroll-view :scroll-y="true" style="height: 100%">
 							<u-cell-group>
 								<u-cell-item v-for="(item,index) in provinces" :title="item.label" :arrow="false" :index="index" :key="index"
 								 @click="provinceChange">
@@ -18,7 +18,7 @@
 				</view>
 				<view class="area-item">
 					<view class="u-padding-10 u-bg-gray" style="height: 100%;">
-						<scroll-view :scroll-y="true">
+						<scroll-view :scroll-y="true" style="height: 100%">
 							<u-cell-group v-show="isChooseP">
 								<u-cell-item v-for="(item,index) in citys" :title="item.label" :arrow="false" :index="index" :key="index"
 								 @click="cityChange">
@@ -31,7 +31,7 @@
 
 				<view class="area-item">
 					<view class="u-padding-10 u-bg-gray" style="height: 100%;">
-						<scroll-view :scroll-y="true">
+						<scroll-view :scroll-y="true" style="height: 100%">
 							<u-cell-group v-show="isChooseC">
 								<u-cell-item v-for="(item,index) in areas" :title="item.label" :arrow="false" :index="index" :key="index"
 								 @click="areaChange">
@@ -102,9 +102,6 @@
 				isChooseA: false, //是否已经选择了区
 				area: 0, //区级下标
 				areas: areas[0][0],
-				tabsList: [{
-					name: '请选择'
-				}],
 				tabsIndex: 0,
 			}
 		},
@@ -143,11 +140,11 @@
 		},
 		methods: {
 			init() {
-				if (this.areaCode.length) {
+				if (this.areaCode.length == 3) {
 					this.setProvince("", this.areaCode[0]);
 					this.setCity("", this.areaCode[1]);
 					this.setArea("", this.areaCode[2]);
-				} else if (this.defaultRegion.length) {
+				} else if (this.defaultRegion.length == 3) {
 					this.setProvince(this.defaultRegion[0], "");
 					this.setCity(this.defaultRegion[1], "");
 					this.setArea(this.defaultRegion[2], "");

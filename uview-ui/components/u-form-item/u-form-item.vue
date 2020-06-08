@@ -6,27 +6,32 @@
 			<view class="u-form-item--left" :style="{
 				width: labelPosition == 'left' ? labelWidth + 'rpx' : '100%',
 				flex: `0 0 ${labelPosition == 'left' ? labelWidth + 'rpx' : '100%'}`,
-				marginBottom: labelPosition == 'left' ? 0 : '10rpx'
+				marginBottom: labelPosition == 'left' ? 0 : '10rpx',
+				
 			}">
 				<!-- 为了块对齐 -->
 				<view class="u-form-item--left__content">
 					<!-- nvue不支持伪元素before -->
 					<text v-if="isRequired" class="u-form-item--left__content--required">*</text>
 					<view class="u-form-item--left__content__icon" v-if="leftIcon">
-						<u-icon :name="leftIcon"></u-icon>
+						<u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
 					</view>
-					<view class="u-form-item--left__content__label" :style="[labelStyle]">
+					<view class="u-form-item--left__content__label" :style="[labelStyle, {
+						'justify-content': labelAlign == 'left' ? 'flex-star' : labelAlign == 'center' ? 'center' : 'flex-end'
+					}]">
 						{{label}}
 					</view>
 				</view>
 			</view>
-			<view class="u-form-item--right">
+			<view class="u-form-item--right u-flex">
 				<view class="u-form-item--right__content">
-					<view class="u-form-item--right__content__slot">
+					<view class="u-form-item--right__content__slot ">
 						<slot />
 					</view>
-					<u-icon v-if="rightIcon" :name="rightIcon"></u-icon>
-					<slot name="right" />
+					<view class="u-form-item--right__content__icon u-flex" v-if="$slots.right || rightIcon">
+						<u-icon :custom-style="rightIconStyle" v-if="rightIcon" :name="rightIcon"></u-icon>
+						<slot name="right" />
+					</view>
 				</view>
 			</view>
 		</view>
@@ -44,7 +49,13 @@ schema.warning = function(){};
 export default {
 	name: 'u-form-item',
 	mixins: [Emitter],
-	inject: ['uForm'],
+	inject: {
+		uForm: {
+			default() {
+				return null
+			}
+		}
+	},
 	props: {
 		// input的label提示语
 		label: {
@@ -56,10 +67,10 @@ export default {
 			type: String,
 			default: ''
 		},
-		// 输入框的边框，bottom-显示下边框，surround-四周边框
+		// 是否显示表单域的下划线边框
 		borderBottom: {
-			type: String,
-			default: 'bottom'
+			type: Boolean,
+			default: true
 		},
 		// label的位置，left-左边，top-上边
 		labelPosition: {
@@ -78,6 +89,11 @@ export default {
 				return {}
 			}
 		},
+		// lable字体的对齐方式
+		labelAlign: {
+			type: String,
+			default: 'left'
+		},
 		// 右侧图标
 		rightIcon: {
 			type: String,
@@ -88,12 +104,18 @@ export default {
 			type: String,
 			default: ''
 		},
-		// 有错误时的提示方式，message-提示信息，border-下边框呈现红色，
-		// all-所有提示方式同时起效，toast-只对提交表单时有效，none-无提示
-		errorType: {
-			type: Array,
+		// 左侧图标的样式
+		leftIconStyle: {
+			type: Object,
 			default() {
-				return ['message', 'border', 'border-bottom']
+				return {}
+			}
+		},
+		// 左侧图标的样式
+		rightIconStyle: {
+			type: Object,
+			default() {
+				return {}
 			}
 		}
 	},
@@ -102,16 +124,20 @@ export default {
 			initialValue: '', // 存储的默认值
 			isRequired: false, // 是否必填
 			validateState: '', // 是否校验成功
-			validateMessage: '' // 校验失败的提示语
+			validateMessage: '' ,// 校验失败的提示语
+			// 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，
+			// border-bottom-下边框呈现红色，none-无提示
+			errorType: ['message']
 		};
 	},
 	watch: {
 		validateState(val) {
-			// 箱子组件发出事件，第三个参数为true或者false，true代表有错误
-			if(this.showError('border')) {
-				this.broadcast('u-input', 'on-form-item-error', val === 'error');
-			}
-			
+			this.broadcastInputError();
+		},
+		// 监听u-form组件的errorType的变化
+		"uForm.errorType"(val) {
+			this.errorType = val;
+			this.broadcastInputError();
 		}
 	},
 	computed: {
@@ -125,10 +151,13 @@ export default {
 				else if(this.errorType.indexOf(type) >= 0) return true;
 				else return false;
 			}
-		},
-		
+		}
 	},
 	methods: {
+		broadcastInputError() {
+			// 子组件发出事件，第三个参数为true或者false，true代表有错误
+			this.broadcast('u-input', 'on-form-item-error', this.validateState === 'error' && this.showError('border'));
+		},
 		// 判断是否需要required校验
 		setRules() {
 			let that = this;
@@ -199,15 +228,18 @@ export default {
 		// 清空当前的u-form-item
 		resetField() {
 			this.uForm.model[this.prop] = this.initialValue;
+			// 设置为`success`状态，只是为了清空错误标记
+			this.validateState = 'success';
 		}
 	},
 
 	// 组件创建完成时，将当前实例保存到u-form中
 	mounted() {
-		// 如果没有传入prop，就不进行校验
-		if (!this.prop) return;
+		// 如果没有传入prop，或者uForm为空(如果u-form-input单独使用，就不会有uForm注入)，就不进行校验
+		if (!this.prop || this.uForm === null) return;
 		// 发出事件，让父组件将本实例加入到管理数组中
 		this.dispatch('u-form', 'on-form-item-add', this);
+		this.errorType = this.uForm.errorType;
 		// 设置初始值
 		this.initialValue = this.fieldValue;
 		// 添加表单校验
@@ -229,7 +261,7 @@ export default {
 		font-size: 28rpx;
 		color: $u-main-color;
 		box-sizing: border-box;
-		// line-height: $u-form-item-height;
+		line-height: $u-form-item-height;
 		flex-direction: column;
 		
 		&__border-bottom--error:after {
@@ -249,9 +281,10 @@ export default {
 				display: flex;
 				align-items: center;
 				padding-right: 10rpx;
+				flex: 1;
 				
 				&__icon {
-					margin-right: 4rpx;
+					margin-right: 8rpx;
 				}
 				
 				&--required {
@@ -265,6 +298,7 @@ export default {
 				&__label {
 					display: flex;
 					align-items: center;
+					flex: 1;
 				}
 			}
 		}
@@ -275,9 +309,18 @@ export default {
 			&__content {
 				display: flex;
 				align-items: center;
+				flex: 1;
 				
 				&__slot {
 					flex: 1;
+					/* #ifndef MP */
+					display: flex;
+					align-items: center;
+					/* #endif */
+				}
+				
+				&__icon {
+					margin-left: 10rpx;
 				}
 			}
 		}

@@ -46,7 +46,7 @@
 export default {
 	data() {
 		return {
-			list: [
+			list1: [
 				{
 					id: 1,
 					title: '长安回望绣成堆，山顶千门次第开，一骑红尘妃子笑，无人知是荔枝来',
@@ -66,6 +66,7 @@ export default {
 					show: false,
 				}
 			],
+			list: [],
 			disabled: false,
 			btnWidth: 180,
 			show: false,
@@ -84,6 +85,11 @@ export default {
 				}
 			]
 		};
+	},
+	onLoad() {
+		setTimeout(() => {
+			this.list = this.list1;
+		}, 2000)
 	},
 	methods: {
 		disabledChange(index) {

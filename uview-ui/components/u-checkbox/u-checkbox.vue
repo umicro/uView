@@ -1,7 +1,7 @@
 <template>
 	<view class="u-checkbox" :style="[checkboxStyle]">
 		<view class="u-checkbox__icon-wrap" @tap="toggle">
-			<u-icon :class="iconClass" @click="toggle" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-checkbox__icon" :style="[iconStyle]" />
+			<u-icon :class="iconClass" name="checkbox-mark" :size="iconSize" :color="iconColor" class="u-checkbox__icon" :style="[iconStyle]" />
 		</view>
 		<view class="u-label-class u-checkbox__label" @tap="onClickLabel" :style="{
 			fontSize: labelSize + 'rpx'

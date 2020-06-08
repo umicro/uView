@@ -23,6 +23,15 @@ export default [
 		groupName: '工具库',
 		list: [
 			{
+				path: 'deepMerge',
+				icon: 'deepMerge',
+				title: 'deepMerge 对象深度合并',
+			},{
+				path: 'deepClone',
+				icon: 'deepClone',
+				title: 'deepClone 对象深度克隆',
+			},
+			{
 				path: 'timeFormat',
 				icon: 'timeFormat',
 				title: 'TimeFormat 时间格式化',

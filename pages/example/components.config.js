@@ -33,14 +33,18 @@ export default [{
 	{
 		groupName: '表单组件',
 		list: [{
+			path: '/pages/componentsA/form/index',
+			icon: 'form',
+			title: 'Form 表单',
+		}, {
 			path: '/pages/componentsA/calendar/index',
 			icon: 'calendar',
 			title: 'Calendar 日历',
-		},{
+		}, {
 			path: '/pages/componentsA/select/index',
 			icon: 'select',
 			title: 'Select 列选择器',
-		},{
+		}, {
 			path: '/pages/componentsA/keyboard/index',
 			icon: 'keyboard',
 			title: 'Keyboard 键盘',
@@ -157,7 +161,7 @@ export default [{
 			path: '/pages/componentsB/line/index',
 			icon: 'line',
 			title: 'Line 线条',
-		},{
+		}, {
 			path: '/pages/componentsB/card/index',
 			icon: 'card',
 			title: 'Card 卡片',
@@ -201,14 +205,18 @@ export default [{
 	}, {
 		groupName: '导航组件',
 		list: [{
+			path: '/pages/componentsA/backTop/index',
+			icon: 'backTop',
+			title: 'BackTop 返回顶部',
+		},{
 			path: '/pages/componentsA/navbar/index',
 			icon: 'navbar',
 			title: 'Navbar 导航栏',
-		},{
+		}, {
 			path: '/pages/componentsA/tabs/index',
 			icon: 'tabs',
 			title: 'Tabs 标签',
-		},{
+		}, {
 			path: '/pages/template/order/index',
 			icon: 'tabsSwiper',
 			title: 'TabsSwiper 全屏选项卡',

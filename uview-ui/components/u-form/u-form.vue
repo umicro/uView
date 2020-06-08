@@ -19,7 +19,15 @@ export default {
 		// 	default() {
 		// 		return {};
 		// 	}
-		// }
+		// },
+		// 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，
+		// border-bottom-下边框呈现红色，none-无提示
+		errorType: {
+			type: Array,
+			default() {
+				return ['message']
+			}
+		}
 	},
 	provide() {
 		return {

@@ -1,26 +1,26 @@
 <template>
 	<u-popup closeable :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto"
-	 :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex" :border-radius="borderRadius">
+	 :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex" :border-radius="borderRadius" :closeable="closeable">
 		<view class="u-calendar">
 			<view class="u-calendar__header">
-				<view class="u-calendar__header__text" v-if="!$slots['tool-tip']">
+				<view class="u-calendar__header__text" v-if="!$slots['tooltip']">
 					{{toolTip}}
 				</view>
-				<slot v-else name="tool-tip" />
+				<slot v-else name="tooltip" />
 			</view>
 			<view class="u-calendar__action u-flex u-row-center">
 				<view class="u-calendar__action__icon">
-					<u-icon v-if="changeYear" name="arrow-left-double" :color="yearArrowColor" @click="changeYear(0)"></u-icon>
+					<u-icon v-if="changeYear" name="arrow-left-double" :color="yearArrowColor" @click="changeYearHandler(0)"></u-icon>
 				</view>
 				<view class="u-calendar__action__icon">
-					<u-icon v-if="changeMonth" name="arrow-left" :color="monthArrowColor" @click="changeMonth(0)"></u-icon>
+					<u-icon v-if="changeMonth" name="arrow-left" :color="monthArrowColor" @click="changeMonthHandler(0)"></u-icon>
 				</view>
 				<view class="u-calendar__action__text">{{ showTitle }}</view>
 				<view class="u-calendar__action__icon">
-					<u-icon v-if="changeMonth" name="arrow-right" :color="monthArrowColor" @click="changeMonth(1)"></u-icon>
+					<u-icon v-if="changeMonth" name="arrow-right" :color="monthArrowColor" @click="changeMonthHandler(1)"></u-icon>
 				</view>
 				<view class="u-calendar__action__icon">
-					<u-icon v-if="changeYear" name="arrow-right-double" :color="yearArrowColor" @click="changeYear(1)"></u-icon>
+					<u-icon v-if="changeYear" name="arrow-right-double" :color="yearArrowColor" @click="changeYearHandler(1)"></u-icon>
 				</view>
 			</view>
 			<view class="u-calendar__week-day">
@@ -95,19 +95,19 @@
 				type: String,
 				default: 'date'
 			},
-			// 可切换最大年份
+			// 可切换的最大年份
 			maxYear: {
-				type: Number,
+				type: [Number, String],
 				default: 2050
 			},
-			// 可切换最小年份
+			// 可切换的最小年份
 			minYear: {
-				type: Number,
+				type: [Number, String],
 				default: 1950
 			},
 			// 最小可选日期(不在范围内日期禁用不可选)
 			minDate: {
-				type: String,
+				type: [Number, String],
 				default: '1950-01-01'
 			},
 			/**
@@ -116,7 +116,7 @@
 			 * 2030-12-31
 			 * */
 			maxDate: {
-				type: String,
+				type: [Number, String],
 				default: ''
 			},
 			// 弹窗顶部左右两边的圆角值
@@ -124,47 +124,47 @@
 				type: [String, Number],
 				default: 20
 			},
-			//月份切换箭头颜色
+			// 月份切换按钮箭头颜色
 			monthArrowColor: {
 				type: String,
 				default: '#606266'
 			},
-			//年份切换箭头颜色
+			// 年份切换按钮箭头颜色
 			yearArrowColor: {
 				type: String,
 				default: '#909399'
 			},
-			//默认日期字体颜色
+			// 默认日期字体颜色
 			color: {
 				type: String,
 				default: '#303133'
 			},
-			//选中|起始结束日期背景色
+			// 选中|起始结束日期背景色
 			activeBgColor: {
 				type: String,
 				default: '#2979ff'
 			},
-			//选中|起始结束日期字体颜色
+			// 选中|起始结束日期字体颜色
 			activeColor: {
 				type: String,
 				default: '#ffffff'
 			},
-			//范围内日期背景色
+			// 范围内日期背景色
 			rangeBgColor: {
 				type: String,
 				default: 'rgba(41,121,255,0.13)'
-			},
-			//范围内日期字体颜色
+			}, 
+			// 范围内日期字体颜色
 			rangeColor: {
 				type: String,
 				default: '#2979ff'
 			},
-			//mode=range时生效，起始日期自定义文案
+			// mode=range时生效，起始日期自定义文案
 			startText: {
 				type: String,
 				default: '开始'
 			},
-			//mode=range时生效，结束日期自定义文案
+			// mode=range时生效，结束日期自定义文案
 			endText: {
 				type: String,
 				default: '结束'
@@ -174,15 +174,20 @@
 				type: String,
 				default: 'primary'
 			},
-			//当前选中日期带选中效果
+			// 当前选中日期带选中效果
 			isActiveCurrent: {
 				type: Boolean,
 				default: true
 			},
-			//切换年月是否触发事件 mode=date时生效
+			// 切换年月是否触发事件 mode=date时生效
 			isChange: {
 				type: Boolean,
 				default: false
+			},
+			// 是否显示右上角的关闭图标
+			closeable: {
+				type: Boolean,
+				default: true
 			},
 			// 顶部的提示文字
 			toolTip: {
@@ -317,7 +322,7 @@
 				}
 				return overstep;
 			},
-			changeMonth(isAdd) {
+			changeMonthHandler(isAdd) {
 				if (isAdd) {
 					let month = this.month + 1;
 					let year = month > 12 ? this.year + 1 : this.year;
@@ -337,7 +342,7 @@
 					}
 				}
 			},
-			changeYear(isAdd) {
+			changeYearHandler(isAdd) {
 				let year = isAdd ? this.year + 1 : this.year - 1;
 				if (!this.checkRange(year)) {
 					this.year = year;
@@ -419,7 +424,7 @@
 						result: result,
 						week: weekText,
 						isToday: isToday,
-						switch: show //是否是切换年月操作
+						// switch: show //是否是切换年月操作
 					});
 				} else {
 					if (!this.startDate || !this.endDate) return;
@@ -495,6 +500,7 @@
 			
 			&__text {
 				flex: 1;
+				text-align: center;
 			}
 		}
 	

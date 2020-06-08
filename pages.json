@@ -2,14 +2,14 @@
 	"easycom": {
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
-	"condition": { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [{
-			"name": "test", //模式名称
-			"path": "pages/componentsA/calendar/index", //启动页面，必选
-			"query": "id=1&name=2" //启动参数，在页面的onLoad函数里面得到
-		}] 
-	},
+	// "condition": { //模式配置，仅开发期间生效
+	// 	"current": 0, //当前激活的模式(list 的索引项)
+	// 	"list": [{
+	// 		"name": "test", //模式名称
+	// 		"path": "pages/componentsA/form/index", //启动页面，必选
+	// 		"query": "id=1&name=2" //启动参数，在页面的onLoad函数里面得到
+	// 	}] 
+	// },
 	"pages": [
 		// 演示-组件 
 		{
@@ -218,6 +218,28 @@
 		{
 			"root": "pages/template",
 			"pages": [
+				// wxCenter 仿微信个人中心
+				{
+					"path": "wxCenter/index",
+					"style": {
+						"navigationBarTitleText": "wxCenter 仿微信个人中心",
+						"navigationStyle": "custom"
+					}
+				},
+				// keyboardPay 自定义键盘支付
+				{
+					"path": "keyboardPay/index",
+					"style": {
+						"navigationBarTitleText": "keyboardPay 自定义键盘支付"
+					}
+				},
+				// // douyin 仿抖音
+				// {
+				// 	"path": "douyin/index",
+				// 	"style": {
+				// 		"navigationBarTitleText": "douyin 仿抖音"
+				// 	}
+				// },
 				// mallMenu商城分类
 				{
 					"path": "mallMenu/index2",
@@ -306,6 +328,20 @@
 		{
 			"root": "pages/library",
 			"pages": [
+				// deepClone-对象深度克隆
+				{
+					"path": "deepClone/index",
+					"style": {
+						"navigationBarTitleText": "deepClone-对象深度克隆"
+					}
+				},
+				// deepMerge-对象深度合并
+				{
+					"path": "deepMerge/index",
+					"style": {
+						"navigationBarTitleText": "deepMerge-对象深度合并"
+					}
+				},
 				// getRect-元素节点
 				{
 					"path": "getRect/index",
@@ -450,6 +486,13 @@
 		{
 			"root": "pages/componentsA",
 			"pages": [
+				// backTop-返回顶部
+				{
+					"path": "backTop/index",
+					"style": {
+						"navigationBarTitleText": "backTop-返回顶部"
+					}
+				},
 				// calendar-日历
 				{
 					"path": "calendar/index",
@@ -679,12 +722,6 @@
 					"path": "upload/index",
 					"style": {
 						"navigationBarTitleText": "upload-上传"
-					}
-				}, // validation表单验证
-				{
-					"path": "validation/index",
-					"style": {
-						"navigationBarTitleText": "validation-表单验证"
 					}
 				}, // waterfall瀑布流
 				{

@@ -5,7 +5,7 @@
 			<view class="u-navbar-inner" :style="[navbarInnerStyle]">
 				<view class="u-back-wrap" v-if="isBack" @tap="goBack"> 
 					<view class="u-icon-wrap">
-						<u-icon :name="backIconName" :color="backIconColor" :size="backIconSize"></u-icon>
+						<u-icon @click="goBack" :name="backIconName" :color="backIconColor" :size="backIconSize"></u-icon>
 					</view>
 					<view class="u-icon-wrap u-back-text u-line-1" v-if="backText" :style="[backTextStyle]">
 						{{backText}}

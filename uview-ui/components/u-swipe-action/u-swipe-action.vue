@@ -9,7 +9,7 @@
 			:disabled="disabled"
 			:x="moveX"
 			:style="{
-				width: movableViewWidth
+				width: movableViewWidth ? movableViewWidth : '100%'
 			}"
 		>
 			<view
@@ -18,7 +18,7 @@
 			>
 				<slot></slot>
 			</view>
-			<view class="u-swipe-del" @tap.stop="btnClick(index)" :style="[btnStyle(item.style)]" v-for="(item, index) in options" :key="index">
+			<view class="u-swipe-del" v-if="showBtn" @tap.stop="btnClick(index)" :style="[btnStyle(item.style)]" v-for="(item, index) in options" :key="index">
 				<view class="u-btn-text">{{ item.text }}</view>
 			</view>
 		</movable-view>
@@ -101,7 +101,8 @@ export default {
 			scrollX: 0, // movable-view移动过程中产生的change事件中的x轴移动值
 			status: false, // 滑动的状态，表示当前是展开还是关闭按钮的状态
 			movableAreaWidth: 0, // 滑动区域
-			elId: this.$u.guid() // id，用于通知另外组件关闭时的识别
+			elId: this.$u.guid(), // id，用于通知另外组件关闭时的识别
+			showBtn: false, // 刚开始渲染视图时不显示右边的按钮，避免视图闪动
 		};
 	},
 	computed: {
@@ -124,6 +125,10 @@ export default {
 	},
 	mounted() {
 		this.getActionRect();
+		// 等视图更新完后，再显示右边的可滑动按钮，防止这些按钮会"闪一下"
+		this.$nextTick(() => {
+			this.showBtn = true;
+		})
 	},
 	methods: {
 		// 点击按钮

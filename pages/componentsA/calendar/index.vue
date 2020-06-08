@@ -42,7 +42,7 @@
 	export default {
 		data() {
 			return {
-				show: true,
+				show: false,
 				mode: 'range',
 				arrowType: 1,
 				minDate: "1920-01-01",

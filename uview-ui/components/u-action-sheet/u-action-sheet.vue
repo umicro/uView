@@ -30,6 +30,7 @@
 	 * @property {Boolean} mask-close-able 点击遮罩是否可以关闭（默认true）
 	 * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
 	 * @property {Number String} z-index z-index值（默认1075）
+	 * @property {String} cancel-text 取消按钮的提示文字
 	 * @event {Function} click 点击ActionSheet列表项时触发
 	 * @event {Function} close 点击取消按钮时触发
 	 * @example <u-action-sheet :list="list" @click="click" v-model="show"></u-action-sheet>

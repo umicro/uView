@@ -1,27 +1,29 @@
-function deepClone(obj){
-    var o,i,j,k;
-    if(typeof(obj)!=="object" || obj===null)return obj;
-    if(obj instanceof Array){
-        o=[];
-        i=0;j=obj.length;
-        for(;i<j;i++){
-            if(typeof(obj[i])==="object" && obj[i]!=null){
-                o[i]=deepClone(obj[i]);
-            }else{
-                o[i]=obj[i];
-            }
-        }
-    }else{
-        o={};
-        for(i in obj){
-            if(typeof(obj[i])==="object" && obj[i]!==null){
-                o[i]=deepClone(obj[i]);
-            }else{
-                o[i]=obj[i];
-            }
-        }
-    }
-    return o;
+// 对象深度克隆
+function deepClone(object = {}) {
+	var o, i, j, k;
+	if (typeof(object) !== "object" || object === null) return object;
+	if (object instanceof Array) {
+		o = [];
+		i = 0;
+		j = object.length;
+		for (; i < j; i++) {
+			if (typeof(object[i]) === "object" && object[i] != null) {
+				o[i] = deepClone(object[i]);
+			} else {
+				o[i] = object[i];
+			}
+		}
+	} else {
+		o = {};
+		for (i in object) {
+			if (typeof(object[i]) === "object" && object[i] !== null) {
+				o[i] = deepClone(object[i]);
+			} else {
+				o[i] = object[i];
+			}
+		}
+	}
+	return o;
 }
 
 export default deepClone;
