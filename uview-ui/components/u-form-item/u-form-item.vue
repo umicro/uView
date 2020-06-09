@@ -14,7 +14,7 @@
 					<!-- nvue不支持伪元素before -->
 					<text v-if="isRequired" class="u-form-item--left__content--required">*</text>
 					<view class="u-form-item--left__content__icon" v-if="leftIcon">
-						<u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
+						<u-icon :name="leftIcon" :custom-style="leftIconStyle" :custom-prefix="iconCustomPrefix></u-icon>
 					</view>
 					<view class="u-form-item--left__content__label" :style="[labelStyle, {
 						'justify-content': labelAlign == 'left' ? 'flex-star' : labelAlign == 'center' ? 'center' : 'flex-end'
@@ -29,7 +29,7 @@
 						<slot />
 					</view>
 					<view class="u-form-item--right__content__icon u-flex" v-if="$slots.right || rightIcon">
-						<u-icon :custom-style="rightIconStyle" v-if="rightIcon" :name="rightIcon"></u-icon>
+						<u-icon :custom-style="rightIconStyle" v-if="rightIcon" :name="rightIcon" :custom-prefix="iconCustomPrefix></u-icon>
 						<slot name="right" />
 					</view>
 				</view>
@@ -117,6 +117,11 @@ export default {
 			default() {
 				return {}
 			}
+		},
+		// 图标的自定义前缀
+		iconCustomPrefix: {
+			type: String,
+			default: ''
 		}
 	},
 	data() {
