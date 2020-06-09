@@ -10,6 +10,10 @@
 		<view class="u-config-wrap">
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
+				<view class="u-item-title">状态</view>
+				<u-subsection vibrateShort :current="current" :list="['打开', '收起']" @change="statusChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
 				<u-subsection vibrateShort :list="['单列', '多列独立', '多列联动']" @change="modeChange"></u-subsection>
 			</view>
@@ -173,6 +177,9 @@ export default {
 		}
 	},
 	methods: {
+		statusChange(index) {
+			this.show = !index;
+		},
 		modeChange(index) {
 			let type = ['single-column', 'mutil-column', 'mutil-column-auto'];
 			this.mode = type[index];

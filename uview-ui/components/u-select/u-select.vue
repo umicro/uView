@@ -193,7 +193,7 @@ export default {
 		setSelectValue() {
 			for(let i = 0; i < this.columnNum; i++) {
 				this.selectValue.push({
-					valut: this.columnData[i][this.defaultSelector[i]].value,
+					value: this.columnData[i][this.defaultSelector[i]].value,
 					label: this.columnData[i][this.defaultSelector[i]].label,
 				})
 			}

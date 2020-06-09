@@ -230,7 +230,8 @@
 			handleChange(value, type) {
 				if (this.disabled) return;
 				this.$emit(type, {
-					value: value,
+					// 转为Number类型
+					value: Number(value),
 					index: this.index
 				})
 			}

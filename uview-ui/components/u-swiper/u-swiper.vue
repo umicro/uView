@@ -1,7 +1,6 @@
 <template>
 	<view class="u-swiper-wrap" :style="{
-		borderRadius: `${borderRadius}rpx`,
-		backgroundColor: bgColor
+		borderRadius: `${borderRadius}rpx`
 	}">
 		<swiper @change="change" @animationfinish="animationfinish" :interval="interval" :circular="circular" :duration="duration" :autoplay="autoplay"
 		 :previous-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'" :next-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'"
@@ -12,7 +11,8 @@
 				<view class="u-list-image-wrap" :class="[current != index ? 'u-list-scale' : '']" :style="{
 						borderRadius: `${borderRadius}rpx`,
 						transform: effect3d && current != index ? 'scaleY(0.9)' : 'scaleY(1)',
-						margin: effect3d && current != index ? '0 20rpx' : 0
+						margin: effect3d && current != index ? '0 20rpx' : 0,
+						backgroundColor: bgColor
 					}">
 					<image class="u-swiper-image" :src="item[name]" :mode="imgMode"></image>
 					<view v-if="title" class="u-swiper-title u-line-1" :style="{
@@ -156,6 +156,12 @@
 			bgColor: {
 				type: String,
 				default: '#f3f4f6'
+			}
+		},
+		watch: {
+			// 如果外部的list发生变化，判断长度是否被修改，如果前后长度不一致，重置current值，避免溢出
+			list(nVal, oVal) {
+				if(nVal.length !== oVal.length) this.current = 0;
 			}
 		},
 		data() {

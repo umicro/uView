@@ -99,7 +99,6 @@ class Request {
 			// 默认的请求头
 			header: {
 				'content-type': 'application/json;charset=UTF-8',
-				'version': 1
 			},
 			method: 'POST',
 			// 设置为json，返回后uni.request会对数据进行一次JSON.parse

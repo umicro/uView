@@ -126,9 +126,9 @@ export default {
 	mounted() {
 		this.getActionRect();
 		// 等视图更新完后，再显示右边的可滑动按钮，防止这些按钮会"闪一下"
-		this.$nextTick(() => {
+		setTimeout(() => {
 			this.showBtn = true;
-		})
+		}, 10);
 	},
 	methods: {
 		// 点击按钮

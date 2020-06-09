@@ -3,11 +3,14 @@
 		<view class="u-demo-wrap" style="background-color: #FFFFFF;">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-calendar v-model="show" :minDate="minDate" :maxDate="maxDate" :btnType="btnType" :activeBgColor="activeBgColor"
-				 :rangeBgColor="rangeBgColor" :rangeColor="rangeColor" :startText="startText" :endText="endText" :arrowType="arrowType"
-				 :mode="mode" ref="calendar" @change="change">
-					
+				<u-calendar v-model="show" ref="calendar" @change="change" :mode="mode"
+					:start-text="startText" :end-text="endText" :range-color="rangeColor"
+					:range-bg-color="rangeBgColor" :active-bg-color="activeBgColor" :btn-type="btnType"
+				>
 				</u-calendar>
+				<view class="u-demo-result-line">
+					{{result}}
+				</view>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -19,20 +22,12 @@
 				<u-subsection vibrateShort :current="showBtnStatus" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">显示错误信息</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="errorMessageChange"></u-subsection>
+				<view class="u-item-title">模式</view>
+				<u-subsection vibrateShort current="1" :list="['单个日期', '日期范围']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">是否必填</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="requiredChange"></u-subsection>
-			</view>
-			<view class="u-config-item">
-				<view class="u-item-title">显示左图标和右箭头</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="customChange"></u-subsection>
-			</view>
-			<view class="u-config-item">
-				<view class="u-item-title">第一个输入框为textarea类型</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="textareaChange"></u-subsection>
+				<view class="u-item-title">自定义样式</view>
+				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -44,16 +39,13 @@
 			return {
 				show: false,
 				mode: 'range',
-				arrowType: 1,
-				minDate: "1920-01-01",
-				maxDate: "",
-				btnType: "primary",
-				activeBgColor: "#2979ff",
-				rangeBgColor: "rgba(41,121,255,0.13)",
-				rangeColor: "#2979ff",
-				startText: "开始",
-				endText: "结束",
-				result: ""
+				result: "请选择日期",
+				startText: '开始',
+				endText: '结束',
+				rangeColor: '#2979ff',
+				rangeBgColor: 'rgba(41,121,255,0.13)',
+				activeBgColor: '#2979ff',
+				btnType: 'primary',
 			}
 		},
 		computed: {
@@ -65,11 +57,27 @@
 			showChange(index) {
 				this.show = !index;
 			},
-			errorMessageChange(index) {
-				this.errorMessage = index == 0 ? '手机号有误' : false
+			modeChange(index) {
+				this.mode = index == 0 ? 'date' : 'range';
+				this.show = true;
 			},
-			requiredChange(index) {
-				this.required = index == 0 ? true : false;
+			styleChange(index) {
+				if(index == 0) {
+					this.startText = '住店';
+					this.endText = '离店';
+					this.activeBgColor = '#19be6b';
+					this.rangeColor = '#19be6b';
+					this.rangeBgColor = 'rgba(25,190,107, 0.13)';
+					this.btnType = 'success';
+				} else {
+					this.startText = '开始';
+					this.endText = '结束';
+					this.activeBgColor = '#2979ff';
+					this.rangeColor = '#2979ff';
+					this.rangeBgColor = 'rgba(41,121,255,0.13)';
+					this.btnType = 'primary';
+				}
+				this.show = true;
 			},
 			customChange(index) {
 				if(index == 0) {
@@ -86,11 +94,10 @@
 				this.type = index == 0 ? 'textarea' : 'text';
 			},
 			change(e) {
-				console.log(e)
-				if (this.type == 1) {
-					this.result = e.result
+				if (this.mode == 'range') {
+					this.result = e.startDate + " - " + e.endDate;
 				} else {
-					this.result = `${e.startDate} 至 ${e.endDate}`
+					this.result = e.result;
 				}
 			}
 		}

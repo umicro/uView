@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-number-box :value="value" :bg-color="bgColor" :color="color" :min="0"
-				:step="step" :disabled="disabled"></u-number-box>
+				:step="step" :disabled="disabled" @change="change"></u-number-box>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -63,7 +63,8 @@ export default {
 			this.step = index == 0 ? 1 : index == 1 ? 3 : index == 2 ? 5 : 8;
 		},
 		change(e) {
-			this.value = e.value;
+			// console.log(e);
+			// this.value = e.value;
 		}
 	}
 };

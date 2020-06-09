@@ -33,7 +33,7 @@
 				}, inputStyle]"
 			/>
 			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @touchstart="clear">
-				<u-icon class="u-clear-icon" name="close" :size="16" color="#fff" @touchstart="clear"></u-icon>
+				<u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
 			</view>
 		</view>
 		<view :style="[actionStyle]" class="u-action" 
@@ -288,12 +288,11 @@ export default {
 }
 
 .u-close-wrap {
-	width: 34rpx;
-	height: 34rpx;
+	width: 40rpx;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: rgb(200, 203, 204);
 	border-radius: 50%;
 }
 
