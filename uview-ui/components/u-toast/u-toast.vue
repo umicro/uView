@@ -1,6 +1,5 @@
 <template>
 	<view class="u-toast" :class="[isShow ? 'u-show' : '', 'u-type-' + config.type, 'u-position-' + config.position]" :style="{
-		padding: isShow ? '0 40rpx' : 0,
 		zIndex: uZIndex
 	}">
 		<view class="u-icon-wrap">
@@ -54,7 +53,7 @@
 			},
 			uZIndex() {
 				// 显示toast时候，如果用户有传递z-index值，有限使用
-				return this.isShow ? (this.zIndex ? this.zIndex : this.$u.zIndex.toast) : '-1';
+				return this.isShow ? (this.zIndex ? this.zIndex : this.$u.zIndex.toast) : '999999';
 			}
 		},
 		methods: {
@@ -136,11 +135,12 @@
 		justify-content: center;
 		font-size: 28rpx;
 		opacity: 0;
+		pointer-events: none;
+		padding:0 40rpx;
 	}
 
 	.u-toast.u-show {
 		opacity: 1;
-		z-index: 9999999;
 	}
 
 	.u-text {
