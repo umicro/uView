@@ -87,6 +87,11 @@
 			},
 			// 开始倒计时
 			start() {
+				// 防止快速点击获取验证码的按钮而导致内部产生多个定时器导致混乱
+				if(this.timer) {
+					clearInterval(this.timer);
+					this.timer = null;
+				}
 				//this.secNum = this.seconds;
 				this.$emit('start');
 				this.canGetCode = false;
@@ -98,6 +103,7 @@
 						this.changeEvent(this.changeText.replace(/x|X/, this.secNum));
 					} else {
 						clearInterval(this.timer);
+						this.timer = null;
 						this.changeEvent(this.endText);
 						this.secNum = this.seconds;
 						this.$emit('end');

@@ -229,7 +229,7 @@ export default {
 					},
 					{
 						// 正则不能含有两边的引号
-						pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]+\S{6,12}$/,
+						pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]+\S{5,12}$/,
 						message: '需同时含有字母和数字，长度在6-12之间',
 						trigger: ['change','blur'],
 					}
@@ -394,7 +394,8 @@ export default {
 			if(this.$refs.uCode.canGetCode) {
 				// 模拟向后端请求验证码
 				uni.showLoading({
-					title: '正在获取验证码'
+					title: '正在获取验证码',
+					mask: true
 				})
 				setTimeout(() => {
 					uni.hideLoading();

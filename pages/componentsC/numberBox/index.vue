@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-number-box :value="value" :bg-color="bgColor" :color="color" :min="0"
+				<u-number-box v-model="value" :bg-color="bgColor" :color="color" :min="0"
 				:step="step" :disabled="disabled" @change="change"></u-number-box>
 			</view>
 		</view>
@@ -63,8 +63,7 @@ export default {
 			this.step = index == 0 ? 1 : index == 1 ? 3 : index == 2 ? 5 : 8;
 		},
 		change(e) {
-			// console.log(e);
-			// this.value = e.value;
+			// console.log(this.value);
 		}
 	}
 };

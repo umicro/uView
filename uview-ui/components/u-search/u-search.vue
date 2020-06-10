@@ -71,6 +71,7 @@
  * @event {Function} change 输入框内容发生变化时触发
  * @event {Function} search 用户确定搜索时触发，用户按回车键，或者手机键盘右下角的"搜索"键时触发
  * @event {Function} custom 用户点击右侧控件时触发
+ * @event {Function} clear 用户点击清除按钮时触发
  * @example <u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
  */
 export default {
@@ -230,6 +231,7 @@ export default {
 		// 也可以作为用户通过this.$refs形式调用清空输入框内容
 		clear() {
 			this.keyword = '';
+			this.$emit('clear');
 		},
 		// 确定搜索
 		search() {

@@ -120,8 +120,9 @@
 			}
 		},
 		watch: {
-			value(val) {
-				this.inputVal = Number(val);
+			value(val, val1) {
+				// 防止用户在change事件回调中将回调值赋值给valut变量，导致change事件触发两次
+				if(Number(val) != this.inputVal) this.inputVal = Number(val);
 			},
 			inputVal(v1, v2) {
 				// 为了让用户能够删除所有输入值，重新输入内容，删除所有值后，内容为空字符串
@@ -229,6 +230,8 @@
 			},
 			handleChange(value, type) {
 				if (this.disabled) return;
+				// 发出input事件，修改通过v-model绑定的值，达到双向绑定的效果
+				this.$emit('input', Number(value));
 				this.$emit(type, {
 					// 转为Number类型
 					value: Number(value),

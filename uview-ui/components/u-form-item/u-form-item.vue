@@ -210,8 +210,11 @@ export default {
 		validation(trigger, callback = () => {}) {
 			// blur和change是否有当前方式的校验规则
 			let rules = this.getFilteredRule(trigger);
-			// 判断是否有验证规则
-			if (!rules || rules.length === 0) return;
+			// 判断是否有验证规则，如果没有规则，也调用回调方法，否则父组件u-form会因为
+			// 对count变量的统计错误而无法进入上一层的回调
+			if (!rules || rules.length === 0) {
+				return callback('');
+			}
 			// 设置当前的装填，标识为校验中
 			this.validateState = 'validating';
 			// 调用async-validator的方法
