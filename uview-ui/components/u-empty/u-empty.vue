@@ -88,8 +88,11 @@
 		},
 		data() {
 			return {
-				icons: icon
+				icons: {}
 			}
+		},
+		created(){
+			this.icons = icon
 		}
 	}
 </script>
