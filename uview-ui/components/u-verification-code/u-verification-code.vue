@@ -46,6 +46,11 @@
 			keepRunning: {
 				type: Boolean,
 				default: false
+			},
+			// 为了区分多个页面，或者一个页面多个倒计时组件本地存储的继续倒计时变了
+			uniqueKey: {
+				type: String,
+				default: ''
 			}
 		},
 		data() {
@@ -69,15 +74,17 @@
 		methods: {
 			checkKeepRunning() {
 				// 获取上一次退出页面(H5还包括刷新)时的时间戳，如果没有上次的保存，此值可能为空
-				let lastTimestamp = Number(uni.getStorageSync('$uCountDownTimestamp'));
+				let lastTimestamp = Number(uni.getStorageSync(this.uniqueKey + '_$uCountDownTimestamp'));
+				if(!lastTimestamp) return this.changeEvent(this.startText);
 				// 当前秒的时间戳
 				let nowTimestamp = Math.floor((+ new Date()) / 1000);
 				// 判断当前的时间戳，是否小于上一次的本该按设定结束，却提前结束的时间戳
+				console.log(lastTimestamp, nowTimestamp);
 				if(this.keepRunning && lastTimestamp && lastTimestamp > nowTimestamp) {
 					// 剩余尚未执行完的倒计秒数
 					this.secNum = lastTimestamp - nowTimestamp;
 					// 清除本地保存的变量
-					uni.setStorageSync('$uCountDownTimestamp', 0);
+					uni.setStorageSync(this.uniqueKey + '_$uCountDownTimestamp', 0);
 					// 开始倒计时
 					this.start();
 				} else {
@@ -92,11 +99,11 @@
 					clearInterval(this.timer);
 					this.timer = null;
 				}
-				//this.secNum = this.seconds;
 				this.$emit('start');
 				this.canGetCode = false;
 				// 这里放这句，是为了一开始时就提示，否则要等setInterval的1秒后才会有提示
 				this.changeEvent(this.changeText.replace(/x|X/, this.secNum));
+				this.setTimeToStorage();
 				this.timer = setInterval(() => {
 					if (--this.secNum) {
 						// 用当前倒计时的秒数替换提示字符串中的"x"字母
@@ -109,7 +116,6 @@
 						this.$emit('end');
 						this.canGetCode = true;
 					}
-					this.setTimeToStorage();
 				}, 1000);
 			},
 			// 重置，可以让用户再次获取验证码
@@ -124,15 +130,15 @@
 			},
 			// 保存时间戳，为了防止倒计时尚未结束，H5刷新或者各端的右上角返回上一页再进来
 			setTimeToStorage() {
-				if(!this.keepRunning) return ;
+				if(!this.keepRunning || !this.timer) return console.log(111, this.timer);
 				// 记录当前的时间戳，为了下次进入页面，如果还在倒计时内的话，继续倒计时
 				// 倒计时尚未结束，结果大于0；倒计时已经开始，就会小于初始值，如果等于初始值，说明没有开始倒计时，无需处理
-				if(this.secNum > 0 && this.secNum < this.seconds) {
+				if(this.secNum > 0 && this.secNum <= this.seconds) {
 					// 获取当前时间戳(+ new Date()为特殊写法)，除以1000变成秒，再去除小数部分
 					let nowTimestamp = Math.floor((+ new Date()) / 1000);
 					// 将本该结束时候的时间戳保存起来 => 当前时间戳 + 剩余的秒数
 					uni.setStorage({
-						key: '$uCountDownTimestamp',
+						key: this.uniqueKey + '_$uCountDownTimestamp',
 						data: nowTimestamp + this.secNum
 					})
 				}
@@ -140,9 +146,9 @@
 		},
 		// 组件销毁的时候，清除定时器，否则定时器会继续存在，系统不会自动清除
 		beforeDestroy() {
+			this.setTimeToStorage();
 			clearTimeout(this.timer);
 			this.timer = null;
-			this.setTimeToStorage();
 		}
 	}
 </script>

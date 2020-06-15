@@ -59,7 +59,7 @@
 				list: [
 					{
 						name: '荔枝',
-						checked: false,
+						checked: true,
 						disabled: false
 					},
 					{
@@ -81,7 +81,7 @@
 				disabled: false,
 				result: '',
 				shape: 'square',
-				value: '',
+				value: '荔枝',
 				activeColor: '#2979ff',
 				size: 34,
 				wrap: false,

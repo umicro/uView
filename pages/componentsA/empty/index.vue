@@ -3,9 +3,6 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<view class="u-no-demo-here">
-					滚动页面，在由下角即可看到返回顶部按钮
-				</view>
 				<u-empty :mode="mode">
 					<u-button v-if="slot" slot="bottom" size="medium">
 						slot按钮

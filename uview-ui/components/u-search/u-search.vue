@@ -11,7 +11,9 @@
 				height: height + 'rpx'
 			}"
 		>
-			<view class="u-icon-wrap"><u-icon class="u-clear-icon" :size="30" name="search" :color="searchIconColor ? searchIconColor : color"></u-icon></view>
+			<view class="u-icon-wrap">
+				<u-icon class="u-clear-icon" :size="30" :name="searchIcon" :color="searchIconColor ? searchIconColor : color"></u-icon>
+			</view>
 			<input
 				confirm-type="search"
 				@blur="blur"
@@ -29,7 +31,8 @@
 				type="text"
 				:style="[{
 					textAlign: inputAlign,
-					color: color
+					color: color,
+					backgroundColor: bgColor,
 				}, inputStyle]"
 			/>
 			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @touchstart="clear">
@@ -58,10 +61,12 @@
  * @property {String} action-text 右侧控件文字（默认“搜索”）
  * @property {Object} action-style 右侧控件的样式，对象形式
  * @property {String} input-align 输入框内容水平对齐方式（默认left）
+ * @property {Object} input-style 自定义输入框样式，对象形式
  * @property {Boolean} disabled 是否启用输入框（默认false）
  * @property {String} search-icon-color 搜索图标的颜色，默认同输入框字体颜色
  * @property {String} color 输入框字体颜色（默认#606266）
  * @property {String} placeholder-color placeholder的颜色（默认#909399）
+ * @property {String} search-icon 输入框左边的图标，可以为uView图标名称或图片路径
  * @property {String} margin 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"
  * @property {Boolean} animation 是否开启动画，见上方说明（默认false）
  * @property {String} value 输入框初始值
@@ -180,6 +185,11 @@ export default {
 		margin: {
 			type: String,
 			default: '0'
+		},
+		// 左边输入框的图标，可以为uView图标名称或图片路径
+		searchIcon: {
+			type: String,
+			default: 'search'
 		}
 	},
 	data() {
@@ -231,11 +241,14 @@ export default {
 		// 也可以作为用户通过this.$refs形式调用清空输入框内容
 		clear() {
 			this.keyword = '';
-			this.$emit('clear');
+			// 延后发出事件，避免在父组件监听clear事件时，value为更新前的值(不为空)
+			this.$nextTick(() => {
+				this.$emit('clear');
+			})
 		},
 		// 确定搜索
-		search() {
-			this.$emit('search', this.keyword);
+		search(e) {
+			this.$emit('search', e.detail.value);
 			// 收起键盘
 			uni.hideKeyboard();
 		},

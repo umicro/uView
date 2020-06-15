@@ -83,9 +83,7 @@
 				// console.log('open');
 			},
 			btnClick() {
-				console.log(this.show);
 				this.show = true;
-				console.log(this.show);
 			}
 		}
 	}

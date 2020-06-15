@@ -21,7 +21,7 @@
 				width: width + 'rpx',
 				height: width + 'rpx'
 			}">
-				<u-icon name="plus" class="u-add-btn" size="40" @click="selectFile"></u-icon>
+				<u-icon name="plus" class="u-add-btn" size="40"></u-icon>
 				<view class="u-add-tips">{{uploadText}}</view>
 			</view>
 		</view>
@@ -462,6 +462,7 @@
 		display: block;
 		width: 100%;
 		height: 100%;
+		border-radius: 10rpx;
 	}
 
 	.u-delete-icon {

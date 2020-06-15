@@ -142,16 +142,16 @@ export default {
 		// 初始化
 		this.cropper = new WeCropper(this.cropperOpt)
 			.on('ready', ctx => {
-				// console.log(`wecropper is ready for work!`)
+				// wecropper is ready for work!
 			})
 			.on('beforeImageLoad', ctx => {
-				// console.log(`before picture loaded, i can do something`)
+				// before picture loaded, i can do something
 			})
 			.on('imageLoad', ctx => {
-				// console.log(`picture loaded`)
+				// picture loaded
 			})
 			.on('beforeDraw', (ctx, instance) => {
-				// console.log(`before canvas draw,i can do something`)
+				// before canvas draw,i can do something
 			});
 		// 设置导航栏样式，以免用户在page.json中没有设置为黑色背景
 		uni.setNavigationBarColor({

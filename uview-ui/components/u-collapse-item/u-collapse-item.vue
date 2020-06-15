@@ -1,14 +1,18 @@
 <template>
 	<view class="u-collapse-item" :style="[itemStyle]">
 		<view :hover-stay-time="200" class="u-collapse-head" @tap.stop="headClick" :hover-class="hoverClass" :style="[headStyle]">
-			<view class="u-collapse-title u-line-1" :style="[{ textAlign: align ? align : 'left' }, 
-				isShow && activeStyle && !arrow ? activeStyle : '']">
-				{{ title }}
-			</view>
-			<view class="u-icon-wrap">
-				<u-icon v-if="arrow" :color="arrowColor ? arrowColor : $u.color.tipsColor" :class="{ 'u-arrow-down-icon-active': isShow }"
-				 class="u-arrow-down-icon" name="arrow-down"></u-icon>
-			</view>
+			<block v-if="!$slots['title-all']">
+				<view v-if="!$slots['title']" class="u-collapse-title u-line-1" :style="[{ textAlign: align ? align : 'left' },
+					isShow && activeStyle && !arrow ? activeStyle : '']">
+					{{ title }}
+				</view>
+				<slot v-else name="title" />
+				<view class="u-icon-wrap">
+					<u-icon v-if="arrow" :color="arrowColor ? arrowColor : $u.color.tipsColor" :class="{ 'u-arrow-down-icon-active': isShow }"
+					 class="u-arrow-down-icon" name="arrow-down"></u-icon>
+				</view>
+			</block>
+			<slot v-else name="title-all" />
 		</view>
 		<view class="u-collapse-body" :style="[{
 				height: isShow ? height + 'px' : '0'
@@ -108,6 +112,7 @@
 			}
 		},
 		created() {
+			// 获取u-collapse的信息，放在u-collapse是为了方便，不用每个u-collapse-item写一遍
 			this.isShow = this.open;
 			this.nameSync = this.name ? this.name : this.uCollapse.childrens.length;
 			this.uCollapse.childrens.push(this);
@@ -169,12 +174,12 @@
 	.u-collapse-title {
 		flex: 1;
 		overflow: hidden;
-		margin-right: 14rpx;
 	}
 
 	.u-arrow-down-icon {
 		transition: all 0.3s;
-		margin-right: 24rpx;
+		margin-right: 20rpx;
+		margin-left: 14rpx;
 	}
 
 	.u-arrow-down-icon-active {

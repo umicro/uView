@@ -25,7 +25,7 @@ export default {
 		errorType: {
 			type: Array,
 			default() {
-				return ['message']
+				return ['message', 'toast']
 			}
 		}
 	},
@@ -75,14 +75,22 @@ export default {
 				// 对所有的u-form-item进行校验
 				let valid = true; // 默认通过
 				let count = 0; // 用于标记是否检查完毕
+				let errorArr = []; // 存放错误信息
 				this.fields.map(field => {
 					// 调用每一个u-form-item实例的validation的校验方法
 					field.validation('', error => {
 						// 如果任意一个u-form-item校验不通过，就意味着整个表单不通过
-						if (error) valid = false;
+						if (error) {
+							valid = false;
+							errorArr.push(error);
+						}
 						// 当历遍了所有的u-form-item时，调用promise的then方法
 						if (++count === this.fields.length) {
 							resolve(valid); // 进入promise的then方法
+							// 判断是否设置了toast的提示方式，只提示最前面的表单域的第一个错误信息
+							if(this.errorType.indexOf('none') === -1 && this.errorType.indexOf('toast') >= 0) {
+								this.$u.toast(errorArr[0]);
+							}
 							// 调用回调方法
 							if (typeof callback == 'function') callback(valid);
 						}

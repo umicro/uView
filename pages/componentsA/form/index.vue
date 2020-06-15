@@ -76,7 +76,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">错误提示方式</view>
-				<u-subsection vibrateShort :list="['文字', '下划线', '输入框', '下划线+文字']" @change="errorChange"></u-subsection>
+				<u-subsection vibrateShort :list="['message', 'toast', '下划线', '输入框']" @change="errorChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -131,6 +131,7 @@ export default {
 						trigger: ['change','blur'],
 					},
 					{
+						// 此为同步验证，可以直接返回true或者false，如果是异步验证，稍微不同，见下方说明
 						validator: (rule, value, callback) => {
 							// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
 							return this.$u.test.chinese(value);
@@ -138,7 +139,24 @@ export default {
 						message: '姓名必须为中文',
 						// 触发器可以同时用blur和change，二者之间用英文逗号隔开
 						trigger: ['change','blur'],
-					}
+					},
+					// 异步验证，用途：比如用户注册时输入完账号，后端检查账号是否已存在
+					// {
+					// 	trigger: ['blur'],
+					// 	// 异步验证需要通过调用callback()，并且在里面抛出new Error()
+					// 	// 抛出的内容为需要提示的信息，和其他方式的message属性的提示一样
+					// 	asyncValidator: (rule, value, callback) => {
+					// 		this.$u.post('/ebapi/public_api/index').then(res => {
+					// 			// 如果验证出错，需要在callback()抛出new Error('错误提示信息')
+					// 			if(res.error) {
+					// 				callback(new Error('姓名重复'));
+					// 			} else {
+					// 				// 如果没有错误，也要执行callback()回调
+					// 				callback();
+					// 			}
+					// 		})
+					// 	},
+					// }
 				],
 				sex: [
 					{
@@ -410,12 +428,9 @@ export default {
 		},
 		errorChange(index) {
 			if(index == 0) this.errorType = ['message'];
-			if(index == 1) this.errorType = ['border-bottom'];
-			if(index == 2) {
-				this.errorType = ['border'];
-				this.border = true;
-			}
-			if(index == 3) this.errorType = ['message', 'border-bottom'];
+			if(index == 1) this.errorType = ['toast'];
+			if(index == 2) this.errorType = ['border-bottom'];
+			if(index == 3) this.errorType = ['border'];
 		}
 	}
 };

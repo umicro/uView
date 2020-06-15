@@ -4,15 +4,15 @@
 			flexDirection: labelPosition == 'left' ? 'row' : 'column'
 		}">
 			<view class="u-form-item--left" :style="{
-				width: labelPosition == 'left' ? labelWidth + 'rpx' : '100%',
-				flex: `0 0 ${labelPosition == 'left' ? labelWidth + 'rpx' : '100%'}`,
+				width: labelPosition == 'left' ? getLabelWidth : '100%',
+				flex: `0 0 ${labelPosition == 'left' ? getLabelWidth : '100%'}`,
 				marginBottom: labelPosition == 'left' ? 0 : '10rpx',
 				
 			}">
 				<!-- 为了块对齐 -->
 				<view class="u-form-item--left__content">
 					<!-- nvue不支持伪元素before -->
-					<text v-if="isRequired" class="u-form-item--left__content--required">*</text>
+					<text v-if="required" class="u-form-item--left__content--required">*</text>
 					<view class="u-form-item--left__content__icon" v-if="leftIcon">
 						<u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
 					</view>
@@ -36,7 +36,7 @@
 			</view>
 		</view>
 		<view class="u-form-item__message" v-if="validateState === 'error' && showError('message')" :style="{
-			paddingLeft: labelPosition == 'left' ? `${labelWidth}rpx` : '0',
+			paddingLeft: labelPosition == 'left' ? getLabelWidth : '0',
 		}">{{validateMessage}}</view>
 	</view>
 </template>
@@ -117,12 +117,17 @@ export default {
 			default() {
 				return {}
 			}
+		},
+		// 是否显示左边的必填星号，只作显示用，具体校验必填的逻辑，请在rules中配置
+		required: {
+			type: Boolean,
+			default: false
 		}
 	},
 	data() {
 		return {
 			initialValue: '', // 存储的默认值
-			isRequired: false, // 是否必填
+			// isRequired: false, // 是否必填，由于人性化考虑，必填"*"号通过props的required配置，不再通过rules的规则自动生成
 			validateState: '', // 是否校验成功
 			validateMessage: '' ,// 校验失败的提示语
 			// 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，
@@ -146,11 +151,15 @@ export default {
 		},
 		showError() {
 			return type => {
-				// 如果errorType数组中含有none，就不提示错误信息
+				// 如果errorType数组中含有none，或者toast提示类型
 				if(this.errorType.indexOf('none') >= 0) return false;
 				else if(this.errorType.indexOf(type) >= 0) return true;
 				else return false;
 			}
+		},
+		// 获取labelWidth的值
+		getLabelWidth() {
+			return this.labelWidth == 'auto' ? 'auto' : this.labelWidth + 'rpx';
 		}
 	},
 	methods: {
@@ -161,14 +170,15 @@ export default {
 		// 判断是否需要required校验
 		setRules() {
 			let that = this;
+			// 由于人性化考虑，必填"*"号通过props的required配置，不再通过rules的规则自动生成
 			// 从父组件u-form拿到当前u-form-item需要验证 的规则
-			let rules = this.getRules();
-			if (rules.length) {
-				this.isRequired = rules.some(rule => {
-					// 如果有必填项，就返回，没有的话，就是undefined
-					return rule.required;
-				});
-			}
+			// let rules = this.getRules();
+			// if (rules.length) {
+			// 	this.isRequired = rules.some(rule => {
+			// 		// 如果有必填项，就返回，没有的话，就是undefined
+			// 		return rule.required;
+			// 	});
+			// }
 
 			// blur事件
 			this.$on('on-form-blur', that.onFieldBlur);
@@ -201,9 +211,9 @@ export default {
 			// 整体验证表单时，triggerType为空字符串，此时返回所有规则进行验证
 			if(!triggerType) return rules;
 			// 历遍判断规则是否有对应的事件，比如blur，change触发等的事件
-			// return rules.filter(res => res.trigger == triggerType);
-			// 使用indexOf判断，是因为某些时候设置的验证规则的trigger属性可能为多个，比如"blur,change"
-			return rules.filter(res => !res.trigger || res.trigger.indexOf(triggerType) !== -1);
+			// 使用indexOf判断，是因为某些时候设置的验证规则的trigger属性可能为多个，比如['blur','change']
+			// 某些场景可能的判断规则，可能不存在trigger属性，故先判断是否存在此属性
+			return rules.filter(res => res.trigger && res.trigger.indexOf(triggerType) !== -1);
 		},
 
 		// 校验数据
@@ -245,14 +255,17 @@ export default {
 		this.errorType = this.uForm.errorType;
 		// 设置初始值
 		this.initialValue = this.fieldValue;
-		// 添加表单校验
-		this.setRules();
+		// 添加表单校验，这里必须要写在$nextTick中，因为u-form的rules是通过ref手动传入的
+		// 不在$nextTick中的话，可能会造成执行此处代码时，父组件还没通过ref把规则给u-form，导致规则为空
+		this.$nextTick(() =>{
+			this.setRules();
+		})
 	},
 
 	// 组件销毁前，将实例从 Form 的缓存中移除
 	beforeDestroy() {
 		this.dispatch('u-form', 'on-form-item-remove', this);
-	}
+	},
 };
 </script>
 

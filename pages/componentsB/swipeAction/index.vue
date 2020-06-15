@@ -89,7 +89,7 @@ export default {
 	onLoad() {
 		setTimeout(() => {
 			this.list = this.list1;
-		}, 2000)
+		}, 0)
 	},
 	methods: {
 		disabledChange(index) {

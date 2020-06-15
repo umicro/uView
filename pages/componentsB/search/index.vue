@@ -5,7 +5,7 @@
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
 				<u-search v-model="value" @change="change" @custom="custom" @search="search" :shape="shape" :clearabled="clearabled" 
-				:show-action="showAction" :input-align="inputAlign"></u-search>
+				:show-action="showAction" :input-align="inputAlign" @clear="clear"></u-search>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -83,6 +83,9 @@
 					title: '搜索内容为：' + value,
 					type: 'success'
 				})
+			},
+			clear() {
+				// console.log(this.value);
 			}
 		}
 	}

@@ -2,13 +2,14 @@
 	<view
 		class="u-card"
 		@tap.stop="click"
-		:class="{ 'u-border': border, 'u-card-full': full }"
+		:class="{ 'u-border': border, 'u-card-full': full, 'u-card--border': borderRadius > 0 }"
 		:style="{
-			borderRadius: full ? 0 : borderRadius + 'rpx',
+			borderRadius: borderRadius + 'rpx',
 			margin: margin
 		}"
 	>
 		<view
+			v-if="showHead"
 			class="u-card__head"
 			:style="[headStyle, {padding: padding + 'rpx'}]"
 			:class="{
@@ -55,6 +56,7 @@
 		</view>
 		<view @tap="bodyClick" class="u-card__body" :style="[bodyStyle, {padding: padding + 'rpx'}]"><slot name="body" /></view>
 		<view
+			v-if="showFoot"
 			class="u-card__foot"
 			 @tap="footClick"
 			:style="[footStyle, {padding: $slots.foot ? padding + 'rpx' : 0}]"
@@ -88,6 +90,8 @@
  * @property {Object} foot-style 底部自定义样式，对象形式
  * @property {Boolean} head-border-bottom 是否显示头部的下边框（默认true）
  * @property {Boolean} foot-border-top 是否显示底部的上边框（默认true）
+ * @property {Boolean} show-head 是否显示头部（默认true）
+ * @property {Boolean} show-head 是否显示尾部（默认true）
  * @property {String} thumb 缩略图路径，如设置将显示在标题的左边，不建议使用相对路径
  * @property {String | Number} thumb-width 缩略图的宽度，高等于宽，单位rpx（默认60）
  * @property {Boolean} thumb-circle 缩略图是否为圆形（默认false）
@@ -205,6 +209,16 @@ export default {
 		padding: {
 			type: [String, Number],
 			default: '30'
+		},
+		// 是否显示头部
+		showHead: {
+			type: Boolean,
+			default: true
+		},
+		// 是否显示尾部
+		showFoot: {
+			type: Boolean,
+			default: true
 		}
 	},
 	data() {
@@ -241,8 +255,8 @@ export default {
 		margin-right: 0 !important;
 	}
 	
-	&:after {
-		border-radius: 20rpx;
+	&--border:after {
+		border-radius: 16rpx;
 	}
 
 	&__head {

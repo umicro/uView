@@ -19,6 +19,15 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 - 按需引入，精简打包体积
 
 
+## 友情链接
+
+<br>
+
+#### **vue-admin-beautiful** —— [企业级、通用型中后台前端解决方案（基于vue/cli 4 最新版，同时支持电脑，手机，平板）](https://github.com/chuzhixin/vue-admin-beautiful)
+
+#### **vue-admin-beautiful** —— [在线演示](http://beautiful.panm.cn/vue-admin-beautiful/#/index)
+<br>
+
 ## 安装
 
 ```bash

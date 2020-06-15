@@ -479,7 +479,7 @@
 			padding: 40rpx 0 40rpx 0;
 			
 			&__icon {
-				margin: 0 10rpx;
+				margin: 0 16rpx;
 			}
 			
 			&__text {

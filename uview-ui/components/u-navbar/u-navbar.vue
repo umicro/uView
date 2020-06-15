@@ -1,36 +1,29 @@
 <template>
 	<view class="">
-		<view class="u-navbar" :style="[navbarStyle]" :class="{'u-navbar-fixed': isFixed, 'u-border-bottom': borderBottom}">
+		<view class="u-navbar" :style="[navbarStyle]" :class="{ 'u-navbar-fixed': isFixed, 'u-border-bottom': borderBottom }">
 			<view class="u-status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
 			<view class="u-navbar-inner" :style="[navbarInnerStyle]">
-				<view class="u-back-wrap" v-if="isBack" @tap="goBack"> 
-					<view class="u-icon-wrap">
-						<u-icon :name="backIconName" :color="backIconColor" :size="backIconSize"></u-icon>
-					</view>
-					<view class="u-icon-wrap u-back-text u-line-1" v-if="backText" :style="[backTextStyle]">
-						{{backText}}
-					</view>
+				<view class="u-back-wrap" v-if="isBack" @tap="goBack">
+					<view class="u-icon-wrap"><u-icon :name="backIconName" :color="backIconColor" :size="backIconSize"></u-icon></view>
+					<view class="u-icon-wrap u-back-text u-line-1" v-if="backText" :style="[backTextStyle]">{{ backText }}</view>
 				</view>
 				<view class="u-navbar-content-title" v-if="title" :style="[titleStyle]">
-					<view class="u-title u-line-1" :style="{
-						color: titleColor,
-						fontSize: titleSize + 'rpx'
-					}">
-						{{title}}
+					<view
+						class="u-title u-line-1"
+						:style="{
+							color: titleColor,
+							fontSize: titleSize + 'rpx'
+						}"
+					>
+						{{ title }}
 					</view>
 				</view>
-				<view class="u-slot-content">
-					<slot></slot>
-				</view>
-				<view class="u-slot-right">
-					<slot name="right"></slot>
-				</view>
+				<view class="u-slot-content"><slot></slot></view>
+				<view class="u-slot-right"><slot name="right"></slot></view>
 			</view>
 		</view>
 		<!-- 解决fixed定位后导航栏塌陷的问题 -->
-		<view class="u-navbar-placeholder" v-if="isFixed" :style="{width: '100%',height: Number(navbarHeight) + statusBarHeight + 'px'}">
-			
-		</view>
+		<view class="u-navbar-placeholder" v-if="isFixed" :style="{ width: '100%', height: Number(navbarHeight) + statusBarHeight + 'px' }"></view>
 	</view>
 </template>
 
@@ -39,7 +32,7 @@
 let systemInfo = uni.getSystemInfoSync();
 let menuButtonInfo = {};
 // 如果是小程序，获取右上角胶囊的尺寸信息，避免导航栏右侧内容与胶囊重叠(支付宝小程序非本API，尚未兼容)
-// #ifdef MP
+// #ifdef MP-WEIXIN || MP-BAIDU || MP-TOUTIAO || MP-QQ
 menuButtonInfo = uni.getMenuButtonBoundingClientRect();
 // #endif
 /**
@@ -56,12 +49,13 @@ menuButtonInfo = uni.getMenuButtonBoundingClientRect();
  * @property {String Number} title-width 导航栏标题的最大宽度，内容超出会以省略号隐藏，单位rpx（默认250）
  * @property {String} title-color 标题的颜色（默认#606266）
  * @property {String Number} title-size 导航栏标题字体大小，单位rpx（默认32）
+ * @property {Function} custom-back 自定义返回逻辑方法
  * @property {String Number} z-index 固定在顶部时的z-index值（默认980）
  * @property {Boolean} is-back 是否显示导航栏左边返回图标和辅助文字（默认true）
  * @property {Object} background 导航栏背景设置，见官网说明（默认{ background: '#ffffff' }）
  * @property {Boolean} is-fixed 导航栏是否固定在顶部（默认true）
  * @property {Boolean} border-bottom 导航栏底部是否显示下边框，如定义了较深的背景颜色，可取消此值（默认true）
- * @example <u-navbar back-text="返回" title="剑未配妥，出门已是江湖"></u-navbar> 
+ * @example <u-navbar back-text="返回" title="剑未配妥，出门已是江湖"></u-navbar>
  */
 export default {
 	name: "u-navbar",
@@ -146,6 +140,11 @@ export default {
 		zIndex: {
 			type: [String, Number],
 			default: ''
+		},
+		// 自定义返回逻辑
+		customBack: {
+			type: Function,
+			default: null
 		}
 	},
 	data() {
@@ -208,82 +207,87 @@ export default {
 	created() {},
 	methods: {
 		goBack() {
-			uni.navigateBack();
+			// 如果自定义了点击返回按钮的函数，则执行，否则执行返回逻辑
+			if(typeof this.customBack === 'function') {
+				this.customBack();
+			} {
+				uni.navigateBack();
+			}
 		}
 	}
 };
 </script>
 
 <style scoped lang="scss">
-	.u-navbar {
-		width: 100%;
-	}
-	
-	.u-navbar-fixed {
-		position: fixed;
-		left: 0;
-		right: 0;
-		top: 0;
-		z-index: 991;
-	}
-	
-	.u-status-bar {
-		width: 100%;
-	}
-	
-	.u-navbar-inner {
-		display: flex;
-		justify-content: space-between;
-		position: relative;
-		align-items: center;
-	}
-	
-	.u-back-wrap {
-		display: flex;
-		align-items: center;
-		flex: 1;
-		flex-grow: 0;
-		padding: 14rpx 14rpx 14rpx 24rpx;
-	}
-	
-	.u-back-text {
-		padding-left: 4rpx; 
-		font-size: 30rpx;
-	}
-	
-	.u-navbar-content-title {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex: 1;
-		position: absolute;
-		left: 0;
-		right: 0;
-		height: 60rpx;
-		text-align: center;
-		flex-shrink: 0;
-	}
-	
-	.u-navbar-centent-slot {
-		flex: 1;
-	}
-	
-	.u-title {
-		line-height: 1;
-		font-size: 32rpx;
-		flex: 1;
-	}
-	
-	.u-navbar-right {
-		flex: 1;
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-	}
-	
-	.u-slot-content {
-		flex: 1;
-		display: flex;
-		align-items: center;
-	}
+.u-navbar {
+	width: 100%;
+}
+
+.u-navbar-fixed {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 991;
+}
+
+.u-status-bar {
+	width: 100%;
+}
+
+.u-navbar-inner {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	align-items: center;
+}
+
+.u-back-wrap {
+	display: flex;
+	align-items: center;
+	flex: 1;
+	flex-grow: 0;
+	padding: 14rpx 14rpx 14rpx 24rpx;
+}
+
+.u-back-text {
+	padding-left: 4rpx;
+	font-size: 30rpx;
+}
+
+.u-navbar-content-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 60rpx;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.u-navbar-centent-slot {
+	flex: 1;
+}
+
+.u-title {
+	line-height: 1;
+	font-size: 32rpx;
+	flex: 1;
+}
+
+.u-navbar-right {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.u-slot-content {
+	flex: 1;
+	display: flex;
+	align-items: center;
+}
 </style>

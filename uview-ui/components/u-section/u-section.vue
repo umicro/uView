@@ -76,7 +76,7 @@
 			// 是否显示左边的竖条
 			showLine: {
 				type: Boolean,
-				default: false
+				default: true
 			}
 		},
 		data() {

@@ -27,15 +27,15 @@
 				<slot />
 			</view>
 			<block v-else><slot /></block>
-			<u-icon
-				v-if="mode != 'center' && closeable"
-				@click="close"
-				class="u-close"
-				:class="['u-close--' + closeIconPos]"
-				:name="closeIcon"
-				:color="closeIconColor"
-				:size="closeIconSize"
-			></u-icon>
+			<view class="u-close" :class="['u-close--' + closeIconPos]">
+				<u-icon
+					v-if="mode != 'center' && closeable"
+					@click="close"
+					:name="closeIcon"
+					:color="closeIconColor"
+					:size="closeIconSize"
+				></u-icon>
+			</view>
 		</view>
 	</view>
 </template>
@@ -176,18 +176,17 @@ export default {
 			// 判断是否是否百分比或者auto值，是的话，直接使用该值，否则默认为rpx单位的数值
 			let length = /%$/.test(this.length) || this.length == 'auto' ? this.length : uni.upx2px(this.length) + 'px';
 			// 如果是左边或者上边弹出时，需要给translate设置为负值，用于隐藏
-			if (this.mode == 'left' || this.mode == 'top') translate = length == 'auto' ? '-100%' : '-' + length;
 			if (this.mode == 'left' || this.mode == 'right') {
 				style = {
 					width: length,
 					height: '100%',
-					transform: `translate3D(${translate},0px,0px)`
+					transform: `translate3D(${this.mode == 'left' ? '-100%' : '100%'},0px,0px)`
 				};
 			} else if (this.mode == 'top' || this.mode == 'bottom') {
 				style = {
 					width: '100%',
 					height: length,
-					transform: `translate3D(0px,${translate},0px)`
+					transform: `translate3D(0px,${this.mode == 'top' ? '-100%' : '100%'},0px)`
 				};
 			}
 			style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.popup;
@@ -236,13 +235,6 @@ export default {
 			}
 		}
 	},
-	created() {
-		// 先让弹窗组件渲染，再改变遮罩和抽屉元素的样式，让其动画其起作用(必须要有延时，才会有效果)
-		this.visibleSync = this.value;
-		setTimeout(() => {
-			this.showDrawer = this.value;
-		}, 30);
-	},
 	methods: {
 		// 遮罩被点击
 		maskClick() {
@@ -266,15 +258,25 @@ export default {
 			// 如果this.popup为false，意味着为picker，actionsheet等组件调用了popup组件
 			if (this.popup == true) this.$emit('input', status);
 			this[param1] = status;
-			if (this.timer) {
-				clearTimeout(this.timer);
-			}
-			this.timer = setTimeout(() => {
+			if(status) {
+				// #ifdef H5 || MP
+				this.timer = setTimeout(() => {
 					this[param2] = status;
 					this.$emit(status ? 'open' : 'close');
-				},
-				status ? 30 : 300
-			);
+				}, 50);
+				// #endif
+				// #ifndef H5 || MP
+				this.$nextTick(() => {
+					this[param2] = status;
+					this.$emit(status ? 'open' : 'close');
+				})
+				// #endif
+			} else {
+				this.timer = setTimeout(() => {
+					this[param2] = status;
+					this.$emit(status ? 'open' : 'close');
+				}, 300);
+			}
 		}
 	}
 };

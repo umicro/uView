@@ -35,7 +35,7 @@
 						:maxlength="6"
 						:dot-fill="true"
 						v-model="password"
-						:disabled-keyboard="false"
+						:disabled-keyboard="true"
 					></u-message-input>
 				</view>
 				<view class="u-text-center u-padding-top-10 u-padding-bottom-20 tips">支付键盘</view>

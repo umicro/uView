@@ -140,7 +140,7 @@
 		},
 		data() {
 			return {
-				inputVal: 0 // 输入框中的值，不能直接使用props中的value，因为应该改变props的状态
+				inputVal: 1 // 输入框中的值，不能直接使用props中的value，因为应该改变props的状态
 			};
 		},
 		created() {
