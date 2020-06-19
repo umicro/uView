@@ -59,6 +59,7 @@
 <style lang="scss">
 page{
 	background-color: #ededed;
+	min-height: 100vh;
 }
 
 .camera{

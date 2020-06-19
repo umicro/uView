@@ -26,6 +26,8 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 #### **vue-admin-beautiful** —— [企业级、通用型中后台前端解决方案（基于vue/cli 4 最新版，同时支持电脑，手机，平板）](https://github.com/chuzhixin/vue-admin-beautiful)
 
 #### **vue-admin-beautiful** —— [在线演示](http://beautiful.panm.cn/vue-admin-beautiful/#/index)
+
+#### **pl-table** —— [ 完美解决 element 万级表格数据渲染卡顿问题](https://github.com/livelyPeng/pl-table)
 <br>
 
 ## 安装

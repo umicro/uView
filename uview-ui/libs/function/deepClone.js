@@ -1,29 +1,21 @@
-// 对象深度克隆
-function deepClone(object = {}) {
-	var o, i, j, k;
-	if (typeof(object) !== "object" || object === null) return object;
-	if (object instanceof Array) {
-		o = [];
-		i = 0;
-		j = object.length;
-		for (; i < j; i++) {
-			if (typeof(object[i]) === "object" && object[i] != null) {
-				o[i] = deepClone(object[i]);
-			} else {
-				o[i] = object[i];
-			}
-		}
-	} else {
-		o = {};
-		for (i in object) {
-			if (typeof(object[i]) === "object" && object[i] !== null) {
-				o[i] = deepClone(object[i]);
-			} else {
-				o[i] = object[i];
-			}
-		}
-	}
-	return o;
+// 判断arr是否为一个数组，返回一个bool值
+function isArray (arr) {
+    return Object.prototype.toString.call(arr) === '[object Array]';  
+}
+
+// 深度克隆
+function deepClone (obj) {  
+    if(typeof obj !== "object" && typeof obj !== 'function') {
+		//原始类型直接返回
+        return obj;        
+    }
+    var o = isArray(obj) ? [] : {}; 
+    for(let i in obj) {  
+        if(obj.hasOwnProperty(i)){ 
+            o[i] = typeof obj[i] === "object" ? deepClone(obj[i]) : obj[i]; 
+        } 
+    } 
+    return o;
 }
 
 export default deepClone;

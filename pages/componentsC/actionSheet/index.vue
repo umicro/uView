@@ -14,10 +14,6 @@
 				参数配置
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">顶部提示文字</view>
-				<u-subsection vibrateShort :current="show ? 0 : 1" :list="['是', '否']" @change="tipsChange"></u-subsection>
-			</view>
-			<view class="u-config-item">
 				<view class="u-item-title">取消按钮</view>
 				<u-subsection vibrateShort :list="['是', '否']" @change="cancelChange"></u-subsection>
 			</view>

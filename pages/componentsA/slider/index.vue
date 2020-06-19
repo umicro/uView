@@ -11,11 +11,13 @@
 					@end="end"
 					@moving="moving"
 				>
-					<view class="">
-						<view class="badge-button" v-if="useSlot">
+					<!-- #ifndef MP-WEIXIN -->
+					<view class="" v-if="useSlot">
+						<view class="badge-button">
 							{{value}}
 						</view>
 					</view>
+					<!-- #endif -->
 				</u-slider>
 				<view class="u-demo-result-line">
 					滑块值：{{value}}
@@ -28,10 +30,12 @@
 				<view class="u-item-title">自定义颜色</view>
 				<u-subsection vibrateShort :list="['primary', 'warning', 'error', 'success']" @change="typeChange"></u-subsection>
 			</view>
+			<!-- #ifndef MP-WEIXIN -->
 			<view class="u-config-item">
 				<view class="u-item-title">自定义传入内容</view>
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="slotChange"></u-subsection>
 			</view>
+			<!-- #endif -->
 			<view class="u-config-item">
 				<view class="u-item-title">自定义尺寸</view>
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="sizeChange"></u-subsection>

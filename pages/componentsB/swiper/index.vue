@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-swiper :height="250" :list="list" :title="title" :effect3d="effect3d" 
+				<u-swiper @change="change" :height="250" :list="list" :title="title" :effect3d="effect3d" 
 				:indicator-pos="indicatorPos" :mode="mode" :interval="3000" @click="click"></u-swiper>
 			</view>
 		</view>
@@ -74,6 +74,9 @@
 					title: `点击了第${index + 1}张图片`,
 					type: 'success'
 				})
+			},
+			change(index) {
+				// console.log(index);
 			}
 		}
 	}

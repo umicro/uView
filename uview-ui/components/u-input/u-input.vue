@@ -35,7 +35,7 @@
 			:type="type == 'password' ? 'text' : type"
 			:style="[getStyle]"
 			:value="defaultValue"
-			:password="type == 'password' && showPassword"
+			:password="type == 'password' && !showPassword"
 			:placeholder="placeholder"
 			:placeholderStyle="placeholderStyle"
 			:disabled="disabled || type === 'select'"
@@ -52,7 +52,7 @@
 				<u-icon size="32" name="close-circle-fill" color="#c0c4cc" @touchstart="onClear"/>
 			</view>
 			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="passwordIcon && type == 'password'">
-				<u-icon size="32" :name="showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword"/>
+				<u-icon size="32" :name="!showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword"/>
 			</view>
 			<view class="u-input__right-icon--select u-input__right-icon__item" v-if="type == 'select'" :class="{
 				'u-input__right-icon--select--reverse': selectOpen
@@ -166,7 +166,7 @@ export default {
 			textareaHeight: 100, // textarea的高度
 			validateState: false, // 当前input的验证状态，用于错误时，边框是否改为红色
 			focused: false, // 当前是否处于获得焦点的状态
-			showPassword: this.passwordIcon, // 是否预览密码
+			showPassword: false, // 是否预览密码
 			marginRight: 0, // 输入框右边的距离，当获得焦点时各一个后面的距离，避免点击右边图标误触输入框
 		};
 	},

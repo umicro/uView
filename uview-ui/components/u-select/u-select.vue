@@ -36,7 +36,7 @@
 					<picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector">
 						<picker-view-column v-for="(item, index) in columnData" :key="index">
 							<view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
-								<view class="u-line-1">{{ item1.label }}</view>
+								<view class="u-line-1">{{ item1[labelName] }}</view>
 							</view>
 						</picker-view-column>
 					</picker-view>
@@ -101,6 +101,21 @@ export default {
 		mode: {
 			type: String,
 			default: 'single-column'
+		},
+		// 自定义value属性名
+		valueName: {
+			type: String,
+			default: 'value'
+		},
+		// 自定义label属性名
+		labelName: {
+			type: String,
+			default: 'label'
+		},
+		// 自定义多列联动模式的children属性名
+		childName: {
+			type: String,
+			default: 'children'
 		}
 	},
 	data() {
@@ -156,8 +171,8 @@ export default {
 				let num = 1;
 				let column = this.list;
 				// 只要有元素并且第一个元素有children属性，继续历遍
-				while(column[0].children) {
-					column = column[0] ? column[0].children : {};
+				while(column[0][this.childName]) {
+					column = column[0] ? column[0][this.childName] : {};
 					num ++;
 				}
 				this.columnNum = num;
@@ -175,11 +190,11 @@ export default {
 					// 第一列默认为整个list数组
 					if (i == 0) {
 						data[i] = this.list;
-						column = column.children;
+						column = column[this.childName];
 					} else {
 						// 大于第一列时，判断是否有默认选中的，如果没有就用该列的第一项
 						data[i] = column;
-						column = column[this.defaultSelector[i]].children;
+						column = column[this.defaultSelector[i]][this.childName];
 					}
 				}
 			} else if(this.mode == 'single-column') {
@@ -191,11 +206,15 @@ export default {
 		},
 		// 获取默认选中的值，如果没有设置defaultValue，就默认选中每列的第一个
 		setSelectValue() {
+			let tmp = null;
 			for(let i = 0; i < this.columnNum; i++) {
+				tmp = this.columnData[i][this.defaultSelector[i]];
 				this.selectValue.push({
-					value: this.columnData[i][this.defaultSelector[i]].value,
-					label: this.columnData[i][this.defaultSelector[i]].label,
+					value: tmp ? tmp[this.valueName] : null,
+					label: tmp ? tmp[this.labelName] : null
 				})
+				// 判断是否存在额外的参数，如果存在，就返回
+				if(tmp && tmp.extra) this.selectValue.extra = tmp.extra;
 			}
 		},
 		// 列选项
@@ -213,7 +232,7 @@ export default {
 				for (let i = index + 1; i < this.columnNum; i++) {
 					// 当前变化列的下一列的数据，需要获取上一列的数据，同时需要指定是上一列的第几个的children，再往后的
 					// 默认是队列的第一个为默认选项
-					this.columnData[i] = this.columnData[i - 1][i - 1 == index ? cloumnIndex[index] : 0].children;
+					this.columnData[i] = this.columnData[i - 1][i - 1 == index ? cloumnIndex[index] : 0][this.childName];
 					// 改变的列之后的所有列，默认选中第一个
 					this.defaultSelector[i] = 0;
 				}
@@ -221,27 +240,39 @@ export default {
 				// 只有在最后一次数据稳定后的结果是正确的，此前的历遍中，可能会产生undefined，故需要判断
 				cloumnIndex.map((item, index) => {
 					let data = this.columnData[index][cloumnIndex[index]];
-					this.selectValue.push({
-						value: data ? data.value : null,
-						label: data ? data.label : null
-					})
+					let tmp = {
+						value: data ? data[this.valueName] : null,
+						label: data ? data[this.labelName] : null,
+					};
+					// 判断是否有需要额外携带的参数
+					if(data && data.extra) tmp.extra = data.extra;
+					this.selectValue.push(tmp);
+					
 				})
 				// 保存这一次的结果，用于下次列发生变化时作比较
 				this.lastSelectIndex = cloumnIndex;
 			} else if(this.mode == 'single-column') {
+				let data = this.columnData[0][cloumnIndex[0]];
 				// 初始默认选中值
-				this.selectValue.push({
-					value: this.columnData[0][cloumnIndex[0]].value,
-					label: this.columnData[0][cloumnIndex[0]].label,
-				})
+				let tmp = {
+					value: data ? data[this.valueName] : null,
+					label: data ? data[this.labelName] : null,
+				};
+				// 判断是否有需要额外携带的参数
+				if(data && data.extra) tmp.extra = data.extra;
+				this.selectValue.push(tmp);
 			} else if(this.mode == 'mutil-column') {
 				// 初始默认选中值
 				cloumnIndex.map((item, index) => {
 					let data = this.columnData[index][cloumnIndex[index]];
-					this.selectValue.push({
-						value: data ? data.value : null,
-						label: data ? data.label : null
-					})
+					// 初始默认选中值
+					let tmp = {
+						value: data ? data[this.valueName] : null,
+						label: data ? data[this.labelName] : null,
+					};
+					// 判断是否有需要额外携带的参数
+					if(data && data.extra) tmp.extra = data.extra;
+					this.selectValue.push(tmp);
 				})
 			}
 		},

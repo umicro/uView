@@ -1,0 +1,28 @@
+/* start--微信小程序编译后页面有组件名的元素，特别处理--start */
+/* #ifdef MP-WEIXIN */
+u-td, u-th {
+	flex: 1;
+	align-self: stretch;
+}
+
+.u-td {
+	height: 100%;
+}
+
+u-icon {
+	display: flex;
+	align-items: center;
+}
+
+// 各家小程序宫格组件外层设置为100%，避免受到父元素display: flex;的影响
+u-grid {
+	width: 100%;
+	flex: 0 0 100%;
+}
+
+// 避免小程序线条组件因为父组件display: flex;而失效
+u-line {
+	flex: 1;
+}
+/* #endif */
+/* end-微信小程序编译后页面有组件名的元素，特别处理--end */

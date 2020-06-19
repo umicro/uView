@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area u-flex u-row-center">
-				<u-line color="red" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
+				<u-line :border-style="borderStyle" color="red" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -13,6 +13,10 @@
 			<view class="u-config-item">
 				<view class="u-item-title">颜色</view>
 				<u-subsection vibrateShort :list="['primary', 'success', 'warning', 'error', 'info']" @change="colorChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">线条类型</view>
+				<u-subsection vibrateShort :list="['实线', '方形虚线', '圆点虚线']" @change="borderStyleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">细边</view>
@@ -33,7 +37,8 @@
 				direction: 'row',
 				hairLine: true,
 				length: '100%',
-				color: this.$u.color['primary']
+				color: this.$u.color['primary'],
+				borderStyle: 'solid'
 			}
 		},
 		methods: {
@@ -48,6 +53,9 @@
 				if(index == 0) this.length = '100%';
 				else this.length = '50rpx';
 			},
+			borderStyleChange(index) {
+				this.borderStyle = ['solid', 'dashed', 'dotted'][index];
+			}
 		}
 	}
 </script>

@@ -15,7 +15,7 @@
 					</view>
 					<view v-else class="u-model-content-message" :style="[contentStyle]">{{ content }}</view>
 				</view>
-				<view class="u-model-footer u-border-top">
+				<view class="u-model-footer u-border-top" v-if="showCancelButton || showConfirmButton">
 					<view
 						v-if="showCancelButton"
 						:hover-stay-time="100"
@@ -242,23 +242,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.u-mask {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	opacity: 0;
-	visibility: hidden;
-}
-
 .btn-hover {
 	background-color: rgb(230, 230, 230);
-}
-
-.u-mask-show {
-	opacity: 1;
-	visibility: visible;
 }
 
 .u-model {

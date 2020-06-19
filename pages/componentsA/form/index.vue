@@ -11,10 +11,10 @@
 				<u-input type="textarea" :border="border" placeholder="请填写简介" v-model="model.intro" />
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="密码" prop="password">
-				<u-input :border="border" type="password" :password="true" v-model="model.password" placeholder="请输入密码"></u-input>
+				<u-input :password-icon="true" :border="border" type="password" v-model="model.password" placeholder="请输入密码"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="确认密码" label-width="150" prop="rePassword">
-				<u-input :border="border" type="password" :password="true" v-model="model.rePassword" placeholder="请确认密码"></u-input>
+				<u-input :border="border" type="password" v-model="model.rePassword" placeholder="请确认密码"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="水果品种" label-width="150" prop="likeFruit">
 				<u-checkbox-group @change="checkboxGroupChange" :width="radioCheckWidth" :wrap="radioCheckWrap">

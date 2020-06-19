@@ -17,7 +17,7 @@
 					</view>
 				</view>
 				<view class="" slot="foot">
-					<u-icon v-if="bottomSlot" name="chat-fill" size="34" color="" label="30评论"></u-icon>
+					<u-icon v-if="bottomSlot" name="chat-fill" size="34" label="30评论"></u-icon>
 				</view>
 			</u-card>
 		</view>

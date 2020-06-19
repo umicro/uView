@@ -86,7 +86,9 @@
 		box-sizing: border-box;
 	}
 
+	/* #ifdef MP */
 	.u-table /deep/ t-tr {
 		display: flex;
 	}
+	/* #endif */
 </style>

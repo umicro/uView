@@ -79,12 +79,11 @@
 				// 当前秒的时间戳
 				let nowTimestamp = Math.floor((+ new Date()) / 1000);
 				// 判断当前的时间戳，是否小于上一次的本该按设定结束，却提前结束的时间戳
-				console.log(lastTimestamp, nowTimestamp);
 				if(this.keepRunning && lastTimestamp && lastTimestamp > nowTimestamp) {
 					// 剩余尚未执行完的倒计秒数
 					this.secNum = lastTimestamp - nowTimestamp;
 					// 清除本地保存的变量
-					uni.setStorageSync(this.uniqueKey + '_$uCountDownTimestamp', 0);
+					uni.removeStorageSync(this.uniqueKey + '_$uCountDownTimestamp');
 					// 开始倒计时
 					this.start();
 				} else {
@@ -130,7 +129,7 @@
 			},
 			// 保存时间戳，为了防止倒计时尚未结束，H5刷新或者各端的右上角返回上一页再进来
 			setTimeToStorage() {
-				if(!this.keepRunning || !this.timer) return console.log(111, this.timer);
+				if(!this.keepRunning || !this.timer) return;
 				// 记录当前的时间戳，为了下次进入页面，如果还在倒计时内的话，继续倒计时
 				// 倒计时尚未结束，结果大于0；倒计时已经开始，就会小于初始值，如果等于初始值，说明没有开始倒计时，无需处理
 				if(this.secNum > 0 && this.secNum <= this.seconds) {
@@ -139,7 +138,7 @@
 					// 将本该结束时候的时间戳保存起来 => 当前时间戳 + 剩余的秒数
 					uni.setStorage({
 						key: this.uniqueKey + '_$uCountDownTimestamp',
-						data: nowTimestamp + this.secNum
+						data: nowTimestamp + Number(this.secNum)
 					})
 				}
 			}

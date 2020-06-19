@@ -193,7 +193,10 @@
 				this.$emit('click', index);
 			},
 			change(e) {
-				this.current = e.detail.current;
+				let current = e.detail.current;
+				this.current = current;
+				// 发出change事件，表示当前自动切换的index，从0开始
+				this.$emit('change', current);
 			},
 			// 头条小程序不支持animationfinish事件，改由change事件
 			// 暂不监听此事件，因为不再给swiper绑定current属性

@@ -334,14 +334,19 @@
 					formData: this.formData,
 					header: this.header,
 					success: (res) => {
+						// 由于此处返回的res.data为字符串，将其转为json格式
+						let data = {};
+						try{
+							data = JSON.parse(res.data);
+						}catch(e){}
 						if (![200,201].includes(res.statusCode)) {
-							this.uploadError(index, res.data);
+							this.uploadError(index, data);
 						} else {
 							// 上传成功
-							this.lists[index].response = res.data;
+							this.lists[index].response = data;
 							this.lists[index].progress = 100;
 							this.lists[index].error = false;
-							this.$emit('on-success', res.data, index, this.lists);
+							this.$emit('on-success', data, index, this.lists);
 						}
 					},
 					fail: (e) => {

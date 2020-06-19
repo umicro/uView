@@ -40,6 +40,7 @@
 					url: '', // toast消失后是否跳转页面，有则跳转
 					icon: true, // 显示的图标
 					position: 'center', // toast出现的位置
+					callback: null, // 执行完后的回调函数
 				}
 			};
 		},
@@ -59,7 +60,7 @@
 		methods: {
 			// 显示toast组件，由父组件通过this.$refs.xxx.show(options)形式调用
 			show(options) {
-				this.config = Object.assign(this.config, options);
+				this.config = this.$u.deepMerge(this.config, options);
 				if (this.timer) {
 					// 清除定时器
 					clearTimeout(this.timer);
@@ -71,6 +72,8 @@
 					this.isShow = false;
 					clearTimeout(this.timer);
 					this.timer = null;
+					// 判断是否存在callback方法，如果存在就执行
+					typeof(this.config.callback) === 'function' && this.config.callback();
 					this.timeEnd();
 				}, this.config.duration);
 			},

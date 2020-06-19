@@ -11,7 +11,7 @@
 		<view
 			v-if="showHead"
 			class="u-card__head"
-			:style="[headStyle, {padding: padding + 'rpx'}]"
+			:style="[{padding: padding + 'rpx'}, headStyle]"
 			:class="{
 				'u-border-bottom': headBorderBottom
 			}"
@@ -54,12 +54,12 @@
 			</view>
 			<slot name="head" v-else />
 		</view>
-		<view @tap="bodyClick" class="u-card__body" :style="[bodyStyle, {padding: padding + 'rpx'}]"><slot name="body" /></view>
+		<view @tap="bodyClick" class="u-card__body" :style="[{padding: padding + 'rpx'}, bodyStyle]"><slot name="body" /></view>
 		<view
 			v-if="showFoot"
 			class="u-card__foot"
 			 @tap="footClick"
-			:style="[footStyle, {padding: $slots.foot ? padding + 'rpx' : 0}]"
+			:style="[{padding: $slots.foot ? padding + 'rpx' : 0}, footStyle]"
 			:class="{
 				'u-border-top': footBorderTop
 			}"

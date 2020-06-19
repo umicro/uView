@@ -11,7 +11,7 @@
 					:closeable="closeable"
 					:close-icon-pos="closeIconPos"
 				>
-					<view v-if="mode == 'center'" style="width: 400rpx;height: 400rpx">
+					<view v-if="mode == 'center'" style="height: 400rpx">
 						<view class="close-btn">
 							<u-button @click="show = false;" size="medium">关闭弹窗</u-button>
 						</view>

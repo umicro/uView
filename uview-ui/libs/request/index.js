@@ -97,9 +97,7 @@ class Request {
 		this.config = {
 			baseUrl: '', // 请求的根域名
 			// 默认的请求头
-			header: {
-				'content-type': 'application/json;charset=UTF-8',
-			},
+			header: {},
 			method: 'POST',
 			// 设置为json，返回后uni.request会对数据进行一次JSON.parse
 			dataType: 'json',

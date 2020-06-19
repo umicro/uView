@@ -1,5 +1,8 @@
 <template>
-	<view class="u-mask" :style="[maskStyle]" :class="[show ? 'u-mask-show' : '']" @tap="click" @touchmove.stop.prevent>
+	<view class="u-mask" :style="[maskStyle, zoomStyle]" @tap="click" @touchmove.stop.prevent :class="{
+		'u-mask-zoom': zoom,
+		'u-mask-show': show
+	}">
 		<slot />
 	</view>
 </template>
@@ -54,6 +57,25 @@
 				default: true
 			}
 		},
+		data() {
+			return {
+				zoomStyle: {
+					transform: ''
+				},
+				scale: 'scale(1.2, 1.2)'
+			}
+		},
+		watch: {
+			show(n) {
+				if(n && this.zoom) {
+					// 当展示遮罩的时候，设置scale为1，达到缩小(原来为1.2)的效果
+					this.zoomStyle.transform = 'scale(1, 1)';
+				} else if(!n && this.zoom) {
+					// 当隐藏遮罩的时候，设置scale为1.2，达到放大(因为显示遮罩时已重置为1)的效果
+					this.zoomStyle.transform = this.scale;
+				}
+			}
+		},
 		computed: {
 			maskStyle() {
 				let style = {};
@@ -61,14 +83,10 @@
 				if(this.show) style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.mask;
 				else style.zIndex = -1;
 				style.transition = `all ${this.duration / 1000}s ease-in-out`;
-				// 缩放
-				if (this.zoom == true) style.transform = 'scale(1.2, 1.2)';
-				// 判断用户传递的对象是否为空
+				// 判断用户传递的对象是否为空，不为空就进行合并
 				if (Object.keys(this.customStyle).length) style = { ...style,
 					...this.customStyle
 				};
-				// 合并自定义的样式
-				//Object.assign(style, customStyle);
 				return style;
 			}
 		},
@@ -89,10 +107,14 @@
 		right: 0;
 		bottom: 0;
 		opacity: 0;
+		transition: transform 0.3s;
 	}
 
 	.u-mask-show {
 		opacity: 1;
-		transform: scale(1);
+	}
+	
+	.u-mask-zoom {
+		transform: scale(1.2, 1.2);
 	}
 </style>

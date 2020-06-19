@@ -32,32 +32,32 @@ export default {
 			list: [],
 			list1: [
 				{
-					value: '江',
-					label: '江'
+					id: '江',
+					name: '江'
 				},
 				{
-					value: '湖',
-					label: '湖'
+					id: '湖',
+					name: '湖'
 				},
 				{
-					value: '夜',
-					label: '夜'
+					id: '夜',
+					name: '夜'
 				},
 				{
-					value: '雨',
-					label: '雨'
+					id: '雨',
+					name: '雨'
 				},
 				{
-					value: '十',
-					label: '十'
+					id: '十',
+					name: '十'
 				},
 				{
-					value: '年',
-					label: '年'
+					id: '年',
+					name: '年'
 				},
 				{
-					value: '灯',
-					label: '灯'
+					id: '灯',
+					name: '灯'
 				}
 			],
 			list2: [

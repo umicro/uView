@@ -29,7 +29,7 @@
 			}
 		},
 		onShow() {
-			this.$nextTick(function(){
+			this.$nextTick(() => {
 				this.current = 1;
 			})
 		},

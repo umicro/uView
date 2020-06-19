@@ -10,7 +10,7 @@
 	export default {
 		data() {
 			return {
-				show: true,
+				show: false,
 				content: `
 					1. 修复badge组件的size参数无效问题<br>
 					2. 新增Modal模态框组件<br>
@@ -19,7 +19,7 @@
 				`,
 			}
 		},
-		onShow() {
+		onReady() {
 			this.show = true;
 		},
 		methods: {
