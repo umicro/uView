@@ -68,6 +68,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	view {
 		box-sizing: border-box;
 	}

@@ -142,6 +142,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-tips {
 		font-size: 26rpx;
 		text-align: center;

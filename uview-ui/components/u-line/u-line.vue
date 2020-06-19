@@ -76,6 +76,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-line {
 		vertical-align: middle;
 	}

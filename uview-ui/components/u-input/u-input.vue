@@ -78,10 +78,6 @@ export default {
 			type: String,
 			default: 'text'
 		},
-		clearable: {
-			type: Boolean,
-			default: true
-		},
 		inputAlign: {
 			type: String,
 			default: 'left'

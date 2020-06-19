@@ -187,6 +187,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
 .dropdown-list-wapper {
   position: relative;
 }

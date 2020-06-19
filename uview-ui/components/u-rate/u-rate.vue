@@ -178,6 +178,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+	
 .u-rate {
 	display: -webkit-inline-flex;
 	display: inline-flex;

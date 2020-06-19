@@ -371,6 +371,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	view,
 	scroll-view {
 		box-sizing: border-box;

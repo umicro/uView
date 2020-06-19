@@ -69,6 +69,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-grid-item {
 		box-sizing: border-box;
 		background: #fff;

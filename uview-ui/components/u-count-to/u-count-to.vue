@@ -230,6 +230,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-count-num {
 	display: inline-block;
 	text-align: center;

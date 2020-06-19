@@ -102,4 +102,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+</style>

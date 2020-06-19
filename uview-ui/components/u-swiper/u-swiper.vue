@@ -7,8 +7,8 @@
 		 :style="{
 				height: height + 'rpx'
 			}">
-			<swiper-item class="u-swiper-item" v-for="(item, index) in list" :key="index" @tap="listClick(index)">
-				<view class="u-list-image-wrap" :class="[current != index ? 'u-list-scale' : '']" :style="{
+			<swiper-item class="u-swiper-item" v-for="(item, index) in list" :key="index">
+				<view class="u-list-image-wrap" @tap.stop.prevent="listClick(index)" :class="[current != index ? 'u-list-scale' : '']" :style="{
 						borderRadius: `${borderRadius}rpx`,
 						transform: effect3d && current != index ? 'scaleY(0.9)' : 'scaleY(1)',
 						margin: effect3d && current != index ? '0 20rpx' : 0,
@@ -210,6 +210,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-swiper-wrap {
 		position: relative;
 		overflow: hidden;

@@ -177,6 +177,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-no-network {
 		background-color: #fff;
 		position: fixed;

@@ -541,6 +541,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-datetime-picker {
 		position: relative;
 		z-index: 999;

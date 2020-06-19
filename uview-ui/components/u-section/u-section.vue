@@ -93,6 +93,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-section {
 		display: flex;
 		justify-content: space-between;

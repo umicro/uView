@@ -51,6 +51,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-time-axis-item {
 		display: flex;
 		flex-direction: column;

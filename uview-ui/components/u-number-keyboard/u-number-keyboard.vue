@@ -116,6 +116,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-keyboard {
 	position: relative;
 	z-index: 1003;

@@ -255,6 +255,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+	
 .u-field {
 	font-size: 28rpx;
 	padding: 20rpx 28rpx;

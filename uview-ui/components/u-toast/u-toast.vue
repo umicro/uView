@@ -124,6 +124,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-toast {
 		position: fixed;
 		z-index: -1;

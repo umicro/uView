@@ -52,6 +52,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-loading-circle {
 		display: inline-block;
 		vertical-align: middle;

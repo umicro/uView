@@ -292,6 +292,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+
 .u-select {
 	&__action {
 		position: relative;

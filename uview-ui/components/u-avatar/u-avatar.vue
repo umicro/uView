@@ -103,6 +103,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-avatar {
 		display: inline-flex;
 		align-items: center;

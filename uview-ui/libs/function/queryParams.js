@@ -19,7 +19,7 @@ function queryParams(data = {}, isPrefix = true, arrayFormat = 'brackets') {
 			switch (arrayFormat) {
 				case 'indices':
 					// 结果: ids[0]=1&ids[1]=2&ids[2]=3
-					for (i = 0; i < value.length; i++) {
+					for (let i = 0; i < value.length; i++) {
 						_result.push(key + '[' + i + ']=' + value[i])
 					}
 					break;

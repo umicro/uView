@@ -28,6 +28,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-tr {
 		display: flex;
 	}

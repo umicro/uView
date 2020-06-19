@@ -241,7 +241,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>	
+@import "../../libs/css/style.components.scss";
+
 .btn-hover {
 	background-color: rgb(230, 230, 230);
 }

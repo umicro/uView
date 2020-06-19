@@ -283,6 +283,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+
 .u-drawer {
 	/* #ifndef APP-NVUE */
 	display: block;

@@ -225,6 +225,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../../libs/css/style.components.scss';
+
 .content {
 	background: rgba(255, 255, 255, 1);
 }

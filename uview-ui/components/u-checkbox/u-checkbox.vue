@@ -198,6 +198,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-checkbox {
 		display: -webkit-flex;
 		display: flex;

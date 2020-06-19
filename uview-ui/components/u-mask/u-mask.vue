@@ -100,6 +100,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-mask {
 		position: fixed;
 		top: 0;

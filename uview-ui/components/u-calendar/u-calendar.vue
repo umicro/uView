@@ -456,6 +456,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-calendar {
 		color: $u-content-color;
 		

@@ -165,6 +165,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-keyboard-grids {
 		background: rgb(215, 215, 217);
 		padding: 24rpx 0;

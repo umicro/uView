@@ -104,6 +104,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-switch {
 		position: relative;
 		display: inline-block;

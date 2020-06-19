@@ -75,6 +75,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-radio-group {
 		/* #ifndef MP */
 		display: inline-flex;

@@ -175,6 +175,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	@keyframes breathe {
 		0% {
 			opacity: 0.3;

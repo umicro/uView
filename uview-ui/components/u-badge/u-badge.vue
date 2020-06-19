@@ -137,6 +137,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-badge-box {
 		display: inline-flex;
 		justify-content: center;

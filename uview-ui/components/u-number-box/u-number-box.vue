@@ -243,6 +243,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-numberbox {
 		display: inline-flex;
 		align-items: center;

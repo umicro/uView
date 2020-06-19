@@ -426,6 +426,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-upload {
 		display: flex;
 		flex-wrap: wrap;

@@ -3,18 +3,6 @@ page {
 	font-size: 28rpx;
 }
 
-image {
-	display: inline-block;
-	// 解决图片加载时可能会瞬间变形的问题
-	will-change: transform;
-}
-
-view,
-text {
-	box-sizing: border-box;
-	flex-direction: row;
-}
-
 /* start--去除webkit的默认样式--start */
 .u-fix-ios-appearance {
 	-webkit-appearance:none;

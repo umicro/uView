@@ -76,6 +76,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+
 .u-grid {
 	width: 100%;
 	/* #ifdef MP */

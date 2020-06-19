@@ -148,6 +148,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-load-more-wrap {
 		width: 100%;
 		display: flex;

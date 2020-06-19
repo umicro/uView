@@ -350,6 +350,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../../libs/css/style.components.scss';
 .u-btn::after {
 	border: none;
 }

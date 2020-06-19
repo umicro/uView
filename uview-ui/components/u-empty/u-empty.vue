@@ -95,6 +95,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-empty {
 		display: flex;
 		flex-direction: column;

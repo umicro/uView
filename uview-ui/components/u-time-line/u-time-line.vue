@@ -22,6 +22,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-time-axis {
 		padding-left: 40rpx;
 		position: relative;

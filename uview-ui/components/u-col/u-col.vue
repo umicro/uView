@@ -38,6 +38,7 @@
 </script>
 
 <style lang="scss">
+	@import "../../libs/css/style.components.scss";
 	.u-col {
 		/* #ifdef MP-WEIXIN */
 		float: left;

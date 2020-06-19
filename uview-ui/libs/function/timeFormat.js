@@ -3,7 +3,7 @@ function timeFormat(timestamp = null, fmt = 'yyyy-mm-dd') {
 	// yyyy:mm:dd|yyyy:mm|yyyy年mm月dd日|yyyy年mm月dd日 hh时MM分等,可自定义组合
 	timestamp = parseInt(timestamp);
 	// 如果为null,则格式化当前时间
-	if (timestamp == null) timestamp = Number(new Date());
+	if (!timestamp) timestamp = Number(new Date());
 	// 判断用户输入的时间戳是秒还是毫秒,一般前端js获取的时间戳是毫秒(13位),后端传过来的为秒(10位)
 	if (timestamp.toString().length == 10) timestamp *= 1000;
 	let date = new Date(timestamp);

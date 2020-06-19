@@ -153,6 +153,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-code-wrap {
 		width: 0;
 		height: 0;
