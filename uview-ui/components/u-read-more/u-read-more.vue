@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<view class="u-content" :style="{ height: isLongContent && !showMore ? showHeight + 'rpx' : 'auto' }">
+		<view class="u-content" :class="[elId]" :style="{ height: isLongContent && !showMore ? showHeight + 'rpx' : 'auto' }">
 			<slot></slot>
 		</view>
 		<view @tap="toggleReadMore" v-if="isLongContent" class="u-showmore-wrap" 
@@ -95,6 +95,7 @@
 			return {
 				isLongContent: false, // 是否需要隐藏一部分内容
 				showMore: false, // 当前隐藏与显示的状态，true-显示，false-收起
+				elId: this.$u.guid(), // 生成唯一class
 			};
 		},
 		mounted() {
@@ -102,7 +103,7 @@
 		},
 		methods: {
 			init() {
-				this.$uGetRect('.u-content').then(res => {
+				this.$uGetRect('.' + this.elId).then(res => {
 					// 判断高度，如果真实内容高度大于占位高度，则显示收起与展开的控制按钮
 					if (res.height > uni.upx2px(this.showHeight)) {
 						this.isLongContent = true;
