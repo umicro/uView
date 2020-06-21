@@ -50,6 +50,26 @@
 </template>
 
 <script>
+	/**
+	 * select 列选择器
+	 * @description 此选择器用于单列，多列，多列联动的选择场景。(从1.3.0版本起，不建议使用Picker组件的单列和多列模式，Select组件是专门为列选择而构造的组件，更简单易用。)
+	 * @tutorial http://uviewui.com/components/select.html
+	 * @property {String} mode 模式选择，"single-column"-单列模式，"mutil-column"-多列模式，"single-column-auto"-多列联动模式
+	 * @property {Array} list 列数据，数组形式，见官网说明
+	 * @property {Boolean} v-model 布尔值变量，用于控制选择器的弹出与收起
+	 * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配(默认false)
+	 * @property {String} cancel-color 取消按钮的颜色（默认#606266）
+	 * @property {String} confirm-color 确认按钮的颜色(默认#2979ff)
+	 * @property {String} default-value 提供的默认选中的下标，见官网说明
+	 * @property {Boolean} mask-close-able 是否允许通过点击遮罩关闭Picker(默认true)
+	 * @property {String Number} z-index 弹出时的z-index值(默认10075)
+	 * @property {String} value-name 自定义list数据的value属性名 1.3.6
+	 * @property {String} label-name 自定义list数据的label属性名 1.3.6
+	 * @property {String} child-name 自定义list数据的children属性名，只对多列联动模式有效 1.3.7
+	 * @event {Function} confirm 点击确定按钮，返回当前选择的值
+	 * @example <u-select v-model="show" :list="list"></u-select>
+	 */
+	
 export default {
 	props: {
 		// 列数据
