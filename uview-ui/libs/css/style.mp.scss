@@ -24,5 +24,10 @@ u-grid {
 u-line {
 	flex: 1;
 }
+
+u-switch {
+	display: inline-flex;
+	align-items: center;
+}
 /* #endif */
 /* end-微信小程序编译后页面有组件名的元素，特别处理--end */

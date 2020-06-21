@@ -39,7 +39,7 @@ export default {
 			type: String,
 			default: ''
 		},
-		// 图标颜色
+		// 图标颜色，可接受主题色(组件内部使用，不对外)
 		color: {
 			type: String,
 			default: ''
@@ -110,10 +110,7 @@ export default {
 			default() {
 				return {}
 			}
-		}
-	},
-	data() {
-		return {};
+		},
 	},
 	computed: {
 		customClass() {
@@ -122,6 +119,8 @@ export default {
 			// uView的自定义图标类名为u-iconfont
 			if (this.customPrefix == 'uicon') classes.push('u-iconfont');
 			else classes.push(this.customPrefix);
+			// 主题色，通过类配置
+			if (this.color && this.$u.config.type.includes(this.color)) classes.push('u-icon__icon--' + this.color);
 			// 阿里，头条，百度小程序通过数组绑定类名时，无法直接使用[a, b, c]的形式，否则无法识别
 			// 故需将其拆成一个字符串的形式，通过空格隔开各个类名
 			//#ifdef MP-ALIPAY || MP-TOUTIAO || MP-BAIDU
@@ -135,7 +134,8 @@ export default {
 				fontSize: this.size == 'inherit' ? 'inherit' : this.size + 'rpx',
 				fontWeight: this.bold ? 'bold' : 'normal'
 			};
-			if (this.color) style.color = this.color;
+			// 非主题色值时，才当作颜色值
+			if (this.color && !this.$u.config.type.includes(this.color)) style.color = this.color;
 			return style;
 		},
 		// 判断传入的name属性，是否图片路径，只要带有"/"均认为是图片形式
@@ -166,10 +166,32 @@ export default {
 .u-icon {
 	display: inline-flex;
 	align-items: center;
-}
-
-.u-icon__img {
-	height: auto;
-	will-change: transform;
+	
+	&__icon {
+		&--primary {
+			color: $u-type-primary;
+		}
+		
+		&--success {
+			color: $u-type-success;
+		}
+		
+		&--error {
+			color: $u-type-error;
+		}
+		
+		&--warning {
+			color: $u-type-warning;
+		}
+		
+		&--info {
+			color: $u-type-info;
+		}
+	}
+	
+	&__img {
+		height: auto;
+		will-change: transform;
+	}
 }
 </style>

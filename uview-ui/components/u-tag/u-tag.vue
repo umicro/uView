@@ -8,7 +8,8 @@
 	 class="u-tag" :style="[customStyle]" @tap="clickTag">
 		{{text}}
 		<view class="u-icon-wrap" @tap.stop>
-			<u-icon @click="close" size="22" v-if="closeable" name="close" class="u-close-icon" :style="[iconStyle]"></u-icon>
+			<u-icon @click="close" size="22" v-if="closeable" :color="closeIconColor" 
+			name="close" class="u-close-icon" :style="[iconStyle]"></u-icon>
 		</view>
 	</view>
 </template>
@@ -124,10 +125,21 @@
 				let style = {};
 				if(this.size == 'mini') style.fontSize = '20rpx';
 				else style.fontSize = '22rpx';
-				if(this.mode == 'plain' || this.mode == 'light') style.color = this.$u.color[this.type];
+				if(this.mode == 'plain' || this.mode == 'light') style.color = this.type;
 				else if(this.mode == 'dark')  style.color = "#ffffff";
 				if(this.closeColor) style.color = this.closeColor;
 				return style;
+			},
+			// 关闭图标的颜色
+			closeIconColor() {
+				// 如果定义了关闭图标的颜色，就用此值，否则用字体颜色的值
+				// 如果上面的二者都没有，如果是dark深色模式，图标就为白色
+				// 最后如果上面的三者都不合适，就返回type值给图标获取颜色
+				let color = '';
+				if(this.closeColor) return this.closeColor;
+				else if(this.color) return this.color;
+				else if(this.mode == 'dark') return '#ffffff';
+				else return this.type;
 			}
 		},
 		methods: {

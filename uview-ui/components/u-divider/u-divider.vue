@@ -5,12 +5,12 @@
 		marginBottom: marginBottom + 'rpx',
 		marginTop: marginTop + 'rpx'
 	}" @tap="click">
-		<view class="u-divider-line" :style="[lineStyle]"></view>
+		<view class="u-divider-line" :class="[type ? 'u-divider-line--bordercolor--' + type : '']" :style="[lineStyle]"></view>
 		<view v-if="useSlot" class="u-divider-text" :style="{
 			color: color,
 			fontSize: fontSize + 'rpx'
 		}"><slot /></view>
-		<view class="u-divider-line" :style="[lineStyle]"></view>
+		<view class="u-divider-line" :class="[type ? 'u-divider-line--bordercolor--' + type : '']" :style="[lineStyle]"></view>
 	</view>
 </template>
 
@@ -93,7 +93,6 @@ export default {
 			else style.width = this.halfWidth + 'rpx';
 			// borderColor优先级高于type值
 			if(this.borderColor) style.borderColor = this.borderColor;
-			else style.borderColor = this.$u.color[this.type];
 			return style;
 		}
 	},
@@ -122,6 +121,26 @@ export default {
 	border-bottom: 1px solid $u-border-color;
 	transform: scale(1, 0.5);
 	transform-origin: center;
+	
+	&--bordercolor--primary {
+		border-color: $u-type-primary;
+	}
+	
+	&--bordercolor--success {
+		border-color: $u-type-success;
+	}
+	
+	&--bordercolor--error {
+		border-color: $u-type-primary;
+	}
+	
+	&--bordercolor--info {
+		border-color: $u-type-info;
+	}
+	
+	&--bordercolor--warning {
+		border-color: $u-type-warning;
+	}
 }
 
 .u-divider-text {

@@ -3,7 +3,7 @@
 		zIndex: uZIndex
 	}">
 		<view class="u-icon-wrap">
-			<u-icon v-if="config.icon" class="u-icon" :name="iconName" :size="30" :color="$u.color[config.type]"></u-icon>
+			<u-icon v-if="config.icon" class="u-icon" :name="iconName" :size="30" :color="config.type"></u-icon>
 		</view>
 		<text class="u-text">{{config.title}}</text>
 	</view>

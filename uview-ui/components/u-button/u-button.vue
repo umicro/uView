@@ -4,10 +4,13 @@
 		class="u-btn u-line-1 u-fix-ios-appearance"
 		:class="[
 			'u-size-' + size,
-			plain ? 'u-' + type + '-plain' : '',
+			plain ? 'u-btn--' + type + '--plain' : '',
 			loading ? 'u-loading' : '',
 			shape == 'circle' ? 'u-round-circle' : '',
-			hairLine ? showHairLineBorder : 'u-bold-border'
+			hairLine ? showHairLineBorder : 'u-bold-border',
+			'u-btn--' + type,
+			disabled ? `u-btn--${type}--disabled` : '',
+			
 		]"
 		:disabled="disabled"
 		:form-type="formType"
@@ -209,39 +212,39 @@ export default {
 		// 按钮主题
 		buttonStyle() {
 			let style = {};
-			if (this.type == 'default') {
-				if (this.disabled) {
-					style.color = '#c0c4cc';
-					style.backgroundColor = '#ffffff';
-					style.borderColor = '#e4e7ed';
-				} else {
-					style.color = this.$u.color['contentColor'];
-					style.backgroundColor = '#ffffff';
-					style.borderColor = '#c0c4cc';
-				}
-			} else {
-				if (this.disabled) {
-					if (this.plain) {
-						style.color = this.$u.color[this.type + 'Disabled'];
-						style.backgroundColor = this.$u.color[this.type + 'Light'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					} else {
-						style.color = '#ffffff';
-						style.backgroundColor = this.$u.color[this.type + 'Disabled'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					}
-				} else {
-					if (this.plain) {
-						style.color = this.$u.color[this.type];
-						style.backgroundColor = this.$u.color[this.type + 'Light'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					} else {
-						style.color = '#ffffff';
-						style.backgroundColor = this.$u.color[this.type];
-						style.borderColor = this.$u.color[this.type];
-					}
-				}
-			}
+			// if (this.type == 'default') {
+			// 	if (this.disabled) {
+			// 		style.color = '#c0c4cc';
+			// 		style.backgroundColor = '#ffffff';
+			// 		style.borderColor = '#e4e7ed';
+			// 	} else {
+			// 		style.color = this.$u.color['contentColor'];
+			// 		style.backgroundColor = '#ffffff';
+			// 		style.borderColor = '#c0c4cc';
+			// 	}
+			// } else {
+			// 	if (this.disabled) {
+			// 		if (this.plain) {
+			// 			style.color = this.$u.color[this.type + 'Disabled'];
+			// 			style.backgroundColor = this.$u.color[this.type + 'Light'];
+			// 			style.borderColor = this.$u.color[this.type + 'Disabled'];
+			// 		} else {
+			// 			style.color = '#ffffff';
+			// 			style.backgroundColor = this.$u.color[this.type + 'Disabled'];
+			// 			style.borderColor = this.$u.color[this.type + 'Disabled'];
+			// 		}
+			// 	} else {
+			// 		if (this.plain) {
+			// 			style.color = this.$u.color[this.type];
+			// 			style.backgroundColor = this.$u.color[this.type + 'Light'];
+			// 			style.borderColor = this.$u.color[this.type + 'Disabled'];
+			// 		} else {
+			// 			style.color = '#ffffff';
+			// 			style.backgroundColor = this.$u.color[this.type];
+			// 			style.borderColor = this.$u.color[this.type];
+			// 		}
+			// 	}
+			// }
 
 			return Object.assign(style, this.customStyle);
 		},
@@ -370,6 +373,90 @@ export default {
 	z-index: 1;
 	box-sizing: border-box;
 	transition: all 0.15s;
+	
+	&--default {
+		color: $u-content-color;
+		border-color: $u-type-warning;
+		background-color: #ffffff;
+	}
+	
+	&--primary {
+		color: #ffffff;
+		border-color: $u-type-primary;
+		background-color: $u-type-primary;
+	}
+	
+	&--success {
+		color: #ffffff;
+		border-color: $u-type-success;
+		background-color: $u-type-success;
+	}
+	
+	&--error {
+		color: #ffffff;
+		border-color: $u-type-error;
+		background-color: $u-type-error;
+	}
+	
+	&--warning {
+		color: #ffffff;
+		border-color: $u-type-warning;
+		background-color: $u-type-warning;
+	}
+	
+	&--default--disabled {
+		color: #ffffff;
+		border-color: #e4e7ed;
+		background-color: #ffffff;
+	}
+	
+	&--primary--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-primary-disabled!important;
+		background-color: $u-type-primary-disabled!important;
+	}
+	
+	&--success--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-success-disabled!important;
+		background-color: $u-type-success-disabled!important;
+	}
+	
+	&--error--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-error-disabled!important;
+		background-color: $u-type-error-disabled!important;
+	}
+	
+	&--warning--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-warning-disabled!important;
+		background-color: $u-type-warning-disabled!important;
+	}
+	
+	&--primary--plain {
+		color: $u-type-primary!important;
+		border-color: $u-type-primary-disabled!important;
+		background-color: $u-type-primary-light!important;
+	}
+	
+	&--success--plain {
+		color: $u-type-success!important;
+		border-color: $u-type-success-disabled!important;
+		background-color: $u-type-success-light!important;
+	}
+	
+	&--error--plain {
+		color: $u-type-error!important;
+		border-color: $u-type-error-disabled!important;
+		background-color: $u-type-error-light!important;
+	}
+	
+	&--warning--plain {
+		color: $u-type-warning!important;
+		border-color: $u-type-warning-disabled!important;
+		background-color: $u-type-warning-light!important;
+	}
 }
 
 .u-hairline-border:after {

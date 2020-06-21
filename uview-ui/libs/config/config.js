@@ -3,5 +3,13 @@ let version = '1.3.61';
 
 export default {
 	v: version,
-	version: version
+	version: version,
+	// 主题名称
+	type: [
+		'primary',
+		'success',
+		'info',
+		'error',
+		'warning'
+	]
 }

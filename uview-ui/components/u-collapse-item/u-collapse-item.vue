@@ -8,7 +8,7 @@
 				</view>
 				<slot v-else name="title" />
 				<view class="u-icon-wrap">
-					<u-icon v-if="arrow" :color="arrowColor ? arrowColor : $u.color.tipsColor" :class="{ 'u-arrow-down-icon-active': isShow }"
+					<u-icon v-if="arrow" :color="arrowColor" :class="{ 'u-arrow-down-icon-active': isShow }"
 					 class="u-arrow-down-icon" name="arrow-down"></u-icon>
 				</view>
 			</block>

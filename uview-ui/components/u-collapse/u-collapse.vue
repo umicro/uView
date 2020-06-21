@@ -55,7 +55,7 @@
 			// 箭头的颜色
 			arrowColor: {
 				type: String,
-				default: ''
+				default: '#909399'
 			},
 			// 标题部分按压时的样式类，"none"为无效果
 			hoverClass: {

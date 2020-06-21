@@ -6,6 +6,9 @@
 			background: computeBgColor,
 			padding: padding
 		}"
+		:class="[
+			type ? `u-type-${type}-light-bg` : ''
+		]"
 	>
 		<view class="u-direction-row">
 			<view class="u-icon-wrap">
@@ -17,13 +20,11 @@
 					id="u-notice-content"
 					:style="{
 						animationDuration: animationDuration,
-						color: computeColor,
 						animationPlayState: animationPlayState,
 					}"
 				>
-					<text class="u-notice-text" @tap="click" :style="{
-						fontSize: fontSize + 'rpx',
-					}">{{showText}}</text>
+					<text class="u-notice-text" @tap="click" :style="[textStyle]"
+					:class="['u-type-' + type]">{{showText}}</text>
 				</view>
 			</view>
 			<view class="u-icon-wrap">
@@ -141,14 +142,22 @@ export default {
 		// 计算字体颜色，如果没有自定义的，就用uview主题颜色
 		computeColor() {
 			if (this.color) return this.color;
-			else if(this.type == 'none') return this.$u.color['contentColor'];
-			else return this.$u.color[this.type];
+			// 如果是无主题，就默认使用content-color
+			else if(this.type == 'none') return '#606266';
+			else return this.type;
+		},
+		// 文字内容的样式
+		textStyle() {
+			let style = {};
+			if (this.color) style.color = this.color;
+			else if(this.type == 'none') style.color = '#606266';
+			style.fontSize = this.fontSize + 'rpx';
+			return style;
 		},
 		// 计算背景颜色
 		computeBgColor() {
 			if (this.bgColor) return this.bgColor;
 			else if(this.type == 'none') return 'transparent';
-			else return this.$u.color[this.type + 'Light'];
 		}
 	},
 	mounted() {

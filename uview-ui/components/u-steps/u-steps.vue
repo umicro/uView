@@ -3,11 +3,11 @@
 		<view class="u-steps">
 			<view class="u-steps-item" v-for="(item,index) in list" :key="index">
 				<view class="u-steps-item-num" v-if="mode == 'number' && current < index">{{index+1}}</view>
-				<view class="u-steps-item-dot" v-if="mode == 'dot'" :style="{backgroundColor: index <= current ? innerActiveColor : unActiveColor}"></view>
-				<u-icon size="22" class="u-steps-item-checked" :style="{backgroundColor: index <= current ? innerActiveColor : unActiveColor}"
-				 v-if="mode == 'number' && current >= index" name="checkmark"></u-icon>
-				<text :style="{color: index <= current ? innerActiveColor : unActiveColor}">{{item.name}}</text>
-				<view class="u-steps-item-line" :style="{backgroundColor: index <= current ? innerActiveColor : unActiveColor, top: mode == 'dot' ? '24rpx' : '36rpx'}">
+				<view class="u-steps-item-dot" v-if="mode == 'dot'" :style="{backgroundColor: index <= current ? activeColor : unActiveColor}"></view>
+				<u-icon size="22" class="u-steps-item-checked" :style="{backgroundColor: index <= current ? activeColor : unActiveColor}"
+				 v-if="mode == 'number' && current >= index" :name="icon"></u-icon>
+				<text :style="{color: index <= current ? activeColor : unActiveColor}">{{item.name}}</text>
+				<view class="u-steps-item-line" :style="{backgroundColor: index <= current ? activeColor : unActiveColor, top: mode == 'dot' ? '24rpx' : '36rpx'}">
 				</view>
 			</view>
 		</view>
@@ -55,12 +55,17 @@
 			// 激活步骤的颜色
 			activeColor: {
 				type: String,
-				default: ''
+				default: '#2979ff'
 			},
 			// 未激活的颜色
 			unActiveColor: {
 				type: String,
 				default: '#606266'
+			},
+			// 自定义图标
+			icon: {
+				type: String,
+				default: 'checkmark'
 			}
 		},
 		data() {
@@ -68,13 +73,6 @@
 
 			}
 		},
-		computed: {
-			innerActiveColor() {
-				if (this.activeColor) return this.activeColor;
-				else if (this.type) return this.$u.color[this.type];
-				else return "#2979ff";
-			},
-		}
 	}
 </script>
 

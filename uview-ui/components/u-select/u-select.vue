@@ -21,9 +21,12 @@
 					>
 						取消
 					</view>
+					<view class="u-select__header__title">
+						{{title}}
+					</view>
 					<view
 						class="u-select__header__confirm u-select__header__btn"
-						:style="{ color: confirmColor }"
+						:style="{ color: moving ? cancelColor : confirmColor }"
 						hover-class="u-hover-class"
 						:hover-stay-time="150"
 						@touchmove.stop=""
@@ -33,7 +36,7 @@
 					</view>
 				</view>
 				<view class="u-select__body">
-					<picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector">
+					<picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend">
 						<picker-view-column v-for="(item, index) in columnData" :key="index">
 							<view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
 								<view class="u-line-1">{{ item1[labelName] }}</view>
@@ -116,6 +119,11 @@ export default {
 		childName: {
 			type: String,
 			default: 'children'
+		},
+		// 顶部标题
+		title: {
+			type: String,
+			default: ''
 		}
 	},
 	data() {
@@ -130,6 +138,8 @@ export default {
 			lastSelectIndex: [], 
 			// 列数
 			columnNum: 0,
+			// 列是否还在滑动中，微信小程序如果在滑动中就点确定，结果可能不准确
+			moving: false
 		};
 	},
 	watch: {
@@ -148,6 +158,18 @@ export default {
 		},
 	},
 	methods: {
+		// 标识滑动开始，只有微信小程序才有这样的事件
+		pickstart() {
+			// #ifdef MP-WEIXIN
+			this.moving = true;
+			// #endif
+		},
+		// 标识滑动结束
+		pickend() {
+			// #ifdef MP-WEIXIN
+			this.moving = false;
+			// #endif
+		},
 		init() {
 			this.setColumnNum();
 			this.setDefaultSelector();
@@ -281,6 +303,9 @@ export default {
 		},
 		// 点击确定或者取消
 		getResult(event = null) {
+			// #ifdef MP-WEIXIN
+			if (this.moving) return;
+			// #endif
 			if (event) this.$emit(event, this.selectValue);
 			this.close();
 		},
@@ -295,6 +320,7 @@ export default {
 @import "../../libs/css/style.components.scss";
 
 .u-select {
+	
 	&__action {
 		position: relative;
 		line-height: $u-form-item-height;
@@ -311,6 +337,12 @@ export default {
 			&--reverse {
 				transform: rotate(-180deg) translateY(50%);
 			}
+		}
+	}
+	
+	&__hader {
+		&__title {
+			color: $u-content-color;
 		}
 	}
 	
