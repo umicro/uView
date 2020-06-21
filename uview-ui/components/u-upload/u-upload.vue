@@ -334,7 +334,7 @@ export default {
 			this.uploadFile(index);
 		},
 		// 上传图片
-		uploadFile(index = 0) {
+		async uploadFile(index = 0) {
 			if (this.disabled) return;
 			if (this.uploading) return;
 			// 全部上传完成
@@ -353,13 +353,22 @@ export default {
 				return;
 			}
 			// 执行before-upload钩子
-			// if(this.beforeUpload && typeof(this.beforeUpload) === 'function') {
-			// 	let beforeResponse = this.beforeUpload(index, this.lists);
-			// 	if (beforeResponse && beforeResponse.then) {
-					
-			// 	}
-			// }
-			
+			if(this.beforeUpload && typeof(this.beforeUpload) === 'function') {
+				// 执行回调，同时传入索引和文件列表当作参数
+				let beforeResponse = this.beforeUpload(index, this.lists);
+				// 判断是否返回了promise
+				if (!!beforeResponse && typeof beforeResponse.then === 'function') {
+					await beforeResponse.then(res => {
+						// promise返回成功，不进行动作，继续上传
+					}).catch(err => {
+						// 进入catch回调的话，继续下一张
+						return this.uploadFile(index + 1);
+					})
+				} else if(beforeResponse === false) {
+					 // 如果返回false，继续下一张图片的上传
+					return this.uploadFile(index + 1);
+				}
+			}
 			this.lists[index].error = false;
 			this.uploading = true;
 			// 创建上传对象

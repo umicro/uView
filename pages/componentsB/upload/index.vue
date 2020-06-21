@@ -14,7 +14,7 @@
 						 :percent="item.progress"></u-line-progress>
 					</view>
 				</view>
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload" :file-list="fileList"
+				<u-upload :beforeUpload="beforeUpload" ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload" :file-list="fileList"
 				 :show-progress="showProgress" :deletable="deletable" :max-count="maxCount" @on-list-change="onListChange">
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<u-icon name="photo" size="60" :color="$u.color['lightColor']"></u-icon>
@@ -53,7 +53,7 @@
 	export default {
 		data() {
 			return {
-				action: 'http://192.168.100.17/index.php/index/index/upload',
+				action: 'http://www.tp5.com',
 				// 预置上传列表
 				fileList: [],
 				// fileList: [{
@@ -70,6 +70,9 @@
 				maxCount: 2,
 				lists: [], // 组件内部的文件列表
 			}
+		},
+		onLoad() {
+			
 		},
 		methods: {
 			reUpload() {
@@ -136,6 +139,9 @@
 			onListChange(lists) {
 				// console.log('onListChange', lists);
 				this.lists = lists;
+			},
+			beforeUpload(index, lists) {
+				return true;
 			}
 		}
 	}
