@@ -1,35 +1,22 @@
 <template>
-	<view class="wrap">
-		<u-swiper :list="list"></u-swiper>
-	</view>
+	<u-upload :before-upload="beforeUpload"></u-upload>
 </template>
 
 <script>
 	export default {
-		data() {
-			return {
-				list: [{
-						image: '/static/uView/swiper/swiper1.jpg',
-						title: '蒹葭苍苍，白露为霜。所谓伊人，在水一方'
-					},
-					{
-						image: '/static/uView/swiper/swiper2.jpg',
-						title: '溯洄从之，道阻且长。溯游从之，宛在水中央'
-					},
-					{
-						image: '/static/uView/swiper/swiper3.jpg',
-						title: '蒹葭萋萋，白露未晞。所谓伊人，在水之湄'
-					}
-				]
-			}
-		},
-		onLoad() {
-			setTimeout(() => {
-				this.list.pop();
-			}, 2000)
-		},
 		methods: {
-
+			beforeUpload(index, list) {
+				// 返回一个promise
+				return new Promise((resolve, reject) => {
+					this.$u.post('http://www.tp5.com/index.php/index/index/hello').then(res => {
+						// resolve()之后，将会进入promise的组件内部的then回调，相当于返回true
+						resolve();
+					}).catch(err => {
+						// reject()之后，将会进入promise的组件内部的catch回调，相当于返回false
+						reject();
+					})
+				})
+			}
 		}
 	}
 </script>

@@ -135,7 +135,8 @@ export default {
 					second: false,
 					province: true,
 					city: true,
-					area: true
+					area: true,
+					timestamp: true,
 				};
 			}
 		},
@@ -546,6 +547,7 @@ export default {
 				if (this.params.hour) result.hour = this.formatNumber(this.hour || 0);
 				if (this.params.minute) result.minute = this.formatNumber(this.minute || 0);
 				if (this.params.second) result.second = this.formatNumber(this.second || 0);
+				if (this.params.timestamp) result.timestamp = this.getTimestamp();
 			} else if (this.mode == 'region') {
 				if (this.params.province) result.province = provinces[this.province];
 				if (this.params.city) result.city = citys[this.province][this.city];
@@ -557,6 +559,11 @@ export default {
 			}
 			if (event) this.$emit(event, result);
 			this.close();
+		},
+		// 获取时间戳
+		getTimestamp() {
+			let time = this.year + '-' + this.month + '-' + this.day + ' ' + this.day + ':' + this.minute + ':' + this.second;
+			return new Date(time).getTime() / 1000;
 		}
 	}
 };

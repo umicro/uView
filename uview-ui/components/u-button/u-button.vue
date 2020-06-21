@@ -7,7 +7,7 @@
 			plain ? 'u-btn--' + type + '--plain' : '',
 			loading ? 'u-loading' : '',
 			shape == 'circle' ? 'u-round-circle' : '',
-			hairLine ? showHairLineBorder : 'u-bold-border',
+			hairLine ? showHairLineBorder : 'u-btn--bold-border',
 			'u-btn--' + type,
 			disabled ? `u-btn--${type}--disabled` : '',
 			
@@ -28,7 +28,7 @@
 		@error="error"
 		@opensetting="opensetting"
 		@launchapp="launchapp"
-		:style="[buttonStyle]"
+		:style="[customStyle]"
 		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"
@@ -209,45 +209,6 @@ export default {
 			hoverClass = this.plain ? 'u-' + this.type + '-plain-hover' : 'u-' + this.type + '-hover';
 			return hoverClass;
 		},
-		// 按钮主题
-		buttonStyle() {
-			let style = {};
-			// if (this.type == 'default') {
-			// 	if (this.disabled) {
-			// 		style.color = '#c0c4cc';
-			// 		style.backgroundColor = '#ffffff';
-			// 		style.borderColor = '#e4e7ed';
-			// 	} else {
-			// 		style.color = this.$u.color['contentColor'];
-			// 		style.backgroundColor = '#ffffff';
-			// 		style.borderColor = '#c0c4cc';
-			// 	}
-			// } else {
-			// 	if (this.disabled) {
-			// 		if (this.plain) {
-			// 			style.color = this.$u.color[this.type + 'Disabled'];
-			// 			style.backgroundColor = this.$u.color[this.type + 'Light'];
-			// 			style.borderColor = this.$u.color[this.type + 'Disabled'];
-			// 		} else {
-			// 			style.color = '#ffffff';
-			// 			style.backgroundColor = this.$u.color[this.type + 'Disabled'];
-			// 			style.borderColor = this.$u.color[this.type + 'Disabled'];
-			// 		}
-			// 	} else {
-			// 		if (this.plain) {
-			// 			style.color = this.$u.color[this.type];
-			// 			style.backgroundColor = this.$u.color[this.type + 'Light'];
-			// 			style.borderColor = this.$u.color[this.type + 'Disabled'];
-			// 		} else {
-			// 			style.color = '#ffffff';
-			// 			style.backgroundColor = this.$u.color[this.type];
-			// 			style.borderColor = this.$u.color[this.type];
-			// 		}
-			// 	}
-			// }
-
-			return Object.assign(style, this.customStyle);
-		},
 		// 在'primary', 'success', 'error', 'warning'类型下，不显示边框，否则会造成四角有毛刺现象
 		showHairLineBorder() {
 			if (['primary', 'success', 'error', 'warning'].indexOf(this.type) >= 0 && !this.plain) {
@@ -374,9 +335,13 @@ export default {
 	box-sizing: border-box;
 	transition: all 0.15s;
 	
+	&--bold-border {
+		border: 1px solid #ffffff;
+	}
+	
 	&--default {
 		color: $u-content-color;
-		border-color: $u-type-warning;
+		border-color: #c0c4cc;
 		background-color: #ffffff;
 	}
 	
@@ -476,10 +441,6 @@ export default {
 	transform: scale(0.5, 0.5);
 	border: 1px solid currentColor;
 	z-index: 1;
-}
-
-.u-bold-border {
-	border: 1px solid #ffffff;
 }
 
 .u-wave-ripple {

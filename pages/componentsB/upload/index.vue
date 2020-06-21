@@ -14,7 +14,7 @@
 						 :percent="item.progress"></u-line-progress>
 					</view>
 				</view>
-				<u-upload :beforeUpload="beforeUpload" ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload" :file-list="fileList"
+				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload" :file-list="fileList"
 				 :show-progress="showProgress" :deletable="deletable" :max-count="maxCount" @on-list-change="onListChange">
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<u-icon name="photo" size="60" :color="$u.color['lightColor']"></u-icon>
@@ -140,9 +140,6 @@
 				// console.log('onListChange', lists);
 				this.lists = lists;
 			},
-			beforeUpload(index, lists) {
-				return true;
-			}
 		}
 	}
 </script>

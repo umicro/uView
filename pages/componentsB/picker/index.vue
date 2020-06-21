@@ -65,7 +65,8 @@ export default {
 				second: true,
 				province: true,
 				city: true,
-				area: true
+				area: true,
+				timestamp: true
 			}
 		};
 	},
@@ -115,6 +116,7 @@ export default {
 			this.show = true;
 		},
 		confirm(e) {
+			console.log(e);
 			this.input = '';
 			if (this.mode == 'time') {
 				if (this.params.year) this.input += e.year;
