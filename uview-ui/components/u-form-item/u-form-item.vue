@@ -46,6 +46,26 @@ import Emitter from '../../libs/util/emitter.js';
 import schema from '../../libs/util/async-validator';
 // 去除警告信息
 schema.warning = function(){};
+
+	/**
+	 * form-item 表单item
+	 * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
+	 * @tutorial http://uviewui.com/components/form.html
+	 * @property {String} label 左侧提示文字
+	 * @property {Object} prop 表单域model对象的属性名，在使用 validate、resetFields 方法的情况下，该属性是必填的
+	 * @property {Boolean} border-bottom 是否显示表单域的下划线边框(默认true)
+	 * @property {String} label-position 表单域提示文字的位置，left-左侧，top-上方(默认left)
+	 * @property {String Number} label-width 提示文字的宽度，单位rpx（默认90）
+	 * @property {Object} label-style lable的样式，对象形式
+	 * @property {String} label-align lable的对齐方式(默认left)
+	 * @property {String} right-icon 右侧自定义字体图标(限uView内置图标)或图片地址
+	 * @property {String} left-icon 左侧自定义字体图标(限uView内置图标)或图片地址
+	 * @property {Object} left-icon-style 左侧图标的样式，对象形式
+	 * @property {Object} right-icon-style 右侧图标的样式，对象形式
+	 * @property {Boolean} required 是否显示左边的"*"号，这里仅起展示作用，如需校验必填，请通过rules配置必填规则(默认false)
+	 * @example <u-form-item label="姓名"><u-input v-model="form.name" /></u-form-item>
+	 */
+	
 export default {
 	name: 'u-form-item',
 	mixins: [Emitter],

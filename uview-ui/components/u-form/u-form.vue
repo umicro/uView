@@ -3,6 +3,16 @@
 </template>
 
 <script>
+	
+	/**
+	 * form 表单
+	 * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
+	 * @tutorial http://uviewui.com/components/form.html
+	 * @property {Object} model 表单数据对象
+	 * @property {Object} rules 通过ref设置，见官网说明
+	 * @property {Array} errorType 错误的提示方式，数组形式，见上方说明(默认['message'])
+	 * @example <u-form :model="form" ref="uForm"></u-form>
+	 */
 export default {
 	name: 'u-form',
 	props: {
