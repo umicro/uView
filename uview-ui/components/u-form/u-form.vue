@@ -98,7 +98,7 @@ export default {
 						if (++count === this.fields.length) {
 							resolve(valid); // 进入promise的then方法
 							// 判断是否设置了toast的提示方式，只提示最前面的表单域的第一个错误信息
-							if(this.errorType.indexOf('none') === -1 && this.errorType.indexOf('toast') >= 0) {
+							if(this.errorType.indexOf('none') === -1 && this.errorType.indexOf('toast') >= 0 && errorArr.length) {
 								this.$u.toast(errorArr[0]);
 							}
 							// 调用回调方法
