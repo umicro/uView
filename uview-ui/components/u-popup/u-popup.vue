@@ -24,9 +24,13 @@
 					:color="closeIconColor"
 					:size="closeIconSize"
 				></u-icon>
-				<slot />
+				<scroll-view class="u-drawer__scroll-view" scroll-y="true">
+					<slot />
+				</scroll-view>
 			</view>
-			<block v-else><slot /></block>
+			<scroll-view class="u-drawer__scroll-view" scroll-y="true" v-else>
+				<slot />
+			</scroll-view>
 			<view class="u-close" :class="['u-close--' + closeIconPos]">
 				<u-icon
 					v-if="mode != 'center' && closeable"
@@ -158,6 +162,18 @@ export default {
 		closeIconSize: {
 			type: [String, Number],
 			default: '30'
+		},
+		// 宽度，只对左，右，中部弹出时起作用，单位rpx，或者"auto"
+		// 或者百分比"50%"，表示由内容撑开高度或者宽度，优先级高于length参数
+		width: {
+			type: String,
+			default: ''
+		},
+		// 高度，只对上，下，中部弹出时起作用，单位rpx，或者"auto"
+		// 或者百分比"50%"，表示由内容撑开高度或者宽度，优先级高于length参数
+		height: {
+			type: String,
+			default: ''
 		}
 	},
 	data() {
@@ -172,20 +188,17 @@ export default {
 		// 根据mode的位置，设定其弹窗的宽度(mode = left|right)，或者高度(mode = top|bottom)
 		style() {
 			let style = {};
-			let translate = '100%';
-			// 判断是否是否百分比或者auto值，是的话，直接使用该值，否则默认为rpx单位的数值
-			let length = /%$/.test(this.length) || this.length == 'auto' ? this.length : uni.upx2px(this.length) + 'px';
 			// 如果是左边或者上边弹出时，需要给translate设置为负值，用于隐藏
 			if (this.mode == 'left' || this.mode == 'right') {
 				style = {
-					width: length,
+					width: this.width ? this.getUnitValue(this.width) : this.getUnitValue(this.length),
 					height: '100%',
 					transform: `translate3D(${this.mode == 'left' ? '-100%' : '100%'},0px,0px)`
 				};
 			} else if (this.mode == 'top' || this.mode == 'bottom') {
 				style = {
 					width: '100%',
-					height: length,
+					height: this.height ? this.getUnitValue(this.height) : this.getUnitValue(this.length),
 					transform: `translate3D(0px,${this.mode == 'top' ? '-100%' : '100%'},0px)`
 				};
 			}
@@ -215,8 +228,9 @@ export default {
 		// 中部弹窗的特有样式
 		centerStyle() {
 			let style = {};
-			let length = /%$/.test(this.length) || this.length == 'auto' ? this.length : uni.upx2px(this.length) + 'px';
-			style.width = length;
+			style.width = this.width ? this.getUnitValue(this.width) : this.getUnitValue(this.length);
+			// 中部弹出的模式，如果没有设置高度，就用auto值，由内容撑开高度
+			style.height = this.height ? this.getUnitValue(this.height) : 'auto';
 			style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.popup;
 			if (this.borderRadius) {
 				style.borderRadius = `${this.borderRadius}rpx`;
@@ -224,7 +238,7 @@ export default {
 				style.overflow = 'hidden';
 			}
 			return style;
-		}
+		},
 	},
 	watch: {
 		value(val) {
@@ -236,6 +250,11 @@ export default {
 		}
 	},
 	methods: {
+		// 判断传入的值，是否带有单位，如果没有，就默认用rpx单位
+		getUnitValue(val) {
+			if(/(%|px|rpx|auto)$/.test(val)) return val;
+			else return val + 'rpx'
+		},
 		// 遮罩被点击
 		maskClick() {
 			this.close();
@@ -307,6 +326,11 @@ export default {
 	transition: all 0.3s linear;
 }
 
+.u-drawer__scroll-view {
+	width: 100%;
+	height: 100%;
+}
+
 .u-drawer-left {
 	top: 0;
 	bottom: 0;
@@ -375,7 +399,7 @@ export default {
 
 .u-close {
 	position: absolute;
-	z-index: 1;
+	z-index: 3;
 }
 
 .u-close--top-left {
