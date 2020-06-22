@@ -77,6 +77,12 @@
 			}
 		},
 		methods: {
+			// 重新初始化一次内部的所有子元素的高度计算，用于异步获取数据渲染的情况
+			init() {
+				this.childrens.forEach((vm, index) => {
+					vm.init();
+				})
+			},
 			// collapse item被点击，由collapse item调用父组件方法
 			onChange() {
 				let activeItem = [];

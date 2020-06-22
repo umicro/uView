@@ -94,9 +94,7 @@
 			};
 		},
 		mounted() {
-			this.$nextTick(() => {
-				this.queryRect();
-			});
+			this.init();
 		},
 		watch: {
 			open(val) {
@@ -123,6 +121,12 @@
 			this.hoverClass = this.uCollapse.hoverClass;
 		},
 		methods: {
+			// 异步获取内容，或者动态修改了内容时，需要重新初始化
+			init() {
+				this.$nextTick(() => {
+					this.queryRect();
+				});
+			},
 			// 点击collapsehead头部
 			headClick() {
 				if (this.disabled) return;

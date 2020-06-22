@@ -1,6 +1,6 @@
 <template>
 	<view class="u-code-wrap">
-
+		<!-- 此组件功能由js完成，无需写html逻辑 -->
 	</view>
 </template>
 
