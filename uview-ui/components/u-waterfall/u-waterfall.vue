@@ -1,7 +1,7 @@
 <template>
 	<view class="u-waterfall">
-		<view id="u-left-cloumn" class="u-cloumn"><slot name="left" :leftList="leftList"></slot></view>
-		<view id="u-right-cloumn" class="u-cloumn"><slot name="right" :rightList="rightList"></slot></view>
+		<view id="u-left-column" class="u-column"><slot name="left" :leftList="leftList"></slot></view>
+		<view id="u-right-column" class="u-column"><slot name="right" :rightList="rightList"></slot></view>
 	</view>
 </template>
 
@@ -73,8 +73,8 @@ export default {
 	methods: {
 		async splitData() {
 			if (!this.tempList.length) return;
-			let leftRect = await this.$uGetRect('#u-left-cloumn');
-			let rightRect = await this.$uGetRect('#u-right-cloumn');
+			let leftRect = await this.$uGetRect('#u-left-column');
+			let rightRect = await this.$uGetRect('#u-right-column');
 			// 如果左边小于或等于右边，就添加到左边，否则添加到右边
 			let item = this.tempList[0];
 			// 解决多次快速上拉后，可能数据会乱的问题，因为经过上面的两个await节点查询阻塞一定时间，加上后面的定时器干扰
@@ -116,7 +116,7 @@ export default {
 		// 清除某一条指定的数据，根据id实现
 		remove(id) {
 			// 如果findIndex找不到合适的条件，就会返回-1
-			let index = -1; 
+			let index = -1;
 			index = this.leftList.findIndex(val => val[this.idKey] == id);
 			if(index != -1) {
 				// 如果index不等于-1，说明已经找到了要找的id，根据index索引删除这一条数据
@@ -133,7 +133,7 @@ export default {
 		// 修改某条数据的某个属性
 		modify(id, key, value) {
 			// 如果findIndex找不到合适的条件，就会返回-1
-			let index = -1; 
+			let index = -1;
 			index = this.leftList.findIndex(val => val[this.idKey] == id);
 			if(index != -1) {
 				// 如果index不等于-1，说明已经找到了要找的id，修改对应key的值
@@ -167,7 +167,7 @@ export default {
 	align-items: flex-start;
 }
 
-.u-cloumn {
+.u-column {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
