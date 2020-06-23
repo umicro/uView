@@ -54,7 +54,7 @@
 	 * select 列选择器
 	 * @description 此选择器用于单列，多列，多列联动的选择场景。(从1.3.0版本起，不建议使用Picker组件的单列和多列模式，Select组件是专门为列选择而构造的组件，更简单易用。)
 	 * @tutorial http://uviewui.com/components/select.html
-	 * @property {String} mode 模式选择，"single-column"-单列模式，"mutil-column"-多列模式，"single-column-auto"-多列联动模式
+	 * @property {String} mode 模式选择，"single-column"-单列模式，"mutil-column"-多列模式，"mutil-column-auto"-多列联动模式
 	 * @property {Array} list 列数据，数组形式，见官网说明
 	 * @property {Boolean} v-model 布尔值变量，用于控制选择器的弹出与收起
 	 * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配(默认false)

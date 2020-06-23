@@ -20,6 +20,7 @@
 		:send-message-title="sendMessageTitle"
 		send-message-path="sendMessagePath"
 		:lang="lang"
+		:data-name="dataName"
 		:session-from="sessionFrom"
 		:send-message-img="sendMessageImg"
 		:show-message-card="showMessageCard"
@@ -32,6 +33,7 @@
 		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"
+		data-name="dataName"
 	>
 		<slot></slot>
 		<view
@@ -198,6 +200,11 @@ export default {
 			default() {
 				return {};
 			}
+		},
+		// 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
+		dataName: {
+			type: String,
+			default: ''
 		}
 	},
 	computed: {

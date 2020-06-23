@@ -19,6 +19,14 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 - 按需引入，精简打包体积
 
 
+## 预览
+
+您可以通过**微信**扫码，查看最佳的演示效果。
+<br>
+<br>
+<img src="https://uviewui.com/common/weixin_mini_qrcode.png" width="220" height="220" >
+
+
 ## 友情链接
 
 <br>
@@ -30,12 +38,20 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 #### **pl-table** —— [ 完美解决 element 万级表格数据渲染卡顿问题](https://github.com/livelyPeng/pl-table)
 <br>
 
+## 链接
+
+- [官方文档](https://uviewui.com/)
+- [更新日志](https://uviewui.com/components/changelog.html)
+- [升级指南](https://uviewui.com/components/changelog.html)
+- [关于我们](https://uviewui.com/cooperation/about.html)
+
+## 交流反馈
+
+欢迎加入我们的QQ群交流反馈：[点此跳转](https://www.uviewui.com/components/addQQGroup.html)
+
 ## 安装
 
-```bash
-# npm方式安装
-npm i uview-ui
-```
+#### **下载地址** —— [https://ext.dcloud.net.cn/plugin?id=1593](https://ext.dcloud.net.cn/plugin?id=1593)
 
 ## 快速上手
 
@@ -66,7 +82,7 @@ Vue.use(uView);
 // pages.json
 {
 	"easycom": {
-		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
 	// 此为本身已有的内容
 	"pages": [
@@ -88,26 +104,13 @@ Vue.use(uView);
 
 请通过[快速上手](https://uviewui.com/components/quickstart.html)了解更详细的内容 
 
-## 链接
 
-- [官方文档](https://uviewui.com/)
-- [更新日志](https://uviewui.com/components/changelog.html)
-- [升级指南](https://uviewui.com/components/changelog.html)
-- [关于我们](https://uviewui.com/cooperation/about.html)
-
-## 预览
-
-您可以通过**微信**扫码，查看最佳的演示效果。
-<br>
-<br>
-<img src="https://uviewui.com/common/weixin_mini_qrcode.png" width="220" height="220" >
-
-<!-- ## 捐赠uView的研发
+## 捐赠uView的研发
 
 uView文档和源码全部开源免费，如果您认为uView帮到了您的开发工作，您可以捐赠uView的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
 
 <img src="https://uviewui.com/common/wechat.png" width="220" >
 <img style="margin-left: 100px;" src="https://uviewui.com/common/alipay.png" width="220" >
- -->
+
 ## 版权信息
 uView遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将uView应用到您的产品中。

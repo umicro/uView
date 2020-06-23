@@ -1,7 +1,5 @@
 <template>
 	<view class="u-row" :style="{
-		marginLeft: `-${gutter/2 + 'rpx'}`,
-		marginRight: `-${gutter/2 + 'rpx'}`,
 		alignItems: uAlignItem,
 		justifyContent: uJustify
 	}">
