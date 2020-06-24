@@ -1651,10 +1651,6 @@
     "type": "string|number",
     "description": "副标题字体大小"
   },
-  "u-card/border": {
-    "type": "boolean",
-    "description": "是否显示边框"
-  },
   "u-card/margin": {
     "type": "string",
     "description": "卡片与屏幕两边和上下元素的间距，需带单位"
@@ -1734,10 +1730,6 @@
   "u-grid/col": {
     "type": "string|number",
     "description": "宫格的列数"
-  },
-  "u-grid/border": {
-    "type": "boolean",
-    "description": "是否显示宫格的边框"
   },
   "u-grid/align": {
     "type": "string",
@@ -1961,10 +1953,6 @@
   "u-navbar/is-fixed": {
     "type": "boolean",
     "description": "导航栏是否固定在顶部"
-  },
-  "u-navbar/border-bottom": {
-    "type": "boolean",
-    "description": "导航栏底部是否显示下边框"
   },
   "u-navbar/custom-back": {
     "type": "function",
