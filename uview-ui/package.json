@@ -16,5 +16,9 @@
 		"sass-loader": "^8.0.2"
 	},
 	"author": "uView",
-	"license": "MIT"
+	"license": "MIT",
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  }
 }

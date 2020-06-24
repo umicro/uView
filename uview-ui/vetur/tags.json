@@ -1,0 +1,1035 @@
+{
+  "u-icon": {
+    "attributes": [
+      "name",
+      "color",
+      "size",
+      "index",
+      "hover-class",
+      "label",
+      "label-size",
+      "label-color",
+      "margin-left",
+      "margin-top",
+      "label-pos",
+      "custom-style"
+    ],
+    "description": "图标"
+  },
+  "u-row": {
+    "attributes": ["gutter", "justify", "align"],
+    "subtags": ["u-col"],
+    "description": "行"
+  },
+  "u-col": {
+    "attributes": ["span", "offset"],
+    "description": "列"
+  },
+  "u-button": {
+    "attributes": [
+      "size",
+      "ripple",
+      "ripple-bg-color",
+      "type",
+      "plain",
+      "disabled",
+      "hair-line",
+      "shape",
+      "loading",
+      "form-type",
+      "open-type",
+      "hover-class",
+      "hover-start-time",
+      "hover-stay-time",
+      "custom-style",
+      "app-parameter",
+      "hover-stop-propagation",
+      "lang",
+      "session-from",
+      "send-message-title",
+      "send-message-path",
+      "send-message-img",
+      "show-message-card"
+    ],
+    "description": "按钮"
+  },
+  "u-cell-group": {
+    "attributes": ["title", "border", "title-style"],
+    "subtags": ["u-cell-item"],
+    "description": "单元格组"
+  },
+  "u-cell-item": {
+    "attributes": [
+      "title",
+      "icon",
+      "value",
+      "label",
+      "border-bottom",
+      "border-gap",
+      "hover-class",
+      "arrow",
+      "arrow-direction",
+      "title-style",
+      "required",
+      "value-style",
+      "label-style",
+      "bg-color",
+      "index",
+      "title-width",
+      "icon-size",
+      "center"
+    ],
+    "description": "单元格"
+  },
+  "u-badge": {
+    "attributes": [
+      "count",
+      "is-dot",
+      "absolute",
+      "overflow-count",
+      "type",
+      "show-zero",
+      "size",
+      "offset",
+      "color",
+      "bgColor",
+      "is-center"
+    ],
+    "description": "徽标数"
+  },
+  "u-tag": {
+    "attributes": [
+      "type",
+      "size",
+      "shape",
+      "text",
+      "bg-color",
+      "color",
+      "border-color",
+      "close-color",
+      "index",
+      "mode",
+      "closeable",
+      "show"
+    ],
+    "description": "标签"
+  },
+  "u-input": {
+    "attributes": [
+      "type",
+      "clearable",
+      "input-align",
+      "placeholder",
+      "disabled",
+      "maxlength",
+      "maxlength",
+      "placeholderStyle",
+      "confirm-type",
+      "custom-style",
+      "focus",
+      "fixed",
+      "password-icon",
+      "border",
+      "border-color",
+      "auto-height",
+      "height"
+    ],
+    "description": "输入框"
+  },
+  "u-form": {
+    "attributes": ["model", "rules", "errorType"],
+    "subtags": ["u-form-item"],
+    "description": "表单"
+  },
+  "u-form-item": {
+    "attributes": [
+      "label",
+      "prop",
+      "border-bottom",
+      "label-position",
+      "label-width",
+      "label-style",
+      "label-align",
+      "right-icon",
+      "left-icon",
+      "left-icon-style",
+      "right-icon-style",
+      "required"
+    ],
+    "description": "表单项"
+  },
+  "u-calendar": {
+    "attributes": [
+      "mode",
+      "v-model",
+      "safe-area-inset-bottom",
+      "change-year",
+      "change-month",
+      "max-year",
+      "min-year",
+      "min-date",
+      "max-date",
+      "border-radius",
+      "mask-close-able",
+      "month-arrow-color",
+      "year-arrow-color",
+      "color",
+      "active-bg-color",
+      "z-index",
+      "active-color",
+      "range-bg-color",
+      "range-color",
+      "start-text",
+      "end-text",
+      "btn-type",
+      "toolTip",
+      "closeable"
+    ],
+    "description": "日历"
+  },
+  "u-select": {
+    "attributes": [
+      "mode",
+      "list",
+      "v-model",
+      "safe-area-inset-bottom",
+      "cancel-color",
+      "confirm-color",
+      "default-value",
+      "mask-close-able",
+      "z-index",
+      "value-name",
+      "label-name",
+      "child-name",
+      "title"
+    ],
+    "description": "列选择器"
+  },
+  "u-keyboard": {
+    "attributes": [
+      "mode",
+      "dot-enabled",
+      "tooltip",
+      "tips",
+      "show-tips",
+      "cancel-btn",
+      "confirm-btn",
+      "mask",
+      "z-index",
+      "random",
+      "safe-area-inset-bottom",
+      "mask-close-able"
+    ],
+    "description": "键盘"
+  },
+  "u-picker": {
+    "attributes": [
+      "params",
+      "mode",
+      "start-year",
+      "end-year",
+      "safe-area-inset-bottom",
+      "cancel-color",
+      "confirm-color",
+      "default-time",
+      "default-region",
+      "area-code",
+      "default-selector",
+      "mask-close-able",
+      "show-time-tag",
+      "z-index",
+      "range",
+      "range-key",
+      "title"
+    ],
+    "description": "选择器"
+  },
+  "u-rate": {
+    "attributes": [
+      "count",
+      "current",
+      "disabled",
+      "size",
+      "inactive-color",
+      "active-color",
+      "gutter",
+      "min-count",
+      "active-icon",
+      "inactive-icon"
+    ],
+    "description": "评分"
+  },
+  "u-search": {
+    "attributes": [
+      "shape",
+      "bg-color",
+      "border-color",
+      "placeholder",
+      "clearabled",
+      "focus",
+      "show-action",
+      "action-text",
+      "action-style",
+      "input-align",
+      "disabled",
+      "animation",
+      "value",
+      "height",
+      "search-icon-color",
+      "color",
+      "placeholder-color",
+      "margin",
+      "maxlength",
+      "input-style",
+      "search-icon"
+    ],
+    "description": "搜索"
+  },
+  "u-number-box": {
+    "attributes": [
+      "v-model",
+      "bg-color",
+      "min",
+      "max",
+      "step",
+      "disabled",
+      "size",
+      "color",
+      "input-width",
+      "input-height",
+      "index",
+      "disabled-input",
+      "cursor-spacing"
+    ],
+    "description": "步进器"
+  },
+  "u-upload": {
+    "attributes": [
+      "action",
+      "max-count",
+      "width",
+      "custom-btn",
+      "show-progress",
+      "disabled",
+      "image-mode",
+      "header",
+      "form-data",
+      "name",
+      "size-type",
+      "source-type",
+      "preview-full-image",
+      "multiple",
+      "deletable",
+      "max-size",
+      "file-list",
+      "upload-text",
+      "auto-upload",
+      "show-tips",
+      "show-upload-list",
+      "del-icon",
+      "del-bg-color",
+      "del-color",
+      "to-json",
+      "before-upload"
+    ],
+    "description": "上传"
+  },
+  "u-verification-code": {
+    "attributes": [
+      "seconds",
+      "start-text",
+      "change-text",
+      "end-text",
+      "keep-running",
+      "unique-key"
+    ],
+    "description": "验证码倒计时"
+  },
+  "u-field": {
+    "attributes": [
+      "type",
+      "icon",
+      "right-icon",
+      "required",
+      "label",
+      "password",
+      "clearable",
+      "label-width",
+      "label-align",
+      "input-align",
+      "icon-color",
+      "clear-size",
+      "field-style",
+      "auto-height",
+      "error-message",
+      "placeholder",
+      "placeholder-style",
+      "focus",
+      "fixed",
+      "disabled",
+      "maxlength",
+      "confirm-type"
+    ],
+    "description": "输入框"
+  },
+  "u-checkbox-group": {
+    "attributes": ["max", "disabled", "size", "active-color", "width", "wrap"],
+    "subtags": ["u-checkbox"],
+    "description": "复选框组"
+  },
+  "u-checkbox": {
+    "attributes": [
+      "icon-size",
+      "label-size",
+      "name",
+      "shape",
+      "disabled",
+      "label-disabled",
+      "active-color"
+    ],
+    "description": "复选框"
+  },
+  "u-radio-group": {
+    "attributes": ["disabled", "active-color", "size", "width", "wrap"],
+    "subtags": ["u-radio"],
+    "description": "单选框组"
+  },
+  "u-radio": {
+    "attributes": [
+      "v-model",
+      "icon-size",
+      "label-size",
+      "name",
+      "shape",
+      "disabled",
+      "label-disabled",
+      "active-color"
+    ],
+    "description": "单选框"
+  },
+  "u-switch": {
+    "attributes": [
+      "loading",
+      "disabled",
+      "size",
+      "active-color",
+      "inactive-color",
+      "vibrate-short",
+      "active-value",
+      "inactive-value"
+    ],
+    "description": "开关选择器"
+  },
+  "u-slider": {
+    "attributes": [
+      "v-model",
+      "min",
+      "max",
+      "step",
+      "block-width",
+      "step",
+      "height",
+      "inactive-color",
+      "active-color",
+      "block-color",
+      "block-style",
+      "disabled",
+      "use-slot"
+    ],
+    "description": "滑动选择器"
+  },
+  "u-circle-progress": {
+    "attributes": [
+      "percent",
+      "inactive-color",
+      "active-color",
+      "width",
+      "border-width",
+      "duration",
+      "type",
+      "bg-color"
+    ],
+    "description": "圆形进度条"
+  },
+  "u-line-progress": {
+    "attributes": [
+      "percent",
+      "round",
+      "type",
+      "active-color",
+      "inactive-color",
+      "show-percent",
+      "height",
+      "striped",
+      "striped-active"
+    ],
+    "description": "线形进度条"
+  },
+  "u-table": {
+    "attributes": [
+      "border-color",
+      "bg-color",
+      "align",
+      "padding",
+      "font-size",
+      "color",
+      "th-style"
+    ],
+    "subtags": ["u-tr", "u-td"],
+    "description": "表格"
+  },
+  "u-tr": {
+    "attributes": ["width"]
+  },
+  "u-td": {
+    "attributes": ["width"]
+  },
+  "u-count-down": {
+    "attributes": [
+      "timestamp",
+      "autoplay",
+      "separator",
+      "separator-size",
+      "separator-color",
+      "font-size",
+      "show-border",
+      "border-color",
+      "bg-color",
+      "color",
+      "height",
+      "show-days",
+      "show-hours",
+      "show-minutes",
+      "show-seconds"
+    ],
+    "description": "倒计时"
+  },
+  "u-count-to": {
+    "attributes": [
+      "start-val",
+      "end-val",
+      "duration",
+      "autoplay",
+      "decimals",
+      "use-easing",
+      "separator",
+      "color",
+      "font-size",
+      "bold"
+    ],
+    "description": "操作菜单"
+  },
+  "u-action-sheet": {
+    "attributes": [
+      "list",
+      "tips",
+      "cancel-btn",
+      "border-radius",
+      "mask-close-able",
+      "safe-area-inset-bottom",
+      "z-index",
+      "cancel-text"
+    ],
+    "description": "用于从底部弹出一个操作菜单，供用户选择并返回结果"
+  },
+  "u-alert-type": {
+    "attributes": [
+      "title",
+      "description",
+      "close-able",
+      "type",
+      "close-text",
+      "show-icon",
+      "show"
+    ],
+    "description": "警告提示"
+  },
+  "u-toast": {
+    "attributes": ["z-index"],
+    "description": "消息提示"
+  },
+  "u-notice-bar": {
+    "attributes": [
+      "list",
+      "type",
+      "volume-icon",
+      "more-icon",
+      "close-icon",
+      "autoplay",
+      "color",
+      "bg-color",
+      "mode",
+      "show",
+      "volume-size",
+      "font-size",
+      "duration",
+      "speed",
+      "is-circular",
+      "play-state",
+      "disable-touch",
+      "padding",
+      "border-radius",
+      "no-list-hidden"
+    ],
+    "description": "滚动通知"
+  },
+  "u-top-tips": {
+    "attributes": ["navbar-height", "z-index"],
+    "description": "顶部提示"
+  },
+  "u-collapse": {
+    "attributes": [
+      "accordion",
+      "arrow",
+      "arrow-color",
+      "item-style",
+      "head-style",
+      "body-style",
+      "hover-class"
+    ],
+    "subtags": ["u-collapse-item"],
+    "description": "折叠面板"
+  },
+  "u-collapse-item": {
+    "attributes": [
+      "title",
+      "index",
+      "disabled",
+      "open",
+      "name",
+      "align",
+      "active-style"
+    ]
+  },
+  "u-popup": {
+    "attributes": [
+      "mode",
+      "mask",
+      "length",
+      "zoom",
+      "safe-area-inset-bottom",
+      "mask-close-able",
+      "custom-style",
+      "border-radius",
+      "z-index",
+      "closeable",
+      "close-icon",
+      "close-icon-pos",
+      "close-icon-color",
+      "close-icon-size",
+      "width",
+      "height"
+    ],
+    "description": "弹出层"
+  },
+  "u-swipe-action": {
+    "attributes": [
+      "bg-color",
+      "index",
+      "btn-width",
+      "disabled",
+      "vibrate-short",
+      "show",
+      "options"
+    ],
+    "description": "滑动操作"
+  },
+  "u-modal": {
+    "attributes": [
+      "v-model",
+      "z-index",
+      "title",
+      "width",
+      "content",
+      "show-title",
+      "show-confirm-button",
+      "show-cancel-button",
+      "confirm-text",
+      "cancel-text",
+      "cancel-color",
+      "confirm-color",
+      "border-radius",
+      "title-style",
+      "content-style",
+      "cancel-style",
+      "confirm-style",
+      "zoom",
+      "async-close",
+      "mask-close-able"
+    ],
+    "description": "模态框"
+  },
+  "u-line": {
+    "attributes": [
+      "color",
+      "length",
+      "direction",
+      "hair-line",
+      "margin",
+      "border-style"
+    ],
+    "description": "线条"
+  },
+  "u-card": {
+    "attributes": [
+      "full",
+      "title",
+      "title-color",
+      "title-size",
+      "sub-title",
+      "sub-title-color",
+      "sub-title-size",
+      "border",
+      "index",
+      "margin",
+      "border-radius",
+      "head-style",
+      "body-style",
+      "foot-style",
+      "head-border-bottom",
+      "foot-border-top",
+      "thumb",
+      "thumb-width",
+      "thumb-circle",
+      "padding",
+      "show-head",
+      "show-foot"
+    ],
+    "description": "卡片"
+  },
+  "u-mask": {
+    "attributes": [
+      "show",
+      "z-index",
+      "custom-style",
+      "duration",
+      "zoom",
+      "mask-click-able"
+    ],
+    "description": "遮罩层"
+  },
+  "u-no-network": {
+    "attributes": ["tips", "zIndex", "image"],
+    "description": "无网络提示"
+  },
+  "u-grid": {
+    "attributes": ["col", "border", "align", "hover-class"],
+    "subtags": ["u-grid-item"],
+    "description": "宫格组"
+  },
+  "u-grid-item": {
+    "attributes": ["bg-color", "index"],
+    "description": "宫格"
+  },
+  "u-swiper": {
+    "attributes": [
+      "list",
+      "title",
+      "mode",
+      "height",
+      "indicator-pos",
+      "effect3d",
+      "autoplay",
+      "interval",
+      "circular",
+      "duration",
+      "border-radius",
+      "title-style",
+      "effect3d-previous-margin",
+      "img-mode",
+      "name",
+      "bg-color"
+    ],
+    "description": "轮播图"
+  },
+  "u-time-line": {
+    "subtags": ["u-time-line-item"],
+    "description": "时间轴组"
+  },
+  "u-time-line-item": {
+    "attributes": ["bg-color", "node-top"],
+    "description": "时间轴"
+  },
+  "u-skeleton": {
+    "attributes": [
+      "el-color",
+      "bg-color",
+      "animation",
+      "border-radius",
+      "loading"
+    ],
+    "description": "骨架屏"
+  },
+  "u-sticky": {
+    "attributes": [
+      "offset-top",
+      "index",
+      "enable",
+      "bg-color",
+      "z-index",
+      "h5-nav-height"
+    ],
+    "description": "吸顶"
+  },
+  "u-waterfall": {
+    "attributes": ["add-time", "idKey"],
+    "description": "瀑布流"
+  },
+  "u-divider": {
+    "attributes": [
+      "half-width",
+      "border-color",
+      "color",
+      "fontSize",
+      "bg-color",
+      "height",
+      "type",
+      "margin-top",
+      "margin-bottom",
+      "use-slot"
+    ],
+    "description": "分割线"
+  },
+  "u-back-top": {
+    "attributes": [
+      "mode",
+      "icon",
+      "tips",
+      "duration",
+      "scroll-top",
+      "top",
+      "bottom",
+      "right",
+      "z-index",
+      "icon-style",
+      "custom-style"
+    ],
+    "description": "返回顶部"
+  },
+  "u-navbar": {
+    "attributes": [
+      "height",
+      "back-icon-color",
+      "back-icon-name",
+      "back-icon-size",
+      "back-text",
+      "back-text-style",
+      "title",
+      "title-width",
+      "title-color",
+      "title-size",
+      "z-index",
+      "is-back",
+      "background",
+      "is-fixed",
+      "border-bottom",
+      "custom-back"
+    ],
+    "description": "导航栏"
+  },
+  "u-tabs": {
+    "attributes": [
+      "is-scroll",
+      "list",
+      "current",
+      "height",
+      "font-size",
+      "duration",
+      "active-color",
+      "inactive-color",
+      "bar-width",
+      "bar-height",
+      "gutter",
+      "bg-color",
+      "name",
+      "bold",
+      "show-bar",
+      "bar-style",
+      "active-item-style"
+    ],
+    "description": "选项卡"
+  },
+  "u-tabs-swiper": {
+    "attributes": [
+      "is-scroll",
+      "list",
+      "current",
+      "height",
+      "font-size",
+      "swiper-width",
+      "active-color",
+      "inactive-color",
+      "bar-width",
+      "bar-height",
+      "gutter",
+      "bg-color",
+      "name",
+      "bold",
+      "show-bar",
+      "bar-style",
+      "active-item-style"
+    ],
+    "description": "全屏选项卡"
+  },
+  "u-subsection": {
+    "attributes": [
+      "list",
+      "current",
+      "active-color",
+      "inactive-color",
+      "mode",
+      "font-size",
+      "animation",
+      "bold",
+      "bg-color",
+      "button-color"
+    ],
+    "description": "分段器"
+  },
+  "u-index-list": {
+    "attributes": [
+      "scroll-top",
+      "index-list",
+      "z-index",
+      "sticky",
+      "offset-top",
+      "active-color"
+    ],
+    "subtags": ["u-index-anchor"],
+    "description": "索引列表"
+  },
+  "u-index-anchor": {
+    "attributes": ["use-slot", "index", "custom-style"],
+    "description": "索引锚点"
+  },
+  "u-steps": {
+    "attributes": [
+      "mode",
+      "list",
+      "current",
+      "active-color",
+      "un-active-color",
+      "icon"
+    ],
+    "description": "步骤条"
+  },
+  "u-empty": {
+    "attributes": [
+      "color",
+      "text",
+      "src",
+      "font-size",
+      "mode",
+      "img-width",
+      "img-height",
+      "show",
+      "margin-top"
+    ],
+    "description": "内容为空"
+  },
+  "u-link": {
+    "attributes": [
+      "color",
+      "font-size",
+      "under-line",
+      "href",
+      "line-color",
+      "mp-tips"
+    ],
+    "description": "超链接"
+  },
+  "u-section": {
+    "attributes": [
+      "title",
+      "sub-title",
+      "right",
+      "show-line",
+      "font-size",
+      "bold",
+      "color",
+      "sub-color"
+    ],
+    "description": "查看更多"
+  },
+  "u-message-input": {
+    "attributes": [
+      "maxlength",
+      "dot-fill",
+      "mode",
+      "value",
+      "breathe",
+      "focus",
+      "bold",
+      "font-size",
+      "active-color",
+      "focus",
+      "width",
+      "disabled-keyboard"
+    ],
+    "description": "验证码输入"
+  },
+  "u-loadmore": {
+    "attributes": [
+      "status",
+      "bg-color",
+      "icon",
+      "icon-type",
+      "icon-color",
+      "is-dot",
+      "color",
+      "font-size",
+      "load-text",
+      "margin-top",
+      "margin-bottom"
+    ],
+    "description": "加载更多"
+  },
+  "u-read-more": {
+    "attributes": [
+      "show-height",
+      "toggle",
+      "close-text",
+      "font-size",
+      "open-text",
+      "color",
+      "shadow-style"
+    ],
+    "description": "展开阅读更多"
+  },
+  "u-lazy-load": {
+    "attributes": [
+      "index",
+      "image",
+      "loading-img",
+      "error-img",
+      "threshold",
+      "duration",
+      "effect",
+      "is-effect",
+      "border-radius",
+      "height",
+      "img-mode"
+    ],
+    "description": "懒加载"
+  },
+  "u-gap": {
+    "attributes": ["bg-color", "height", "margin-top", "margin-bottom"],
+    "description": "间隔槽"
+  },
+  "u-avatar": {
+    "attributes": [
+      "bg-color",
+      "src",
+      "size",
+      "mode",
+      "text",
+      "img-mode",
+      "index"
+    ],
+    "description": "头像"
+  },
+  "u-loading": {
+    "attributes": ["mode", "color", "size", "show"],
+    "description": "加载动画"
+  }
+}

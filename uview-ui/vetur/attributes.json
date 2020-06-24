@@ -1,0 +1,2520 @@
+{
+  "disabled": {
+    "type": "boolean",
+    "description": "是否禁用"
+  },
+  "loading": {
+    "type": "boolean",
+    "description": "是否带 loading 图标"
+  },
+  "size": {
+    "options": ["default", "medium", "mini"],
+    "description": "大小尺寸"
+  },
+  "color": {
+    "type": "string",
+    "description": "颜色"
+  },
+  "index": {
+    "type": "string|number",
+    "description": "点击时，会通过 click 事件返回该值"
+  },
+  "custom-style": {
+    "type": "object",
+    "description": "自定义样式，对象形式"
+  },
+  "border": {
+    "type": "boolean",
+    "description": "是否显示边框"
+  },
+  "border-color": {
+    "type": "string",
+    "description": "边框颜色"
+  },
+  "border-bottom": {
+    "type": "boolean",
+    "description": "是否显示下边框"
+  },
+  "border-radius": {
+    "type": "string|number",
+    "description": "边框圆角值，单位rpx"
+  },
+  "title": {
+    "type": "string",
+    "description": "标题"
+  },
+  "title-style": {
+    "type": "object",
+    "description": "标题样式，对象形式"
+  },
+  "icon": {
+    "type": "string",
+    "description": "图标，限 uView 内置图标"
+  },
+  "hover-class": {
+    "type": "string",
+    "description": "点击反馈，none 为无效果"
+  },
+  "required": {
+    "type": "boolean",
+    "description": "是否显示左边表示必填的星号"
+  },
+  "safe-area-inset-bottom": {
+    "type": "boolean",
+    "description": "是否开启底部安全区适配"
+  },
+  "z-index": {
+    "type": "string|number",
+    "description": "弹出时的 z-index 值"
+  },
+  "cancel-color": {
+    "type": "string",
+    "description": "取消按钮的颜色"
+  },
+  "confirm-color": {
+    "type": "string",
+    "description": "确认按钮的颜色"
+  },
+  "focus": {
+    "type": "boolean",
+    "description": "是否自动获得焦点"
+  },
+  "mask-close-able": {
+    "type": "boolean",
+    "description": "点击遮罩是否可以关闭"
+  },
+  "mask": {
+    "type": "boolean",
+    "description": "是否显示遮罩"
+  },
+  "vibrate-short": {
+    "type": "boolean",
+    "description": "是否使手机发生短促震动，目前只在iOS的微信小程序和微信小程序开发工具有效"
+  },
+  "bg-color": {
+    "type": "string",
+    "description": "背景颜色"
+  },
+  "animation": {
+    "type": "boolean",
+    "description": "是否开启动画"
+  },
+  "img-mode": {
+    "options": [
+      "scaleToFill",
+      "aspectFit",
+      "aspectFill",
+      "widthFix",
+      "heightFix",
+      "top",
+      "bottom",
+      "center",
+      "left",
+      "right",
+      "top left",
+      "top right",
+      "bottom left",
+      "bottom right"
+    ],
+    "description": "图片的裁剪模式"
+  },
+  "u-row/gutter": {
+    "type": "string|number",
+    "description": "栅格间隔，左右各为此值的一半，单位rpx"
+  },
+  "u-row/justify": {
+    "options": [
+      "start",
+      "flex-start",
+      "end",
+      "flex-end",
+      "center",
+      "space-around",
+      "between",
+      "space-between"
+    ],
+    "description": "水平排列方式(微信小程序暂不支持)"
+  },
+  "u-row/align": {
+    "options": ["center", "top", "bottom"],
+    "description": "垂直排列方式"
+  },
+  "u-col/span": {
+    "type": "string|number",
+    "description": "栅格占据的列数，总12等分"
+  },
+  "u-col/offset": {
+    "type": "string|number",
+    "description": "分栏左边偏移"
+  },
+  "u-cell-item/value": {
+    "type": "string",
+    "description": "右侧内容"
+  },
+  "u-cell-item/label": {
+    "type": "string",
+    "description": "标题下方的描述信息"
+  },
+  "u-cell-item/border-gap": {
+    "type": "boolean",
+    "description": "border-bottom = true 时，cell 列表中间的条目的下边框是否与左边有一个间隔"
+  },
+  "u-cell-item/arrow": {
+    "type": "boolean",
+    "description": "是否显示右侧箭头，开启的话，将会默认带上点击反馈，可通过 hover-class 配置"
+  },
+  "u-cell-item/arrow-direction": {
+    "options": ["right", "up", "bottom"],
+    "description": "箭头方向"
+  },
+  "u-cell-item/value-style": {
+    "type": "object",
+    "description": "右侧内容样式，对象形式"
+  },
+  "u-cell-item/label-style": {
+    "type": "object",
+    "description": "标题下方描述信息的样式，对象形式"
+  },
+  "u-cell-item/title-width": {
+    "type": "string|number",
+    "description": "标题的宽度，单位rpx"
+  },
+  "u-cell-item/icon-size": {
+    "type": "string|number",
+    "description": "左边通过 icon 参数传入的图标的大小，单位rpx"
+  },
+  "u-cell-item/center": {
+    "type": "boolean",
+    "description": "是否使内容垂直居中"
+  },
+  "u-button/ripple": {
+    "type": "boolean",
+    "description": "是否开启点击水波纹效果"
+  },
+  "u-button/ripple-bg-color": {
+    "type": "string",
+    "description": "水波纹的背景色，ripple = true 时有效"
+  },
+  "u-button/type": {
+    "options": ["default", "primary", "success", "info", "warning", "error"],
+    "description": "按钮的样式类型"
+  },
+  "u-button/plain": {
+    "type": "boolean",
+    "description": "按钮是否镂空，背景色透明"
+  },
+  "u-button/hair-line": {
+    "type": "boolean",
+    "description": "是否显示按钮的细边框"
+  },
+  "u-button/shape": {
+    "options": ["square", "circle"],
+    "description": "按钮外观形状"
+  },
+  "u-button/form-type": {
+    "options": ["submit", "reset"],
+    "description": "用于 form 组件"
+  },
+  "u-button/open-type": {
+    "options": [
+      "feedback",
+      "share",
+      "getUserInfo",
+      "contact",
+      "getPhoneNumber",
+      "launchApp",
+      "openSetting",
+      "getAuthorize",
+      "contactShare",
+      "lifestyle",
+      "openGroupProfile"
+    ],
+    "description": "开放能力"
+  },
+  "u-button/hover-start-time": {
+    "type": "number",
+    "description": "按住后多久出现点击态，单位毫秒"
+  },
+  "u-button/hover-stay-time": {
+    "type": "number",
+    "description": "手指松开后点击态保留时间，单位毫秒"
+  },
+  "u-button/app-parameter": {
+    "type": "boolean",
+    "description": "打开 APP 时传递的参数，open-type = launchApp 时有效"
+  },
+  "u-button/hover-stop-propagation": {
+    "type": "boolean",
+    "description": "指定是否阻止本节点的祖先节点出现点击态"
+  },
+  "u-button/lang": {
+    "options": ["zh_CN", "zh_TW", "en"],
+    "description": "指定返回用户信息的语言"
+  },
+  "u-button/session-from": {
+    "type": "string",
+    "description": "会话来源，open-type = contact 时有效"
+  },
+  "u-button/send-message-title": {
+    "type": "string",
+    "description": "会话内消息卡片标题，open-type = contact 时有效"
+  },
+  "u-button/send-message-path": {
+    "type": "string",
+    "description": "会话内消息卡片点击跳转小程序路径，open-type = contact 时有效"
+  },
+  "u-button/send-message-img": {
+    "type": "string",
+    "description": "会话内消息卡片图片，open-type = contact时有效"
+  },
+  "u-button/show-message-card": {
+    "type": "boolean",
+    "description": "是否显示会话内消息卡片，open-type = contact时有效"
+  },
+  "u-badge/count": {
+    "type": "string|number",
+    "description": "展示的数字，大于 overflowCount 时显示为 ${overflowCount}+，为 0 且 show-zero = false 时隐藏"
+  },
+  "u-badge/is-dot": {
+    "type": "boolean",
+    "description": "不展示数字，只有一个小点"
+  },
+  "u-badge/absolute": {
+    "type": "boolean",
+    "description": "是否绝对定位，为 true 时，offset 参数才有效"
+  },
+  "u-badge/overflow-count": {
+    "type": "string|number",
+    "description": "展示封顶的数字值"
+  },
+  "u-badge/type": {
+    "options": ["error", "success", "primary", "warning", "info"],
+    "description": "使用预设的背景颜色"
+  },
+  "u-badge/show-zero": {
+    "type": "boolean",
+    "description": "当数值为 0 时，是否展示 Badge"
+  },
+  "u-badge/offset": {
+    "type": "array",
+    "description": "设置badge的位置偏移，格式为 [x, y]，也即设置的为 top 和 right 的值，单位rpx。absolute = true 时有效"
+  },
+  "u-badge/bgColor": {
+    "type": "string",
+    "description": "背景颜色，优先级比 type 高"
+  },
+  "u-badge/is-center": {
+    "type": "boolean",
+    "description": "组件中心点是否和父组件右上角重合，优先级比 offset 高"
+  },
+  "u-tag/type": {
+    "options": ["primary", "success", "info", "warning", "error"],
+    "description": "主题类型"
+  },
+  "u-tag/shape": {
+    "options": ["square", "circle", "circleLeft", "circleRight"],
+    "description": "标签形状"
+  },
+  "u-tag/text": {
+    "type": "string",
+    "description": "标签的文字内容"
+  },
+  "u-tag/close-color": {
+    "type": "string",
+    "description": "关闭按钮的颜色"
+  },
+  "u-tag/mode": {
+    "options": ["light", "dark", "plain"],
+    "description": "模式选择"
+  },
+  "u-tag/closeable": {
+    "type": "boolean",
+    "description": "是否可关闭，设置为true，文字右边会出现一个关闭图标"
+  },
+  "u-tag/show": {
+    "type": "boolean",
+    "description": "标签显示与否"
+  },
+  "u-input/type": {
+    "options": ["text", "select ", "password ", "textarea ", "number"],
+    "description": "模式选择"
+  },
+  "u-input/clearable": {
+    "type": "boolean",
+    "description": "是否显示右侧的清除图标"
+  },
+  "u-input/input-align": {
+    "options": ["left", "center", "right"],
+    "description": "输入框文字的对齐方式"
+  },
+  "u-input/maxlength": {
+    "type": "string|number",
+    "description": "输入框的最大可输入长度"
+  },
+  "u-input/placeholderStyle": {
+    "type": "string",
+    "description": "placeholder 的样式"
+  },
+  "u-input/confirm-type": {
+    "type": "string",
+    "description": "设置键盘右下角按钮的文字，仅在 type 为 text 时生效"
+  },
+  "u-input/fixed": {
+    "type": "boolean",
+    "description": "如果 type 为 textarea，且在一个 'position:fixed' 的区域，需要指明为 true"
+  },
+  "u-input/password-icon": {
+    "type": "boolean",
+    "description": "type 为 password 时，是否显示右侧的密码查看图标"
+  },
+  "u-input/auto-height": {
+    "type": "boolean",
+    "description": "是否自动增高输入区域，type 为 textarea 时有效"
+  },
+  "u-input/height": {
+    "type": "string|number",
+    "description": "高度，单位rpx"
+  },
+  "u-form/model": {
+    "type": "object",
+    "description": "表单数据对象"
+  },
+  "u-form/rules": {
+    "type": "object",
+    "description": "检验规则，通过 ref 设置"
+  },
+  "u-form/errorType": {
+    "options": ["message", "none", "border-bottom", "border", "toast"],
+    "description": "错误的提示方式"
+  },
+  "u-form-item/label": {
+    "type": "string",
+    "description": "左侧提示文字"
+  },
+  "u-form-item/prop": {
+    "type": "object",
+    "description": "model 对象的属性名，在使用 validate、resetFields 方法的情况下，该属性是必填的"
+  },
+  "u-form-item/label-position": {
+    "options": ["left", "top"],
+    "description": "提示文字的位置"
+  },
+  "u-form-item/label-width": {
+    "type": "string|number",
+    "description": "提示文字的宽度，单位rpx"
+  },
+  "u-form-item/label-style": {
+    "type": "object",
+    "description": "提示文字的样式，对象形式"
+  },
+  "u-form-item/label-align": {
+    "options": ["left", "center", "right"],
+    "description": "提示文字的对齐方式"
+  },
+  "u-form-item/right-icon": {
+    "type": "string",
+    "description": "右侧自定义字体图标，uView 内置图标或图片地址"
+  },
+  "u-form-item/left-icon": {
+    "type": "string",
+    "description": "左侧自定义字体图标，uView 内置图标或图片地址"
+  },
+  "u-form-item/left-icon-style": {
+    "type": "object",
+    "description": "左侧图标的样式"
+  },
+  "u-form-item/right-icon-style": {
+    "type": "object",
+    "description": "右侧图标的样式"
+  },
+  "u-calendar/mode": {
+    "options": ["date", "range"],
+    "description": "选择日期的模式，date 为单个日期，range 为选择日期范围"
+  },
+  "u-calendar/v-model": {
+    "type": "boolean",
+    "description": "用于控制日历的弹出与收起"
+  },
+  "u-calendar/change-year": {
+    "type": "boolean",
+    "description": "是否显示顶部的切换年份方向的按钮"
+  },
+  "u-calendar/change-month": {
+    "type": "boolean",
+    "description": "是否显示顶部的切换月份方向的按钮"
+  },
+  "u-calendar/max-year": {
+    "type": "string|number",
+    "description": "可切换的最大年份"
+  },
+  "u-calendar/min-year": {
+    "type": "string|number",
+    "description": "可切换的最小年份"
+  },
+  "u-calendar/min-date": {
+    "type": "string|number",
+    "description": "最小可选日期"
+  },
+  "u-calendar/max-date": {
+    "type": "string|number",
+    "description": "最大可选日期"
+  },
+  "u-calendar/month-arrow-color": {
+    "type": "string",
+    "description": "月份切换按钮箭头颜色"
+  },
+  "u-calendar/year-arrow-color": {
+    "type": "string",
+    "description": "年份切换按钮箭头颜色"
+  },
+  "u-calendar/color": {
+    "type": "string",
+    "description": "日期字体的默认颜色"
+  },
+  "u-calendar/active-bg-color": {
+    "type": "string",
+    "description": "起始/结束日期按钮的背景色"
+  },
+  "u-calendar/active-color": {
+    "type": "string",
+    "description": "起始/结束日期按钮的字体颜色"
+  },
+  "u-calendar/range-bg-color": {
+    "type": "string",
+    "description": "起始/结束日期之间的区域的背景颜色"
+  },
+  "u-calendar/range-color": {
+    "type": "string",
+    "description": "选择范围内字体颜色"
+  },
+  "u-calendar/start-text": {
+    "type": "string",
+    "description": "起始日期底部的提示文字"
+  },
+  "u-calendar/end-text": {
+    "type": "string",
+    "description": "结束日期底部的提示文字"
+  },
+  "u-calendar/btn-type": {
+    "options": ["primary", "default", "success", "info", "warning", "error"],
+    "description": "底部确定按钮的主题"
+  },
+  "u-calendar/toolTip": {
+    "type": "string",
+    "description": "顶部提示文字，如设置名为 tooltip 的 slot，此参数将失效"
+  },
+  "u-calendar/closeable": {
+    "type": "boolean",
+    "description": "是否显示右上角的关闭图标"
+  },
+  "u-select/mode": {
+    "options": ["single-column", "mutil-column", "single-column-auto"],
+    "description": "模式选择"
+  },
+  "u-select/list": {
+    "type": "array",
+    "description": "列数据，数组形式"
+  },
+  "u-select/v-model": {
+    "type": "boolean",
+    "description": "用于控制选择器的弹出与收起"
+  },
+  "u-select/default-value": {
+    "type": "array",
+    "description": "提供的默认选中的下标"
+  },
+  "u-select/value-name": {
+    "type": "string",
+    "description": "自定义 list 数据的 value 属性名"
+  },
+  "u-select/label-name": {
+    "type": "string",
+    "description": "自定义 list 数据的 label 属性名"
+  },
+  "u-select/child-name": {
+    "type": "string",
+    "description": "自定义 list 数据的 children 属性名，只对多列联动模式有效"
+  },
+  "u-select/title": {
+    "type": "string",
+    "description": "顶部中间的标题"
+  },
+  "u-keyboard/mode": {
+    "options": ["number", "car", "card"],
+    "description": "键盘类型"
+  },
+  "u-keyboard/dot-enabled": {
+    "type": "boolean",
+    "description": "是否显示'.'按键，只在 mode=number 时有效"
+  },
+  "u-keyboard/tooltip": {
+    "type": "boolean",
+    "description": "是否显示键盘顶部工具条"
+  },
+  "u-keyboard/tips": {
+    "type": "string",
+    "description": "工具条中间的提示文字"
+  },
+  "u-keyboard/show-tips": {
+    "type": "boolean",
+    "description": "是否显示工具条中间的文字"
+  },
+  "u-keyboard/cancel-btn": {
+    "type": "boolean",
+    "description": "是否显示工具条左边的取消按钮"
+  },
+  "u-keyboard/confirm-btn": {
+    "type": "boolean",
+    "description": "是否显示工具条右边的完成按钮"
+  },
+  "u-keyboard/random": {
+    "type": "boolean",
+    "description": "是否打乱键盘按键的顺序"
+  },
+  "u-picker/params": {
+    "type": "object",
+    "description": "需要显示的参数，mode=region 或 mode=time 时有效"
+  },
+  "u-picker/mode": {
+    "options": ["region", "time", "selector", "multiSelector"],
+    "description": "模式选择"
+  },
+  "u-picker/start-year": {
+    "type": "string|number",
+    "description": "可选的开始年份，mode=time 时有效"
+  },
+  "u-picker/end-year": {
+    "type": "string|number",
+    "description": "可选的结束年份，mode=time 时有效"
+  },
+  "u-picker/default-time": {
+    "type": "string",
+    "description": "默认选中的时间，mode=time 时有效"
+  },
+  "u-picker/default-region": {
+    "type": "array",
+    "description": "默认选中的地区，中文形式，mode=region 时有效"
+  },
+  "u-picker/area-code": {
+    "type": "array",
+    "description": "默认选中的地区，编号形式，mode=region 时有效"
+  },
+  "u-picker/default-selector": {
+    "type": "array",
+    "description": "数组形式，其中每一项表示选择了range对应项中的第几个(下标从0开始)"
+  },
+  "u-picker/show-time-tag": {
+    "type": "boolean",
+    "description": "时间模式时，是否显示后面的年月日中文提示"
+  },
+  "u-picker/range": {
+    "type": "array",
+    "description": "自定义选择的数据，mode=selector 或 mode=multiSelector 时有效"
+  },
+  "u-picker/range-key": {
+    "type": "string",
+    "description": "当 range 参数的元素为对象时，指定Object中的哪个key的值作为选择器显示内容"
+  },
+  "u-picker/title": {
+    "type": "string",
+    "description": "顶部中间的标题"
+  },
+  "u-rate/count": {
+    "type": "string|number",
+    "description": "最多可选的星星数量"
+  },
+  "u-rate/current": {
+    "type": "string|number",
+    "description": "默认选中的星星数量"
+  },
+  "u-rate/size": {
+    "type": "string|number",
+    "description": "星星的大小，单位rpx"
+  },
+  "u-rate/inactive-color": {
+    "type": "string",
+    "description": "未选中星星的颜色"
+  },
+  "u-rate/active-color": {
+    "type": "string",
+    "description": "选中的星星颜色"
+  },
+  "u-rate/gutter": {
+    "type": "string|number",
+    "description": "星星之间的距离"
+  },
+  "u-rate/min-count": {
+    "type": "string|number",
+    "description": "最少选中星星的个数"
+  },
+  "u-rate/active-icon": {
+    "type": "string",
+    "description": "选中时的图标，限 uView 内置图标"
+  },
+  "u-rate/inactive-icon": {
+    "type": "string",
+    "description": "未选中时的图标，限 uView 内置图标"
+  },
+  "u-search/shape": {
+    "options": ["round", "square"],
+    "description": "搜索框形状"
+  },
+  "u-search/clearabled": {
+    "type": "boolean",
+    "description": "是否启用清除控件"
+  },
+  "u-search/show-action": {
+    "type": "boolean",
+    "description": "是否显示右侧控件"
+  },
+  "u-search/action-text": {
+    "type": "string",
+    "description": "右侧控件文字"
+  },
+  "u-search/action-style": {
+    "type": "object",
+    "description": "右侧控件的样式，对象形式"
+  },
+  "u-search/input-align": {
+    "options": ["left", "center", "right"],
+    "description": "输入框内容水平对齐方式"
+  },
+  "u-search/value": {
+    "type": "string",
+    "description": "输入框初始值"
+  },
+  "u-search/height": {
+    "type": "string|number",
+    "description": "输入框高度，单位rpx"
+  },
+  "u-search/search-icon-color": {
+    "type": "string",
+    "description": "搜索图标的颜色"
+  },
+  "u-search/color": {
+    "type": "string",
+    "description": "输入框字体颜色"
+  },
+  "u-search/placeholder-color": {
+    "type": "string",
+    "description": "placeholder 的颜色"
+  },
+  "u-search/margin": {
+    "type": "string",
+    "description": "组件与其他上下左右元素之间的距离，带单位的字符串形式"
+  },
+  "u-search/maxlength": {
+    "type": "string|number",
+    "description": "输入框最大能输入的长度，-1为不限制长度"
+  },
+  "u-search/input-style": {
+    "type": "object",
+    "description": "自定义输入框样式，对象形式"
+  },
+  "u-search/search-icon": {
+    "type": "string",
+    "description": "输入框左边的图标，uView 内置图标或图片路径"
+  },
+  "u-number-box/v-model": {
+    "type": "number",
+    "description": "输入框初始值"
+  },
+  "u-number-box/min": {
+    "type": "number",
+    "description": "用户可输入的最小值"
+  },
+  "u-number-box/max": {
+    "type": "number",
+    "description": "用户可输入的最大值"
+  },
+  "u-number-box/step": {
+    "type": "number",
+    "description": "步长，每次加或减的值"
+  },
+  "u-number-box/size": {
+    "type": "string|number",
+    "description": "输入框文字和按钮字体大小，单位rpx"
+  },
+  "u-number-box/color": {
+    "type": "string",
+    "description": "输入框文字和加减按钮图标的颜色"
+  },
+  "u-number-box/input-width": {
+    "type": "string|number",
+    "description": "输入框宽度，单位rpx"
+  },
+  "u-number-box/input-height": {
+    "type": "string|number",
+    "description": "输入框和按钮的高度，单位rpx"
+  },
+  "u-number-box/disabled-input": {
+    "type": "boolean",
+    "description": "是否禁止输入框手动输入值"
+  },
+  "u-number-box/cursor-spacing": {
+    "type": "string|number",
+    "description": "指定光标于键盘的距离，避免键盘遮挡输入框，单位rpx"
+  },
+  "u-upload/action": {
+    "type": "string",
+    "description": "服务器上传地址"
+  },
+  "u-upload/max-count": {
+    "type": "string|number",
+    "description": "最大选择图片的数量"
+  },
+  "u-upload/width": {
+    "type": "string|number",
+    "description": "图片预览区域和添加图片按钮的宽度(高等于宽)，单位rpx，不能是百分比，或者auto"
+  },
+  "u-upload/custom-btn": {
+    "type": "boolean",
+    "description": "如果需要自定义选择图片的按钮，设置为true"
+  },
+  "u-upload/show-progress": {
+    "type": "boolean",
+    "description": "是否显示进度条"
+  },
+  "u-upload/disabled": {
+    "type": "boolean",
+    "description": "是否启用(显示/移仓)组件"
+  },
+  "u-upload/image-mode": {
+    "type": "string",
+    "description": "预览图片等显示模式，可选值为 uni 的 image 的 mode 属性值"
+  },
+  "u-upload/header": {
+    "type": "object",
+    "description": "上传携带的头信息，对象形式"
+  },
+  "u-upload/form-data": {
+    "type": "object",
+    "description": "上传额外携带的参数"
+  },
+  "u-upload/name": {
+    "type": "string",
+    "description": "上传文件的字段名，供后端获取使用"
+  },
+  "u-upload/size-type": {
+    "type": "array",
+    "description": "original 原图，compressed 压缩图，默认二者都有"
+  },
+  "u-upload/source-type": {
+    "type": "array",
+    "description": "选择图片的来源，album-从相册选图，camera-使用相机，默认二者都有"
+  },
+  "u-upload/preview-full-image": {
+    "type": "boolean",
+    "description": "是否可以通过 uni.previewImage 预览已选择的图片"
+  },
+  "u-upload/multiple": {
+    "type": "boolean",
+    "description": "是否开启图片多选，部分安卓机型不支持"
+  },
+  "u-upload/deletable": {
+    "type": "boolean",
+    "description": "是否显示删除图片的按钮"
+  },
+  "u-upload/max-size": {
+    "type": "string|number",
+    "description": "选择单个文件的最大大小，单位B(byte)，默认不限制"
+  },
+  "u-upload/file-list": {
+    "type": "array",
+    "description": "默认显示的图片列表，数组元素为对象，必须提供url属性"
+  },
+  "u-upload/upload-text": {
+    "type": "boolean",
+    "description": "选择图片按钮的提示文字"
+  },
+  "u-upload/auto-upload": {
+    "type": "boolean",
+    "description": "选择完图片是否自动上传"
+  },
+  "u-upload/show-tips": {
+    "type": "boolean",
+    "description": "特殊情况下是否自动提示toast"
+  },
+  "u-upload/show-upload-list": {
+    "type": "boolean",
+    "description": "是否显示组件内部的图片预览"
+  },
+  "u-upload/del-icon": {
+    "type": "string",
+    "description": "右上角删除图标，限 uView 内置图标"
+  },
+  "u-upload/del-bg-color": {
+    "type": "string",
+    "description": "右上角关闭按钮的背景颜色"
+  },
+  "u-upload/del-color": {
+    "type": "string",
+    "description": "右上角关闭按钮图标的颜色"
+  },
+  "u-upload/to-json": {
+    "type": "string",
+    "description": "如果上传后的值"
+  },
+  "u-upload/before-upload": {
+    "type": "function",
+    "description": "每个文件上传前触发的钩子回调函数"
+  },
+  "u-verification-code/seconds": {
+    "type": "number|string",
+    "description": "倒计时所需的秒数"
+  },
+  "u-verification-code/start-text": {
+    "type": "string",
+    "description": "开始前的提示语"
+  },
+  "u-verification-code/change-text": {
+    "type": "string",
+    "description": "倒计时期间的提示语，必须带有字母 x"
+  },
+  "u-verification-code/end-text": {
+    "type": "string",
+    "description": "倒计结束的提示语"
+  },
+  "u-verification-code/keep-running": {
+    "type": "boolean",
+    "description": "是否在H5刷新或各端返回再进入时继续倒计时"
+  },
+  "u-verification-code/unique-key": {
+    "type": "string",
+    "description": "多个组件之间继续倒计时的区分key"
+  },
+  "u-field/type": {
+    "type": "string",
+    "description": "输入框的类型"
+  },
+  "u-field/right-icon": {
+    "type": "string",
+    "description": "输入框右边的图标，限 uView 内置图标"
+  },
+  "u-field/label": {
+    "type": "string",
+    "description": "输入框左边的文字提示"
+  },
+  "u-field/password": {
+    "type": "boolean",
+    "description": "是否密码输入方式(用点替换文字)，type 为 text 时有效"
+  },
+  "u-field/clearable": {
+    "type": "boolean",
+    "description": "是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容"
+  },
+  "u-field/label-width": {
+    "type": "number|string",
+    "description": "label的宽度，单位rpx"
+  },
+  "u-field/label-align": {
+    "type": "string",
+    "description": "label的文字对齐方式"
+  },
+  "u-field/input-align": {
+    "type": "string",
+    "description": "输入框内容对齐方式"
+  },
+  "u-field/icon-color": {
+    "type": "string",
+    "description": "左边通过 icon 配置的图标的颜色"
+  },
+  "u-field/clear-size": {
+    "type": "number|string",
+    "description": "清除图标的大小，单位rpx"
+  },
+  "u-field/field-style": {
+    "type": "object",
+    "description": "输入框的样式，对象形式"
+  },
+  "u-field/auto-height": {
+    "type": "boolean",
+    "description": "是否自动增高输入区域，type 为 textarea 时有效"
+  },
+  "u-field/error-message": {
+    "type": "string|boolean",
+    "description": "显示的错误提示内容，如果为空字符串或者false，则不显示错误信息"
+  },
+  "u-field/placeholder": {
+    "type": "string",
+    "description": "输入框的提示文字"
+  },
+  "u-field/placeholder-style": {
+    "type": "string",
+    "description": "placeholder的样式"
+  },
+  "u-field/fixed": {
+    "type": "boolean",
+    "description": "如果 type 为 textarea，且在一个 position:fixed 的区域，需要指明为true"
+  },
+  "u-field/disabled": {
+    "type": "boolean",
+    "description": "是否不可输入"
+  },
+  "u-field/maxlength": {
+    "type": "number|string",
+    "description": "最大输入长度，设置为 -1 的时候不限制最大长度"
+  },
+  "u-field/confirm-type": {
+    "type": "string",
+    "description": "设置键盘右下角按钮的文字，仅在 type=text 时生效"
+  },
+  "u-checkbox-group/max": {
+    "type": "string|number",
+    "description": "最多能选中多少个 checkbox"
+  },
+  "u-checkbox-group/disabled": {
+    "type": "boolean",
+    "description": "是否禁用所有 checkbox"
+  },
+  "u-checkbox-group/size": {
+    "type": "string|number",
+    "description": "组件整体的大小，单位rpx"
+  },
+  "u-checkbox-group/active-color": {
+    "type": "string",
+    "description": "选中时的颜色，应用到所有子 checkbox 组件"
+  },
+  "u-checkbox-group/width": {
+    "type": "string",
+    "description": "checkbox 的宽度，需带单位"
+  },
+  "u-checkbox-group/wrap": {
+    "type": "boolean",
+    "description": "是否每个 checkbox 占一行"
+  },
+  "u-checkbox/icon-size": {
+    "type": "string|number",
+    "description": "图标大小，单位rpx"
+  },
+  "u-checkbox/label-size": {
+    "type": "string|number",
+    "description": "label字体大小，单位rpx"
+  },
+  "u-checkbox/name": {
+    "type": "string|number",
+    "description": "checkbox组件的标示符"
+  },
+  "u-checkbox/shape": {
+    "type": "string",
+    "description": "形状"
+  },
+  "u-checkbox/disabled": {
+    "type": "boolean",
+    "description": "是否禁用"
+  },
+  "u-checkbox/label-disabled": {
+    "type": "boolean",
+    "description": "点击文本是否可以操作checkbox"
+  },
+  "u-checkbox/active-color": {
+    "type": "string",
+    "description": "选中时的颜色，如设置 CheckboxGroup 的 active-color 将失效"
+  },
+  "u-radio-group/max": {
+    "type": "string|number",
+    "description": "最多能选中多少个 radio"
+  },
+  "u-radio-group/disabled": {
+    "type": "boolean",
+    "description": "是否禁用所有 radio"
+  },
+  "u-radio-group/size": {
+    "type": "string|number",
+    "description": "组件整体的大小，单位rpx"
+  },
+  "u-radio-group/active-color": {
+    "type": "string",
+    "description": "选中时的颜色，应用到所有子 radio 组件"
+  },
+  "u-radio-group/width": {
+    "type": "string",
+    "description": "radio 的宽度，需带单位"
+  },
+  "u-radio-group/wrap": {
+    "type": "boolean",
+    "description": "是否每个 radio 占一行"
+  },
+  "u-radio/v-model": {
+    "type": "string|number",
+    "description": "被选中radio双向绑定的值"
+  },
+  "u-radio/icon-size": {
+    "type": "string|number",
+    "description": "图标大小，单位rpx"
+  },
+  "u-radio/label-size": {
+    "type": "string|number",
+    "description": "label字体大小，单位rpx"
+  },
+  "u-radio/name": {
+    "type": "string|number",
+    "description": "radio组件的标示符"
+  },
+  "u-radio/shape": {
+    "options": ["circle", "square"],
+    "description": "形状"
+  },
+  "u-radio/label-disabled": {
+    "type": "boolean",
+    "description": "点击文本是否可以操作radio"
+  },
+  "u-radio/active-color": {
+    "type": "string",
+    "description": "选中时的颜色，如设置 radioGroup 的 active-color 将失效"
+  },
+  "u-switch/loading": {
+    "type": "boolean",
+    "description": "是否处于加载中"
+  },
+  "u-switch/size": {
+    "type": "string|number",
+    "description": "开关尺寸，单位rpx"
+  },
+  "u-switch/active-color": {
+    "type": "string",
+    "description": "打开时的背景色"
+  },
+  "u-switch/inactive-color": {
+    "type": "string",
+    "description": "关闭时的背景色"
+  },
+  "u-switch/active-value": {
+    "type": "boolean|number|string",
+    "description": "打开选择器时通过 change 事件发出的值"
+  },
+  "u-switch/inactive-value": {
+    "type": "boolean|number|string",
+    "description": "关闭选择器时通过 change 事件发出的值"
+  },
+  "u-slider/v-model": {
+    "type": "string|number",
+    "description": "滑块选择值"
+  },
+  "u-slider/min": {
+    "type": "string|number",
+    "description": "可选的最小值(0-100之间)"
+  },
+  "u-slider/max": {
+    "type": "string|number",
+    "description": "可选的最大值(0-100之间)"
+  },
+  "u-slider/step": {
+    "type": "string|number",
+    "description": "选择的步长"
+  },
+  "u-slider/block-width": {
+    "type": "string|number",
+    "description": "滑动按钮的宽度(高等于宽)，单位rpx"
+  },
+  "u-slider/height": {
+    "type": "string|number",
+    "description": "滑动选择条的高度，单位rpx"
+  },
+  "u-slider/inactive-color": {
+    "type": "string",
+    "description": "滑动选择条的底部背景颜色"
+  },
+  "u-slider/active-color": {
+    "type": "string",
+    "description": "底部选择部分的背景颜色"
+  },
+  "u-slider/block-color": {
+    "type": "string",
+    "description": "滑块颜色"
+  },
+  "u-slider/block-style": {
+    "type": "object",
+    "description": "给滑块按钮自定义样式，对象形式"
+  },
+  "u-slider/disabled": {
+    "type": "boolean",
+    "description": "是否禁用滑块"
+  },
+  "u-slider/use-slot": {
+    "type": "boolean",
+    "description": "是否使用 slot 传入自定义滑块"
+  },
+  "u-circle-progress/percent": {
+    "type": "string|number",
+    "description": "圆环进度百分比值，为数值类型，0-100"
+  },
+  "u-circle-progress/inactive-color": {
+    "type": "string",
+    "description": "圆环的底色，默认为灰色(该值无法动态变更)"
+  },
+  "u-circle-progress/active-color": {
+    "type": "string",
+    "description": "圆环激活部分的颜色(该值无法动态变更)"
+  },
+  "u-circle-progress/width": {
+    "type": "string|number",
+    "description": "整个圆环组件的宽度，高度默认等于宽度值，单位rpx"
+  },
+  "u-circle-progress/border-width": {
+    "type": "string|number",
+    "description": "圆环的边框宽度，单位rpx"
+  },
+  "u-circle-progress/duration": {
+    "type": "string|number",
+    "description": "整个圆环执行一圈的时间，单位毫秒"
+  },
+  "u-circle-progress/type": {
+    "type": "string",
+    "description": "如设置，active-color 值将会失效"
+  },
+  "u-line-progress/percent": {
+    "type": "string|number",
+    "description": "进度条百分比值，为数值类型，0-100"
+  },
+  "u-line-progress/round": {
+    "type": "boolean",
+    "description": "进度条两端是否为半圆"
+  },
+  "u-line-progress/type": {
+    "type": "string",
+    "description": "如设置，active-color 值将会失效"
+  },
+  "u-line-progress/active-color": {
+    "type": "string",
+    "description": "进度条激活部分的颜色"
+  },
+  "u-line-progress/inactive-color": {
+    "type": "string",
+    "description": "进度条的底色，默认为灰色"
+  },
+  "u-line-progress/show-percent": {
+    "type": "boolean",
+    "description": "是否在进度条内部显示当前的百分比值数值"
+  },
+  "u-line-progress/height": {
+    "type": "string|number",
+    "description": "进度条的高度，单位rpx"
+  },
+  "u-line-progress/striped": {
+    "type": "boolean",
+    "description": "是否显示进度条激活部分的条纹"
+  },
+  "u-line-progress/striped-active": {
+    "type": "boolean",
+    "description": "条纹是否具有动态效果"
+  },
+  "u-table/align": {
+    "type": "string",
+    "description": "单元格的内容对齐方式"
+  },
+  "u-table/padding": {
+    "type": "string",
+    "description": "单元格的内边距"
+  },
+  "u-table/font-size": {
+    "type": "string|number",
+    "description": "单元格字体大小，单位rpx"
+  },
+  "u-table/color": {
+    "type": "string",
+    "description": "单元格字体颜色"
+  },
+  "u-table/th-style": {
+    "type": "object",
+    "description": "th 单元格的样式，对象形式"
+  },
+  "u-td/width": {
+    "type": "string|number",
+    "description": "单元格宽度百分比或者具体带单位的值"
+  },
+  "u-tr/width": {
+    "type": "string|number",
+    "description": "标题单元格宽度百分比或者具体带单位的值"
+  },
+  "u-count-down/timestamp": {
+    "type": "string|number",
+    "description": "倒计时，单位为秒"
+  },
+  "u-count-down/autoplay": {
+    "type": "boolean",
+    "description": "是否自动开始倒计时"
+  },
+  "u-count-down/separator": {
+    "type": "string",
+    "description": "分隔符，colon为英文冒号，zh为中文"
+  },
+  "u-count-down/separator-size": {
+    "type": "string|number",
+    "description": "分隔符的字体大小，单位rpx"
+  },
+  "u-count-down/separator-color": {
+    "type": "string",
+    "description": "分隔符的颜色"
+  },
+  "u-count-down/font-size": {
+    "type": "string|number",
+    "description": "倒计时字体大小，单位rpx"
+  },
+  "u-count-down/show-border": {
+    "type": "boolean",
+    "description": "是否显示倒计时数字的边框"
+  },
+  "u-count-down/color": {
+    "type": "string",
+    "description": "倒计时数字的颜色"
+  },
+  "u-count-down/height": {
+    "type": "string",
+    "description": "数字高度值(宽度等同此值)，设置边框时看情况是否需要设置此值，单位rpx"
+  },
+  "u-count-down/show-days": {
+    "type": "boolean",
+    "description": "是否显示倒计时的天部分"
+  },
+  "u-count-down/show-hours": {
+    "type": "boolean",
+    "description": "是否显示倒计时的时部分"
+  },
+  "u-count-down/show-minutes": {
+    "type": "boolean",
+    "description": "是否显示倒计时的分部分"
+  },
+  "u-count-down/show-seconds": {
+    "type": "boolean",
+    "description": "是否显示倒计时的秒部分"
+  },
+  "u-count-to/start-val": {
+    "type": "string|number",
+    "description": "开始值"
+  },
+  "u-count-to/end-val": {
+    "type": "string|number",
+    "description": "结束值"
+  },
+  "u-count-to/duration": {
+    "type": "string|number",
+    "description": "滚动过程所需的时间，单位毫秒"
+  },
+  "u-count-to/autoplay": {
+    "type": "boolean",
+    "description": "是否自动开始滚动"
+  },
+  "u-count-to/decimals": {
+    "type": "string|number",
+    "description": "要显示的小数位数"
+  },
+  "u-count-to/use-easing": {
+    "type": "boolean",
+    "description": "滚动结束时，是否缓动结尾"
+  },
+  "u-count-to/separator": {
+    "type": "string",
+    "description": "千位分隔符，见上方说明"
+  },
+  "u-count-to/color": {
+    "type": "string",
+    "description": "字体颜色"
+  },
+  "u-count-to/font-size": {
+    "type": "string|number",
+    "description": "字体大小，单位rpx"
+  },
+  "u-count-to/bold": {
+    "type": "boolean",
+    "description": "字体是否加粗"
+  },
+  "u-action-sheet/list": {
+    "type": "array",
+    "description": "按钮的文字数组"
+  },
+  "u-action-sheet/tips": {
+    "type": "object",
+    "description": "顶部的提示文字"
+  },
+  "u-action-sheet/cancel-btn": {
+    "type": "boolean",
+    "description": "是否显示底部的取消按钮"
+  },
+  "u-action-sheet/cancel-text": {
+    "type": "string",
+    "description": "取消按钮的提示文字"
+  },
+  "u-alert-type/title": {
+    "type": "string",
+    "description": "显示的文字"
+  },
+  "u-alert-type/description": {
+    "type": "string",
+    "description": "辅助性文字，颜色比title浅一点，字号也小一点，可选"
+  },
+  "u-alert-type/close-able": {
+    "type": "boolean",
+    "description": "关闭按钮"
+  },
+  "u-alert-type/type": {
+    "options": ["warning", "success", "primary", "error", "info"],
+    "description": "使用预设的颜色"
+  },
+  "u-alert-type/close-text": {
+    "type": "string",
+    "description": "用文字替代关闭图标，close-able 为 true 时有效"
+  },
+  "u-alert-type/show-icon": {
+    "type": "boolean",
+    "description": "是否显示左边的辅助图标"
+  },
+  "u-alert-type/show": {
+    "type": "boolean",
+    "description": "显示或隐藏组件"
+  },
+  "u-notice-bar/list": {
+    "type": "array",
+    "description": "滚动内容，数组形式"
+  },
+  "u-notice-bar/type": {
+    "options": ["warning", "primary", "info", "error", "success", "none"],
+    "description": "显示的主题"
+  },
+  "u-notice-bar/volume-icon": {
+    "type": "boolean",
+    "description": "是否显示小喇叭图标"
+  },
+  "u-notice-bar/more-icon": {
+    "type": "boolean",
+    "description": "是否显示右边的向右箭头"
+  },
+  "u-notice-bar/close-icon": {
+    "type": "boolean",
+    "description": "是否显示关闭图标"
+  },
+  "u-notice-bar/autoplay": {
+    "type": "boolean",
+    "description": "是否自动播放"
+  },
+  "u-notice-bar/color": {
+    "type": "string",
+    "description": "文字颜色"
+  },
+  "u-notice-bar/mode": {
+    "options": ["horizontal", "vertical"],
+    "description": "滚动模式"
+  },
+  "u-notice-bar/show": {
+    "type": "boolean",
+    "description": "是否显示"
+  },
+  "u-notice-bar/volume-size": {
+    "type": "string|number",
+    "description": "左边喇叭的大小"
+  },
+  "u-notice-bar/font-size": {
+    "type": "string|number",
+    "description": "字体大小，单位rpx"
+  },
+  "u-notice-bar/duration": {
+    "type": "string|number",
+    "description": "滚动周期时长，只对步进模式有效，横向衔接模式无效，单位毫秒"
+  },
+  "u-notice-bar/speed": {
+    "type": "string|number",
+    "description": "水平滚动时的滚动速度，即每秒移动多少距离，只对水平衔接方式有效，单位rpx"
+  },
+  "u-notice-bar/is-circular": {
+    "type": "boolean",
+    "description": "mode为horizontal时，指明是否水平衔接滚动"
+  },
+  "u-notice-bar/play-state": {
+    "options": ["play", "paused"],
+    "description": "播放状态"
+  },
+  "u-notice-bar/disable-touch": {
+    "type": "boolean",
+    "description": "是否禁止通过手动滑动切换通知"
+  },
+  "u-notice-bar/padding": {
+    "type": "string",
+    "description": "内置滚动通知的内边距"
+  },
+  "u-notice-bar/no-list-hidden": {
+    "type": "boolean",
+    "description": "list为空数组时，是否显示组件"
+  },
+  "u-top-tips/navbar-height": {
+    "type": "string|number",
+    "description": "导航栏高度"
+  },
+  "u-collapse/accordion": {
+    "type": "boolean",
+    "description": "是否手风琴模式"
+  },
+  "u-collapse/arrow": {
+    "type": "boolean",
+    "description": "是否显示标题右侧的箭头"
+  },
+  "u-collapse/arrow-color": {
+    "type": "string",
+    "description": "标题右侧箭头的颜色"
+  },
+  "u-collapse/item-style": {
+    "type": "object",
+    "description": "整个Item的自定义样式，对象形式"
+  },
+  "u-collapse/head-style": {
+    "type": "object",
+    "description": "Item的标题自定义样式，对象形式"
+  },
+  "u-collapse/body-style": {
+    "type": "object",
+    "description": "Item的主体自定义样式，对象形式"
+  },
+  "u-collapse-item/title": {
+    "type": "string",
+    "description": "面板标题"
+  },
+  "u-collapse-item/open": {
+    "type": "boolean",
+    "description": "设置某个面板的初始状态是否打开"
+  },
+  "u-collapse-item/name": {
+    "type": "string|number",
+    "description": "唯一标识符，如不设置，默认用当前 collapse-item 的索引值"
+  },
+  "u-collapse-item/align": {
+    "options": ["left", "center", "right"],
+    "description": "标题的对齐方式"
+  },
+  "u-collapse-item/active-style": {
+    "type": "object",
+    "description": "不显示箭头时，可以添加当前选择的 collapse-item 活动样式，对象形式"
+  },
+  "u-popup/mode": {
+    "options": ["left", "top", "right", "bottom", "center"],
+    "description": "弹出方向"
+  },
+  "u-popup/length": {
+    "type": "string|number",
+    "description": "长度，单位rpx，mode = left 时有效，已不推荐"
+  },
+  "u-popup/zoom": {
+    "type": "boolean",
+    "description": "是否开启缩放动画，只在 mode = center 时有效"
+  },
+  "u-popup/closeable": {
+    "type": "boolean",
+    "description": "是否显示关闭图标"
+  },
+  "u-popup/close-icon": {
+    "type": "string",
+    "description": "关闭图标，限 uView 内置图标"
+  },
+  "u-popup/close-icon-pos": {
+    "options": ["top-left", "top-right", "bottom-left", "bottom-right"],
+    "description": "自定义关闭图标位置"
+  },
+  "u-popup/close-icon-color": {
+    "type": "string",
+    "description": "关闭图标的颜色"
+  },
+  "u-popup/close-icon-size": {
+    "type": "string|number",
+    "description": "关闭图标的大小，单位rpx"
+  },
+  "u-popup/width": {
+    "type": "string|number",
+    "description": "mode = left | center | right 时有效，优先级高于 length"
+  },
+  "u-popup/height": {
+    "type": "string|number",
+    "description": "mode = top | center | bottom 时有效，优先级高于 length"
+  },
+  "u-swipe-action/btn-width": {
+    "type": "string|number",
+    "description": "按钮宽度，单位rpx"
+  },
+  "u-swipe-action/show": {
+    "type": "boolean",
+    "description": "打开或者关闭某个组件"
+  },
+  "u-swipe-action/options": {
+    "type": "array",
+    "description": "按钮组的配置参数，数组形式"
+  },
+  "u-modal/v-model": {
+    "type": "boolean",
+    "description": "是否显示模态框"
+  },
+  "u-modal/title": {
+    "type": "string",
+    "description": "标题内容"
+  },
+  "u-modal/width": {
+    "type": "string|number",
+    "description": "模态框宽度，数值时单位为rpx"
+  },
+  "u-modal/content": {
+    "type": "string",
+    "description": "模态框内容，如传入slot内容，则此参数无效"
+  },
+  "u-modal/show-title": {
+    "type": "boolean",
+    "description": "是否显示标题"
+  },
+  "u-modal/show-confirm-button": {
+    "type": "boolean",
+    "description": "是否显示确认按钮"
+  },
+  "u-modal/show-cancel-button": {
+    "type": "boolean",
+    "description": "是否显示取消按钮"
+  },
+  "u-modal/confirm-text": {
+    "type": "string",
+    "description": "确认按钮的文字"
+  },
+  "u-modal/cancel-text": {
+    "type": "string",
+    "description": "取消按钮的文字"
+  },
+  "u-modal/cancel-color": {
+    "type": "string",
+    "description": "取消按钮的颜色"
+  },
+  "u-modal/confirm-color": {
+    "type": "string",
+    "description": "确认按钮的颜色"
+  },
+  "u-modal/content-style": {
+    "type": "object",
+    "description": "自定义内容样式，对象形式"
+  },
+  "u-modal/cancel-style": {
+    "type": "object",
+    "description": "自定义取消按钮样式，对象形式"
+  },
+  "u-modal/confirm-style": {
+    "type": "object",
+    "description": "自定义确认按钮样式，对象形式"
+  },
+  "u-modal/zoom": {
+    "type": "boolean",
+    "description": "是否开启缩放模式"
+  },
+  "u-modal/async-close": {
+    "type": "boolean",
+    "description": "是否异步关闭，只对确定按钮有效"
+  },
+  "u-line/color": {
+    "type": "string",
+    "description": "线条的颜色"
+  },
+  "u-line/length": {
+    "type": "string",
+    "description": "长度，竖向时表现为高度，横向时表现为长度"
+  },
+  "u-line/direction": {
+    "options": ["row", "col"],
+    "description": "线条的方向"
+  },
+  "u-line/hair-line": {
+    "type": "boolean",
+    "description": "是否显示细线条"
+  },
+  "u-line/margin": {
+    "type": "string",
+    "description": "线条与上下左右元素的间距，字符串形式"
+  },
+  "u-line/border-style": {
+    "type": "string",
+    "description": "线条类型，见上方说明"
+  },
+  "u-card/full": {
+    "type": "boolean",
+    "description": "卡片与屏幕两侧是否留空隙"
+  },
+  "u-card/title": {
+    "type": "string",
+    "description": "头部左边的标题"
+  },
+  "u-card/title-color": {
+    "type": "string",
+    "description": "标题颜色"
+  },
+  "u-card/title-size": {
+    "type": "string|number",
+    "description": "标题字体大小，单位rpx"
+  },
+  "u-card/sub-title": {
+    "type": "string",
+    "description": "头部右边的副标题"
+  },
+  "u-card/sub-title-color": {
+    "type": "string",
+    "description": "副标题颜色"
+  },
+  "u-card/sub-title-size": {
+    "type": "string|number",
+    "description": "副标题字体大小"
+  },
+  "u-card/border": {
+    "type": "boolean",
+    "description": "是否显示边框"
+  },
+  "u-card/margin": {
+    "type": "string",
+    "description": "卡片与屏幕两边和上下元素的间距，需带单位"
+  },
+  "u-card/head-style": {
+    "type": "object",
+    "description": "头部自定义样式，对象形式"
+  },
+  "u-card/body-style": {
+    "type": "object",
+    "description": "主体自定义样式，对象形式"
+  },
+  "u-card/foot-style": {
+    "type": "object",
+    "description": "底部自定义样式，对象形式"
+  },
+  "u-card/head-border-bottom": {
+    "type": "boolean",
+    "description": "是否显示头部的下边框"
+  },
+  "u-card/foot-border-top": {
+    "type": "boolean",
+    "description": "是否显示底部的上边框"
+  },
+  "u-card/thumb": {
+    "type": "string",
+    "description": "缩略图路径，如设置将显示在标题的左边，不建议使用相对路径"
+  },
+  "u-card/thumb-width": {
+    "type": "string|number",
+    "description": "缩略图的宽度，高等于宽，单位rpx"
+  },
+  "u-card/thumb-circle": {
+    "type": "boolean",
+    "description": "缩略图是否为圆形"
+  },
+  "u-card/padding": {
+    "type": "string|number",
+    "description": "内边距，单位rpx"
+  },
+  "u-card/show-head": {
+    "type": "boolean",
+    "description": "是否显示头部"
+  },
+  "u-card/show-foot": {
+    "type": "boolean",
+    "description": "是否显示尾部"
+  },
+  "u-mask/show": {
+    "type": "boolean",
+    "description": "是否显示遮罩"
+  },
+  "u-mask/duration": {
+    "type": "string|number",
+    "description": "动画时长，单位毫秒"
+  },
+  "u-mask/zoom": {
+    "type": "boolean",
+    "description": "是否使用scale对遮罩进行缩放"
+  },
+  "u-mask/mask-click-able": {
+    "type": "boolean",
+    "description": "遮罩是否可点击"
+  },
+  "u-no-network/tips": {
+    "type": "string",
+    "description": "没有网络时的提示语"
+  },
+  "u-no-network/zIndex": {
+    "type": "string|number",
+    "description": "组件的 z-index 值"
+  },
+  "u-no-network/image": {
+    "type": "string",
+    "description": "无网络的图片提示，可用的src地址或base64图片"
+  },
+  "u-grid/col": {
+    "type": "string|number",
+    "description": "宫格的列数"
+  },
+  "u-grid/border": {
+    "type": "boolean",
+    "description": "是否显示宫格的边框"
+  },
+  "u-grid/align": {
+    "type": "string",
+    "description": "宫格的对齐方式，用于控制只有一两个宫格时的对齐场景"
+  },
+  "u-swiper/list": {
+    "type": "array",
+    "description": "轮播图数据"
+  },
+  "u-swiper/title": {
+    "type": "boolean",
+    "description": "是否显示标题文字，需要配合 list 参数"
+  },
+  "u-swiper/mode": {
+    "options": ["round", "rect", "dot", "number", "none"],
+    "description": "指示器模式"
+  },
+  "u-swiper/height": {
+    "type": "string|number",
+    "description": "轮播图组件高度，单位rpx"
+  },
+  "u-swiper/indicator-pos": {
+    "options": [
+      "bottomCenter",
+      "topLeft",
+      "topCenter",
+      "topRight",
+      "bottomLeft",
+      " bottomRight"
+    ],
+    "description": "指示器的位置"
+  },
+  "u-swiper/effect3d": {
+    "type": "boolean",
+    "description": "是否开启3D效果"
+  },
+  "u-swiper/autoplay": {
+    "type": "boolean",
+    "description": "是否自动播放"
+  },
+  "u-swiper/interval": {
+    "type": "string|number",
+    "description": "自动轮播时间间隔，单位毫秒"
+  },
+  "u-swiper/circular": {
+    "type": "boolean",
+    "description": "是否衔接播放"
+  },
+  "u-swiper/duration": {
+    "type": "string|number",
+    "description": "切换一张轮播图所需的时间，单位毫秒"
+  },
+  "u-swiper/effect3d-previous-margin": {
+    "type": "string|number",
+    "description": "effect3d = true 模式的情况下，激活项与前后项之间的距离，单位rpx"
+  },
+  "u-swiper/name": {
+    "type": "string",
+    "description": "组件内部读取的 list 参数中的属性名"
+  },
+  "u-time-line-item/node-top": {
+    "type": "string|number",
+    "description": "节点左边图标绝对定位的 top 值，单位rpx"
+  },
+  "u-skeleton/el-color": {
+    "type": "string",
+    "description": "骨架块状元素的背景颜色"
+  },
+  "u-skeleton/loading": {
+    "type": "boolean",
+    "description": "是否显示骨架组件"
+  },
+  "u-sticky/offset-top": {
+    "type": "string|number",
+    "description": "吸顶时与顶部的距离，单位rpx"
+  },
+  "u-sticky/index": {
+    "type": "string|number",
+    "description": "自定义标识，用于区分是哪一个组件"
+  },
+  "u-sticky/enable": {
+    "type": "boolean",
+    "description": "是否开启吸顶功能"
+  },
+  "u-sticky/h5-nav-height": {
+    "type": "string|number",
+    "description": "导航栏高度，自定义导航栏时(无导航栏时需设置为0)，需要传入此值，单位px"
+  },
+  "u-waterfall/add-time": {
+    "type": "string|number",
+    "description": "单条数据添加到队列的时间间隔，单位毫秒"
+  },
+  "u-waterfall/idKey": {
+    "type": "string",
+    "description": "数据的唯一值的键名"
+  },
+  "u-divider/half-width": {
+    "type": "string|number",
+    "description": "文字左或右边线条宽度，数值或百分比，数值时单位为rpx"
+  },
+  "u-divider/border-color": {
+    "type": "string",
+    "description": "线条颜色，优先级高于 type"
+  },
+  "u-divider/color": {
+    "type": "string",
+    "description": "文字颜色"
+  },
+  "u-divider/fontSize": {
+    "type": "string|number",
+    "description": "字体大小，单位rpx"
+  },
+  "u-divider/height": {
+    "type": "string|number",
+    "description": "高度，单位rpx"
+  },
+  "u-divider/type": {
+    "options": ["primary", "info", "success", "warning", "error"],
+    "description": "将线条设置主题色"
+  },
+  "u-divider/margin-top": {
+    "type": "string|number",
+    "description": "与前一个元素的距离，单位rpx"
+  },
+  "u-divider/margin-bottom": {
+    "type": "string|number",
+    "description": "与后一个元素的距离，单位rpx"
+  },
+  "u-divider/use-slot": {
+    "type": "boolean",
+    "description": "是否使用 slot 传入内容，如果不传入，中间不会有空隙"
+  },
+  "u-back-top/mode": {
+    "options": ["circle", "square"],
+    "description": "按钮形状"
+  },
+  "u-back-top/tips": {
+    "type": "string",
+    "description": "返回顶部按钮的提示文字"
+  },
+  "u-back-top/duration": {
+    "type": "string|number",
+    "description": "返回顶部过程中的过渡时间，单位毫秒"
+  },
+  "u-back-top/scroll-top": {
+    "type": "string|number",
+    "description": "页面的滚动距离，通过 onPageScroll 生命周期获取"
+  },
+  "u-back-top/top": {
+    "type": "string|number",
+    "description": "滚动条滑动多少距离时显示，单位rpx"
+  },
+  "u-back-top/bottom": {
+    "type": "string|number",
+    "description": "返回按钮位置到屏幕底部的距离，单位rpx"
+  },
+  "u-back-top/right": {
+    "type": "string|number",
+    "description": "返回按钮位置到屏幕右边的距离，单位rpx"
+  },
+  "u-back-top/z-index": {
+    "type": "string|number",
+    "description": "返回顶部按钮的层级"
+  },
+  "u-back-top/icon-style": {
+    "type": "object",
+    "description": "图标的样式，对象形式"
+  },
+  "u-navbar/height": {
+    "type": "string|number",
+    "description": "导航栏高度(不包括状态栏高度在内，内部自动加上)，单位px"
+  },
+  "u-navbar/back-icon-color": {
+    "type": "string",
+    "description": "左边返回图标的颜色"
+  },
+  "u-navbar/back-icon-name": {
+    "type": "string",
+    "description": "左边返回图标，限 uView 内置图标"
+  },
+  "u-navbar/back-icon-size": {
+    "type": "string|number",
+    "description": "左边返回图标的大小，单位rpx"
+  },
+  "u-navbar/back-text": {
+    "type": "string",
+    "description": "返回图标右边的辅助提示文字"
+  },
+  "u-navbar/back-text-style": {
+    "type": "object",
+    "description": "返回图标右边的辅助提示文字的样式，对象形式"
+  },
+  "u-navbar/title": {
+    "type": "string",
+    "description": "导航栏标题，如设置为空字符，将会隐藏标题占位区域"
+  },
+  "u-navbar/title-width": {
+    "type": "string|number",
+    "description": "导航栏标题的最大宽度，内容超出会以省略号隐藏，单位rpx"
+  },
+  "u-navbar/title-color": {
+    "type": "string",
+    "description": "标题的颜色"
+  },
+  "u-navbar/title-size": {
+    "type": "string|number",
+    "description": "导航栏标题字体大小，单位rpx"
+  },
+  "u-navbar/z-index": {
+    "type": "string|number",
+    "description": "固定在顶部时的 z-index 值"
+  },
+  "u-navbar/is-back": {
+    "type": "boolean",
+    "description": "是否显示导航栏左边返回图标和辅助文字"
+  },
+  "u-navbar/background": {
+    "type": "object",
+    "description": "导航栏背景设置(APP和小程序上包括状态栏的颜色)，对象形式"
+  },
+  "u-navbar/is-fixed": {
+    "type": "boolean",
+    "description": "导航栏是否固定在顶部"
+  },
+  "u-navbar/border-bottom": {
+    "type": "boolean",
+    "description": "导航栏底部是否显示下边框"
+  },
+  "u-navbar/custom-back": {
+    "type": "function",
+    "description": "自定义返回逻辑方法，如传入，点击返回按钮执行函数，否则正常返回上一页"
+  },
+  "u-tabs/is-scroll": {
+    "type": "boolean",
+    "description": "是否可以左右拖动"
+  },
+  "u-tabs/list": {
+    "type": "array",
+    "description": "标签数组，元素为对象"
+  },
+  "u-tabs/current": {
+    "type": "string|number",
+    "description": "指定哪个 tab 为激活状态"
+  },
+  "u-tabs/height": {
+    "type": "string|number",
+    "description": "导航栏的高度，单位rpx"
+  },
+  "u-tabs/font-size": {
+    "type": "string|number",
+    "description": "tab 文字大小，单位rpx"
+  },
+  "u-tabs/duration": {
+    "type": "string|number",
+    "description": "滑块移动一次所需的时间，单位秒"
+  },
+  "u-tabs/active-color": {
+    "type": "string",
+    "description": "滑块和激活 tab 文字的颜色"
+  },
+  "u-tabs/inactive-color": {
+    "type": "string",
+    "description": "tabs 文字颜色"
+  },
+  "u-tabs/bar-width": {
+    "type": "string|number",
+    "description": "滑块宽度，单位rpx"
+  },
+  "u-tabs/bar-height": {
+    "type": "string|number",
+    "description": "滑块高度，单位rpx"
+  },
+  "u-tabs/gutter": {
+    "type": "string|number",
+    "description": "单个 tab 标签的左右内边距之和，单位rpx"
+  },
+  "u-tabs/name": {
+    "type": "string",
+    "description": "组件内部读取的 list 参数中的属性名"
+  },
+  "u-tabs/bold": {
+    "type": "boolean",
+    "description": "激活选项的字体是否加粗"
+  },
+  "u-tabs/show-bar": {
+    "type": "boolean",
+    "description": "是否显示底部的滑块"
+  },
+  "u-tabs/bar-style": {
+    "type": "object",
+    "description": "底部滑块的样式，对象形式"
+  },
+  "u-tabs/active-item-style": {
+    "type": "object",
+    "description": "当前活动 item 的样式，对象形式"
+  },
+  "u-tabs-swiper/is-scroll": {
+    "type": "boolean",
+    "description": "是否可以左右拖动"
+  },
+  "u-tabs-swiper/list": {
+    "type": "array",
+    "description": "标签数组，元素为对象"
+  },
+  "u-tabs-swiper/current": {
+    "type": "string|number",
+    "description": "指定哪个 tab 为激活状态"
+  },
+  "u-tabs-swiper/height": {
+    "type": "string|number",
+    "description": "导航栏的高度，单位rpx"
+  },
+  "u-tabs-swiper/font-size": {
+    "type": "string|number",
+    "description": "tab文字大小，单位rpx"
+  },
+  "u-tabs-swiper/swiper-width": {
+    "type": "string|number",
+    "description": "tabs 组件外部 swiper 的宽度，单位rpx"
+  },
+  "u-tabs-swiper/active-color": {
+    "type": "string",
+    "description": "滑块和激活 tab 文字的颜色"
+  },
+  "u-tabs-swiper/inactive-color": {
+    "type": "string",
+    "description": "tabs 文字颜色"
+  },
+  "u-tabs-swiper/bar-width": {
+    "type": "string|number",
+    "description": "滑块宽度，单位rpx"
+  },
+  "u-tabs-swiper/bar-height": {
+    "type": "string|number",
+    "description": "滑块高度，单位rpx"
+  },
+  "u-tabs-swiper/gutter": {
+    "type": "string|number",
+    "description": "单个 tab 标签的左右内边距之和，单位rpx"
+  },
+  "u-tabs-swiper/name": {
+    "type": "string",
+    "description": "组件内部读取的 list 参数中的属性名"
+  },
+  "u-tabs-swiper/bold": {
+    "type": "boolean",
+    "description": "激活选项的字体是否加粗"
+  },
+  "u-tabs-swiper/show-bar": {
+    "type": "boolean",
+    "description": "是否显示底部的滑块"
+  },
+  "u-tabs-swiper/bar-style": {
+    "type": "object",
+    "description": "底部滑块的样式，对象形式"
+  },
+  "u-tabs-swiper/active-item-style": {
+    "type": "object",
+    "description": "当前活动 item 的样式，对象形式"
+  },
+  "u-subsection/list": {
+    "type": "array",
+    "description": "选项的数组"
+  },
+  "u-subsection/current": {
+    "type": "string|number",
+    "description": "初始化时默认选中的选项索引值"
+  },
+  "u-subsection/active-color": {
+    "type": "string",
+    "description": "激活时的颜色"
+  },
+  "u-subsection/inactive-color": {
+    "type": "string",
+    "description": "未激活时的颜色"
+  },
+  "u-subsection/mode": {
+    "options": ["button", "subsection"],
+    "description": "模式选择"
+  },
+  "u-subsection/font-size": {
+    "type": "string|number",
+    "description": "字体大小，单位rpx"
+  },
+  "u-subsection/bold": {
+    "type": "boolean",
+    "description": "激活选项的字体是否加粗"
+  },
+  "u-subsection/bg-color": {
+    "type": "string",
+    "description": "组件背景颜色，mode = button 时有效"
+  },
+  "u-subsection/button-color": {
+    "type": "string",
+    "description": "按钮背景颜色，mode = button 时有效"
+  },
+  "u-index-list/scroll-top": {
+    "type": "string|number",
+    "description": "当前滚动高度"
+  },
+  "u-index-list/index-list": {
+    "type": "array",
+    "description": "索引字符列表"
+  },
+  "u-index-list/z-index": {
+    "type": "string|number",
+    "description": "锚点吸顶时的层级"
+  },
+  "u-index-list/sticky": {
+    "type": "boolean",
+    "description": "是否开启锚点自动吸顶"
+  },
+  "u-index-list/offset-top": {
+    "type": "string|number",
+    "description": "锚点自动吸顶时与顶部的距离，单位rpx"
+  },
+  "u-index-list/active-color": {
+    "type": "string",
+    "description": "锚点和右边索引字符高亮颜色"
+  },
+  "u-index-anchor/use-slot": {
+    "type": "boolean",
+    "description": "是否使用自定义内容的插槽"
+  },
+  "u-index-anchor/index": {
+    "type": "string|number",
+    "description": "索引字符，如果定义了 use-slot，此参数自动失效"
+  },
+  "u-steps/mode": {
+    "options": ["dot", "number"],
+    "description": "设置模式"
+  },
+  "u-steps/list": {
+    "type": "array",
+    "description": "数轴条数据"
+  },
+  "u-steps/current": {
+    "type": "string|number",
+    "description": "设置当前处于第几步"
+  },
+  "u-steps/active-color": {
+    "type": "string",
+    "description": "已完成步骤的颜色"
+  },
+  "u-steps/un-active-color": {
+    "type": "string",
+    "description": "未完成步骤的颜色"
+  },
+  "u-steps/icon": {
+    "type": "string",
+    "description": "mode = number 时的图标，限 uView 内置图标"
+  },
+  "u-empty/color": {
+    "type": "string",
+    "description": "文字颜色"
+  },
+  "u-empty/text": {
+    "type": "string",
+    "description": "文字提示"
+  },
+  "u-empty/src": {
+    "type": "string",
+    "description": "自定义图标路径，如定义，mode 参数会失效"
+  },
+  "u-empty/font-size": {
+    "type": "string|number",
+    "description": "提示文字的大小，单位rpx"
+  },
+  "u-empty/mode": {
+    "options": [
+      "car",
+      "page",
+      "search",
+      "address",
+      "wifi",
+      "order",
+      "coupon",
+      "favor",
+      "permission",
+      "history",
+      "news",
+      "message",
+      "list",
+      "data"
+    ],
+    "description": "内置的图标"
+  },
+  "u-empty/img-width": {
+    "type": "string|number",
+    "description": "图标的宽度，单位rpx"
+  },
+  "u-empty/img-height": {
+    "type": "string",
+    "description": "图标的高度，单位rpx"
+  },
+  "u-empty/show": {
+    "type": "boolean",
+    "description": "是否显示组件"
+  },
+  "u-empty/margin-top": {
+    "type": "string|number",
+    "description": "组件到上一个元素的间距，单位rpx"
+  },
+  "u-link/color": {
+    "type": "string",
+    "description": "文字颜色"
+  },
+  "u-link/font-size": {
+    "type": "string|number",
+    "description": "字体大小，单位rpx"
+  },
+  "u-link/under-line": {
+    "type": "boolean",
+    "description": "是否显示下划线"
+  },
+  "u-link/href": {
+    "type": "string",
+    "description": "跳转的链接，要带上http(s)"
+  },
+  "u-link/line-color": {
+    "type": "string",
+    "description": "下划线颜色"
+  },
+  "u-link/mp-tips": {
+    "type": "string",
+    "description": "各个小程序平台把链接复制到粘贴板后的提示语"
+  },
+  "u-section/title": {
+    "type": "string",
+    "description": "左边主标题"
+  },
+  "u-section/sub-title": {
+    "type": "string",
+    "description": "右边副标题"
+  },
+  "u-section/right": {
+    "type": "boolean",
+    "description": "是否显示右边的内容"
+  },
+  "u-section/show-line": {
+    "type": "boolean",
+    "description": "是否显示左边的竖条"
+  },
+  "u-section/font-size": {
+    "type": "string|number",
+    "description": "主标题的字体大小"
+  },
+  "u-section/bold": {
+    "type": "boolean",
+    "description": "主标题是否加粗"
+  },
+  "u-section/color": {
+    "type": "string",
+    "description": "主标题颜色"
+  },
+  "u-section/sub-color": {
+    "type": "string",
+    "description": "右边副标题的颜色"
+  },
+  "u-message-input/maxlength": {
+    "type": "string|number",
+    "description": "输入字符个数"
+  },
+  "u-message-input/dot-fill": {
+    "type": "boolean",
+    "description": "是否用圆点填充"
+  },
+  "u-message-input/mode": {
+    "options": ["box", "bottomLine", "middleLine"],
+    "description": "模式选择"
+  },
+  "u-message-input/value": {
+    "type": "string|number",
+    "description": "预置值"
+  },
+  "u-message-input/breathe": {
+    "type": "boolean",
+    "description": "是否开启呼吸效果"
+  },
+  "u-message-input/focus": {
+    "type": "string",
+    "description": "非激活输入框的样式"
+  },
+  "u-message-input/bold": {
+    "type": "boolean",
+    "description": "字体和输入横线是否加粗"
+  },
+  "u-message-input/font-size": {
+    "type": "string|number",
+    "description": "字体大小，单位rpx"
+  },
+  "u-message-input/active-color": {
+    "type": "string",
+    "description": "当前激活输入框的样式"
+  },
+  "u-message-input/width": {
+    "type": "string|number",
+    "description": "输入框的宽度(高等于宽)，单位rpx"
+  },
+  "u-message-input/disabled-keyboard": {
+    "type": "boolean",
+    "description": "禁止点击输入框唤起系统键盘"
+  },
+  "u-loadmore/status": {
+    "options": ["loadmore", "nomore"],
+    "description": "组件状态"
+  },
+  "u-loadmore/icon": {
+    "type": "boolean",
+    "description": "加载中时是否显示图标"
+  },
+  "u-loadmore/icon-type": {
+    "options": ["circle", "flower"],
+    "description": "加载中时的图标类型"
+  },
+  "u-loadmore/icon-color": {
+    "type": "string",
+    "description": "icon-type = circle 时，加载中的动画图标的颜色"
+  },
+  "u-loadmore/is-dot": {
+    "type": "boolean",
+    "description": "status = nomore 时，内容显示为一个 ●"
+  },
+  "u-loadmore/color": {
+    "type": "string",
+    "description": "字体颜色"
+  },
+  "u-loadmore/font-size": {
+    "type": "string|number",
+    "description": "字体大小，单位rpx"
+  },
+  "u-loadmore/load-text": {
+    "type": "object",
+    "description": "自定义显示的文字，对象形式"
+  },
+  "u-loadmore/margin-top": {
+    "type": "string|number",
+    "description": "与前一个元素的距离，单位rpx"
+  },
+  "u-loadmore/margin-bottom": {
+    "type": "string|number",
+    "description": "与后一个元素的距离，单位rpx"
+  },
+  "u-read-more/show-height": {
+    "type": "string|number",
+    "description": "内容超出此高度才会显示展开全文按钮，单位rpx"
+  },
+  "u-read-more/toggle": {
+    "type": "boolean",
+    "description": "展开后是否显示收起按钮"
+  },
+  "u-read-more/close-text": {
+    "type": "string",
+    "description": "关闭时的提示文字"
+  },
+  "u-read-more/font-size": {
+    "type": "string|number",
+    "description": "提示文字的大小，单位rpx"
+  },
+  "u-read-more/open-text": {
+    "type": "string",
+    "description": "展开时的提示文字"
+  },
+  "u-read-more/color": {
+    "type": "string",
+    "description": "提示文字的颜色"
+  },
+  "u-read-more/shadow-style": {
+    "type": "object",
+    "description": "对阴影的自定义处理，对象形式"
+  },
+  "u-lazy-load/image": {
+    "type": "string",
+    "description": "图片路径"
+  },
+  "u-lazy-load/loading-img": {
+    "type": "string",
+    "description": "预加载时的占位图"
+  },
+  "u-lazy-load/error-img": {
+    "type": "string",
+    "description": "图片加载出错时的占位图"
+  },
+  "u-lazy-load/threshold": {
+    "type": "string",
+    "description": "触发加载时的位置，单位 rpx"
+  },
+  "u-lazy-load/duration": {
+    "type": "string|number",
+    "description": "图片加载成功时，淡入淡出时间，单位毫秒"
+  },
+  "u-lazy-load/effect": {
+    "options": ["ease-in-out", "linear", "ease", "ease-in", "ease-out"],
+    "description": "图片加载成功时，淡入淡出的 css 动画效果"
+  },
+  "u-lazy-load/is-effect": {
+    "type": "boolean",
+    "description": "图片加载成功时，是否启用淡入淡出效果"
+  },
+  "u-lazy-load/height": {
+    "type": "string|number",
+    "description": "图片高度，实际高度可能受 img-mode 参数影响"
+  },
+  "u-gap/height": {
+    "type": "string|number",
+    "description": "间隔槽高度，单位rpx"
+  },
+  "u-gap/margin-top": {
+    "type": "string|number",
+    "description": "与前一个元素的距离，单位rpx"
+  },
+  "u-gap/margin-bottom": {
+    "type": "string|number",
+    "description": "与后一个元素的距离，单位rpx"
+  },
+  "u-avatar/src": {
+    "type": "string",
+    "description": "头像路径，如加载失败，将会显示默认头像"
+  },
+  "u-avatar/size": {
+    "type": "string|number",
+    "description": "头像尺寸，可以为指定字符串(large, default, mini)，或者数值，单位rpx"
+  },
+  "u-avatar/mode": {
+    "options": ["circle", "square"],
+    "description": "显示类型"
+  },
+  "u-avatar/text": {
+    "type": "string",
+    "description": "用文字替代图片，级别优先于 src"
+  },
+  "u-loading/mode": {
+    "options": ["circle", "flower"],
+    "description": "模式选择"
+  },
+  "u-loading/color": {
+    "type": "string",
+    "description": "动画活动区域的颜色，只对 mode = circle 模式有效"
+  },
+  "u-loading/size": {
+    "type": "string|number",
+    "description": "加载图标的大小，单位rpx"
+  },
+  "u-loading/show": {
+    "type": "boolean",
+    "description": "是否显示动画"
+  },
+  "u-icon/name": {
+    "type": "string",
+    "description": "图标名称"
+  },
+  "u-icon/size": {
+    "type": "string|number",
+    "description": "图标字体大小，单位rpx"
+  },
+  "u-icon/label": {
+    "type": "string",
+    "description": "图标右侧/下方的 label 文字"
+  },
+  "u-icon/label-size": {
+    "type": "string|number",
+    "description": "label 字体大小，单位rpx"
+  },
+  "u-icon/label-color": {
+    "type": "string",
+    "description": "label 字体颜色"
+  },
+  "u-icon/margin-left": {
+    "type": "string|number",
+    "description": "label 在右方时与图标的距离，单位rpx"
+  },
+  "u-icon/margin-top": {
+    "type": "string|number",
+    "description": "label 在下方时与图标的距离，单位rpx"
+  },
+  "u-icon/label-pos": {
+    "options": ["right", "bottom"],
+    "description": "label 相对于图标的位置"
+  }
+}
