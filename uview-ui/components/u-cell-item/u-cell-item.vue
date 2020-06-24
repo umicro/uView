@@ -2,7 +2,7 @@
 	<view
 		@tap="click"
 		class="u-cell"
-		:class="{ 'u-cell-border': itemIndex > 0 && borderBottom, 'u-col-center': center, 'u-border-gap': borderGap, 'u-cell--required': required }"
+		:class="{ 'u-border-bottom': borderBottom, 'u-border-top': borderTop, 'u-col-center': center, 'u-border-gap': borderGap, 'u-cell--required': required }"
 		hover-stay-time="150"
 		:hover-class="hoverClass"
 		:style="{
@@ -51,7 +51,8 @@
  * @property {String} icon 左侧图标名，只支持uView内置图标，见Icon 图标
  * @property {String} value 右侧内容
  * @property {String} label 标题下方的描述信息
- * @property {Boolean} border-bottom 是否显示每个cell的下边框（默认true）
+ * @property {Boolean} border-bottom 是否显示cell的下边框（默认true）
+ * @property {Boolean} border-top 是否显示cell的上边框（默认false）
  * @property {Boolean} center 是否使内容垂直居中（默认false）
  * @property {String} hover-class 是否开启点击反馈，none为无效果（默认true）
  * @property {Boolean} border-gap border-bottom为true时，Cell列表中间的条目的下边框是否与左边有一个间隔（默认true）
@@ -89,10 +90,15 @@ export default {
 			type: [String, Number],
 			default: ''
 		},
-		// 是否显示内边框
+		// 是否显示下边框
 		borderBottom: {
 			type: Boolean,
 			default: true
+		},
+		// 是否显示上边框
+		borderTop: {
+			type: Boolean,
+			default: false
 		},
 		// 多个cell中，中间的cell显示下划线时，下划线是否给一个到左边的距离
 		borderGap: {
@@ -171,23 +177,10 @@ export default {
 			default: 34
 		}
 	},
-	inject: {
-		uCellGroup: {
-			// 添加默认值，是为了能让u-cell-item组件无需u-cell-group组件嵌套亦可单独使用
-			default() {
-				return {
-					index: 0
-				}
-			}
-		}
-	},
 	data() {
 		return {
-			itemIndex: 0
+			
 		};
-	},
-	created() {
-		this.itemIndex = this.uCellGroup.index++;
 	},
 	computed: {
 		arrowStyle() {

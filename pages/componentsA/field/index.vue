@@ -3,27 +3,25 @@
 		<view class="u-demo-wrap" style="background-color: #FFFFFF;">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-cell-group>
-					<u-field
-						v-model="mobile"
-						label="手机号"
-						:error-message="errorMessage"
-						placeholder="请填写手机号"
-						:required="required"
-						:icon="icon1"
-						:type="type"
-					>
-					</u-field>
-					<u-field
-						v-model="code"
-						label="验证码"
-						placeholder="请填写验证码"
-						:required="required"
-						:icon="icon2"
-					>
-						<u-button v-if="showBtn" slot="right" size="mini" type="success">发送验证码</u-button>
-					</u-field>
-				</u-cell-group>
+				<u-field
+					v-model="mobile"
+					label="手机号"
+					:error-message="errorMessage"
+					placeholder="请填写手机号"
+					:required="required"
+					:icon="icon1"
+					:type="type"
+				>
+				</u-field>
+				<u-field
+					v-model="code"
+					label="验证码"
+					placeholder="请填写验证码"
+					:required="required"
+					:icon="icon2"
+				>
+					<u-button v-if="showBtn" slot="right" size="mini" type="success">发送验证码</u-button>
+				</u-field>
 			</view>
 		</view>
 		<view class="u-config-wrap">

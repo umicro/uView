@@ -46,11 +46,6 @@
 				index: 0,
 			}
 		},
-		provide() {
-			return {
-				uCellGroup: this
-			}
-		},
 	}
 </script>
 
