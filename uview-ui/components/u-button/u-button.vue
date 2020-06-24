@@ -33,7 +33,6 @@
 		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"
-		data-name="dataName"
 	>
 		<slot></slot>
 		<view

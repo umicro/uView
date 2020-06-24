@@ -6,7 +6,7 @@
 				flex: labelPosition == 'left' ? `0 0 ${labelWidth}rpx` : '1'
 			}">
 				<view class="u-icon-wrap" v-if="icon">
-					<u-icon size="32" :name="icon" :color="iconColor" class="u-icon"></u-icon>
+					<u-icon size="32" :custom-style="iconStyle" :name="icon" :color="iconColor" class="u-icon"></u-icon>
 				</view>
 				<slot name="icon"></slot>
 				<text class="u-label-text" :class="[this.$slots.icon || icon ? 'u-label-left-gap' : '']">{{ label }}</text>
@@ -162,6 +162,13 @@ export default {
 		clearSize: {
 			type: [Number, String],
 			default: 30
+		},
+		// lable左边的图标样式，对象形式
+		iconStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
 		}
 	},
 	inject: ['uCellGroup'],

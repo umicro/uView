@@ -628,7 +628,6 @@
 		flex: 0 0 33.33333333%;
 		justify-content: center;
 		overflow: hidden;
-		padding: 0 6rpx;
 	}
 	
 	.u-icon-name {

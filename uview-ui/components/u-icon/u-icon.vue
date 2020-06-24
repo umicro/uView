@@ -23,6 +23,7 @@
  * @property {String} label 图标右侧的label文字（默认28）
  * @property {String} label-pos label文字相对于图标的位置，只能right或bottom（默认right）
  * @property {String} label-color label字体颜色（默认#606266）
+ * @property {Object} custom-style icon的样式，对象形式
  * @property {String | Number} margin-left label在右侧时与图标的距离，单位rpx（默认6）
  * @property {String | Number} margin-top label在下方时与图标的距离，单位rpx（默认6）
  * @property {String} label-pos label相对于图标的位置，只能right或bottom（默认right）
