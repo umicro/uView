@@ -37,10 +37,11 @@
 					type: '', // 主题类型，primary，success，error，warning，black
 					duration: 2000, // 显示的时间，毫秒
 					isTab: false, // 是否跳转tab页面
-					url: '', // toast消失后是否跳转页面，有则跳转
+					url: '', // toast消失后是否跳转页面，有则跳转，优先级高于back参数
 					icon: true, // 显示的图标
 					position: 'center', // toast出现的位置
 					callback: null, // 执行完后的回调函数
+					back: false, // 结束toast是否自动返回上一页
 				}
 			};
 		},
@@ -117,6 +118,11 @@
 							url: this.config.url
 						});
 					}
+				} else if(this.config.back) {
+					// 回退到上一页
+					this.$u.route({
+						type: 'back'
+					})
 				}
 			}
 		}

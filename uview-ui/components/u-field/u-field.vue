@@ -55,6 +55,7 @@
  * @tutorial https://www.uviewui.com/components/field.html
  * @property {String} type 输入框的类型（默认text）
  * @property {String} icon label左边的图标，限uView的图标名称
+ * @property {Object} icon-style 左边图标的样式，对象形式
  * @property {Boolean} right-icon 输入框右边的图标名称，限uView的图标名称（默认false）
  * @property {Boolean} required 是否必填，左边您显示红色"*"号（默认false）
  * @property {String} label 输入框左边的文字提示

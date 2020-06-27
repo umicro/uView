@@ -318,7 +318,7 @@ export default {
 	
 	&__right-icon {
 		position: absolute;
-		right: 20rpx;
+		right: 0;
 		top: 50%;
 		z-index: 3;
 		transform: translateY(-50%);
