@@ -210,7 +210,7 @@ export default {
 			// 如果自定义了点击返回按钮的函数，则执行，否则执行返回逻辑
 			if(typeof this.customBack === 'function') {
 				this.customBack();
-			} {
+			} else {
 				uni.navigateBack();
 			}
 		}
