@@ -245,7 +245,14 @@ export default {
 			immediate: true,
 			handler(val) {
 				val.map(value => {
-					this.lists.push({ url: value.url, error: false, progress: 100 });
+					// 首先检查内部是否已经添加过这张图片，因为外部绑定了一个对象给fileList的话(对象引用)，进行修改外部fileList
+					// 时，会触发watch，导致重新把原来的图片再次添加到this.lists
+					// 数组的some方法意思是，只要数组元素有任意一个元素条件符合，就返回true，而另一个数组的every方法的意思是数组所有元素都符合条件才返回true
+					let tmp = this.lists.some(val => {
+						return val.url == value.url;
+					})
+					// 如果内部没有这个图片(tmp为false)，则添加到内部
+					!tmp && this.lists.push({ url: value.url, error: false, progress: 100 });
 				});
 			}
 		}

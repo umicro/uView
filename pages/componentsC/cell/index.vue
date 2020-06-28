@@ -12,7 +12,7 @@
 						<u-badge :absolute="false" v-if="rightSlot == 'badge'" count="105" slot="right-icon"></u-badge>
 						<u-switch v-if="rightSlot == 'switch'" slot="right-icon" v-model="checked"></u-switch>
 					</u-cell-item>
-					<u-cell-item value="" title="铁马冰河入梦来" value="行万里路" :arrow="false">
+					<u-cell-item :border-bottom="false" value="" title="铁马冰河入梦来" value="行万里路" :arrow="false">
 						<u-icon slot="icon" size="34" name="calendar" style="margin-right: 5px;"></u-icon>
 						<u-icon slot="right-icon" size="34" name="calendar"></u-icon>
 						<u-field slot="value"></u-field>

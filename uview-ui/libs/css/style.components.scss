@@ -6,9 +6,9 @@ image {
 	will-change: transform;
 }
 
+// 在weex，也即nvue中，所有元素默认为border-box
 view,
 text {
 	box-sizing: border-box;
-	flex-direction: row;
 }
 /* #endif */

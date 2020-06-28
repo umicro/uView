@@ -8,8 +8,8 @@
 } 
 /* #endif */
 
-/* 支付宝，百度，头条小程序目前读取大的本地字体文件，导致无法显示图标，故用在线加载的方式-2020-05-12 */
-/* #ifdef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO || H5 */ 
+/* 支付宝，百度，头条，QQ小程序，以及H5在部分浏览器目前读取大的本地字体文件，导致无法显示图标，故用在线加载的方式-2020-06-24 */
+/* #ifdef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO || H5 || MP-QQ */ 
 @font-face {
 	font-family: "uicon-iconfont";
 	src: url('//at.alicdn.com/t/font_1529455_k9eg3z8m98');

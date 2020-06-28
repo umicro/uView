@@ -1,12 +1,12 @@
 <template>
-	<view class="u-field" :class="{'u-field-border': itemIndex > 0 }">
+	<view class="u-field" :class="{'u-border-top': borderTop, 'u-border-bottom': borderBottom }">
 		<view class="u-field-inner" :class="[type == 'textarea' ? 'u-textarea-inner' : '', 'u-label-postion-' + labelPosition]">
 			<view class="u-label" :class="[required ? 'u-required' : '']" :style="{
 				justifyContent: justifyContent, 
 				flex: labelPosition == 'left' ? `0 0 ${labelWidth}rpx` : '1'
 			}">
 				<view class="u-icon-wrap" v-if="icon">
-					<u-icon size="32" :name="icon" :color="iconColor" class="u-icon"></u-icon>
+					<u-icon size="32" :custom-style="iconStyle" :name="icon" :color="iconColor" class="u-icon"></u-icon>
 				</view>
 				<slot name="icon"></slot>
 				<text class="u-label-text" :class="[this.$slots.icon || icon ? 'u-label-left-gap' : '']">{{ label }}</text>
@@ -55,6 +55,7 @@
  * @tutorial https://www.uviewui.com/components/field.html
  * @property {String} type 输入框的类型（默认text）
  * @property {String} icon label左边的图标，限uView的图标名称
+ * @property {Object} icon-style 左边图标的样式，对象形式
  * @property {Boolean} right-icon 输入框右边的图标名称，限uView的图标名称（默认false）
  * @property {Boolean} required 是否必填，左边您显示红色"*"号（默认false）
  * @property {String} label 输入框左边的文字提示
@@ -65,6 +66,8 @@
  * @property {Object} field-style 自定义输入框的样式，对象形式
  * @property {Number | String} clear-size 清除图标的大小，单位rpx（默认30）
  * @property {String} input-align 输入框内容对齐方式（默认left）
+ * @property {Boolean} border-bottom 是否显示field的下边框（默认true）
+ * @property {Boolean} border-top 是否显示field的上边框（默认false）
  * @property {String} icon-color 左边通过icon配置的图标的颜色（默认#606266）
  * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效（默认true）
  * @property {String Boolean} error-message 显示的错误提示内容，如果为空字符串或者false，则不显示错误信息
@@ -162,19 +165,30 @@ export default {
 		clearSize: {
 			type: [Number, String],
 			default: 30
-		}
+		},
+		// lable左边的图标样式，对象形式
+		iconStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
+		// 是否显示上边框
+		borderTop: {
+			type: Boolean,
+			default: false
+		},
+		// 是否显示下边框
+		borderBottom: {
+			type: Boolean,
+			default: true
+		},
 	},
-	inject: ['uCellGroup'],
 	data() {
 		return {
 			focused: false,
 			itemIndex: 0,
 		};
-	},
-	created() {
-		if(this.uCellGroup) {
-			this.itemIndex = this.uCellGroup.index++;
-		}
 	},
 	computed: {
 		inputWrapStyle() {
@@ -334,19 +348,6 @@ export default {
 .u-clear-icon {
 	display: flex;
 	align-items: center;
-}
-
-.u-field-border:after {
-	left: 32rpx!important;
-	position: absolute;
-	box-sizing: border-box;
-	content: ' ';
-	pointer-events: none;
-	right: 0;
-	top: 0;
-	border-bottom: 1px solid $u-border-color;
-	-webkit-transform: scaleY(0.5);
-	transform: scaleY(0.5);
 }
 
 .u-error-message {

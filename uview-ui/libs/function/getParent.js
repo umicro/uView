@@ -6,14 +6,18 @@ export default function getParent(name, keys) {
 	while (parent) {
 		// 父组件
 		if (parent.$options.name !== name) {
+			// 如果组件的name不相等，继续上一级寻找
 			parent = parent.$parent;
 		} else {
-			return keys.reduce((result, key) => {
-				result[key] = parent[key];
-				return result;
-			}, {});
+			let data = {};
+			// 历遍传过来的对象参数
+			for(let i in keys) {
+				// 如果父组件有此值则用，无此值则用默认值
+				data[i] = parent[i] ? parent[i] : keys[i];
+			}
+			return data;
 		}
 	}
 
-	return null;
+	return {};
 }

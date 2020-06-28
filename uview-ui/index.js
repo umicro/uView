@@ -1,7 +1,7 @@
 // 引入全局mixin
 import mixin from './libs/mixin/mixin.js'
 // 引入关于是否mixin集成小程序分享的配置
-import wxshare from './libs/mixin/mpShare.js'
+// import wxshare from './libs/mixin/mpShare.js'
 // 全局挂载引入http相关请求拦截插件
 import http from './libs/request'
 
@@ -45,6 +45,8 @@ import randomArray from './libs/function/randomArray.js'
 import deepClone from './libs/function/deepClone.js'
 // 对象深度拷贝
 import deepMerge from './libs/function/deepMerge.js'
+// 添加单位
+import addUnit from './libs/function/addUnit.js'
 
 // 规则检验
 import test from './libs/function/test.js'
@@ -86,6 +88,7 @@ const $u = {
 	deepClone,
 	deepMerge,
 	getParent,
+	addUnit,
 	trim,
 	type: ['primary', 'success', 'error', 'warning', 'info'],
 	http,

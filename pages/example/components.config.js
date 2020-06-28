@@ -8,6 +8,10 @@ export default [{
 			path: '/pages/componentsA/icon/index',
 			icon: 'icon',
 			title: 'Icon 图标',
+		},{
+			path: '/pages/componentsB/image/index',
+			icon: 'image',
+			title: 'Image 图片',
 		}, {
 			path: '/pages/componentsC/button/index',
 			icon: 'button',

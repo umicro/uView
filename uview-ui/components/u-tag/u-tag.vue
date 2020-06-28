@@ -181,31 +181,31 @@
 	.u-mode-light-primary {
 		background-color: $u-type-primary-light;
 		color: $u-type-primary;
-		border: 1px solid rgb(215, 234, 254);
+		border: 1px solid $u-type-primary-disabled;
 	}
 	
 	.u-mode-light-success {
 		background-color: $u-type-success-light;
 		color: $u-type-success;
-		border: 1px solid #BEF5C8;
+		border: 1px solid $u-type-success-disabled;
 	}
 	
 	.u-mode-light-error {
 		background-color: $u-type-error-light;
 		color: $u-type-error;
-		border: 1px solid #fde2e2;
+		border: 1px solid $u-type-error-disabled;
 	}
 	
 	.u-mode-light-warning {
 		background-color: $u-type-warning-light;
 		color: $u-type-warning;
-		border: 1px solid #faecd8;
+		border: 1px solid $u-type-warning-disabled;
 	}
 	
 	.u-mode-light-info {
 		background-color: $u-type-info-light;
 		color: $u-type-info;
-		border: 1px solid #ebeef5;
+		border: 1px solid $u-type-info-disabled;
 	}
 	
 	.u-mode-dark-primary {
