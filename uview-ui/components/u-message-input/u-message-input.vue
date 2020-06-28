@@ -3,7 +3,7 @@
 		<view class="u-char-flex">
 			<input :disabled="disabledKeyboard" :value="valueModel" type="number" :focus="focus" :maxlength="maxlength" class="u-input" @input="getVal"/>
 			<view v-for="(item, index) in maxlength" :key="index">
-				<view :class="[breathe && charArrLength == index ? 'u-breathe' : '', 'u-char-item', 
+				<view :class="[breathe && charArrLength == index ? 'u-breathe' : '', 'u-char-item',
 				charArrLength === index && mode == 'box' ? 'u-box-active' : '',
 				mode === 'box' ? 'u-box' : '']" :style="{
 					fontWeight: bold ? 'bold' : 'normal',
@@ -15,7 +15,7 @@
 					<view class="u-placeholder-line" :style="{
 							display: charArrLength === index ? 'block' : 'none',
 							height: width * 0.5 +'rpx'
-						}" 
+						}"
 						v-if="mode !== 'middleLine'"
 					></view>
 					<view v-if="mode === 'middleLine' && charArrLength <= index" :class="[breathe && charArrLength == index ? 'u-breathe' : '', charArrLength === index ? 'u-middle-line-active' : '']"
@@ -46,7 +46,7 @@
 	 * @property {Boolean} bold 字体和输入横线是否加粗（默认true）
 	 * @property {String Number} font-size 字体大小，单位rpx（默认60）
 	 * @property {String} active-color 当前激活输入框的样式（默认#2979ff）
-	 * @property {String} focus 非激活输入框的样式，文字颜色同此值（默认#606266）
+	 * @property {String} inactive-color 非激活输入框的样式，文字颜色同此值（默认#606266）
 	 * @property {String | Number} width 输入框宽度，单位rpx，高等于宽（默认80）
 	 * @property {Boolean} disabled-keyboard 禁止点击输入框唤起系统键盘（默认false）
 	 * @event {Function} change 输入内容发生改变时触发，具体见官网说明
@@ -176,7 +176,7 @@
 
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
-	
+
 	@keyframes breathe {
 		0% {
 			opacity: 0.3;
