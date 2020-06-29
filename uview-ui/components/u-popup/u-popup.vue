@@ -184,6 +184,11 @@ export default {
 			style1: {}
 		};
 	},
+	created() {
+		if (this.value){
+			this.open()
+		}
+	},
 	computed: {
 		// 根据mode的位置，设定其弹窗的宽度(mode = left|right)，或者高度(mode = top|bottom)
 		style() {
