@@ -181,7 +181,6 @@ export default {
 			visibleSync: false,
 			showDrawer: false,
 			timer: null,
-			style1: {}
 		};
 	},
 	computed: {
@@ -249,7 +248,11 @@ export default {
 			}
 		}
 	},
-	methods: {
+	mounted() {
+		// 组件渲染完成时，检查value是否为true，如果是，弹出popup
+		this.value && this.open();
+	},
+    methods: {
 		// 判断传入的值，是否带有单位，如果没有，就默认用rpx单位
 		getUnitValue(val) {
 			if(/(%|px|rpx|auto)$/.test(val)) return val;

@@ -1,5 +1,5 @@
 <template>
-	<view :style="[customStyle]" class="u-icon" @tap="click" :class="[labelPos == 'bottom' ? 'u-flex-col u-row-center' : 'u-flex u-col-center']">
+	<view :style="[customStyle]" class="u-icon" @tap="click" :class="['u-icon--' + labelPos]">
 		<image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]"></image>
 		<text v-else class="u-icon__icon" :class="customClass" :style="[iconStyle]" :hover-class="hoverClass" @touchstart="touchstart"></text>
 		<text v-if="label" class="u-icon__label" :style="{
@@ -7,6 +7,8 @@
 			fontSize: labelSize + 'rpx',
 			marginLeft: labelPos == 'right' ? marginLeft + 'rpx' : 0,
 			marginTop: labelPos == 'bottom' ? marginTop + 'rpx' : 0,
+			marginRight: labelPos == 'left' ? marginRight + 'rpx' : 0,
+			marginBottom: labelPos == 'top' ? marginBottom + 'rpx' : 0,
 		}">{{label}}</text>
 	</view>
 </template>
@@ -26,6 +28,8 @@
  * @property {Object} custom-style icon的样式，对象形式
  * @property {String | Number} margin-left label在右侧时与图标的距离，单位rpx（默认6）
  * @property {String | Number} margin-top label在下方时与图标的距离，单位rpx（默认6）
+ * @property {String | Number} margin-bottom label在上方时与图标的距离，单位rpx（默认6）
+ * @property {String | Number} margin-right label在左侧时与图标的距离，单位rpx（默认6）
  * @property {String} label-pos label相对于图标的位置，只能right或bottom（默认right）
  * @property {String} index 一个用于区分多个图标的值，点击图标时通过click事件传出
  * @property {String} hover-class 图标按下去的样式类，用法同uni的view组件的hover-class参数，详情见官网
@@ -100,6 +104,16 @@ export default {
 			type: [String, Number],
 			default: '6'
 		},
+		// label与图标的距离(竖向排列)
+		marginRight: {
+			type: [String, Number],
+			default: '6'
+		},
+		// label与图标的距离(竖向排列)
+		marginBottom: {
+			type: [String, Number],
+			default: '6'
+		},
 		// 图片的mode
 		imgMode: {
 			type: String,
@@ -167,32 +181,56 @@ export default {
 .u-icon {
 	display: inline-flex;
 	align-items: center;
-	
+
+	&--left {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	&--right {
+		flex-direction: row-reverse;
+		align-items: center;
+	}
+
+	&--top {
+		flex-direction: column-reverse;
+		justify-content: center;
+	}
+
+	&--bottom {
+		flex-direction: column;
+		justify-content: center;
+	}
+
 	&__icon {
 		&--primary {
 			color: $u-type-primary;
 		}
-		
+
 		&--success {
 			color: $u-type-success;
 		}
-		
+
 		&--error {
 			color: $u-type-error;
 		}
-		
+
 		&--warning {
 			color: $u-type-warning;
 		}
-		
+
 		&--info {
 			color: $u-type-info;
 		}
 	}
-	
+
 	&__img {
 		height: auto;
 		will-change: transform;
+	}
+
+	&__label {
+		line-height: 1;
 	}
 }
 </style>

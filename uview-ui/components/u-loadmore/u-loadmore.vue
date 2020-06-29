@@ -2,7 +2,8 @@
 	<view class="u-load-more-wrap" :style="{
 		backgroundColor: bgColor,
 		marginBottom: marginBottom + 'rpx',
-		marginTop: marginTop + 'rpx'
+		marginTop: marginTop + 'rpx',
+		height: $u.addUnit(height)
 	}">
 		<!-- 加载中和没有更多的状态才显示两边的横线 -->
 		<view :class="status == 'loadmore' || status == 'nomore' ? 'u-more' : ''" class="u-load-more-inner">
@@ -96,6 +97,11 @@
 				type: [String, Number],
 				default: 0
 			},
+			// 高度，单位rpx
+			height: {
+				type: [String, Number],
+				default: 'auto'
+			}
 		},
 		data() {
 			return {

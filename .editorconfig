@@ -1,6 +1,6 @@
 [*]
 #缩进风格：空格
-indent_style = space
+indent_style = tab
 #缩进大小2
 indent_size = 4
 #换行符lf

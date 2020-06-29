@@ -1,13 +1,6 @@
 <template>
 	<view>
-		<!-- 底部弹窗 -->
-		<u-popup v-model="show" mode="bottom">
-			<view style="padding-bottom: 60px;">出淤泥而不染，濯清涟而不妖</view>
-		</u-popup>
-		<!-- 底部固定栏 -->
-		<view class="box-1"></view>
-		<!-- 模态框 -->
-		<u-modal v-model="show" :zoom="false"></u-modal>
+		<u-icon name="map" label="nihao" label-pos="right"></u-icon>
 	</view>
 </template>
 
