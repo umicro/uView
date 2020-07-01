@@ -4,19 +4,19 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-row gutter="20" :justify="justify">
-					<u-col :span="span" :offset="offset">
+					<u-col :span="span" :offset="offset" @click="click">
 						<view class="demo-layout bg-purple-dark">
-							
+
 						</view>
 					</u-col>
 					<u-col :span="span" :offset="offset">
 						<view class="demo-layout bg-purple-dark">
-							
+
 						</view>
 					</u-col>
 					<u-col :span="span" :offset="offset">
 						<view class="demo-layout bg-purple-dark">
-							
+
 						</view>
 					</u-col>
 				</u-row>
@@ -125,7 +125,7 @@
 	.bg-purple-dark {
 		background: #99a9bf;
 	}
-	
+
 	// H5中，电脑端文档演示时，可能会导致演示块挤出边界，特别处理。
 	// 真实使用环境不会产生此问题
 	/* #ifdef H5 */

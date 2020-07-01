@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<u-navbar title="" :border-bottom="false">
+		<u-navbar :is-back="false" title="　" :border-bottom="false">
 			<view class="u-flex u-row-right" style="width: 100%;">
 				<view class="camera u-flex u-row-center">
 					<u-icon name="camera-fill" color="#000000" size="48"></u-icon>
@@ -23,20 +23,26 @@
 			</view>
 		</view>
 		
-		<u-cell-group class="u-m-t-20">
-			<u-cell-item icon="rmb-circle" title="支付"></u-cell-item>
-		</u-cell-group>
+		<view class="u-m-t-20">
+			<u-cell-group>
+				<u-cell-item icon="rmb-circle" title="支付"></u-cell-item>
+			</u-cell-group>
+		</view>
 		
-		<u-cell-group class="u-m-t-20">
-			<u-cell-item icon="star" title="收藏"></u-cell-item>
-			<u-cell-item icon="photo" title="相册"></u-cell-item>
-			<u-cell-item icon="coupon" title="卡券"></u-cell-item>
-			<u-cell-item icon="heart" title="关注"></u-cell-item>
-		</u-cell-group>
+		<view class="u-m-t-20">
+			<u-cell-group>
+				<u-cell-item icon="star" title="收藏"></u-cell-item>
+				<u-cell-item icon="photo" title="相册"></u-cell-item>
+				<u-cell-item icon="coupon" title="卡券"></u-cell-item>
+				<u-cell-item icon="heart" title="关注"></u-cell-item>
+			</u-cell-group>
+		</view>
 		
-		<u-cell-group class="u-m-t-20">
-			<u-cell-item icon="setting" title="设置"></u-cell-item>
-		</u-cell-group>
+		<view class="u-m-t-20">
+			<u-cell-group>
+				<u-cell-item icon="setting" title="设置"></u-cell-item>
+			</u-cell-group>
+		</view>
 	</view>
 </template>
 
@@ -44,7 +50,8 @@
 	export default {
 		data() {
 			return {
-				pic:'https://uviewui.com/common/logo.png'
+				pic:'https://uviewui.com/common/logo.png',
+				show:true
 			}
 		},
 		onLoad() {
@@ -59,7 +66,6 @@
 <style lang="scss">
 page{
 	background-color: #ededed;
-	min-height: 100vh;
 }
 
 .camera{

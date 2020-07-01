@@ -72,7 +72,8 @@
 		data() {
 			return {
 				error: false,
-                avatar: this.src, // 头像的地址，因为如果加载错误，需要赋值为默认图片，props值无法修改，所以需要一个中间值
+				// 头像的地址，因为如果加载错误，需要赋值为默认图片，props值无法修改，所以需要一个中间值
+                avatar: this.src ? this.src : base64Avatar, 
 			}
 		},
         watch: {
