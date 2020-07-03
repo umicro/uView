@@ -1,7 +1,7 @@
 <template>
 	<view
 		class="u-image"
-		@tap.stop.prevent="onClick"
+		@tap="onClick"
 		:style="[wrapStyle, backgroundStyle]"
 	>
 		<image

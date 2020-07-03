@@ -649,6 +649,13 @@
 		{
 			"root": "pages/componentsB",
 			"pages": [
+				// tabbar-底部导航栏
+				{
+					"path": "tabbar/index",
+					"style": {
+						"navigationBarTitleText": "tabbar-底部导航栏"
+					}
+				},
 				// line-线条
 				{
 					"path": "line/index",

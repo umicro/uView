@@ -11,7 +11,7 @@
 		</view> -->
 		<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
 			<view class="u-select">
-				<view class="u-select__header" @touchmove.stop.prevent="stop" catchtouchmove="stop">
+				<view class="u-select__header" @touchmove.stop.prevent="">
 					<view
 						class="u-select__header__cancel u-select__header__btn"
 						:style="{ color: cancelColor }"

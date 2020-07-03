@@ -9,6 +9,8 @@
 
 uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水
 
+### **欢迎加群交流反馈：249718512**
+
 ## 特性
 
 - 兼容安卓，iOS，微信小程序，H5，QQ小程序，百度小程序，支付宝小程序，头条小程序
@@ -91,7 +93,7 @@ Vue.use(uView);
 }
 ```
 
-请通过[快速上手](https://uviewui.com/components/quickstart.html)了解更详细的内容 
+请通过[快速上手](https://uviewui.com/components/quickstart.html)了解更详细的内容
 
 ## 使用方法
 配置easycom规则后，自动按需引入，无需`import`组件，直接引用即可。
@@ -102,7 +104,7 @@ Vue.use(uView);
 </template>
 ```
 
-请通过[快速上手](https://uviewui.com/components/quickstart.html)了解更详细的内容 
+请通过[快速上手](https://uviewui.com/components/quickstart.html)了解更详细的内容
 
 
 ## 捐赠uView的研发

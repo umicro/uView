@@ -71,6 +71,7 @@
 		/* #ifndef MP-WEIXIN */
 		display: flex;
 		/* #endif */
+		flex-wrap: wrap;
 	}
 
 	.u-row:after {
