@@ -32,6 +32,7 @@ class Request {
 				uni.hideLoading();
 				// 清除定时器，如果请求回来了，就无需loading
 				clearTimeout(this.config.timer);
+				this.timer = null;
 				// 判断用户对拦截返回数据的要求，如果originalData为true，返回所有的数据(response)到拦截器，否则只返回response.data
 				if(this.config.originalData) {
 					// 判断是否存在拦截器

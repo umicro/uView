@@ -56,6 +56,7 @@
  * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
  * @property {Boolean} mask-close-able 点击遮罩是否可以关闭弹出层（默认true）
  * @property {Object} custom-style 用户自定义样式
+ * @property {Stringr | Number} negative-top 中部弹出时，往上偏移的值
  * @property {Numberr | String} border-radius 弹窗圆角值（默认0）
  * @property {Numberr | String} z-index 弹出内容的z-index值（默认1075）
  * @property {Boolean} closeable 是否显示关闭图标（默认false）
@@ -174,6 +175,11 @@ export default {
 		height: {
 			type: String,
 			default: ''
+		},
+		// 给一个负的margin-top，往上偏移，避免和键盘重合的情况，仅在mode=center时有效
+		negativeTop: {
+			type: [String, Number],
+			default: 0
 		}
 	},
 	data() {
@@ -181,7 +187,6 @@ export default {
 			visibleSync: false,
 			showDrawer: false,
 			timer: null,
-			style1: {}
 		};
 	},
 	computed: {
@@ -232,6 +237,7 @@ export default {
 			// 中部弹出的模式，如果没有设置高度，就用auto值，由内容撑开高度
 			style.height = this.height ? this.getUnitValue(this.height) : 'auto';
 			style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.popup;
+			style.marginTop = `-${this.$u.addUnit(this.negativeTop)}`;
 			if (this.borderRadius) {
 				style.borderRadius = `${this.borderRadius}rpx`;
 				// 不加可能圆角无效
@@ -249,7 +255,11 @@ export default {
 			}
 		}
 	},
-	methods: {
+	mounted() {
+		// 组件渲染完成时，检查value是否为true，如果是，弹出popup
+		this.value && this.open();
+	},
+    methods: {
 		// 判断传入的值，是否带有单位，如果没有，就默认用rpx单位
 		getUnitValue(val) {
 			if(/(%|px|rpx|auto)$/.test(val)) return val;

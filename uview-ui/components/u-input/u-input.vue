@@ -42,6 +42,7 @@
 			:maxlength="inputMaxlength"
 			:focus="focus"
 			:confirmType="confirmType"
+			:cursor-spacing="getCursorSpacing"
 			@focus="onFocus"
 			@blur="handleBlur"
 			@input="handleInput"
@@ -77,6 +78,7 @@ import Emitter from '../../libs/util/emitter.js';
 	 * @property {String} placeholder placeholder显示值(默认 '请输入内容')
 	 * @property {Boolean} disabled 是否禁用输入框(默认false)
 	 * @property {String Number} maxlength 输入框的最大可输入长度(默认140)
+	 * @property {String Number} cursor-spacing 指定光标与键盘的距离，单位px(默认0)
 	 * @property {String} placeholderStyle placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;")
 	 * @property {String} confirm-type 设置键盘右下角按钮的文字，仅在type为text时生效(默认done)
 	 * @property {Object} custom-style 自定义输入框的样式，对象形式
@@ -178,6 +180,11 @@ export default {
 			type: Boolean,
 			default: true
 		},
+		// 指定光标与键盘的距离，单位 px
+		cursorSpacing: {
+			type: [Number, String],
+			default: 0
+		}
 	},
 	data() {
 		return {
@@ -214,11 +221,15 @@ export default {
 		getStyle() {
 			let style = {};
 			// 如果没有自定义高度，就根据type为input还是textare来分配一个默认的高度
-			style.minHeight = this.height ? this.height + 'rpx' : this.type == 'textarea' ? 
+			style.minHeight = this.height ? this.height + 'rpx' : this.type == 'textarea' ?
 				this.textareaHeight + 'rpx' : this.inputHeight + 'rpx';
 			style.marginRight = this.marginRight + 'px';
 			style = Object.assign(style, this.customStyle);
 			return style;
+		},
+		//
+		getCursorSpacing() {
+			return Number(this.cursorSpacing);
 		}
 	},
 	created() {
@@ -291,13 +302,13 @@ export default {
 .u-input {
 	position: relative;
 	flex: 1;
-	
+
 	&__input {
 		//height: $u-form-item-height;
 		font-size: 28rpx;
 		color: $u-main-color;
 	}
-	
+
 	&__textarea {
 		width: auto;
 		font-size: 28rpx;
@@ -311,25 +322,25 @@ export default {
 		border-radius: 4px;
 		border: 1px solid $u-form-item-border-color;
 	}
-	
+
 	&--error {
 		border-color: $u-type-error!important;
 	}
-	
+
 	&__right-icon {
 		position: absolute;
 		right: 0;
 		top: 50%;
 		z-index: 3;
 		transform: translateY(-50%);
-		
+
 		&__item {
 			margin-left: 10rpx;
 		}
-		
+
 		&--select {
 			transition: transform .4s;
-			
+
 			&--reverse {
 				transform: rotate(-180deg);
 			}

@@ -4,7 +4,9 @@
 	]" :style="{
 		padding: `0 ${Number(gutter)/2 + 'rpx'}`,
 		marginLeft: 100 / 12 * offset + '%',
-		flex: `0 0 ${100 / 12 * span}%`
+		flex: `0 0 ${100 / 12 * span}%`,
+		alignItems: uAlignItem,
+		justifyContent: uJustify
 	}">
 		<slot></slot>
 	</view>
@@ -32,8 +34,30 @@
 				type: [Number, String],
 				default: 0
 			},
+			// 水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`)
+			justify: {
+				type: String,
+				default: 'start'
+			},
+			// 垂直对齐方式，可选值为top、center、bottom
+			align: {
+				type: String,
+				default: 'center'
+			}
 		},
 		inject: ['gutter'],
+		computed: {
+			uJustify() {
+				if (this.justify == 'end' || this.justify == 'start') return 'flex-' + this.justify;
+				else if (this.justify == 'around' || this.justify == 'between') return 'space-' + this.justify;
+				else return this.justify;
+			},
+			uAlignItem() {
+				if (this.align == 'top') return 'flex-start';
+				if (this.align == 'bottom') return 'flex-end';
+				else return this.align;
+			}
+		},
 	}
 </script>
 

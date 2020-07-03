@@ -188,7 +188,7 @@ export default {
 	},
 	data() {
 		return {
-			
+
 		};
 	},
 	computed: {
@@ -267,6 +267,7 @@ export default {
 	font-size: 26rpx;
 	line-height: 36rpx;
 	color: $u-tips-color;
+	word-wrap: break-word;
 }
 
 .u-cell__value {

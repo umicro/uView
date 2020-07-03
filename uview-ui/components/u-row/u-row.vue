@@ -1,8 +1,10 @@
 <template>
 	<view class="u-row" :style="{
-		alignItems: uAlignItem,
-		justifyContent: uJustify
-	}">
+			alignItems: uAlignItem,
+			justifyContent: uJustify
+		}"
+		@tap.stop.prevent="click"
+	>
 		<slot />
 	</view>
 </template>
@@ -52,18 +54,24 @@
 				if (this.align == 'bottom') return 'flex-end';
 				else return this.align;
 			}
+		},
+		methods: {
+			click() {
+				this.$emit('click');
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-row {
 		// 由于微信小程序编译后奇怪的页面结构，只能使用float布局实现，flex无法实现
 		/* #ifndef MP-WEIXIN */
 		display: flex;
 		/* #endif */
+		flex-wrap: wrap;
 	}
 
 	.u-row:after {

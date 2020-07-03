@@ -1,6 +1,13 @@
 <template>
 	<view class="u-avatar" :style="[wrapStyle]" @tap="click">
-		<image @error="loadError" :style="[imgStyle]" class="u-avatar-img" v-if="!text && defaultAvatar" :src="defaultAvatar" :mode="imgMode"></image>
+		<image
+			@error="loadError"
+			:style="[imgStyle]"
+			class="u-avatar-img"
+			v-if="!text && avatar"
+			:src="avatar"
+			:mode="mode"
+		></image>
 		<text class="u-line-1" v-else-if="text">{{text}}</text>
 		<slot v-else></slot>
 	</view>
@@ -65,12 +72,20 @@
 		data() {
 			return {
 				error: false,
+				// 头像的地址，因为如果加载错误，需要赋值为默认图片，props值无法修改，所以需要一个中间值
+                avatar: this.src ? this.src : base64Avatar, 
 			}
 		},
+        watch: {
+            src(n) {
+                // 用户可能会在头像加载失败时，再次修改头像值，所以需要重新赋值
+                this.avatar = n;
+            }
+        },
 		computed: {
 			wrapStyle() {
 				let style = {};
-				style.height = this.size == 'large' ? '120rpx' : this.size == 'default' ? 
+				style.height = this.size == 'large' ? '120rpx' : this.size == 'default' ?
 				'90rpx' : this.size == 'mini' ? '70rpx' : this.size + 'rpx';
 				style.width = style.height;
 				style.flex = `0 0 ${style.height}`;
@@ -79,21 +94,17 @@
 				if(this.text) style.padding = `0 6rpx`;
 				return style;
 			},
-			defaultAvatar() {
-				if(!this.src) return base64Avatar;
-				else if(this.src && this.error) return base64Avatar;
-				else return this.src;
-			},
 			imgStyle() {
 				let style = {};
 				style.borderRadius = this.mode == 'circle' ? '500px' : '5px';
 				return style;
-			}
+			},
 		},
 		methods: {
 			// 图片加载错误时，显示默认头像
 			loadError() {
 				this.error = true;
+                this.avatar = base64Avatar;
 			},
 			click() {
 				this.$emit('click', this.index);
@@ -104,7 +115,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-avatar {
 		display: inline-flex;
 		align-items: center;
@@ -112,9 +123,9 @@
 		font-size: 28rpx;
 		color: $u-content-color;
 		border-radius: 10px;
-		overflow: hidden; 
+		overflow: hidden;
 	}
-	
+
 	.u-avatar-img {
 		width: 100%;
 		height: 100%;

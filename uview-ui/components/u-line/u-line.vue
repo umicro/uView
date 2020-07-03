@@ -59,13 +59,13 @@
 					// 此处采用兼容分开写，兼容nvue的写法
 					style.borderBottomWidth = '1px';
 					style.borderBottomStyle = this.borderStyle;
-					style.width = this.length;
+					style.width = this.$u.addUnit(this.length);
 					if(this.hairLine) style.transform = 'scaleY(0.5)';
 				} else {
 					// 如果是竖向线条，边框宽度为1px，再通过transform缩小一半，就是0.5px了
 					style.borderLeftWidth = '1px';
 					style.borderLeftStyle = this.borderStyle;
-					style.height = this.length;
+					style.height = this.$u.addUnit(this.length);
 					if(this.hairLine) style.transform = 'scaleX(0.5)';
 				}
 				style.borderColor = this.color;

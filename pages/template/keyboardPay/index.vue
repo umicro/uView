@@ -5,11 +5,9 @@
 				<u-icon name="red-packet"></u-icon>
 				<text class="u-padding-left-10">发送1.00元红包</text>
 			</u-button>
-		</view>
-		
-		
+		</view>		
 		<u-keyboard 
-			default="778"
+			default=""
 			ref="uKeyboard" 
 			mode="number" 
 			:mask="true" 
@@ -19,8 +17,7 @@
 			:safe-area-inset-bottom="true"
 			:tooltip="false"
 			@change="onChange"
-			@backspace="onBackspace"
-		>
+			@backspace="onBackspace">
 			<view>
 				<view class="u-text-center u-padding-20 money">
 					<text>1.00</text>
@@ -36,6 +33,7 @@
 						:dot-fill="true"
 						v-model="password"
 						:disabled-keyboard="true"
+						@finish="finish"
 					></u-message-input>
 				</view>
 				<view class="u-text-center u-padding-top-10 u-padding-bottom-20 tips">支付键盘</view>
@@ -53,7 +51,7 @@
 			}
 		},
 		onLoad() {
-			console.log(this.$u.config.v)
+			
 		},
 		methods: {
 			onChange(val){
@@ -87,6 +85,9 @@
 			showPop(flag = true){
 				this.password = '';
 				this.show = flag;
+			},
+			finish(){
+				console.log(11111)
 			}
 		}
 	}

@@ -275,7 +275,7 @@ export default {
 }
 
 .u-title {
-	line-height: 1;
+	line-height: 60rpx;
 	font-size: 32rpx;
 	flex: 1;
 }

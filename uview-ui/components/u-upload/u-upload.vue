@@ -255,14 +255,16 @@ export default {
 					!tmp && this.lists.push({ url: value.url, error: false, progress: 100 });
 				});
 			}
+		},
+		// 监听lists的变化，发出事件
+		lists(n) {
+			this.$emit('on-list-change', n);
 		}
 	},
 	methods: {
 		// 清除列表
 		clear() {
 			this.lists = [];
-			// 如果是清空形式的话，发出"on-list-change"事件
-			this.$emit('on-list-change', this.lists);
 		},
 		// 重新上传队列中上传失败的所有文件
 		reUpload() {
@@ -305,8 +307,6 @@ export default {
 								progress: 0,
 								error: false
 							});
-							// 列表发生改变，发出事件，第二个参数为当前发生变化的项的索引
-							this.$emit('on-list-change', this.lists);
 						}
 					});
 					// 每次图片选择完，抛出一个事件，并将当前内部选择的图片数组抛出去
@@ -437,8 +437,6 @@ export default {
 						this.$forceUpdate();
 						this.$emit('on-remove', index, this.lists);
 						this.showToast('移除成功');
-						// 列表发生改变，发出事件
-						this.$emit('on-list-change', this.lists);
 					}
 				}
 			});

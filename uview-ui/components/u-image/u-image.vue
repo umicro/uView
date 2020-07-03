@@ -1,15 +1,15 @@
 <template>
 	<view
 		class="u-image"
-		@tap.stop.prevent="onClick"
-		:style="[wrapStyle]"
+		@tap="onClick"
+		:style="[wrapStyle, backgroundStyle]"
 	>
-		<image 
-			v-if="!isError" 
-			:src="src" 
+		<image
+			v-if="!isError"
+			:src="src"
 			:mode="mode"
-			@error="onErrorHandler" 
-			@load="onLoadHandler" 
+			@error="onErrorHandler"
+			@load="onLoadHandler"
 			:lazy-load="lazyLoad"
 			class="u-image__image"
 			:style="{
@@ -42,7 +42,7 @@ export default {
 		// 裁剪模式
 		mode: {
 			type: String,
-			default: 'widthFix'
+			default: 'aspectFill'
 		},
 		// 宽度，单位任意
 		width: {
@@ -62,7 +62,7 @@ export default {
 		// 圆角，单位任意
 		borderRadius: {
 			type: [String, Number],
-			default: 10
+			default: 0
 		},
 		// 是否懒加载，微信小程序、App、百度小程序、字节跳动小程序
 		lazyLoad: {
@@ -120,6 +120,8 @@ export default {
 			opacity: 1,
 			// 过渡时间，因为props的值无法修改，故需要一个中间值
 			durationTime: this.duration,
+			// 图片加载完成时，去掉背景颜色，因为如果是png图片，就会显示灰色的背景
+			backgroundStyle: {}
 		};
 	},
 	computed: {
@@ -153,7 +155,7 @@ export default {
 		// 图片加载完成，标记loading结束
 		onLoadHandler() {
 			this.loading = false;
-			this.error = false;
+			this.isError = false;
 			this.$emit('load');
 			// 如果不需要动画效果，就不执行下方代码
 			if(!this.fade) return ;
@@ -166,6 +168,12 @@ export default {
 			setTimeout(() => {
 				this.durationTime = this.duration;
 				this.opacity = 1;
+				setTimeout(() => {
+					// 淡入动画过渡完成后，将背景设置为透明色，否则png图片会看到灰色的背景
+					this.backgroundStyle = {
+						backgroundColor: 'transparent'
+					};
+				}, this.durationTime)
 			}, 50)
 		}
 	}
@@ -184,7 +192,7 @@ export default {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	&__loading, &__error {
 		position: absolute;
 		top: 0;
