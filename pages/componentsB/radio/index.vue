@@ -85,7 +85,7 @@
 				activeColor: '#2979ff',
 				size: 34,
 				wrap: false,
-				width: ''
+				width: 'auto'
 			}
 		},
 		methods: {

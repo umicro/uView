@@ -209,6 +209,10 @@ export default [{
 	}, {
 		groupName: '导航组件',
 		list: [{
+			path: '/pages/componentsB/tabbar/index',
+			icon: 'tabbar',
+			title: 'Tabbar 底部导航栏',
+		},{
 			path: '/pages/componentsA/backTop/index',
 			icon: 'backTop',
 			title: 'BackTop 返回顶部',

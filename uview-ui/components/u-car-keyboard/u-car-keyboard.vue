@@ -153,12 +153,14 @@
 			backspaceClick() {
 				this.$emit('backspace');
 				clearInterval(this.timer); //再次清空定时器，防止重复注册定时器
+				this.timer = null;
 				this.timer = setInterval(() => {
 					this.$emit('backspace');
 				}, 250);
 			},
 			clearTimer() {
 				clearInterval(this.timer);
+				this.timer = null;
 			},
 		}
 	};
@@ -166,7 +168,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-keyboard-grids {
 		background: rgb(215, 215, 217);
 		padding: 24rpx 0;

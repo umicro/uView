@@ -86,7 +86,7 @@
 						activeColor: '#2979ff',
 						max: 999999,
 						emitEvent: () => {},
-						width: '',
+						width: 'auto',
 						wrap: false
 					}
 				}
@@ -199,7 +199,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-checkbox {
 		display: -webkit-flex;
 		display: flex;
@@ -210,7 +210,7 @@
 		user-select: none;
 		line-height: 1.8;
 	}
-	
+
 	.u-checkbox__icon-wrap,
 	.u-checkbox__label {
 		color: $u-content-color;
