@@ -1,6 +1,6 @@
 <template>
 	<view class="u-numberbox">
-		<view class="u-icon-minus" @tap.stop="minus" :class="{ 'u-icon-disabled': disabled || inputVal <= min }" :style="{
+		<view class="u-icon-minus" @touchstart.stop="btnTouchStart('minus')" @touchend.stop="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal <= min }" :style="{
 				background: bgColor,
 				height: inputHeight + 'rpx',
 				color: color
@@ -15,7 +15,7 @@
 				height: inputHeight + 'rpx',
 				width: inputWidth + 'rpx'
 			}" />
-		<view class="u-icon-plus" @tap.stop="plus" :class="{ 'u-icon-disabled': disabled || inputVal >= max }" :style="{
+		<view class="u-icon-plus" @touchstart.stop="btnTouchStart('plus')" @touchend.stop="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal >= max }" :style="{
 				background: bgColor,
 				height: inputHeight + 'rpx',
 				color: color
@@ -42,11 +42,13 @@
 	 * @property {String | Number} input-width 输入框宽度，单位rpx（默认80）
 	 * @property {String | Number} input-height 输入框和按钮的高度，单位rpx（默认50）
 	 * @property {String | Number} index 事件回调时用以区分当前发生变化的是哪个输入框
+	 * @property {Boolean} long-press 是否开启长按连续递增或递减(默认true)
+	 * @property {String | Number} press-time 开启长按触发后，每触发一次需要多久，单位ms(默认250)
 	 * @property {String | Number} cursor-spacing 指定光标于键盘的距离，避免键盘遮挡输入框，单位rpx（默认200）
 	 * @event {Function} change 输入框内容发生变化时触发，对象形式
 	 * @event {Function} blur 输入框失去焦点时触发，对象形式
 	 * @event {Function} minus 点击减少按钮时触发(按钮可点击情况下)，对象形式
-	 * @event {Function} plus 点击增加按钮时触发(按钮可点击情况下)，对象形式	
+	 * @event {Function} plus 点击增加按钮时触发(按钮可点击情况下)，对象形式
 	 * @example <u-number-box :min="1" :max="100"></u-number-box>
 	 */
 	export default {
@@ -117,6 +119,16 @@
 			cursorSpacing: {
 				type: [Number, String],
 				default: 100
+			},
+			// 是否开启长按连续递增或递减
+			longPress: {
+				type: Boolean,
+				default: true
+			},
+			// 开启长按触发后，每触发一次需要多久
+			pressTime: {
+				type: [Number, String],
+				default: 250
 			}
 		},
 		watch: {
@@ -128,19 +140,20 @@
 				// 为了让用户能够删除所有输入值，重新输入内容，删除所有值后，内容为空字符串
 				if (v1 == '') return;
 				let value = 0;
-				// 首先判断是否正整数，并且在min和max之间，如果不是，使用原来值
-				let tmp = /(^\d+$)/.test(v1);
+				// 首先判断是否数值，并且在min和max之间，如果不是，使用原来值
+				let tmp = this.$u.test.number(v1);
 				if (tmp && v1 >= this.min && v1 <= this.max) value = v1;
 				else value = v2;
 				this.handleChange(value, 'change');
 				this.$nextTick(() => {
-					this.inputVal = value;
+					this.inputVal = v1;
 				})
 			}
 		},
 		data() {
 			return {
-				inputVal: 1 // 输入框中的值，不能直接使用props中的value，因为应该改变props的状态
+				inputVal: 1 , // 输入框中的值，不能直接使用props中的value，因为应该改变props的状态
+				timer: null, // 用作长按的定时器
 			};
 		},
 		created() {
@@ -153,6 +166,25 @@
 			}
 		},
 		methods: {
+			// 点击退格键
+			btnTouchStart(callback) {
+				// 先执行一遍方法，否则会造成松开手时，就执行了clearTimer，导致无法实现功能
+				this[callback]();
+				// 如果没开启长按功能，直接返回
+				if(!this.longPress) return ;
+				clearInterval(this.timer); //再次清空定时器，防止重复注册定时器
+				this.timer = null;
+				this.timer = setInterval(() => {
+					// 执行加或减函数
+					this[callback]();
+				}, this.pressTime);
+			},
+			clearTimer() {
+				this.$nextTick(() => {
+					clearInterval(this.timer);
+					this.timer = null;
+				})
+			},
 			minus() {
 				this.computeVal('minus');
 			},
@@ -189,6 +221,7 @@
 				} catch (e) {
 					baseNum2 = 0;
 				}
+				console.log(num1, num2, baseNum1, baseNum2);
 				baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
 				let precision = baseNum1 >= baseNum2 ? baseNum1 : baseNum2;
 				return ((num1 * baseNum - num2 * baseNum) / baseNum).toFixed(precision);
@@ -244,7 +277,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-numberbox {
 		display: inline-flex;
 		align-items: center;

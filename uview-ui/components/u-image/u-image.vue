@@ -13,17 +13,17 @@
 			:lazy-load="lazyLoad"
 			class="u-image__image"
 			:style="{
-				borderRadius: shape == 'circle' ? '50%' : borderRadius + 'rpx',
+				borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
 			}"
 		></image>
 		<view v-if="showLoading && loading" class="u-image__loading" :style="{
-			borderRadius: shape == 'circle' ? '50%' : borderRadius + 'rpx',
+			borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
 		}">
 			<slot v-if="$slots.loading" name="loading" />
 			<u-icon v-else :name="loadingIcon"></u-icon>
 		</view>
 		<view v-if="showError && isError && !loading" class="u-image__error" :style="{
-			borderRadius: shape == 'circle' ? '50%' : borderRadius + 'rpx',
+			borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
 		}">
 			<slot v-if="$slots.error" name="error" />
 			<u-icon v-else :name="errorIcon"></u-icon>

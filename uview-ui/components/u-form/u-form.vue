@@ -12,7 +12,7 @@
 	 * @property {Array} errorType 错误的提示方式，数组形式，见上方说明(默认['message'])
 	 * @example <u-form :model="form" ref="uForm"></u-form>
 	 */
-	
+
 export default {
 	name: 'u-form',
 	props: {
@@ -37,7 +37,34 @@ export default {
 			default() {
 				return ['message', 'toast']
 			}
-		}
+		},
+		// 是否显示表单域的下划线边框
+		borderBottom: {
+			type: Boolean,
+			default: true
+		},
+		// label的位置，left-左边，top-上边
+		labelPosition: {
+			type: String,
+			default: 'left'
+		},
+		// label的宽度，单位rpx
+		labelWidth: {
+			type: [String, Number],
+			default: 90
+		},
+		// lable字体的对齐方式
+		labelAlign: {
+			type: String,
+			default: 'left'
+		},
+		// lable的样式，对象形式
+		labelStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
 	},
 	provide() {
 		return {

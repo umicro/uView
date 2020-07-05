@@ -60,7 +60,7 @@
 		<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
 		<view class="u-config-wrap">
 			<view class="u-config-title u-border-bottom">
-				参数配置 
+				参数配置
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">label对齐方式</view>
@@ -119,15 +119,15 @@ export default {
 			],
 			rules: {
 				name: [
-					{ 
-						required: true, 
-						message: '请输入姓名', 
+					{
+						required: true,
+						message: '请输入姓名',
 						trigger: 'blur' ,
-					}, 
-					{ 
-						min: 3, 
-						max: 5, 
-						message: '姓名长度在3到5个字符', 
+					},
+					{
+						min: 3,
+						max: 5,
+						message: '姓名长度在3到5个字符',
 						trigger: ['change','blur'],
 					},
 					{
@@ -160,19 +160,19 @@ export default {
 				],
 				sex: [
 					{
-						required: true, 
+						required: true,
 						message: '请选择性别',
 						trigger: 'change'
-					}, 
+					},
 				],
 				intro: [
 					{
-						required: true, 
+						required: true,
 						message: '请填写简介'
-					}, 
+					},
 					{
-						min: 5, 
-						message: '简介不能少于5个字', 
+						min: 5,
+						message: '简介不能少于5个字',
 						trigger: 'change' ,
 					},
 					// 正则校验示例，此处用正则校验是否中文，此处仅为示例，因为uView有this.$u.test.chinese可以判断是否中文
@@ -184,7 +184,7 @@ export default {
 				],
 				likeFruit: [
 					{
-						required: true, 
+						required: true,
 						message: '请选择您喜欢的水果',
 						trigger: 'change',
 						type: 'array',
@@ -192,28 +192,28 @@ export default {
 				],
 				payType: [
 					{
-						required: true, 
+						required: true,
 						message: '请选择任意一种支付方式',
 						trigger: 'change',
 					}
 				],
 				region: [
 					{
-						required: true, 
+						required: true,
 						message: '请选择地区',
 						trigger: 'change',
 					}
 				],
 				goodsType: [
 					{
-						required: true, 
+						required: true,
 						message: '请选择商品类型',
 						trigger: 'change',
 					}
 				],
 				phone: [
 					{
-						required: true, 
+						required: true,
 						message: '请输入手机号',
 						trigger: ['change','blur'],
 					},
@@ -229,7 +229,7 @@ export default {
 				],
 				code: [
 					{
-						required: true, 
+						required: true,
 						message: '请输入验证码',
 						trigger: ['change','blur'],
 					},
@@ -241,7 +241,7 @@ export default {
 				],
 				password: [
 					{
-						required: true, 
+						required: true,
 						message: '请输入密码',
 						trigger: ['change','blur'],
 					},
@@ -254,7 +254,7 @@ export default {
 				],
 				rePassword: [
 					{
-						required: true, 
+						required: true,
 						message: '请重新输入密码',
 						trigger: ['change','blur'],
 					},
@@ -337,7 +337,7 @@ export default {
 		};
 	},
 	onLoad() {
-		
+
 	},
 	computed: {
 		borderCurrent() {
@@ -445,7 +445,7 @@ export default {
 	display: flex;
 	align-items: center;
 	margin: 40rpx 0;
-	
+
 	.agreement-text {
 		padding-left: 8rpx;
 		color: $u-tips-color;

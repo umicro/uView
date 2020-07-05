@@ -3,9 +3,9 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-rate :count="count" :current="current" @change="change" 
-				:active-color="activeColor" :inaction-color="inactiveColor" 
-				:active-icon="activeIcon" :inactive-icon="inactiveIcon" 
+				<u-rate v-model="value" :count="count" @change="change"
+				:active-color="activeColor" :inaction-color="inactiveColor"
+				:active-icon="activeIcon" :inactive-icon="inactiveIcon"
 				:disabled="disabled"></u-rate>
 			</view>
 		</view>
@@ -45,13 +45,20 @@
 	export default {
 		data() {
 			return {
-				current: 1,
+				// 1.4.5后推荐使用v-model双向绑定，弃用current
+				// current: 1,
 				activeColor: '#FA3534',
 				inactiveColor: '#b2b2b2',
 				disabled: false,
 				count: 5,
 				customIcon: false,
 				plain: false,
+				value: 0
+			}
+		},
+		watch: {
+			value(n) {
+				// console.log(n);
 			}
 		},
 		computed: {

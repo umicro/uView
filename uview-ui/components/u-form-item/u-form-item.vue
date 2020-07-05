@@ -1,13 +1,13 @@
 <template>
-	<view class="u-form-item" :class="{'u-border-bottom': borderBottom, 'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom')}">
+	<view class="u-form-item" :class="{'u-border-bottom': parentParam.borderBottom, 'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom')}">
 		<view class="u-form-item__body" :style="{
-			flexDirection: labelPosition == 'left' ? 'row' : 'column'
+			flexDirection: parentParam.labelPosition == 'left' ? 'row' : 'column'
 		}">
 			<view class="u-form-item--left" :style="{
-				width: labelPosition == 'left' ? getLabelWidth : '100%',
-				flex: `0 0 ${labelPosition == 'left' ? getLabelWidth : '100%'}`,
-				marginBottom: labelPosition == 'left' ? 0 : '10rpx',
-				
+				width: parentParam.labelPosition == 'left' ? $u.addUnit(parentParam.labelWidth) : '100%',
+				flex: `0 0 ${parentParam.labelPosition == 'left' ? $u.addUnit(parentParam.labelWidth) : '100%'}`,
+				marginBottom: parentParam.labelPosition == 'left' ? 0 : '10rpx',
+
 			}">
 				<!-- 为了块对齐 -->
 				<view class="u-form-item--left__content">
@@ -16,8 +16,8 @@
 					<view class="u-form-item--left__content__icon" v-if="leftIcon">
 						<u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
 					</view>
-					<view class="u-form-item--left__content__label" :style="[labelStyle, {
-						'justify-content': labelAlign == 'left' ? 'flex-star' : labelAlign == 'center' ? 'center' : 'flex-end'
+					<view class="u-form-item--left__content__label" :style="[parentParam.labelStyle, {
+						'justify-content': parentParam.labelAlign == 'left' ? 'flex-star' : parentParam.labelAlign == 'center' ? 'center' : 'flex-end'
 					}]">
 						{{label}}
 					</view>
@@ -36,7 +36,7 @@
 			</view>
 		</view>
 		<view class="u-form-item__message" v-if="validateState === 'error' && showError('message')" :style="{
-			paddingLeft: labelPosition == 'left' ? getLabelWidth : '0',
+			paddingLeft: parentParam.labelPosition == 'left' ? $u.addUnit(parentParam.labelWidth) : '0',
 		}">{{validateMessage}}</view>
 	</view>
 </template>
@@ -65,7 +65,7 @@ schema.warning = function(){};
 	 * @property {Boolean} required 是否显示左边的"*"号，这里仅起展示作用，如需校验必填，请通过rules配置必填规则(默认false)
 	 * @example <u-form-item label="姓名"><u-input v-model="form.name" /></u-form-item>
 	 */
-	
+
 export default {
 	name: 'u-form-item',
 	mixins: [Emitter],
@@ -89,13 +89,13 @@ export default {
 		},
 		// 是否显示表单域的下划线边框
 		borderBottom: {
-			type: Boolean,
-			default: true
+			type: [Boolean, String],
+			default: ''
 		},
 		// label的位置，left-左边，top-上边
 		labelPosition: {
 			type: String,
-			default: 'left'
+			default: ''
 		},
 		// label的宽度，单位rpx
 		labelWidth: {
@@ -112,7 +112,7 @@ export default {
 		// lable字体的对齐方式
 		labelAlign: {
 			type: String,
-			default: 'left'
+			default: ''
 		},
 		// 右侧图标
 		rightIcon: {
@@ -152,8 +152,25 @@ export default {
 			validateMessage: '' ,// 校验失败的提示语
 			// 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，
 			// border-bottom-下边框呈现红色，none-无提示
-			errorType: ['message']
+			errorType: ['message'],
+			parentParam: {
+				labelStyle: {}, // lable的样式，对象形式
+				labelAlign: '', //	lable的对齐方式
+				labelWidth: '', // 提示文字的宽度，单位rpx
+				labelPosition: '', // 表单域提示文字的位置
+				borderBottom: '', // 是否显示表单域的下划线边框
+			}
 		};
+	},
+	created() {
+		// 如果子组件有值，优先使用子组件的，否则使用u-from提供的值
+		this.parentParam = this.$u.getParent.call(this, 'u-form', {
+			labelStyle: this.labelStyle,
+			labelWidth: this.labelWidth,
+			labelPosition: this.labelPosition,
+			borderBottom: this.borderBottom,
+			labelAlign: this.labelAlign
+		});
 	},
 	watch: {
 		validateState(val) {
@@ -177,10 +194,6 @@ export default {
 				else return false;
 			}
 		},
-		// 获取labelWidth的值
-		getLabelWidth() {
-			return this.labelWidth == 'auto' ? 'auto' : this.labelWidth + 'rpx';
-		}
 	},
 	methods: {
 		broadcastInputError() {
@@ -291,7 +304,7 @@ export default {
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-form-item {
 		display: flex;
 		// align-items: flex-start;
@@ -301,30 +314,30 @@ export default {
 		box-sizing: border-box;
 		line-height: $u-form-item-height;
 		flex-direction: column;
-		
+
 		&__border-bottom--error:after {
 			border-color: $u-type-error;
 		}
-		
+
 		&__body {
 			display: flex;
 		}
-		
+
 		&--left {
 			display: flex;
 			align-items: center;
-			
+
 			&__content {
 				position: relative;
 				display: flex;
 				align-items: center;
 				padding-right: 10rpx;
 				flex: 1;
-				
+
 				&__icon {
 					margin-right: 8rpx;
 				}
-				
+
 				&--required {
 					position: absolute;
 					left: -16rpx;
@@ -332,7 +345,7 @@ export default {
 					color: $u-type-error;
 					padding-top: 6rpx;
 				}
-				
+
 				&__label {
 					display: flex;
 					align-items: center;
@@ -340,15 +353,15 @@ export default {
 				}
 			}
 		}
-		
+
 		&--right {
 			flex: 1;
-			
+
 			&__content {
 				display: flex;
 				align-items: center;
 				flex: 1;
-				
+
 				&__slot {
 					flex: 1;
 					/* #ifndef MP */
@@ -356,13 +369,13 @@ export default {
 					align-items: center;
 					/* #endif */
 				}
-				
+
 				&__icon {
 					margin-left: 10rpx;
 				}
 			}
 		}
-		
+
 		&__message {
 			font-size: 24rpx;
 			line-height: 24rpx;
