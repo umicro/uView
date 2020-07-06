@@ -304,6 +304,9 @@ export default {
 							}
 							lists.push({
 								url: val.path,
+								name:val.name,
+								size:val.size,
+								type:val.type,
 								progress: 0,
 								error: false
 							});
