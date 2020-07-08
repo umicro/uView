@@ -141,11 +141,10 @@
 
 				this.isShow = !this.isShow;
 				// 触发本组件的事件
-				uni.$emit('change', {
+				this.$emit('change', {
 					index: this.index,
 					show: this.isShow
 				})
-
 				// 只有在打开时才发出事件
 				if (this.isShow) this.uCollapse.onChange();
 				this.$forceUpdate();

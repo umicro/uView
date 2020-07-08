@@ -4,11 +4,16 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<view class="">
-					<u-checkbox-group :size="size" :width="width" :wrap="wrap" :max="max" @change="checkboxGroupChange" :activeColor="activeColor">
+					<u-checkbox-group :size="size" :width="width" 
+						:wrap="wrap" :max="max" 
+						@change="checkboxGroupChange" 
+						:activeColor="activeColor"
+					>
 						<u-checkbox @change="checkboxChange"
 							v-model="item.checked" v-for="(item, index) in list" 
 							:key="index" :name="item.name"
-							:shape="shape" :disabled="item.disabled"
+							:shape="shape"
+							:disabled="item.disabled"
 						>{{item.name}}</u-checkbox>
 					</u-checkbox-group>
 				</view>
@@ -140,7 +145,6 @@
 			// 选中任一checkbox时，由checkbox-group触发
 			checkboxGroupChange(e) {
 				this.result = e;
-				// console.log(this.result);
 			},
 			widthChange(index) {
 				this.width = index == 0 ? '50%' : '';

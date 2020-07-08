@@ -521,6 +521,7 @@ export default {
 
 .u-add-tips {
 	margin-top: 20rpx;
+	line-height: 40rpx;
 }
 
 .u-add-wrap__hover {

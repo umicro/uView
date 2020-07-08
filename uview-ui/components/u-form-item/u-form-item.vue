@@ -372,6 +372,8 @@ export default {
 
 				&__icon {
 					margin-left: 10rpx;
+					color: $u-light-color;
+					font-size: 30rpx;
 				}
 			}
 		}

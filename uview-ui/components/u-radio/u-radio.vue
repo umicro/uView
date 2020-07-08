@@ -37,7 +37,7 @@
 			// 形状，square为方形，circle为原型
 			shape: {
 				type: String,
-				default: 'square'
+				default: 'circle'
 			},
 			// 是否禁用
 			disabled: {

@@ -7,7 +7,5 @@ indent_size = 4
 end_of_line = lf
 #字符集utf-8
 charset = utf-8
-#是否删除行尾的空格
-trim_trailing_whitespace = true
 
 

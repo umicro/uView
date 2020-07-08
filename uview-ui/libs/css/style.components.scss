@@ -1,14 +1,3 @@
-// nvue不能用标签命名样式
-/* #ifndef APP-NVUE */
-image {
-	display: inline-block;
-	// 解决图片加载时可能会瞬间变形的问题
-	will-change: transform;
+.demo {
+	
 }
-
-// 在weex，也即nvue中，所有元素默认为border-box
-view,
-text {
-	box-sizing: border-box;
-}
-/* #endif */
