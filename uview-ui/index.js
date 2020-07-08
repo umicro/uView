@@ -58,6 +58,8 @@ import trim from './libs/function/trim.js'
 import toast from './libs/function/toast.js'
 // 获取父组件参数
 import getParent from './libs/function/getParent.js'
+// 获取整个父组件
+import $parent from './libs/function/$parent.js'
 
 
 // 配置信息
@@ -88,6 +90,7 @@ const $u = {
 	deepClone,
 	deepMerge,
 	getParent,
+	$parent,
 	addUnit,
 	trim,
 	type: ['primary', 'success', 'error', 'warning', 'info'],

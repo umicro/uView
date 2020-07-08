@@ -45,6 +45,16 @@
 				type: [Boolean, String],
 				default: ''
 			},
+			// 是否禁止点击提示语选中复选框
+			labelDisabled: {
+				type: Boolean,
+				default: false
+			},
+			// 形状，square为方形，circle为原型
+			shape: {
+				type: String,
+				default: 'square'
+			},
 			// 选中状态下的颜色
 			activeColor: {
 				type: String,
@@ -64,12 +74,12 @@
 			wrap: {
 				type: Boolean,
 				default: false
-			}
-		},
-		provide() {
-			return {
-				checkboxGroup: this
-			}
+			},
+			// 图标的大小，单位rpx
+			iconSize: {
+				type: [String, Number],
+				default: 20
+			},
 		},
 		data() {
 			return {

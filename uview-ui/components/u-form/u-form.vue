@@ -9,7 +9,7 @@
 	 * @tutorial http://uviewui.com/components/form.html
 	 * @property {Object} model 表单数据对象
 	 * @property {Object} rules 通过ref设置，见官网说明
-	 * @property {Array} errorType 错误的提示方式，数组形式，见上方说明(默认['message'])
+	 * @property {Array} error-type 错误的提示方式，数组形式，见上方说明(默认['message'])
 	 * @example <u-form :model="form" ref="uForm"></u-form>
 	 */
 

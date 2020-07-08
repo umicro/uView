@@ -78,7 +78,7 @@ function carNo(value) {
  */
 function amount(value) {
 	//金额，只允许保留两位小数
-	return /^[1-9]\d*(,\d{3})*(\.\d{1,2})?$|^0.\d{1,2}$/.test(value);
+	return /^[1-9]\d*(,\d{3})*(\.\d{1,2})?$|^0\.\d{1,2}$/.test(value);
 }
 
 /**

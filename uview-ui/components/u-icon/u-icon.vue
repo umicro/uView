@@ -4,11 +4,11 @@
 		<text v-else class="u-icon__icon" :class="customClass" :style="[iconStyle]" :hover-class="hoverClass" @touchstart="touchstart"></text>
 		<text v-if="label" class="u-icon__label" :style="{
 			color: labelColor,
-			fontSize: labelSize + 'rpx',
-			marginLeft: labelPos == 'right' ? marginLeft + 'rpx' : 0,
-			marginTop: labelPos == 'bottom' ? marginTop + 'rpx' : 0,
-			marginRight: labelPos == 'left' ? marginRight + 'rpx' : 0,
-			marginBottom: labelPos == 'top' ? marginBottom + 'rpx' : 0,
+			fontSize: $u.addUnit(labelSize),
+			marginLeft: labelPos == 'right' ? $u.addUnit(marginLeft) : 0,
+			marginTop: labelPos == 'bottom' ? $u.addUnit(marginTop) : 0,
+			marginRight: labelPos == 'left' ? $u.addUnit(marginRight) : 0,
+			marginBottom: labelPos == 'top' ? $u.addUnit(marginBottom) : 0,
 		}">{{label}}</text>
 	</view>
 </template>
@@ -44,7 +44,7 @@ export default {
 			type: String,
 			default: ''
 		},
-		// 图标颜色，可接受主题色(组件内部使用，不对外)
+		// 图标颜色，可接受主题色
 		color: {
 			type: String,
 			default: ''
@@ -146,7 +146,7 @@ export default {
 		iconStyle() {
 			let style = {};
 			style = {
-				fontSize: this.size == 'inherit' ? 'inherit' : this.size + 'rpx',
+				fontSize: this.size == 'inherit' ? 'inherit' : this.$u.addUnit(this.size),
 				fontWeight: this.bold ? 'bold' : 'normal'
 			};
 			// 非主题色值时，才当作颜色值
@@ -159,7 +159,7 @@ export default {
 		},
 		imgStyle() {
 			let style = {};
-			style.width = this.size + 'rpx';
+			style.width = this.$u.addUnit(this.size);
 			return style;
 		}
 	},
@@ -183,12 +183,12 @@ export default {
 	align-items: center;
 
 	&--left {
-		flex-direction: row;
+		flex-direction: row-reverse;
 		align-items: center;
 	}
 
 	&--right {
-		flex-direction: row-reverse;
+		flex-direction: row;
 		align-items: center;
 	}
 

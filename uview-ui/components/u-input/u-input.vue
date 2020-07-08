@@ -49,7 +49,7 @@
 			@confirm="onConfirm"
 		/>
 		<view class="u-input__right-icon u-flex">
-			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && value && focused">
+			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && value != '' && focused">
 				<u-icon size="32" name="close-circle-fill" color="#c0c4cc" @touchstart="onClear"/>
 			</view>
 			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="passwordIcon && type == 'password'">
@@ -96,7 +96,7 @@ export default {
 	mixins: [Emitter],
 	props: {
 		value: {
-			type: String,
+			type: [String, Number],
 			default: ''
 		},
 		// 输入框的类型，textarea，text，number
@@ -206,6 +206,8 @@ export default {
 					value: nVal
 				}
 			})
+			// 值变化，且是右对齐时，计算右侧的清除图标的位置尺寸，避免input-align=right时文字与清除图标重合
+			if(oVal == '' && this.inputAlign == 'right') this.getMarginRight();
 		},
 		focused(nVal) {
 			if(this.clearable && this.value) {
@@ -244,8 +246,7 @@ export default {
 		getMarginRight() {
 			this.$nextTick(() => {
 				this.$uGetRect('.u-input__right-icon').then(res => {
-					// 此处20rpx为图标绝对定位右侧的“right”
-					this.marginRight = res.width + uni.upx2px(20);
+					this.marginRight = res.width;
 				})
 			})
 		},
