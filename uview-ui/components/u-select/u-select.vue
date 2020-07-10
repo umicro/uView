@@ -10,7 +10,8 @@
 			</view>
 		</view> -->
 		<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
-			<view class="u-select">
+			<!-- 多加一个if判断，避免微信小程序第二次打开后，视图没有重新渲染，而导致数据混乱 -->
+			<view class="u-select" v-if="value">
 				<view class="u-select__header" @touchmove.stop.prevent="">
 					<view
 						class="u-select__header__cancel u-select__header__btn"
@@ -251,12 +252,13 @@ export default {
 			let tmp = null;
 			for(let i = 0; i < this.columnNum; i++) {
 				tmp = this.columnData[i][this.defaultSelector[i]];
-				this.selectValue.push({
+				let data = {
 					value: tmp ? tmp[this.valueName] : null,
 					label: tmp ? tmp[this.labelName] : null
-				})
+				};
 				// 判断是否存在额外的参数，如果存在，就返回
-				if(tmp && tmp.extra) this.selectValue.extra = tmp.extra;
+				if(tmp && tmp.extra) data.extra = tmp.extra;
+				this.selectValue.push(data)
 			}
 		},
 		// 列选项

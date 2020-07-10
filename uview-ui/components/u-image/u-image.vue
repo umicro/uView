@@ -157,8 +157,9 @@ export default {
 			this.loading = false;
 			this.isError = false;
 			this.$emit('load');
-			// 如果不需要动画效果，就不执行下方代码
-			if(!this.fade) return ;
+			// 如果不需要动画效果，就不执行下方代码，同时移除加载时的背景颜色
+			// 否则无需fade效果时，png图片依然能看到下方的背景色
+			if(!this.fade) return this.removeBgColor();
 			// 原来opacity为1(不透明，是为了显示占位图)，改成0(透明，意味着该元素显示的是背景颜色，默认的灰色)，再改成1，是为了获得过渡效果
 			this.opacity = 0;
 			// 这里设置为0，是为了图片展示到背景全透明这个过程时间为0，延时之后延时之后重新设置为duration，是为了获得背景透明(灰色)
@@ -169,12 +170,16 @@ export default {
 				this.durationTime = this.duration;
 				this.opacity = 1;
 				setTimeout(() => {
-					// 淡入动画过渡完成后，将背景设置为透明色，否则png图片会看到灰色的背景
-					this.backgroundStyle = {
-						backgroundColor: 'transparent'
-					};
+					this.removeBgColor();
 				}, this.durationTime)
 			}, 50)
+		},
+		// 移除图片的背景色
+		removeBgColor() {
+			// 淡入动画过渡完成后，将背景设置为透明色，否则png图片会看到灰色的背景
+			this.backgroundStyle = {
+				backgroundColor: 'transparent'
+			};
 		}
 	}
 };

@@ -26,6 +26,7 @@
  * @property {String} label-pos label文字相对于图标的位置，只能right或bottom（默认right）
  * @property {String} label-color label字体颜色（默认#606266）
  * @property {Object} custom-style icon的样式，对象形式
+ * @property {String} custom-prefix 自定义字体图标库时，需要写上此值
  * @property {String | Number} margin-left label在右侧时与图标的距离，单位rpx（默认6）
  * @property {String | Number} margin-top label在下方时与图标的距离，单位rpx（默认6）
  * @property {String | Number} margin-bottom label在上方时与图标的距离，单位rpx（默认6）
@@ -160,6 +161,7 @@ export default {
 		imgStyle() {
 			let style = {};
 			style.width = this.$u.addUnit(this.size);
+			style.height = this.$u.addUnit(this.size);
 			return style;
 		}
 	},

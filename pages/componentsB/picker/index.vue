@@ -116,7 +116,7 @@ export default {
 			this.show = true;
 		},
 		confirm(e) {
-			console.log(e);
+			// console.log(e);
 			this.input = '';
 			if (this.mode == 'time') {
 				if (this.params.year) this.input += e.year;

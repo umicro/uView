@@ -160,7 +160,7 @@
 		},
 		methods: {
 			onClickLabel() {
-				if (!this.isDisabled) {
+				if (!this.isLabelDisabled) {
 					this.setValue();
 				}
 			},
