@@ -23,7 +23,7 @@
 						:type="type"
 						class="u-flex-1 u-field__input-wrap"
 						:value="value"
-						:password="password || type === 'password'"
+						:password="type === 'password' ? 'text' : type"
 						:placeholder="placeholder"
 						:placeholderStyle="placeholderStyle"
 						:disabled="disabled"

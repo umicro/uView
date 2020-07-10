@@ -7,7 +7,7 @@
 		flex: `0 0 ${100 / 12 * span}%`,
 		alignItems: uAlignItem,
 		justifyContent: uJustify
-	}">
+	}" @tap.stop.prevent="click">
 		<slot></slot>
 	</view>
 </template>
@@ -58,6 +58,11 @@
 				else return this.align;
 			}
 		},
+		methods: {
+			click() {
+				this.$emit('click');
+			}
+		}
 	}
 </script>
 

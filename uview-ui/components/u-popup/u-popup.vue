@@ -1,5 +1,7 @@
 <template>
-	<view v-if="visibleSync" :style="[customStyle]" :class="{ 'u-drawer-visible': showDrawer }" class="u-drawer">
+	<view v-if="visibleSync" :style="[customStyle, {
+		zIndex: uZindex - 1
+	}]" :class="{ 'u-drawer-visible': showDrawer }" class="u-drawer">
 		<u-mask :maskClickAble="maskCloseAble" :show="showDrawer && mask" @click="maskClick"></u-mask>
 		<view
 			class="u-drawer-content"
@@ -207,7 +209,7 @@ export default {
 					transform: `translate3D(0px,${this.mode == 'top' ? '-100%' : '100%'},0px)`
 				};
 			}
-			style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.popup;
+			style.zIndex = this.uZindex;
 			// 如果用户设置了borderRadius值，添加弹窗的圆角
 			if (this.borderRadius) {
 				switch (this.mode) {
@@ -236,7 +238,7 @@ export default {
 			style.width = this.width ? this.getUnitValue(this.width) : this.getUnitValue(this.length);
 			// 中部弹出的模式，如果没有设置高度，就用auto值，由内容撑开高度
 			style.height = this.height ? this.getUnitValue(this.height) : 'auto';
-			style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.popup;
+			style.zIndex = this.uZindex;
 			style.marginTop = `-${this.$u.addUnit(this.negativeTop)}`;
 			if (this.borderRadius) {
 				style.borderRadius = `${this.borderRadius}rpx`;
@@ -245,6 +247,10 @@ export default {
 			}
 			return style;
 		},
+		// 计算整理后的z-index值
+		uZindex() {
+			return this.zIndex ? this.zIndex : this.$u.zIndex.popup;
+		}
 	},
 	watch: {
 		value(val) {
@@ -324,7 +330,6 @@ export default {
 	right: 0;
 	bottom: 0;
 	overflow: hidden;
-	z-index: 999;
 }
 
 .u-drawer-content {

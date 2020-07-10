@@ -113,11 +113,11 @@
 			},
 			badgeChange(index) {
 				if (index == 1) {
-					this.config[0].count = 0;
-					this.config[4].count = 0;
+					this.list[0].count = 0;
+					this.list[4].count = 0;
 				} else {
-					this.config[0].count = 2;
-					this.config[4].count = 23;
+					this.list[0].count = 2;
+					this.list[4].count = 23;
 				}
 			},
 			minButtonChange(index) {

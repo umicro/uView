@@ -1,6 +1,7 @@
 <template>
 	<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
-		<view class="u-datetime-picker" @tap.stop>
+		<!-- 多加一个if判断，避免微信小程序第二次打开后，视图没有重新渲染，而导致数据混乱 -->
+		<view class="u-datetime-picker" @tap.stop v-if="value">
 			<view class="u-picker-header" @touchmove.stop.prevent="">
 				<view class="u-btn-picker u-btn-picker--tips" :style="{ color: cancelColor }" hover-class="u-opacity" :hover-stay-time="150" @tap="getResult('cancel')">取消</view>
 				<view class="u-picker__title">{{ title }}</view>
@@ -562,7 +563,7 @@ export default {
 		},
 		// 获取时间戳
 		getTimestamp() {
-			let time = this.year + '-' + this.month + '-' + this.day + ' ' + this.day + ':' + this.minute + ':' + this.second;
+			let time = this.year + '-' + this.month + '-' + this.day + ' ' + this.hour + ':' + this.minute + ':' + this.second;
 			return new Date(time).getTime() / 1000;
 		}
 	}
