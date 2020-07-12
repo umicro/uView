@@ -8,6 +8,11 @@
 	 * @description 此组件一般用于表单场景，可以配置Input输入框，Select弹出框，进行表单验证等。
 	 * @tutorial http://uviewui.com/components/form.html
 	 * @property {Object} model 表单数据对象
+	 * @property {Boolean} border-bottom 是否显示表单域的下划线边框
+	 * @property {String} label-position 表单域提示文字的位置，left-左侧，top-上方
+	 * @property {String Number} label-width 提示文字的宽度，单位rpx（默认90）
+	 * @property {Object} label-style lable的样式，对象形式
+	 * @property {String} label-align lable的对齐方式
 	 * @property {Object} rules 通过ref设置，见官网说明
 	 * @property {Array} error-type 错误的提示方式，数组形式，见上方说明(默认['message'])
 	 * @example <u-form :model="form" ref="uForm"></u-form>

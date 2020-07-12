@@ -16,12 +16,12 @@
 	 * checkbox 复选框
 	 * @description 该组件需要搭配checkboxGroup组件使用，以便用户进行操作时，获得当前复选框组的选中情况。
 	 * @tutorial https://www.uviewui.com/components/checkbox.html
-	 * @property {String Number} icon-size 图标大小，单位rpx（默认24）
+	 * @property {String Number} icon-size 图标大小，单位rpx（默认20）
 	 * @property {String Number} label-size label字体大小，单位rpx（默认28）
 	 * @property {String Number} name checkbox组件的标示符
 	 * @property {String} shape 形状，见官网说明（默认circle）
-	 * @property {Boolean} disabled 是否禁用（默认false）
-	 * @property {Boolean} label-disabled 点击文本是否可以操作checkbox（默认true）
+	 * @property {Boolean} disabled 是否禁用
+	 * @property {Boolean} label-disabled 是否禁止点击文本操作checkbox
 	 * @property {String} active-color 选中时的颜色，如设置CheckboxGroup的active-color将失效
 	 * @event {Function} change 某个checkbox状态发生变化时触发，回调为一个对象
 	 * @example <u-checkbox v-model="checked" :disabled="false">天涯</u-checkbox>
@@ -46,13 +46,13 @@
 			},
 			// 是否禁用
 			disabled: {
-				type: Boolean,
-				default: false
+				type: [Boolean, String],
+				default: ''
 			},
 			// 是否禁止点击提示语选中复选框
 			labelDisabled: {
-				type: Boolean,
-				default: false
+				type: [Boolean, String],
+				default: ''
 			},
 			// 选中状态下的颜色，如设置此值，将会覆盖checkboxGroup的activeColor值
 			activeColor: {
@@ -90,11 +90,11 @@
 		computed: {
 			// 是否禁用，如果父组件u-checkbox-group禁用的话，将会忽略子组件的配置
 			isDisabled() {
-				return this.parent ? this.parent.disabled || this.disabled : this.disabled;
+				return this.disabled !== '' ? this.disabled : this.parent ? this.parent.disabled : false;
 			},
 			// 是否禁用label点击
 			isLabelDisabled() {
-				return this.parent ? this.parent.labelDisabled || this.labelDisabled : this.labelDisabled;
+				return this.labelDisabled !== '' ? this.labelDisabled : this.parent ? this.parent.labelDisabled : false;
 			},
 			// 组件尺寸，对应size的值，默认值为34rpx
 			checkboxSize() {

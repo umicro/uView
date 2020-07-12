@@ -13,7 +13,11 @@
 	 * @property {String Number} max 最多能选中多少个checkbox（默认999）
 	 * @property {String Number} size 组件整体的大小，单位rpx（默认40）
 	 * @property {Boolean} disabled 是否禁用所有checkbox（默认false）
+	 * @property {String Number} icon-size 图标大小，单位rpx（默认20）
+	 * @property {Boolean} label-disabled 是否禁止点击文本操作checkbox(默认false)
 	 * @property {String} width 宽度，需带单位
+	 * @property {String} width 宽度，需带单位
+	 * @property {String} shape 外观形状，shape-方形，circle-圆形(默认circle)
 	 * @property {Boolean} wrap 是否每个checkbox都换行（默认false）
 	 * @property {String} active-color 选中时的颜色，应用到所有子Checkbox组件（默认#2979ff）
 	 * @event {Function} change 任一个checkbox状态发生变化时触发，回调为一个对象
