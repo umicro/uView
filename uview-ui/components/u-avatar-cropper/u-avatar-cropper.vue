@@ -9,6 +9,7 @@
 				@touchend="touchEnd"
 				:style="{ width: cropperOpt.width, height: cropperOpt.height, backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
 				canvas-id="cropper"
+				id="cropper"
 			></canvas>
 			<canvas
 				class="cropper"
@@ -21,6 +22,7 @@
 					height: `${cropperOpt.height * cropperOpt.pixelRatio}`
 				}"
 				canvas-id="targetId"
+				id="targetId"
 			></canvas>
 		</view>
 		<view class="cropper-buttons safe-area-padding" :style="{ height: bottomNavHeight + 'px' }">
@@ -181,7 +183,6 @@ export default {
 			this.cropper.touchEnd(e);
 		},
 		getCropperImage(isPre = false) {
-			console.log(this.src);
 			if(!this.src) return this.$u.toast('请先选择图片再裁剪');
 
 			let cropper_opt = {

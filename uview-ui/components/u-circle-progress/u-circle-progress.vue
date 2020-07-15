@@ -7,9 +7,11 @@
 			backgroundColor: bgColor
 		}"
 	>
+		<!-- 支付宝小程序不支持canvas-id属性，必须用id属性 -->
 		<canvas
 			class="u-canvas-bg"
 			:canvas-id="elBgId"
+			:id="elBgId"
 			:style="{
 				width: widthPx + 'px',
 				height: widthPx + 'px'
@@ -18,6 +20,7 @@
 		<canvas
 			class="u-canvas"
 			:canvas-id="elId"
+			:id="elId"
 			:style="{
 				width: widthPx + 'px',
 				height: widthPx + 'px'

@@ -563,7 +563,8 @@ export default {
 		},
 		// 获取时间戳
 		getTimestamp() {
-			let time = this.year + '-' + this.month + '-' + this.day + ' ' + this.hour + ':' + this.minute + ':' + this.second;
+			// yyyy-mm-dd为安卓写法，不支持iOS，需要使用"/"分隔，才能二者兼容
+			let time = this.year + '/' + this.month + '/' + this.day + ' ' + this.hour + ':' + this.minute + ':' + this.second;
 			return new Date(time).getTime() / 1000;
 		}
 	}

@@ -19,6 +19,7 @@
 			<view class="u-config-item">
 				<view class="u-item-title">时间</view>
 				<u-subsection vibrateShort :list="timeArr1" @change="timeArr1Change"></u-subsection>
+				<u-gap></u-gap>
 				<u-subsection vibrateShort style="margin-top: 40rpx;" :list="timeArr2" @change="timeArr2Change"></u-subsection>
 			</view>
 		</view>

@@ -215,9 +215,9 @@ export default {
 	display: flex;
 	box-sizing: border-box;
 	width: 100%;
-	padding: 20rpx 32rpx;
+	padding: 26rpx 32rpx;
 	font-size: 28rpx;
-	line-height: 48rpx;
+	line-height: 54rpx;
 	color: $u-content-color;
 	background-color: #fff;
 	text-align: left;

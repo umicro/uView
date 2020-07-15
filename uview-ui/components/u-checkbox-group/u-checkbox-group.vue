@@ -75,7 +75,7 @@
 				default: 'auto'
 			},
 			// 是否每个checkbox都换行
-			wrap: {
+			wrap: { 
 				type: Boolean,
 				default: false
 			},

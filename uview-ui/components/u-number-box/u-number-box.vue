@@ -221,7 +221,6 @@
 				} catch (e) {
 					baseNum2 = 0;
 				}
-				console.log(num1, num2, baseNum1, baseNum2);
 				baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
 				let precision = baseNum1 >= baseNum2 ? baseNum1 : baseNum2;
 				return ((num1 * baseNum - num2 * baseNum) / baseNum).toFixed(precision);
