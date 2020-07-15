@@ -2,7 +2,7 @@
 	<view v-if="visibleSync" :style="[customStyle, {
 		zIndex: uZindex - 1
 	}]" :class="{ 'u-drawer-visible': showDrawer }" class="u-drawer">
-		<u-mask :maskClickAble="maskCloseAble" :show="showDrawer && mask" @click="maskClick"></u-mask>
+		<u-mask :maskClickAble="maskCloseAble" :z-index="uZindex - 2" :show="showDrawer && mask" @click="maskClick"></u-mask>
 		<view
 			class="u-drawer-content"
 			@tap="modeCenterClose(mode)"

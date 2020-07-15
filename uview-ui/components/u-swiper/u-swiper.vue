@@ -137,12 +137,12 @@
 				type: [Number, String],
 				default: 500
 			},
-			// 是否衔接滑动，即到最后一张时接着滑动，是佛自动切换到第一张
+			// 是否衔接滑动，即到最后一张时接着滑动，是否自动切换到第一张
 			circular: {
 				type: Boolean,
 				default: true
 			},
-			// 图片的形式模式 
+			// 图片的裁剪模式 
 			imgMode: {
 				type: String,
 				default: 'aspectFill'

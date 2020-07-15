@@ -194,7 +194,6 @@ export default {
 			validateState: false, // 当前input的验证状态，用于错误时，边框是否改为红色
 			focused: false, // 当前是否处于获得焦点的状态
 			showPassword: false, // 是否预览密码
-			marginRight: 0, // 输入框右边的距离，当获得焦点时各一个后面的距离，避免点击右边图标误触输入框
 		};
 	},
 	watch: {
@@ -206,14 +205,7 @@ export default {
 					value: nVal
 				}
 			})
-			// 值变化，且是右对齐时，计算右侧的清除图标的位置尺寸，避免input-align=right时文字与清除图标重合
-			if(oVal == '' && this.inputAlign == 'right') this.getMarginRight();
 		},
-		focused(nVal) {
-			if(this.clearable && this.value) {
-				this.getMarginRight();
-			}
-		}
 	},
 	computed: {
 		// 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，给用户可以传入字符串数值
@@ -225,7 +217,6 @@ export default {
 			// 如果没有自定义高度，就根据type为input还是textare来分配一个默认的高度
 			style.minHeight = this.height ? this.height + 'rpx' : this.type == 'textarea' ?
 				this.textareaHeight + 'rpx' : this.inputHeight + 'rpx';
-			style.marginRight = this.marginRight + 'px';
 			style = Object.assign(style, this.customStyle);
 			return style;
 		},
@@ -238,18 +229,7 @@ export default {
 		// 监听u-form-item发出的错误事件，将输入框边框变红色
 		this.$on('on-form-item-error', this.onFormItemError);
 	},
-	mounted() {
-		this.getMarginRight();
-	},
 	methods: {
-		// 计算输入框的右边距
-		getMarginRight() {
-			this.$nextTick(() => {
-				this.$uGetRect('.u-input__right-icon').then(res => {
-					this.marginRight = res.width;
-				})
-			})
-		},
 		/**
 		 * change 事件
 		 * @param event
@@ -303,11 +283,13 @@ export default {
 .u-input {
 	position: relative;
 	flex: 1;
+	display: flex;
 
 	&__input {
 		//height: $u-form-item-height;
 		font-size: 28rpx;
 		color: $u-main-color;
+		flex: 1;
 	}
 
 	&__textarea {
@@ -316,6 +298,7 @@ export default {
 		color: $u-main-color;
 		padding: 10rpx 0;
 		line-height: normal;
+		flex: 1;
 	}
 
 	&--border {
@@ -329,11 +312,6 @@ export default {
 	}
 
 	&__right-icon {
-		position: absolute;
-		right: 0;
-		top: 50%;
-		z-index: 3;
-		transform: translateY(-50%);
 
 		&__item {
 			margin-left: 10rpx;

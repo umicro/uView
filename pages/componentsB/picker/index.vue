@@ -177,7 +177,6 @@ export default {
 					this.defaultSelector.splice(2, 1, 0)
 					break
 			}
-			this.$forceUpdate()
 		}
 	}
 };

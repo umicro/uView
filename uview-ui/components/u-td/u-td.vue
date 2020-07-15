@@ -23,7 +23,7 @@
 		},
 		data() {
 			return {
-				tr: []
+				
 			};
 		},
 		inject: ['uTable', 'uTr'],
@@ -33,7 +33,8 @@
 			}
 		},
 		created() {
-
+			// 定义在created中，避免微信小程序造成循环引用而报错
+			this.tr = []
 		},
 		computed: {
 			tdStyle() {

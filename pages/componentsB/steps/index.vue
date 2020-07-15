@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-steps :current="current" :list="steps" :mode="mode" :icon="icon"></u-steps>
+				<u-steps :direction="direction" :current="current" :list="steps" :mode="mode" :icon="icon"></u-steps>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -13,6 +13,10 @@
 			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
 				<u-subsection vibrateShort :list="['number', 'dot']" @change="modeChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">方向</view>
+				<u-subsection vibrateShort :list="['横向', '竖向']" @change="directionChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义图标</view>
@@ -41,7 +45,8 @@
 				}, ],
 				current: 0,
 				icon: 'checkmark',
-				mode: 'number'
+				mode: 'number',
+				direction: 'row'
 			}
 		},
 		methods: {
@@ -49,10 +54,13 @@
 				this.mode = index == 0 ? 'number' : 'dot';
 			},
 			stepChange(index) {
-				this.current = index == 0 ? 0 : index == 1 ? 1 : index == 2 ? 2 : 3;
+				this.current = [0, 1, 2, 3][index];
 			},
 			iconChange(index) {
 				this.icon = index == 0 ? 'checkmark' : 'map-fill';
+			},
+			directionChange(index) {
+				this.direction = index == 0 ? 'row' : 'column';
 			}
 		}
 	}

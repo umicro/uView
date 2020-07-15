@@ -4,8 +4,8 @@
 		type ? 'u-alert-tips--bg--' + type + '-light' : '',
 		type ? 'u-alert-tips--border--' + type + '-disabled' : '',
 	]" :style="{
-		backgroundColor: borderColor,
-		borderColor: bgColor
+		backgroundColor: bgColor,
+		borderColor: borderColor
 	}">
 		<view class="u-icon-wrap">
 			<u-icon v-if="showIcon" :name="$u.type2icon(type)" :size="description ? 40 : 32" class="u-icon" :color="type"></u-icon>

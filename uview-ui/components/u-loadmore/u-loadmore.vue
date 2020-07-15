@@ -28,7 +28,8 @@
 	 * @property {String} icon-color icon-type为circle时有效，加载中的动画图标的颜色（默认#b7b7b7）
 	 * @property {Boolean} is-dot status为nomore时，内容显示为一个"●"（默认false）
 	 * @property {String} color 字体颜色（默认#606266）
-	 * @property {String Number} font-size 字体大小，单位rpx（默认28）
+	 * @property {String Number} margin-top 到上一个相邻元素的距离
+	 * @property {String Number} margin-bottom 到下一个相邻元素的距离
 	 * @property {Object} load-text 自定义显示的文字，见上方说明示例
 	 * @event {Function} loadmore status为loadmore时，点击组件会发出此事件
 	 * @example <u-loadmore :status="status" icon-type="iconType" load-text="loadText" />

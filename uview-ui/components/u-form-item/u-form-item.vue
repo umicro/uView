@@ -1,12 +1,12 @@
 <template>
-	<view class="u-form-item" :class="{'u-border-bottom': parentParam.borderBottom, 'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom')}">
+	<view class="u-form-item" :class="{'u-border-bottom': elBorderBottom, 'u-form-item__border-bottom--error': validateState === 'error' && showError('border-bottom')}">
 		<view class="u-form-item__body" :style="{
-			flexDirection: parentParam.labelPosition == 'left' ? 'row' : 'column'
+			flexDirection: elLabelPosition == 'left' ? 'row' : 'column'
 		}">
 			<view class="u-form-item--left" :style="{
-				width: parentParam.labelPosition == 'left' ? $u.addUnit(parentParam.labelWidth) : '100%',
-				flex: `0 0 ${parentParam.labelPosition == 'left' ? $u.addUnit(parentParam.labelWidth) : '100%'}`,
-				marginBottom: parentParam.labelPosition == 'left' ? 0 : '10rpx',
+				width: elLabelPosition == 'left' ? $u.addUnit(elLabelWidth) : '100%',
+				flex: `0 0 ${elLabelPosition == 'left' ? $u.addUnit(elLabelWidth) : '100%'}`,
+				marginBottom: elLabelPosition == 'left' ? 0 : '10rpx',
 
 			}">
 				<!-- 为了块对齐 -->
@@ -16,8 +16,8 @@
 					<view class="u-form-item--left__content__icon" v-if="leftIcon">
 						<u-icon :name="leftIcon" :custom-style="leftIconStyle"></u-icon>
 					</view>
-					<view class="u-form-item--left__content__label" :style="[parentParam.labelStyle, {
-						'justify-content': parentParam.labelAlign == 'left' ? 'flex-star' : parentParam.labelAlign == 'center' ? 'center' : 'flex-end'
+					<view class="u-form-item--left__content__label" :style="[elLabelStyle, {
+						'justify-content': elLabelAlign == 'left' ? 'flex-start' : elLabelAlign == 'center' ? 'center' : 'flex-end'
 					}]">
 						{{label}}
 					</view>
@@ -36,7 +36,7 @@
 			</view>
 		</view>
 		<view class="u-form-item__message" v-if="validateState === 'error' && showError('message')" :style="{
-			paddingLeft: parentParam.labelPosition == 'left' ? $u.addUnit(parentParam.labelWidth) : '0',
+			paddingLeft: elLabelPosition == 'left' ? $u.addUnit(elLabelWidth) : '0',
 		}">{{validateMessage}}</view>
 	</view>
 </template>
@@ -53,11 +53,11 @@ schema.warning = function(){};
 	 * @tutorial http://uviewui.com/components/form.html
 	 * @property {String} label 左侧提示文字
 	 * @property {Object} prop 表单域model对象的属性名，在使用 validate、resetFields 方法的情况下，该属性是必填的
-	 * @property {Boolean} border-bottom 是否显示表单域的下划线边框(默认true)
-	 * @property {String} label-position 表单域提示文字的位置，left-左侧，top-上方(默认left)
+	 * @property {Boolean} border-bottom 是否显示表单域的下划线边框
+	 * @property {String} label-position 表单域提示文字的位置，left-左侧，top-上方
 	 * @property {String Number} label-width 提示文字的宽度，单位rpx（默认90）
 	 * @property {Object} label-style lable的样式，对象形式
-	 * @property {String} label-align lable的对齐方式(默认left)
+	 * @property {String} label-align lable的对齐方式
 	 * @property {String} right-icon 右侧自定义字体图标(限uView内置图标)或图片地址
 	 * @property {String} left-icon 左侧自定义字体图标(限uView内置图标)或图片地址
 	 * @property {Object} left-icon-style 左侧图标的样式，对象形式
@@ -89,7 +89,7 @@ export default {
 		},
 		// 是否显示表单域的下划线边框
 		borderBottom: {
-			type: [Boolean, String],
+			type: [String, Boolean],
 			default: ''
 		},
 		// label的位置，left-左边，top-上边
@@ -100,7 +100,7 @@ export default {
 		// label的宽度，单位rpx
 		labelWidth: {
 			type: [String, Number],
-			default: 90
+			default: ''
 		},
 		// lable的样式，对象形式
 		labelStyle: {
@@ -151,26 +151,12 @@ export default {
 			validateState: '', // 是否校验成功
 			validateMessage: '' ,// 校验失败的提示语
 			// 有错误时的提示方式，message-提示信息，border-如果input设置了边框，变成呈红色，
-			// border-bottom-下边框呈现红色，none-无提示
 			errorType: ['message'],
-			parentParam: {
-				labelStyle: {}, // lable的样式，对象形式
-				labelAlign: '', //	lable的对齐方式
-				labelWidth: '', // 提示文字的宽度，单位rpx
-				labelPosition: '', // 表单域提示文字的位置
-				borderBottom: '', // 是否显示表单域的下划线边框
-			}
 		};
 	},
 	created() {
-		// 如果子组件有值，优先使用子组件的，否则使用u-from提供的值
-		this.parentParam = this.$u.getParent.call(this, 'u-form', {
-			labelStyle: this.labelStyle,
-			labelWidth: this.labelWidth,
-			labelPosition: this.labelPosition,
-			borderBottom: this.borderBottom,
-			labelAlign: this.labelAlign
-		});
+		// 支付宝小程序不支持provide/inject，所以使用这个方法获取整个父组件，在created定义，避免循环应用
+		this.parent = this.$u.$parent.call(this, 'u-form');
 	},
 	watch: {
 		validateState(val) {
@@ -180,7 +166,7 @@ export default {
 		"uForm.errorType"(val) {
 			this.errorType = val;
 			this.broadcastInputError();
-		}
+		},
 	},
 	computed: {
 		fieldValue() {
@@ -194,6 +180,28 @@ export default {
 				else return false;
 			}
 		},
+		// label的宽度
+		elLabelWidth() {
+			// label默认宽度为90，优先使用本组件的值，如果没有，则用u-form的值
+			return this.labelWidth ? this.labelWidth : (this.parent ? this.parent.labelWidth : 90);
+		},
+		// label的样式
+		elLabelStyle() {
+			return Object.keys(this.labelStyle).length ? this.labelStyle : (this.parent ? this.parent.labelStyle : {});
+		},
+		// label的位置，左侧或者上方
+		elLabelPosition() {
+			return this.labelPosition ? this.labelPosition : (this.parent ? this.parent.labelPosition : 'left');
+		}, 
+		// label的对齐方式
+		elLabelAlign() {
+			return this.labelAlign ? this.labelAlign : (this.parent ? this.parent.labelAlign : 'left');
+		},
+		// label的下划线
+		elBorderBottom() {
+			// 子组件的borderBottom默认为空字符串，如果不等于空字符串，意味着子组件设置了值，优先使用子组件的值
+			return this.borderBottom !== '' ? this.borderBottom : this.parent ? this.parent.borderBottom : true;
+		}
 	},
 	methods: {
 		broadcastInputError() {
