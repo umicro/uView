@@ -1,5 +1,5 @@
 <template>
-	<view class="u-search" :style="{
+	<view class="u-search" @tap="clickHandler" :style="{
 		margin: margin,
 	}">
 		<view
@@ -270,6 +270,10 @@ export default {
 			this.focused = false;
 			this.show = false;
 			this.$emit('blur', this.keyword);
+		},
+		// 点击搜索框，只有disabled=true时才发出事件，因为禁止了输入，意味着是想跳转真正的搜索页
+		clickHandler() {
+			if(this.disabled) this.$emit('click');
 		}
 	}
 };

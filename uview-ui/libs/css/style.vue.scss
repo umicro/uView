@@ -147,3 +147,14 @@ page {
 	background-color: #FFFFFF;  
 }
 /* end--高斯模糊tabbar底部处理--end */
+
+/* start--提升H5端uni.toast()的层级，避免被uView的modal等遮盖--start */
+/* #ifdef H5 */
+uni-toast {
+    z-index: 10090;
+}
+uni-toast .uni-toast {
+   z-index: 10090;
+}
+/* #endif */
+/* end--提升H5端uni.toast()的层级，避免被uView的modal等遮盖--end */

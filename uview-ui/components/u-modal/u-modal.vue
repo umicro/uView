@@ -219,13 +219,13 @@ export default {
 	},
 	methods: {
 		confirm() {
-			this.$emit('confirm');
 			// 异步关闭
 			if(this.asyncClose) {
 				this.loading = true;
 			} else {
 				this.$emit('input', false);
 			}
+			this.$emit('confirm');
 		},
 		cancel() {
 			this.$emit('cancel');

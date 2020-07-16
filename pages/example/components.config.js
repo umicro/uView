@@ -252,6 +252,10 @@ export default [{
 	}, {
 		groupName: '其他组件',
 		list: [{
+			path: '/pages/componentsA/parse/index',
+			icon: 'parse',
+			title: 'parse 富文本解析器',
+		},{
 			path: '/pages/componentsC/messageInput/index',
 			icon: 'messageInput',
 			title: 'MessageInput 验证码输入',
@@ -261,7 +265,7 @@ export default [{
 			title: 'AvatarCropper 头像裁剪',
 		}, {
 			path: '/pages/componentsC/loadmore/index',
-			icon: 'loadmore',
+			icon: 'loadmore', 
 			title: 'Loadmore 加载更多',
 		}, {
 			path: '/pages/componentsB/readMore/index',
