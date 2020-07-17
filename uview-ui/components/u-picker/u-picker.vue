@@ -1,7 +1,6 @@
 <template>
 	<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
-		<!-- 多加一个if判断，避免微信小程序第二次打开后，视图没有重新渲染，而导致数据混乱 -->
-		<view class="u-datetime-picker" @tap.stop v-if="value">
+		<view class="u-datetime-picker">
 			<view class="u-picker-header" @touchmove.stop.prevent="">
 				<view class="u-btn-picker u-btn-picker--tips" :style="{ color: cancelColor }" hover-class="u-opacity" :hover-stay-time="150" @tap="getResult('cancel')">取消</view>
 				<view class="u-picker__title">{{ title }}</view>
@@ -72,14 +71,14 @@
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else-if="mode == 'selector'" :value="defaultSelector" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+				<picker-view v-else-if="mode == 'selector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
 					<picker-view-column>
 						<view class="u-column-item" v-for="(item, index) in range" :key="index">
 							<view class="u-line-1">{{ getItemValue(item, 'selector') }}</view>
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else-if="mode == 'multiSelector'" :value="defaultSelector" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+				<picker-view v-else-if="mode == 'multiSelector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
 					<picker-view-column v-for="(item, index) in range" :key="index">
 						<view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
 							<view class="u-line-1">{{ getItemValue(item1, 'multiSelector') }}</view>
@@ -331,6 +330,9 @@ export default {
 		},
 		// 生成递进的数组
 		generateArray: function(start, end) {
+			// 转为数值格式，否则用户给end-year等传递字符串值时，下面的end+1会导致字符串拼接，而不是相加
+			start = Number(start);
+			end = Number(end);
 			end = end > start ? end : start;
 			// 生成数组，获取其中的索引，并剪出来
 			return [...Array(end + 1).keys()].slice(start);

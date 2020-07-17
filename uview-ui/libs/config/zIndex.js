@@ -4,6 +4,7 @@
  * modal: 999
  * navigate: 998
  * tabbar: 998
+ * toast: 999
  */
 
 export default {

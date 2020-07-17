@@ -10,6 +10,7 @@
 					v-model="show"
 					:defaultRegion="defaultRegion"
 					:params="params"
+					end-year="2030"
 					@confirm="confirm"
 					:defaultSelector="defaultSelector"
 					:range="range"

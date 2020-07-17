@@ -18,6 +18,7 @@
 		></image>
 		<view v-if="showLoading && loading" class="u-image__loading" :style="{
 			borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
+			backgroundColor: this.bgColor
 		}">
 			<slot v-if="$slots.loading" name="loading" />
 			<u-icon v-else :name="loadingIcon"></u-icon>
@@ -108,6 +109,11 @@ export default {
 		duration: {
 			type: [String, Number],
 			default: 500
+		},
+		// 背景颜色，用于深色页面加载图片时，为了和背景色融合
+		bgColor: {
+			type: String,
+			default: '#f3f4f6'
 		}
 	},
 	data() {
@@ -189,7 +195,6 @@ export default {
 @import '../../libs/css/style.components.scss';
 
 .u-image {
-	background-color: $u-bg-color;
 	position: relative;
 	transition: opacity 0.5s ease-in-out;
 
