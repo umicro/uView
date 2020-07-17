@@ -1,6 +1,6 @@
 <template>
 	<view class="u-content">
-		<u-parse :html="content" show-with-animation></u-parse>
+		<u-dropdown-list></u-dropdown-list>
 	</view>
 </template>
 

@@ -137,11 +137,11 @@ export default {
 			index = this.leftList.findIndex(val => val[this.idKey] == id);
 			if(index != -1) {
 				// 如果index不等于-1，说明已经找到了要找的id，修改对应key的值
-				this.leftList[key] = value;
+				this.leftList[index][key] = value;
 			} else {
 				// 同理于上方面的方法
 				index = this.rightList.findIndex(val => val[this.idKey] == id);
-				if(index != -1) this.leftList[key] = value;
+				if(index != -1) this.rightList[index][key] = value;
 			}
 			// 修改父组件的数据中的对应id的条目
 			index = this.value.findIndex(val => val[this.idKey] == id);

@@ -99,7 +99,9 @@
 			};
 		},
 		mounted() {
-			this.init();
+			this.$nextTick(function(){
+				this.init();
+			})
 		},
 		methods: {
 			init() {

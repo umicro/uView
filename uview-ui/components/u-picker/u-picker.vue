@@ -330,6 +330,9 @@ export default {
 		},
 		// 生成递进的数组
 		generateArray: function(start, end) {
+			// 转为数值格式，否则用户给end-year等传递字符串值时，下面的end+1会导致字符串拼接，而不是相加
+			start = Number(start);
+			end = Number(end);
 			end = end > start ? end : start;
 			// 生成数组，获取其中的索引，并剪出来
 			return [...Array(end + 1).keys()].slice(start);

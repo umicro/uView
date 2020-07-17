@@ -363,4 +363,8 @@ export default {
 .u-input-class {
 	font-size: 28rpx;
 }
+
+.u-button-wrap {
+	margin-left: 8rpx;
+}
 </style>
