@@ -1,17 +1,20 @@
 <template>
-	<view class="u-index-bar">
-		<slot />
-		<view v-if="showSidebar" class="u-index-bar__sidebar" @touchstart.stop.prevent="onTouchMove" @touchmove.stop.prevent="onTouchMove"
-		 @touchend.stop.prevent="onTouchStop" @touchcancel.stop.prevent="onTouchStop">
-			<view v-for="(item, index) in indexList" :key="index" class="u-index-bar__index" :style="{zIndex: zIndex + 1, color: activeAnchorIndex === index ? activeColor : ''}"
-			 :data-index="index">
-				{{ item }}
+	<!-- 支付宝小程序使用$u.getRect()获取组件的根元素尺寸，所以在外面套一个"壳" -->
+	<view>
+		<view class="u-index-bar">
+			<slot />
+			<view v-if="showSidebar" class="u-index-bar__sidebar" @touchstart.stop.prevent="onTouchMove" @touchmove.stop.prevent="onTouchMove"
+			 @touchend.stop.prevent="onTouchStop" @touchcancel.stop.prevent="onTouchStop">
+				<view v-for="(item, index) in indexList" :key="index" class="u-index-bar__index" :style="{zIndex: zIndex + 1, color: activeAnchorIndex === index ? activeColor : ''}"
+				 :data-index="index">
+					{{ item }}
+				</view>
 			</view>
-		</view>
-		<view class="u-indexed-list-alert" v-if="touchmove && indexList[touchmoveIndex]" :style="{
-			zIndex: alertZIndex
-		}">
-			<text>{{indexList[touchmoveIndex]}}</text>
+			<view class="u-indexed-list-alert" v-if="touchmove && indexList[touchmoveIndex]" :style="{
+				zIndex: alertZIndex
+			}">
+				<text>{{indexList[touchmoveIndex]}}</text>
+			</view>
 		</view>
 	</view>
 </template>

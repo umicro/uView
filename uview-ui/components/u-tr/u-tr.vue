@@ -13,17 +13,6 @@
 	 */
 	export default {
 		name: "u-tr",
-		inject: ['uTable', 'uTd'],
-		provide() {
-			return {
-				uTr: this,
-			};
-		},
-		created() {
-			if (this.uTd && this.uTd.tr) {
-				this.uTd.tr.push(this);
-			}
-		}
 	}
 </script>
 

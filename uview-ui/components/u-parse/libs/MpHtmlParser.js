@@ -1,7 +1,7 @@
 /**
  * html 解析器
  * @tutorial https://github.com/jin-yufeng/Parser
- * @version 20200712
+ * @version 20200719
  * @author JinYufeng
  * @listens MIT
  */
@@ -233,8 +233,6 @@ MpHtmlParser.prototype.setNode = function() {
 				style += ';-webkit-touch-callout:none';
 				styleObj['max-width'] = '100%';
 			}
-			if (!styleObj.position)
-				styleObj.top = styleObj.bottom = styleObj.left = styleObj.right = styleObj['z-index'] = void 0;
 			var width;
 			if (styleObj.width) width = styleObj.width;
 			else if (attrs.width) width = attrs.width.includes('%') ? attrs.width : attrs.width + 'px';
@@ -305,7 +303,7 @@ MpHtmlParser.prototype.remove = function(node) {
 		if (!node.attrs.xmlns) src = ' xmlns="http://www.w3.org/2000/svg"' + src;
 		var i = j;
 		while (this.data[j] != '<') j--;
-		src = this.data.substring(j, i) + src;
+		src = this.data.substring(j, i).replace("viewbox", "viewBox") + src;
 		var parent = this.parent();
 		if (node.attrs.width == '100%' && parent && (parent.attrs.style || '').includes('inline'))
 			parent.attrs.style = 'width:300px;max-width:100%;' + parent.attrs.style;

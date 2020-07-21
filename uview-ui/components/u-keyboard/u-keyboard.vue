@@ -1,6 +1,6 @@
 <template>
 	<u-popup class="" :mask="mask" :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto"
-	 :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose">
+	 :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose" :zIndex="uZIndex">
 		<slot />
 		<view class="u-tooltip" v-if="tooltip">
 			<view class="u-tooltip-item u-tooltip-cancel" hover-class="u-tooltip-cancel-hover" @tap="onCancel">

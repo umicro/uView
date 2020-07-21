@@ -62,7 +62,6 @@
 		provide() {
 			return {
 				uTable: this,
-				uTd: this
 			};
 		},
 		data() {

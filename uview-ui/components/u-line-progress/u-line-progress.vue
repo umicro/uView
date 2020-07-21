@@ -8,7 +8,11 @@
 			type ? `u-type-${type}-bg` : '',
 			striped ? 'u-striped' : '',
 			striped && stripedActive ? 'u-striped-active' : ''
-		]" class="u-active" :style="[progressStyle]">{{showPercent ? percent + '%' : ''}}
+		]" class="u-active" :style="[progressStyle]">
+			<slot v-if="$slots.default" />
+			<block v-else-if="showPercent">
+				{{percent + '%'}}
+			</block>
 		</view>
 	</view>
 </template>

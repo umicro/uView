@@ -1,5 +1,5 @@
 <template>
-	<view class="interlayer">
+	<view :class="'interlayer '+(c||'')" :style="s">
 		<block v-for="(n, i) in nodes" v-bind:key="i">
 			<!--图片-->
 			<view v-if="n.name=='img'" :class="'_img '+n.attrs.class" :style="n.attrs.style" :data-attrs="n.attrs" @tap="imgtap">
@@ -27,7 +27,7 @@
 			<!--链接-->
 			<view v-else-if="n.name=='a'" :id="n.attrs.id" :class="'_a '+(n.attrs.class||'')" hover-class="_hover" :style="n.attrs.style"
 			 :data-attrs="n.attrs" @tap="linkpress">
-				<trees class="_span" :nodes="n.children" />
+				<trees class="_span" c="_span" :nodes="n.children" />
 			</view>
 			<!--广告-->
 			<!--<ad v-else-if="n.name=='ad'" :class="n.attrs.class" :style="n.attrs.style" :unit-id="n.attrs['unit-id']" :appid="n.attrs.appid" :apid="n.attrs.apid" :type="n.attrs.type" :adpid="n.attrs.adpid" data-source="ad" @error="error" />-->
@@ -39,31 +39,15 @@
 					<view v-else-if="n.floor%3==2" class="_ul-p2" />
 					<view v-else class="_ul-p1" style="border-radius:50%">█</view>
 				</view>
-				<!--#ifdef MP-ALIPAY-->
-				<view class="_li">
-					<trees :nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
-				</view>
-				<!--#endif-->
-				<!--#ifndef MP-ALIPAY-->
-				<trees class="_li" :nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
-				<!--#endif-->
+				<trees class="_li" c="_li" :nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
 			</view>
 			<!--表格-->
 			<view v-else-if="n.name=='table'&&n.c" :id="n.attrs.id" :class="n.attrs.class" :style="(n.attrs.style||'')+';display:table'">
 				<view v-for="(tbody, o) in n.children" v-bind:key="o" :class="tbody.attrs.class" :style="(tbody.attrs.style||'')+(tbody.name[0]=='t'?';display:table-'+(tbody.name=='tr'?'row':'row-group'):'')">
 					<view v-for="(tr, p) in tbody.children" v-bind:key="p" :class="tr.attrs.class" :style="(tr.attrs.style||'')+(tr.name[0]=='t'?';display:table-'+(tr.name=='tr'?'row':'cell'):'')">
 						<trees v-if="tr.name=='td'" :nodes="tr.children" />
-						<block v-else>
-							<!--#ifdef MP-ALIPAY-->
-							<view v-for="(td, q) in tr.children" v-bind:key="q" :class="td.attrs.class" :style="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')">
-								<trees :nodes="td.children" />
-							</view>
-							<!--#endif-->
-							<!--#ifndef MP-ALIPAY-->
-							<trees v-for="(td, q) in tr.children" v-bind:key="q" :class="td.attrs.class" :style="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')"
-							 :nodes="td.children" />
-							<!--#endif-->
-						</block>
+						<trees v-else v-for="(td, q) in tr.children" v-bind:key="q" :class="td.attrs.class" :c="td.attrs.class" :style="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')"
+						 :s="(td.attrs.style||'')+(td.name[0]=='t'?';display:table-'+(td.name=='tr'?'row':'cell'):'')" :nodes="td.children" />
 					</view>
 				</view>
 			</view>
@@ -79,15 +63,8 @@
 			<!--#ifndef MP-WEIXIN || MP-QQ || APP-PLUS-->
 			<rich-text v-else-if="!n.c" :id="n.attrs.id" :nodes="[n]" style="display:inline" />
 			<!--#endif-->
-			<!--#ifdef MP-ALIPAY-->
-			<view v-else :id="n.attrs.id" :class="'_'+n.name+' '+(n.attrs.class||'')" :style="n.attrs.style">
-				<trees :nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
-			</view>
-			<!--#endif-->
-			<!--#ifndef MP-ALIPAY-->
-			<trees v-else :class="(n.attrs.id||'')+' _'+n.name+' '+(n.attrs.class||'')" :style="n.attrs.style" :nodes="n.children"
-			 :lazyLoad="lazyLoad" :loading="loading" />
-			<!--#endif-->
+			<trees v-else :class="(n.attrs.id||'')+' _'+n.name+' '+(n.attrs.class||'')" :c="(n.attrs.id||'')+' _'+n.name+' '+(n.attrs.class||'')"
+			 :style="n.attrs.style" :s="n.attrs.style" :nodes="n.children" :lazyLoad="lazyLoad" :loading="loading" />
 		</block>
 	</view>
 </template>
@@ -106,19 +83,21 @@
 				controls: [],
 				placeholder: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="225"/>',
 				errorImg,
-				loadVideo:
-					// #ifdef APP-PLUS
-					false
-				// #endif
-				// #ifndef APP-PLUS
-				true
+				loadVideo: typeof plus == 'undefined',
+				// #ifndef MP-ALIPAY
+				c: '',
+				s: ''
 				// #endif
 			}
 		},
 		props: {
 			nodes: Array,
 			lazyLoad: Boolean,
-			loading: String
+			loading: String,
+			// #ifdef MP-ALIPAY
+			c: String,
+			s: String
+			// #endif
 		},
 		mounted() {
 			for (this.top = this.$parent; this.top.$options.name != 'parser'; this.top = this.top.$parent);
@@ -140,7 +119,7 @@
 								top: 500,
 								bottom: 500
 							});
-							this.$nextTick(() => {
+							setTimeout(() => {
 								this.observer.observe('._img', res => {
 									if (res.intersectionRatio) {
 										for (var j = this.nodes.length; j--;)
@@ -149,7 +128,7 @@
 										this.observer.disconnect();
 									}
 								})
-							})
+							}, 0)
 						}
 						// #endif
 					} else if (n.name == 'video' || n.name == 'audio') {
@@ -318,9 +297,9 @@
 	}
 
 	._img {
-		position: relative;
 		display: inline-block;
 		max-width: 100%;
+		overflow: hidden;
 	}
 
 	/* #ifdef MP-WEIXIN */
@@ -330,7 +309,7 @@
 
 	/* #endif */
 
-	/* #ifdef MP || QUICKAPP-WEBVIEW */
+	/* #ifndef MP-ALIPAY || APP-PLUS */
 	.interlayer {
 		display: inherit;
 		flex-direction: inherit;
@@ -349,6 +328,7 @@
 		font-weight: bold;
 	}
 
+	/* #ifndef MP-ALIPAY */
 	._blockquote,
 	._div,
 	._p,
@@ -357,6 +337,8 @@
 	._li {
 		display: block;
 	}
+	
+	/* #endif */
 
 	._code {
 		font-family: monospace;
@@ -402,11 +384,10 @@
 	}
 
 	._image {
-		position: absolute;
-		top: 0;
-		left: 0;
+		display: block;
 		width: 100%;
-		height: 100%;
+		height: 360px;
+		margin-top: -360px;
 		opacity: 0;
 	}
 
@@ -470,7 +451,7 @@
 		vertical-align: super;
 	}
 
-	/* #ifdef MP-ALIPAY || APP-PLUS || QUICKAPP-WEBVIEW*/
+	/* #ifdef MP-ALIPAY || APP-PLUS || QUICKAPP-WEBVIEW */
 	._abbr,
 	._b,
 	._code,
