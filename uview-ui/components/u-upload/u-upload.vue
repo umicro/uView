@@ -387,7 +387,7 @@ export default {
 				header: this.header,
 				success: res => {
 					// 判断是否json字符串，将其转为json格式
-					let data = this.toJson && this.checkIsJSON(res.data) ? JSON.parse(res.data) : res.data;
+					let data = this.toJson && this.$u.test.jsonString(res.data) ? JSON.parse(res.data) : res.data;
 					if (![200, 201].includes(res.statusCode)) {
 						this.uploadError(index, data);
 					} else {
@@ -466,22 +466,6 @@ export default {
 					});
 				}
 			});
-		},
-		// 判断是否json字符串
-		checkIsJSON(str) {
-			if (typeof str == 'string') {
-				try {
-					var obj = JSON.parse(str);
-					if (typeof obj == 'object' && obj) {
-						return true;
-					} else {
-						return false;
-					}
-				} catch (e) {
-					return false;
-				}
-			}
-			return false;
 		}
 	}
 };

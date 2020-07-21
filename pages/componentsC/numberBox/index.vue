@@ -63,7 +63,7 @@ export default {
 			this.step = index == 0 ? 1 : index == 1 ? 3 : index == 2 ? 5 : 8;
 		},
 		change(e) {
-			console.log(this.value);
+			//console.log(e.value);
 		}
 	}
 };

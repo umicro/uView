@@ -197,11 +197,15 @@ export default [{
 			path: '/pages/componentsB/sticky/index',
 			icon: 'sticky',
 			title: 'Sticky 吸顶',
-		}, {
+		}, 
+		// #ifndef MP-ALIPAY
+		{
 			path: '/pages/componentsB/waterfall/index',
 			icon: 'waterfall',
 			title: 'Waterfall 瀑布流',
-		}, {
+		},
+		// #endif
+		{
 			path: '/pages/componentsB/divider/index',
 			icon: 'divider',
 			title: 'Divider 分割线',
@@ -224,11 +228,15 @@ export default [{
 			path: '/pages/componentsA/tabs/index',
 			icon: 'tabs',
 			title: 'Tabs 标签',
-		}, {
+		}, 
+		// #ifndef MP-ALIPAY
+		{
 			path: '/pages/template/order/index',
 			icon: 'tabsSwiper',
 			title: 'TabsSwiper 全屏选项卡',
-		}, {
+		},
+		// #endif
+		{
 			path: '/pages/componentsC/subsection/index',
 			icon: 'subsection',
 			title: 'Subsection 分段器',

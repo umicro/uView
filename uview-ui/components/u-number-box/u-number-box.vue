@@ -132,10 +132,6 @@
 			}
 		},
 		watch: {
-			value(val, val1) {
-				// 防止用户在change事件回调中将回调值赋值给valut变量，导致change事件触发两次
-				if(Number(val) != this.inputVal) this.inputVal = Number(val);
-			},
 			inputVal(v1, v2) {
 				// 为了让用户能够删除所有输入值，重新输入内容，删除所有值后，内容为空字符串
 				if (v1 == '') return;
@@ -144,10 +140,8 @@
 				let tmp = this.$u.test.number(v1);
 				if (tmp && v1 >= this.min && v1 <= this.max) value = v1;
 				else value = v2;
+				// 发出change事件
 				this.handleChange(value, 'change');
-				this.$nextTick(() => {
-					this.inputVal = v1;
-				})
 			}
 		},
 		data() {
@@ -258,7 +252,6 @@
 				this.$nextTick(() => {
 					this.inputVal = val;
 				})
-				this.handleChange(val, "blur");
 			},
 			handleChange(value, type) {
 				if (this.disabled) return;

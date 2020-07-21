@@ -21,11 +21,6 @@
 				default: ''
 			}
 		},
-		data() {
-			return {
-
-			};
-		},
 		inject: ['uTable'],
 		computed: {
 			thStyle() {

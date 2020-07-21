@@ -127,10 +127,18 @@ function rangeLength(value, param) {
 }
 
 /**
+ * 是否固定电话
+ */
+function landline(value) {
+	let reg = /^\d{3,4}-\d{7,8}(-\d{3,4})?$/;
+	return reg.test(value);
+}
+
+/**
  * 判断是否为空
  */
-function empty(value){
-    switch (typeof value) {
+function empty(value) {
+	switch (typeof value) {
 		case 'undefined':
 			return true;
 		case 'string':
@@ -148,8 +156,47 @@ function empty(value){
 				return false;
 			}
 			return true;
-    }
-    return false;	
+	}
+	return false;
+}
+
+/**
+ * 是否json字符串
+ */
+function jsonString(value) {
+	if (typeof value == 'string') {
+		try {
+			var obj = JSON.parse(value);
+			if (typeof obj == 'object' && obj) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (e) {
+			return false;
+		}
+	}
+	return false;
+}
+
+
+/**
+ * 是否数组
+ */
+function array(value) {
+	if (typeof Array.isArray === "function") {
+		return Array.isArray(value);
+	} else {
+		return Object.prototype.toString.call(value) === "[object Array]";
+	}
+}
+
+
+/**
+ * 是否对象
+ */
+function object(value) {
+	return Object.prototype.toString.call(value) === '[object Object]';
 }
 
 
@@ -171,5 +218,9 @@ export default {
 	range,
 	rangeLength,
 	empty,
-	isEmpty: empty
+	isEmpty: empty,
+	jsonString,
+	landline,
+	object,
+	array
 }

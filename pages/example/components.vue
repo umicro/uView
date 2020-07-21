@@ -28,6 +28,9 @@
 				}
 			}
 		},
+		created() {
+			
+		},
 		methods: {
 			openPage(path) {
 				this.$u.route({
