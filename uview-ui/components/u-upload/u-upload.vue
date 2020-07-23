@@ -230,7 +230,14 @@ export default {
 		beforeUpload: {
 			type: Function,
 			default: null
-		}
+		},
+		// 允许上传的图片后缀
+		limitType:{
+			type: Array,
+			default() {
+				return ['png', 'jpg', 'jpeg', 'webp'];
+			}
+		},
 	},
 	mounted() {},
 	data() {
@@ -291,6 +298,9 @@ export default {
 					let file = null;
 					let listOldLength = this.lists.length;
 					res.tempFiles.map((val, index) => {
+						// 检查文件后缀是否允许，如果不在this.limitType内，就会返回false
+						if(!this.checkFileExt(val)) return ;
+						
 						// 如果是非多选，index大于等于1或者超出最大限制数量时，不处理
 						if (!multiple && index >= 1) return;
 						if (val.size > maxSize) {
@@ -466,6 +476,29 @@ export default {
 					});
 				}
 			});
+		},
+		// 判断文件后缀是否允许
+		checkFileExt(file) {
+			// 检查是否在允许的后缀中
+			let noArrowExt = false;
+			// 获取后缀名
+			let fileExt = '';
+			const reg = /.+\./;
+			// 如果是H5，需要从name中判断
+			// #ifdef H5
+			fileExt = file.name.replace(reg, "").toLowerCase();
+			// #endif
+			// 非H5，需要从path中读取后缀
+			// #ifndef H5
+			fileExt = file.path.replace(reg, "").toLowerCase();
+			// #endif
+			// 使用数组的some方法，只要符合limitType中的一个，就返回true
+			noArrowExt = this.limitType.some(ext => {
+				// 转为小写
+				return ext.toLowerCase() === fileExt;
+			})
+			if(!noArrowExt) this.showToast(`不允许选择${fileExt}格式的文件`);
+			return noArrowExt;
 		}
 	}
 };
