@@ -1,19 +1,23 @@
 <template>
 	<view class="">
-		<view class="u-content" :class="[elId]" :style="{ height: isLongContent && !showMore ? showHeight + 'rpx' : 'auto' }">
+		<view class="u-content" :class="[elId]" :style="{ 
+			height: isLongContent && !showMore ? showHeight + 'rpx' : 'auto',
+			textIndent: this.textIndent
+		}">
 			<slot></slot>
 		</view>
-		<view @tap="toggleReadMore" v-if="isLongContent" class="u-showmore-wrap" 
-			:class="{ 'u-show-more': showMore }" 
-			:style="[innerShadowStyle]"
-		>
-			<text class="u-readmore-btn" :style="{
+		<view @tap="toggleReadMore" v-if="isLongContent" class="u-content__showmore-wrap"
+		    :class="{ 'u-content__show-more': showMore }"
+		    :style="[innerShadowStyle]">
+			<text class="u-content__showmore-wrap__readmore-btn" :style="{
 				fontSize: fontSize + 'rpx',
 				color: color
 			}">
 				{{ showMore ? openText : closeText }}
 			</text>
-			<u-icon :color="color" :size="fontSize" class="u-icon" :name="showMore ? 'arrow-up' : 'arrow-down'"></u-icon>
+			<view class="u-content__showmore-wrap__readmore-btn__icon u-flex">
+				<u-icon :color="color" :size="fontSize" :name="showMore ? 'arrow-up' : 'arrow-down'"></u-icon>
+			</view>
 		</view>
 	</view>
 </template>
@@ -27,6 +31,7 @@
 	 * @property {Boolean} toggle 展开后是否显示收起按钮（默认false）
 	 * @property {String} close-text 关闭时的提示文字（默认“展开阅读全文”）
 	 * @property {String Number} font-size 提示文字的大小，单位rpx（默认28）
+	 * @property {String} text-indent 段落首行缩进的字符个数（默认2em）
 	 * @property {String} open-text 展开时的提示文字（默认“收起”）
 	 * @property {String} color 提示文字的颜色（默认#2979ff）
 	 * @example <u-read-more><rich-text :nodes="content"></rich-text></u-read-more>
@@ -67,13 +72,18 @@
 			// 是否显示阴影
 			shadowStyle: {
 				type: Object,
-				default() {
+				default () {
 					return {
 						backgroundImage: "linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, #fff 80%)",
 						paddingTop: "300rpx",
 						marginTop: "-300rpx"
 					}
 				}
+			},
+			// 段落首行缩进的字符个数
+			textIndent: {
+				type: String,
+				default: '2em'
 			}
 		},
 		watch: {
@@ -87,7 +97,7 @@
 			},
 			// 展开后无需阴影，收起时才需要阴影样式
 			innerShadowStyle() {
-				if(this.showMore) return {};
+				if (this.showMore) return {};
 				else return this.shadowStyle
 			}
 		},
@@ -99,7 +109,7 @@
 			};
 		},
 		mounted() {
-			this.$nextTick(function(){
+			this.$nextTick(function() {
 				this.init();
 			})
 		},
@@ -125,39 +135,38 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-content {
 		font-size: 30rpx;
 		color: $u-content-color;
 		line-height: 1.8;
 		text-align: left;
-		text-indent: 2em;
 		overflow: hidden;
-	}
 
-	.u-showmore-wrap {
-		position: relative;
-		width: 100%;
-		padding-bottom: 26rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+		&__show-more {
+			padding-top: 0;
+			background: none;
+			margin-top: 20rpx;
+		}
 
-	.u-show-more {
-		padding-top: 0;
-		background: none;
-		margin-top: 20rpx;
-	}
+		&__showmore-wrap {
+			position: relative;
+			width: 100%;
+			padding-bottom: 26rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
-	.u-readmore-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		line-height: 1;
-	}
+			&__readmore-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 1;
 
-	.u-icon {
-		margin-left: 14rpx;
+				&__icon {
+					margin-left: 14rpx;
+				}
+			}
+		}
 	}
 </style>
