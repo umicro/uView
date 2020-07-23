@@ -1,9 +1,5 @@
 <template>
-	<view
-		class="u-image"
-		@tap="onClick"
-		:style="[wrapStyle, backgroundStyle]"
-	>
+	<view class="u-image" @tap="onClick" :style="[wrapStyle, backgroundStyle]">
 		<image
 			v-if="!isError"
 			:src="src"
@@ -13,19 +9,27 @@
 			:lazy-load="lazyLoad"
 			class="u-image__image"
 			:style="{
-				borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
+				borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius)
 			}"
 		></image>
-		<view v-if="showLoading && loading" class="u-image__loading" :style="{
-			borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
-			backgroundColor: this.bgColor
-		}">
+		<view
+			v-if="showLoading && loading"
+			class="u-image__loading"
+			:style="{
+				borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
+				backgroundColor: this.bgColor
+			}"
+		>
 			<slot v-if="$slots.loading" name="loading" />
 			<u-icon v-else :name="loadingIcon"></u-icon>
 		</view>
-		<view v-if="showError && isError && !loading" class="u-image__error" :style="{
-			borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
-		}">
+		<view
+			v-if="showError && isError && !loading"
+			class="u-image__error"
+			:style="{
+				borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius)
+			}"
+		>
 			<slot v-if="$slots.error" name="error" />
 			<u-icon v-else :name="errorIcon"></u-icon>
 		</view>
@@ -33,6 +37,30 @@
 </template>
 
 <script>
+/**
+ * Image 图片
+ * @description 此组件为uni-app的image组件的加强版，在继承了原有功能外，还支持淡入动画、加载中、加载失败提示、圆角值和形状等。
+ * @tutorial https://uviewui.com/components/image.html
+ * @property {String} src 图片地址
+ * @property {String} mode 裁剪模式，见官网说明
+ * @property {String | Number} width 宽度，单位任意，如果为数值，则为rpx单位（默认100%）
+ * @property {String | Number} height 高度，单位任意，如果为数值，则为rpx单位（默认 auto）
+ * @property {String} shape 图片形状，circle-圆形，square-方形（默认square）
+ * @property {String | Number} border-radius 圆角值，单位任意，如果为数值，则为rpx单位（默认 0）
+ * @property {Boolean} lazy-load 是否懒加载，仅微信小程序、App、百度小程序、字节跳动小程序有效（默认 true）
+ * @property {Boolean} show-menu-by-longpress 是否开启长按图片显示识别小程序码菜单，仅微信小程序有效（默认 false）
+ * @property {String} loading-icon 加载中的图标，或者小图片（默认 photo）
+ * @property {String} error-icon 加载失败的图标，或者小图片（默认 error-circle）
+ * @property {Boolean} show-loading 是否显示加载中的图标或者自定义的slot（默认 true）
+ * @property {Boolean} show-error 是否显示加载错误的图标或者自定义的slot（默认 true）
+ * @property {Boolean} fade 是否需要淡入效果（默认 true）
+ * @property {Boolean} webp 只支持网络资源，只对微信小程序有效（默认 false）
+ * @property {String | Number} duration 搭配fade参数的过渡时间，单位ms（默认 500）
+ * @event {Function} click 点击图片时触发
+ * @event {Function} error 图片加载失败时触发
+ * @event {Function} load 图片加载成功时触发
+ * @example <u-image width="100%" height="300rpx" :src="src"></u-image>
+ */
 export default {
 	props: {
 		// 图片地址
@@ -140,7 +168,7 @@ export default {
 			style.borderRadius = this.shape == 'circle' ? '50%' : this.$u.addUnit(this.borderRadius);
 			// 如果设置圆角，必须要有hidden，否则可能圆角无效
 			style.overflow = this.borderRadius > 0 ? 'hidden' : 'visible';
-			if(this.fade) {
+			if (this.fade) {
 				style.opacity = this.opacity;
 				style.transition = `opacity ${Number(this.durationTime) / 1000}s ease-in-out`;
 			}
@@ -165,7 +193,7 @@ export default {
 			this.$emit('load');
 			// 如果不需要动画效果，就不执行下方代码，同时移除加载时的背景颜色
 			// 否则无需fade效果时，png图片依然能看到下方的背景色
-			if(!this.fade) return this.removeBgColor();
+			if (!this.fade) return this.removeBgColor();
 			// 原来opacity为1(不透明，是为了显示占位图)，改成0(透明，意味着该元素显示的是背景颜色，默认的灰色)，再改成1，是为了获得过渡效果
 			this.opacity = 0;
 			// 这里设置为0，是为了图片展示到背景全透明这个过程时间为0，延时之后延时之后重新设置为duration，是为了获得背景透明(灰色)
@@ -177,8 +205,8 @@ export default {
 				this.opacity = 1;
 				setTimeout(() => {
 					this.removeBgColor();
-				}, this.durationTime)
-			}, 50)
+				}, this.durationTime);
+			}, 50);
 		},
 		// 移除图片的背景色
 		removeBgColor() {
@@ -203,7 +231,8 @@ export default {
 		height: 100%;
 	}
 
-	&__loading, &__error {
+	&__loading,
+	&__error {
 		position: absolute;
 		top: 0;
 		left: 0;
