@@ -1,20 +1,23 @@
 <template>
 	<view class="u-section">
-		<view class="u-section-title" :style="{
+		<view class="u-section__title" :style="{
 			fontWeight: bold ? 'bold' : 'normal',
 			color: color,
 			fontSize: fontSize + 'rpx',
-			paddingLeft: showLine ? '10rpx' : 0
+			paddingLeft: showLine ? (fontSize * 0.7) + 'rpx' : 0
 		}" :class="{
 			'u-section--line': showLine
 		}">
-			{{title}}
+			<view class="u-section__title__icon-wrap u-flex" :style="[lineStyle]">
+				<u-icon name="column-line" :size="fontSize * 1.25" bold :color="lineColor ? lineColor : color"></u-icon>
+			</view>
+			<text class="u-flex u-section__title__text">{{title}}</text>
 		</view>
-		<view class="u-right-info" v-if="right" :style="{
+		<view class="u-section__right-info" v-if="right" :style="{
 			color: subColor
 		}" @tap="rightClick">
 			{{subTitle}}
-			<view class="u-icon-arrow">
+			<view class="u-section__right-info__icon-arrow u-flex">
 				<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
 			</view>
 		</view>
@@ -56,7 +59,7 @@
 			},
 			fontSize: {
 				type: [Number, String],
-				default: 28
+				default: 32
 			},
 			// 主标题是否加粗
 			bold: {
@@ -77,11 +80,22 @@
 			showLine: {
 				type: Boolean,
 				default: true
+			},
+			// 左边竖线的颜色
+			lineColor: {
+				type: String,
+				default: ''
 			}
 		},
-		data() {
-			return {
-				
+		computed: {
+			// 左边竖条的样式
+			lineStyle() {
+				// 由于安卓和iOS的，需要稍微调整绝对定位的top值，才能让左边的竖线和右边的文字垂直居中
+				return {
+					// 由于竖线为字体图标，具有比实际线宽更宽的宽度，所以也需要根据字体打下动态调整
+					left: -(Number(this.fontSize) * 0.9) + 'rpx',
+					top: -(Number(this.fontSize) * (this.$u.os == 'ios' ? 0.13 : 0.15)) + 'rpx',
+				}
 			}
 		},
 		methods: {
@@ -100,32 +114,32 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-	}
-	
-	.u-section-title {
-		position: relative;
-		font-size: 28rpx;
-		line-height: 1;
-	}
-	
-	.u-section--line:after {
-		position: absolute;
-		width: 4px;
-		height: 100%;
-		content: '';
-		left: 0;
-		border-radius: 10px;
-		background-color: currentColor;
-	}
-	
-	.u-right-info {
-		color: $u-tips-color;
-		font-size: 26rpx;
-		display: flex;
-		align-items: center;
-	}
-	
-	.u-icon-arrow {
-		margin-left: 6rpx;
+		
+		&__title {
+			position: relative;
+			font-size: 28rpx;
+			padding-left: 20rpx;
+			display: flex;
+			align-items: center;
+			
+			&__icon-wrap {
+				position: absolute;
+			}
+			
+			&__text {
+				line-height: 1;
+			}
+		}
+		
+		&__right-info {
+			color: $u-tips-color;
+			font-size: 26rpx;
+			display: flex;
+			align-items: center;
+			
+			&__icon-arrow {
+				margin-left: 6rpx;
+			}
+		}
 	}
 </style>

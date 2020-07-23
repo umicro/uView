@@ -84,7 +84,7 @@
 			return {
 				title: '新闻',
 				backText: '返回',
-				backIconName: 'arrow-left',
+				backIconName: 'nav-back',
 				right: false,
 				showAction: false,
 				rightSlot: false,

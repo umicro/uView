@@ -152,7 +152,7 @@
 		},
 		methods: {
 			onClickLabel() {
-				if (!this.elLabelDisabled) {
+				if (!this.elLabelDisabled && !this.elDisabled) {
 					this.parent.setValue(this.name);
 					this.emitEvent();
 				}

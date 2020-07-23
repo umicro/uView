@@ -117,6 +117,10 @@ const install = Vue => {
 	Vue.filter('timeFrom', (timestamp, format) => {
 		return timeFrom(timestamp, format)
 	})
+	// 获取设备信息，挂载到$u的sys(system的缩写)属性中，
+	// 同时把安卓和ios平台的名称"ios"和"android"挂到$u.os中，方便取用
+	$u.sys = uni.getSystemInfoSync();
+	$u.os = $u.sys.platform;
 	Vue.prototype.$u = $u
 }
 
