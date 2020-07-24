@@ -28,7 +28,7 @@
 			</view>
 		</view>
 		<!-- 解决fixed定位后导航栏塌陷的问题 -->
-		<view class="u-navbar-placeholder" v-if="isFixed" :style="{ width: '100%', height: Number(navbarHeight) + statusBarHeight + 'px' }"></view>
+		<view class="u-navbar-placeholder" v-if="isFixed && !immersive" :style="{ width: '100%', height: Number(navbarHeight) + statusBarHeight + 'px' }"></view>
 	</view>
 </template>
 
@@ -59,6 +59,7 @@
 	 * @property {Boolean} is-back 是否显示导航栏左边返回图标和辅助文字（默认true）
 	 * @property {Object} background 导航栏背景设置，见官网说明（默认{ background: '#ffffff' }）
 	 * @property {Boolean} is-fixed 导航栏是否固定在顶部（默认true）
+	 * @property {Boolean} immersive 沉浸式，允许fixed定位后导航栏塌陷，仅fixed定位下生效（默认false）
 	 * @property {Boolean} border-bottom 导航栏底部是否显示下边框，如定义了较深的背景颜色，可取消此值（默认true）
 	 * @example <u-navbar back-text="返回" title="剑未配妥，出门已是江湖"></u-navbar>
 	 */
@@ -136,6 +137,11 @@
 			isFixed: {
 				type: Boolean,
 				default: true
+			},
+			// 是否沉浸式，允许fixed定位后导航栏塌陷，仅fixed定位下生效
+			immersive: {
+				type: Boolean,
+				default: false
 			},
 			// 是否显示导航栏的下边框
 			borderBottom: {
