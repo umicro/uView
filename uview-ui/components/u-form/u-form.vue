@@ -139,6 +139,37 @@ export default {
 					});
 				});
 			});
+		},
+		// 校验部分字段 单个字段传递form-item组件prop 多个字段传递prop数组
+		validateField(fields, callback) {
+			fields = typeof fields === 'string' ? [fields] : fields;
+			return new Promise(resolve => {
+				// 对所有的u-form-item进行校验
+				let valid = true; // 默认通过
+				let count = 0; // 用于标记是否检查完毕
+				let errorArr = []; // 存放错误信息
+				const fs = this.fields.filter(field => fields.includes(field.prop));
+				fs.map(field => {
+					// 调用每一个u-form-item实例的validation的校验方法
+					field.validation('', error => {
+						// 如果任意一个u-form-item校验不通过，就意味着整个表单不通过
+						if (error) {
+							valid = false;
+							errorArr.push(error);
+						}
+						// 当历遍了所有的u-form-item时，调用promise的then方法
+						if (++count === fs.length) {
+							resolve(valid); // 进入promise的then方法
+							// 判断是否设置了toast的提示方式，只提示最前面的表单域的第一个错误信息
+							if (this.errorType.indexOf('none') === -1 && this.errorType.indexOf('toast') >= 0 && errorArr.length) {
+								this.$u.toast(errorArr[0]);
+							}
+							// 调用回调方法
+							if (typeof callback == 'function') callback(valid);
+						}
+					});
+				});
+			});
 		}
 	}
 };
