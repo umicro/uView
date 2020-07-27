@@ -21,7 +21,7 @@
 			}"
 		>
 			<slot v-if="$slots.loading" name="loading" />
-			<u-icon v-else :name="loadingIcon"></u-icon>
+			<u-icon v-else :name="loadingIcon" :width="width" :height="height"></u-icon>
 		</view>
 		<view
 			v-if="showError && isError && !loading"
@@ -31,7 +31,7 @@
 			}"
 		>
 			<slot v-if="$slots.error" name="error" />
-			<u-icon v-else :name="errorIcon"></u-icon>
+			<u-icon v-else :name="errorIcon" :width="width" :height="height"></u-icon>
 		</view>
 	</view>
 </template>
@@ -54,6 +54,8 @@
  * @property {Boolean} show-loading 是否显示加载中的图标或者自定义的slot（默认 true）
  * @property {Boolean} show-error 是否显示加载错误的图标或者自定义的slot（默认 true）
  * @property {Boolean} fade 是否需要淡入效果（默认 true）
+ * @property {String Number} width 传入图片路径时图片的宽度
+ * @property {String Number} height 传入图片路径时图片的高度
  * @property {Boolean} webp 只支持网络资源，只对微信小程序有效（默认 false）
  * @property {String | Number} duration 搭配fade参数的过渡时间，单位ms（默认 500）
  * @event {Function} click 点击图片时触发
@@ -62,6 +64,7 @@
  * @example <u-image width="100%" height="300rpx" :src="src"></u-image>
  */
 export default {
+	name: 'u-image',
 	props: {
 		// 图片地址
 		src: {

@@ -7,7 +7,7 @@
 		flex: `0 0 ${100 / 12 * span}%`,
 		alignItems: uAlignItem,
 		justifyContent: uJustify,
-		textAlign: this.textAlign
+		textAlign: textAlign
 	}" @tap.stop.prevent="click">
 		<slot></slot>
 	</view>

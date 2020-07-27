@@ -1,19 +1,25 @@
 <template>
 	<u-popup mode="bottom" :border-radius="borderRadius" :popup="false" v-model="value" :maskCloseAble="maskCloseAble"
-	 length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose" :z-index="uZIndex">
+	    length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose" :z-index="uZIndex">
 		<view class="u-tips u-border-bottom" v-if="tips.text" :style="[tipsStyle]">
 			{{tips.text}}
 		</view>
 		<block v-for="(item, index) in list" :key="index">
-			<view @touchmove.stop.prevent @tap="itemClick(index)" :style="[itemStyle(index)]" class="u-action-sheet-item" :class="[index < list.length - 1 ? 'u-border-bottom' : '']"
-			 hover-class="u-hover-class" :hover-stay-time="150">
+			<view 
+				@touchmove.stop.prevent 
+				@tap="itemClick(index)" 
+				:style="[itemStyle(index)]" 
+				class="u-action-sheet-item" 
+				:class="[index < list.length - 1 ? 'u-border-bottom' : '']"
+				:hover-stay-time="150"
+			>
 				{{item.text}}
 			</view>
 		</block>
 		<view class="u-gab" v-if="cancelBtn">
 		</view>
 		<view @touchmove.stop.prevent class="u-actionsheet-cancel u-action-sheet-item" hover-class="u-hover-class"
-		 :hover-stay-time="150" v-if="cancelBtn" @tap="close">{{cancelText}}</view>
+		    :hover-stay-time="150" v-if="cancelBtn" @tap="close">{{cancelText}}</view>
 	</u-popup>
 </template>
 
@@ -112,6 +118,8 @@
 					let style = {};
 					if (this.list[index].color) style.color = this.list[index].color;
 					if (this.list[index].fontSize) style.fontSize = this.list[index].fontSize + 'rpx';
+					// 选项被禁用的样式
+					if (this.list[index].disabled) style.color = '#c0c4cc';
 					return style;
 				}
 			},
@@ -132,8 +140,10 @@
 			popupClose() {
 				this.$emit('input', false);
 			},
-			// 点击某一个itemif (!this.show) return;
+			// 点击某一个item
 			itemClick(index) {
+				// disabled的项禁止点击
+				if(this.list[index].disabled) return;
 				this.$emit('click', index);
 				this.$emit('input', false);
 			}
@@ -143,7 +153,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-tips {
 		font-size: 26rpx;
 		text-align: center;

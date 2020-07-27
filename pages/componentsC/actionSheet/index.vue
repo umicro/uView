@@ -32,7 +32,8 @@
 				list: [{
 					text: '最是人间留不住',
 				}, {
-					text: '朱颜辞镜花辞树'
+					text: '朱颜辞镜花辞树',
+					disabled: true
 				}, {
 					text: '正是江南好风景'
 				}, {

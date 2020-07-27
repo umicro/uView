@@ -24,6 +24,8 @@
 			:fixed="fixed"
 			:focus="focus"
 			:autoHeight="autoHeight"
+			:selection-end="uSelectionEnd"
+			:selection-start="uSelectionStart"
 			@input="handleInput"
 			@blur="handleBlur"
 			@focus="onFocus"
@@ -43,6 +45,8 @@
 			:focus="focus"
 			:confirmType="confirmType"
 			:cursor-spacing="getCursorSpacing"
+			:selection-end="uSelectionEnd"
+			:selection-start="uSelectionStart"
 			@focus="onFocus"
 			@blur="handleBlur"
 			@input="handleInput"
@@ -78,6 +82,8 @@ import Emitter from '../../libs/util/emitter.js';
 	 * @property {String} placeholder placeholder显示值(默认 '请输入内容')
 	 * @property {Boolean} disabled 是否禁用输入框(默认false)
 	 * @property {String Number} maxlength 输入框的最大可输入长度(默认140)
+	 * @property {String Number} selection-start 光标起始位置，自动聚焦时有效，需与selection-end搭配使用（默认-1）
+	 * @property {String Number} maxlength 光标结束位置，自动聚焦时有效，需与selection-start搭配使用（默认-1）
 	 * @property {String Number} cursor-spacing 指定光标与键盘的距离，单位px(默认0)
 	 * @property {String} placeholderStyle placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;")
 	 * @property {String} confirm-type 设置键盘右下角按钮的文字，仅在type为text时生效(默认done)
@@ -184,6 +190,16 @@ export default {
 		cursorSpacing: {
 			type: [Number, String],
 			default: 0
+		},
+		// 光标起始位置，自动聚焦时有效，需与selection-end搭配使用
+		selectionStart: {
+			type: [Number, String],
+			default: -1
+		},
+		// 光标结束位置，自动聚焦时有效，需与selection-start搭配使用
+		selectionEnd: {
+			type: [Number, String],
+			default: -1
 		}
 	},
 	data() {
@@ -223,6 +239,14 @@ export default {
 		//
 		getCursorSpacing() {
 			return Number(this.cursorSpacing);
+		},
+		// 光标起始位置
+		uSelectionStart() {
+			return String(this.selectionStart);
+		},
+		// 光标结束位置
+		uSelectionEnd() {
+			return String(this.selectionEnd);
 		}
 	},
 	created() {

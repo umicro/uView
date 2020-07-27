@@ -1,21 +1,24 @@
 <template>
 	<view class="u-numberbox">
-		<view class="u-icon-minus" @touchstart.stop="btnTouchStart('minus')" @touchend.stop="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal <= min }" :style="{
+		<view class="u-icon-minus" @touchstart.stop="btnTouchStart('minus')" @touchend.stop="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal <= min }"
+		    :style="{
 				background: bgColor,
 				height: inputHeight + 'rpx',
 				color: color
 			}">
 			<u-icon name="minus" :size="size"></u-icon>
 		</view>
-		<input :disabled="disabledInput || disabled" :cursor-spacing="getCursorSpacing" :class="{ 'u-input-disabled': disabled }" v-model="inputVal" class="u-number-input" @blur="onBlur"
-		 type="number" :style="{
+		<input :disabled="disabledInput || disabled" :cursor-spacing="getCursorSpacing" :class="{ 'u-input-disabled': disabled }"
+		    v-model="inputVal" class="u-number-input" @blur="onBlur"
+		    type="number" :style="{
 				color: color,
 				fontSize: size + 'rpx',
 				background: bgColor,
 				height: inputHeight + 'rpx',
 				width: inputWidth + 'rpx'
 			}" />
-		<view class="u-icon-plus" @touchstart.stop="btnTouchStart('plus')" @touchend.stop="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal >= max }" :style="{
+		<view class="u-icon-plus" @touchstart.stop="btnTouchStart('plus')" @touchend.stop="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal >= max }"
+		    :style="{
 				background: bgColor,
 				height: inputHeight + 'rpx',
 				color: color
@@ -37,6 +40,7 @@
 	 * @property {Number} step 步长，每次加或减的值（默认1）
 	 * @property {Boolean} disabled 是否禁用操作，禁用后无法加减或手动修改输入框的值（默认false）
 	 * @property {Boolean} disabled-input 是否禁止输入框手动输入值（默认false）
+	 * @property {Boolean} positive-integer 是否只能输入正整数（默认true）
 	 * @property {String | Number} size 输入框文字和按钮字体大小，单位rpx（默认26）
 	 * @property {String} color 输入框文字和加减按钮图标的颜色（默认#323233）
 	 * @property {String | Number} input-width 输入框宽度，单位rpx（默认80）
@@ -129,9 +133,21 @@
 			pressTime: {
 				type: [Number, String],
 				default: 250
+			},
+			// 是否只能输入大于或等于0的整数(正整数)
+			positiveInteger: {
+				type: Boolean,
+				default: true
 			}
 		},
 		watch: {
+			value(v1, v2) {
+				// 只有value的改变是来自外部的时候，才去同步inputVal的值，否则会造成循环错误
+				if(!this.changeFromInner) {
+					this.inputVal = v1;
+				}
+				this.changeFromInner = false;
+			},
 			inputVal(v1, v2) {
 				// 为了让用户能够删除所有输入值，重新输入内容，删除所有值后，内容为空字符串
 				if (v1 == '') return;
@@ -140,14 +156,26 @@
 				let tmp = this.$u.test.number(v1);
 				if (tmp && v1 >= this.min && v1 <= this.max) value = v1;
 				else value = v2;
+				// 判断是否只能输入大于等于0的整数
+				if(this.positiveInteger) {
+					// 小于0，或者带有小数点，
+					if(v1 < 0 || String(v1).indexOf('.') !== -1) {
+						value = v2;
+						// 双向绑定input的值，必须要使用$nextTick修改显示的值
+						this.$nextTick(() => {
+							this.inputVal = v2;
+						})
+					}
+				}
 				// 发出change事件
 				this.handleChange(value, 'change');
 			}
 		},
 		data() {
 			return {
-				inputVal: 1 , // 输入框中的值，不能直接使用props中的value，因为应该改变props的状态
+				inputVal: 1, // 输入框中的值，不能直接使用props中的value，因为应该改变props的状态
 				timer: null, // 用作长按的定时器
+				changeFromInner: false, // 值发生变化，是来自内部还是外部
 			};
 		},
 		created() {
@@ -165,7 +193,7 @@
 				// 先执行一遍方法，否则会造成松开手时，就执行了clearTimer，导致无法实现功能
 				this[callback]();
 				// 如果没开启长按功能，直接返回
-				if(!this.longPress) return ;
+				if (!this.longPress) return;
 				clearInterval(this.timer); //再次清空定时器，防止重复注册定时器
 				this.timer = null;
 				this.timer = setInterval(() => {
@@ -256,6 +284,7 @@
 			handleChange(value, type) {
 				if (this.disabled) return;
 				// 发出input事件，修改通过v-model绑定的值，达到双向绑定的效果
+				this.changeFromInner = true;
 				this.$emit('input', Number(value));
 				this.$emit(type, {
 					// 转为Number类型

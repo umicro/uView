@@ -18,7 +18,8 @@
 				<slot v-if="$slots.default"/>
 				<view v-else class="u-slider__button" :style="[blockStyle, {
 					height: blockWidth + 'rpx',
-					width: blockWidth + 'rpx'
+					width: blockWidth + 'rpx',
+					backgroundColor: blockColor
 				}]"></view>
 			</view>
 		</view>

@@ -6,7 +6,7 @@
 		<view :id="id">
 			<scroll-view scroll-x class="u-scroll-view" :scroll-left="scrollLeft" scroll-with-animation>
 				<view class="u-scroll-box" :class="{'u-tabs-scorll-flex': !isScroll}">
-					<view class="u-tab-item" :id="'u-tab-item-' + index" v-for="(item, index) in list" :key="index" @tap="clickTab(index)"
+					<view class="u-tab-item u-line-1" :id="'u-tab-item-' + index" v-for="(item, index) in list" :key="index" @tap="clickTab(index)"
 					 :style="[tabItemStyle(index)]">
 						{{ item[name] || item['name']}}
 					</view>
@@ -35,6 +35,7 @@
 	 * @property {Object} bar-style 底部滑块的样式，对象形式
 	 * @property {Boolean} show-bar 是否显示底部的滑块（默认true）
 	 * @property {String Number} bar-height 滑块高度，单位rpx（默认6）
+	 * @property {String Number} item-width 标签的宽度（默认auto）
 	 * @property {String Number} gutter 单个tab标签的左右内边距之和，单位rpx（默认40）
 	 * @property {String} bg-color tabs导航栏的背景颜色（默认#ffffff）
 	 * @property {String} name 组件内部读取的list参数中的属性名，见官网说明（默认name）
@@ -135,6 +136,11 @@
 				default() {
 					return {}
 				}
+			},
+			// 标签的宽度
+			itemWidth: {
+				type: [Number, String],
+				default: 'auto'
 			}
 		},
 		data() {
@@ -196,7 +202,8 @@
 						'font-size': this.fontSize + 'rpx',
 						'transition-duration': `${this.duration}s`,
 						padding: this.isScroll ? `0 ${this.gutter}rpx` : '',
-						flex: this.isScroll ? 'auto' : '1'
+						flex: this.isScroll ? 'auto' : '1',
+						width: this.$u.addUnit(this.itemWidth)
 					};
 					// 字体加粗
 					if (index == this.currentIndex && this.bold) style.fontWeight = 'bold';

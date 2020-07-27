@@ -235,7 +235,7 @@ export default {
 		limitType:{
 			type: Array,
 			default() {
-				return ['png', 'jpg', 'jpeg', 'webp'];
+				return ['png', 'jpg', 'jpeg', 'webp', 'gif'];
 			}
 		},
 	},

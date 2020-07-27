@@ -9,7 +9,7 @@
 			'u-section--line': showLine
 		}">
 			<view class="u-section__title__icon-wrap u-flex" :style="[lineStyle]">
-				<u-icon name="column-line" :size="fontSize * 1.25" bold :color="lineColor ? lineColor : color"></u-icon>
+				<u-icon top="0" name="column-line" :size="fontSize * 1.25" bold :color="lineColor ? lineColor : color"></u-icon>
 			</view>
 			<text class="u-flex u-section__title__text">{{title}}</text>
 		</view>
@@ -94,7 +94,7 @@
 				return {
 					// 由于竖线为字体图标，具有比实际线宽更宽的宽度，所以也需要根据字体打下动态调整
 					left: -(Number(this.fontSize) * 0.9) + 'rpx',
-					top: -(Number(this.fontSize) * (this.$u.os == 'ios' ? 0.13 : 0.15)) + 'rpx',
+					top: -(Number(this.fontSize) * (this.$u.os == 'ios' ? 0.14 : 0.15)) + 'rpx',
 				}
 			}
 		},
