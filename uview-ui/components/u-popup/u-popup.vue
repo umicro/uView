@@ -33,10 +33,9 @@
 			<scroll-view class="u-drawer__scroll-view" scroll-y="true" v-else>
 				<slot />
 			</scroll-view>
-			<view class="u-close" :class="['u-close--' + closeIconPos]">
+			<view @tap="close" class="u-close" :class="['u-close--' + closeIconPos]">
 				<u-icon
 					v-if="mode != 'center' && closeable"
-					@click="close"
 					:name="closeIcon"
 					:color="closeIconColor"
 					:size="closeIconSize"
@@ -196,6 +195,7 @@ export default {
 			visibleSync: false,
 			showDrawer: false,
 			timer: null,
+			closeFromInner: false, // value的值改变，是发生在内部还是外部
 		};
 	},
 	computed: {
@@ -263,9 +263,10 @@ export default {
 		value(val) {
 			if (val) {
 				this.open();
-			} else {
+			} else if(!this.closeFromInner) {
 				this.close();
 			}
+			this.closeFromInner = false;
 		}
 	},
 	mounted() {
@@ -298,7 +299,12 @@ export default {
 		// 打开时，先渲染组件，延时一定时间再让遮罩和弹窗的动画起作用
 		change(param1, param2, status) {
 			// 如果this.popup为false，意味着为picker，actionsheet等组件调用了popup组件
-			if (this.popup == true) this.$emit('input', status);
+			if (this.popup == true) {
+				// 标记关闭是内部发生的，否则修改了value值，导致watch中对value检测，导致再执行一遍close
+				// 造成@close事件触发两次
+				this.closeFromInner = true;
+				this.$emit('input', status);
+			}
 			this[param1] = status;
 			if(status) {
 				// #ifdef H5 || MP

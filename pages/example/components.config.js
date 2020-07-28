@@ -198,13 +198,11 @@ export default [{
 			icon: 'sticky',
 			title: 'Sticky 吸顶',
 		}, 
-		// #ifndef MP-ALIPAY
 		{
 			path: '/pages/componentsB/waterfall/index',
 			icon: 'waterfall',
 			title: 'Waterfall 瀑布流',
 		},
-		// #endif
 		{
 			path: '/pages/componentsB/divider/index',
 			icon: 'divider',

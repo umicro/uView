@@ -34,6 +34,9 @@
  * @property {String} label-pos label相对于图标的位置，只能right或bottom（默认right）
  * @property {String} index 一个用于区分多个图标的值，点击图标时通过click事件传出
  * @property {String} hover-class 图标按下去的样式类，用法同uni的view组件的hover-class参数，详情见官网
+ * @property {String} width 显示图片小图标时的宽度
+ * @property {String} height 显示图片小图标时的高度
+ * @property {String} top 图标在垂直方向上的定位
  * @event {Function} click 点击图标时触发
  * @example <u-icon name="photo" color="#2979ff" size="28"></u-icon>
  */
@@ -127,6 +130,21 @@ export default {
 				return {}
 			}
 		},
+		// 用于显示图片小图标时，图片的宽度
+		width: {
+			type: [String, Number],
+			default: ''
+		},
+		// 用于显示图片小图标时，图片的高度
+		height: {
+			type: [String, Number],
+			default: ''
+		},
+		// 用于解决某些情况下，让图标垂直居中的用途
+		top: {
+			type: [String, Number],
+			default: ''
+		}
 	},
 	computed: {
 		customClass() {
@@ -148,7 +166,9 @@ export default {
 			let style = {};
 			style = {
 				fontSize: this.size == 'inherit' ? 'inherit' : this.$u.addUnit(this.size),
-				fontWeight: this.bold ? 'bold' : 'normal'
+				fontWeight: this.bold ? 'bold' : 'normal',
+				// 安卓和iOS各需要设置一个到顶部的距离，才能更好的垂直居中
+				top: this.top === '' ? (this.$u.os == 'ios' ? '2rpx' : '4rpx') : 0
 			};
 			// 非主题色值时，才当作颜色值
 			if (this.color && !this.$u.config.type.includes(this.color)) style.color = this.color;
@@ -160,8 +180,9 @@ export default {
 		},
 		imgStyle() {
 			let style = {};
-			style.width = this.$u.addUnit(this.size);
-			style.height = this.$u.addUnit(this.size);
+			// 如果设置width和height属性，则优先使用，否则使用size属性
+			style.width = this.width ? this.$u.addUnit(this.width) : this.$u.addUnit(this.size);
+			style.height = this.height ? this.$u.addUnit(this.height) : this.$u.addUnit(this.size);
 			return style;
 		}
 	},
@@ -205,6 +226,8 @@ export default {
 	}
 
 	&__icon {
+		position: relative;
+		
 		&--primary {
 			color: $u-type-primary;
 		}

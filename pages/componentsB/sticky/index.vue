@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-sticky :offset-top="offsetTop" :enable="enable" @fixed="fixed">
+				<u-sticky :offset-top="offsetTop" :enable="enable" @fixed="fixed" @unfixed="unfixed">
 					<view class="sticky">
 						宝剑锋从磨砺出,梅花香自苦寒来
 					</view>
@@ -50,6 +50,12 @@
 				this.$refs.uToast.show({
 					type: 'warning',
 					title: '触发吸顶'
+				})
+			},
+			unfixed() {
+				this.$refs.uToast.show({
+					type: 'success',
+					title: '取消吸顶'
 				})
 			}
 		}

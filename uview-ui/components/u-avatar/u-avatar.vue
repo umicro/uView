@@ -3,13 +3,21 @@
 		<image
 			@error="loadError"
 			:style="[imgStyle]"
-			class="u-avatar-img"
-			v-if="!text && avatar"
-			:src="avatar"
+			class="u-avatar__img"
+			v-if="!uText && avatar"
+			:src="avatar" 
 			:mode="mode"
 		></image>
-		<text class="u-line-1" v-else-if="text">{{text}}</text>
+		<text class="u-line-1" v-else-if="uText" :style="{
+			fontSize: '38rpx'
+		}">{{uText}}</text>
 		<slot v-else></slot>
+		<view class="u-avatar__sex" v-if="showSex" :class="['u-avatar__sex--' + sexIcon]" :style="[uSexStyle]">
+			<u-icon :name="sexIcon" size="20"></u-icon>
+		</view>
+		<view class="u-avatar__level" v-if="showLevel" :style="[uLevelStyle]">
+			<u-icon :name="levelIcon" size="20"></u-icon>
+		</view>
 	</view>
 </template>
 
@@ -23,7 +31,12 @@
 	 * @property {String} src 头像路径，如加载失败，将会显示默认头像
 	 * @property {String Number} size 头像尺寸，可以为指定字符串(large, default, mini)，或者数值，单位rpx（默认default）
 	 * @property {String} mode 显示类型，见上方说明（默认circle）
-	 * @property {String} text 用文字替代图片，级别优先于src
+	 * @property {String} sex-icon 性别图标，man-男，woman-女（默认man）
+	 * @property {String} level-icon 等级图标（默认level）
+	 * @property {String} sex-bg-color 性别图标背景颜色
+	 * @property {String} level-bg-color 等级图标背景颜色
+	 * @property {String} show-sex 是否显示性别图标（默认false）
+	 * @property {String} show-level 是否显示等级图标（默认false）
 	 * @property {String} img-mode 头像图片的裁剪类型，与uni的image组件的mode参数一致，如效果达不到需求，可尝试传widthFix值（默认aspectFill）
 	 * @property {String} index 用户传递的标识符值，如果是列表循环，可穿v-for的index值
 	 * @event {Function} click 头像被点击
@@ -67,6 +80,36 @@
 			index: {
 				type: [String, Number],
 				default: ''
+			},
+			// 右上角性别角标，man-男，woman-女
+			sexIcon: {
+				type: String,
+				default: 'man'
+			},
+			// 右下角的等级图标
+			levelIcon: {
+				type: String,
+				default: 'level'
+			},
+			// 右下角等级图标背景颜色
+			levelBgColor: {
+				type: String,
+				default: ''
+			},
+			// 右上角性别图标的背景颜色
+			sexBgColor: {
+				type: String,
+				default: ''
+			},
+			// 是否显示性别图标
+			showSex: {
+				type: Boolean,
+				default: false
+			},
+			// 是否显示等级图标
+			showLevel: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -99,6 +142,22 @@
 				style.borderRadius = this.mode == 'circle' ? '500px' : '5px';
 				return style;
 			},
+			// 取字符串的第一个字符
+			uText() {
+				return String(this.text)[0];
+			},
+			// 性别图标的自定义样式
+			uSexStyle() {
+				let style = {};
+				if(this.sexBgColor) style.backgroundColor = this.sexBgColor;
+				return style;
+			},
+			// 等级图标的自定义样式
+			uLevelStyle() {
+				let style = {};
+				if(this.levelBgColor) style.backgroundColor = this.levelBgColor;
+				return style;
+			}
 		},
 		methods: {
 			// 图片加载错误时，显示默认头像
@@ -123,11 +182,54 @@
 		font-size: 28rpx;
 		color: $u-content-color;
 		border-radius: 10px;
-		overflow: hidden;
-	}
-
-	.u-avatar-img {
-		width: 100%;
-		height: 100%;
+		position: relative;
+		
+		&__img {
+			width: 100%;
+			height: 100%;
+		}
+		
+		&__sex {
+			position: absolute;
+			width: 32rpx;
+			color: #ffffff;
+			height: 32rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 100rpx;
+			top: 5%;
+			z-index: 1;
+			right: -7%;
+			border: 1px #ffffff solid;
+			
+			&--man {
+				background-color: $u-type-primary;
+			}
+			
+			&--woman {
+				background-color: $u-type-error;
+			}
+			
+			&--none {
+				background-color: $u-type-warning;
+			}
+		}
+		
+		&__level {
+			position: absolute;
+			width: 32rpx;
+			color: #ffffff;
+			height: 32rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 100rpx;
+			bottom: 5%; 
+			z-index: 1;
+			right: -7%;
+			border: 1px #ffffff solid;
+			background-color: $u-type-warning;
+		}
 	}
 </style>

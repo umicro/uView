@@ -1,6 +1,9 @@
 <template>
-	<view class="u-content">
-		<u-dropdown-list></u-dropdown-list>
+	<view>
+		<u-popup v-model="show" @close="close">
+			<view>出淤泥而不染，濯清涟而不妖</view>
+		</u-popup>
+		<u-button @click="show = true">打开</u-button>
 	</view>
 </template>
 
@@ -8,25 +11,13 @@
 	export default {
 		data() {
 			return {
-				content: `
-					<p>露从今夜白，月是故乡明</p>
-					<img src="https://cdn.uviewui.com/uview/swiper/2.jpg" />
-				`
+				show: false
 			}
 		},
-	}
-</script>
-
-<style lang="scss" scoped>
-	.u-content {
-		margin-top: 100rpx;
-		color: $u-content-color;
-		font-size: 32rpx;
-		line-height: 1.8;
-		
-		// 标签形式无效
-		p {
-			color: $u-tips-color;
+		methods: {
+			close() {
+				console.log('close');
+			}
 		}
 	}
-</style>
+</script>

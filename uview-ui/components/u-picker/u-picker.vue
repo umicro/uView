@@ -2,7 +2,12 @@
 	<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
 		<view class="u-datetime-picker">
 			<view class="u-picker-header" @touchmove.stop.prevent="">
-				<view class="u-btn-picker u-btn-picker--tips" :style="{ color: cancelColor }" hover-class="u-opacity" :hover-stay-time="150" @tap="getResult('cancel')">取消</view>
+				<view class="u-btn-picker u-btn-picker--tips" 
+					:style="{ color: cancelColor }" 
+					hover-class="u-opacity" 
+					:hover-stay-time="150" 
+					@tap="getResult('cancel')"
+				>{{cancelText}}</view>
 				<view class="u-picker__title">{{ title }}</view>
 				<view
 					class="u-btn-picker u-btn-picker--primary"
@@ -12,7 +17,7 @@
 					@touchmove.stop=""
 					@tap.stop="getResult('confirm')"
 				>
-					确定
+					{{confirmText}}
 				</view>
 			</view>
 			<view class="u-picker-body">
@@ -108,6 +113,8 @@ import areas from '../../libs/util/area.js';
  * @property {String} cancel-color 取消按钮的颜色（默认#606266）
  * @property {String} confirm-color 确认按钮的颜色（默认#2979ff）
  * @property {String} default-time 默认选中的时间，mode=time时有效
+ * @property {String} confirm-text 确认按钮的文字
+ * @property {String} cancel-text 取消按钮的文字
  * @property {String} default-region 默认选中的地区，中文形式，mode=region时有效
  * @property {String} default-code 默认选中的地区，编号形式，mode=region时有效
  * @property {Boolean} mask-close-able 是否允许通过点击遮罩关闭Picker（默认true）
@@ -231,6 +238,16 @@ export default {
 		title: {
 			type: String,
 			default: ''
+		},
+		// 取消按钮的文字
+		cancelText: {
+			type: String,
+			default: '取消'
+		},
+		// 确认按钮的文字
+		confirmText: {
+			type: String,
+			default: '确认'
 		}
 	},
 	data() {

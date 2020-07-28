@@ -18,7 +18,9 @@
 					</view>
 					<view class="demo-shop">{{ item.shop }}</view>
 					<!-- 微信小程序无效，因为它不支持在template中引入组件 -->
-					<u-icon name="close-circle-fill" color="#fa3534" size="34" class="u-close" @click="remove(item.id)"></u-icon>
+					<view class="u-close">
+						<u-icon name="close-circle-fill" color="#fa3534" size="34" @click="remove(item.id)"></u-icon>
+					</view>
 				</view>
 			</template>
 			<template v-slot:right="{ rightList }">
@@ -37,7 +39,9 @@
 					</view>
 					<view class="demo-shop">{{ item.shop }}</view>
 					<!-- 微信小程序无效，因为它不支持在template中引入组件 -->
-					<u-icon name="close-circle-fill" color="#fa3534" size="34" class="u-close" @click="remove(item.id)"></u-icon>
+					<view class="u-close">
+						<u-icon name="close-circle-fill" color="#fa3534" size="34" @click="remove(item.id)"></u-icon>
+					</view>
 				</view>
 			</template>
 		</u-waterfall>
