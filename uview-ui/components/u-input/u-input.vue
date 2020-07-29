@@ -26,6 +26,7 @@
 			:autoHeight="autoHeight"
 			:selection-end="uSelectionEnd"
 			:selection-start="uSelectionStart"
+			:cursor-spacing="getCursorSpacing"
 			@input="handleInput"
 			@blur="handleBlur"
 			@focus="onFocus"
