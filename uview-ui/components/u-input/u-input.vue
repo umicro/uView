@@ -16,7 +16,7 @@
 			v-if="type == 'textarea'"
 			class="u-input__input u-input__textarea"
 			:style="[getStyle]"
-			:value="value"
+			:value="defaultValue"
 			:placeholder="placeholder"
 			:placeholderStyle="placeholderStyle"
 			:disabled="disabled"
