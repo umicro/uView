@@ -168,7 +168,7 @@ export default {
 				fontSize: this.size == 'inherit' ? 'inherit' : this.$u.addUnit(this.size),
 				fontWeight: this.bold ? 'bold' : 'normal',
 				// 安卓和iOS各需要设置一个到顶部的距离，才能更好的垂直居中
-				top: this.top === '' ? (this.$u.os == 'ios' ? '2rpx' : '4rpx') : 0
+				top: this.top === '' ? (this.$u.os == 'ios' ? '2rpx' : '4rpx') : this.$u.addUnit(this.top)
 			};
 			// 非主题色值时，才当作颜色值
 			if (this.color && !this.$u.config.type.includes(this.color)) style.color = this.color;

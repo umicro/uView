@@ -15,6 +15,15 @@
 			return {
 				iconList: [
 					{
+						name: 'level'
+					},
+					{
+						name: 'woman'
+					},
+					{
+						name: 'man'
+					},
+					{
 						name: 'arrow-left-double'
 					},
 					{

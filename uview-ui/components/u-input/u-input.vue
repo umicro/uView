@@ -71,32 +71,32 @@
 <script>
 import Emitter from '../../libs/util/emitter.js';
 
-	/**
-	 * input 输入框
-	 * @description 此组件为一个输入框，默认没有边框和样式，是专门为配合表单组件u-form而设计的，利用它可以快速实现表单验证，输入内容，下拉选择等功能。
-	 * @tutorial http://uviewui.com/components/input.html
-	 * @property {String} type 模式选择，见官网说明
-	 * @property {Boolean} clearable 是否显示右侧的清除图标(默认true)
-	 * @property {} v-model 用于双向绑定输入框的值
-	 * @property {String} input-align 输入框文字的对齐方式(默认left)
-	 * @property {String} placeholder placeholder显示值(默认 '请输入内容')
-	 * @property {Boolean} disabled 是否禁用输入框(默认false)
-	 * @property {String Number} maxlength 输入框的最大可输入长度(默认140)
-	 * @property {String Number} selection-start 光标起始位置，自动聚焦时有效，需与selection-end搭配使用（默认-1）
-	 * @property {String Number} maxlength 光标结束位置，自动聚焦时有效，需与selection-start搭配使用（默认-1）
-	 * @property {String Number} cursor-spacing 指定光标与键盘的距离，单位px(默认0)
-	 * @property {String} placeholderStyle placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;")
-	 * @property {String} confirm-type 设置键盘右下角按钮的文字，仅在type为text时生效(默认done)
-	 * @property {Object} custom-style 自定义输入框的样式，对象形式
-	 * @property {Boolean} focus 是否自动获得焦点(默认false)
-	 * @property {Boolean} fixed 如果type为textarea，且在一个"position:fixed"的区域，需要指明为true(默认false)
-	 * @property {Boolean} password-icon type为password时，是否显示右侧的密码查看图标(默认true)
-	 * @property {Boolean} border 是否显示边框(默认false)
-	 * @property {String} border-color 输入框的边框颜色(默认#dcdfe6)
-	 * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效(默认true)
-	 * @property {String Number} height 高度，单位rpx(text类型时为70，textarea时为100)
-	 * @example <u-input v-model="value" :type="type" :border="border" />
-	 */
+/**
+ * input 输入框
+ * @description 此组件为一个输入框，默认没有边框和样式，是专门为配合表单组件u-form而设计的，利用它可以快速实现表单验证，输入内容，下拉选择等功能。
+ * @tutorial http://uviewui.com/components/input.html
+ * @property {String} type 模式选择，见官网说明
+ * @property {Boolean} clearable 是否显示右侧的清除图标(默认true)
+ * @property {} v-model 用于双向绑定输入框的值
+ * @property {String} input-align 输入框文字的对齐方式(默认left)
+ * @property {String} placeholder placeholder显示值(默认 '请输入内容')
+ * @property {Boolean} disabled 是否禁用输入框(默认false)
+ * @property {String Number} maxlength 输入框的最大可输入长度(默认140)
+ * @property {String Number} selection-start 光标起始位置，自动聚焦时有效，需与selection-end搭配使用（默认-1）
+ * @property {String Number} maxlength 光标结束位置，自动聚焦时有效，需与selection-start搭配使用（默认-1）
+ * @property {String Number} cursor-spacing 指定光标与键盘的距离，单位px(默认0)
+ * @property {String} placeholderStyle placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;")
+ * @property {String} confirm-type 设置键盘右下角按钮的文字，仅在type为text时生效(默认done)
+ * @property {Object} custom-style 自定义输入框的样式，对象形式
+ * @property {Boolean} focus 是否自动获得焦点(默认false)
+ * @property {Boolean} fixed 如果type为textarea，且在一个"position:fixed"的区域，需要指明为true(默认false)
+ * @property {Boolean} password-icon type为password时，是否显示右侧的密码查看图标(默认true)
+ * @property {Boolean} border 是否显示边框(默认false)
+ * @property {String} border-color 输入框的边框颜色(默认#dcdfe6)
+ * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效(默认true)
+ * @property {String Number} height 高度，单位rpx(text类型时为70，textarea时为100)
+ * @example <u-input v-model="value" :type="type" :border="border" />
+ */
 export default {
 	name: 'u-input',
 	mixins: [Emitter],

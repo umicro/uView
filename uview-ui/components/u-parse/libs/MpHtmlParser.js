@@ -1,7 +1,7 @@
 /**
  * html 解析器
  * @tutorial https://github.com/jin-yufeng/Parser
- * @version 20200719
+ * @version 20200728
  * @author JinYufeng
  * @listens MIT
  */
@@ -102,9 +102,16 @@ MpHtmlParser.prototype.setText = function() {
 	}
 	if (!this.pre) {
 		// 合并空白符
-		var tmp = [];
+		var flag, tmp = [];
 		for (let i = text.length, c; c = text[--i];)
-			if (!blankChar[c] || (!blankChar[tmp[0]] && (c = ' '))) tmp.unshift(c);
+			if (!blankChar[c]) {
+				tmp.unshift(c);
+				if (!flag) flag = 1;
+			} else {
+				if (tmp[0] != ' ') tmp.unshift(' ');
+				if (c == '\n' && flag == void 0) flag = 0;
+			}
+		if (flag == 0) return;
 		text = tmp.join('');
 	}
 	this.siblings().push({
@@ -119,6 +126,7 @@ MpHtmlParser.prototype.setNode = function() {
 			attrs: this.attrs
 		},
 		close = cfg.selfClosingTags[node.name];
+	if (this.options.nodes.length) node.type = 'node';
 	this.attrs = {};
 	if (!cfg.ignoreTags[node.name]) {
 		// 处理属性
@@ -189,6 +197,7 @@ MpHtmlParser.prototype.setNode = function() {
 						attrs.height = void 0;
 					}
 				}
+				if (!attrs.controls && !attrs.autoplay) attrs.controls = 'T';
 				attrs.source = [];
 				if (attrs.src) {
 					attrs.source.push(attrs.src);
@@ -217,8 +226,7 @@ MpHtmlParser.prototype.setNode = function() {
 			if (info.length < 2) continue;
 			let key = info[0].trim().toLowerCase(),
 				value = info.slice(1).join(':').trim();
-			if (value.includes('-webkit') || value.includes('-moz') || value.includes('-ms') || value.includes('-o') || value.includes(
-					'safe'))
+			if (value[0] == '-' || value.includes('safe'))
 				style += `;${key}:${value}`;
 			else if (!styleObj[key] || value.includes('import') || !styleObj[key].includes('import'))
 				styleObj[key] = value;
@@ -359,13 +367,6 @@ MpHtmlParser.prototype.popNode = function(node) {
 	// 替换一些标签名
 	if (cfg.blockTags[node.name]) node.name = 'div';
 	else if (!cfg.trustTags[node.name]) node.name = 'span';
-	// 去除块标签前后空串
-	if (node.name == 'div' || node.name == 'p' || node.name[0] == 't') {
-		if (len > 1 && siblings[len - 2].text == ' ')
-			siblings.splice(--len - 1, 1);
-		if (childs.length && childs[childs.length - 1].text == ' ')
-			childs.pop();
-	}
 	// 处理列表
 	if (node.c && (node.name == 'ul' || node.name == 'ol')) {
 		if ((node.attrs.style || '').includes('list-style:none')) {

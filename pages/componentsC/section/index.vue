@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-section :title="title" :right="right" :bold="bold" :color="color"></u-section>
+				<u-section :title="title" :right="right" :bold="bold" :color="color" :show-line="false"></u-section>
 			</view>
 		</view>
 		<view class="u-config-wrap">
