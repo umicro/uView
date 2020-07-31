@@ -15,7 +15,7 @@
 			<slot v-else name="title-all" />
 		</view>
 		<view class="u-collapse-body" :style="[{
-				height: isShow ? height + 'px' : '0'
+				height: isShow ? 'auto' : '0'
 			}]">
 			<view class="u-collapse-content" :id="elId" :style="[bodyStyle]">
 				<slot></slot>
