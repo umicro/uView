@@ -294,15 +294,17 @@ export default {
 				// 在历遍的过程中，可能由于上一步修改this.columnData，导致产生连锁反应，程序触发columnChange，会有多次调用
 				// 只有在最后一次数据稳定后的结果是正确的，此前的历遍中，可能会产生undefined，故需要判断
 				columnIndex.map((item, index) => {
-					let data = this.columnData[index][columnIndex[index]];
-					let tmp = {
-						value: data ? data[this.valueName] : null,
-						label: data ? data[this.labelName] : null,
-					};
-					// 判断是否有需要额外携带的参数
-					if(data && data.extra) tmp.extra = data.extra;
-					this.selectValue.push(tmp);
-
+					let data = this.columnData[index] && this.columnData[index][columnIndex[index]];
+					// 如果column项有数据才需要push，否则会引发空值异常
+					if (data) {
+						let tmp = {
+							value: data[this.valueName],
+							label: data[this.labelName]
+						};
+						// 判断是否有需要额外携带的参数
+						if (data.extra) tmp.extra = data.extra;
+						this.selectValue.push(tmp);
+					}
 				})
 				// 保存这一次的结果，用于下次列发生变化时作比较
 				this.lastSelectIndex = columnIndex;
