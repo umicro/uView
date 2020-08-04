@@ -252,7 +252,7 @@
 				// 颜色渐变过程数组
 				this.colorGradientArr = color.colorGradient(this.inactiveColor, this.activeColor, this.colorStep);
 			},
-			// 获取各个tab的节点信息 
+			// 获取各个tab的节点信息
 			getTabsInfo() {
 				return new Promise((resolve, reject) => {
 					let view = uni.createSelectorQuery().in(this);
@@ -355,13 +355,11 @@
 			// swiper结束滑动
 			setFinishCurrent(current) {
 				// 如果滑动的索引不一致，修改tab颜色变化，因为可能会有直接点击tab的情况
-				if (current != this.animationFinishCurrent) {
-					this.tabsInfo.map((val, index) => {
-						if (current == index) val.color = this.activeColor;
-						else val.color = this.inactiveColor;
-						return val;
-					});
-				}
+				this.tabsInfo.map((val, index) => {
+					if (current == index) val.color = this.activeColor;
+					else val.color = this.inactiveColor;
+					return val;
+				});
 				this.line3AddDx = 0;
 				this.animationFinishCurrent = current;
 				this.countLine3Dx();
@@ -372,7 +370,7 @@
 
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
-	
+
 	view,
 	scroll-view {
 		box-sizing: border-box;
