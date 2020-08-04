@@ -359,11 +359,6 @@ export default {
 				this.$emit('on-uploaded', this.lists);
 				return;
 			}
-			// 检查上传地址
-			if (!this.action) {
-				this.showToast('请配置上传地址', true);
-				return;
-			}
 			// 检查是否是已上传或者正在上传中
 			if (this.lists[index].progress == 100) {
 				if (this.autoUpload == false) this.uploadFile(index + 1);
@@ -372,7 +367,12 @@ export default {
 			// 执行before-upload钩子
 			if(this.beforeUpload && typeof(this.beforeUpload) === 'function') {
 				// 执行回调，同时传入索引和文件列表当作参数
-				let beforeResponse = this.beforeUpload(index, this.lists);
+				// 在微信，支付宝等环境(H5正常)，会导致父组件定义的customBack()函数体中的this变成子组件的this
+				// 通过bind()方法，绑定父组件的this，让this.customBack()的this为父组件的上下文
+				// 因为upload组件可能会被嵌套在其他组件内，比如u-form，这时this.$parent其实为u-form的this，
+				// 非页面的this，所以这里需要往上历遍，一直寻找到最顶端的$parent，这里用了this.$u.$parent.call(this)
+				// 明白意思即可，无需纠结this.$u.$parent.call(this)的细节
+				let beforeResponse = this.beforeUpload.bind(this.$u.$parent.call(this))(index, this.lists);
 				// 判断是否返回了promise
 				if (!!beforeResponse && typeof beforeResponse.then === 'function') {
 					await beforeResponse.then(res => {
@@ -386,6 +386,11 @@ export default {
 					return this.uploadFile(index + 1);
 				}
 			}
+			// 检查上传地址
+			if (!this.action) {
+				this.showToast('请配置上传地址', true);
+				return;
+			}
 			this.lists[index].error = false;
 			this.uploading = true;
 			// 创建上传对象
@@ -398,7 +403,7 @@ export default {
 				success: res => {
 					// 判断是否json字符串，将其转为json格式
 					let data = this.toJson && this.$u.test.jsonString(res.data) ? JSON.parse(res.data) : res.data;
-					if (![200, 201].includes(res.statusCode)) {
+					if (![200, 201, 204].includes(res.statusCode)) {
 						this.uploadError(index, data);
 					} else {
 						// 上传成功

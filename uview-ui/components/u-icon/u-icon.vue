@@ -143,7 +143,7 @@ export default {
 		// 用于解决某些情况下，让图标垂直居中的用途
 		top: {
 			type: [String, Number],
-			default: ''
+			default: 0
 		}
 	},
 	computed: {
@@ -167,8 +167,8 @@ export default {
 			style = {
 				fontSize: this.size == 'inherit' ? 'inherit' : this.$u.addUnit(this.size),
 				fontWeight: this.bold ? 'bold' : 'normal',
-				// 安卓和iOS各需要设置一个到顶部的距离，才能更好的垂直居中
-				top: this.top === '' ? (this.$u.os == 'ios' ? '2rpx' : '4rpx') : this.$u.addUnit(this.top)
+				// 某些特殊情况需要设置一个到顶部的距离，才能更好的垂直居中
+				top: this.$u.addUnit(this.top)
 			};
 			// 非主题色值时，才当作颜色值
 			if (this.color && !this.$u.config.type.includes(this.color)) style.color = this.color;

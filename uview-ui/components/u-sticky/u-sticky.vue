@@ -141,6 +141,9 @@
 				const observer = this[observerName];
 				observer && observer.disconnect();
 			},
+		},
+		beforeDestroy() {
+			this.disconnectObserver('contentObserver');
 		}
 	};
 </script>

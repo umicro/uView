@@ -23,6 +23,11 @@ export default [
 		groupName: '工具库',
 		list: [
 			{
+				path: 'debounce',
+				icon: 'debounce',
+				title: 'throttle | debounce 节流防抖',
+			},
+			{
 				path: 'deepMerge',
 				icon: 'deepMerge',
 				title: 'deepMerge 对象深度合并',

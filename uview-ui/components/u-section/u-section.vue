@@ -15,7 +15,7 @@
 		</view>
 		<view class="u-section__right-info" v-if="right" :style="{
 			color: subColor
-		}" @tap="rightClick">
+		}" @tap="rightClick"> 
 			{{subTitle}}
 			<view class="u-section__right-info__icon-arrow u-flex">
 				<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>

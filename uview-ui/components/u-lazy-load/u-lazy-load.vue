@@ -114,7 +114,7 @@
 			},
 			// 计算图片的高度，可能为auto，带%，或者直接数值
 			imgHeight() {
-				return this.height == 'auto' ? 'auto' : String(this.height).indexOf('%') != -1 ? this.height : this.height + 'rpx';
+				return this.$u.addUnit(this.height);
 			}
 		},
 		created() {
@@ -133,9 +133,18 @@
 					this.time = this.duration;
 					this.opacity = 1;
 				}, 30)
+			},
+			// 图片路径发生变化时，需要重新标记一些变量，否则会一直卡在某一个状态，比如isError
+			image(n) {
+				this.init();
 			}
 		},
 		methods: {
+			// 用于重新初始化
+			init() {
+				this.isError = false;
+				this.loadStatus = '';
+			},
 			// 点击图片触发的事件,loadlazy-还是懒加载中状态，loading-图片正在加载，loaded-图片加加载完成
 			clickImg() {
 				let whichImg = '';

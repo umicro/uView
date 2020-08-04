@@ -8,13 +8,13 @@
 		borderColor: borderColor
 	}">
 		<view class="u-icon-wrap">
-			<u-icon v-if="showIcon" :name="$u.type2icon(type)" :size="description ? 40 : 32" class="u-icon" :color="type"></u-icon>
+			<u-icon v-if="showIcon" :name="uIcon" :size="description ? 40 : 32" class="u-icon" :color="uIconType" :custom-style="iconStyle"></u-icon>
 		</view>
 		<view class="u-alert-content" @tap.stop="click">
-			<view class="u-alert-title" :style="{fontWeight: description ? 500 : 'normal'}">
+			<view class="u-alert-title" :style="[uTitleStyle]">
 				{{title}}
 			</view>
-			<view v-if="description" class="u-alert-desc">
+			<view v-if="description" class="u-alert-desc" :style="[descStyle]">
 				{{description}}
 			</view>
 		</view>
@@ -38,6 +38,10 @@
 	 * @property {String} title 显示的标题文字
 	 * @property {String} description 辅助性文字，颜色比title浅一点，字号也小一点，可选
 	 * @property {String} type 关闭按钮(默认为叉号icon图标)
+	 * @property {String} icon 图标名称
+	 * @property {Object} icon-style 图标的样式，对象形式
+	 * @property {Object} title-style 标题的样式，对象形式
+	 * @property {Object} desc-style 描述的样式，对象形式
 	 * @property {String} close-able 用文字替代关闭图标，close-able为true时有效
 	 * @property {Boolean} show-icon 是否显示左边的辅助图标
 	 * @property {Boolean} show 显示或隐藏组件
@@ -96,10 +100,53 @@
 			show: {
 				type: Boolean,
 				default: true
-			}
+			},
+			// 左边显示的icon
+			icon: {
+				type: String,
+				default: ''
+			},
+			// icon的样式
+			iconStyle: {
+				type: Object,
+				default() {
+					return {}
+				}
+			},
+			// 标题的样式
+			titleStyle: {
+				type: Object,
+				default() {
+					return {}
+				}
+			},
+			// 描述文字的样式
+			descStyle: {
+				type: Object,
+				default() {
+					return {}
+				}
+			},
 		},
 		data() {
 			return {
+			}
+		},
+		computed: {
+			uTitleStyle() {
+				let style = {};
+				// 如果有描述文字的话，标题进行加粗
+				style.fontWeight = this.description ? 500 : 'normal';
+				// 将用户传入样式对象和style合并，传入的优先级比style高，同属性会被覆盖
+				return this.$u.deepMerge(style, this.titleStyle);
+			},
+			uIcon() {
+				// 如果有设置icon名称就使用，否则根据type主题，推定一个默认的图标
+				return this.icon ? this.icon : this.$u.type2icon(type);
+			},
+			uIconType() {
+				// 如果有设置图标的样式，优先使用，没有的话，则用type的样式
+				return Object.keys(this.iconStyle).length ? '' : this.type;
 			}
 		},
 		methods: {
@@ -171,16 +218,6 @@
 	.u-close-alert-tips {
 		opacity: 0;
 		visibility: hidden;
-	}
-
-	@keyframes myfirst {
-		from {
-			height: 100%;
-		}
-
-		to {
-			height: 0
-		}
 	}
 
 	.u-icon {

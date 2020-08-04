@@ -1,6 +1,11 @@
 <template>
 	<view class="">
-		<u-navbar title-color="#fff" back-icon-color="#ffffff" :is-fixed="isFixed" :is-back="isBack" :background="background" :back-text-style="{color: '#fff'}" :title="title" :back-icon-name="backIconName" :back-text="backText">
+		<u-navbar title-color="#fff" back-icon-color="#ffffff" 
+			:is-fixed="isFixed" :is-back="isBack" 
+			:background="background" 
+			:back-text-style="{color: '#fff'}" :title="title" 
+			:back-icon-name="backIconName" :back-text="backText"
+		>
 			<view class="slot-wrap" v-if="useSlot">
 				<view class="search-wrap" v-if="search">
 					<!-- 如果使用u-search组件，必须要给v-model绑定一个变量 -->

@@ -200,6 +200,11 @@ export default {
 		selectionEnd: {
 			type: [Number, String],
 			default: -1
+		},
+		// 是否自动去除两端的空格
+		trim: {
+			type: Boolean,
+			default: true
 		}
 	},
 	data() {
@@ -259,15 +264,18 @@ export default {
 		 * @param event
 		 */
 		handleInput(event) {
+			let value = event.detail.value;
+			// 判断是否去除空格
+			if(this.trim) value = this.$u.trim(value);
 			// 当前model 赋值
-			this.defaultValue = event.detail.value;
+			this.defaultValue = value;
 			// vue 原生的方法 return 出去
-			this.$emit('input', event.detail.value);
+			this.$emit('input', value);
 			// 过一个生命周期再发送事件给u-form-item，否则this.$emit('input')更新了父组件的值，但是微信小程序上
 			// 尚未更新到u-form-item，导致获取的值为空，从而校验混论
 			this.$nextTick(() => {
 				// 将当前的值发送到 u-form-item 进行校验
-				this.dispatch('u-form-item', 'on-form-change', event.detail.value);
+				this.dispatch('u-form-item', 'on-form-change', value);
 			});
 		},
 		/**

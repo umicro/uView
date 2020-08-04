@@ -1,5 +1,5 @@
-// 此版本发布于2020-07-29
-let version = '1.5.7';
+// 此版本发布于2020-08-04
+let version = '1.5.8';
 
 export default {
 	v: version,
