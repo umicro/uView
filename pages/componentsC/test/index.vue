@@ -1,9 +1,9 @@
 <template>
-	<view>
-		<u-popup v-model="show" @close="close">
-			<view>出淤泥而不染，濯清涟而不妖</view>
-		</u-popup>
-		<u-button @click="show = true">打开</u-button>
+	<view style="padding-top: 200px;">
+		<u-button @click="show = true" :custom-style="{
+			color: 'red',
+			borderColor: 'blue'
+		}">打开</u-button>
 	</view>
 </template>
 
@@ -11,12 +11,28 @@
 	export default {
 		data() {
 			return {
-				show: false
+				show: true,
+				list: [{
+					name: '待收货'
+				}, {
+					name: '待付款'
+				}, {
+					name: '待评价'
+				}],
+				current: 0
 			}
+		},
+		onLoad() {
+			// setTimeout(() => {
+			// 	this.show = false;
+			// }, 2000)
 		},
 		methods: {
 			close() {
-				console.log('close');
+				//console.log('close');
+			},
+			change(index) {
+				this.current = index;
 			}
 		}
 	}

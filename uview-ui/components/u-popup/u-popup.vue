@@ -284,6 +284,9 @@ export default {
 			this.close();
 		},
 		close() {
+			// 标记关闭是内部发生的，否则修改了value值，导致watch中对value检测，导致再执行一遍close
+			// 造成@close事件触发两次
+			this.closeFromInner = true;
 			this.change('showDrawer', 'visibleSync', false);
 		},
 		// 中部弹出时，需要.u-drawer-content将居中内容，此元素会铺满屏幕，点击需要关闭弹窗
@@ -300,9 +303,6 @@ export default {
 		change(param1, param2, status) {
 			// 如果this.popup为false，意味着为picker，actionsheet等组件调用了popup组件
 			if (this.popup == true) {
-				// 标记关闭是内部发生的，否则修改了value值，导致watch中对value检测，导致再执行一遍close
-				// 造成@close事件触发两次
-				this.closeFromInner = true;
 				this.$emit('input', status);
 			}
 			this[param1] = status;

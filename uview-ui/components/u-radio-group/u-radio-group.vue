@@ -53,7 +53,7 @@
 			// 形状，square为方形，circle为原型
 			shape: {
 				type: String,
-				default: 'square'
+				default: 'circle'
 			},
 			// 图标的大小，单位rpx
 			iconSize: {

@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-read-more :toggle="toggle" :show-height="showHeight" ref="uReadMore">
+				<u-read-more @open="open" @close="close" :toggle="toggle" :show-height="showHeight" ref="uReadMore">
 					<!-- u-parse组件在微信小程序渲染慢，支付宝小程序rich-text不支持nodes属性 -->
 					<!-- #ifdef MP-ALIPAY -->
 					<u-parse :html="content"></u-parse>
@@ -48,6 +48,12 @@
 			},
 			toggleChange(index) {
 				this.toggle = index == 0 ? true : false;
+			},
+			open() {
+				// console.log('open');
+			},
+			close() {
+				// console.log('close');
 			}
 		}
 	}

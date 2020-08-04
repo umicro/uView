@@ -3,11 +3,11 @@
 		<view class="u-form-item__body" :style="{
 			flexDirection: elLabelPosition == 'left' ? 'row' : 'column'
 		}">
-			<view class="u-form-item--left" :style="{
+			<!-- 微信小程序中，将一个参数设置空字符串，结果会变成字符串"true" -->
+			<view class="u-form-item--left" v-if="label !== '' && label !== 'true'" :style="{
 				width: elLabelPosition == 'left' ? $u.addUnit(elLabelWidth) : '100%',
 				flex: `0 0 ${elLabelPosition == 'left' ? $u.addUnit(elLabelWidth) : '100%'}`,
 				marginBottom: elLabelPosition == 'left' ? 0 : '10rpx',
-
 			}">
 				<!-- 为了块对齐 -->
 				<view class="u-form-item--left__content">
@@ -182,8 +182,8 @@ export default {
 		},
 		// label的宽度
 		elLabelWidth() {
-			// label默认宽度为90，优先使用本组件的值，如果没有，则用u-form的值
-			return this.labelWidth ? this.labelWidth : (this.parent ? this.parent.labelWidth : 90);
+			// label默认宽度为90，优先使用本组件的值，如果没有(如果设置为0，也算是配置了值，依然起效)，则用u-form的值
+			return (this.labelWidth != 0 || this.labelWidth != '') ? this.labelWidth : (this.parent ? this.parent.labelWidth : 90);
 		},
 		// label的样式
 		elLabelStyle() {

@@ -183,6 +183,11 @@ export default {
 			type: Boolean,
 			default: true
 		},
+		// 是否自动去除两端的空格
+		trim: {
+			type: Boolean,
+			default: true
+		}
 	},
 	data() {
 		return {
@@ -241,7 +246,10 @@ export default {
 	},
 	methods: {
 		onInput(event) {
-			this.$emit('input', event.target.value);
+			let value = event.detail.value;
+			// 判断是否去除空格
+			if(this.trim) value = this.$u.trim(value);
+			this.$emit('input', value);
 		},
 		onFocus(event) {
 			this.focused = true;

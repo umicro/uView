@@ -127,7 +127,7 @@
 		},
 		created() {
 			// 是否隐藏原生tabbar
-			if(this.borderTop) uni.hideTabBar();
+			if(this.hideTabBar) uni.hideTabBar();
 			// 获取引入了u-tabbar页面的路由地址，该地址没有路径前面的"/"
 			let pages = getCurrentPages();
 			// 页面栈中的最后一个即为项为当前页面，route属性为页面路径
@@ -174,7 +174,9 @@
 			async clickHandler(index) {
 				if(this.beforeSwitch && typeof(this.beforeSwitch) === 'function') {
 					// 执行回调，同时传入索引当作参数
-					let beforeSwitch = this.beforeSwitch(index);
+					// 在微信，支付宝等环境(H5正常)，会导致父组件定义的customBack()函数体中的this变成子组件的this
+					// 通过bind()方法，绑定父组件的this，让this.customBack()的this为父组件的上下文
+					let beforeSwitch = this.beforeSwitch.bind(this.$u.$parent.call(this))(index);
 					// 判断是否返回了promise
 					if (!!beforeSwitch && typeof beforeSwitch.then === 'function') {
 						await beforeSwitch.then(res => {

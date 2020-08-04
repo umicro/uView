@@ -3,8 +3,8 @@
 		<block v-for="(n, i) in nodes" v-bind:key="i">
 			<!--图片-->
 			<view v-if="n.name=='img'" :class="'_img '+n.attrs.class" :style="n.attrs.style" :data-attrs="n.attrs" @tap="imgtap">
-				<rich-text v-if="controls[i]!=0" :nodes="[{attrs:{src:loading&&(controls[i]||0)<2?loading:(lazyLoad&&!controls[i]?placeholder:(controls[i]==3?errorImg:n.attrs.src||'')),alt:n.attrs.alt||'',width:n.attrs.width||'',style:'-webkit-touch-callout:none;max-width:100%;display:block'+(n.attrs.height?';height:'+n.attrs.height:'')},name:'img'}]" />
-				<image class="_image" :src="lazyLoad&&!controls[i]?placeholder:n.attrs.src" :lazy-load="lazyLoad"
+				<rich-text v-if="ctrl[i]!=0" :nodes="[{attrs:{src:loading&&(ctrl[i]||0)<2?loading:(lazyLoad&&!ctrl[i]?placeholder:(ctrl[i]==3?errorImg:n.attrs.src||'')),alt:n.attrs.alt||'',width:n.attrs.width||'',style:'-webkit-touch-callout:none;max-width:100%;display:block'+(n.attrs.height?';height:'+n.attrs.height:'')},name:'img'}]" />
+				<image class="_image" :src="lazyLoad&&!ctrl[i]?placeholder:n.attrs.src" :lazy-load="lazyLoad"
 				 :show-menu-by-longpress="!n.attrs.ignore" :data-i="i" :data-index="n.attrs.i" data-source="img" @load="loadImg"
 				 @error="error" />
 			</view>
@@ -14,15 +14,15 @@
 			<text v-else-if="n.name=='br'">\n</text>
 			<!--#endif-->
 			<!--视频-->
-			<view v-else-if="((n.lazyLoad&&!n.attrs.autoplay)||(n.name=='video'&&!loadVideo))&&controls[i]==undefined" :id="n.attrs.id" :class="'_video '+(n.attrs.class||'')"
+			<view v-else-if="((n.lazyLoad&&!n.attrs.autoplay)||(n.name=='video'&&!loadVideo))&&ctrl[i]==undefined" :id="n.attrs.id" :class="'_video '+(n.attrs.class||'')"
 			 :style="n.attrs.style" :data-i="i" @tap="_loadVideo" />
-			<video v-else-if="n.name=='video'" :id="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style" :autoplay="n.attrs.autoplay||controls[i]==0"
-			 :controls="!n.attrs.autoplay||n.attrs.controls" :loop="n.attrs.loop" :muted="n.attrs.muted" :poster="n.attrs.poster" :src="n.attrs.source[controls[i]||0]"
+			<video v-else-if="n.name=='video'" :id="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style" :autoplay="n.attrs.autoplay||ctrl[i]==0"
+			 :controls="n.attrs.controls" :loop="n.attrs.loop" :muted="n.attrs.muted" :poster="n.attrs.poster" :src="n.attrs.source[ctrl[i]||0]"
 			 :unit-id="n.attrs['unit-id']" :data-id="n.attrs.id" :data-i="i" data-source="video" @error="error" @play="play" />
 			<!--音频-->
 			<audio v-else-if="n.name=='audio'" :ref="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style" :author="n.attrs.author"
-			 :autoplay="n.attrs.autoplay" :controls="!n.attrs.autoplay||n.attrs.controls" :loop="n.attrs.loop" :name="n.attrs.name" :poster="n.attrs.poster"
-			 :src="n.attrs.source[controls[i]||0]" :data-i="i" :data-id="n.attrs.id" data-source="audio"
+			 :autoplay="n.attrs.autoplay" :controls="n.attrs.controls" :loop="n.attrs.loop" :name="n.attrs.name" :poster="n.attrs.poster"
+			 :src="n.attrs.source[ctrl[i]||0]" :data-i="i" :data-id="n.attrs.id" data-source="audio"
 			 @error.native="error" @play.native="play" />
 			<!--链接-->
 			<view v-else-if="n.name=='a'" :id="n.attrs.id" :class="'_a '+(n.attrs.class||'')" hover-class="_hover" :style="n.attrs.style"
@@ -32,7 +32,7 @@
 			<!--广告-->
 			<!--<ad v-else-if="n.name=='ad'" :class="n.attrs.class" :style="n.attrs.style" :unit-id="n.attrs['unit-id']" :appid="n.attrs.appid" :apid="n.attrs.apid" :type="n.attrs.type" :adpid="n.attrs.adpid" data-source="ad" @error="error" />-->
 			<!--列表-->
-			<view v-else-if="n.name=='li'" :id="n.attrs.id" :class="n.attrs.class" :style="(n.attrs.style||'')+';display:flex'">
+			<view v-else-if="n.name=='li'" :id="n.attrs.id" :class="n.attrs.class" :style="(n.attrs.style||'')+';display:flex;flex-direction:row'">
 				<view v-if="n.type=='ol'" class="_ol-bef">{{n.num}}</view>
 				<view v-else class="_ul-bef">
 					<view v-if="n.floor%3==0" class="_ul-p1">█</view>
@@ -80,7 +80,7 @@
 		name: 'trees',
 		data() {
 			return {
-				controls: [],
+				ctrl: [],
 				placeholder: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="225"/>',
 				errorImg,
 				loadVideo: typeof plus == 'undefined',
@@ -124,7 +124,7 @@
 									if (res.intersectionRatio) {
 										for (var j = this.nodes.length; j--;)
 											if (this.nodes[j].name == 'img')
-												this.$set(this.controls, j, 1);
+												this.$set(this.ctrl, j, 1);
 										this.observer.disconnect();
 									}
 								})
@@ -184,23 +184,23 @@
 			},
 			loadImg(e) {
 				var i = e.currentTarget.dataset.i;
-				if (this.lazyLoad && !this.controls[i]) {
+				if (this.lazyLoad && !this.ctrl[i]) {
 					// #ifdef QUICKAPP-WEBVIEW
-					this.$set(this.controls, i, 0);
+					this.$set(this.ctrl, i, 0);
 					this.$nextTick(function() {
 						// #endif
 						// #ifndef APP-PLUS
-						this.$set(this.controls, i, 1);
+						this.$set(this.ctrl, i, 1);
 						// #endif
 						// #ifdef QUICKAPP-WEBVIEW
 					})
 					// #endif
-				} else if (this.loading && this.controls[i] != 2) {
+				} else if (this.loading && this.ctrl[i] != 2) {
 					// #ifdef QUICKAPP-WEBVIEW
-					this.$set(this.controls, i, 0);
+					this.$set(this.ctrl, i, 0);
 					this.$nextTick(function() {
 						// #endif
-						this.$set(this.controls, i, 2);
+						this.$set(this.ctrl, i, 2);
 						// #ifdef QUICKAPP-WEBVIEW
 					})
 					// #endif
@@ -258,14 +258,14 @@
 					i = target.dataset.i;
 				if (source == 'video' || source == 'audio') {
 					// 加载其他 source
-					var index = this.controls[i] ? this.controls[i].i + 1 : 1;
+					var index = this.ctrl[i] ? this.ctrl[i].i + 1 : 1;
 					if (index < this.nodes[i].attrs.source.length)
-						this.$set(this.controls, i, index);
+						this.$set(this.ctrl, i, index);
 					if (e.detail.__args__)
 						e.detail = e.detail.__args__[0];
 				} else if (errorImg && source == 'img') {
 					this.top.imgList.setItem(target.dataset.index, errorImg);
-					this.$set(this.controls, i, 3);
+					this.$set(this.ctrl, i, 3);
 				}
 				this.top && this.top.$emit('error', {
 					source,
@@ -274,7 +274,7 @@
 				});
 			},
 			_loadVideo(e) {
-				this.$set(this.controls, e.target.dataset.i, 0);
+				this.$set(this.ctrl, e.target.dataset.i, 0);
 			}
 		}
 	}
@@ -407,12 +407,13 @@
 	}
 
 	._ul-bef {
+		display: block;
 		margin: 0 12px 0 23px;
 		line-height: normal;
 	}
 
 	._ol-bef,
-	._ul_bef {
+	._ul-bef {
 		flex: none;
 		user-select: none;
 	}

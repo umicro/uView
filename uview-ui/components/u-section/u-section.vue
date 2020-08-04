@@ -8,14 +8,14 @@
 		}" :class="{
 			'u-section--line': showLine
 		}">
-			<view class="u-section__title__icon-wrap u-flex" :style="[lineStyle]">
+			<view class="u-section__title__icon-wrap u-flex" :style="[lineStyle]" v-if="showLine">
 				<u-icon top="0" name="column-line" :size="fontSize * 1.25" bold :color="lineColor ? lineColor : color"></u-icon>
 			</view>
 			<text class="u-flex u-section__title__text">{{title}}</text>
 		</view>
 		<view class="u-section__right-info" v-if="right" :style="{
 			color: subColor
-		}" @tap="rightClick">
+		}" @tap="rightClick"> 
 			{{subTitle}}
 			<view class="u-section__right-info__icon-arrow u-flex">
 				<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
@@ -59,7 +59,7 @@
 			},
 			fontSize: {
 				type: [Number, String],
-				default: 32
+				default: 28
 			},
 			// 主标题是否加粗
 			bold: {

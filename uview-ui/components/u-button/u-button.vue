@@ -205,6 +205,11 @@ export default {
 		dataName: {
 			type: String,
 			default: ''
+		},
+		// 节流，一定时间内只能触发一次
+		throttleTime: {
+			type: [String, Number],
+			default: 1000
 		}
 	},
 	computed: {
@@ -236,17 +241,20 @@ export default {
 	methods: {
 		// 按钮点击
 		click(e) {
-			// 如果按钮时disabled和loading状态，不触发水波纹效果
-			if (this.loading === true || this.disabled === true) return;
-			// 是否开启水波纹效果
-			if (this.ripple) {
-				// 每次点击时，移除上一次的类，再次添加，才能触发动画效果
-				this.waveActive = false;
-				this.$nextTick(function() {
-					this.getWaveQuery(e);
-				});
-			}
-			this.$emit('click', e);
+			// 进行节流控制，每this.throttle毫秒内，只在开始处执行
+			this.$u.throttle(() => {
+				// 如果按钮时disabled和loading状态，不触发水波纹效果
+				if (this.loading === true || this.disabled === true) return;
+				// 是否开启水波纹效果
+				if (this.ripple) {
+					// 每次点击时，移除上一次的类，再次添加，才能触发动画效果
+					this.waveActive = false;
+					this.$nextTick(function() {
+						this.getWaveQuery(e);
+					});
+				}
+				this.$emit('click', e);
+			}, this.throttleTime);
 		},
 		// 查询按钮的节点信息
 		getWaveQuery(e) {
