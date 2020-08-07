@@ -6,7 +6,7 @@
 			class="u-avatar__img"
 			v-if="!uText && avatar"
 			:src="avatar" 
-			:mode="mode"
+			:mode="imgMode"
 		></image>
 		<text class="u-line-1" v-else-if="uText" :style="{
 			fontSize: '38rpx'
