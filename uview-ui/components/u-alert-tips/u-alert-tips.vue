@@ -142,7 +142,7 @@
 			},
 			uIcon() {
 				// 如果有设置icon名称就使用，否则根据type主题，推定一个默认的图标
-				return this.icon ? this.icon : this.$u.type2icon(type);
+				return this.icon ? this.icon : this.$u.type2icon(this.type);
 			},
 			uIconType() {
 				// 如果有设置图标的样式，优先使用，没有的话，则用type的样式

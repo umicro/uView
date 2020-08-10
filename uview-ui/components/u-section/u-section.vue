@@ -13,13 +13,16 @@
 			</view>
 			<text class="u-flex u-section__title__text">{{title}}</text>
 		</view>
-		<view class="u-section__right-info" v-if="right" :style="{
+		<view class="u-section__right-info" v-if="right || $slots.right" :style="{
 			color: subColor
 		}" @tap="rightClick"> 
-			{{subTitle}}
-			<view class="u-section__right-info__icon-arrow u-flex">
-				<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
-			</view>
+			<slot name="right" v-if="$slots.right" />
+			<block v-else>
+				{{subTitle}}
+				<view class="u-section__right-info__icon-arrow u-flex">
+					<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
+				</view>
+			</block>
 		</view>
 	</view>
 </template>
@@ -94,7 +97,7 @@
 				return {
 					// 由于竖线为字体图标，具有比实际线宽更宽的宽度，所以也需要根据字体打下动态调整
 					left: -(Number(this.fontSize) * 0.9) + 'rpx',
-					top: -(Number(this.fontSize) * (this.$u.os == 'ios' ? 0.14 : 0.15)) + 'rpx',
+					top: -(Number(this.fontSize) * (this.$u.os() == 'ios' ? 0.14 : 0.15)) + 'rpx',
 				}
 			}
 		},

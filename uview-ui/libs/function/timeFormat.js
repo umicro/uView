@@ -1,10 +1,10 @@
 // padStart 的 polyfill，因为某些机型或情况，还无法支持es7的padStart，比如电脑版的微信小程序
 // 所以这里做一个兼容polyfill的兼容处理
-if (!String.prototype.padStart){
-	String.prototype.padStart =
+if (!String.prototype.padStart) {
 	// 为了方便表示这里 fillString 用了ES6 的默认参数，不影响理解
-	function(maxLength, fillString = ' ') {
-		if (Object.prototype.toString.call(fillString) !== "[object String]") throw new TypeError('fillString must be String')
+	String.prototype.padStart = function(maxLength, fillString = ' ') {
+		if (Object.prototype.toString.call(fillString) !== "[object String]") throw new TypeError(
+			'fillString must be String')
 		let str = this
 		// 返回 String(str) 这里是为了使返回的值是字符串字面量，在控制台中更符合直觉
 		if (str.length >= maxLength) return String(str)
@@ -43,7 +43,6 @@ function timeFormat(timestamp = null, fmt = 'yyyy-mm-dd') {
 	for (let k in opt) {
 		ret = new RegExp("(" + k + ")").exec(fmt);
 		if (ret) {
-			console.log(k, ret, opt[k]);
 			fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
 		};
 	};

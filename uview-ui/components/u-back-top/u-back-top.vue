@@ -6,9 +6,9 @@
 		zIndex: uZIndex,
 		opacity: opacity
 	}, customStyle]">
-		<view class="" v-if="!$slots.default">
+		<view class="u-back-top__content" v-if="!$slots.default">
 			<u-icon @click="backToTop" :name="icon" :custom-style="iconStyle"></u-icon>
-			<view class="u-back-top__tips">
+			<view class="u-back-top__content__tips">
 				{{tips}}
 			</view>
 		</view>
@@ -138,10 +138,16 @@
 		align-items: center;
 		transition: opacity 0.4s;
 		
-		&__tips {
-			font-size: 24rpx;
-			transform: scale(0.8);
-			line-height: 1;
+		&__content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			
+			&__tips {
+				font-size: 24rpx;
+				transform: scale(0.8);
+				line-height: 1;
+			}
 		}
 	}
 </style>
