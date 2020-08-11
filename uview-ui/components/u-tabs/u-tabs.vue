@@ -40,7 +40,8 @@
 	 * @property {String} bg-color tabs导航栏的背景颜色（默认#ffffff）
 	 * @property {String} name 组件内部读取的list参数中的属性名，见官网说明（默认name）
 	 * @property {Boolean} bold 激活选项的字体是否加粗（默认true）
-	 * @event {Function} change 点击标签时触发
+	 * @event {Function} change 选中标签时触发
+	 * @event {Function} click-tab 点击标签时触发
 	 * @example <u-tabs ref="tabs" :list="list" :is-scroll="false"></u-tabs>
 	 */
 	export default {
@@ -231,10 +232,12 @@
 			},
 			// 点击某一个tab菜单
 			clickTab(index) {
-				// 点击当前活动tab，不触发事件
-				if(index == this.currentIndex) return ;
-				// 发送事件给父组件
-				this.$emit('change', index);
+				// 发送选择事件给父组件
+				this.$emit('click-tab', index);
+				// 发送变更事件给父组件
+				if(index !== this.currentIndex) {
+					this.$emit('change', index);
+				}
 			},
 			// 查询tab的布局信息
 			getTabRect() {
