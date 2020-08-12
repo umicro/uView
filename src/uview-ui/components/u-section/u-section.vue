@@ -15,9 +15,9 @@
 		</view>
 		<view class="u-section__right-info" v-if="right" :style="{
 			color: subColor
-		}" @tap="rightClick"> 
+		}" @tap="rightClick">
 			{{subTitle}}
-			<view class="u-section__right-info__icon-arrow u-flex">
+			<view class="u-section__right-info__icon-arrow u-flex" v-if="arrow">
 				<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
 			</view>
 		</view>
@@ -32,6 +32,7 @@
 	 * @property {String} title 左边主标题
 	 * @property {String} sub-title 右边副标题（默认更多）
 	 * @property {Boolean} right 是否显示右边的内容（默认true）
+	 * @property {Boolean} arrow 是否显示右边箭头（默认true）
 	 * @property {Boolean} showLine 是否显示左边的竖条（默认true）
 	 * @property {String Number} font-size 主标题的字体大小（默认28）
 	 * @property {Boolean} bold 主标题是否加粗（默认true）
@@ -85,7 +86,12 @@
 			lineColor: {
 				type: String,
 				default: ''
-			}
+			},
+			// 是否显示右边箭头
+			arrow: {
+				type: Boolean,
+				default: true
+			},
 		},
 		computed: {
 			// 左边竖条的样式
@@ -108,35 +114,35 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-section {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		
+
 		&__title {
 			position: relative;
 			font-size: 28rpx;
 			padding-left: 20rpx;
 			display: flex;
 			align-items: center;
-			
+
 			&__icon-wrap {
 				position: absolute;
 			}
-			
+
 			&__text {
 				line-height: 1;
 			}
 		}
-		
+
 		&__right-info {
 			color: $u-tips-color;
 			font-size: 26rpx;
 			display: flex;
 			align-items: center;
-			
+
 			&__icon-arrow {
 				margin-left: 6rpx;
 			}
