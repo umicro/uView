@@ -136,13 +136,7 @@
 			},
 			// 图片路径发生变化时，需要重新标记一些变量，否则会一直卡在某一个状态，比如isError
 			image(n) {
-				if(!n) {
-					// 如果传入null或者''，或者undefined，标记为错误状态
-					this.isError = true;
-				} else {
-					this.init();
-					this.isError = false;
-				}
+				this.init();
 			}
 		},
 		methods: {

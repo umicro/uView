@@ -108,7 +108,7 @@ export default {
       type: String,
       default: 'none'
     },
-    //rpx 选择框高度也用这个值
+    //toprpx 选择框高度也用这个值
     top: {
       type: Number,
       default: 90

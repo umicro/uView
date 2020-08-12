@@ -152,7 +152,7 @@
 	}
 
 	.u-switch--on .u-switch__node {
-		transform: translateX(100%);
+		transform: translateX(1em);
 	}
 
 	.u-switch--disabled {

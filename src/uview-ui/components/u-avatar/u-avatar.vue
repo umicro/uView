@@ -122,13 +122,7 @@
         watch: {
             src(n) {
                 // 用户可能会在头像加载失败时，再次修改头像值，所以需要重新赋值
-                if(!n) {
-					// 如果传入null或者''，或者undefined，显示默认头像
-					this.error = true;
-				} else {
-					this.avatar = n;
-					this.error = false;
-				}
+                this.avatar = n;
             }
         },
 		computed: {
