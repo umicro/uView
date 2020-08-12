@@ -12,12 +12,12 @@ class Request {
 		// 检查请求拦截
 		if (this.interceptor.request && typeof this.interceptor.request === 'function') {
 			let tmpConfig = {};
-			let interceptorReuest = this.interceptor.request(options);
-			if (interceptorReuest === false) {
+			let interceptorRequest = this.interceptor.request(options);
+			if (interceptorRequest === false) {
 				// 返回一个处于pending状态中的Promise，来取消原promise，避免进入then()回调
 				return new Promise(()=>{});
 			}
-			this.options = interceptorReuest;
+			this.options = interceptorRequest;
 		}
 		options.dataType = options.dataType || this.config.dataType;
 		options.responseType = options.responseType || this.config.responseType;

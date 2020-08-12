@@ -73,7 +73,7 @@
 		},
 		methods: {
 			currentChange(index) {
-				this.current = index == 0 ? 1 : index == 1 ? 2 : index == 2 ? 3 : 4;
+				this.value = index == 0 ? 1 : index == 1 ? 2 : index == 2 ? 3 : 4;
 			},
 			plainChange(index) {
 				this.plain = !index;

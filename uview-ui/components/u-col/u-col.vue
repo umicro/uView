@@ -76,7 +76,7 @@
 <style lang="scss">
 	@import "../../libs/css/style.components.scss";
 	.u-col {
-		/* #ifdef MP-WEIXIN */
+		/* #ifdef MP-WEIXIN || MP-QQ */
 		float: left;
 		/* #endif */
 	}

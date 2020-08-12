@@ -5,7 +5,7 @@
 				:name="activeIndex > index ? activeIcon : inactiveIcon"
 				@click="click(index + 1, $event)"
 				:color="activeIndex > index ? activeColor : inactiveColor"
-				:style="{
+				:custom-style="{
 					fontSize: size + 'rpx',
 					padding: `0 ${gutter / 2 + 'rpx'}`
 				}"

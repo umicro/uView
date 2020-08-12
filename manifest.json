@@ -109,6 +109,12 @@
         "usingComponents" : true,
         "component2" : true
     },
+    "mp-qq" : {
+        "optimization" : {
+            "subPackages" : true
+        },
+        "appid" : "15646153"
+    },
     "mp-baidu" : {
         "usingComponents" : true,
         "appid" : "17597421"

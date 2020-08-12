@@ -2,16 +2,16 @@
 	<view class="u-swiper-wrap" :style="{
 		borderRadius: `${borderRadius}rpx`
 	}">
-		<swiper @change="change" @animationfinish="animationfinish" :interval="interval" :circular="circular" :duration="duration" :autoplay="autoplay"
+		<swiper :current="elCurrent" @change="change" @animationfinish="animationfinish" :interval="interval" :circular="circular" :duration="duration" :autoplay="autoplay"
 		 :previous-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'" :next-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'"
 		 :style="{
 				height: height + 'rpx'
 			}">
 			<swiper-item class="u-swiper-item" v-for="(item, index) in list" :key="index">
-				<view class="u-list-image-wrap" @tap.stop.prevent="listClick(index)" :class="[current != index ? 'u-list-scale' : '']" :style="{
+				<view class="u-list-image-wrap" @tap.stop.prevent="listClick(index)" :class="[uCurrent != index ? 'u-list-scale' : '']" :style="{
 						borderRadius: `${borderRadius}rpx`,
-						transform: effect3d && current != index ? 'scaleY(0.9)' : 'scaleY(1)',
-						margin: effect3d && current != index ? '0 20rpx' : 0,
+						transform: effect3d && uCurrent != index ? 'scaleY(0.9)' : 'scaleY(1)',
+						margin: effect3d && uCurrent != index ? '0 20rpx' : 0,
 						backgroundColor: bgColor
 					}">
 					<image class="u-swiper-image" :src="item[name]" :mode="imgMode"></image>
@@ -30,19 +30,19 @@
 				padding: `0 ${effect3d ? '74rpx' : '24rpx'}`
 			}">
 			<block v-if="mode == 'rect'">
-				<view class="u-indicator-item-rect" :class="{ 'u-indicator-item-rect-active': index == current }" v-for="(item, index) in list"
+				<view class="u-indicator-item-rect" :class="{ 'u-indicator-item-rect-active': index == uCurrent }" v-for="(item, index) in list"
 				 :key="index"></view>
 			</block>
 			<block v-if="mode == 'dot'">
-				<view class="u-indicator-item-dot" :class="{ 'u-indicator-item-dot-active': index == current }" v-for="(item, index) in list"
+				<view class="u-indicator-item-dot" :class="{ 'u-indicator-item-dot-active': index == uCurrent }" v-for="(item, index) in list"
 				 :key="index"></view>
 			</block>
 			<block v-if="mode == 'round'">
-				<view class="u-indicator-item-round" :class="{ 'u-indicator-item-round-active': index == current }" v-for="(item, index) in list"
+				<view class="u-indicator-item-round" :class="{ 'u-indicator-item-round-active': index == uCurrent }" v-for="(item, index) in list"
 				 :key="index"></view>
 			</block>
 			<block v-if="mode == 'number'">
-				<view class="u-indicator-item-number">{{ current + 1 }}/{{ list.length }}</view>
+				<view class="u-indicator-item-number">{{ uCurrent + 1 }}/{{ list.length }}</view>
 			</block>
 		</view>
 	</view>
@@ -156,17 +156,27 @@
 			bgColor: {
 				type: String,
 				default: '#f3f4f6'
+			},
+			// 初始化时，默认显示第几项
+			current: {
+				type: [Number, String],
+				default: 0
 			}
 		},
 		watch: {
-			// 如果外部的list发生变化，判断长度是否被修改，如果前后长度不一致，重置current值，避免溢出
+			// 如果外部的list发生变化，判断长度是否被修改，如果前后长度不一致，重置uCurrent值，避免溢出
 			list(nVal, oVal) {
-				if(nVal.length !== oVal.length) this.current = 0;
+				if(nVal.length !== oVal.length) this.uCurrent = 0;
+			},
+			// 监听外部current的变化，实时修改内部依赖于此测uCurrent值，如果更新了current，而不是更新uCurrent，
+			// 就会错乱，因为指示器是依赖于uCurrent的
+			current(n) {
+				this.uCurrent = n;
 			}
 		},
 		data() {
 			return {
-				current: 0 // 当前活跃的swiper-item的index
+				uCurrent: this.current // 当前活跃的swiper-item的index
 			};
 		},
 		computed: {
@@ -186,6 +196,10 @@
 					tmp = '12rpx';
 				}
 				return tmp;
+			},
+			// 因为uni的swiper组件的current参数只接受Number类型，这里做一个转换
+			elCurrent() {
+				return Number(this.current);
 			}
 		},
 		methods: {
@@ -194,15 +208,15 @@
 			},
 			change(e) {
 				let current = e.detail.current;
-				this.current = current;
+				this.uCurrent = current;
 				// 发出change事件，表示当前自动切换的index，从0开始
 				this.$emit('change', current);
 			},
 			// 头条小程序不支持animationfinish事件，改由change事件
-			// 暂不监听此事件，因为不再给swiper绑定current属性
+			// 暂不监听此事件，因为不再给swiper绑定uCurrent属性
 			animationfinish(e) {
 				// #ifndef MP-TOUTIAO
-				// this.current = e.detail.current;
+				// this.uCurrent = e.detail.current;
 				// #endif
 			}
 		}
