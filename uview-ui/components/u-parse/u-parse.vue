@@ -525,7 +525,7 @@
 					style += '</style>';
 					html = style + html;
 				}
-				// 处理 rpx
+				// 处理rpx
 				if (html.includes('rpx'))
 					html = html.replace(/[0-9.]+\s*rpx/g, $ => (parseFloat($) * windowWidth / 750) + 'px');
 				return html;
