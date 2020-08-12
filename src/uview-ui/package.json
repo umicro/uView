@@ -1,0 +1,20 @@
+{
+	"name": "uview-ui",
+	"version": "1.6.0",
+	"description": "uView UI，是uni-app生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水",
+	"main": "index.js",
+	"keywords": ["uview", "uView", "uni-app", "uni-app ui", "uniapp", "uviewui", "uview ui", "uviewUI", "uViewui", "uViewUI", "uView UI", "uni ui", "uni UI", "uniapp ui", "ui", "UI框架", "uniapp ui框架", "uniapp UI"],
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"devDependencies": {
+		"node-sass": "^4.14.0",
+		"sass-loader": "^8.0.2"
+	},
+	"author": "uView",
+	"license": "MIT"
+}
