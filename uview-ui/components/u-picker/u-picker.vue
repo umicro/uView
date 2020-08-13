@@ -39,37 +39,37 @@
 					</picker-view-column>
 				</picker-view>
 				<picker-view v-else-if="mode == 'time'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column v-if="!reset && params.year">
+					<picker-view-column v-if="params.year">
 						<view class="u-column-item" v-for="(item, index) in years" :key="index">
 							{{ item }}
 							<text class="u-text" v-if="showTimeTag">年</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="!reset && params.month">
+					<picker-view-column v-if="params.month">
 						<view class="u-column-item" v-for="(item, index) in months" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">月</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="!reset && params.day">
+					<picker-view-column v-if="params.day">
 						<view class="u-column-item" v-for="(item, index) in days" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">日</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="!reset && params.hour">
+					<picker-view-column v-if="params.hour">
 						<view class="u-column-item" v-for="(item, index) in hours" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">时</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="!reset && params.minute">
+					<picker-view-column v-if="params.minute">
 						<view class="u-column-item" v-for="(item, index) in minutes" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">分</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="!reset && params.second">
+					<picker-view-column v-if="params.second">
 						<view class="u-column-item" v-for="(item, index) in seconds" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">秒</text>
@@ -267,7 +267,6 @@ export default {
 			startDate: '',
 			endDate: '',
 			valueArr: [],
-			reset: false,
 			provinces: provinces,
 			citys: citys[0],
 			areas: areas[0][0],
@@ -299,7 +298,6 @@ export default {
 	},
 	watch: {
 		propsChange() {
-			this.reset = true;
 			setTimeout(() => this.init(), 10);
 		},
 		// 如果地区发生变化，为了让picker联动起来，必须重置this.citys和this.areas
@@ -315,7 +313,6 @@ export default {
 		// 微信和QQ小程序由于一些奇怪的原因(故同时对所有平台均初始化一遍)，需要重新初始化才能显示正确的值
 		value(n) {
 			if (n) {
-				this.reset = true;
 				setTimeout(() => this.init(), 10);
 			}
 		}
@@ -377,7 +374,6 @@ export default {
 		},
 		init() {
 			this.valueArr = [];
-			this.reset = false;
 			if (this.mode == 'time') {
 				this.initTimeValue();
 				if (this.params.year) {
@@ -446,6 +442,9 @@ export default {
 			else if (this.params.month) index = 1;
 			else if (this.params.year) index = 1;
 			else index = 0;
+			// 当月份变化时，会导致日期的天数也会变化，如果原来选的天数大于变化后的天数，则重置为变化后的最大值
+			// 比如原来选中3月31日，调整为2月后，日期变为最大29，这时如果day值继续为31显然不合理，于是将其置为29(picker-column从1开始)
+			if(this.day > this.days.length) this.day = this.days.length;
 			this.valueArr.splice(index, 1, this.getIndex(this.days, this.day));
 		},
 		setHours() {

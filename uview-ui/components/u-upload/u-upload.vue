@@ -63,6 +63,7 @@
  * @property {String} image-mode 预览图片等显示模式，可选值为uni的image的mode属性值（默认aspectFill）
  * @property {String} del-icon 右上角删除图标名称，只能为uView内置图标
  * @property {String} del-bg-color 右上角关闭按钮的背景颜色
+ * @property {String | Number} index 在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件
  * @property {String} del-color 右上角关闭按钮图标的颜色
  * @property {Object} header 上传携带的头信息，对象形式
  * @property {Object} form-data 上传额外携带的参数
@@ -238,6 +239,11 @@ export default {
 				return ['png', 'jpg', 'jpeg', 'webp', 'gif'];
 			}
 		},
+		// 在各个回调事件中的最后一个参数返回，用于区别是哪一个组件的事件
+		index: {
+			type: [Number, String],
+			default: ''
+		}
 	},
 	mounted() {},
 	data() {
@@ -265,7 +271,7 @@ export default {
 		},
 		// 监听lists的变化，发出事件
 		lists(n) {
-			this.$emit('on-list-change', n);
+			this.$emit('on-list-change', n, this.index);
 		}
 	},
 	methods: {
@@ -304,11 +310,11 @@ export default {
 						// 如果是非多选，index大于等于1或者超出最大限制数量时，不处理
 						if (!multiple && index >= 1) return;
 						if (val.size > maxSize) {
-							this.$emit('on-oversize', val, this.lists);
+							this.$emit('on-oversize', val, this.lists, this.index);
 							this.showToast('超出允许的文件大小');
 						} else {
 							if (maxCount <= lists.length) {
-								this.$emit('on-exceed', val, this.lists);
+								this.$emit('on-exceed', val, this.lists, this.index);
 								this.showToast('超出最大允许的文件个数');
 								return;
 							}
@@ -320,7 +326,7 @@ export default {
 						}
 					});
 					// 每次图片选择完，抛出一个事件，并将当前内部选择的图片数组抛出去
-					this.$emit('on-choose-complete', this.lists);
+					this.$emit('on-choose-complete', this.lists, this.index);
 					if (this.autoUpload) this.uploadFile(listOldLength);
 				})
 				.catch(error => {
@@ -356,7 +362,7 @@ export default {
 			if (this.uploading) return;
 			// 全部上传完成
 			if (index >= this.lists.length) {
-				this.$emit('on-uploaded', this.lists);
+				this.$emit('on-uploaded', this.lists, this.index);
 				return;
 			}
 			// 检查是否是已上传或者正在上传中
@@ -410,7 +416,7 @@ export default {
 						this.lists[index].response = data;
 						this.lists[index].progress = 100;
 						this.lists[index].error = false;
-						this.$emit('on-success', data, index, this.lists);
+						this.$emit('on-success', data, index, this.lists, this.index);
 					}
 				},
 				fail: e => {
@@ -420,13 +426,13 @@ export default {
 					uni.hideLoading();
 					this.uploading = false;
 					this.uploadFile(index + 1);
-					this.$emit('on-change', res, index, this.lists);
+					this.$emit('on-change', res, index, this.lists, this.index);
 				}
 			});
 			task.onProgressUpdate(res => {
 				if (res.progress > 0) {
 					this.lists[index].progress = res.progress;
-					this.$emit('on-progress', res, index, this.lists);
+					this.$emit('on-progress', res, index, this.lists, this.index);
 				}
 			});
 		},
@@ -435,7 +441,7 @@ export default {
 			this.lists[index].progress = 0;
 			this.lists[index].error = true;
 			this.lists[index].response = null;
-			this.$emit('on-error', err, index, this.lists);
+			this.$emit('on-error', err, index, this.lists, this.index);
 			this.showToast('上传失败，请重试');
 		},
 		// 删除一个图片
@@ -450,7 +456,7 @@ export default {
 						}
 						this.lists.splice(index, 1);
 						this.$forceUpdate();
-						this.$emit('on-remove', index, this.lists);
+						this.$emit('on-remove', index, this.lists, this.index);
 						this.showToast('移除成功');
 					}
 				}
@@ -461,7 +467,7 @@ export default {
 			// 判断索引的合法范围
 			if (index >= 0 && index < this.lists.length) {
 				this.lists.splice(index, 1);
-				this.$emit('on-list-change', this.lists);
+				this.$emit('on-list-change', this.lists, this.index);
 			}
 		},
 		// 预览图片
@@ -472,7 +478,7 @@ export default {
 				urls: images,
 				current: url,
 				success: () => {
-					this.$emit('on-preview', url, this.lists);
+					this.$emit('on-preview', url, this.lists, this.index);
 				},
 				fail: () => {
 					uni.showToast({

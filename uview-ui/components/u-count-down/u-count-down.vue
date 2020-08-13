@@ -164,7 +164,7 @@ export default {
 		// 监听时间戳的变化
 		timestamp(newVal, oldVal) {
 			// 如果倒计时间发生变化，清除定时器，重新开始倒计时
-			clearInterval(this.timer);
+			this.clearTimer();
 			this.start();
 		}
 	},
@@ -211,6 +211,8 @@ export default {
 	methods: {
 		// 倒计时
 		start() {
+			// 避免可能出现的倒计时重叠情况
+			this.clearTimer();
 			if (this.timestamp <= 0) return;
 			this.seconds = Number(this.timestamp);
 			this.formatTime(this.seconds);
@@ -254,10 +256,16 @@ export default {
 		},
 		// 停止倒计时
 		end() {
-			// 清除定时器
-			clearInterval(this.timer);
-			this.timer = null;
+			this.clearTimer();
 			this.$emit('end', {});
+		},
+		// 清除定时器
+		clearTimer() {
+			if(this.timer) {
+				// 清除定时器
+				clearInterval(this.timer);
+				this.timer = null;
+			}
 		}
 	},
 	beforeDestroy() {

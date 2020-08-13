@@ -29,9 +29,34 @@ Vue.mixin(vuexStore)
 let mpShare = require('uview-ui/libs/mixin/mpShare.js');
 Vue.mixin(mpShare)
 
+// i18n部分的配置
+// 引入语言包，注意路径
+import Chinese from '@/common/locales/zh.js';
+import English from '@/common/locales/en.js';
+
+// VueI18n
+import VueI18n from 'vue-i18n'
+
+// VueI18n
+Vue.use(VueI18n)
+
+const i18n = new VueI18n({
+	// 默认语言
+	locale: 'zh',
+	// 引入语言文件
+	messages: {
+		'zh': Chinese,
+		'en': English,
+	}
+})
+
+// 由于微信小程序的运行机制问题，需声明如下一行，H5和APP非必填
+Vue.prototype._i18n = i18n
+
 const app = new Vue({
-  store,
-  ...App
+	i18n,
+	store,
+	...App
 })
 
 // http拦截器，将此部分放在new Vue()和app.$mount()之间，才能App.vue中正常使用
@@ -43,4 +68,3 @@ import httpApi from '@/common/http.api.js'
 Vue.use(httpApi, app)
 
 app.$mount()
-

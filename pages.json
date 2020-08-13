@@ -6,7 +6,7 @@
 	// 	"current": 0, //当前激活的模式(list 的索引项)
 	// 	"list": [{
 	// 		"name": "test", //模式名称
-	// 		"path": "pages/componentsC/test/index", //启动页面，必选
+	// 		"path": "pages/componentsC/layout/index", //启动页面，必选
 	// 		"query": "id=1&name=2" //启动参数，在页面的onLoad函数里面得到
 	// 	}]
 	// },
@@ -61,9 +61,9 @@
 				{
 					"path": "test/index",
 					"style": {
-						// "navigationBarTitleText": "navbar-自定义导航栏",
-						"navigationStyle": "custom" ,// 隐藏系统导航栏
-						"navigationBarTextStyle": "white" // 状态栏字体为白色
+						"navigationBarTitleText": "navbar-自定义导航栏"
+						// "navigationStyle": "custom" ,// 隐藏系统导航栏
+						// "navigationBarTextStyle": "white" // 状态栏字体为白色
 					}
 				},
 				// gap-间隔槽
@@ -835,22 +835,22 @@
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
 		"list": [{
-				"pagePath": "pages/example/components"
+				"pagePath": "pages/example/components",
 				// "iconPath": "static/uview/example/component.png",
 				// "selectedIconPath": "static/uview/example/component_select.png",
-				// "text": "组件"
+				"text": "组件"
 			},
 			{
-				"pagePath": "pages/example/js"
+				"pagePath": "pages/example/js",
 				// "iconPath": "static/uview/example/js.png",
 				// "selectedIconPath": "static/uview/example/js_select.png",
-				// "text": "工具"
+				"text": "工具"
 			},
 			{
-				"pagePath": "pages/example/template"
+				"pagePath": "pages/example/template",
 				// "iconPath": "static/uview/example/template.png",
 				// "selectedIconPath": "static/uview/example/template_select.png",
-				// "text": "模板"
+				"text": "模板"
 			}
 		]
 	}

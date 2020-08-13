@@ -35,10 +35,10 @@
 			<block class="u-cell__value" v-if="value">{{ value }}</block>
 			<slot v-else></slot>
 		</view>
-		<u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
 		<view class="u-flex" v-if="$slots['right-icon']">
 			<slot name="right-icon"></slot>
 		</view>
+		<u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
 	</view>
 </template>
 

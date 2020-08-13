@@ -2,7 +2,7 @@
     "name" : "uView",
     "appid" : "__UNI__60F4B81",
     "description" : "多平台快速开发的UI框架",
-    "versionName" : "1.5.8",
+    "versionName" : "1.6.0",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -108,6 +108,12 @@
     "mp-alipay" : {
         "usingComponents" : true,
         "component2" : true
+    },
+    "mp-qq" : {
+        "optimization" : {
+            "subPackages" : true
+        },
+        "appid" : "15646153"
     },
     "mp-baidu" : {
         "usingComponents" : true,
