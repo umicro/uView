@@ -5,7 +5,8 @@
 		:class="{ 'u-border': border, 'u-card-full': full, 'u-card--border': borderRadius > 0 }"
 		:style="{
 			borderRadius: borderRadius + 'rpx',
-			margin: margin
+			margin: margin,
+			boxShadow: boxShadow
 		}"
 	>
 		<view
@@ -83,6 +84,7 @@
  * @property {String | Number} sub-title-size 副标题字体大小（默认26）
  * @property {Boolean} border 是否显示边框（默认true）
  * @property {String | Number} index 用于标识点击了第几个卡片
+ * @property {String} box-shadow 卡片外围阴影，字符串形式（默认none）
  * @property {String} margin 卡片与屏幕两边和上下元素的间距，需带单位，如"30rpx 20rpx"（默认30rpx）
  * @property {String | Number} border-radius 卡片整体的圆角值，单位rpx（默认16）
  * @property {Object} head-style 头部自定义样式，对象形式
@@ -219,6 +221,11 @@ export default {
 		showFoot: {
 			type: Boolean,
 			default: true
+		},
+		// 卡片外围阴影，字符串形式
+		boxShadow: {
+			type: Boolean,
+			default: 'none'
 		}
 	},
 	data() {

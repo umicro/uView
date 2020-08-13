@@ -21,8 +21,9 @@
 						:color="elColor(index)"
 						:custom-prefix="item.customIcon ? 'custom-icon' : 'uicon'"
 					></u-icon>
+					<!-- 需要判断是否数字，$u.test.number()，否则报错 -->
 					<u-badge :count="item.count" :is-dot="item.isDot" 
-						v-if="item.count > 0"
+						v-if="$u.test.number(item.count) && Number(item.count) > 0"
 						:offset="[-2, getOffsetRight(item.count, item.isDot)]"
 					></u-badge>
 				</view>
