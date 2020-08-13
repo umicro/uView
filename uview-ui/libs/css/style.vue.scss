@@ -158,3 +158,15 @@ uni-toast .uni-toast {
 }
 /* #endif */
 /* end--提升H5端uni.toast()的层级，避免被uView的modal等遮盖--end */
+
+/* start--去除button的所有默认样式--start */
+.u-reset-button {
+	padding: 0;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.u-reset-button::after {
+   border: none;
+}
+/* end--去除button的所有默认样式--end */
