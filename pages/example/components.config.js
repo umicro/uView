@@ -266,6 +266,11 @@ export default [{
 		groupName: '导航组件',
 		groupName_en: 'Navigation components',
 		list: [{
+			path: '/pages/componentsB/dropdown/index',
+			icon: 'dropdown',
+			title: 'Dropdown 下拉菜单',
+			title_en: 'Dropdown',
+		},{
 			path: '/pages/componentsB/tabbar/index',
 			icon: 'tabbar',
 			title: 'Tabbar 底部导航栏',
