@@ -191,12 +191,18 @@ function array(value) {
 	}
 }
 
-
 /**
  * 是否对象
  */
 function object(value) {
 	return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+/**
+ * 是否短信验证码
+ */
+function code(value, len = 6) {
+	return new RegExp(`^\\d{${len}}$`).test(value);
 }
 
 
@@ -222,5 +228,6 @@ export default {
 	jsonString,
 	landline,
 	object,
-	array
+	array,
+	code
 }

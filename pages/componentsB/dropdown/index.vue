@@ -1,17 +1,15 @@
 <template>
 	<view class="">
-		<view class="">
-			<view class="u-demo-title">演示效果</view>
-
+		<view class="u-m-t-50">
 			<view class="u-demo-area u-flex u-row-center">
-				<u-dropdown ref="uDropdown">
-					<u-dropdown-item v-model="value1" title="距离" :options="options1"></u-dropdown-item>
-					<u-dropdown-item v-model="value2" title="温度" :options="options2"></u-dropdown-item>
+				<u-dropdown :close-on-click-mask="mask" ref="uDropdown" :activeColor="activeColor" :borderBottom="borderBottom">
+					<u-dropdown-item @change="change" v-model="value1" title="距离" :options="options1"></u-dropdown-item>
+					<u-dropdown-item @change="change" v-model="value2" title="温度" :options="options2"></u-dropdown-item>
 					<u-dropdown-item title="属性">
 						<view class="slot-content">
 							<view class="item-box">
 								<view class="item" :class="[item.active ? 'active' : '']" @tap="tagClick(index)" v-for="(item, index) in list" :key="index">
-									{{item.text}}
+									{{item.label}}
 								</view>
 							</view>
 							<u-button type="primary" @click="closeDropdown">确定</u-button>
@@ -22,24 +20,20 @@
 		</view>
 		<view class="u-config-wrap">
 			<view class="u-config-title u-border-bottom">
-				参数配置时
-			</view>
-			<!-- <view class="u-config-item">
-				<view class="u-item-title">颜色</view>
-				<u-subsection vibrateShort :list="['primary', 'success', 'warning', 'error', 'info']" @change="colorChange"></u-subsection>
+				参数配置
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">线条类型</view>
-				<u-subsection vibrateShort :list="['实线', '方形虚线', '圆点虚线']" @change="borderStyleChange"></u-subsection>
+				<view class="u-item-title">下边框</view>
+				<u-subsection vibrateShort current="1" :list="['有', '无']" @change="borderChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">细边</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="hairLineChange"></u-subsection>
+				<view class="u-item-title">激活颜色</view>
+				<u-subsection vibrateShort :list="['#2979ff', '#ff9900', '#19be6b']" @change="activeColorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">方向</view>
-				<u-subsection vibrateShort :list="['水平', '垂直']" @change="directionChange"></u-subsection>
-			</view> -->
+				<view class="u-item-title">遮罩是否可点击</view>
+				<u-subsection vibrateShort :list="['是', '否']" @change="maskChange"></u-subsection>
+			</view>
 		</view>
 	</view>
 </template>
@@ -50,105 +44,92 @@
 			return {
 				value1: '',
 				value2: '2',
-				value3: '',
+				mask: true,
 				options1: [{
-						text: '默认排序',
+						label: '默认排序',
 						value: 1,
-						icon: 'map'
 					},
 					{
-						text: '距离优先',
+						label: '距离优先',
 						value: 2,
-						icon: 'map'
 					},
 					{
-						text: '价格优先',
+						label: '价格优先',
 						value: 3,
-						icon: 'map'
 					}
 				],
 				options2: [{
-						text: '去冰',
+						label: '去冰',
 						value: 1,
-						icon: 'map'
 					},
 					{
-						text: '加冰',
+						label: '加冰',
 						value: 2,
-						icon: 'map'
 					},
 					{
-						text: '正常温',
+						label: '正常温',
 						value: 3,
-						icon: 'map'
 					},
 					{
-						text: '加热',
+						label: '加热',
 						value: 4,
-						icon: 'map'
 					},
 					{
-						text: '极寒风暴',
+						label: '极寒风暴',
 						value: 5,
-						icon: 'map'
 					}
 				],
 				list: [{
-						text: '琪花瑶草',
+						label: '琪花瑶草',
 						active: true,
 					},
 					{
-						text: '清词丽句',
+						label: '清词丽句',
 						active: false,
 					},
 					{
-						text: '宛转蛾眉',
+						label: '宛转蛾眉',
 						active: false,
 					},
 					{
-						text: '煦色韶光',
+						label: '煦色韶光',
 						active: false,
 					},
 					{
-						text: '鱼沉雁落',
+						label: '鱼沉雁落',
 						active: false,
 					},
 					{
-						text: '章台杨柳',
+						label: '章台杨柳',
 						active: false,
 					},
 					{
-						text: '霞光万道',
+						label: '霞光万道',
 						active: false,
 					}
 				],
-				direction: 'row',
-				hairLine: true,
-				length: '100%',
-				color: this.$u.color['primary'],
-				borderStyle: 'solid'
+				borderBottom: false,
+				activeColor: '#2979ff'
 			}
 		},
 		methods: {
-			colorChange(index) {
-				this.color = this.$u.color[['primary', 'success', 'warning', 'error', 'info'][index]];
+			borderChange(index) {
+				this.borderBottom = !index;
 			},
-			hairLineChange(index) {
-				this.hairLine = !index;
+			activeColorChange(index) {
+				this.activeColor = ['#2979ff', '#ff9900', '#19be6b'][index];
 			},
-			directionChange(index) {
-				this.direction = index == 0 ? 'row' : 'col';
-				if (index == 0) this.length = '100%';
-				else this.length = '50rpx';
+			change(index) {
+				this.$u.toast(`点击了第${index}项`);
 			},
-			borderStyleChange(index) {
-				this.borderStyle = ['solid', 'dashed', 'dotted'][index];
+			closeDropdown() {
+				this.$refs.uDropdown.close();
 			},
 			tagClick(index) {
 				this.list[index].active = !this.list[index].active;
 			},
-			closeDropdown() {
-				this.$refs.uDropdown.close();
+			maskChange(index) {
+				this.mask = !index;
 			}
 		}
 	}

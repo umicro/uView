@@ -80,7 +80,7 @@ export default {
 		},
 		// 图标右边或者下面的文字
 		label: {
-			type: String,
+			type: [String, Number],
 			default: ''
 		},
 		// label的位置，只能右边或者下边

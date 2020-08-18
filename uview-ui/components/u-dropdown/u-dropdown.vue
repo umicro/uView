@@ -1,20 +1,27 @@
 <template>
 	<view class="u-dropdown" @touchmove.stop.prevent>
-		<view class="u-dropdown__menu">
+		<view class="u-dropdown__menu" :style="{
+			height: $u.addUnit(height)
+		}" :class="{
+			'u-border-bottom': borderBottom
+		}">
 			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
 				<view class="u-flex">
 					<text class="u-dropdown__menu__item__text" :style="{
-						color: index === current ? activeColor : '#606266'
-					}">{{item}}</text>
-					<view class="u-dropdown__menu__item__arrow">
-						<u-icon :name="index === current ? 'arrow-up' : 'arrow-down'" size="26" :color="index === current ? activeColor : '#c0c4cc'"></u-icon>
+						color: item.disabled ? '#c0c4cc' : index === current ? activeColor : inactiveColor,
+						fontSize: $u.addUnit(titleSize)
+					}">{{item.title}}</text>
+					<view class="u-dropdown__menu__item__arrow" :class="{
+						'u-dropdown__menu__item__arrow--rotate': index === current
+					}">
+						<u-icon :custom-style="{display: 'flex'}" name="arrow-down" size="26" :color="index === current ? activeColor : '#c0c4cc'"></u-icon>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="u-dropdown__content" :style="[contentStyle, {
-			transition: `all ${duration / 1000}s linear`
-		}]" @tap="menuClick(current)">
+			transition: `opacity ${duration / 1000}s linear`
+		}]" @tap="maskClick">
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
 				<slot></slot>
 			</view>
@@ -36,16 +43,6 @@
 				type: String,
 				default: '#606266'
 			},
-			// 菜单展开方向，bottom-向上展开，top-向下展开
-			direction: {
-				type: String,
-				default: 'top'
-			},
-			// 是否展示遮罩
-			mask: {
-				type: Boolean,
-				default: false
-			},
 			// 点击遮罩是否关闭菜单
 			closeOnClickMask: {
 				type: Boolean,
@@ -60,6 +57,21 @@
 			duration: {
 				type: [Number, String],
 				default: 300
+			}, 
+			// 标题菜单的高度，单位任意，数值默认为rpx单位
+			height: {
+				type: [Number, String],
+				default: 80
+			},
+			// 是否显示下边框
+			borderBottom: {
+				type: Boolean,
+				default: false
+			},
+			// 标题的字体大小
+			titleSize: {
+				type: [Number, String],
+				default: 28
 			}
 		},
 		data() {
@@ -91,8 +103,10 @@
 		methods: {
 			// 点击菜单
 			menuClick(index) {
+				// 判断是否被禁用
+				if(this.menuList[index].disabled) return ;
 				// 如果点击时的索引和当前激活项索引相同，意味着点击了激活项，需要收起下拉菜单
-				if (index === this.current) {
+				if (index === this.current && this.closeOnClickSelf) {
 					this.close();
 					// 等动画结束后，再移除下拉菜单中的内容，否则直接移除，也就没有下拉菜单收起的效果了
 					setTimeout(() => {
@@ -124,6 +138,12 @@
 					zIndex: -1,
 					opacity: 0
 				}
+			},
+			// 点击遮罩
+			maskClick() {
+				// 如果不允许点击遮罩，直接返回
+				if(!this.closeOnClickMask) return;
+				this.close();
 			}
 		}
 	}
@@ -134,6 +154,7 @@
 
 	.u-dropdown {
 		flex: 1;
+		width: 100%;
 
 		&__menu {
 			display: flex;
@@ -148,7 +169,7 @@
 				align-items: center;
 
 				&__text {
-					font-size: 26rpx;
+					font-size: 28rpx;
 					color: $u-content-color;
 				}
 
@@ -156,6 +177,11 @@
 					margin-left: 6rpx;
 					transition: transform .3s;
 					align-items: center;
+					display: flex;
+					
+					&--rotate {
+						transform: rotate(180deg);
+					}
 				}
 			}
 		}

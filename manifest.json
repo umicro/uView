@@ -130,7 +130,7 @@
         },
         "optimization" : {
             "treeShaking" : {
-                "enable" : true
+                "enable" : false
             }
         },
         "title" : "uView UI"
