@@ -171,7 +171,8 @@ export default {
 			// 列数
 			columnNum: 0,
 			// 列是否还在滑动中，微信小程序如果在滑动中就点确定，结果可能不准确
-			moving: false
+			moving: false,
+			listColumnNum: []
 		};
 	},
 	watch: {
@@ -179,7 +180,7 @@ export default {
 		value: {
 			immediate: true,
 			handler(val) {
-				if(val) setTimeout(() => this.init(), 10);
+				if (val) setTimeout(() => this.init(), 10);
 			}
 		},
 	},
@@ -232,6 +233,18 @@ export default {
 				this.columnNum = num;
 			}
 		},
+		// 读取数据的层级
+		getColumnNum(item, num) {
+			let children = item.children;
+			num++;
+			if (children && children.length > 0) {
+				for (let i = 0; i < children.length; i++) {
+					const child = children[i];
+					return this.getColumnNum(child, num);
+				}
+			}
+			return num;
+		},
 		// 获取需要展示在picker中的列数据
 		setColumnData() {
 			let data = [];
@@ -239,6 +252,12 @@ export default {
 			if(this.mode == 'mutil-column-auto') {
 				// 获得所有数据中的第一个元素
 				let column = this.list[this.defaultSelector.length ? this.defaultSelector[0] : 0];
+				
+				// 设置数据层级
+				for (let i = 0; i < this.list.length; i++) {
+					const item = this.list[i];
+					this.listColumnNum[i] = this.getColumnNum(item, 0);
+				}
 				// 通过循环所有的列数，再根据设定列的数组，得出当前需要渲染的整个列数组
 				for (let i = 0; i < this.columnNum; i++) {
 					// 第一列默认为整个list数组
@@ -281,9 +300,21 @@ export default {
 			if(this.mode == 'mutil-column-auto') {
 				// 对比前后两个数组，寻找变更的是哪一列，如果某一个元素不同，即可判定该列发生了变化
 				this.lastSelectIndex.map((val, idx) => {
-					if (val != columnIndex[idx]) index = idx;
+					if (val != columnIndex[idx]) {
+						index = idx;
+					}
 				});
 				this.defaultSelector = columnIndex;
+				// 获取上一个column的层级
+				const prevColumnNum = this.columnNum;
+				// 设置当前column层级
+				this.columnNum = this.listColumnNum[columnIndex[0]];
+				let cloneColumnIndex = [];
+				
+				for (let i = index + 1; i < prevColumnNum; i++) {
+					this.columnData[i] = null;
+					this.defaultSelector[i] = 0;
+				}
 				for (let i = index + 1; i < this.columnNum; i++) {
 					// 当前变化列的下一列的数据，需要获取上一列的数据，同时需要指定是上一列的第几个的children，再往后的
 					// 默认是队列的第一个为默认选项
@@ -291,22 +322,26 @@ export default {
 					// 改变的列之后的所有列，默认选中第一个
 					this.defaultSelector[i] = 0;
 				}
+				for (let i = 0; i < this.columnNum; i++) {
+					cloneColumnIndex.push(columnIndex[i]);
+				}
 				// 在历遍的过程中，可能由于上一步修改this.columnData，导致产生连锁反应，程序触发columnChange，会有多次调用
 				// 只有在最后一次数据稳定后的结果是正确的，此前的历遍中，可能会产生undefined，故需要判断
-				columnIndex.map((item, index) => {
-					let data = this.columnData[index][columnIndex[index]];
-					let tmp = {
-						value: data ? data[this.valueName] : null,
-						label: data ? data[this.labelName] : null,
-					};
-					// 判断是否有需要额外携带的参数
-					if(data && data.extra) tmp.extra = data.extra;
-					this.selectValue.push(tmp);
-
-				})
+				cloneColumnIndex.map((item, index) => {
+					let data = this.columnData[index] && this.columnData[index][cloneColumnIndex[index]];
+					if (data) {
+						let tmp = {
+							value: data[this.valueName],
+							label: data[this.labelName]
+						};
+						// 判断是否有需要额外携带的参数
+						if (data.extra) tmp.extra = data.extra;
+						this.selectValue.push(tmp);
+					}
+				});
 				// 保存这一次的结果，用于下次列发生变化时作比较
-				this.lastSelectIndex = columnIndex;
-			} else if(this.mode == 'single-column') {
+				this.lastSelectIndex = cloneColumnIndex;
+			} else if (this.mode == 'single-column') {
 				let data = this.columnData[0][columnIndex[0]];
 				// 初始默认选中值
 				let tmp = {
