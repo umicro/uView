@@ -321,7 +321,8 @@ export default {
 							lists.push({
 								url: val.path,
 								progress: 0,
-								error: false
+								error: false,
+								file: val
 							});
 						}
 					});
@@ -544,7 +545,7 @@ export default {
 .u-add-wrap {
 	flex-direction: column;
 	color: $u-content-color;
-	font-size: 28rpx;
+	font-size: 26rpx;
 }
 
 .u-add-tips {

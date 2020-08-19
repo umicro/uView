@@ -224,7 +224,7 @@ export default {
 		},
 		// 卡片外围阴影，字符串形式
 		boxShadow: {
-			type: Boolean,
+			type: String,
 			default: 'none'
 		}
 	},

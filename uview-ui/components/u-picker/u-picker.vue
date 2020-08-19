@@ -22,54 +22,54 @@
 			</view>
 			<view class="u-picker-body">
 				<picker-view v-if="mode == 'region'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column v-if="params.province">
+					<picker-view-column v-if="!reset && params.province">
 						<view class="u-column-item" v-for="(item, index) in provinces" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.city">
+					<picker-view-column v-if="!reset && params.city">
 						<view class="u-column-item" v-for="(item, index) in citys" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.area">
+					<picker-view-column v-if="!reset && params.area">
 						<view class="u-column-item" v-for="(item, index) in areas" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
 						</view>
 					</picker-view-column>
 				</picker-view>
 				<picker-view v-else-if="mode == 'time'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column v-if="params.year">
+					<picker-view-column v-if="!reset && params.year">
 						<view class="u-column-item" v-for="(item, index) in years" :key="index">
 							{{ item }}
 							<text class="u-text" v-if="showTimeTag">年</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.month">
+					<picker-view-column v-if="!reset && params.month">
 						<view class="u-column-item" v-for="(item, index) in months" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">月</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.day">
+					<picker-view-column v-if="!reset && params.day">
 						<view class="u-column-item" v-for="(item, index) in days" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">日</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.hour">
+					<picker-view-column v-if="!reset && params.hour">
 						<view class="u-column-item" v-for="(item, index) in hours" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">时</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.minute">
+					<picker-view-column v-if="!reset && params.minute">
 						<view class="u-column-item" v-for="(item, index) in minutes" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">分</text>
 						</view>
 					</picker-view-column>
-					<picker-view-column v-if="params.second">
+					<picker-view-column v-if="!reset && params.second">
 						<view class="u-column-item" v-for="(item, index) in seconds" :key="index">
 							{{ formatNumber(item) }}
 							<text class="u-text" v-if="showTimeTag">秒</text>
@@ -77,14 +77,14 @@
 					</picker-view-column>
 				</picker-view>
 				<picker-view v-else-if="mode == 'selector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column>
+					<picker-view-column v-if="!reset">
 						<view class="u-column-item" v-for="(item, index) in range" :key="index">
 							<view class="u-line-1">{{ getItemValue(item, 'selector') }}</view>
 						</view>
 					</picker-view-column>
 				</picker-view>
 				<picker-view v-else-if="mode == 'multiSelector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
-					<picker-view-column v-for="(item, index) in range" :key="index">
+					<picker-view-column v-if="!reset" v-for="(item, index) in range" :key="index">
 						<view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
 							<view class="u-line-1">{{ getItemValue(item1, 'multiSelector') }}</view>
 						</view>
@@ -264,6 +264,7 @@ export default {
 			hour: 0,
 			minute: 0,
 			second: 0,
+			reset: false,
 			startDate: '',
 			endDate: '',
 			valueArr: [],
@@ -298,6 +299,7 @@ export default {
 	},
 	watch: {
 		propsChange() {
+			this.reset = true;
 			setTimeout(() => this.init(), 10);
 		},
 		// 如果地区发生变化，为了让picker联动起来，必须重置this.citys和this.areas
@@ -313,6 +315,7 @@ export default {
 		// 微信和QQ小程序由于一些奇怪的原因(故同时对所有平台均初始化一遍)，需要重新初始化才能显示正确的值
 		value(n) {
 			if (n) {
+				this.reset = true;
 				setTimeout(() => this.init(), 10);
 			}
 		}
@@ -374,6 +377,7 @@ export default {
 		},
 		init() {
 			this.valueArr = [];
+			this.reset = false;
 			if (this.mode == 'time') {
 				this.initTimeValue();
 				if (this.params.year) {

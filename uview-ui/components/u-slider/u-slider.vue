@@ -176,6 +176,8 @@ export default {
 		updateValue(value, drag) {
 			// 去掉小数部分，同时也是对step步进的处理
 			const width = this.format(value);
+			// 不允许滑动的值超过max最大值，百分比也不能超过100
+			if(width > this.max || width > 100) return;
 			// 设置移动的百分比值
 			let barStyle = {
 				width: width + '%'

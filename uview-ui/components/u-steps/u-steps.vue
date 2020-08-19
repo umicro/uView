@@ -28,7 +28,7 @@
 				<view class="u-steps__item__dot" v-if="mode == 'dot'" :style="{ 
 					backgroundColor: index <= current ? activeColor : unActiveColor 
 				}"></view>
-				<text :style="{ 
+				<text class="u-line-1" :style="{ 
 					color: index <= current ? activeColor : unActiveColor,
 				}" :class="['u-steps__item__text--' + direction]">
 					{{ item.name }}

@@ -285,6 +285,7 @@
 				this.$nextTick(() => {
 					this.inputVal = val;
 				})
+				this.handleChange(val, 'blur');
 			},
 			handleChange(value, type) {
 				if (this.disabled) return;

@@ -339,7 +339,8 @@ export default {
 	border: 0;
 	//border-radius: 10rpx;
 	display: inline-block;
-	overflow: hidden;
+	// 避免边框某些场景可能被“裁剪”，不能设置为hidden
+	overflow: visible;
 	line-height: 1;
 	display: flex;
 	align-items: center;
