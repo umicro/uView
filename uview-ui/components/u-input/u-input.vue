@@ -54,8 +54,8 @@
 			@confirm="onConfirm"
 		/>
 		<view class="u-input__right-icon u-flex">
-			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="clearable && value != '' && focused">
-				<u-icon size="32" name="close-circle-fill" color="#c0c4cc" @touchstart="onClear"/>
+			<view class="u-input__right-icon__clear u-input__right-icon__item" @tap="onClear" v-if="clearable && value != '' && focused">
+				<u-icon size="32" name="close-circle-fill" color="#c0c4cc"/>
 			</view>
 			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="passwordIcon && type == 'password'">
 				<u-icon size="32" :name="!showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword"/>
@@ -284,7 +284,11 @@ export default {
 		 * @param event
 		 */
 		handleBlur(event) {
-			this.focused = false;
+			// 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
+			// 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
+			setTimeout(() => {
+				this.focused = false;
+			}, 100)
 			// vue 原生的方法 return 出去
 			this.$emit('blur', event.detail.value);
 			this.$nextTick(() => {

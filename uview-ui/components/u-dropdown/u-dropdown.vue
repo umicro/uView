@@ -1,5 +1,5 @@
 <template>
-	<view class="u-dropdown" @touchmove.stop.prevent>
+	<view class="u-dropdown">
 		<view class="u-dropdown__menu" :style="{
 			height: $u.addUnit(height)
 		}" :class="{
@@ -21,7 +21,7 @@
 		</view>
 		<view class="u-dropdown__content" :style="[contentStyle, {
 			transition: `opacity ${duration / 1000}s linear`
-		}]" @tap="maskClick">
+		}]" @tap="maskClick"  @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
 				<slot></slot>
 			</view>
@@ -79,7 +79,9 @@
 				showDropdown: true, // 是否打开下来菜单,
 				menuList: [], // 显示的菜单
 				active: false, // 下拉菜单的状态
-				current: "", // 当前是第几个菜单处于激活状态
+				// 当前是第几个菜单处于激活状态，小程序中此处不能写成false或者""，否则后续将current赋值为0，
+				// 无能的TX没有使用===而是使用==判断，导致程序认为前后二者没有变化，从而不会触发视图更新
+				current: 99999, 
 				// 外层内容的样式，初始时处于底层，且透明
 				contentStyle: {
 					zIndex: -1,
@@ -101,6 +103,14 @@
 			this.children = [];
 		},
 		methods: {
+			init() {
+				// 当某个子组件内容变化时，触发父组件的init，父组件再让每一个子组件重新初始化一遍
+				// 以保证数据的正确性
+				this.menuList = [];
+				this.children.map(child => {
+					child.init();
+				})
+			},
 			// 点击菜单
 			menuClick(index) {
 				// 判断是否被禁用
@@ -132,7 +142,7 @@
 			close() {
 				// 设置为收起状态，同时current归位，设置为空字符串
 				this.active = false;
-				this.current = "";
+				this.current = 99999;
 				// 下拉内容的样式进行调整，不透明度设置为0
 				this.contentStyle = {
 					zIndex: -1,

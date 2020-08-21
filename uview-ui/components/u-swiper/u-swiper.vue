@@ -15,9 +15,9 @@
 						backgroundColor: bgColor
 					}">
 					<image class="u-swiper-image" :src="item[name]" :mode="imgMode"></image>
-					<view v-if="title" class="u-swiper-title u-line-1" :style="{
+					<view v-if="title" class="u-swiper-title u-line-1" :style="[{
 							'padding-bottom': titlePaddingBottom
-						}">
+						}, titleStyle]">
 						{{ item.title }}
 					</view>
 				</view>
@@ -161,6 +161,13 @@
 			current: {
 				type: [Number, String],
 				default: 0
+			},
+			// 标题的样式，对象形式
+			titleStyle: {
+				type: Object,
+				default() {
+					return {}
+				}
 			}
 		},
 		watch: {

@@ -10,7 +10,6 @@
 			hairLine ? showHairLineBorder : 'u-btn--bold-border',
 			'u-btn--' + type,
 			disabled ? `u-btn--${type}--disabled` : '',
-			
 		]"
 		:disabled="disabled"
 		:form-type="formType"
@@ -29,7 +28,9 @@
 		@error="error"
 		@opensetting="opensetting"
 		@launchapp="launchapp"
-		:style="[customStyle]"
+		:style="[customStyle, {
+			overflow: ripple ? 'hidden' : 'visible'
+		}]"
 		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"

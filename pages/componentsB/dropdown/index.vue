@@ -33,14 +33,14 @@
 			<view class="u-config-item">
 				<view class="u-item-title">遮罩是否可点击</view>
 				<u-subsection vibrateShort :list="['是', '否']" @change="maskChange"></u-subsection>
-			</view>
+			</view> 
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
-		data() {
+		data() { 
 			return {
 				value1: '',
 				value2: '2',

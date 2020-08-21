@@ -278,6 +278,8 @@
 				&__button {
 					position: absolute;
 					top: 10rpx;
+					left: 50%;
+					transform: translateX(-50%);
 				}
 
 				&__text {

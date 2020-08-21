@@ -1,9 +1,3 @@
-/*
- * @Desc: ---   ----
- * @Date: 2020-04-22 12:29:21
- * @LastEditors: 王
- * @LastEditTime: 2020-04-22 15:18:39
- */
 import Vue from 'vue'
 import App from './App'
 

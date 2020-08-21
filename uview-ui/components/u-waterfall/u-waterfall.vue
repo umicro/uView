@@ -112,6 +112,7 @@ export default {
 			this.rightList = [];
 			// 同时清除父组件列表中的数据
 			this.$emit('input', []);
+			this.tempList = [];
 		},
 		// 清除某一条指定的数据，根据id实现
 		remove(id) {

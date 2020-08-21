@@ -2,7 +2,8 @@
 	<view :style="[customStyle]" class="u-icon" @tap="click" :class="['u-icon--' + labelPos]">
 		<image class="u-icon__img" v-if="isImg" :src="name" :mode="imgMode" :style="[imgStyle]"></image>
 		<text v-else class="u-icon__icon" :class="customClass" :style="[iconStyle]" :hover-class="hoverClass" @touchstart="touchstart"></text>
-		<text v-if="label" class="u-icon__label" :style="{
+		<!-- 这里进行空字符串判断，如果仅仅是v-if="label"，可能会出现传递0的时候，结果也无法显示 -->
+		<text v-if="label !== ''" class="u-icon__label" :style="{
 			color: labelColor,
 			fontSize: $u.addUnit(labelSize),
 			marginLeft: labelPos == 'right' ? $u.addUnit(marginLeft) : 0,
