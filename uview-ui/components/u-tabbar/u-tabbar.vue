@@ -21,7 +21,7 @@
 						:color="elColor(index)"
 						:custom-prefix="item.customIcon ? 'custom-icon' : 'uicon'"
 					></u-icon>
-					<u-badge :count="item.count" :is-dot="item.isDot" 
+					<u-badge :count="item.count" :is-dot="item.isDot"
 						v-if="item.count"
 						:offset="[-2, getOffsetRight(item.count, item.isDot)]"
 					></u-badge>
@@ -41,7 +41,7 @@
 			</view>
 		</view>
 		<!-- 这里加上一个48rpx的高度,是为了增高有凸起按钮时的防塌陷高度(也即按钮凸出来部分的高度) -->
-		<view class="u-fixed-placeholder safe-area-inset-bottom" :style="{ 
+		<view class="u-fixed-placeholder safe-area-inset-bottom" :style="{
 				height: `calc(${$u.addUnit(height)} + ${midButton ? 48 : 0}rpx)`,
 			}"></view>
 	</view>
@@ -121,7 +121,7 @@
 		data() {
 			return {
 				// 由于安卓太菜了，通过css居中凸起按钮的外层元素有误差，故通过js计算将其其中
-				midButtonLeft: '50%', 
+				midButtonLeft: '50%',
 				pageUrl: '', // 当前
 			}
 		},
@@ -183,7 +183,7 @@
 							// promise返回成功，
 							this.switchTab(index);
 						}).catch(err => {
-							
+
 						})
 					} else if(beforeSwitch === true) {
 						// 如果返回true
@@ -221,7 +221,7 @@
 			},
 			// 获取凸起按钮外层元素的left值，让其水平居中
 			getMidButtonLeft() {
-				let windowWidth = this.$u.sys.windowWidth;
+				let windowWidth = this.$u.sys().windowWidth;
 				// 由于安卓中css计算left: 50%的结果不准确，故用js计算
 				this.midButtonLeft = (windowWidth / 2) + 'px';
 			}
@@ -259,7 +259,7 @@
 				// 故使用js计算的形式来定位，此处不注释，是因为js计算有延后，避免出现位置闪动
 				left: 50%;
 				transform: translateX(-50%);
-				
+
 				&:after {
 					border-radius: 100px;
 				}
