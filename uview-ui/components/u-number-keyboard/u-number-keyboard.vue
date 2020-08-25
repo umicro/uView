@@ -145,7 +145,7 @@
 	}
 
 	.u-bg-gray {
-		background-color: #e7e6eb;
+		background-color: $u-border-color;
 	}
 
 	.u-keyboard-back {

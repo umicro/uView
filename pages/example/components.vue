@@ -39,7 +39,7 @@
 			});
 		},
 		created() {
-
+			
 		},
 		methods: {
 			openPage(path) {

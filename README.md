@@ -86,7 +86,11 @@ Vue.use(uView);
 // pages.json
 {
 	"easycom": {
+		// 下载安装的方式需要前面的"@/"，npm安装的方式无需"@/"
+		// 下载安装方式
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		// npm安装方式
+		// "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
 	// 此为本身已有的内容
 	"pages": [

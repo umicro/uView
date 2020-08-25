@@ -74,7 +74,11 @@
 					this.activeColor = parent.activeColor;
 					this.inactiveColor = parent.inactiveColor;
 					// 将本组件的this，放入到父组件的children数组中，让父组件可以操作本(子)组件的方法和属性
-					parent.children.push(this);
+					// push进去前，显判断是否已经存在了本实例，因为在子组件内部数据变化时，会通过父组件重新初始化子组件
+					let exist = parent.children.find(val => {
+						return this === val;
+					})
+					if(!exist) parent.children.push(this);
 					if(parent.children.length == 1) this.active = true;
 					// 父组件无法监听children的变化，故将子组件的title，传入父组件的menuList数组中
 					parent.menuList.push({

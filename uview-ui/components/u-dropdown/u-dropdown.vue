@@ -8,13 +8,13 @@
 			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
 				<view class="u-flex">
 					<text class="u-dropdown__menu__item__text" :style="{
-						color: item.disabled ? '#c0c4cc' : index === current ? activeColor : inactiveColor,
+						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex == index) ? activeColor : inactiveColor,
 						fontSize: $u.addUnit(titleSize)
 					}">{{item.title}}</text>
 					<view class="u-dropdown__menu__item__arrow" :class="{
 						'u-dropdown__menu__item__arrow--rotate': index === current
 					}">
-						<u-icon :custom-style="{display: 'flex'}" name="arrow-down" size="26" :color="index === current ? activeColor : '#c0c4cc'"></u-icon>
+						<u-icon :custom-style="{display: 'flex'}" name="arrow-down" size="26" :color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'"></u-icon>
 					</view>
 				</view>
 			</view>
@@ -86,7 +86,9 @@
 				contentStyle: {
 					zIndex: -1,
 					opacity: 0
-				}
+				},
+				// 让某个菜单保持高亮的状态
+				highlightIndex: 99999
 			}
 		},
 		computed: {
@@ -124,6 +126,12 @@
 					}, this.duration)
 					return;
 				}
+				this.open(index);
+			},
+			// 打开下拉菜单
+			open(index) {
+				// 重置高亮索引，否则会造成多个菜单同时高亮
+				// this.highlightIndex = 9999;
 				// 展开时，设置下拉内容的样式
 				this.contentStyle = {
 					zIndex: 11,
@@ -137,9 +145,11 @@
 				this.children.map((val, idx) => {
 					val.active = index == idx ? true : false;
 				})
+				this.$emit('open', this.current);
 			},
 			// 设置下拉菜单处于收起状态
 			close() {
+				this.$emit('close', this.current);
 				// 设置为收起状态，同时current归位，设置为空字符串
 				this.active = false;
 				this.current = 99999;
@@ -154,6 +164,10 @@
 				// 如果不允许点击遮罩，直接返回
 				if(!this.closeOnClickMask) return;
 				this.close();
+			},
+			// 外部手动设置某个菜单高亮
+			highlight(index = undefined) {
+				this.highlightIndex = index !== undefined ? index : 99999;
 			}
 		}
 	}
