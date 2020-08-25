@@ -84,7 +84,7 @@
 		font-size: 28rpx;
 		left: 0;
 		right: 0;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		opacity: 0;

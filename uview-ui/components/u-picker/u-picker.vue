@@ -610,7 +610,7 @@ export default {
 	width: 100%;
 	height: 90rpx;
 	padding: 0 40rpx;
-	display: flex;
+	@include vue-flex;
 	justify-content: space-between;
 	align-items: center;
 	box-sizing: border-box;
@@ -642,7 +642,7 @@ export default {
 }
 
 .u-column-item {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 32rpx;

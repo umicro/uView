@@ -119,7 +119,7 @@
 	@import "../../libs/css/style.components.scss";
 	
 	.u-section {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
@@ -128,7 +128,7 @@
 			position: relative;
 			font-size: 28rpx;
 			padding-left: 20rpx;
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 			
 			&__icon-wrap {
@@ -143,7 +143,7 @@
 		&__right-info {
 			color: $u-tips-color;
 			font-size: 26rpx;
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 			
 			&__icon-arrow {

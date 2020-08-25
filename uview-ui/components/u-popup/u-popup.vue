@@ -388,10 +388,8 @@ export default {
 }
 
 .u-drawer-center {
-	/* #ifndef APP-NVUE */
-	display: flex;
+	@include vue-flex;
 	flex-direction: column;
-	/* #endif */
 	bottom: 0;
 	left: 0;
 	right: 0;

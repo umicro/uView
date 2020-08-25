@@ -232,7 +232,9 @@
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
 	.u-fixed-placeholder {
+		/* #ifndef APP-NVUE */
 		box-sizing: content-box;
+		/* #endif */
 	}
 
 	.u-tabbar {
@@ -246,7 +248,9 @@
 			left: 0;
 			width: 100%;
 			z-index: 998;
+			/* #ifndef APP-NVUE */
 			box-sizing: content-box;
+			/* #endif */
 
 			&__circle__border {
 				border-radius: 100%;
@@ -271,7 +275,7 @@
 				justify-content: center;
 				height: 100%;
 				padding: 12rpx 0;
-				display: flex;
+				@include vue-flex;
 				flex-direction: column;
 				align-items: center;
 				position: relative;
@@ -296,17 +300,19 @@
 
 			&__circle {
 				position: relative;
-				display: flex;
+				@include vue-flex;
 				flex-direction: column;
 				justify-content: space-between;
 				z-index: 10;
+				/* #ifndef APP-NVUE */
 				height: calc(100% - 1px);
+				/* #endif */
 
 				&__button {
 					width: 90rpx;
 					height: 90rpx;
 					border-radius: 100%;
-					display: flex;
+					@include vue-flex;
 					justify-content: center;
 					align-items: center;
 					position: absolute;

@@ -190,7 +190,7 @@
 
 	.u-inner {
 		height: 100vh;
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;

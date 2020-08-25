@@ -176,7 +176,7 @@
 	}
 
 	.u-keyboard-grids-item {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 	}
@@ -208,7 +208,7 @@
 		bottom: 32rpx;
 		height: 80rpx;
 		background-color: rgb(185, 188, 195);
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		border-radius: 8rpx;
 		justify-content: center;
@@ -225,7 +225,7 @@
 		bottom: 32rpx;
 		height: 80rpx;
 		background-color: #ffffff;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		border-radius: 8rpx;
 		justify-content: center;

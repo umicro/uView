@@ -252,7 +252,7 @@
 	.u-swiper-indicator {
 		padding: 0 24rpx;
 		position: absolute;
-		display: flex;
+		@include vue-flex;
 		width: 100%;
 		z-index: 1;
 	}
@@ -331,7 +331,7 @@
 	}
 
 	.u-swiper-item {
-		display: flex;
+		@include vue-flex;
 		overflow: hidden;
 		align-items: center;
 	}

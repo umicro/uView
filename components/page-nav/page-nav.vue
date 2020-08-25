@@ -58,7 +58,10 @@
 	}
 	
 	.nav-title {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
+		flex-direction: row;
 		align-items: center;
 	}
 	
@@ -67,7 +70,9 @@
 	}
 	
 	.nav-title__text {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		color: $u-main-color;
 		font-size: 50rpx;
 		font-weight: bold;
@@ -75,8 +80,9 @@
 	
 	.logo {
 		width: 140rpx;
-		flex: 0 0 140rpx;
+		/* #ifndef APP-NVUE */
 		height: auto;
+		/* #endif */
 	}
 	
 	.nav-slogan {

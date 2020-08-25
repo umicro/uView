@@ -200,7 +200,10 @@ export default {
 
 <style scoped lang="scss">
 @import "../../libs/css/style.components.scss";
+/* #ifndef APP-NVUE */
+// 目前由于nvue对定义字体时的content属性报错，所以nvue先不引入
 @import '../../iconfont.css';
+/* #endif */
 
 .u-icon {
 	/* #ifndef APP-NVUE */

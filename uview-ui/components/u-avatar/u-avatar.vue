@@ -200,7 +200,7 @@
 			width: 32rpx;
 			color: #ffffff;
 			height: 32rpx;
-			display: flex;
+			@include vue-flex;
 			justify-content: center;
 			align-items: center;
 			border-radius: 100rpx;
@@ -227,7 +227,7 @@
 			width: 32rpx;
 			color: #ffffff;
 			height: 32rpx;
-			display: flex;
+			@include vue-flex;
 			justify-content: center;
 			align-items: center;
 			border-radius: 100rpx;

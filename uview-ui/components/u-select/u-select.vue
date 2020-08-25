@@ -386,7 +386,7 @@ export default {
 	}
 
 	&__header {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: space-between;
 		height: 80rpx;
@@ -404,7 +404,7 @@ export default {
 			box-sizing: border-box;
 
 			&__item {
-				display: flex;
+				@include vue-flex;
 				align-items: center;
 				justify-content: center;
 				font-size: 32rpx;

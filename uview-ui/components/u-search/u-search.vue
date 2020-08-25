@@ -287,20 +287,20 @@ export default {
 @import "../../libs/css/style.components.scss";
 
 .u-search {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	flex: 1;
 }
 
 .u-content {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	padding: 0 18rpx;
 	flex: 1;
 }
 
 .u-clear-icon {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 }
 
@@ -315,7 +315,7 @@ export default {
 .u-close-wrap {
 	width: 40rpx;
 	height: 100%;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;

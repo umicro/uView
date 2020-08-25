@@ -284,7 +284,7 @@ export default {
 	}
 
 	.u-countdown-item {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		padding: 2rpx;
@@ -300,7 +300,7 @@ export default {
 	}
 
 	.u-countdown-colon {
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		padding: 0 5rpx;
 		line-height: 1;

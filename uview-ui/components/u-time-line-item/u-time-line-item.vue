@@ -54,7 +54,7 @@
 	@import "../../libs/css/style.components.scss";
 	
 	.u-time-axis-item {
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		width: 100%;
 		position: relative;
@@ -67,7 +67,7 @@
 		left: -40rpx;
 		transform-origin: 0;
 		transform: translateX(-50%);
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		z-index: 1;

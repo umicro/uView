@@ -130,7 +130,7 @@
 		height: 80rpx;
 		position: fixed;
 		z-index: 9;
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		justify-content: center;
 		background-color: #E1E1E1;
@@ -139,7 +139,7 @@
 		transition: opacity 0.4s;
 		
 		&__content {
-			display: flex;
+			@include vue-flex;
 			flex-direction: column;
 			align-items: center;
 			

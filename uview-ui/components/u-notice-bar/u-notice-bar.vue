@@ -227,26 +227,26 @@ export default {
 }
 
 .u-direction-row {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
 .u-left-icon {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 }
 
 .u-notice-box {
 	flex: 1;
-	display: flex;
+	@include vue-flex;
 	overflow: hidden;
 	margin-left: 12rpx;
 }
 
 .u-right-icon {
 	margin-left: 12rpx;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 }
 

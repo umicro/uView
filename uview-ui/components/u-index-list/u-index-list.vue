@@ -282,7 +282,7 @@
 		position: fixed;
 		top: 50%;
 		right: 0;
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		text-align: center;
 		transform: translateY(-50%);
@@ -308,7 +308,7 @@
 		font-size: 50rpx;
 		color: #fff;
 		background-color: rgba(0, 0, 0, 0.65);
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 		padding: 0;

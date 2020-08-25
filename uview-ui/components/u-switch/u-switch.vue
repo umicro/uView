@@ -123,7 +123,7 @@
 	}
 
 	.u-switch__node {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		position: absolute;
@@ -142,7 +142,7 @@
 	}
 
 	.u-switch__loading {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 	}

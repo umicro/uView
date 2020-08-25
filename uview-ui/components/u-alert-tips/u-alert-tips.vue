@@ -166,7 +166,7 @@
 	@import "../../libs/css/style.components.scss";
 	
 	.u-alert-tips {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		padding: 16rpx 30rpx;
 		border-radius: 8rpx;

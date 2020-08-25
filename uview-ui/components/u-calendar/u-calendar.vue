@@ -502,7 +502,7 @@
 			&__text {
 				margin-top: 30rpx;
 				padding: 0 60rpx;
-				display: flex;
+				@include vue-flex;
 				justify-content: center;
 				align-items: center;
 			}
@@ -525,7 +525,7 @@
 		}
 	
 		&__week-day {
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 			justify-content: center;
 			padding: 6px 0;
@@ -539,7 +539,7 @@
 	
 		&__content {
 			width: 100%;
-			display: flex;
+			@include vue-flex;
 			flex-wrap: wrap;
 			padding: 6px 0;
 			box-sizing: border-box;
@@ -558,7 +558,7 @@
 			
 			&__item {
 				width: 14.2857%;
-				display: flex;
+				@include vue-flex;
 				align-items: center;
 				justify-content: center;
 				padding: 6px 0;
@@ -570,7 +570,7 @@
 					height: 84rpx;
 					display: -webkit-box;
 					display: -webkit-flex;
-					display: flex;
+					@include vue-flex;
 					align-items: center;
 					justify-content: center;
 					flex-direction: column;
@@ -619,7 +619,7 @@
 	
 		&__bottom {
 			width: 100%;
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 			justify-content: center;
 			flex-direction: column;

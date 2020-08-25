@@ -159,12 +159,12 @@
 	
 	.u-load-more-wrap {
 		width: 100%;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 	}
 	
 	.u-load-more-inner {
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 	}
@@ -172,7 +172,7 @@
 	.u-more {
 		width: 60%;
 		position: relative;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 	}
 	
@@ -192,7 +192,7 @@
 	}
 	
 	.u-loadmore-icon {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 	}

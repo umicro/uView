@@ -87,7 +87,7 @@ export default {
 	/* #endif */
 	
 	/* #ifndef MP */
-	display: flex;
+	@include vue-flex;
 	flex-wrap: wrap;
 	align-items: center;
 	/* #endif */

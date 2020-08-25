@@ -166,7 +166,7 @@
 	
 	.u-collapse-head {
 		position: relative;
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 		align-items: center;
 		color: $u-main-color;

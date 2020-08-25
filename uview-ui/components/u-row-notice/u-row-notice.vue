@@ -217,7 +217,7 @@ export default {
 }
 
 .u-direction-row {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: space-between;
 }
@@ -229,7 +229,7 @@ export default {
 
 .u-notice-box {
 	flex: 1;
-	display: flex;
+	@include vue-flex;
 	overflow: hidden;
 	margin-left: 12rpx;
 }
@@ -245,7 +245,7 @@ export default {
 	text-align: right;
 	// 这一句很重要，为了能让滚动左右连接起来
 	padding-left: 100%;
-	display: flex;
+	@include vue-flex;
 	flex-wrap: nowrap;
 }
 

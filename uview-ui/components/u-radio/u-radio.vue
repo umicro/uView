@@ -176,7 +176,7 @@
 
 	.u-radio {
 		display: -webkit-flex;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		overflow: hidden;
 		user-select: none;
@@ -184,7 +184,7 @@
 		
 		&__icon-wrap {
 			color: $u-content-color;
-			display: flex;
+			@include vue-flex;
 			flex: none;
 			align-items: center;
 			justify-content: center;

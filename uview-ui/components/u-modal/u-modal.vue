@@ -266,7 +266,7 @@
 		}
 
 		&__footer {
-			display: flex;
+			@include vue-flex;
 
 			&__button {
 				flex: 1;
