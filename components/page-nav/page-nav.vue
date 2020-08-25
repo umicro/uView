@@ -46,7 +46,6 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "@/uview-ui/libs/css/style.components.scss";
 	.nav-wrap {
 		padding: 30rpx;
 		position: relative;
@@ -59,8 +58,7 @@
 	}
 	
 	.nav-title {
-		@include vue-flex;
-		flex-direction: row;
+		display: flex;
 		align-items: center;
 	}
 	
@@ -69,7 +67,7 @@
 	}
 	
 	.nav-title__text {
-		@include vue-flex;
+		display: flex;
 		color: $u-main-color;
 		font-size: 50rpx;
 		font-weight: bold;
@@ -89,6 +87,6 @@
 	.nav-desc {
 		margin-top: 20rpx;
 		font-size: 28rpx;
-		color: $u-content-color; 
+		color: $u-content-color;
 	}
 </style>
