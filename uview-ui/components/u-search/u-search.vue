@@ -35,13 +35,13 @@
 					backgroundColor: bgColor,
 				}, inputStyle]"
 			/>
-			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @touchstart="clear">
+			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @tap="clear">
 				<u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
 			</view>
 		</view>
 		<view :style="[actionStyle]" class="u-action" 
 			:class="[showActionBtn || show ? 'u-action-active' : '']" 
-			@touchstart.stop.prevent="custom"
+			@tap.stop.prevent="custom"
 		>{{ actionText }}</view>
 	</view>
 </template>
@@ -267,7 +267,11 @@ export default {
 		},
 		// 失去焦点
 		blur() {
-			this.focused = false;
+			// 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
+			// 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
+			setTimeout(() => {
+				this.focused = false;
+			}, 100)
 			this.show = false;
 			this.$emit('blur', this.keyword);
 		},
