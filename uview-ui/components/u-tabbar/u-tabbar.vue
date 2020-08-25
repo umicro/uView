@@ -230,6 +230,7 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
 	.u-fixed-placeholder {
 		box-sizing: content-box;
 	}
@@ -237,7 +238,7 @@
 	.u-tabbar {
 
 		&__content {
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 			position: relative;
 			position: fixed;
@@ -277,7 +278,7 @@
 
 				&__button {
 					position: absolute;
-					top: 10rpx;
+					top: 14rpx;
 					left: 50%;
 					transform: translateX(-50%);
 				}
@@ -287,7 +288,7 @@
 					font-size: 26rpx;
 					line-height: 28rpx;
 					position: absolute;
-					bottom: 12rpx;
+					bottom: 14rpx;
 					left: 50%;
 					transform: translateX(-50%);
 				}

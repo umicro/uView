@@ -203,7 +203,10 @@ export default {
 @import '../../iconfont.css';
 
 .u-icon {
+	/* #ifndef APP-NVUE */
 	display: inline-flex;
+	/* #endif */
+	flex-direction: row;
 	align-items: center;
 
 	&--left {
@@ -251,8 +254,10 @@ export default {
 	}
 
 	&__img {
+		/* #ifndef APP-PLUS */
 		height: auto;
 		will-change: transform;
+		/* #endif */
 	}
 
 	&__label {

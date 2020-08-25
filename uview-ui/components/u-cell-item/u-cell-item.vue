@@ -211,8 +211,9 @@ export default {
 <style lang="scss" scoped>
 @import "../../libs/css/style.components.scss";
 .u-cell {
+	@include vue-flex;
+	align-items: center;
 	position: relative;
-	display: flex;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 26rpx 32rpx;

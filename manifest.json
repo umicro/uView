@@ -6,6 +6,10 @@
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
+		// 定义nvue页面的flex布局默认为row排列
+		"nvue ": {
+			"flex-direction": "row"
+		},
         // APP-VUE分包，可提APP升启动速度，2.7.12开始支持，兼容微信小程序分包方案，默认关闭
         "optimization" : {
             "subPackages" : true
