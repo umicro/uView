@@ -1,5 +1,5 @@
 <template>
-	<view v-if="show" class="u-tabbar" @touchmove.stop.prevent>
+	<view v-if="show" class="u-tabbar" @touchmove.stop.prevent="() => {}">
 		<view class="u-tabbar__content safe-area-inset-bottom" :style="{
 			height: $u.addUnit(height),
 			backgroundColor: bgColor,

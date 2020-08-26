@@ -1,5 +1,5 @@
 <template>
-	<view class="u-keyboard" @touchmove.stop.prevent>
+	<view class="u-keyboard" @touchmove.stop.prevent="() => {}">
 		<view class="u-keyboard-grids">
 			<view
 			    class="u-keyboard-grids-item"

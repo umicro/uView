@@ -1,5 +1,5 @@
 <template>
-	<view class="u-no-network" v-if="!isConnected" :style="{'z-index': uZIndex}" @touchmove.stop.prevent="">
+	<view class="u-no-network" v-if="!isConnected" :style="{'z-index': uZIndex}" @touchmove.stop.prevent="() => {}">
 		<view class="u-inner">
 			<image class="u-error-icon" :src="image" mode="widthFix"></image>
 			<view class="u-tips">
