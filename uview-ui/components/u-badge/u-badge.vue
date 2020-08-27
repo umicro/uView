@@ -141,7 +141,9 @@
 	@import "../../libs/css/style.components.scss";
 	
 	.u-badge {
+		/* #ifndef APP-NVUE */
 		display: inline-flex;
+		/* #endif */
 		justify-content: center;
 		align-items: center;
 		line-height: 24rpx;
@@ -207,7 +209,7 @@
 	// }
 	
 	.u-info {
-		background: $u-type-info;
+		background-color: $u-type-info;
 		color: #fff;
 	}
 </style>
