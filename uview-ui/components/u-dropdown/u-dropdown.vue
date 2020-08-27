@@ -6,7 +6,10 @@
 			'u-border-bottom': borderBottom
 		}">
 			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
-				<view class="u-flex">
+				<view class="u-icon-wrap" v-if="item.icon">
+					<u-icon :size="iconSize" :name="item.icon" :color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'" class="u-icon"></u-icon>
+				</view>
+				<view class="u-flex" v-else>
 					<text class="u-dropdown__menu__item__text" :style="{
 						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex == index) ? activeColor : inactiveColor,
 						fontSize: $u.addUnit(titleSize)
@@ -33,6 +36,11 @@
 	export default {
 		name: 'u-dropdown',
 		props: {
+			// icon的大小
+			iconSize: {
+				type: [Number, String],
+				default: 32
+			},
 			// 菜单标题和选项的激活态颜色
 			activeColor: {
 				type: String,
