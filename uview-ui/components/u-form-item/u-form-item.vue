@@ -188,7 +188,7 @@ export default {
 		// label的宽度
 		elLabelWidth() {
 			// label默认宽度为90，优先使用本组件的值，如果没有(如果设置为0，也算是配置了值，依然起效)，则用u-form的值
-			return (this.labelWidth != 0 || this.labelWidth != '') ? this.labelWidth : (this.parent ? this.parent.labelWidth : 90);
+			return (this.labelWidth != 0 || this.labelWidth != '') ? this.labelWidth : (this.parent ? this.parent.labelWidth : 90) + 10;
 		},
 		// label的样式
 		elLabelStyle() {
