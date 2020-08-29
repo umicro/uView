@@ -14,6 +14,7 @@
 		:disabled="disabled"
 		:form-type="formType"
 		:open-type="openType"
+		:scope="scope"
 		:app-parameter="appParameter"
 		:hover-stop-propagation="hoverStopPropagation"
 		:send-message-title="sendMessageTitle"
@@ -67,6 +68,7 @@
  * @property {Boolean} loading 按钮名称前是否带 loading 图标(App-nvue 平台，在 ios 上为雪花，Android上为圆圈)
  * @property {String} form-type 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件
  * @property {String} open-type 开放能力
+ * @property {String} scope 支付宝小程序开放能力扩展参数
  * @property {String} data-name 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
  * @property {String} hover-class 指定按钮按下去的样式类。当 hover-class="none" 时，没有点击态效果(App-nvue 平台暂不支持)
  * @property {Number} hover-start-time 按住后多久出现点击态，单位毫秒
@@ -121,6 +123,12 @@ export default {
 		// 开放能力，具体请看uniapp稳定关于button组件部分说明
 		// https://uniapp.dcloud.io/component/button
 		openType: {
+			type: String,
+			default: ''
+		},
+		// 支付宝开放能力扩展参数，具体请看支付宝小程序文档对button的scope参数的要求
+		// https://opendocs.alipay.com/mini/introduce/getphonenumber
+		scope: {
 			type: String,
 			default: ''
 		},
