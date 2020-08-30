@@ -1,7 +1,7 @@
 /**
  * html 解析器
  * @tutorial https://github.com/jin-yufeng/Parser
- * @version 20200728
+ * @version 20200828
  * @author JinYufeng
  * @listens MIT
  */
@@ -243,7 +243,7 @@ MpHtmlParser.prototype.setNode = function() {
 			}
 			var width;
 			if (styleObj.width) width = styleObj.width;
-			else if (attrs.width) width = attrs.width.includes('%') ? attrs.width : attrs.width + 'px';
+			else if (attrs.width) width = attrs.width.includes('%') ? attrs.width : parseFloat(attrs.width) + 'px';
 			if (width) {
 				styleObj.width = width;
 				attrs.width = '100%';
@@ -256,7 +256,7 @@ MpHtmlParser.prototype.setNode = function() {
 				attrs.height = styleObj.height;
 				styleObj.height = '';
 			} else if (attrs.height && !attrs.height.includes('%'))
-				attrs.height += 'px';
+				attrs.height = parseFloat(attrs.height) + 'px';
 		}
 		for (var key in styleObj) {
 			var value = styleObj[key];

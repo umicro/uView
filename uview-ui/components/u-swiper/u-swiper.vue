@@ -14,8 +14,8 @@
 						margin: effect3d && uCurrent != index ? '0 20rpx' : 0,
 						backgroundColor: bgColor
 					}">
-					<image class="u-swiper-image" :src="item[name]" :mode="imgMode"></image>
-					<view v-if="title" class="u-swiper-title u-line-1" :style="[{
+					<image class="u-swiper-image" :src="item[name] || item" :mode="imgMode"></image>
+					<view v-if="title && item.title" class="u-swiper-title u-line-1" :style="[{
 							'padding-bottom': titlePaddingBottom
 						}, titleStyle]">
 						{{ item.title }}

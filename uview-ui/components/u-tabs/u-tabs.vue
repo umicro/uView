@@ -308,6 +308,9 @@
 
 	.u-scroll-box {
 		position: relative;
+		/* #ifdef MP-TOUTIAO */
+		white-space: nowrap;
+		/* #endif */
 	}
 
 	/* #ifdef H5 */

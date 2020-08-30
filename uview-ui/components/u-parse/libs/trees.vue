@@ -112,7 +112,7 @@
 			init() {
 				for (var i = this.nodes.length, n; n = this.nodes[--i];) {
 					if (n.name == 'img') {
-						this.top.imgList.setItem(n.attrs.i, n.attrs.src);
+						this.top.imgList.setItem(n.attrs.i, n.attrs['original-src'] || n.attrs.src);
 						// #ifdef APP-PLUS
 						if (this.lazyLoad && !this.observer) {
 							this.observer = uni.createIntersectionObserver(this).relativeToViewport({
