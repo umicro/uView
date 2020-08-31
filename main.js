@@ -29,7 +29,7 @@ import Chinese from '@/common/locales/zh.js';
 import English from '@/common/locales/en.js';
 
 // VueI18n
-import VueI18n from 'vue-i18n'
+import VueI18n from '@/common/vue-i18n.min.js'
 
 // VueI18n
 Vue.use(VueI18n)

@@ -20,7 +20,7 @@
 		data() {
 			return {
 				list: list,
-				desc: '众多组件覆盖开发过程的各个需求，组件功能丰富，多端兼容。让你快速集成，开箱即用。',
+				//desc: '众多组件覆盖开发过程的各个需求，组件功能丰富，多端兼容。让你快速集成，开箱即用。',
 			}
 		},
 		computed: {
@@ -29,17 +29,17 @@
 					return 'https://cdn.uviewui.com/uview/example/' + path + '.png';
 				}
 			},
-			// desc() {
-			// 	return this.$t('components.desc');
-			// }
+			desc() {
+				return this.$t('components.desc');
+			}
 		},
 		onShow() {
-			// uni.setNavigationBarTitle({
-			// 	title: this.$t('nav.components')
-			// });
+			uni.setNavigationBarTitle({
+				title: this.$t('nav.components')
+			});
 		},
 		created() {
-			//console.log(this.abc);   
+			
 		},
 		methods: {
 			openPage(path) {
@@ -48,12 +48,10 @@
 				})
 			},
 			getGroupTitle(item) {
-				// return this.$i18n.locale == 'zh' ? item.groupName : item.groupName_en
-				return item.groupName;
+				return this.$i18n.locale == 'zh' ? item.groupName : item.groupName_en
 			},
 			getFieldTitle(item) {
-				// return this.$i18n.locale == 'zh' ? item.title : item.title_en
-				return item.title;
+				return this.$i18n.locale == 'zh' ? item.title : item.title_en
 			}
 		}
 	}

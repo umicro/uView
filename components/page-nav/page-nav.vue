@@ -4,21 +4,19 @@
 			<image class="logo" src="https://cdn.uviewui.com/uview/common/logo.png" mode="widthFix"></image>
 			<view class="nav-info">
 				<view class="nav-title__text">
-					<!-- {{$t('common.title')}} -->
-					{{title}}
+					{{$t('common.title')}}
 				</view>
 				<view class="nav-slogan">
-					 <!-- {{$t('common.intro')}} -->
-					 {{desc}}
+					 {{$t('common.intro')}}
 				</view>
 			</view>
 		</view>
 		<view class="nav-desc">
 			{{desc}}
 		</view>
-		<!-- <view class="lang" @tap="switchLang">
+		<view class="lang" @tap="switchLang">
 			<u-icon size="46" color="warning" :name="lang"></u-icon>
-		</view> -->
+		</view>
 	</view>
 </template>
 
@@ -29,20 +27,20 @@
 			title: String,
 		},
 		computed: {
-			// lang() {
-			// 	return this.$i18n.locale == 'zh' ? 'zh' : 'en';
-			// }
+			lang() {
+				return this.$i18n.locale == 'zh' ? 'zh' : 'en';
+			}
 		},
 		methods: {
-			// switchLang() {
-			// 	this.$i18n.locale = this.$i18n.locale == 'en' ? 'zh' : 'en';
-			// 	this.vuex_tabbar[0].text = this.$t('nav.components')
-			// 	this.vuex_tabbar[1].text = this.$t('nav.js')
-			// 	this.vuex_tabbar[2].text = this.$t('nav.template')
-			// 	uni.setNavigationBarTitle({
-			// 		title: this.$t(this.title)
-			// 	});
-			// }
+			switchLang() {
+				this.$i18n.locale = this.$i18n.locale == 'en' ? 'zh' : 'en';
+				this.vuex_tabbar[0].text = this.$t('nav.components')
+				this.vuex_tabbar[1].text = this.$t('nav.js')
+				this.vuex_tabbar[2].text = this.$t('nav.template')
+				uni.setNavigationBarTitle({
+					title: this.$t(this.title)
+				});
+			}
 		}
 	}
 </script>
