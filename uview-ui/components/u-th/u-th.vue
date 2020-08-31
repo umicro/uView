@@ -41,7 +41,7 @@
 	@import "../../libs/css/style.components.scss";
 	
 	.u-th {
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		flex: 1;
 		justify-content: center;

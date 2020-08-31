@@ -319,7 +319,7 @@ export default {
 	@import "../../libs/css/style.components.scss";
 
 	.u-form-item {
-		display: flex;
+		@include vue-flex;
 		// align-items: flex-start;
 		padding: 20rpx 0;
 		font-size: 28rpx;
@@ -333,16 +333,16 @@ export default {
 		}
 
 		&__body {
-			display: flex;
+			@include vue-flex;
 		}
 
 		&--left {
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 
 			&__content {
 				position: relative;
-				display: flex;
+				@include vue-flex;
 				align-items: center;
 				padding-right: 10rpx;
 				flex: 1;
@@ -360,7 +360,7 @@ export default {
 				}
 
 				&__label {
-					display: flex;
+					@include vue-flex;
 					align-items: center;
 					flex: 1;
 				}
@@ -371,14 +371,14 @@ export default {
 			flex: 1;
 
 			&__content {
-				display: flex;
+				@include vue-flex;
 				align-items: center;
 				flex: 1;
 
 				&__slot {
 					flex: 1;
 					/* #ifndef MP */
-					display: flex;
+					@include vue-flex;
 					align-items: center;
 					/* #endif */
 				}

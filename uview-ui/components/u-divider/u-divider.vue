@@ -110,7 +110,7 @@ export default {
 	width: 100%;
 	position: relative;
 	text-align: center;
-	display: flex;
+	@include vue-flex;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;

@@ -1,5 +1,5 @@
 <template>
-	<view class="u-mask" hover-stop-propagation :style="[maskStyle, zoomStyle]" @tap="click" @touchmove.stop.prevent :class="{
+	<view class="u-mask" hover-stop-propagation :style="[maskStyle, zoomStyle]" @tap="click" @touchmove.stop.prevent="() => {}" :class="{
 		'u-mask-zoom': zoom,
 		'u-mask-show': show
 	}">

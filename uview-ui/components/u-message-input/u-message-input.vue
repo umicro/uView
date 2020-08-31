@@ -196,7 +196,7 @@
 	}
 
 	.u-char-flex {
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		flex-wrap: wrap;
 		position: relative;
@@ -223,7 +223,7 @@
 		font-weight: bold;
 		color: $u-main-color;
 		line-height: 90rpx;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 	}

@@ -45,7 +45,7 @@ text {
 	/* #ifndef APP-NVUE */
 	display: flex;
 	/* #endif */
-	flex-direction: row;
+	flex-direction: row!important;
 	align-items: center;
 }
 
@@ -169,4 +169,8 @@ text {
 	}
 }
 
-
+// 重置nvue的默认关于flex的样式
+.u-reset-nvue {
+	flex-direction: row;
+	align-items: center;
+}

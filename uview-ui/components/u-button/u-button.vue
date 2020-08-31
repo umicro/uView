@@ -343,7 +343,7 @@ export default {
 	// 避免边框某些场景可能被“裁剪”，不能设置为hidden
 	overflow: visible;
 	line-height: 1;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;

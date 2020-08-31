@@ -181,14 +181,14 @@
 		width: 100%;
 
 		&__menu {
-			display: flex;
+			@include vue-flex;
 			position: relative;
 			z-index: 11;
 			height: 80rpx;
 
 			&__item {
 				flex: 1;
-				display: flex;
+				@include vue-flex;
 				justify-content: center;
 				align-items: center;
 
@@ -201,7 +201,7 @@
 					margin-left: 6rpx;
 					transition: transform .3s;
 					align-items: center;
-					display: flex;
+					@include vue-flex;
 					
 					&--rotate {
 						transform: rotate(180deg);

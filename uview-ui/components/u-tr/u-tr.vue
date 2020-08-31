@@ -20,6 +20,6 @@
 	@import "../../libs/css/style.components.scss";
 	
 	.u-tr {
-		display: flex;
+		@include vue-flex;
 	}
 </style>

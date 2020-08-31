@@ -252,14 +252,14 @@
 	}
 
 	.u-navbar-inner {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 		position: relative;
 		align-items: center;
 	}
 
 	.u-back-wrap {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		flex: 1;
 		flex-grow: 0;
@@ -272,7 +272,7 @@
 	}
 
 	.u-navbar-content-title {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		flex: 1;
@@ -296,14 +296,14 @@
 
 	.u-navbar-right {
 		flex: 1;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: flex-end;
 	}
 
 	.u-slot-content {
 		flex: 1;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 	}
 </style>

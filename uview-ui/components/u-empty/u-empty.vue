@@ -173,7 +173,7 @@
 	@import "../../libs/css/style.components.scss";
 
 	.u-empty {
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
@@ -185,7 +185,7 @@
 	}
 
 	.u-slot-wrap {
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 		margin-top: 20rpx;

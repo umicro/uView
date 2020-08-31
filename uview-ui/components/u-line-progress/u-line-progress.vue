@@ -116,7 +116,7 @@
 		width: 0;
 		height: 100%;
 		align-items: center;
-		display: flex;
+		@include vue-flex;
 		justify-items: flex-end;
 		justify-content: space-around;
 		font-size: 20rpx;

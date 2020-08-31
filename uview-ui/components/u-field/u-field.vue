@@ -292,7 +292,7 @@ export default {
 }
 
 .u-field-inner {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 }
 
@@ -307,7 +307,7 @@ export default {
 }
 
 .fild-body {
-	display: flex;
+	@include vue-flex;
 	flex: 1;
 	align-items: center;
 }
@@ -334,7 +334,7 @@ export default {
 	flex: 1 1 130rpx;
 	text-align: left;
 	position: relative;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 }
 
@@ -358,7 +358,7 @@ export default {
 }
 
 .u-clear-icon {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 }
 

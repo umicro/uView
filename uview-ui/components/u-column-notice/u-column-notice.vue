@@ -193,7 +193,7 @@ export default {
 
 .u-notice-bar {
 	width: 100%;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: nowrap;
@@ -204,14 +204,14 @@ export default {
 .u-swiper {
 	font-size: 26rpx;
 	height: 32rpx;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	flex: 1;
 	margin-left: 12rpx;
 }
 
 .u-swiper-item {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	overflow: hidden;
 }

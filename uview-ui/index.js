@@ -113,7 +113,7 @@ const $u = {
 }
 
 const install = Vue => {
-	Vue.mixin(mixin)
+	Vue.mixin(mixin) 
 	if (Vue.prototype.openShare) {
 		Vue.mixin(mpShare);
 	}

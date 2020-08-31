@@ -1,5 +1,5 @@
 <template>
-	<view class="u-keyboard" @touchmove.stop.prevent>
+	<view class="u-keyboard" @touchmove.stop.prevent="() => {}">
 		<view class="u-keyboard-grids">
 			<view
 			    class="u-keyboard-grids-item"
@@ -128,7 +128,7 @@
 	}
 
 	.u-keyboard-grids {
-		display: flex;
+		@include vue-flex;
 		flex-wrap: wrap;
 	}
 
@@ -137,7 +137,7 @@
 		text-align: center;
 		font-size: 50rpx;
 		color: #333;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		height: 110rpx;

@@ -141,7 +141,7 @@
 		border-radius: 8rpx;
 		background: #585858;
 		height: 80rpx;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 28rpx;
@@ -162,7 +162,7 @@
 
 	.u-icon {
 		margin-right: 10rpx;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		line-height: normal;
 	}

@@ -163,7 +163,7 @@
 	}
 
 	.u-action-sheet-item {
-		display: flex;
+		@include vue-flex;;
 		line-height: 1;
 		justify-content: center;
 		align-items: center;

@@ -69,7 +69,7 @@
 	.u-row {
 		// 由于微信小程序编译后奇怪的页面结构，只能使用float布局实现，flex无法实现
 		/* #ifndef MP-WEIXIN || MP-QQ */
-		display: flex;
+		@include vue-flex;
 		/* #endif */
 		flex-wrap: wrap;
 	}

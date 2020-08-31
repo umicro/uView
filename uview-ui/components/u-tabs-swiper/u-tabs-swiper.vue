@@ -414,7 +414,7 @@
 	}
 
 	.u-tabs-scorll-flex {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 	}
 
@@ -454,7 +454,7 @@
 		position: absolute;
 		top: 0;
 		transition-property: left, background-color;
-		display: flex;
+		@include vue-flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;

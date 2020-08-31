@@ -74,7 +74,7 @@
 	.u-grid-item {
 		box-sizing: border-box;
 		background: #fff;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		position: relative;
@@ -102,7 +102,7 @@
 
 	.u-grid-item-box {
 		padding: 30rpx 0;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;

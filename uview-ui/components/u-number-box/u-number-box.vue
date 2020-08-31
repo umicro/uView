@@ -315,7 +315,7 @@
 		text-align: center;
 		padding: 0;
 		margin: 0 6rpx;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 	}
@@ -323,7 +323,7 @@
 	.u-icon-plus,
 	.u-icon-minus {
 		width: 60rpx;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 	}

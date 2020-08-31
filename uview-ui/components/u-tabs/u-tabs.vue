@@ -344,7 +344,7 @@
 	}
 
 	.u-tabs-scorll-flex {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 	}
 </style>

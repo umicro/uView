@@ -179,7 +179,7 @@
 	}
 
 	.u-tooltip {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 	}
 

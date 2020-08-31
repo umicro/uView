@@ -223,7 +223,7 @@
 			color: $u-content-color;
 			flex: none;
 			display: -webkit-flex;
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 			justify-content: center;
 			box-sizing: border-box;

@@ -317,10 +317,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-input {
 	position: relative;
 	flex: 1;
-	display: flex;
+	@include vue-flex;
 
 	&__input {
 		//height: $u-form-item-height;

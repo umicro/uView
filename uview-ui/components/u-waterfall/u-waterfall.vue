@@ -163,13 +163,13 @@ export default {
 @import "../../libs/css/style.components.scss";
 
 .u-waterfall {
-	display: flex;
+	@include vue-flex;
 	flex-direction: row;
 	align-items: flex-start;
 }
 
 .u-column {
-	display: flex;
+	@include vue-flex;
 	flex: 1;
 	flex-direction: column;
 	height: auto;

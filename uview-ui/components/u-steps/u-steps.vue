@@ -114,7 +114,7 @@ $u-steps-item-number-width: 44rpx;
 $u-steps-item-dot-width: 20rpx;
 
 .u-steps {
-	display: flex;
+	@include vue-flex;
 	
 	.u-steps__item {
 		flex: 1;
@@ -123,13 +123,13 @@ $u-steps-item-dot-width: 20rpx;
 		min-width: 100rpx;
 		font-size: 26rpx;
 		color: #8799a3;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		flex-direction: column;
 		align-items: center;
 		
 		&--row {
-			display: flex;
+			@include vue-flex;
 			flex-direction: column;
 			
 			.u-steps__item__line {
@@ -149,7 +149,7 @@ $u-steps-item-dot-width: 20rpx;
 		}
 		
 		&--column {
-			display: flex;
+			@include vue-flex;
 			flex-direction: row;
 			justify-content: flex-start;
 			min-height: 120rpx;
@@ -171,7 +171,7 @@ $u-steps-item-dot-width: 20rpx;
 		}
 		
 		&__num {
-			display: flex;
+			@include vue-flex;
 			align-items: center;
 			justify-content: center;
 			width: $u-steps-item-number-width;
@@ -184,7 +184,7 @@ $u-steps-item-dot-width: 20rpx;
 		&__dot {
 			width: $u-steps-item-dot-width;
 			height: $u-steps-item-dot-width;
-			display: flex;
+			@include vue-flex;
 			border-radius: 50%;
 		}
 		

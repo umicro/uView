@@ -252,7 +252,7 @@ export default {
 
 .cropper-wrapper {
 	position: relative;
-	display: flex;
+	@include vue-flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
@@ -262,7 +262,7 @@ export default {
 
 .cropper-buttons {
 	width: 100vw;
-	display: flex;
+	@include vue-flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;

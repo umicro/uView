@@ -6,5 +6,5 @@ module.exports = {
 			disableHostCheck: true
 		}
 	},
-	//productionSourceMap: false
+	//productionSourceMap: false,
 }

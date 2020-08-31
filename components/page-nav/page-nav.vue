@@ -4,19 +4,21 @@
 			<image class="logo" src="https://cdn.uviewui.com/uview/common/logo.png" mode="widthFix"></image>
 			<view class="nav-info">
 				<view class="nav-title__text">
-					{{$t('common.title')}}
+					<!-- {{$t('common.title')}} -->
+					{{title}}
 				</view>
 				<view class="nav-slogan">
-					 {{$t('common.intro')}}
+					 <!-- {{$t('common.intro')}} -->
+					 {{desc}}
 				</view>
 			</view>
 		</view>
 		<view class="nav-desc">
 			{{desc}}
 		</view>
-		<view class="lang" @tap="switchLang">
+		<!-- <view class="lang" @tap="switchLang">
 			<u-icon size="46" color="warning" :name="lang"></u-icon>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -27,20 +29,20 @@
 			title: String,
 		},
 		computed: {
-			lang() {
-				return this.$i18n.locale == 'zh' ? 'zh' : 'en';
-			}
+			// lang() {
+			// 	return this.$i18n.locale == 'zh' ? 'zh' : 'en';
+			// }
 		},
 		methods: {
-			switchLang() {
-				this.$i18n.locale = this.$i18n.locale == 'en' ? 'zh' : 'en';
-				this.vuex_tabbar[0].text = this.$t('nav.components')
-				this.vuex_tabbar[1].text = this.$t('nav.js')
-				this.vuex_tabbar[2].text = this.$t('nav.template')
-				uni.setNavigationBarTitle({
-					title: this.$t(this.title)
-				});
-			}
+			// switchLang() {
+			// 	this.$i18n.locale = this.$i18n.locale == 'en' ? 'zh' : 'en';
+			// 	this.vuex_tabbar[0].text = this.$t('nav.components')
+			// 	this.vuex_tabbar[1].text = this.$t('nav.js')
+			// 	this.vuex_tabbar[2].text = this.$t('nav.template')
+			// 	uni.setNavigationBarTitle({
+			// 		title: this.$t(this.title)
+			// 	});
+			// }
 		}
 	}
 </script>
@@ -58,7 +60,10 @@
 	}
 	
 	.nav-title {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
+		flex-direction: row;
 		align-items: center;
 	}
 	
@@ -67,7 +72,9 @@
 	}
 	
 	.nav-title__text {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		color: $u-main-color;
 		font-size: 50rpx;
 		font-weight: bold;
@@ -75,8 +82,9 @@
 	
 	.logo {
 		width: 140rpx;
-		flex: 0 0 140rpx;
+		/* #ifndef APP-NVUE */
 		height: auto;
+		/* #endif */
 	}
 	
 	.nav-slogan {
