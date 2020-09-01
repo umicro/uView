@@ -547,7 +547,7 @@
 					"path": "navbar/index",
 					"style": {
 						// "navigationBarTitleText": "navbar-自定义导航栏",
-						"navigationStyle": "custom" ,// 隐藏系统导航栏
+						"navigationStyle": "custom", // 隐藏系统导航栏
 						"navigationBarTextStyle": "white" // 状态栏字体为白色
 					}
 				},
@@ -758,13 +758,16 @@
 					"style": {
 						"navigationBarTitleText": "upload-上传"
 					}
-				}, // waterfall瀑布流
+				},
+				// waterfall瀑布流
+				// #ifndef MP-TOUTIAO 
 				{
 					"path": "waterfall/index",
 					"style": {
 						"navigationBarTitleText": "waterfall-瀑布流"
 					}
 				},
+				// #endif
 				// table表格
 				{
 					"path": "table/index",

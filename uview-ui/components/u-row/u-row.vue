@@ -38,11 +38,6 @@
 				default: 'center'
 			}
 		},
-		provide() {
-			return {
-				gutter: this.gutter
-			}
-		},
 		computed: {
 			uJustify() {
 				if (this.justify == 'end' || this.justify == 'start') return 'flex-' + this.justify;
@@ -68,14 +63,14 @@
 
 	.u-row {
 		// 由于微信小程序编译后奇怪的页面结构，只能使用float布局实现，flex无法实现
-		/* #ifndef MP-WEIXIN || MP-QQ */
+		/* #ifndef MP-WEIXIN || MP-QQ || MP-TOUTIAO */
 		@include vue-flex;
 		/* #endif */
 		flex-wrap: wrap;
 	}
 
 	.u-row:after {
-		/* #ifdef MP-WEIXIN || MP-QQ */
+		/* #ifdef MP-WEIXIN || MP-QQ || MP-TOUTIAO */
 		display: table;
 		clear: both;
 		content: "";

@@ -37,11 +37,22 @@ u-dropdown {
 /* end-微信小程序编译后页面有组件名的元素，特别处理--end */
 
 
-/* #ifdef MP-QQ */
-/* 需要做这一切额外的兼容，都是因为TX的无能 */
+/* #ifdef MP-QQ || MP-TOUTIAO */
+// 需要做这一切额外的兼容，都是因为TX的无能
 u-icon {
 	line-height: 0;
 }
 /* #endif */
+
+/* start--头条小程序编译后页面有组件名的元素，特别处理--start */
+// 由于头条小程序不支持直接组件名形式写样式，目前只能在写组件的时候给组件加上对应的类名
+/* #ifdef MP-TOUTIAO */
+.u-td, .u-th, .u-tr {
+	flex: 1;
+	align-self: stretch;
+}
+/* #endif */
+/* end-头条小程序编译后页面有组件名的元素，特别处理--end */
+
 
 

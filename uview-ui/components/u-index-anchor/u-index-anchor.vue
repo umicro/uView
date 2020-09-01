@@ -48,10 +48,15 @@
 				anchorStyle: {}
 			}
 		},
-		inject: ['UIndexList'],
+		created() {
+			this.parent = false;
+		},
 		mounted() {
-			this.UIndexList.children.push(this);
-			this.UIndexList.updateData();
+			this.parent = this.$u.$parent.call(this, 'u-index-list');
+			if(this.parent) {
+				this.parent.children.push(this);
+				this.parent.updateData();
+			}
 		},
 		computed: {
 			customAnchorStyle() {

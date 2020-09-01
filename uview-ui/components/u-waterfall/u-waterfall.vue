@@ -38,11 +38,6 @@ export default {
 			default: 'id'
 		}
 	},
-	provide() {
-		return {
-			uWaterfall: this
-		}
-	},
 	data() {
 		return {
 			leftList: [],

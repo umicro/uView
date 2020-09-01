@@ -80,7 +80,6 @@
 				default: ''
 			}
 		},
-		inject: ['uCollapse'],
 		data() {
 			return {
 				isShow: false,
@@ -88,41 +87,37 @@
 				height: 0, // body内容的高度
 				headStyle: {}, // 头部样式，对象形式
 				bodyStyle: {}, // 主体部分样式
-				//itemStyle: {}, // 每个item的整体样式
+				itemStyle: {}, // 每个item的整体样式
 				arrowColor: '', // 箭头的颜色
 				hoverClass: '', // 头部按下时的效果样式类
+				arrow: true, // 是否显示右侧箭头
+				
 			};
-		},
-		mounted() {
-			this.init();
 		},
 		watch: {
 			open(val) {
 				this.isShow = val;
 			}
 		},
-		computed: {
-			arrow() {
-				return this.uCollapse.arrow;
-			},
-			itemStyle() {
-				return this.uCollapse.itemStyle;
-			}
-		},
 		created() {
+			this.parent = false;
 			// 获取u-collapse的信息，放在u-collapse是为了方便，不用每个u-collapse-item写一遍
 			this.isShow = this.open;
-			this.nameSync = this.name ? this.name : this.uCollapse.childrens.length;
-			this.uCollapse.childrens.push(this);
-			//this.itemStyle = this.uCollapse.itemStyle;
-			this.headStyle = this.uCollapse.headStyle;
-			this.bodyStyle = this.uCollapse.bodyStyle;
-			this.arrowColor = this.uCollapse.arrowColor;
-			this.hoverClass = this.uCollapse.hoverClass;
 		},
 		methods: {
 			// 异步获取内容，或者动态修改了内容时，需要重新初始化
 			init() {
+				this.parent = this.$u.$parent.call(this, 'u-collapse');
+				if(this.parent) {
+					this.nameSync = this.name ? this.name : this.parent.childrens.length;
+					this.parent.childrens.push(this);
+					this.headStyle = this.parent.headStyle;
+					this.bodyStyle = this.parent.bodyStyle;
+					this.arrowColor = this.parent.arrowColor;
+					this.hoverClass = this.parent.hoverClass;
+					this.arrow = this.parent.arrow;
+					this.itemStyle = this.parent.itemStyle;
+				}
 				this.$nextTick(() => {
 					this.queryRect();
 				});
@@ -130,8 +125,8 @@
 			// 点击collapsehead头部
 			headClick() {
 				if (this.disabled) return;
-				if (this.uCollapse.accordion == true) {
-					this.uCollapse.childrens.map(val => {
+				if (this.parent && this.parent.accordion == true) {
+					this.parent.childrens.map(val => {
 						// 自身不设置为false，因为后面有this.isShow = !this.isShow;处理了
 						if (this != val) {
 							val.isShow = false;
@@ -146,7 +141,7 @@
 					show: this.isShow
 				})
 				// 只有在打开时才发出事件
-				if (this.isShow) this.uCollapse.onChange();
+				if (this.isShow) this.parent && this.parent.onChange();
 				this.$forceUpdate();
 			},
 			// 查询内容高度
@@ -157,6 +152,9 @@
 					this.height = res.height;
 				})
 			}
+		},
+		mounted() {
+			this.init();
 		}
 	};
 </script>

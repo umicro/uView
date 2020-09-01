@@ -1,7 +1,7 @@
 <template>
 	<view class="u-checkbox" :style="[checkboxStyle]">
 		<view class="u-checkbox__icon-wrap" @tap="toggle" :class="[iconClass]" :style="[iconStyle]">
-			<u-icon name="checkbox-mark" :size="checkboxIconSize" :color="iconColor"/>
+			<u-icon class="u-checkbox__icon-wrap__icon" name="checkbox-mark" :size="checkboxIconSize" :color="iconColor"/>
 		</view>
 		<view class="u-checkbox__label" @tap="onClickLabel" :style="{
 			fontSize: $u.addUnit(labelSize)
@@ -213,7 +213,9 @@
 	@import "../../libs/css/style.components.scss";
 
 	.u-checkbox {
+		/* #ifndef APP-NVUE */
 		display: inline-flex;
+		/* #endif */
 		align-items: center;
 		overflow: hidden;
 		user-select: none;
@@ -235,6 +237,13 @@
 			font-size: 20px;
 			border: 1px solid #c8c9cc;
 			transition-duration: 0.2s;
+			
+			/* #ifdef MP-TOUTIAO */
+			// 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
+			&__icon {
+				line-height: 0;
+			}
+			/* #endif */
 			
 			&--circle {
 				border-radius: 100%;

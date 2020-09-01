@@ -34,37 +34,38 @@
 				default: ''
 			},
 		},
-		// 父组件通过provide传递过来的整个this
-		inject: ['uGrid'],
 		data() {
 			return {
 				hoverClass: '', // 按下去的时候，是否显示背景灰色
+				col: 1, // 父组件划分的宫格数
+				showBorder: false, // 是否显示边框，根据父组件决定
 			};
 		},
 		created() {
-			this.hoverClass = this.uGrid.hoverClass;
+			// 父组件的实例
+			this.parent = false;
 		},
 		computed: {
-			// 小于2，显示2列；大于12，显示12列
-			colNum() {
-				return this.col < 2 ? 2 : this.col > 12 ? 12 : this.col;
-			},
 			// 每个grid-item的宽度
 			width() {
-				return 100 / Number(this.uGrid.col) + '%';
+				return 100 / Number(this.col) + '%';
 			},
-			// 是否显示边框
-			// 为了迎合演示的需要，从created生命周期移到此，以为演示中可能需要动态修改有无边框
-			showBorder() {
-				return this.uGrid.border;
-			}
 		},
 		methods: {
 			click() {
 				this.$emit('click', this.index);
-				this.uGrid.click(this.index);
+				this.parent && this.parent.click(this.index);
 			}
 		},
+		mounted() {
+			// 获取父组件节点u-grid，将其参数，赋值给本组件相关变量
+			this.parent = this.$u.$parent.call(this, 'u-grid');
+			if(this.parent) {
+				this.col = this.parent.col;
+				this.showBorder = this.parent.border;
+				this.hoverClass = this.parent.hoverClass;
+			}
+		}
 	};
 </script>
 

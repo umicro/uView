@@ -88,10 +88,10 @@
 			<view class="u-config-title u-border-bottom">
 				参数配置
 			</view>
-			<view class="u-config-item">
+			<!-- <view class="u-config-item">
 				<view class="u-item-title">是否显示边框</view>
 				<u-subsection vibrateShort :list="['是', '否']" @change="borderChange"></u-subsection>
-			</view>
+			</view> -->
 			<view class="u-config-item">
 				<view class="u-item-title">是否可滑动</view>
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="isSwiperChange"></u-subsection>

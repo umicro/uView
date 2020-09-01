@@ -63,11 +63,6 @@
 				default: 'u-hover-class'
 			}
 		},
-		provide() {
-			return {
-				uCollapse: this
-			}
-		},
 		created() {
 			this.childrens = []
 		},

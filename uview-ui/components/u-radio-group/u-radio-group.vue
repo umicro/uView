@@ -71,14 +71,18 @@
 				default: false
 			}
 		},
-		provide() {
-			return {
-				radioGroup: this
-			}
+		created() {
+			// 如果将children定义在data中，在微信小程序会造成循环引用而报错
+			this.children = [];
 		},
 		methods: {
 			// 该方法有子组件radio调用，当一个radio被选中的时候，给父组件设置value值(props传递的value)
 			setValue(val) {
+				// 通过子组件传递过来的val值(此被选中的子组件内部已将parentValue设置等于val的值)，将其他
+				// u-radio设置未选中的状态
+				this.children.map(child => {
+					if(child.parentValue != val) child.parentValue = '';
+				})
 				// 通过emit事件，设置父组件通过v-model双向绑定的值
 				this.$emit('input', val);
 				// 等待下一个周期再执行，因为this.$emit('input')作用于父组件，再反馈到子组件内部，需要时间

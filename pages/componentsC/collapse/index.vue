@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-collapse :item-style="itemStyle" event-type="close" :arrow="arrow" :accordion="accordion" @change="change">
+				<u-collapse v-if="key" :item-style="itemStyle" event-type="close" :arrow="arrow" :accordion="accordion" @change="change">
 					<u-collapse-item :index="index" @change="itemChange" :title="item.head" v-for="(item, index) in itemList" :key="index">
 						{{item.body}}
 					</u-collapse-item>
@@ -59,7 +59,8 @@
 				accordion: true,
 				arrow: true,
 				hoverClass: 'hover2',
-				itemStyle: {}
+				itemStyle: {},
+				key: true
 			}
 		},
 		methods: {
@@ -68,6 +69,7 @@
 			},
 			arrowChange(index) {
 				this.arrow = index == 0 ? true : false;
+				this.changeStatus();
 			},
 			styleChange(index) {
 				if(index == 0) {
@@ -79,6 +81,7 @@
 				} else {
 					this.itemStyle = {}
 				}
+				this.changeStatus();
 			},
 			change(index) {
 				let str = '';
@@ -97,6 +100,12 @@
 			},
 			itemChange(e) {
 				console.log(e);
+			},
+			changeStatus() {
+				this.key = false;
+				this.$nextTick(function(){
+					this.key = true;
+				})
 			}
 		}
 	}

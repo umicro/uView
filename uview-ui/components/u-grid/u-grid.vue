@@ -42,11 +42,6 @@ export default {
 			index: 0,
 		}
 	},
-	provide() {
-		return {
-			uGrid: this
-		}
-	},
 	computed: {
 		// 宫格对齐方式
 		gridStyle() {

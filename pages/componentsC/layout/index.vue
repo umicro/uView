@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-row gutter="20" :justify="justify">
+				<u-row :justify="justify">
 					<u-col :span="span" :offset="offset" @click="click">
 						<view class="demo-layout bg-purple-dark">
 

@@ -121,12 +121,12 @@
 			},
 			// 选中某个单选框时，由radio时触发
 			radioChange(e) {
-				console.log(e);
+				//console.log(e);
 			},
 			// 选中任一radio时，由radio-group触发
 			radioGroupChange(e) {
 				this.result = e;
-				console.log(e);
+				//console.log(e);
 			},
 			widthChange(index) {
 				this.width = index == 0 ? '50%' : '';

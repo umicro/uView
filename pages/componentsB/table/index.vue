@@ -5,29 +5,29 @@
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
 				<u-table :align="align" :borderColor="borderColor">
-					<u-tr>
-						<u-th>姓名</u-th>
-						<u-th>年龄</u-th>
-						<u-th>籍贯</u-th>
-						<u-th>性别</u-th>
+					<u-tr class="u-tr">
+						<u-th class="u-th">姓名</u-th>
+						<u-th class="u-th">年龄</u-th>
+						<u-th class="u-th">籍贯</u-th>
+						<u-th class="u-th">性别</u-th>
 					</u-tr>
-					<u-tr>
-						<u-td>吕布</u-td>
-						<u-td>22</u-td>
-						<u-td>楚河</u-td>
-						<u-td>男</u-td>
+					<u-tr class="u-tr">
+						<u-td class="u-td">吕布</u-td>
+						<u-td class="u-td">22</u-td>
+						<u-td class="u-td">楚河</u-td>
+						<u-td class="u-td">男</u-td>
 					</u-tr>
-					<u-tr>
-						<u-td>项羽</u-td>
-						<u-td>28</u-td>
-						<u-td>汉界</u-td>
-						<u-td>男</u-td>
+					<u-tr class="u-tr">
+						<u-td class="u-td">项羽</u-td>
+						<u-td class="u-td">28</u-td>
+						<u-td class="u-td">汉界</u-td>
+						<u-td class="u-td">男</u-td>
 					</u-tr>
-					<u-tr>
-						<u-td>木兰</u-td>
-						<u-td>24</u-td>
-						<u-td>南国</u-td>
-						<u-td>女</u-td>
+					<u-tr class="u-tr">
+						<u-td class="u-td">木兰</u-td>
+						<u-td class="u-td">24</u-td>
+						<u-td class="u-td">南国</u-td>
+						<u-td class="u-td">女</u-td>
 					</u-tr>
 				</u-table>
 			</view>

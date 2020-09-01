@@ -2,6 +2,7 @@
 	<view class="u-radio" :style="[radioStyle]">
 		<view class="u-radio__icon-wrap" @tap="toggle" :class="[iconClass]" :style="[iconStyle]">
 			<u-icon
+				class="u-radio__icon-wrap__icon"
 			    name="checkbox-mark"
 			    :size="elIconSize" 
 				:color="iconColor"/>
@@ -70,13 +71,18 @@
 		},
 		data() {
 			return {
-				parentDisabled: false
+				parentValue: ''
 			};
 		},
 		created() {
-			// this.parentDisabled = this.parent.disabled;
+			this.parent = false;
+		},
+		mounted() {
 			// 支付宝小程序不支持provide/inject，所以使用这个方法获取整个父组件，在created定义，避免循环应用
 			this.parent = this.$u.$parent.call(this, 'u-radio-group');
+			if(this.parent) {
+				this.parent.children.push(this);
+			}
 		},
 		computed: {
 			// 是否禁用，如果父组件u-raios-group禁用的话，将会忽略子组件的配置
@@ -106,7 +112,7 @@
 			// 设置radio的状态，要求radio的name等于parent的value时才为选中状态
 			iconStyle() {
 				let style = {};
-				if (this.elActiveColor && this.name == this.parent.value && !this.elDisabled) {
+				if (this.elActiveColor && this.parentValue && !this.elDisabled) {
 					style.borderColor = this.elActiveColor;
 					style.backgroundColor = this.elActiveColor;
 				}
@@ -115,21 +121,21 @@
 				return style;
 			},
 			iconColor() {
-				return this.name == this.parent.value ? '#ffffff' : 'transparent';
+				return this.name ==  this.parentValue ? '#ffffff' : 'transparent';
 			},
 			iconClass() {
 				let classes = [];
 				classes.push('u-radio__icon-wrap--' + this.elShape);
-				if (this.name == this.parent.value) classes.push('u-radio__icon-wrap--checked');
+				if (this.name == this.parentValue) classes.push('u-radio__icon-wrap--checked');
 				if (this.elDisabled) classes.push('u-radio__icon-wrap--disabled');
-				if (this.name == this.parent.value && this.elDisabled) classes.push(
+				if (this.name == this.parentValue && this.elDisabled) classes.push(
 					'u-radio__icon-wrap--disabled--checked');
 				// 支付宝小程序无法动态绑定一个数组类名，否则解析出来的结果会带有","，而导致失效
 				return classes.join(' ');
 			},
 			radioStyle() {
 				let style = {};
-				if (this.parent.width) {
+				if (this.parent && this.parent.width) {
 					style.width = this.parent.width;
 					// #ifdef MP
 					// 各家小程序因为它们特殊的编译结构，使用float布局
@@ -140,7 +146,7 @@
 					style.flex = `0 0 ${this.parent.width}`;
 					// #endif
 				}
-				if (this.parent.wrap) {
+				if (this.parent && this.parent.wrap) {
 					style.width = '100%';
 					// #ifndef MP
 					// H5和APP使用flex布局，将宽度设置100%，即可自动换行
@@ -153,20 +159,28 @@
 		methods: {
 			onClickLabel() {
 				if (!this.elLabelDisabled && !this.elDisabled) {
-					this.parent.setValue(this.name);
-					this.emitEvent();
+					this.setRadioCheckedStatus();
 				}
 			},
 			toggle() {
 				if (!this.elDisabled) {
-					this.parent.setValue(this.name);
-					this.emitEvent();
+					this.setRadioCheckedStatus();
 				}
 			},
 			emitEvent() {
 				// u-radio的name不等于父组件的v-model的值时(意味着未选中)，才发出事件，避免多次点击触发事件
-				if(this.parent.value != this.name) this.$emit('change', this.name);
+				if(this.parent && this.parent.value != this.name) this.$emit('change', this.name);
 			},
+			// 改变组件选中状态
+			// 这里的改变的依据是，更改本组件的parentValue值为本组件的name值，同时通过父组件遍历所有u-radio实例
+			// 将本组建外的其他u-radio的parentValue都设置为空(由computed计算后，都被取消选中状态)，因而只剩下一个为选中状态
+			setRadioCheckedStatus() {
+				if(this.parent) {
+					this.parent.setValue(this.name);
+					this.parentValue = this.name;
+				}
+				this.emitEvent();
+			}
 		}
 	};
 </script>
@@ -175,8 +189,9 @@
 	@import "../../libs/css/style.components.scss";
 
 	.u-radio {
-		display: -webkit-flex;
-		@include vue-flex;
+		/* #ifndef APP-NVUE */
+		display: inline-flex;
+		/* #endif */
 		align-items: center;
 		overflow: hidden;
 		user-select: none;
@@ -197,6 +212,13 @@
 			font-size: 20px;
 			border: 1px solid #c8c9cc;
 			transition-duration: 0.2s;
+			
+			/* #ifdef MP-TOUTIAO */
+			// 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
+			&__icon {
+				line-height: 0;
+			}
+			/* #endif */
 			
 			&--circle {
 				border-radius: 100%;

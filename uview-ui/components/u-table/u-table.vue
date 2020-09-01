@@ -59,11 +59,6 @@
 				default: '#ffffff'
 			}
 		},
-		provide() {
-			return {
-				uTable: this,
-			};
-		},
 		data() {
 			return {}
 		},
