@@ -35,7 +35,7 @@
 			<block class="u-cell__value" v-if="value">{{ value }}</block>
 			<slot v-else></slot>
 		</view>
-		<view class="u-flex" v-if="$slots['right-icon']">
+		<view class="u-flex u-cell_right" v-if="$slots['right-icon']">
 			<slot name="right-icon"></slot>
 		</view>
 		<u-icon v-if="arrow" name="arrow-right" :style="[arrowStyle]" class="u-icon-wrap u-cell__right-icon-wrap"></u-icon>
@@ -249,7 +249,7 @@ export default {
 }
 
 .u-cell-border:after {
-	position: absolute;
+	position: absolute; 
 	/* #ifndef APP-NVUE */
 	box-sizing: border-box;
 	content: ' ';
@@ -301,12 +301,16 @@ export default {
 
 .u-cell--required:before {
 	position: absolute;
-	/* #ifndef APP-PLUS */
+	/* #ifndef APP-NVUE */
 	content: '*';
 	/* #endif */
 	left: 8px;
 	margin-top: 4rpx;
 	font-size: 14px;
 	color: $u-type-error;
+}
+
+.u-cell_right {
+	line-height: 1;
 }
 </style>

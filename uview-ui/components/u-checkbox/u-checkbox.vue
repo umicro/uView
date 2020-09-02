@@ -176,7 +176,10 @@
 					name: this.name
 				})
 				// 执行父组件u-checkbox-group的事件方法
-				if(this.parent && this.parent.emitEvent) this.parent.emitEvent();
+				// 等待下一个周期再执行，因为this.$emit('input')作用于父组件，再反馈到子组件内部，需要时间
+				setTimeout(() => {
+					if(this.parent && this.parent.emitEvent) this.parent.emitEvent();
+				}, 80);
 			},
 			// 设置input的值，这里通过input事件，设置通过v-model绑定的组件的值
 			setValue() {
@@ -191,17 +194,11 @@
 				// 如果原来为选中状态，那么可以取消
 				if (this.value == true) {
 					this.$emit('input', !this.value);
-					// 等待下一个周期再执行，因为this.$emit('input')作用于父组件，再反馈到子组件内部，需要时间
-					this.$nextTick(function() {
-						this.emitEvent();
-					})
+					this.emitEvent();
 				} else if ((this.parent && checkedNum < this.parent.max) || !this.parent) {
 					// 如果原来为未选中状态，需要选中的数量少于父组件中设置的max值，才可以选中
 					this.$emit('input', !this.value);
-					// 等待下一个周期再执行，因为this.$emit('input')作用于父组件，再反馈到子组件内部，需要时间
-					this.$nextTick(function() {
-						this.emitEvent();
-					})
+					this.emitEvent();
 				}
 
 			}

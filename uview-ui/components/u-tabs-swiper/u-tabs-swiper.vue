@@ -381,6 +381,7 @@
 		transition-property: background-color, color;
 	}
 
+	/* #ifndef APP-NVUE */
 	::-webkit-scrollbar,
 	::-webkit-scrollbar,
 	::-webkit-scrollbar {
@@ -390,6 +391,7 @@
 		-webkit-appearance: none;
 		background: transparent;
 	}
+	/* #endif */
 
 	/* #ifdef H5 */
 	// 通过样式穿透，隐藏H5下，scroll-view下的滚动条

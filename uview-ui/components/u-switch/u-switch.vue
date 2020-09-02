@@ -111,7 +111,9 @@
 	
 	.u-switch {
 		position: relative;
+		/* #ifndef APP-NVUE */
 		display: inline-block;
+		/* #endif */
 		box-sizing: initial;
 		width: 2em;
 		height: 1em;

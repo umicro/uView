@@ -279,7 +279,9 @@ export default {
 	@import "../../libs/css/style.components.scss";
 
 	.u-countdown {
-		display: inline-flex;
+		/* #ifndef APP-NVUE */
+		display: inline-flex;		
+		/* #endif */
 		align-items: center;
 	}
 

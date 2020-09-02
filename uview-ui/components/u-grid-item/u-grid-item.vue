@@ -93,7 +93,9 @@
 
 	.u-grid-marker-box {
 		position: absolute;
-		display: inline-block;
+		/* #ifndef APP-NVUE */
+		display: inline-flex;		
+		/* #endif */
 		line-height: 0;
 	}
 

@@ -169,7 +169,11 @@
 			},
 			emitEvent() {
 				// u-radio的name不等于父组件的v-model的值时(意味着未选中)，才发出事件，避免多次点击触发事件
-				if(this.parent && this.parent.value != this.name) this.$emit('change', this.name);
+				// 等待下一个周期再执行，因为this.$emit('input')作用于父组件，再反馈到子组件内部，需要时间
+				// 头条需要延时的时间比较长，这里给比较大的值
+				setTimeout(() => {
+					if(this.parent && this.parent.value != this.name) this.$emit('change', this.name);
+				}, 80);
 			},
 			// 改变组件选中状态
 			// 这里的改变的依据是，更改本组件的parentValue值为本组件的name值，同时通过父组件遍历所有u-radio实例

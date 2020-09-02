@@ -222,12 +222,16 @@ export default {
 
 .u-right-icon {
 	margin-left: 12rpx;
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	align-items: center;
 }
 
 .u-left-icon {
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	align-items: center;
 }
 </style>

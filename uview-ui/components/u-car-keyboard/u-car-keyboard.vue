@@ -186,7 +186,9 @@
 		width: 62rpx;
 		flex: 0 0 64rpx;
 		height: 80rpx;
-		display: inline-block;
+		/* #ifndef APP-NVUE */
+		display: inline-flex;		
+		/* #endif */
 		font-size: 36rpx;
 		text-align: center;
 		line-height: 80rpx;

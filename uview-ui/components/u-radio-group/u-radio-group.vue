@@ -85,13 +85,13 @@
 				})
 				// 通过emit事件，设置父组件通过v-model双向绑定的值
 				this.$emit('input', val);
+				this.$emit('change', val);
 				// 等待下一个周期再执行，因为this.$emit('input')作用于父组件，再反馈到子组件内部，需要时间
-				this.$nextTick(function() {
-					this.$emit('change', val);
-					// 发出事件，用于在表单组件中嵌入radio的情况，进行验证
+				// 由于头条小程序执行迟钝，故需要用几十毫秒的延时
+				setTimeout(() => {
 					// 将当前的值发送到 u-form-item 进行校验
 					this.dispatch('u-form-item', 'on-form-change', val);
-				});
+				}, 60)
 			}
 		}
 	}
@@ -101,7 +101,7 @@
 	@import "../../libs/css/style.components.scss";
 	
 	.u-radio-group {
-		/* #ifndef MP */
+		/* #ifndef MP || APP-NVUE */
 		display: inline-flex;
 		flex-wrap: wrap;
 		/* #endif */

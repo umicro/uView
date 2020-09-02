@@ -237,6 +237,8 @@
 		transform: transition3d(0, 0, 0);
 		// 防止图片加载“闪一下”
 		will-change: transform;
+		/* #ifndef APP-NVUE */
 		display: block;
+		/* #endif */
 	}
 </style>

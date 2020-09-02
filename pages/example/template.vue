@@ -10,7 +10,7 @@
 			</u-cell-group>
 		</view>
 		<u-gap height="70"></u-gap>
-		<u-tabbar :list="vuex_tabbar" :mid-button="true"></u-tabbar>
+		<!-- <u-tabbar :list="vuex_tabbar" :mid-button="true"></u-tabbar> -->
 	</view>
 </template>
 

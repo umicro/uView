@@ -182,7 +182,9 @@
 	@import "../../libs/css/style.components.scss";
 
 	.u-avatar {
-		display: inline-flex;
+		/* #ifndef APP-NVUE */
+		display: inline-flex;		
+		/* #endif */
 		align-items: center;
 		justify-content: center;
 		font-size: 28rpx;

@@ -1,7 +1,7 @@
 <template>
 	<view v-if="visibleSync" :style="[customStyle, {
 		zIndex: uZindex - 1
-	}]" :class="{ 'u-drawer-visible': showDrawer }" class="u-drawer" hover-stop-propagation>
+	}]" class="u-drawer" hover-stop-propagation>
 		<u-mask :custom-style="maskCustomStyle" :maskClickAble="maskCloseAble" :z-index="uZindex - 2" :show="showDrawer && mask" @click="maskClick"></u-mask>
 		<view
 			class="u-drawer-content"

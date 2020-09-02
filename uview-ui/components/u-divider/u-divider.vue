@@ -146,6 +146,8 @@ export default {
 .u-divider-text {
 	white-space: nowrap;
 	padding: 0 16rpx;
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 }
 </style>

@@ -164,7 +164,9 @@
 		box-sizing: border-box;
 		align-items: center;
 		border-radius: 6rpx;
+		/* #ifndef APP-NVUE */
 		display: inline-block;
+		/* #endif */
 		line-height: 1;
 	}
 	

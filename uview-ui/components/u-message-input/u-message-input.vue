@@ -256,7 +256,9 @@
 	}
 
 	.u-placeholder-line {
+		/* #ifndef APP-NVUE */
 		display: none;
+		/* #endif */
 		position: absolute;
 		left: 50%;
 		top: 50%;

@@ -85,21 +85,6 @@ export default {
 		// 存储当前form下的所有u-form-item的实例
 		// 不能定义在data中，否则微信小程序会造成循环引用而报错
 		this.fields = [];
-		// 存当前实例
-		let that = this;
-		// 监听on-form-item-add事件，将子组件添加到fields中
-		this.$on('on-form-item-add', item => {
-			if (item) {
-				that.fields.push(item);
-			}
-		});
-		// 删除当前有的实例
-		this.$on('on-form-item-remove', item => {
-			// 如果当前没有prop的话表示当前不要进行删除（因为没有注入）
-			if (item.prop) {
-				that.fields.splice(that.fields.indexOf(item), 1);
-			}
-		});
 	},
 	methods: {
 		setRules(rules) {

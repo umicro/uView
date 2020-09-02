@@ -317,7 +317,9 @@ export default {
 }
 
 .u-label-text {
-	display: inline-block;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 }
 
 .u-label-left-gap {

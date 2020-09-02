@@ -538,7 +538,9 @@ export default {
 	background: rgb(244, 245, 246);
 	position: relative;
 	border-radius: 10rpx;
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-block;
+	/* #endif */
 	align-items: center;
 	justify-content: center;
 }

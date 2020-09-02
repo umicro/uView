@@ -203,7 +203,9 @@ export default {
 @import "../../libs/css/style.components.scss";
 .u-circle-progress {
 	position: relative;
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	align-items: center;
 	justify-content: center;
 }

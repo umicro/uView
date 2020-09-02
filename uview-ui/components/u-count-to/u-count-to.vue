@@ -233,7 +233,9 @@ export default {
 @import "../../libs/css/style.components.scss";
 
 .u-count-num {
-	display: inline-block;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	text-align: center;
 }
 </style>

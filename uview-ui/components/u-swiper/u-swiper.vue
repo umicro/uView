@@ -243,7 +243,9 @@
 		width: 100%;
 		will-change: transform;
 		height: 100%;
+		/* #ifndef APP-NVUE */
 		display: block;
+		/* #endif */
 		/* #ifdef H5 */
 		pointer-events: none;
 		/* #endif */

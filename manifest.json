@@ -120,7 +120,8 @@
         "appid" : "17597421"
     },
     "mp-toutiao" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "appid" : "tt2bc55d78b4ff50bf"
     },
     "h5" : {
         "template" : "template.h5.html",

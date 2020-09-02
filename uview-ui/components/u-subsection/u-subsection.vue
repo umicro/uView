@@ -321,7 +321,6 @@
 		align-items: center;
 		justify-content: center;
 		color: $u-main-color;
-		display: inline-flex;
 		padding: 0 6rpx;
 	}
 

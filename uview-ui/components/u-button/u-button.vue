@@ -11,6 +11,8 @@
 			'u-btn--' + type,
 			disabled ? `u-btn--${type}--disabled` : '',
 		]"
+		:hover-start-time="Number(hoverStartTime)"
+		:hover-stay-time="Number(hoverStayTime)"
 		:disabled="disabled"
 		:form-type="formType"
 		:open-type="openType"
@@ -211,7 +213,17 @@ export default {
 		throttleTime: {
 			type: [String, Number],
 			default: 1000
-		}
+		},
+		// 按住后多久出现点击态，单位毫秒
+		hoverStartTime: {
+			type: [String, Number],
+			default: 20
+		},
+		// 手指松开后点击态保留时间，单位毫秒
+		hoverStayTime: {
+			type: [String, Number],
+			default: 150
+		},
 	},
 	computed: {
 		// 当没有传bgColor变量时，按钮按下去的颜色类名
@@ -339,7 +351,9 @@ export default {
 	position: relative;
 	border: 0;
 	//border-radius: 10rpx;
-	display: inline-block;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	// 避免边框某些场景可能被“裁剪”，不能设置为hidden
 	overflow: visible;
 	line-height: 1;
@@ -497,7 +511,9 @@ export default {
 }
 
 .u-size-medium {
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	width: auto;
 	font-size: 26rpx;
 	height: 70rpx;
@@ -506,7 +522,9 @@ export default {
 }
 
 .u-size-mini {
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	width: auto;
 	font-size: 22rpx;
 	padding-top: 1px;

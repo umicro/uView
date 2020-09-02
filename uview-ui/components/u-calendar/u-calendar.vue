@@ -568,8 +568,6 @@
 				
 				&__inner {
 					height: 84rpx;
-					display: -webkit-box;
-					display: -webkit-flex;
 					@include vue-flex;
 					align-items: center;
 					justify-content: center;

@@ -106,7 +106,9 @@
 	.u-progress {
 		overflow: hidden;
 		height: 15px;
+		/* #ifndef APP-NVUE */
 		display: inline-flex;
+		/* #endif */
 		align-items: center;
 		width: 100%;
 		border-radius: 100rpx;

@@ -223,7 +223,9 @@ export default {
 }
 
 .u-left-icon {
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: none;
+	/* #endif */
 	align-items: center;
 }
 
