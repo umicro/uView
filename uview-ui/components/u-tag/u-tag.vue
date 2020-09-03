@@ -112,9 +112,9 @@
 			customStyle() {
 				let style = {};
 				// 文字颜色（如果有此值，会覆盖type值的颜色）
-				if(this.color) style.color = this.color+"!important";
+				if(this.color) style.color = this.color;
 				// tag的背景颜色（如果有此值，会覆盖type值的颜色）
-				if(this.bgColor) style.backgroundColor = this.bgColor+"!important";
+				if(this.bgColor) style.backgroundColor = this.bgColor;
 				// 如果是镂空型tag，没有传递边框颜色（borderColor）的话，使用文字的颜色（color属性）
 				if(this.mode == 'plain' && this.color && !this.borderColor) style.borderColor = this.color;
 				else style.borderColor = this.borderColor;

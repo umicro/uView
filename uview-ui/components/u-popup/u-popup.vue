@@ -2,7 +2,7 @@
 	<view v-if="visibleSync" :style="[customStyle, {
 		zIndex: uZindex - 1
 	}]" class="u-drawer" hover-stop-propagation>
-		<u-mask :custom-style="maskCustomStyle" :maskClickAble="maskCloseAble" :z-index="uZindex - 2" :show="showDrawer && mask" @click="maskClick"></u-mask>
+		<u-mask :duration="duration" :custom-style="maskCustomStyle" :maskClickAble="maskCloseAble" :z-index="uZindex - 2" :show="showDrawer && mask" @click="maskClick"></u-mask>
 		<view
 			class="u-drawer-content"
 			@tap="modeCenterClose(mode)"
@@ -188,6 +188,11 @@ export default {
 			default() {
 				return {}
 			}
+		},
+		// 遮罩打开或收起的动画过渡时间，单位ms
+		duration: {
+			type: [String, Number],
+			default: 250
 		}
 	},
 	data() {
@@ -237,6 +242,7 @@ export default {
 				// 不加可能圆角无效
 				style.overflow = 'hidden';
 			}
+			if(this.duration) style.transition = `all ${this.duration / 1000}s linear`;
 			return style;
 		},
 		// 中部弹窗的特有样式
@@ -323,7 +329,7 @@ export default {
 				this.timer = setTimeout(() => {
 					this[param2] = status;
 					this.$emit(status ? 'open' : 'close');
-				}, 300);
+				}, this.duration);
 			}
 		}
 	}
@@ -351,7 +357,7 @@ export default {
 	/* #endif */
 	position: absolute;
 	z-index: 1003;
-	transition: all 0.3s linear;
+	transition: all 0.25s linear;
 }
 
 .u-drawer__scroll-view {

@@ -11,7 +11,7 @@
 					@end="end"
 					@moving="moving"
 				>
-					<!-- #ifndef MP-WEIXIN -->
+					<!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
 					<view class="" v-if="useSlot">
 						<view class="badge-button">
 							{{value}}

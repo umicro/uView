@@ -2,7 +2,8 @@
 	<view class="u-char-box">
 		<view class="u-char-flex">
 			<input :disabled="disabledKeyboard" :value="valueModel" type="number" :focus="focus" :maxlength="maxlength" class="u-input" @input="getVal"/>
-			<view v-for="(item, index) in maxlength" :key="index">
+			<!-- 这里需要通过new Array生成一个供循环的数组，是因为头条小程序不支持通过v-for历遍一个数值，其他端都是正常的 -->
+			<view v-for="(item, index) in (new Array(maxlength).fill(0))" :key="index">
 				<view :class="[breathe && charArrLength == index ? 'u-breathe' : '', 'u-char-item',
 				charArrLength === index && mode == 'box' ? 'u-box-active' : '',
 				mode === 'box' ? 'u-box' : '']" :style="{
@@ -118,13 +119,13 @@
 			}
 		},
 		watch: {
-			maxlength: {
-				// 此值设置为true，会在组件加载后无需maxlength变化就会执行一次本监听函数，无需再created生命周期中处理
-				immediate: true,
-				handler(val) {
-					this.maxlength = Number(val);
-				}
-			},
+			// maxlength: {
+			// 	// 此值设置为true，会在组件加载后无需maxlength变化就会执行一次本监听函数，无需再created生命周期中处理
+			// 	immediate: true,
+			// 	handler(val) {
+			// 		this.maxlength = Number(val);
+			// 	}
+			// }, 
 			value: {
 				immediate: true,
 				handler(val) {

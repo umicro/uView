@@ -219,12 +219,16 @@ export default [{
 			icon: 'mask',
 			title: 'Mask 遮罩层',
 			title_en: 'Mask',
-		}, {
+		}, 
+		// #ifndef MP-TOUTIAO
+		{
 			path: '/pages/componentsA/noNetwork/index',
 			icon: 'noNetwork',
 			title: 'NoNetwork 无网络提示',
 			title_en: 'NoNetwork',
-		}, {
+		}, 
+		// #endif
+		{
 			path: '/pages/componentsC/grid/index',
 			icon: 'grid',
 			title: 'Grid 宫格布局',
@@ -250,12 +254,14 @@ export default [{
 			title: 'Sticky 吸顶',
 			title_en: 'Sticky',
 		}, 
+		// #ifndef MP-TOUTIAO
 		{
 			path: '/pages/componentsB/waterfall/index',
 			icon: 'waterfall',
 			title: 'Waterfall 瀑布流',
 			title_en: 'Waterfall',
 		},
+		// #endif
 		{
 			path: '/pages/componentsB/divider/index',
 			icon: 'divider',

@@ -9,7 +9,7 @@
 					:show-title="showTitle" :async-close="asyncClose"
 					@confirm="confirm" :content="content"
 				>
-					<!-- #ifndef MP-WEIXIN -->
+					<!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
 					<view class="warp" style="margin: 30rpx;" v-if="contentSlot">
 						<image class="logo" src="https://uviewui.com/common/logo.png" style="width: 220rpx;" mode="widthFix"></image>
 					</view>

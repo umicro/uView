@@ -1,11 +1,11 @@
 <template>
-	<view class="u-toast" :class="[isShow ? 'u-show' : '', 'u-type-' + config.type, 'u-position-' + config.position]" :style="{
+	<view class="u-toast" :class="[isShow ? 'u-show' : '', 'u-type-' + tmpConfig.type, 'u-position-' + tmpConfig.position]" :style="{
 		zIndex: uZIndex
 	}">
 		<view class="u-icon-wrap">
-			<u-icon v-if="config.icon" class="u-icon" :name="iconName" :size="30" :color="config.type"></u-icon>
+			<u-icon v-if="tmpConfig.icon" class="u-icon" :name="iconName" :size="30" :color="tmpConfig.type"></u-icon>
 		</view>
-		<text class="u-text">{{config.title}}</text>
+		<text class="u-text">{{tmpConfig.title}}</text>
 	</view>
 </template>
 
@@ -42,14 +42,15 @@
 					position: 'center', // toast出现的位置
 					callback: null, // 执行完后的回调函数
 					back: false, // 结束toast是否自动返回上一页
-				}
+				},
+				tmpConfig: {}, // 将用户配置和内置配置合并后的临时配置变量
 			};
 		},
 		computed: {
 			iconName() {
 				// 只有不为none，并且type为error|warning|succes|info时候，才显示图标
-				if (['error', 'warning', 'success', 'info'].indexOf(this.config.type) >= 0 && this.config.icon) {
-					let icon = this.$u.type2icon(this.config.type);
+				if (['error', 'warning', 'success', 'info'].indexOf(this.tmpConfig.type) >= 0 && this.tmpConfig.icon) {
+					let icon = this.$u.type2icon(this.tmpConfig.type);
 					return icon;
 				}
 			},
@@ -61,7 +62,8 @@
 		methods: {
 			// 显示toast组件，由父组件通过this.$refs.xxx.show(options)形式调用
 			show(options) {
-				this.config = this.$u.deepMerge(this.config, options);
+				// 不降结果合并到this.config变量，避免多次条用u-toast，前后的配置造成混论
+				this.tmpConfig = this.$u.deepMerge(this.config, options);
 				if (this.timer) {
 					// 清除定时器
 					clearTimeout(this.timer);
@@ -74,9 +76,9 @@
 					clearTimeout(this.timer);
 					this.timer = null;
 					// 判断是否存在callback方法，如果存在就执行
-					typeof(this.config.callback) === 'function' && this.config.callback();
+					typeof(this.tmpConfig.callback) === 'function' && this.tmpConfig.callback();
 					this.timeEnd();
-				}, this.config.duration);
+				}, this.tmpConfig.duration);
 			},
 			// 隐藏toast组件，由父组件通过this.$refs.xxx.hide()形式调用
 			hide() {
@@ -90,35 +92,35 @@
 			// 倒计时结束之后，进行的一些操作
 			timeEnd() {
 				// 如果带有url值，根据isTab为true或者false进行跳转
-				if (this.config.url) {
+				if (this.tmpConfig.url) {
 					// 如果url没有"/"开头，添加上，因为uni的路由跳转需要"/"开头
-					if (this.config.url[0] != '/') this.config.url = '/' + this.config.url;
+					if (this.tmpConfig.url[0] != '/') this.tmpConfig.url = '/' + this.tmpConfig.url;
 					// 判断是否有传递显式的参数
-					if (Object.keys(this.config.params).length) {
+					if (Object.keys(this.tmpConfig.params).length) {
 						// 判断用户传递的url中，是否带有参数
 						// 使用正则匹配，主要依据是判断是否有"/","?","="等，如“/page/index/index?name=mary"
 						// 如果有params参数，转换后无需带上"?"
 						let query = '';
-						if (/.*\/.*\?.*=.*/.test(this.config.url)) {
+						if (/.*\/.*\?.*=.*/.test(this.tmpConfig.url)) {
 							// object对象转为get类型的参数
-							query = this.$u.queryParams(this.config.params, false);
-							this.config.url = this.config.url + "&" + query;
+							query = this.$u.queryParams(this.tmpConfig.params, false);
+							this.tmpConfig.url = this.tmpConfig.url + "&" + query;
 						} else {
-							query = this.$u.queryParams(this.config.params);
-							this.config.url += query;
+							query = this.$u.queryParams(this.tmpConfig.params);
+							this.tmpConfig.url += query;
 						}
 					}
 					// 如果是跳转tab页面，就使用uni.switchTab
-					if (this.config.isTab) {
+					if (this.tmpConfig.isTab) {
 						uni.switchTab({
-							url: this.config.url
+							url: this.tmpConfig.url
 						});
 					} else {
 						uni.navigateTo({
-							url: this.config.url
+							url: this.tmpConfig.url
 						});
 					}
-				} else if(this.config.back) {
+				} else if(this.tmpConfig.back) {
 					// 回退到上一页
 					this.$u.route({
 						type: 'back'

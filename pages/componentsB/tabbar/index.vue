@@ -28,7 +28,6 @@
 			</view>
 		</view>
 		<u-tabbar
-		    :beforeSwitch="beforeSwitch"
 		    v-model="current"
 		    :show="show"
 		    :bg-color="bgColor"

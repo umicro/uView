@@ -3,7 +3,8 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area u-flex u-row-center">
-				<u-line :border-style="borderStyle" color="red" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
+				<!-- 头条小程序因为兼容性，必须要给组件写上u-line类 -->
+				<u-line class="u-line" :border-style="borderStyle" color="red" :color="color" :length="length" :direction="direction" :hair-line="hairLine"></u-line>
 			</view>
 		</view>
 		<view class="u-config-wrap">
