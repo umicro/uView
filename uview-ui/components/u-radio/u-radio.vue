@@ -8,6 +8,7 @@
 				:color="iconColor"/>
 		</view>
 		<view class="u-radio__label" @tap="onClickLabel" :style="{
+			width: isWrap?'100%':'auto',
 			fontSize: $u.addUnit(labelSize)
 		}">
 			<slot />
@@ -85,6 +86,10 @@
 			}
 		},
 		computed: {
+			// 是否占整行，如果父组件u-radio-group需要换行的话，子组件label应该占整行
+			isWrap() {
+				return this.parent ? this.parent.wrap : false;
+			},
 			// 是否禁用，如果父组件u-raios-group禁用的话，将会忽略子组件的配置
 			elDisabled() {
 				return this.disabled !== '' ? this.disabled : this.parent ? this.parent.disabled : false;
