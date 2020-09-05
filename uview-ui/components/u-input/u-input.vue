@@ -27,6 +27,7 @@
 			:selection-end="uSelectionEnd"
 			:selection-start="uSelectionStart"
 			:cursor-spacing="getCursorSpacing"
+			:show-confirm-bar="showConfirmbar"
 			@input="handleInput"
 			@blur="handleBlur"
 			@focus="onFocus"
@@ -48,6 +49,7 @@
 			:cursor-spacing="getCursorSpacing"
 			:selection-end="uSelectionEnd"
 			:selection-start="uSelectionStart"
+			:show-confirm-bar="showConfirmbar"
 			@focus="onFocus"
 			@blur="handleBlur"
 			@input="handleInput"
@@ -206,6 +208,11 @@ export default {
 		trim: {
 			type: Boolean,
 			default: true
+		},
+		// 是否显示键盘上方带有”完成“按钮那一栏
+		showConfirmbar:{
+			type:Boolean,
+			default:true
 		}
 	},
 	data() {
