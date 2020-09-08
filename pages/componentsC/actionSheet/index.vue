@@ -35,7 +35,8 @@
 					text: '朱颜辞镜花辞树',
 					disabled: true
 				}, {
-					text: '正是江南好风景'
+					text: '正是江南好风景',
+					subText: '春江水暖鸭先知'
 				}, {
 					text: '落花时节又逢君'
 				}],

@@ -4,7 +4,7 @@
 			background: bgColor,
 			width: width,
 		}">
-		<view class="u-grid-item-box" :class="[showBorder ? 'u-border-right u-border-bottom' : '']">
+		<view class="u-grid-item-box" :style="customStyle" :class="[showBorder ? 'u-border-right u-border-bottom' : '']">
 			<slot />
 		</view>
 	</view>
@@ -17,6 +17,7 @@
 	 * @tutorial https://www.uviewui.com/components/grid.html
 	 * @property {String} bg-color 宫格的背景颜色（默认#ffffff）
 	 * @property {String Number} index 点击宫格时，返回的值
+	 * @property {Object} custom-style 自定义样式，对象形式
 	 * @event {Function} click 点击宫格触发
 	 * @example <u-grid-item></u-grid-item>
 	 */
@@ -33,6 +34,15 @@
 				type: [Number, String],
 				default: ''
 			},
+			// 自定义样式，对象形式
+			customStyle: {
+				type: Object,
+				default() {
+					return {
+						padding: '30rpx 0'
+					}
+				}
+			}
 		},
 		data() {
 			return {

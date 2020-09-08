@@ -149,6 +149,7 @@
 		line-height: 24rpx;
 		padding: 4rpx 8rpx;
 		border-radius: 100rpx;
+		z-index: 9;
 		
 		&--bg--primary {
 			background-color: $u-type-primary;

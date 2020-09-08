@@ -9,11 +9,12 @@
 				@touchmove.stop.prevent 
 				@tap="itemClick(index)" 
 				:style="[itemStyle(index)]" 
-				class="u-action-sheet-item" 
+				class="u-action-sheet-item u-line-1" 
 				:class="[index < list.length - 1 ? 'u-border-bottom' : '']"
 				:hover-stay-time="150"
 			>
-				{{item.text}}
+				<text>{{item.text}}</text>
+				<text class="u-action-sheet-item__subtext u-line-1" v-if="item.subText">{{item.subText}}</text>
 			</view>
 		</block>
 		<view class="u-gab" v-if="cancelBtn">
@@ -167,8 +168,15 @@
 		line-height: 1;
 		justify-content: center;
 		align-items: center;
-		font-size: 34rpx;
+		font-size: 32rpx;
 		padding: 34rpx 0;
+		flex-direction: column;
+	}
+	
+	.u-action-sheet-item__subtext {
+		font-size: 24rpx;
+		color: $u-tips-color;
+		margin-top: 20rpx;
 	}
 
 	.u-gab {

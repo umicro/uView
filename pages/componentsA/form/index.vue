@@ -23,7 +23,7 @@
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="结算方式" prop="payType" label-width="150">
 				<u-radio-group v-model="radio" @change="radioGroupChange" :width="radioCheckWidth" :wrap="radioCheckWrap">
-					<u-radio shape="circle" v-model="item.checked" v-for="(item, index) in radioList" :key="index" :name="item.name">{{ item.name }}</u-radio>
+					<u-radio shape="circle" v-for="(item, index) in radioList" :key="index" :name="item.name">{{ item.name }}</u-radio>
 				</u-radio-group>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="所在地区" prop="region" label-width="150">
@@ -44,7 +44,7 @@
 				<u-switch v-model="model.remember" slot="right"></u-switch>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
-				<u-upload width="160"></u-upload>
+				<u-upload width="160" height="160"></u-upload>
 			</u-form-item>
 		</u-form>
 		<view class="agreement">
