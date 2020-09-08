@@ -2,8 +2,7 @@
 	<view class="u-char-box">
 		<view class="u-char-flex">
 			<input :disabled="disabledKeyboard" :value="valueModel" type="number" :focus="focus" :maxlength="maxlength" class="u-input" @input="getVal"/>
-			<!-- 这里需要通过new Array生成一个供循环的数组，是因为头条小程序不支持通过v-for历遍一个数值，其他端都是正常的 -->
-			<view v-for="(item, index) in (new Array(maxlength).fill(0))" :key="index">
+			<view v-for="(item, index) in loopCharArr" :key="index">
 				<view :class="[breathe && charArrLength == index ? 'u-breathe' : '', 'u-char-item',
 				charArrLength === index && mode == 'box' ? 'u-box-active' : '',
 				mode === 'box' ? 'u-box' : '']" :style="{
@@ -11,7 +10,8 @@
 					fontSize: fontSize + 'rpx',
 					width: width + 'rpx',
 					height: width + 'rpx',
-					color: inactiveColor
+					color: inactiveColor,
+					borderColor: charArrLength === index && mode == 'box' ? activeColor : 'none'
 				}">
 					<view class="u-placeholder-line" :style="{
 							display: charArrLength === index ? 'block' : 'none',
@@ -100,7 +100,7 @@
 			// 激活样式
 			activeColor: {
 				type: String,
-				default: '#2979ff'
+				default: 'red'
 			},
 			// 未激活的样式
 			inactiveColor: {
@@ -155,6 +155,10 @@
 			},
 			charArrLength() {
 				return this.charArr.length;
+			},
+			// 根据长度，循环输入框的个数，因为头条小程序数值不能用于v-for
+			loopCharArr() {
+				return new Array(this.maxlength);
 			}
 		},
 		methods: {

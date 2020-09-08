@@ -224,7 +224,7 @@ export default {
 
 .u-left-icon {
 	/* #ifndef APP-NVUE */
-	display: none;
+	display: inline-flex;
 	/* #endif */
 	align-items: center;
 }
