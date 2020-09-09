@@ -1,5 +1,5 @@
 <template>
-	<view class="u-search" :style="{
+	<view class="u-search" @tap="clickHandler" :style="{
 		margin: margin,
 	}">
 		<view
@@ -11,7 +11,9 @@
 				height: height + 'rpx'
 			}"
 		>
-			<view class="u-icon-wrap"><u-icon class="u-clear-icon" :size="30" name="search" :color="searchIconColor ? searchIconColor : color"></u-icon></view>
+			<view class="u-icon-wrap">
+				<u-icon class="u-clear-icon" :size="30" :name="searchIcon" :color="searchIconColor ? searchIconColor : color"></u-icon>
+			</view>
 			<input
 				confirm-type="search"
 				@blur="blur"
@@ -29,16 +31,17 @@
 				type="text"
 				:style="[{
 					textAlign: inputAlign,
-					color: color
+					color: color,
+					backgroundColor: bgColor,
 				}, inputStyle]"
 			/>
-			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @touchstart="clear">
-				<u-icon class="u-clear-icon" name="close" :size="16" color="#fff" @touchstart="clear"></u-icon>
+			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @tap="clear">
+				<u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
 			</view>
 		</view>
 		<view :style="[actionStyle]" class="u-action" 
 			:class="[showActionBtn || show ? 'u-action-active' : '']" 
-			@touchstart.stop.prevent="custom"
+			@tap.stop.prevent="custom"
 		>{{ actionText }}</view>
 	</view>
 </template>
@@ -58,10 +61,12 @@
  * @property {String} action-text 右侧控件文字（默认“搜索”）
  * @property {Object} action-style 右侧控件的样式，对象形式
  * @property {String} input-align 输入框内容水平对齐方式（默认left）
+ * @property {Object} input-style 自定义输入框样式，对象形式
  * @property {Boolean} disabled 是否启用输入框（默认false）
  * @property {String} search-icon-color 搜索图标的颜色，默认同输入框字体颜色
  * @property {String} color 输入框字体颜色（默认#606266）
  * @property {String} placeholder-color placeholder的颜色（默认#909399）
+ * @property {String} search-icon 输入框左边的图标，可以为uView图标名称或图片路径
  * @property {String} margin 组件与其他上下左右元素之间的距离，带单位的字符串形式，如"30rpx"
  * @property {Boolean} animation 是否开启动画，见上方说明（默认false）
  * @property {String} value 输入框初始值
@@ -71,6 +76,7 @@
  * @event {Function} change 输入框内容发生变化时触发
  * @event {Function} search 用户确定搜索时触发，用户按回车键，或者手机键盘右下角的"搜索"键时触发
  * @event {Function} custom 用户点击右侧控件时触发
+ * @event {Function} clear 用户点击清除按钮时触发
  * @example <u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
  */
 export default {
@@ -179,6 +185,11 @@ export default {
 		margin: {
 			type: String,
 			default: '0'
+		},
+		// 左边输入框的图标，可以为uView图标名称或图片路径
+		searchIcon: {
+			type: String,
+			default: 'search'
 		}
 	},
 	data() {
@@ -230,10 +241,14 @@ export default {
 		// 也可以作为用户通过this.$refs形式调用清空输入框内容
 		clear() {
 			this.keyword = '';
+			// 延后发出事件，避免在父组件监听clear事件时，value为更新前的值(不为空)
+			this.$nextTick(() => {
+				this.$emit('clear');
+			})
 		},
 		// 确定搜索
-		search() {
-			this.$emit('search', this.keyword);
+		search(e) {
+			this.$emit('search', e.detail.value);
 			// 收起键盘
 			uni.hideKeyboard();
 		},
@@ -252,30 +267,40 @@ export default {
 		},
 		// 失去焦点
 		blur() {
-			this.focused = false;
+			// 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
+			// 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
+			setTimeout(() => {
+				this.focused = false;
+			}, 100)
 			this.show = false;
 			this.$emit('blur', this.keyword);
+		},
+		// 点击搜索框，只有disabled=true时才发出事件，因为禁止了输入，意味着是想跳转真正的搜索页
+		clickHandler() {
+			if(this.disabled) this.$emit('click');
 		}
 	}
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-search {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	flex: 1;
 }
 
 .u-content {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	padding: 0 18rpx;
 	flex: 1;
 }
 
 .u-clear-icon {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 }
 
@@ -288,12 +313,11 @@ export default {
 }
 
 .u-close-wrap {
-	width: 34rpx;
-	height: 34rpx;
-	display: flex;
+	width: 40rpx;
+	height: 100%;
+	@include vue-flex;
 	align-items: center;
 	justify-content: center;
-	background-color: rgb(200, 203, 204);
 	border-radius: 50%;
 }
 

@@ -1,26 +1,24 @@
+import deepMerge from "../function/deepMerge";
+import validate from "../function/test";
 class Request {
-	// 判断是否http|https开头的URL
-	static isHttp(url) {
-		return /(http|https):\/\/([\w.]+\/?)\S*/.test(url)
-	}
-
 	// 设置全局默认配置
 	setConfig(customConfig) {
-		this.config = Object.assign(this.config, customConfig);
+		// 深度合并对象，否则会造成对象深层属性丢失
+		this.config = deepMerge(this.config, customConfig);
 	}
 
 	// 主要请求部分
-	async request(options = {}) {
+	request(options = {}) {
 		// 检查请求拦截
 		if (this.interceptor.request && typeof this.interceptor.request === 'function') {
 			let tmpConfig = {};
-			let interceptorReuest = this.interceptor.request(options);
-			if (interceptorReuest === false) {
-				return false;
+			let interceptorRequest = this.interceptor.request(options);
+			if (interceptorRequest === false) {
+				// 返回一个处于pending状态中的Promise，来取消原promise，避免进入then()回调
+				return new Promise(()=>{});
 			}
-			this.options = interceptorReuest;
+			this.options = interceptorRequest;
 		}
-		
 		options.dataType = options.dataType || this.config.dataType;
 		options.responseType = options.responseType || this.config.responseType;
 		options.url = options.url || '';
@@ -34,6 +32,7 @@ class Request {
 				uni.hideLoading();
 				// 清除定时器，如果请求回来了，就无需loading
 				clearTimeout(this.config.timer);
+				this.config.timer = null;
 				// 判断用户对拦截返回数据的要求，如果originalData为true，返回所有的数据(response)到拦截器，否则只返回response.data
 				if(this.config.originalData) {
 					// 判断是否存在拦截器
@@ -57,7 +56,7 @@ class Request {
 							if (resInterceptors !== false) {
 								resolve(resInterceptors);
 							} else {
-								reject(response);
+								reject(response.data);
 							}
 						} else {
 							// 如果不是返回原始数据(originalData=false)，且没有拦截器的情况下，返回纯数据给then回调
@@ -65,18 +64,18 @@ class Request {
 						}
 					} else {
 						// 不返回原始数据的情况下，服务器状态码不为200，modal弹框提示
-						if(response.errMsg) {
-							uni.showModal({
-								title: response.errMsg
-							});
-						}
+						// if(response.errMsg) {
+						// 	uni.showModal({
+						// 		title: response.errMsg
+						// 	});
+						// }
 						reject(response)
 					}
 				}
 			}
 
-			// 判断用户传递的URL是否/开头,如果不是,加上/
-			options.url = Request.isHttp(options.url) ? options.url : (this.config.baseUrl + (options.url.indexOf('/') == 0 ?
+			// 判断用户传递的URL是否/开头,如果不是,加上/，这里使用了uView的test.js验证库的url()方法
+			options.url = validate.url(options.url) ? options.url : (this.config.baseUrl + (options.url.indexOf('/') == 0 ?
 				options.url : '/' + options.url));
 			
 			// 是否显示loading
@@ -92,16 +91,19 @@ class Request {
 				}, this.config.loadingTime);
 			}
 			uni.request(options);
-		}).catch(e => {})
+		})
+		// .catch(res => {
+		// 	// 如果返回reject()，不让其进入this.$u.post().then().catch()后面的catct()
+		// 	// 因为很多人都会忘了写后面的catch()，导致报错捕获不到catch
+		// 	return new Promise(()=>{});
+		// })
 	}
 
 	constructor() {
 		this.config = {
 			baseUrl: '', // 请求的根域名
 			// 默认的请求头
-			header: {
-				'content-type': 'application/json;charset=UTF-8'
-			},
+			header: {},
 			method: 'POST',
 			// 设置为json，返回后uni.request会对数据进行一次JSON.parse
 			dataType: 'json',

@@ -2,15 +2,17 @@
 	<view
 		class="u-card"
 		@tap.stop="click"
-		:class="{ 'u-border': border, 'u-card-full': full }"
+		:class="{ 'u-border': border, 'u-card-full': full, 'u-card--border': borderRadius > 0 }"
 		:style="{
-			borderRadius: full ? 0 : borderRadius + 'rpx',
-			margin: margin
+			borderRadius: borderRadius + 'rpx',
+			margin: margin,
+			boxShadow: boxShadow
 		}"
 	>
 		<view
+			v-if="showHead"
 			class="u-card__head"
-			:style="[headStyle, {padding: padding + 'rpx'}]"
+			:style="[{padding: padding + 'rpx'}, headStyle]"
 			:class="{
 				'u-border-bottom': headBorderBottom
 			}"
@@ -53,11 +55,12 @@
 			</view>
 			<slot name="head" v-else />
 		</view>
-		<view @tap="bodyClick" class="u-card__body" :style="[bodyStyle, {padding: padding + 'rpx'}]"><slot name="body" /></view>
+		<view @tap="bodyClick" class="u-card__body" :style="[{padding: padding + 'rpx'}, bodyStyle]"><slot name="body" /></view>
 		<view
+			v-if="showFoot"
 			class="u-card__foot"
 			 @tap="footClick"
-			:style="[footStyle, {padding: $slots.foot ? padding + 'rpx' : 0}]"
+			:style="[{padding: $slots.foot ? padding + 'rpx' : 0}, footStyle]"
 			:class="{
 				'u-border-top': footBorderTop
 			}"
@@ -81,6 +84,7 @@
  * @property {String | Number} sub-title-size 副标题字体大小（默认26）
  * @property {Boolean} border 是否显示边框（默认true）
  * @property {String | Number} index 用于标识点击了第几个卡片
+ * @property {String} box-shadow 卡片外围阴影，字符串形式（默认none）
  * @property {String} margin 卡片与屏幕两边和上下元素的间距，需带单位，如"30rpx 20rpx"（默认30rpx）
  * @property {String | Number} border-radius 卡片整体的圆角值，单位rpx（默认16）
  * @property {Object} head-style 头部自定义样式，对象形式
@@ -88,6 +92,8 @@
  * @property {Object} foot-style 底部自定义样式，对象形式
  * @property {Boolean} head-border-bottom 是否显示头部的下边框（默认true）
  * @property {Boolean} foot-border-top 是否显示底部的上边框（默认true）
+ * @property {Boolean} show-head 是否显示头部（默认true）
+ * @property {Boolean} show-head 是否显示尾部（默认true）
  * @property {String} thumb 缩略图路径，如设置将显示在标题的左边，不建议使用相对路径
  * @property {String | Number} thumb-width 缩略图的宽度，高等于宽，单位rpx（默认60）
  * @property {Boolean} thumb-circle 缩略图是否为圆形（默认false）
@@ -205,6 +211,21 @@ export default {
 		padding: {
 			type: [String, Number],
 			default: '30'
+		},
+		// 是否显示头部
+		showHead: {
+			type: Boolean,
+			default: true
+		},
+		// 是否显示尾部
+		showFoot: {
+			type: Boolean,
+			default: true
+		},
+		// 卡片外围阴影，字符串形式
+		boxShadow: {
+			type: String,
+			default: 'none'
 		}
 	},
 	data() {
@@ -228,6 +249,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+	
 .u-card {
 	position: relative;
 	overflow: hidden;
@@ -241,8 +264,8 @@ export default {
 		margin-right: 0 !important;
 	}
 	
-	&:after {
-		border-radius: 20rpx;
+	&--border:after {
+		border-radius: 16rpx;
 	}
 
 	&__head {

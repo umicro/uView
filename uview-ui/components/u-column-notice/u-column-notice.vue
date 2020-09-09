@@ -5,6 +5,9 @@
 			background: computeBgColor,
 			padding: padding
 		}"
+		:class="[
+			type ? `u-type-${type}-light-bg` : ''
+		]"
 	>
 		<view class="u-icon-wrap">
 			<u-icon class="u-left-icon" v-if="volumeIcon" name="volume-fill" :size="volumeSize" :color="computeColor"></u-icon>
@@ -13,11 +16,9 @@
 			<swiper-item v-for="(item, index) in list" :key="index" class="u-swiper-item">
 				<view
 					class="u-news-item u-line-1"
-					:style="{
-						color: computeColor,
-						fontSize: fontSize + 'rpx'
-					}"
+					:style="[textStyle]"
 					@tap="click(index)"
+					:class="['u-type-' + type]"
 				>
 					{{ item }}
 				</view>
@@ -136,8 +137,17 @@ export default {
 		// 计算字体颜色，如果没有自定义的，就用uview主题颜色
 		computeColor() {
 			if (this.color) return this.color;
-			else if(this.type == 'none') return this.$u.color['contentColor'];
-			else return this.$u.color[this.type];
+			// 如果是无主题，就默认使用content-color
+			else if(this.type == 'none') return '#606266';
+			else return this.type;
+		},
+		// 文字内容的样式
+		textStyle() {
+			let style = {};
+			if (this.color) style.color = this.color;
+			else if(this.type == 'none') style.color = '#606266';
+			style.fontSize = this.fontSize + 'rpx';
+			return style;
 		},
 		// 垂直或者水平滚动
 		vertical() {
@@ -148,7 +158,6 @@ export default {
 		computeBgColor() {
 			if (this.bgColor) return this.bgColor;
 			else if(this.type == 'none') return 'transparent';
-			else return this.$u.color[this.type + 'Light'];
 		}
 	},
 	data() {
@@ -180,9 +189,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-notice-bar {
 	width: 100%;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: nowrap;
@@ -193,14 +204,14 @@ export default {
 .u-swiper {
 	font-size: 26rpx;
 	height: 32rpx;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	flex: 1;
 	margin-left: 12rpx;
 }
 
 .u-swiper-item {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	overflow: hidden;
 }
@@ -211,12 +222,16 @@ export default {
 
 .u-right-icon {
 	margin-left: 12rpx;
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	align-items: center;
 }
 
 .u-left-icon {
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	align-items: center;
 }
 </style>

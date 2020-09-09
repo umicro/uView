@@ -10,6 +10,7 @@
 					v-model="show"
 					:defaultRegion="defaultRegion"
 					:params="params"
+					end-year="2030"
 					@confirm="confirm"
 					:defaultSelector="defaultSelector"
 					:range="range"
@@ -65,7 +66,8 @@ export default {
 				second: true,
 				province: true,
 				city: true,
-				area: true
+				area: true,
+				timestamp: true
 			}
 		};
 	},
@@ -115,12 +117,13 @@ export default {
 			this.show = true;
 		},
 		confirm(e) {
+			// console.log(e);
 			this.input = '';
 			if (this.mode == 'time') {
 				if (this.params.year) this.input += e.year;
 				if (this.params.month) this.input += '-' + e.month;
 				if (this.params.day) this.input += '-' + e.day;
-				if (this.params.hour) this.input += ' ' + e.day;
+				if (this.params.hour) this.input += ' ' + e.hour;
 				if (this.params.minute) this.input += ':' + e.minute;
 				if (this.params.second) this.input += ':' + e.second;
 			} else if (this.mode == 'region') {
@@ -175,7 +178,6 @@ export default {
 					this.defaultSelector.splice(2, 1, 0)
 					break
 			}
-			this.$forceUpdate()
 		}
 	}
 };

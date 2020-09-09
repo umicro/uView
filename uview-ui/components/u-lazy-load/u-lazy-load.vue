@@ -114,7 +114,7 @@
 			},
 			// 计算图片的高度，可能为auto，带%，或者直接数值
 			imgHeight() {
-				return this.height == 'auto' ? 'auto' : String(this.height).indexOf('%') != -1 ? this.height : this.height + 'rpx';
+				return this.$u.addUnit(this.height);
 			}
 		},
 		created() {
@@ -126,16 +126,31 @@
 				// 如果是不开启过渡效果，直接返回
 				if (!this.isEffect) return;
 				this.time = 0;
-				// 原来opacity为1(不透明，是为了显示占位图)，改成0(透明， 意味着该元素显示的是背景颜色，默认的白色)，再改成1，是为了获得过渡效果
+				// 原来opacity为1(不透明，是为了显示占位图)，改成0(透明，意味着该元素显示的是背景颜色，默认的白色)，再改成1，是为了获得过渡效果
 				this.opacity = 0;
 				// 延时30ms，否则在浏览器H5，过渡效果无效
 				setTimeout(() => {
 					this.time = this.duration;
 					this.opacity = 1;
 				}, 30)
+			},
+			// 图片路径发生变化时，需要重新标记一些变量，否则会一直卡在某一个状态，比如isError
+			image(n) {
+				if(!n) {
+					// 如果传入null或者''，或者undefined，标记为错误状态
+					this.isError = true;
+				} else {
+					this.init();
+					this.isError = false;
+				}
 			}
 		},
 		methods: {
+			// 用于重新初始化
+			init() {
+				this.isError = false;
+				this.loadStatus = '';
+			},
 			// 点击图片触发的事件,loadlazy-还是懒加载中状态，loading-图片正在加载，loaded-图片加加载完成
 			clickImg() {
 				let whichImg = '';
@@ -209,6 +224,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-wrap {
 		background-color: #eee;
 		overflow: hidden;
@@ -220,6 +237,8 @@
 		transform: transition3d(0, 0, 0);
 		// 防止图片加载“闪一下”
 		will-change: transform;
+		/* #ifndef APP-NVUE */
 		display: block;
+		/* #endif */
 	}
 </style>

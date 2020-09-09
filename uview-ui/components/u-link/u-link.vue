@@ -67,13 +67,13 @@
 				// #ifdef MP
 				uni.setClipboardData({
 					data: this.href,
-					success() {
+					success: () => {
 						uni.hideToast();
+						this.$nextTick(() => {
+							this.$u.toast(this.mpTips);
+						})
 					}
 				});
-				this.$nextTick(() => {
-					this.$u.toast(this.mpTips);
-				})
 				// #endif
 			}
 		}
@@ -81,6 +81,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-link {
 		line-height: 1;
 	}

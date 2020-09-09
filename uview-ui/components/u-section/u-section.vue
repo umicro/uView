@@ -1,19 +1,28 @@
 <template>
 	<view class="u-section">
-		<view class="u-section-title" :style="{
+		<view class="u-section__title" :style="{
 			fontWeight: bold ? 'bold' : 'normal',
 			color: color,
-			fontSize: fontSize + 'rpx'
+			fontSize: fontSize + 'rpx',
+			paddingLeft: showLine ? (fontSize * 0.7) + 'rpx' : 0
+		}" :class="{
+			'u-section--line': showLine
 		}">
-			{{title}}
-		</view>
-		<view class="u-right-info" v-if="right" :style="{
-			color: subColor
-		}" @tap="rightClick">
-			{{subTitle}}
-			<view class="u-icon-arrow">
-				<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
+			<view class="u-section__title__icon-wrap u-flex" :style="[lineStyle]" v-if="showLine">
+				<u-icon top="0" name="column-line" :size="fontSize * 1.25" bold :color="lineColor ? lineColor : color"></u-icon>
 			</view>
+			<text class="u-flex u-section__title__text">{{title}}</text>
+		</view>
+		<view class="u-section__right-info" v-if="right || $slots.right" :style="{
+			color: subColor
+		}" @tap="rightClick"> 
+			<slot name="right" v-if="$slots.right" />
+			<block v-else>
+				{{subTitle}}
+				<view class="u-section__right-info__icon-arrow u-flex" v-if="arrow">
+					<u-icon name="arrow-right" size="24" :color="subColor"></u-icon>
+				</view>
+			</block>
 		</view>
 	</view>
 </template>
@@ -26,6 +35,8 @@
 	 * @property {String} title 左边主标题
 	 * @property {String} sub-title 右边副标题（默认更多）
 	 * @property {Boolean} right 是否显示右边的内容（默认true）
+	 * @property {Boolean} showLine 是否显示左边的竖条（默认true）
+	 * @property {Boolean} arrow 是否显示右边箭头（默认true）
 	 * @property {String Number} font-size 主标题的字体大小（默认28）
 	 * @property {Boolean} bold 主标题是否加粗（默认true）
 	 * @property {String} color 主标题颜色（默认#303133）
@@ -68,11 +79,32 @@
 			subColor: {
 				type: String,
 				default: '#909399'
-			}
+			},
+			// 是否显示左边的竖条
+			showLine: {
+				type: Boolean,
+				default: true
+			},
+			// 左边竖线的颜色
+			lineColor: {
+				type: String,
+				default: ''
+			},
+			// 是否显示右边箭头
+			arrow: {
+				type: Boolean,
+				default: true
+			},
 		},
-		data() {
-			return {
-				
+		computed: {
+			// 左边竖条的样式
+			lineStyle() {
+				// 由于安卓和iOS的，需要稍微调整绝对定位的top值，才能让左边的竖线和右边的文字垂直居中
+				return {
+					// 由于竖线为字体图标，具有比实际线宽更宽的宽度，所以也需要根据字体打下动态调整
+					left: -(Number(this.fontSize) * 0.9) + 'rpx',
+					top: -(Number(this.fontSize) * (this.$u.os() == 'ios' ? 0.14 : 0.15)) + 'rpx',
+				}
 			}
 		},
 		methods: {
@@ -84,38 +116,39 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-section {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-	}
-	
-	.u-section-title {
-		position: relative;
-		font-size: 28rpx;
-		padding-left: 10px;
-		line-height: 1;
-	}
-	
-	.u-section-title:after {
-		position: absolute;
-		width: 4px;
-		height: 100%;
-		content: '';
-		left: 0;
-		border-radius: 10px;
-		background-color: currentColor;
-	}
-	
-	.u-right-info {
-		color: $u-tips-color;
-		font-size: 26rpx;
-		display: flex;
-		align-items: center;
-	}
-	
-	.u-icon-arrow {
-		margin-left: 6rpx;
+		
+		&__title {
+			position: relative;
+			font-size: 28rpx;
+			padding-left: 20rpx;
+			@include vue-flex;
+			align-items: center;
+			
+			&__icon-wrap {
+				position: absolute;
+			}
+			
+			&__text {
+				line-height: 1;
+			}
+		}
+		
+		&__right-info {
+			color: $u-tips-color;
+			font-size: 26rpx;
+			@include vue-flex;
+			align-items: center;
+			
+			&__icon-arrow {
+				margin-left: 6rpx;
+			}
+		}
 	}
 </style>

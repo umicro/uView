@@ -252,7 +252,7 @@
 				// 颜色渐变过程数组
 				this.colorGradientArr = color.colorGradient(this.inactiveColor, this.activeColor, this.colorStep);
 			},
-			// 获取各个tab的节点信息 
+			// 获取各个tab的节点信息
 			getTabsInfo() {
 				return new Promise((resolve, reject) => {
 					let view = uni.createSelectorQuery().in(this);
@@ -355,13 +355,11 @@
 			// swiper结束滑动
 			setFinishCurrent(current) {
 				// 如果滑动的索引不一致，修改tab颜色变化，因为可能会有直接点击tab的情况
-				if (current != this.animationFinishCurrent) {
-					this.tabsInfo.map((val, index) => {
-						if (current == index) val.color = this.activeColor;
-						else val.color = this.inactiveColor;
-						return val;
-					});
-				}
+				this.tabsInfo.map((val, index) => {
+					if (current == index) val.color = this.activeColor;
+					else val.color = this.inactiveColor;
+					return val;
+				});
 				this.line3AddDx = 0;
 				this.animationFinishCurrent = current;
 				this.countLine3Dx();
@@ -371,6 +369,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+
 	view,
 	scroll-view {
 		box-sizing: border-box;
@@ -381,6 +381,7 @@
 		transition-property: background-color, color;
 	}
 
+	/* #ifndef APP-NVUE */
 	::-webkit-scrollbar,
 	::-webkit-scrollbar,
 	::-webkit-scrollbar {
@@ -390,10 +391,11 @@
 		-webkit-appearance: none;
 		background: transparent;
 	}
+	/* #endif */
 
 	/* #ifdef H5 */
 	// 通过样式穿透，隐藏H5下，scroll-view下的滚动条
-	scroll-view /deep/ ::-webkit-scrollbar {
+	scroll-view ::v-deep ::-webkit-scrollbar {
 		display: none;
 		width: 0 !important;
 		height: 0 !important;
@@ -414,7 +416,7 @@
 	}
 
 	.u-tabs-scorll-flex {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 	}
 
@@ -454,7 +456,7 @@
 		position: absolute;
 		top: 0;
 		transition-property: left, background-color;
-		display: flex;
+		@include vue-flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;

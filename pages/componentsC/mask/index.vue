@@ -43,7 +43,7 @@
 		data() {
 			return {
 				show: false,
-				zoom: false,
+				zoom: true,
 				duration: 300,
 				content: false,
 			}

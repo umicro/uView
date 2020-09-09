@@ -15,7 +15,6 @@ function timeFrom(timestamp = null, format = 'yyyy-mm-dd') {
 	timer = parseInt(timer / 1000);
 	// 如果小于5分钟,则返回"刚刚",其他以此类推
 	let tips = '';
-	console.log(timer);
 	switch (true) {
 		case timer < 300:
 			tips = '刚刚';

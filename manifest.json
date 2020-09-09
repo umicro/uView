@@ -2,10 +2,14 @@
     "name" : "uView",
     "appid" : "__UNI__60F4B81",
     "description" : "多平台快速开发的UI框架",
-    "versionName" : "1.0.0",
+    "versionName" : "1.6.8",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
+        // APP-VUE分包，可提APP升启动速度，2.7.12开始支持，兼容微信小程序分包方案，默认关闭
+        "optimization" : {
+            "subPackages" : true
+        },
         "safearea" : {
             "bottom" : {
                 "offset" : "none"
@@ -102,13 +106,22 @@
         "usingComponents" : true
     },
     "mp-alipay" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "component2" : true
+    },
+    "mp-qq" : {
+        "optimization" : {
+            "subPackages" : true
+        },
+        "appid" : "15646153"
     },
     "mp-baidu" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "appid" : "17597421"
     },
     "mp-toutiao" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "appid" : "tt2bc55d78b4ff50bf"
     },
     "h5" : {
         "template" : "template.h5.html",
@@ -118,8 +131,9 @@
         },
         "optimization" : {
             "treeShaking" : {
-                "enable" : true
+                "enable" : false
             }
-        }
+        },
+        "title" : "uView UI"
     }
 }

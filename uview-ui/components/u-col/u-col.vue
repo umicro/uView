@@ -4,8 +4,12 @@
 	]" :style="{
 		padding: `0 ${Number(gutter)/2 + 'rpx'}`,
 		marginLeft: 100 / 12 * offset + '%',
-		flex: `0 0 ${100 / 12 * span}%`
-	}">
+		flex: `0 0 ${100 / 12 * span}%`,
+		alignItems: uAlignItem,
+		justifyContent: uJustify,
+		textAlign: textAlign
+	}"
+	 @tap.stop.prevent="click">
 		<slot></slot>
 	</view>
 </template>
@@ -16,6 +20,7 @@
 	 * @description 通过基础的 12 分栏，迅速简便地创建布局（搭配<u-row>使用）
 	 * @tutorial https://www.uviewui.com/components/layout.html
 	 * @property {String Number} span 栅格占据的列数，总12等分（默认0）
+	 * @property {String} text-align 文字水平对齐方式（默认left）
 	 * @property {String Number} offset 分栏左边偏移，计算方式与span相同（默认0）
 	 * @example <u-col span="3"><view class="demo-layout bg-purple"></view></u-col>
 	 */
@@ -32,14 +37,62 @@
 				type: [Number, String],
 				default: 0
 			},
+			// 水平排列方式，可选值为`start`(或`flex-start`)、`end`(或`flex-end`)、`center`、`around`(或`space-around`)、`between`(或`space-between`)
+			justify: {
+				type: String,
+				default: 'start'
+			},
+			// 垂直对齐方式，可选值为top、center、bottom
+			align: {
+				type: String,
+				default: 'center'
+			},
+			// 文字对齐方式
+			textAlign: {
+				type: String,
+				default: 'left'
+			}
 		},
-		inject: ['gutter'],
+		data() {
+			return {
+				gutter: 20, // 给col添加间距，左右边距各占一半，从父组件u-row获取
+			}
+		},
+		created() {
+			this.parent = false;
+		},
+		mounted() {
+			// 获取父组件实例，并赋值给对应的参数
+			this.parent = this.$u.$parent.call(this, 'u-row');
+			if (this.parent) {
+				this.gutter = this.parent.gutter;
+			}
+		},
+		computed: {
+			uJustify() {
+				if (this.justify == 'end' || this.justify == 'start') return 'flex-' + this.justify;
+				else if (this.justify == 'around' || this.justify == 'between') return 'space-' + this.justify;
+				else return this.justify;
+			},
+			uAlignItem() {
+				if (this.align == 'top') return 'flex-start';
+				if (this.align == 'bottom') return 'flex-end';
+				else return this.align;
+			}
+		},
+		methods: {
+			click() {
+				this.$emit('click');
+			}
+		}
 	}
 </script>
 
 <style lang="scss">
+	@import "../../libs/css/style.components.scss";
+
 	.u-col {
-		/* #ifdef MP-WEIXIN */
+		/* #ifdef MP-WEIXIN || MP-QQ || MP-TOUTIAO */
 		float: left;
 		/* #endif */
 	}

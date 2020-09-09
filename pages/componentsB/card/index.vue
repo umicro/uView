@@ -2,7 +2,7 @@
 	<view class="">
 		<view class="u-card-wrap">
 			<u-card @click="click" @head-click="headClick" :title="title" :sub-title="subTitle" :thumb="thumb" :padding="padding" :border="border">
-				<view class="" slot="body">
+				<view class="" slot="body"> 
 					<view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
 						<view class="u-body-item-title u-line-2">
 							瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半
@@ -17,7 +17,7 @@
 					</view>
 				</view>
 				<view class="" slot="foot">
-					<u-icon v-if="bottomSlot" name="chat-fill" size="34" color="" label="30评论"></u-icon>
+					<u-icon v-if="bottomSlot" name="chat-fill" size="34" label="30评论"></u-icon>
 				</view>
 			</u-card>
 		</view>

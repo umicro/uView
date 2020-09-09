@@ -42,11 +42,6 @@ export default {
 			index: 0,
 		}
 	},
-	provide() {
-		return {
-			uGrid: this
-		}
-	},
 	computed: {
 		// 宫格对齐方式
 		gridStyle() {
@@ -76,6 +71,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+
 .u-grid {
 	width: 100%;
 	/* #ifdef MP */
@@ -85,7 +82,7 @@ export default {
 	/* #endif */
 	
 	/* #ifndef MP */
-	display: flex;
+	@include vue-flex;
 	flex-wrap: wrap;
 	align-items: center;
 	/* #endif */

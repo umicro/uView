@@ -114,7 +114,12 @@
 				this.toast(`点击了关闭图标`);
 			},
 			click(index) {
-				this.toast(`点击了第${index + 1}条消息`);
+				if(this.mode == 'horizontal' && this.isCircular) {
+					this.toast('此模式无法获取Index值');
+				} else {
+					this.toast(`点击了第${index + 1}条消息`);
+				}
+				
 			},
 			getMore() {
 				this.toast(`点击了更多图标`);

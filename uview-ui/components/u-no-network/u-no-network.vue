@@ -1,5 +1,5 @@
 <template>
-	<view class="u-no-network" v-if="!isConnected" :style="{'z-index': uZIndex}" @touchmove.stop.prevent="">
+	<view class="u-no-network" v-if="!isConnected" :style="{'z-index': uZIndex}" @touchmove.stop.prevent="() => {}">
 		<view class="u-inner">
 			<image class="u-error-icon" :src="image" mode="widthFix"></image>
 			<view class="u-tips">
@@ -60,10 +60,6 @@
 			}
 		},
 		mounted() {
-			uni.setNavigationBarColor({
-			    frontColor: '#000000',
-			    backgroundColor: '#ffffff',
-			})
 			this.isIOS = (uni.getSystemInfoSync().platform === 'ios');
 			uni.onNetworkStatusChange((res) => {
 				this.isConnected = res.isConnected;
@@ -181,6 +177,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-no-network {
 		background-color: #fff;
 		position: fixed;
@@ -192,7 +190,7 @@
 
 	.u-inner {
 		height: 100vh;
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;

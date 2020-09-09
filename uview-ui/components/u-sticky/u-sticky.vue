@@ -29,6 +29,7 @@
 	 * @property {String Number} z-index 吸顶时的z-index值（默认970）
 	 * @property {String Number} h5-nav-height 导航栏高度，自定义导航栏时(无导航栏时需设置为0)，需要传入此值，单位px（默认44）
 	 * @event {Function} fixed 组件吸顶时触发
+	 * @event {Function} unfixed 组件取消吸顶时触发
 	 * @example <u-sticky offset-top="200"><view>塞下秋来风景异，衡阳雁去无留意</view></u-sticky>
 	 */
 	export default {
@@ -132,18 +133,24 @@
 			},
 			setFixed(top) {
 				const fixed = top < this.stickyTop;
-				this.fixed = fixed;
 				if (fixed) this.$emit('fixed', this.index);
+				else if(this.fixed) this.$emit('unfixed', this.index);
+				this.fixed = fixed;
 			},
 			disconnectObserver(observerName) {
 				const observer = this[observerName];
 				observer && observer.disconnect();
 			},
+		},
+		beforeDestroy() {
+			this.disconnectObserver('contentObserver');
 		}
 	};
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-sticky {
 		z-index: 9999999999;
 	}

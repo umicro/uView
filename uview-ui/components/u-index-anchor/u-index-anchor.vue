@@ -1,10 +1,13 @@
 <template>
-	<view class="u-index-anchor-wrapper" :id="$u.guid()" :style="[wrapperStyle]">
-		<view class="u-index-anchor " :class="[active ? 'u-index-anchor--active' : '']" :style="[customAnchorStyle]">
-			<slot v-if="useSlot" />
-			<block v-else>
-				<text>{{ index }}</text>
-			</block>
+	<!-- 支付宝小程序使用$u.getRect()获取组件的根元素尺寸，所以在外面套一个"壳" -->
+	<view>
+		<view class="u-index-anchor-wrapper" :id="$u.guid()" :style="[wrapperStyle]">
+			<view class="u-index-anchor " :class="[active ? 'u-index-anchor--active' : '']" :style="[customAnchorStyle]">
+				<slot v-if="useSlot" />
+				<block v-else>
+					<text>{{ index }}</text>
+				</block>
+			</view>
 		</view>
 	</view>
 </template>
@@ -45,10 +48,15 @@
 				anchorStyle: {}
 			}
 		},
-		inject: ['UIndexList'],
+		created() {
+			this.parent = false;
+		},
 		mounted() {
-			this.UIndexList.children.push(this);
-			this.UIndexList.updateData();
+			this.parent = this.$u.$parent.call(this, 'u-index-list');
+			if(this.parent) {
+				this.parent.children.push(this);
+				this.parent.updateData();
+			}
 		},
 		computed: {
 			customAnchorStyle() {
@@ -59,6 +67,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-index-anchor {
 		box-sizing: border-box;
 		padding: 14rpx 24rpx;

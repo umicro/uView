@@ -16,7 +16,7 @@ function mobile(value) {
  * 验证URL格式
  */
 function url(value) {
-	return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i
+	return /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?(([0-9]{1,3}.){3}[0-9]{1,3}|([0-9a-zA-Z_!~*'()-]+.)*([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z].[a-zA-Z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+\/?)$/
 		.test(value)
 }
 
@@ -78,7 +78,7 @@ function carNo(value) {
  */
 function amount(value) {
 	//金额，只允许保留两位小数
-	return /^[1-9]\d*(,\d{3})*(\.\d{1,2})?$|^0.\d{1,2}$/.test(value);
+	return /^[1-9]\d*(,\d{3})*(\.\d{1,2})?$|^0\.\d{1,2}$/.test(value);
 }
 
 /**
@@ -127,10 +127,18 @@ function rangeLength(value, param) {
 }
 
 /**
+ * 是否固定电话
+ */
+function landline(value) {
+	let reg = /^\d{3,4}-\d{7,8}(-\d{3,4})?$/;
+	return reg.test(value);
+}
+
+/**
  * 判断是否为空
  */
-function empty(value){
-    switch (typeof value) {
+function empty(value) {
+	switch (typeof value) {
 		case 'undefined':
 			return true;
 		case 'string':
@@ -148,8 +156,53 @@ function empty(value){
 				return false;
 			}
 			return true;
-    }
-    return false;	
+	}
+	return false;
+}
+
+/**
+ * 是否json字符串
+ */
+function jsonString(value) {
+	if (typeof value == 'string') {
+		try {
+			var obj = JSON.parse(value);
+			if (typeof obj == 'object' && obj) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (e) {
+			return false;
+		}
+	}
+	return false;
+}
+
+
+/**
+ * 是否数组
+ */
+function array(value) {
+	if (typeof Array.isArray === "function") {
+		return Array.isArray(value);
+	} else {
+		return Object.prototype.toString.call(value) === "[object Array]";
+	}
+}
+
+/**
+ * 是否对象
+ */
+function object(value) {
+	return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+/**
+ * 是否短信验证码
+ */
+function code(value, len = 6) {
+	return new RegExp(`^\\d{${len}}$`).test(value);
 }
 
 
@@ -171,5 +224,10 @@ export default {
 	range,
 	rangeLength,
 	empty,
-	isEmpty: empty
+	isEmpty: empty,
+	jsonString,
+	landline,
+	object,
+	array,
+	code
 }

@@ -36,6 +36,27 @@ const store = new Vuex.Store({
 		// 如果vuex_version无需保存到本地永久存储，无需lifeData.vuex_version方式
 		vuex_version: '1.0.1',
 		vuex_demo: '绛紫',
+		// 自定义tabbar数据
+		vuex_tabbar: [{
+				iconPath: "/static/uview/example/component.png",
+				selectedIconPath: "/static/uview/example/component_select.png",
+				text: '组件',
+				pagePath: '/pages/example/components'
+			},
+			{
+				iconPath: "/static/uview/example/js.png",
+				selectedIconPath: "/static/uview/example/js_select.png",
+				text: '工具',
+				midButton: true,
+				pagePath: '/pages/example/js'
+			},
+			{
+				iconPath: "/static/uview/example/template.png",
+				selectedIconPath: "/static/uview/example/template_select.png",
+				text: '模板',
+				pagePath: '/pages/example/template'
+			}
+		]
 	},
 	mutations: {
 		$uStore(state, payload) {
@@ -43,7 +64,7 @@ const store = new Vuex.Store({
 			let nameArr = payload.name.split('.');
 			let saveKey = '';
 			let len = nameArr.length;
-			if(nameArr.length >= 2) {
+			if(len >= 2) {
 				let obj = state[nameArr[0]];
 				for(let i = 1; i < len - 1; i ++) {
 					obj = obj[nameArr[i]];

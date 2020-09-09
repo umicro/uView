@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-verification-code :seconds="seconds" @end="end" @start="start" ref="uCode" 
+				<u-verification-code :keep-running="true" :seconds="seconds" @end="end" @start="start" ref="uCode" 
 				@change="codeChange" :startText="startText" :changeText="changeText" 
 				:endText="endText"></u-verification-code>
 				<u-button @click="getCode">{{tips}}</u-button>

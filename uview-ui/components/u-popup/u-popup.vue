@@ -1,6 +1,8 @@
 <template>
-	<view v-if="visibleSync" :style="[customStyle]" :class="{ 'u-drawer-visible': showDrawer }" class="u-drawer">
-		<u-mask :maskClickAble="maskCloseAble" :show="showDrawer && mask" @click="maskClick"></u-mask>
+	<view v-if="visibleSync" :style="[customStyle, {
+		zIndex: uZindex - 1
+	}]" class="u-drawer" hover-stop-propagation>
+		<u-mask :duration="duration" :custom-style="maskCustomStyle" :maskClickAble="maskCloseAble" :z-index="uZindex - 2" :show="showDrawer && mask" @click="maskClick"></u-mask>
 		<view
 			class="u-drawer-content"
 			@tap="modeCenterClose(mode)"
@@ -24,18 +26,21 @@
 					:color="closeIconColor"
 					:size="closeIconSize"
 				></u-icon>
-				<slot />
+				<scroll-view class="u-drawer__scroll-view" scroll-y="true">
+					<slot />
+				</scroll-view>
 			</view>
-			<block v-else><slot /></block>
-			<u-icon
-				v-if="mode != 'center' && closeable"
-				@click="close"
-				class="u-close"
-				:class="['u-close--' + closeIconPos]"
-				:name="closeIcon"
-				:color="closeIconColor"
-				:size="closeIconSize"
-			></u-icon>
+			<scroll-view class="u-drawer__scroll-view" scroll-y="true" v-else>
+				<slot />
+			</scroll-view>
+			<view @tap="close" class="u-close" :class="['u-close--' + closeIconPos]">
+				<u-icon
+					v-if="mode != 'center' && closeable"
+					:name="closeIcon"
+					:color="closeIconColor"
+					:size="closeIconSize"
+				></u-icon>
+			</view>
 		</view>
 	</view>
 </template>
@@ -52,6 +57,7 @@
  * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
  * @property {Boolean} mask-close-able 点击遮罩是否可以关闭弹出层（默认true）
  * @property {Object} custom-style 用户自定义样式
+ * @property {Stringr | Number} negative-top 中部弹出时，往上偏移的值
  * @property {Numberr | String} border-radius 弹窗圆角值（默认0）
  * @property {Numberr | String} z-index 弹出内容的z-index值（默认1075）
  * @property {Boolean} closeable 是否显示关闭图标（默认false）
@@ -158,6 +164,35 @@ export default {
 		closeIconSize: {
 			type: [String, Number],
 			default: '30'
+		},
+		// 宽度，只对左，右，中部弹出时起作用，单位rpx，或者"auto"
+		// 或者百分比"50%"，表示由内容撑开高度或者宽度，优先级高于length参数
+		width: {
+			type: String,
+			default: ''
+		},
+		// 高度，只对上，下，中部弹出时起作用，单位rpx，或者"auto"
+		// 或者百分比"50%"，表示由内容撑开高度或者宽度，优先级高于length参数
+		height: {
+			type: String,
+			default: ''
+		},
+		// 给一个负的margin-top，往上偏移，避免和键盘重合的情况，仅在mode=center时有效
+		negativeTop: {
+			type: [String, Number],
+			default: 0
+		},
+		// 遮罩的样式，一般用于修改遮罩的透明度
+		maskCustomStyle: {
+			type: Object,
+			default() {
+				return {}
+			}
+		},
+		// 遮罩打开或收起的动画过渡时间，单位ms
+		duration: {
+			type: [String, Number],
+			default: 250
 		}
 	},
 	data() {
@@ -165,32 +200,28 @@ export default {
 			visibleSync: false,
 			showDrawer: false,
 			timer: null,
-			style1: {}
+			closeFromInner: false, // value的值改变，是发生在内部还是外部
 		};
 	},
 	computed: {
 		// 根据mode的位置，设定其弹窗的宽度(mode = left|right)，或者高度(mode = top|bottom)
 		style() {
 			let style = {};
-			let translate = '100%';
-			// 判断是否是否百分比或者auto值，是的话，直接使用该值，否则默认为rpx单位的数值
-			let length = /%$/.test(this.length) || this.length == 'auto' ? this.length : uni.upx2px(this.length) + 'px';
 			// 如果是左边或者上边弹出时，需要给translate设置为负值，用于隐藏
-			if (this.mode == 'left' || this.mode == 'top') translate = length == 'auto' ? '-100%' : '-' + length;
 			if (this.mode == 'left' || this.mode == 'right') {
 				style = {
-					width: length,
+					width: this.width ? this.getUnitValue(this.width) : this.getUnitValue(this.length),
 					height: '100%',
-					transform: `translate3D(${translate},0px,0px)`
+					transform: `translate3D(${this.mode == 'left' ? '-100%' : '100%'},0px,0px)`
 				};
 			} else if (this.mode == 'top' || this.mode == 'bottom') {
 				style = {
 					width: '100%',
-					height: length,
-					transform: `translate3D(0px,${translate},0px)`
+					height: this.height ? this.getUnitValue(this.height) : this.getUnitValue(this.length),
+					transform: `translate3D(0px,${this.mode == 'top' ? '-100%' : '100%'},0px)`
 				};
 			}
-			style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.popup;
+			style.zIndex = this.uZindex;
 			// 如果用户设置了borderRadius值，添加弹窗的圆角
 			if (this.borderRadius) {
 				switch (this.mode) {
@@ -211,44 +242,57 @@ export default {
 				// 不加可能圆角无效
 				style.overflow = 'hidden';
 			}
+			if(this.duration) style.transition = `all ${this.duration / 1000}s linear`;
 			return style;
 		},
 		// 中部弹窗的特有样式
 		centerStyle() {
 			let style = {};
-			let length = /%$/.test(this.length) || this.length == 'auto' ? this.length : uni.upx2px(this.length) + 'px';
-			style.width = length;
-			style.zIndex = this.zIndex ? this.zIndex : this.$u.zIndex.popup;
+			style.width = this.width ? this.getUnitValue(this.width) : this.getUnitValue(this.length);
+			// 中部弹出的模式，如果没有设置高度，就用auto值，由内容撑开高度
+			style.height = this.height ? this.getUnitValue(this.height) : 'auto';
+			style.zIndex = this.uZindex;
+			style.marginTop = `-${this.$u.addUnit(this.negativeTop)}`;
 			if (this.borderRadius) {
 				style.borderRadius = `${this.borderRadius}rpx`;
 				// 不加可能圆角无效
 				style.overflow = 'hidden';
 			}
 			return style;
+		},
+		// 计算整理后的z-index值
+		uZindex() {
+			return this.zIndex ? this.zIndex : this.$u.zIndex.popup;
 		}
 	},
 	watch: {
 		value(val) {
 			if (val) {
 				this.open();
-			} else {
+			} else if(!this.closeFromInner) {
 				this.close();
 			}
+			this.closeFromInner = false;
 		}
 	},
-	created() {
-		// 先让弹窗组件渲染，再改变遮罩和抽屉元素的样式，让其动画其起作用(必须要有延时，才会有效果)
-		this.visibleSync = this.value;
-		setTimeout(() => {
-			this.showDrawer = this.value;
-		}, 30);
+	mounted() {
+		// 组件渲染完成时，检查value是否为true，如果是，弹出popup
+		this.value && this.open();
 	},
-	methods: {
+    methods: {
+		// 判断传入的值，是否带有单位，如果没有，就默认用rpx单位
+		getUnitValue(val) {
+			if(/(%|px|rpx|auto)$/.test(val)) return val;
+			else return val + 'rpx'
+		},
 		// 遮罩被点击
 		maskClick() {
 			this.close();
 		},
 		close() {
+			// 标记关闭是内部发生的，否则修改了value值，导致watch中对value检测，导致再执行一遍close
+			// 造成@close事件触发两次
+			this.closeFromInner = true;
 			this.change('showDrawer', 'visibleSync', false);
 		},
 		// 中部弹出时，需要.u-drawer-content将居中内容，此元素会铺满屏幕，点击需要关闭弹窗
@@ -264,23 +308,37 @@ export default {
 		// 打开时，先渲染组件，延时一定时间再让遮罩和弹窗的动画起作用
 		change(param1, param2, status) {
 			// 如果this.popup为false，意味着为picker，actionsheet等组件调用了popup组件
-			if (this.popup == true) this.$emit('input', status);
-			this[param1] = status;
-			if (this.timer) {
-				clearTimeout(this.timer);
+			if (this.popup == true) {
+				this.$emit('input', status);
 			}
-			this.timer = setTimeout(() => {
+			this[param1] = status;
+			if(status) {
+				// #ifdef H5 || MP
+				this.timer = setTimeout(() => {
 					this[param2] = status;
 					this.$emit(status ? 'open' : 'close');
-				},
-				status ? 30 : 300
-			);
+				}, 50);
+				// #endif
+				// #ifndef H5 || MP
+				this.$nextTick(() => {
+					this[param2] = status;
+					this.$emit(status ? 'open' : 'close');
+				})
+				// #endif
+			} else {
+				this.timer = setTimeout(() => {
+					this[param2] = status;
+					this.$emit(status ? 'open' : 'close');
+				}, this.duration);
+			}
 		}
 	}
 };
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+
 .u-drawer {
 	/* #ifndef APP-NVUE */
 	display: block;
@@ -291,7 +349,6 @@ export default {
 	right: 0;
 	bottom: 0;
 	overflow: hidden;
-	z-index: 999;
 }
 
 .u-drawer-content {
@@ -300,7 +357,12 @@ export default {
 	/* #endif */
 	position: absolute;
 	z-index: 1003;
-	transition: all 0.3s linear;
+	transition: all 0.25s linear;
+}
+
+.u-drawer__scroll-view {
+	width: 100%;
+	height: 100%;
 }
 
 .u-drawer-left {
@@ -332,10 +394,8 @@ export default {
 }
 
 .u-drawer-center {
-	/* #ifndef APP-NVUE */
-	display: flex;
+	@include vue-flex;
 	flex-direction: column;
-	/* #endif */
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -371,7 +431,7 @@ export default {
 
 .u-close {
 	position: absolute;
-	z-index: 1;
+	z-index: 3;
 }
 
 .u-close--top-left {

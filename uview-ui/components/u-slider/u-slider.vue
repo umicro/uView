@@ -15,10 +15,11 @@
 			<view class="u-slider__button-wrap" @touchstart="onTouchStart" 
 				@touchmove="onTouchMove" @touchend="onTouchEnd" 
 				@touchcancel="onTouchEnd">
-				<slot v-if="useSlot"/>
+				<slot v-if="$slots.default"/>
 				<view v-else class="u-slider__button" :style="[blockStyle, {
 					height: blockWidth + 'rpx',
-					width: blockWidth + 'rpx'
+					width: blockWidth + 'rpx',
+					backgroundColor: blockColor
 				}]"></view>
 			</view>
 		</view>
@@ -40,7 +41,6 @@
  * @property {String} blockColor 滑块颜色（默认#ffffff）
  * @property {Object} blockStyle 给滑块自定义样式，对象形式
  * @property {Boolean} disabled 是否禁用滑块(默认为false)
- * @property {Boolean} useSlot 是否使用slot传入自定义滑块(默认为false)
  * @event {Function} start 滑动触发
  * @event {Function} moving 正在滑动中
  * @event {Function} end 滑动结束
@@ -106,11 +106,6 @@ export default {
 				return {};
 			}
 		},
-		// 是否传入自定义的按钮slot
-		useSlot: {
-			type: Boolean,
-			default: false
-		}
 	},
 	data() {
 		return {
@@ -181,6 +176,8 @@ export default {
 		updateValue(value, drag) {
 			// 去掉小数部分，同时也是对step步进的处理
 			const width = this.format(value);
+			// 不允许滑动的值超过max最大值，百分比也不能超过100
+			if(width > this.max || width > 100) return;
 			// 设置移动的百分比值
 			let barStyle = {
 				width: width + '%'
@@ -211,6 +208,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+
 .u-slider {
 	position: relative;
 	border-radius: 999px;

@@ -59,12 +59,6 @@
 				default: '#ffffff'
 			}
 		},
-		provide() {
-			return {
-				uTable: this,
-				uTd: this
-			};
-		},
 		data() {
 			return {}
 		},
@@ -81,12 +75,10 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-table {
 		width: 100%;
 		box-sizing: border-box;
-	}
-
-	.u-table /deep/ t-tr {
-		display: flex;
 	}
 </style>

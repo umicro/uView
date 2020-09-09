@@ -343,7 +343,8 @@ var types = {
 			return false;
 		}
 
-		return typeof value === 'number';
+		// 修改源码，将字符串数值先转为数值
+		return typeof +value === 'number';
 	},
 	object: function object(value) {
 		return typeof value === 'object' && !types.array(value);
@@ -865,9 +866,8 @@ function pattern$2(rule, value, callback, source, options) {
 }
 
 function date(rule, value, callback, source, options) {
-	// console.log('integer rule called %j', rule);
 	var errors = [];
-	var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field); // console.log('validate on %s value', value);
+	var validate = rule.required || !rule.required && source.hasOwnProperty(rule.field); 
 
 	if (validate) {
 		if (isEmptyValue(value) && !rule.required) {

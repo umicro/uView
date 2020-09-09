@@ -1,5 +1,5 @@
 <template>
-	<view class="u-keyboard" @touchmove.stop.prevent>
+	<view class="u-keyboard" @touchmove.stop.prevent="() => {}">
 		<view class="u-keyboard-grids">
 			<block>
 				<view class="u-keyboard-grids-item" v-for="(group, i) in abc ? EngKeyBoardList : areaList" :key="i">
@@ -153,18 +153,22 @@
 			backspaceClick() {
 				this.$emit('backspace');
 				clearInterval(this.timer); //再次清空定时器，防止重复注册定时器
+				this.timer = null;
 				this.timer = setInterval(() => {
 					this.$emit('backspace');
 				}, 250);
 			},
 			clearTimer() {
 				clearInterval(this.timer);
+				this.timer = null;
 			},
 		}
 	};
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+
 	.u-keyboard-grids {
 		background: rgb(215, 215, 217);
 		padding: 24rpx 0;
@@ -172,7 +176,7 @@
 	}
 
 	.u-keyboard-grids-item {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 	}
@@ -182,7 +186,9 @@
 		width: 62rpx;
 		flex: 0 0 64rpx;
 		height: 80rpx;
-		display: inline-block;
+		/* #ifndef APP-NVUE */
+		display: inline-flex;		
+		/* #endif */
 		font-size: 36rpx;
 		text-align: center;
 		line-height: 80rpx;
@@ -204,7 +210,7 @@
 		bottom: 32rpx;
 		height: 80rpx;
 		background-color: rgb(185, 188, 195);
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		border-radius: 8rpx;
 		justify-content: center;
@@ -221,7 +227,7 @@
 		bottom: 32rpx;
 		height: 80rpx;
 		background-color: #ffffff;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		border-radius: 8rpx;
 		justify-content: center;

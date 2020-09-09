@@ -1,7 +1,10 @@
 <template>
 	<view class="u-switch" :class="[value == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']" @tap="onClick"
 	 :style="[switchStyle]">
-		<view class="u-switch__node node-class">
+		<view class="u-switch__node node-class" :style="{
+			width: $u.addUnit(this.size),
+			height: $u.addUnit(this.size)
+		}">
 			<u-loading :show="loading" class="u-switch__loading" :size="size * 0.6" :color="loadingColor" />
 		</view>
 	</view>
@@ -94,7 +97,7 @@
 					if(this.vibrateShort) uni.vibrateShort();
 					this.$emit('input', !this.value);
 					// 放到下一个生命周期，因为双向绑定的value修改父组件状态需要时间，且是异步的
-					this.$nextTick(function() {
+					this.$nextTick(() => {
 						this.$emit('change', this.value ? this.activeValue : this.inactiveValue);
 					})
 				}
@@ -104,26 +107,25 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-switch {
 		position: relative;
+		/* #ifndef APP-NVUE */
 		display: inline-block;
+		/* #endif */
 		box-sizing: initial;
 		width: 2em;
-		width: var(--switch-width, 2em);
 		height: 1em;
-		height: var(--switch-height, 1em);
 		background-color: #fff;
-		background-color: var(--switch-background-color, #fff);
 		border: 1px solid rgba(0, 0, 0, 0.1);
-		border: var(--switch-border, 1px solid rgba(0, 0, 0, 0.1));
 		border-radius: 1em;
-		border-radius: var(--switch-node-size, 1em);
 		transition: background-color 0.3s;
-		transition: background-color var(--switch-transition-duration, 0.3s);
+		font-size: 50rpx;
 	}
 
 	.u-switch__node {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		position: absolute;
@@ -131,44 +133,31 @@
 		left: 0;
 		border-radius: 100%;
 		z-index: 1;
-		z-index: var(--switch-node-z-index, 1);
-		width: 1em;
-		width: var(--switch-node-size, 1em);
-		height: 1em;
-		height: var(--switch-node-size, 1em);
 		background-color: #fff;
-		background-color: var(--switch-node-background-color, #fff);
+		background-color: #fff;
 		box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
-		box-shadow: var(--switch-node-box-shadow, 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05));
-		transition: -webkit-transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
+		box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.05), 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.05);
 		transition: transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
 		transition: transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05), -webkit-transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
-		transition: -webkit-transform var(--switch-transition-duration, 0.3s) cubic-bezier(0.3, 1.05, 0.4, 1.05);
-		transition: transform var(--switch-transition-duration, 0.3s) cubic-bezier(0.3, 1.05, 0.4, 1.05);
-		transition: transform var(--switch-transition-duration, 0.3s) cubic-bezier(0.3, 1.05, 0.4, 1.05),
-			-webkit-transform var(--switch-transition-duration, 0.3s) cubic-bezier(0.3, 1.05, 0.4, 1.05);
+		transition: transform cubic-bezier(0.3, 1.05, 0.4, 1.05);
+		transition: transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05)
 	}
 
 	.u-switch__loading {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 	}
 
 	.u-switch--on {
 		background-color: #1989fa;
-		background-color: var(--switch-on-background-color, #1989fa);
 	}
 
 	.u-switch--on .u-switch__node {
-		-webkit-transform: translateX(1em);
-		transform: translateX(1em);
-		-webkit-transform: translateX(calc(var(--switch-width, 2em) - var(--switch-node-size, 1em)));
-		transform: translateX(calc(var(--switch-width, 2em) - var(--switch-node-size, 1em)));
+		transform: translateX(100%);
 	}
 
 	.u-switch--disabled {
 		opacity: 0.4;
-		opacity: var(--switch-disabled-opacity, 0.4);
 	}
 </style>

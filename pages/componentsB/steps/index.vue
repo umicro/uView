@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-steps :current="current" :list="steps" :mode="mode" :type="type"></u-steps>
+				<u-steps :direction="direction" :current="current" :list="steps" :mode="mode" :icon="icon"></u-steps>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -15,8 +15,12 @@
 				<u-subsection vibrateShort :list="['number', 'dot']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">主题选择</view>
-				<u-subsection vibrateShort :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+				<view class="u-item-title">方向</view>
+				<u-subsection vibrateShort :list="['横向', '竖向']" @change="directionChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">自定义图标</view>
+				<u-subsection vibrateShort :list="['否', '是']" @change="iconChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">当前步值</view>
@@ -40,19 +44,23 @@
 					name: '签收'
 				}, ],
 				current: 0,
-				type: 'primary',
-				mode: 'number'
+				icon: 'checkmark',
+				mode: 'number',
+				direction: 'row'
 			}
 		},
 		methods: {
 			modeChange(index) {
 				this.mode = index == 0 ? 'number' : 'dot';
 			},
-			typeChange(index) {
-				this.type = index == 0 ? 'primary' : index == 1 ? 'success' : index == 2 ? 'error' : index == 3 ? 'warning'  : 'info';
-			},
 			stepChange(index) {
-				this.current = index == 0 ? 0 : index == 1 ? 1 : index == 2 ? 2 : 3;
+				this.current = [0, 1, 2, 3][index];
+			},
+			iconChange(index) {
+				this.icon = index == 0 ? 'checkmark' : 'map-fill';
+			},
+			directionChange(index) {
+				this.direction = index == 0 ? 'row' : 'column';
 			}
 		}
 	}

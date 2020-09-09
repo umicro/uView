@@ -2,16 +2,17 @@
 	<view class="u-empty" v-if="show" :style="{
 		marginTop: marginTop + 'rpx'
 	}">
-		<image class="u-image" :src="src ? src : icons[mode].image" mode="widthFix" :style="{
-			width: imgWidth + 'rpx',
-			height: imgHeight == 'auto' ? 'auto' : imgHeight + 'rpx'
-		}"></image>
-		<text :style="{
-			color: color,
-			fontSize: fontSize + 'rpx',
-		}">
-			{{text ? text : icons[mode].text}}
-		</text>
+		<u-icon
+			:name="src ? src : 'empty-' + mode"
+			:custom-style="iconStyle"
+			:label="text ? text : icons[mode]"
+			label-pos="bottom"
+			:label-color="color"
+			:label-size="fontSize"
+			:size="iconSize"
+			:color="iconColor"
+			margin-top="14"
+		></u-icon>
 		<view class="u-slot-wrap">
 			<slot name="bottom"></slot>
 		</view>
@@ -19,7 +20,6 @@
 </template>
 
 <script>
-	import icon from "./icon.js";
 	/**
 	 * empty 内容为空
 	 * @description 该组件用于需要加载内容，但是加载的第一页数据就为空，提示一个"没有内容"的场景， 我们精心挑选了十几个场景的图标，方便您使用。
@@ -55,6 +55,16 @@
 				type: String,
 				default: '#c0c4cc'
 			},
+			// 图标的颜色
+			iconColor: {
+				type: String,
+				default: '#c0c4cc'
+			},
+			// 图标的大小
+			iconSize: {
+				type: [String, Number],
+				default: 120
+			},
 			// 文字大小，单位rpx
 			fontSize: {
 				type: [String, Number],
@@ -68,7 +78,7 @@
 			//  图标宽度，单位rpx
 			imgWidth: {
 				type: [String, Number],
-				default: 240
+				default: 120
 			},
 			// 图标高度，单位rpx
 			imgHeight: {
@@ -84,19 +94,86 @@
 			marginTop: {
 				type: [String, Number],
 				default: 0
+			},
+			iconStyle: {
+				type: Object,
+				default() {
+					return {}
+				}
 			}
 		},
 		data() {
 			return {
-				icons: icon
+				icons: {
+					car: '购物车为空',
+					page: '页面不存在',
+					search: '没有搜索结果',
+					address: '没有收货地址',
+					wifi: '没有WiFi',
+					order: '订单为空',
+					coupon: '没有优惠券',
+					favor: '暂无收藏',
+					permission: '无权限',
+					history: '无历史记录',
+					news: '无新闻列表',
+					message: '消息列表为空',
+					list: '列表为空',
+					data: '数据为空'
+				},
+				// icons: [{
+				// 	icon: 'car',
+				// 	text: '购物车为空'
+				// },{
+				// 	icon: 'page',
+				// 	text: '页面不存在'
+				// },{
+				// 	icon: 'search',
+				// 	text: '没有搜索结果'
+				// },{
+				// 	icon: 'address',
+				// 	text: '没有收货地址'
+				// },{
+				// 	icon: 'wifi',
+				// 	text: '没有WiFi'
+				// },{
+				// 	icon: 'order',
+				// 	text: '订单为空'
+				// },{
+				// 	icon: 'coupon',
+				// 	text: '没有优惠券'
+				// },{
+				// 	icon: 'favor',
+				// 	text: '暂无收藏'
+				// },{
+				// 	icon: 'permission',
+				// 	text: '无权限'
+				// },{
+				// 	icon: 'history',
+				// 	text: '无历史记录'
+				// },{
+				// 	icon: 'news',
+				// 	text: '无新闻列表'
+				// },{
+				// 	icon: 'message',
+				// 	text: '消息列表为空'
+				// },{
+				// 	icon: 'list',
+				// 	text: '列表为空'
+				// },{
+				// 	icon: 'data',
+				// 	text: '数据为空'
+				// }],
+
 			}
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+
 	.u-empty {
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
@@ -108,7 +185,7 @@
 	}
 
 	.u-slot-wrap {
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 		margin-top: 20rpx;

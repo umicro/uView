@@ -68,6 +68,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	view {
 		box-sizing: border-box;
 	}
@@ -82,7 +84,7 @@
 		font-size: 28rpx;
 		left: 0;
 		right: 0;
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		opacity: 0;

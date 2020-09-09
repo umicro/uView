@@ -23,37 +23,37 @@
 		},
 		data() {
 			return {
-				tr: []
-			};
-		},
-		inject: ['uTable', 'uTr'],
-		provide() {
-			return {
-				uTd: this
+				tdStyle: {
+					
+				}
 			}
 		},
 		created() {
-
+			this.parent = false;
 		},
-		computed: {
-			tdStyle() {
+		mounted() {
+			this.parent = this.$u.$parent.call(this, 'u-table');
+			if (this.parent) {
+				// 将父组件的相关参数，合并到本组件
 				let style = {};
 				if (this.width != "auto") style.flex = `0 0 ${this.width}`;
-				style.textAlign = this.uTable.align;
-				style.padding = this.tr.length == 0 ? this.uTable.padding : 0;
-				style.borderBottom = this.tr.length == 0 ? `solid 1px ${this.uTable.borderColor}` : 0;
-				style.borderRight = this.tr.length == 0 ? `solid 1px ${this.uTable.borderColor}` : 0;
-				style.fontSize = this.uTable.fontSize + 'rpx';
-				style.color = this.uTable.color;
-				return style;
+				style.textAlign = this.parent.align;
+				style.fontSize = this.parent.fontSize + 'rpx';
+				style.padding = this.parent.padding;
+				style.borderBottom = `solid 1px ${this.parent.borderColor}`;
+				style.borderRight = `solid 1px ${this.parent.borderColor}`;
+				style.color = this.parent.color;
+				this.tdStyle = style;
 			}
 		}
 	};
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+
 	.u-td {
-		display: flex;
+		@include vue-flex;
 		flex-direction: column;
 		flex: 1;
 		justify-content: center;
@@ -61,53 +61,6 @@
 		color: $u-content-color;
 		align-self: stretch;
 		box-sizing: border-box;
-	}
-
-	.u-col-1 {
-		flex: 0 0 calc(100%/12);
-	}
-
-	.u-col-2 {
-		flex: 0 0 calc(100%/12 * 2);
-	}
-
-	.u-col-3 {
-		flex: 0 0 calc(100%/12 * 3);
-	}
-
-	.u-col-4 {
-		flex: 0 0 calc(100%/12 * 4);
-	}
-
-	.u-col-5 {
-		flex: 0 0 calc(100%/12 * 5);
-	}
-
-	.u-col-6 {
-		flex: 0 0 calc(100%/12 * 6);
-	}
-
-	.u-col-7 {
-		flex: 0 0 calc(100%/12 * 7);
-	}
-
-	.u-col-8 {
-		flex: 0 0 calc(100%/12 * 8);
-	}
-
-	.u-col-9 {
-		flex: 0 0 calc(100%/12 * 9);
-	}
-
-	.u-col-10 {
-		flex: 0 0 calc(100%/12 * 10);
-	}
-
-	.u-col-11 {
-		flex: 0 0 calc(100%/12 * 11);
-	}
-
-	.u-col-12 {
-		flex: 0 0 calc(100%/12 * 12);
+		height: 100%;
 	}
 </style>

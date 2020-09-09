@@ -1,16 +1,16 @@
 <template>
 	<u-popup class="" :mask="mask" :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto"
-	 :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose">
+	 :safeAreaInsetBottom="safeAreaInsetBottom" @close="popupClose" :zIndex="uZIndex">
 		<slot />
 		<view class="u-tooltip" v-if="tooltip">
 			<view class="u-tooltip-item u-tooltip-cancel" hover-class="u-tooltip-cancel-hover" @tap="onCancel">
-				{{cancelBtn ? '取消' : ''}}
+				{{cancelBtn ? cancelText : ''}}
 			</view>
 			<view v-if="showTips" class="u-tooltip-item u-tooltip-tips">
 				{{tips ? tips : mode == 'number' ? '数字键盘' : mode == 'card' ? '身份证键盘' : '车牌号键盘'}}
 			</view>
 			<view v-if="confirmBtn" @tap="onConfirm" class="u-tooltip-item u-tooltips-submit" hover-class="u-tooltips-submit-hover">
-				{{confirmBtn ? '完成' : ''}}
+				{{confirmBtn ? confirmText : ''}}
 			</view>
 		</view>
 		<block v-if="mode == 'number' || mode == 'card'">
@@ -34,6 +34,8 @@
 	 * @property {Boolean} cancel-btn 是否显示工具条左边的"取消"按钮（默认true）
 	 * @property {Boolean} confirm-btn 是否显示工具条右边的"完成"按钮（默认true）
 	 * @property {Boolean} mask 是否显示遮罩（默认true）
+	 * @property {String} confirm-text 确认按钮的文字
+	 * @property {String} cancel-text 取消按钮的文字
 	 * @property {Number String} z-index 弹出键盘的z-index值（默认1075）
 	 * @property {Boolean} random 是否打乱键盘按键的顺序（默认false）
 	 * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
@@ -111,6 +113,16 @@
 			zIndex: {
 				type: [Number, String],
 				default: ''
+			},
+			// 取消按钮的文字
+			cancelText: {
+				type: String,
+				default: '取消'
+			},
+			// 确认按钮的文字
+			confirmText: {
+				type: String,
+				default: '确认'
 			}
 		},
 		data() {
@@ -129,7 +141,6 @@
 			},
 			// 键盘关闭
 			popupClose() {
-				console.log(333);
 				// 通过发送input这个特殊的事件名，可以修改父组件传给props的value的变量，也即双向绑定
 				this.$emit('input', false);
 			},
@@ -160,13 +171,15 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-keyboard {
 		position: relative;
 		z-index: 1003;
 	}
 
 	.u-tooltip {
-		display: flex;
+		@include vue-flex;
 		justify-content: space-between;
 	}
 

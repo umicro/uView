@@ -8,7 +8,8 @@
 	 class="u-tag" :style="[customStyle]" @tap="clickTag">
 		{{text}}
 		<view class="u-icon-wrap" @tap.stop>
-			<u-icon @click="close" size="22" v-if="closeable" name="close" class="u-close-icon" :style="[iconStyle]"></u-icon>
+			<u-icon @click="close" size="22" v-if="closeable" :color="closeIconColor" 
+			name="close" class="u-close-icon" :style="[iconStyle]"></u-icon>
 		</view>
 	</view>
 </template>
@@ -111,9 +112,9 @@
 			customStyle() {
 				let style = {};
 				// 文字颜色（如果有此值，会覆盖type值的颜色）
-				if(this.color) style.color = this.color+"!important";
+				if(this.color) style.color = this.color;
 				// tag的背景颜色（如果有此值，会覆盖type值的颜色）
-				if(this.bgColor) style.backgroundColor = this.bgColor+"!important";
+				if(this.bgColor) style.backgroundColor = this.bgColor;
 				// 如果是镂空型tag，没有传递边框颜色（borderColor）的话，使用文字的颜色（color属性）
 				if(this.mode == 'plain' && this.color && !this.borderColor) style.borderColor = this.color;
 				else style.borderColor = this.borderColor;
@@ -124,10 +125,21 @@
 				let style = {};
 				if(this.size == 'mini') style.fontSize = '20rpx';
 				else style.fontSize = '22rpx';
-				if(this.mode == 'plain' || this.mode == 'light') style.color = this.$u.color[this.type];
+				if(this.mode == 'plain' || this.mode == 'light') style.color = this.type;
 				else if(this.mode == 'dark')  style.color = "#ffffff";
 				if(this.closeColor) style.color = this.closeColor;
 				return style;
+			},
+			// 关闭图标的颜色
+			closeIconColor() {
+				// 如果定义了关闭图标的颜色，就用此值，否则用字体颜色的值
+				// 如果上面的二者都没有，如果是dark深色模式，图标就为白色
+				// 最后如果上面的三者都不合适，就返回type值给图标获取颜色
+				let color = '';
+				if(this.closeColor) return this.closeColor;
+				else if(this.color) return this.color;
+				else if(this.mode == 'dark') return '#ffffff';
+				else return this.type;
 			}
 		},
 		methods: {
@@ -146,11 +158,15 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-tag {
 		box-sizing: border-box;
 		align-items: center;
 		border-radius: 6rpx;
+		/* #ifndef APP-NVUE */
 		display: inline-block;
+		/* #endif */
 		line-height: 1;
 	}
 	
@@ -167,31 +183,31 @@
 	.u-mode-light-primary {
 		background-color: $u-type-primary-light;
 		color: $u-type-primary;
-		border: 1px solid rgb(215, 234, 254);
+		border: 1px solid $u-type-primary-disabled;
 	}
 	
 	.u-mode-light-success {
 		background-color: $u-type-success-light;
 		color: $u-type-success;
-		border: 1px solid #BEF5C8;
+		border: 1px solid $u-type-success-disabled;
 	}
 	
 	.u-mode-light-error {
 		background-color: $u-type-error-light;
 		color: $u-type-error;
-		border: 1px solid #fde2e2;
+		border: 1px solid $u-type-error-disabled;
 	}
 	
 	.u-mode-light-warning {
 		background-color: $u-type-warning-light;
 		color: $u-type-warning;
-		border: 1px solid #faecd8;
+		border: 1px solid $u-type-warning-disabled;
 	}
 	
 	.u-mode-light-info {
 		background-color: $u-type-info-light;
 		color: $u-type-info;
-		border: 1px solid #ebeef5;
+		border: 1px solid $u-type-info-disabled;
 	}
 	
 	.u-mode-dark-primary {

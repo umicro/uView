@@ -1,28 +1,30 @@
 <template>
-	<movable-area class="u-swipe-action" :style="{ backgroundColor: bgColor }">
-		<movable-view
-			class="u-swipe-view"
-			@change="change"
-			@touchend="touchend"
-			@touchstart="touchstart"
-			direction="horizontal"
-			:disabled="disabled"
-			:x="moveX"
-			:style="{
-				width: movableViewWidth
-			}"
-		>
-			<view
-				class="u-swipe-content"
-				@tap.stop="contentClick"
+	<view class="">
+		<movable-area class="u-swipe-action" :style="{ backgroundColor: bgColor }">
+			<movable-view
+				class="u-swipe-view"
+				@change="change"
+				@touchend="touchend"
+				@touchstart="touchstart"
+				direction="horizontal"
+				:disabled="disabled"
+				:x="moveX"
+				:style="{
+					width: movableViewWidth ? movableViewWidth : '100%'
+				}"
 			>
-				<slot></slot>
-			</view>
-			<view class="u-swipe-del" @tap.stop="btnClick(index)" :style="[btnStyle(item.style)]" v-for="(item, index) in options" :key="index">
-				<view class="u-btn-text">{{ item.text }}</view>
-			</view>
-		</movable-view>
-	</movable-area>
+				<view
+					class="u-swipe-content"
+					@tap.stop="contentClick"
+				>
+					<slot></slot>
+				</view>
+				<view class="u-swipe-del" v-if="showBtn" @tap.stop="btnClick(index)" :style="[btnStyle(item.style)]" v-for="(item, index) in options" :key="index">
+					<view class="u-btn-text">{{ item.text }}</view>
+				</view>
+			</movable-view>
+		</movable-area>
+	</view>
 </template>
 
 <script>
@@ -101,7 +103,8 @@ export default {
 			scrollX: 0, // movable-view移动过程中产生的change事件中的x轴移动值
 			status: false, // 滑动的状态，表示当前是展开还是关闭按钮的状态
 			movableAreaWidth: 0, // 滑动区域
-			elId: this.$u.guid() // id，用于通知另外组件关闭时的识别
+			elId: this.$u.guid(), // id，用于通知另外组件关闭时的识别
+			showBtn: false, // 刚开始渲染视图时不显示右边的按钮，避免视图闪动
 		};
 	},
 	computed: {
@@ -144,7 +147,7 @@ export default {
 		// 打开按钮的状态
 		open() {
 			if (this.disabled) return;
-			this.moveX = -this.btnWidth;
+			this.moveX = -this.allBtnWidth;
 			this.status = true;
 		},
 		// 用户手指离开movable-view元素，停止触摸
@@ -197,6 +200,10 @@ export default {
 		getActionRect() {
 			this.$uGetRect('.u-swipe-action').then(res => {
 				this.movableAreaWidth = res.width;
+				// 等视图更新完后，再显示右边的可滑动按钮，防止这些按钮会"闪一下"
+				this.$nextTick(() => {
+					this.showBtn = true;
+				})
 			});
 		},
 		// 点击内容触发事件
@@ -213,6 +220,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+	
 .u-swipe-action {
 	width: auto;
 	height: initial;
@@ -221,7 +230,7 @@ export default {
 }
 
 .u-swipe-view {
-	display: flex;
+	@include vue-flex;
 	height: initial;
 	position: relative;
 	/* 这一句很关键，覆盖默认的绝对定位 */

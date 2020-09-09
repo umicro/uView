@@ -14,10 +14,6 @@
 				参数配置
 			</view>
 			<view class="u-config-item">
-				<view class="u-item-title">顶部提示文字</view>
-				<u-subsection vibrateShort :current="show ? 0 : 1" :list="['是', '否']" @change="tipsChange"></u-subsection>
-			</view>
-			<view class="u-config-item">
 				<view class="u-item-title">取消按钮</view>
 				<u-subsection vibrateShort :list="['是', '否']" @change="cancelChange"></u-subsection>
 			</view>
@@ -36,9 +32,11 @@
 				list: [{
 					text: '最是人间留不住',
 				}, {
-					text: '朱颜辞镜花辞树'
+					text: '朱颜辞镜花辞树',
+					disabled: true
 				}, {
-					text: '正是江南好风景'
+					text: '正是江南好风景',
+					subText: '春江水暖鸭先知'
 				}, {
 					text: '落花时节又逢君'
 				}],

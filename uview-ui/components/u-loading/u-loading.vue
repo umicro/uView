@@ -52,8 +52,12 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-loading-circle {
-		display: inline-block;
+		/* #ifndef APP-NVUE */
+		display: inline-flex;
+		/* #endif */
 		vertical-align: middle;
 		width: 28rpx;
 		height: 28rpx;

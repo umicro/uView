@@ -6,6 +6,9 @@
 			background: computeBgColor,
 			padding: padding
 		}"
+		:class="[
+			type ? `u-type-${type}-light-bg` : ''
+		]"
 	>
 		<view class="u-direction-row">
 			<view class="u-icon-wrap">
@@ -17,13 +20,11 @@
 					id="u-notice-content"
 					:style="{
 						animationDuration: animationDuration,
-						color: computeColor,
 						animationPlayState: animationPlayState,
 					}"
 				>
-					<text class="u-notice-text" @tap="click" :style="{
-						fontSize: fontSize + 'rpx',
-					}">{{showText}}</text>
+					<text class="u-notice-text" @tap="click" :style="[textStyle]"
+					:class="['u-type-' + type]">{{showText}}</text>
 				</view>
 			</view>
 			<view class="u-icon-wrap">
@@ -141,14 +142,22 @@ export default {
 		// 计算字体颜色，如果没有自定义的，就用uview主题颜色
 		computeColor() {
 			if (this.color) return this.color;
-			else if(this.type == 'none') return this.$u.color['contentColor'];
-			else return this.$u.color[this.type];
+			// 如果是无主题，就默认使用content-color
+			else if(this.type == 'none') return '#606266';
+			else return this.type;
+		},
+		// 文字内容的样式
+		textStyle() {
+			let style = {};
+			if (this.color) style.color = this.color;
+			else if(this.type == 'none') style.color = '#606266';
+			style.fontSize = this.fontSize + 'rpx';
+			return style;
 		},
 		// 计算背景颜色
 		computeBgColor() {
 			if (this.bgColor) return this.bgColor;
 			else if(this.type == 'none') return 'transparent';
-			else return this.$u.color[this.type + 'Light'];
 		}
 	},
 	mounted() {
@@ -200,25 +209,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../libs/css/style.components.scss";
+	
 .u-notice-bar {
 	padding: 18rpx 24rpx;
 	overflow: hidden;
 }
 
 .u-direction-row {
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
 .u-left-icon {
+	/* #ifndef APP-NVUE */
 	display: inline-flex;
+	/* #endif */
 	align-items: center;
 }
 
 .u-notice-box {
 	flex: 1;
-	display: flex;
+	@include vue-flex;
 	overflow: hidden;
 	margin-left: 12rpx;
 }
@@ -234,7 +247,7 @@ export default {
 	text-align: right;
 	// 这一句很重要，为了能让滚动左右连接起来
 	padding-left: 100%;
-	display: flex;
+	@include vue-flex;
 	flex-wrap: nowrap;
 }
 

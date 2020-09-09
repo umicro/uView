@@ -1,7 +1,15 @@
-// 此版本发布于2020-05-26
-let version = '1.2.9';
+// 此版本发布于2020-09-07
+let version = '1.6.8';
 
 export default {
 	v: version,
-	version: version
+	version: version,
+	// 主题名称
+	type: [
+		'primary',
+		'success',
+		'info',
+		'error',
+		'warning'
+	]
 }

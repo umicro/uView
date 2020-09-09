@@ -1,22 +1,23 @@
 <template>
 	<view class="u-swiper-wrap" :style="{
-		borderRadius: `${borderRadius}rpx`,
+		borderRadius: `${borderRadius}rpx`
 	}">
-		<swiper @change="change" @animationfinish="animationfinish" :interval="interval" :circular="circular" :duration="duration" :autoplay="autoplay"
+		<swiper :current="elCurrent" @change="change" @animationfinish="animationfinish" :interval="interval" :circular="circular" :duration="duration" :autoplay="autoplay"
 		 :previous-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'" :next-margin="effect3d ? effect3dPreviousMargin + 'rpx' : '0'"
 		 :style="{
-				height: height + 'rpx'
+				height: height + 'rpx',
+				backgroundColor: bgColor
 			}">
-			<swiper-item class="u-swiper-item" v-for="(item, index) in list" :key="index" @tap="listClick(index)">
-				<view class="u-list-image-wrap" :class="[current != index ? 'u-list-scale' : '']" :style="{
+			<swiper-item class="u-swiper-item" v-for="(item, index) in list" :key="index">
+				<view class="u-list-image-wrap" @tap.stop.prevent="listClick(index)" :class="[uCurrent != index ? 'u-list-scale' : '']" :style="{
 						borderRadius: `${borderRadius}rpx`,
-						transform: effect3d && current != index ? 'scaleY(0.9)' : 'scaleY(1)',
-						margin: effect3d && current != index ? '0 20rpx' : 0
+						transform: effect3d && uCurrent != index ? 'scaleY(0.9)' : 'scaleY(1)',
+						margin: effect3d && uCurrent != index ? '0 20rpx' : 0,
 					}">
-					<image class="u-swiper-image" :src="item[name]" :mode="imgMode"></image>
-					<view v-if="title" class="u-swiper-title u-line-1" :style="{
+					<image class="u-swiper-image" :src="item[name] || item" :mode="imgMode"></image>
+					<view v-if="title && item.title" class="u-swiper-title u-line-1" :style="[{
 							'padding-bottom': titlePaddingBottom
-						}">
+						}, titleStyle]">
 						{{ item.title }}
 					</view>
 				</view>
@@ -29,19 +30,19 @@
 				padding: `0 ${effect3d ? '74rpx' : '24rpx'}`
 			}">
 			<block v-if="mode == 'rect'">
-				<view class="u-indicator-item-rect" :class="{ 'u-indicator-item-rect-active': index == current }" v-for="(item, index) in list"
+				<view class="u-indicator-item-rect" :class="{ 'u-indicator-item-rect-active': index == uCurrent }" v-for="(item, index) in list"
 				 :key="index"></view>
 			</block>
 			<block v-if="mode == 'dot'">
-				<view class="u-indicator-item-dot" :class="{ 'u-indicator-item-dot-active': index == current }" v-for="(item, index) in list"
+				<view class="u-indicator-item-dot" :class="{ 'u-indicator-item-dot-active': index == uCurrent }" v-for="(item, index) in list"
 				 :key="index"></view>
 			</block>
 			<block v-if="mode == 'round'">
-				<view class="u-indicator-item-round" :class="{ 'u-indicator-item-round-active': index == current }" v-for="(item, index) in list"
+				<view class="u-indicator-item-round" :class="{ 'u-indicator-item-round-active': index == uCurrent }" v-for="(item, index) in list"
 				 :key="index"></view>
 			</block>
 			<block v-if="mode == 'number'">
-				<view class="u-indicator-item-number">{{ current + 1 }}/{{ list.length }}</view>
+				<view class="u-indicator-item-number">{{ uCurrent + 1 }}/{{ list.length }}</view>
 			</block>
 		</view>
 	</view>
@@ -61,6 +62,7 @@
 	 * @property {Boolean} autoplay 是否自动播放（默认true）
 	 * @property {String Number} interval 自动轮播时间间隔，单位ms（默认2500）
 	 * @property {Boolean} circular 是否衔接播放，见官网说明（默认true）
+	 * @property {String} bg-color 背景颜色（默认#f3f4f6）
 	 * @property {String Number} border-radius 轮播图圆角值，单位rpx（默认8）
 	 * @property {Object} title-style 自定义标题样式
 	 * @property {String Number} effect3d-previous-margin mode = true模式的情况下，激活项与前后项之间的距离，单位rpx（默认50）
@@ -135,12 +137,12 @@
 				type: [Number, String],
 				default: 500
 			},
-			// 是否衔接滑动，即到最后一张时接着滑动，是佛自动切换到第一张
+			// 是否衔接滑动，即到最后一张时接着滑动，是否自动切换到第一张
 			circular: {
 				type: Boolean,
 				default: true
 			},
-			// 图片的形式模式 
+			// 图片的裁剪模式 
 			imgMode: {
 				type: String,
 				default: 'aspectFill'
@@ -149,11 +151,39 @@
 			name: {
 				type: String,
 				default: 'image'
+			},
+			// 背景颜色
+			bgColor: {
+				type: String,
+				default: '#f3f4f6'
+			},
+			// 初始化时，默认显示第几项
+			current: {
+				type: [Number, String],
+				default: 0
+			},
+			// 标题的样式，对象形式
+			titleStyle: {
+				type: Object,
+				default() {
+					return {}
+				}
+			}
+		},
+		watch: {
+			// 如果外部的list发生变化，判断长度是否被修改，如果前后长度不一致，重置uCurrent值，避免溢出
+			list(nVal, oVal) {
+				if(nVal.length !== oVal.length) this.uCurrent = 0;
+			},
+			// 监听外部current的变化，实时修改内部依赖于此测uCurrent值，如果更新了current，而不是更新uCurrent，
+			// 就会错乱，因为指示器是依赖于uCurrent的
+			current(n) {
+				this.uCurrent = n;
 			}
 		},
 		data() {
 			return {
-				current: 0 // 当前活跃的swiper-item的index
+				uCurrent: this.current // 当前活跃的swiper-item的index
 			};
 		},
 		computed: {
@@ -173,6 +203,10 @@
 					tmp = '12rpx';
 				}
 				return tmp;
+			},
+			// 因为uni的swiper组件的current参数只接受Number类型，这里做一个转换
+			elCurrent() {
+				return Number(this.current);
 			}
 		},
 		methods: {
@@ -180,13 +214,16 @@
 				this.$emit('click', index);
 			},
 			change(e) {
-				this.current = e.detail.current;
+				let current = e.detail.current;
+				this.uCurrent = current;
+				// 发出change事件，表示当前自动切换的index，从0开始
+				this.$emit('change', current);
 			},
 			// 头条小程序不支持animationfinish事件，改由change事件
-			// 暂不监听此事件，因为不再给swiper绑定current属性
+			// 暂不监听此事件，因为不再给swiper绑定uCurrent属性
 			animationfinish(e) {
 				// #ifndef MP-TOUTIAO
-				// this.current = e.detail.current;
+				// this.uCurrent = e.detail.current;
 				// #endif
 			}
 		}
@@ -194,6 +231,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-swiper-wrap {
 		position: relative;
 		overflow: hidden;
@@ -204,7 +243,9 @@
 		width: 100%;
 		will-change: transform;
 		height: 100%;
+		/* #ifndef APP-NVUE */
 		display: block;
+		/* #endif */
 		/* #ifdef H5 */
 		pointer-events: none;
 		/* #endif */
@@ -213,7 +254,7 @@
 	.u-swiper-indicator {
 		padding: 0 24rpx;
 		position: absolute;
-		display: flex;
+		@include vue-flex;
 		width: 100%;
 		z-index: 1;
 	}
@@ -292,7 +333,7 @@
 	}
 
 	.u-swiper-item {
-		display: flex;
+		@include vue-flex;
 		overflow: hidden;
 		align-items: center;
 	}

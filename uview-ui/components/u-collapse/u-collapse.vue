@@ -40,6 +40,13 @@
 					return {}
 				}
 			},
+			// 每一个item的样式
+			itemStyle: {
+				type: Object,
+				default () {
+					return {}
+				}
+			},
 			// 是否显示右侧的箭头
 			arrow: {
 				type: Boolean,
@@ -48,17 +55,12 @@
 			// 箭头的颜色
 			arrowColor: {
 				type: String,
-				default: ''
+				default: '#909399'
 			},
 			// 标题部分按压时的样式类，"none"为无效果
 			hoverClass: {
 				type: String,
 				default: 'u-hover-class'
-			}
-		},
-		provide() {
-			return {
-				uCollapse: this
 			}
 		},
 		created() {
@@ -70,6 +72,12 @@
 			}
 		},
 		methods: {
+			// 重新初始化一次内部的所有子元素的高度计算，用于异步获取数据渲染的情况
+			init() {
+				this.childrens.forEach((vm, index) => {
+					vm.init();
+				})
+			},
 			// collapse item被点击，由collapse item调用父组件方法
 			onChange() {
 				let activeItem = [];
@@ -87,5 +95,5 @@
 </script>
 
 <style lang="scss" scoped>
-
+	@import "../../libs/css/style.components.scss";
 </style>

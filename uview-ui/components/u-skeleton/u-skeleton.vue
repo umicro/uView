@@ -94,8 +94,16 @@
 		methods: {
 			// 查询各节点的信息
 			selecterQueryInfo() {
-				// 获取整个父组件容器的高度，当做骨架屏的高度
-				uni.createSelectorQuery().selectAll('.u-skeleton').boundingClientRect().exec((res) => {
+				// 获取整个父组件容器的高度，当做骨架屏的高度 
+				// 在微信小程序中，如果把骨架屏放入组件中使用的话，需要调in(this)上下文为父组件才有效
+				let query = '';
+				// #ifdef MP-WEIXIN
+				query = uni.createSelectorQuery().in(this.$parent);
+				// #endif
+				// #ifndef MP-WEIXIN
+				query = uni.createSelectorQuery()
+				// #endif
+				query.selectAll('.u-skeleton').boundingClientRect().exec((res) => {
 					this.windowHeight = res[0][0].height;
 					this.windowWinth = res[0][0].width;
 					this.top = res[0][0].bottom - res[0][0].height;
@@ -110,19 +118,43 @@
 			},
 			// 矩形元素列表
 			getRectEls() {
-				uni.createSelectorQuery().selectAll('.u-skeleton-rect').boundingClientRect().exec((res) => {
+				let query = '';
+				// 在微信小程序中，如果把骨架屏放入组件中使用的话，需要调in(this)上下文为父组件才有效
+				// #ifdef MP-WEIXIN
+				query = uni.createSelectorQuery().in(this.$parent);
+				// #endif
+				// #ifndef MP-WEIXIN
+				query = uni.createSelectorQuery()
+				// #endif
+				query.selectAll('.u-skeleton-rect').boundingClientRect().exec((res) => {
 					this.RectNodes = res[0];
 				});
 			},
 			// 圆角元素列表
 			getFilletEls() {
-				uni.createSelectorQuery().selectAll('.u-skeleton-fillet').boundingClientRect().exec((res) => {
+				let query = '';
+				// 在微信小程序中，如果把骨架屏放入组件中使用的话，需要调in(this)上下文为父组件才有效
+				// #ifdef MP-WEIXIN
+				query = uni.createSelectorQuery().in(this.$parent);
+				// #endif
+				// #ifndef MP-WEIXIN
+				query = uni.createSelectorQuery()
+				// #endif
+				query.selectAll('.u-skeleton-fillet').boundingClientRect().exec((res) => {
 					this.filletNodes = res[0];
 				});
 			},
 			// 圆形元素列表
 			getCircleEls() {
-				uni.createSelectorQuery().selectAll('.u-skeleton-circle').boundingClientRect().exec((res) => {
+				let query = '';
+				// 在微信小程序中，如果把骨架屏放入组件中使用的话，需要调in(this)上下文为父组件才有效
+				// #ifdef MP-WEIXIN
+				query = uni.createSelectorQuery().in(this.$parent);
+				// #endif
+				// #ifndef MP-WEIXIN
+				query = uni.createSelectorQuery()
+				// #endif
+				query.selectAll('.u-skeleton-circle').boundingClientRect().exec((res) => {
 					this.circleNodes = res[0];
 				});
 			}
@@ -139,6 +171,8 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.skeleton-fade {
 		width: 100%;
 		height: 100%;

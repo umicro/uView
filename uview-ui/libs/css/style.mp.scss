@@ -1,0 +1,72 @@
+/* start--微信小程序编译后页面有组件名的元素，特别处理--start */
+/* #ifdef MP-WEIXIN || MP-QQ */
+u-td, u-th {
+	flex: 1;
+	align-self: stretch;
+}
+
+.u-td {
+	height: 100%;
+}
+
+u-icon {
+	display: inline-flex;
+	align-items: center;
+}
+
+// 各家小程序宫格组件外层设置为100%，避免受到父元素display: flex;的影响
+u-grid {
+	width: 100%;
+	flex: 0 0 100%;
+}
+
+// 避免小程序线条组件因为父组件display: flex;而失效
+u-line {
+	flex: 1;
+}
+
+u-switch {
+	display: inline-flex;
+	align-items: center;
+}
+
+u-dropdown {
+	flex: 1;
+}
+/* #endif */
+/* end-微信小程序编译后页面有组件名的元素，特别处理--end */
+
+
+/* #ifdef MP-QQ || MP-TOUTIAO */
+// 需要做这一切额外的兼容，都是因为TX的无能
+u-icon {
+	line-height: 0;
+}
+/* #endif */
+
+/* start--头条小程序编译后页面有组件名的元素，特别处理--start */
+// 由于头条小程序不支持直接组件名形式写样式，目前只能在写组件的时候给组件加上对应的类名
+/* #ifdef MP-TOUTIAO */
+.u-td, .u-th, .u-tr {
+	flex: 1;
+	align-self: stretch;
+}
+
+.u-row, .u-col {
+	flex: 1;
+	align-self: stretch;
+}
+
+// 避免小程序线条组件因为父组件display: flex;而失效
+.u-line {
+	flex: 1;
+}
+
+.u-dropdown {
+	flex: 1;
+}
+/* #endif */
+/* end-头条小程序编译后页面有组件名的元素，特别处理--end */
+
+
+

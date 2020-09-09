@@ -4,11 +4,15 @@
 		class="u-btn u-line-1 u-fix-ios-appearance"
 		:class="[
 			'u-size-' + size,
-			plain ? 'u-' + type + '-plain' : '',
+			plain ? 'u-btn--' + type + '--plain' : '',
 			loading ? 'u-loading' : '',
 			shape == 'circle' ? 'u-round-circle' : '',
-			hairLine ? showHairLineBorder : 'u-bold-border'
+			hairLine ? showHairLineBorder : 'u-btn--bold-border',
+			'u-btn--' + type,
+			disabled ? `u-btn--${type}--disabled` : '',
 		]"
+		:hover-start-time="Number(hoverStartTime)"
+		:hover-stay-time="Number(hoverStayTime)"
 		:disabled="disabled"
 		:form-type="formType"
 		:open-type="openType"
@@ -17,6 +21,7 @@
 		:send-message-title="sendMessageTitle"
 		send-message-path="sendMessagePath"
 		:lang="lang"
+		:data-name="dataName"
 		:session-from="sessionFrom"
 		:send-message-img="sendMessageImg"
 		:show-message-card="showMessageCard"
@@ -25,7 +30,9 @@
 		@error="error"
 		@opensetting="opensetting"
 		@launchapp="launchapp"
-		:style="[buttonStyle]"
+		:style="[customStyle, {
+			overflow: ripple ? 'hidden' : 'visible'
+		}]"
 		@tap.stop="click($event)"
 		:hover-class="getHoverClass"
 		:loading="loading"
@@ -62,6 +69,7 @@
  * @property {Boolean} loading 按钮名称前是否带 loading 图标(App-nvue 平台，在 ios 上为雪花，Android上为圆圈)
  * @property {String} form-type 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件
  * @property {String} open-type 开放能力
+ * @property {String} data-name 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
  * @property {String} hover-class 指定按钮按下去的样式类。当 hover-class="none" 时，没有点击态效果(App-nvue 平台暂不支持)
  * @property {Number} hover-start-time 按住后多久出现点击态，单位毫秒
  * @property {Number} hover-stay-time 手指松开后点击态保留时间，单位毫秒
@@ -195,7 +203,27 @@ export default {
 			default() {
 				return {};
 			}
-		}
+		},
+		// 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取
+		dataName: {
+			type: String,
+			default: ''
+		},
+		// 节流，一定时间内只能触发一次
+		throttleTime: {
+			type: [String, Number],
+			default: 1000
+		},
+		// 按住后多久出现点击态，单位毫秒
+		hoverStartTime: {
+			type: [String, Number],
+			default: 20
+		},
+		// 手指松开后点击态保留时间，单位毫秒
+		hoverStayTime: {
+			type: [String, Number],
+			default: 150
+		},
 	},
 	computed: {
 		// 当没有传bgColor变量时，按钮按下去的颜色类名
@@ -205,45 +233,6 @@ export default {
 			let hoverClass = '';
 			hoverClass = this.plain ? 'u-' + this.type + '-plain-hover' : 'u-' + this.type + '-hover';
 			return hoverClass;
-		},
-		// 按钮主题
-		buttonStyle() {
-			let style = {};
-			if (this.type == 'default') {
-				if (this.disabled) {
-					style.color = '#c0c4cc';
-					style.backgroundColor = '#ffffff';
-					style.borderColor = '#e4e7ed';
-				} else {
-					style.color = this.$u.color['contentColor'];
-					style.backgroundColor = '#ffffff';
-					style.borderColor = '#c0c4cc';
-				}
-			} else {
-				if (this.disabled) {
-					if (this.plain) {
-						style.color = this.$u.color[this.type + 'Disabled'];
-						style.backgroundColor = this.$u.color[this.type + 'Light'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					} else {
-						style.color = '#ffffff';
-						style.backgroundColor = this.$u.color[this.type + 'Disabled'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					}
-				} else {
-					if (this.plain) {
-						style.color = this.$u.color[this.type];
-						style.backgroundColor = this.$u.color[this.type + 'Light'];
-						style.borderColor = this.$u.color[this.type + 'Disabled'];
-					} else {
-						style.color = '#ffffff';
-						style.backgroundColor = this.$u.color[this.type];
-						style.borderColor = this.$u.color[this.type];
-					}
-				}
-			}
-
-			return Object.assign(style, this.customStyle);
 		},
 		// 在'primary', 'success', 'error', 'warning'类型下，不显示边框，否则会造成四角有毛刺现象
 		showHairLineBorder() {
@@ -265,17 +254,20 @@ export default {
 	methods: {
 		// 按钮点击
 		click(e) {
-			// 如果按钮时disabled和loading状态，不触发水波纹效果
-			if (this.loading === true || this.disabled === true) return;
-			// 是否开启水波纹效果
-			if (this.ripple) {
-				// 每次点击时，移除上一次的类，再次添加，才能触发动画效果
-				this.waveActive = false;
-				this.$nextTick(function() {
-					this.getWaveQuery(e);
-				});
-			}
-			this.$emit('click');
+			// 进行节流控制，每this.throttle毫秒内，只在开始处执行
+			this.$u.throttle(() => {
+				// 如果按钮时disabled和loading状态，不触发水波纹效果
+				if (this.loading === true || this.disabled === true) return;
+				// 是否开启水波纹效果
+				if (this.ripple) {
+					// 每次点击时，移除上一次的类，再次添加，才能触发动画效果
+					this.waveActive = false;
+					this.$nextTick(function() {
+						this.getWaveQuery(e);
+					});
+				}
+				this.$emit('click', e);
+			}, this.throttleTime);
 		},
 		// 查询按钮的节点信息
 		getWaveQuery(e) {
@@ -350,6 +342,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../../libs/css/style.components.scss';
 .u-btn::after {
 	border: none;
 }
@@ -358,10 +351,13 @@ export default {
 	position: relative;
 	border: 0;
 	//border-radius: 10rpx;
-	display: inline-block;
-	overflow: hidden;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
+	// 避免边框某些场景可能被“裁剪”，不能设置为hidden
+	overflow: visible;
 	line-height: 1;
-	display: flex;
+	@include vue-flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
@@ -369,6 +365,94 @@ export default {
 	z-index: 1;
 	box-sizing: border-box;
 	transition: all 0.15s;
+	
+	&--bold-border {
+		border: 1px solid #ffffff;
+	}
+	
+	&--default {
+		color: $u-content-color;
+		border-color: #c0c4cc;
+		background-color: #ffffff;
+	}
+	
+	&--primary {
+		color: #ffffff;
+		border-color: $u-type-primary;
+		background-color: $u-type-primary;
+	}
+	
+	&--success {
+		color: #ffffff;
+		border-color: $u-type-success;
+		background-color: $u-type-success;
+	}
+	
+	&--error {
+		color: #ffffff;
+		border-color: $u-type-error;
+		background-color: $u-type-error;
+	}
+	
+	&--warning {
+		color: #ffffff;
+		border-color: $u-type-warning;
+		background-color: $u-type-warning;
+	}
+	
+	&--default--disabled {
+		color: #ffffff;
+		border-color: #e4e7ed;
+		background-color: #ffffff;
+	}
+	
+	&--primary--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-primary-disabled!important;
+		background-color: $u-type-primary-disabled!important;
+	}
+	
+	&--success--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-success-disabled!important;
+		background-color: $u-type-success-disabled!important;
+	}
+	
+	&--error--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-error-disabled!important;
+		background-color: $u-type-error-disabled!important;
+	}
+	
+	&--warning--disabled {
+		color: #ffffff!important;
+		border-color: $u-type-warning-disabled!important;
+		background-color: $u-type-warning-disabled!important;
+	}
+	
+	&--primary--plain {
+		color: $u-type-primary!important;
+		border-color: $u-type-primary-disabled!important;
+		background-color: $u-type-primary-light!important;
+	}
+	
+	&--success--plain {
+		color: $u-type-success!important;
+		border-color: $u-type-success-disabled!important;
+		background-color: $u-type-success-light!important;
+	}
+	
+	&--error--plain {
+		color: $u-type-error!important;
+		border-color: $u-type-error-disabled!important;
+		background-color: $u-type-error-light!important;
+	}
+	
+	&--warning--plain {
+		color: $u-type-warning!important;
+		border-color: $u-type-warning-disabled!important;
+		background-color: $u-type-warning-light!important;
+	}
 }
 
 .u-hairline-border:after {
@@ -382,16 +466,12 @@ export default {
 	transform-origin: 0 0;
 	left: 0;
 	top: 0;
-	width: 200.1%;
-	height: 200.1%;
+	width: 199.8%;
+	height: 199.7%;
 	-webkit-transform: scale(0.5, 0.5);
 	transform: scale(0.5, 0.5);
 	border: 1px solid currentColor;
-	z-index: 0;
-}
-
-.u-bold-border {
-	border: 1px solid #ffffff;
+	z-index: 1;
 }
 
 .u-wave-ripple {
@@ -431,7 +511,9 @@ export default {
 }
 
 .u-size-medium {
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	width: auto;
 	font-size: 26rpx;
 	height: 70rpx;
@@ -440,7 +522,9 @@ export default {
 }
 
 .u-size-mini {
-	display: inline-flex;
+	/* #ifndef APP-NVUE */
+	display: inline-flex;		
+	/* #endif */
 	width: auto;
 	font-size: 22rpx;
 	padding-top: 1px;

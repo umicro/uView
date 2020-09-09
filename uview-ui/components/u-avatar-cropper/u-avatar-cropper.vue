@@ -9,6 +9,7 @@
 				@touchend="touchEnd"
 				:style="{ width: cropperOpt.width, height: cropperOpt.height, backgroundColor: 'rgba(0, 0, 0, 0.8)' }"
 				canvas-id="cropper"
+				id="cropper"
 			></canvas>
 			<canvas
 				class="cropper"
@@ -21,6 +22,7 @@
 					height: `${cropperOpt.height * cropperOpt.pixelRatio}`
 				}"
 				canvas-id="targetId"
+				id="targetId"
 			></canvas>
 		</view>
 		<view class="cropper-buttons safe-area-padding" :style="{ height: bottomNavHeight + 'px' }">
@@ -116,7 +118,8 @@ export default {
 			// 裁剪框宽度，单位px
 			rectWidth: 200,
 			// 输出的图片类型，如果'png'类型发现裁剪的图片太大，改成"jpg"即可
-			fileType: 'jpg'
+			fileType: 'jpg',
+			src: '', // 选择的图片路径，用于在点击确定时，判断是否选择了图片
 		};
 	},
 	onLoad(option) {
@@ -142,16 +145,16 @@ export default {
 		// 初始化
 		this.cropper = new WeCropper(this.cropperOpt)
 			.on('ready', ctx => {
-				// console.log(`wecropper is ready for work!`)
+				// wecropper is ready for work!
 			})
 			.on('beforeImageLoad', ctx => {
-				// console.log(`before picture loaded, i can do something`)
+				// before picture loaded, i can do something
 			})
 			.on('imageLoad', ctx => {
-				// console.log(`picture loaded`)
+				// picture loaded
 			})
 			.on('beforeDraw', (ctx, instance) => {
-				// console.log(`before canvas draw,i can do something`)
+				// before canvas draw,i can do something
 			});
 		// 设置导航栏样式，以免用户在page.json中没有设置为黑色背景
 		uni.setNavigationBarColor({
@@ -163,9 +166,9 @@ export default {
 			sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
 			sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
 			success: res => {
-				let src = res.tempFilePaths[0];
+				this.src = res.tempFilePaths[0];
 				//  获取裁剪图片资源后，给data添加src属性及其值
-				this.cropper.pushOrign(src);
+				this.cropper.pushOrign(this.src);
 			}
 		});
 	},
@@ -180,6 +183,8 @@ export default {
 			this.cropper.touchEnd(e);
 		},
 		getCropperImage(isPre = false) {
+			if(!this.src) return this.$u.toast('请先选择图片再裁剪');
+
 			let cropper_opt = {
 				destHeight: Number(this.destWidth), // uni.canvasToTempFilePath要求这些参数为数值
 				destWidth: Number(this.destWidth),
@@ -212,11 +217,11 @@ export default {
 				count: 1, // 默认9
 				sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
 				sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-				success(res) {
-					const src = res.tempFilePaths[0];
+				success: (res) => {
+					self.src = res.tempFilePaths[0];
 					//  获取裁剪图片资源后，给data添加src属性及其值
 
-					self.cropper.pushOrign(src);
+					self.cropper.pushOrign(this.src);
 				}
 			});
 		}
@@ -224,7 +229,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '../../libs/css/style.components.scss';
+
 .content {
 	background: rgba(255, 255, 255, 1);
 }
@@ -235,7 +242,7 @@ export default {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 99999999999999;
+	z-index: 11;
 }
 
 .cropper-buttons {
@@ -245,7 +252,7 @@ export default {
 
 .cropper-wrapper {
 	position: relative;
-	display: flex;
+	@include vue-flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
@@ -255,7 +262,7 @@ export default {
 
 .cropper-buttons {
 	width: 100vw;
-	display: flex;
+	@include vue-flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;

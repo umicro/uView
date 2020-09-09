@@ -5,7 +5,7 @@
 				:name="activeIndex > index ? activeIcon : inactiveIcon"
 				@click="click(index + 1, $event)"
 				:color="activeIndex > index ? activeColor : inactiveColor"
-				:style="{
+				:custom-style="{
 					fontSize: size + 'rpx',
 					padding: `0 ${gutter / 2 + 'rpx'}`
 				}"
@@ -36,12 +36,19 @@
 export default {
 	name: 'u-rate',
 	props: {
+		// 用于v-model双向绑定选中的星星数量
+		// 1.4.5版新增
+		value: {
+			type: [Number, String],
+			default: -1
+		},
 		// 要显示的星星数量
 		count: {
 			type: [Number, String],
 			default: 5
 		},
 		// 当前需要默认选中的星星(选中的个数)
+		// 1.4.5后通过value双向绑定，不再建议使用此参数
 		current: {
 			type: [Number, String],
 			default: 0
@@ -98,7 +105,8 @@ export default {
 			elId: this.$u.guid(),
 			elClass: this.$u.guid(),
 			starBoxLeft: 0, // 评分盒子左边到屏幕左边的距离，用于滑动选择时计算距离
-			activeIndex: this.current, // 当前激活的星星的index
+			// 当前激活的星星的index，如果存在value，优先使用value，因为它可以双向绑定(1.4.5新增)
+			activeIndex: this.value != -1 ? this.value : this.current,
 			starWidth: 0, // 每个星星的宽度
 			starWidthArr: [] //每个星星最右边到组件盒子最左边的距离
 		};
@@ -106,20 +114,23 @@ export default {
 	watch: {
 		current(val) {
 			this.activeIndex = val;
+		},
+		value(val) {
+			this.activeIndex = val;
 		}
 	},
 	methods: {
 		// 获取评分组件盒子的布局信息
 		getElRectById() {
 			// uView封装的获取节点的方法，详见文档
-			this.$u.getRect('#' + this.elId).then(res => {
+			this.$uGetRect('#' + this.elId).then(res => {
 				this.starBoxLeft = res.left;
 			})
 		},
 		// 获取单个星星的尺寸
 		getElRectByClass() {
 			// uView封装的获取节点的方法，详见文档
-			this.$u.getRect('.' + this.elClass).then(res => {
+			this.$uGetRect('.' + this.elClass).then(res => {
 				this.starWidth = res.width;
 				// 把每个星星右边到组件盒子左边的距离放入数组中
 				for (let i = 0; i < this.count; i++) {
@@ -148,7 +159,7 @@ export default {
 			this.activeIndex = index > this.count ? this.count : index;
 			// 对最少颗星星的限制
 			if (this.activeIndex < this.minCount) this.activeIndex = this.minCount;
-			this.$emit('change', this.activeIndex);
+			this.emitEvent();
 		},
 		// 通过点击，直接选中
 		click(index, e) {
@@ -167,17 +178,30 @@ export default {
 			}
 			// 对最少颗星星的限制
 			if (this.activeIndex < this.minCount) this.activeIndex = this.minCount;
+			this.emitEvent();
+		},
+		// 发出事件
+		emitEvent() {
+			// 发出change事件
 			this.$emit('change', this.activeIndex);
+			// 同时修改双向绑定的value的值
+			if(this.value != -1) {
+				this.$emit('input', this.activeIndex);
+			}
 		}
 	},
 	mounted() {
-		this.getElRectById();
-		this.getElRectByClass();
+		setTimeout(() => {
+			this.getElRectById();
+			this.getElRectByClass();
+		}, 100)
 	}
 };
 </script>
 
 <style scoped lang="scss">
+@import "../../libs/css/style.components.scss";
+
 .u-rate {
 	display: -webkit-inline-flex;
 	display: inline-flex;

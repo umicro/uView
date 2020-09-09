@@ -2,7 +2,8 @@
 	<view class="u-load-more-wrap" :style="{
 		backgroundColor: bgColor,
 		marginBottom: marginBottom + 'rpx',
-		marginTop: marginTop + 'rpx'
+		marginTop: marginTop + 'rpx',
+		height: $u.addUnit(height)
 	}">
 		<!-- 加载中和没有更多的状态才显示两边的横线 -->
 		<view :class="status == 'loadmore' || status == 'nomore' ? 'u-more' : ''" class="u-load-more-inner">
@@ -27,7 +28,8 @@
 	 * @property {String} icon-color icon-type为circle时有效，加载中的动画图标的颜色（默认#b7b7b7）
 	 * @property {Boolean} is-dot status为nomore时，内容显示为一个"●"（默认false）
 	 * @property {String} color 字体颜色（默认#606266）
-	 * @property {String Number} font-size 字体大小，单位rpx（默认28）
+	 * @property {String Number} margin-top 到上一个相邻元素的距离
+	 * @property {String Number} margin-bottom 到下一个相邻元素的距离
 	 * @property {Object} load-text 自定义显示的文字，见上方说明示例
 	 * @event {Function} loadmore status为loadmore时，点击组件会发出此事件
 	 * @example <u-loadmore :status="status" icon-type="iconType" load-text="loadText" />
@@ -38,7 +40,7 @@
 			//当前页面背景颜色，如果背景为非白色的时候，需要把此值设置为背景的颜色
 			bgColor: {
 				type: String,
-				default: '#fff'
+				default: '#ffffff'
 			},
 			// 是否显示加载中的图标
 			icon: {
@@ -96,6 +98,11 @@
 				type: [String, Number],
 				default: 0
 			},
+			// 高度，单位rpx
+			height: {
+				type: [String, Number],
+				default: 'auto'
+			}
 		},
 		data() {
 			return {
@@ -148,14 +155,16 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+	
 	.u-load-more-wrap {
 		width: 100%;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 	}
 	
 	.u-load-more-inner {
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 	}
@@ -163,7 +172,7 @@
 	.u-more {
 		width: 60%;
 		position: relative;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 	}
 	
@@ -183,7 +192,7 @@
 	}
 	
 	.u-loadmore-icon {
-		display: flex;
+		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 	}

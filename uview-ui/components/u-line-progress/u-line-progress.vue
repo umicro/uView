@@ -4,7 +4,16 @@
 		height: height + 'rpx',
 		backgroundColor: inactiveColor
 	}">
-		<view :class="{'u-striped': striped, 'u-striped-active': striped && stripedActive}" class="u-active" :style="[progressStyle]">{{showPercent ? percent + '%' : ''}}</view>
+		<view :class="[
+			type ? `u-type-${type}-bg` : '',
+			striped ? 'u-striped' : '',
+			striped && stripedActive ? 'u-striped-active' : ''
+		]" class="u-active" :style="[progressStyle]">
+			<slot v-if="$slots.default" />
+			<block v-else-if="showPercent">
+				{{percent + '%'}}
+			</block>
+		</view>
 	</view>
 </template>
 
@@ -81,9 +90,7 @@
 			progressStyle() {
 				let style = {};
 				style.width = this.percent + '%';
-				if (['success', 'error', 'info', 'primary', 'warning'].indexOf(this.type) >= 0) style.backgroundColor = this.$u.color[
-					this.type];
-				else style.backgroundColor = this.activeColor;
+				if(this.activeColor) style.backgroundColor = this.activeColor;
 				return style;
 			}
 		},
@@ -94,10 +101,14 @@
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-progress {
 		overflow: hidden;
 		height: 15px;
+		/* #ifndef APP-NVUE */
 		display: inline-flex;
+		/* #endif */
 		align-items: center;
 		width: 100%;
 		border-radius: 100rpx;
@@ -107,7 +118,7 @@
 		width: 0;
 		height: 100%;
 		align-items: center;
-		display: flex;
+		@include vue-flex;
 		justify-items: flex-end;
 		justify-content: space-around;
 		font-size: 20rpx;

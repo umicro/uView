@@ -46,15 +46,12 @@
 				index: 0,
 			}
 		},
-		provide() {
-			return {
-				uCellGroup: this
-			}
-		},
 	}
 </script>
 
 <style lang="scss" scoped>
+	@import "../../libs/css/style.components.scss";
+	
 	.u-cell-box {
 		width: 100%;
 	}
@@ -68,5 +65,6 @@
 
 	.u-cell-item-box {
 		background-color: #FFFFFF;
+		flex-direction: row;
 	}
 </style>

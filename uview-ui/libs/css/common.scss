@@ -8,6 +8,19 @@
 	position: absolute;
 }
 
+// nvue不能用标签命名样式，不能放在微信组件中，否则微信开发工具会报警告，无法使用标签名当做选择器
+/* #ifndef APP-NVUE */
+image {
+	display: inline-block;
+}
+
+// 在weex，也即nvue中，所有元素默认为border-box
+view,
+text {
+	box-sizing: border-box;
+}
+/* #endif */
+
 .u-font-xs {
 	font-size: 22rpx;
 }
@@ -29,7 +42,9 @@
 }
 
 .u-flex {
+	/* #ifndef APP-NVUE */
 	display: flex;
+	/* #endif */
 	flex-direction: row;
 	align-items: center;
 }
@@ -87,12 +102,14 @@
 }
 
 .u-flex-col {
+	/* #ifndef APP-NVUE */
 	display: flex;
+	/* #endif */
 	flex-direction: column;
 }
 
 // 定义flex等分
-@for $i from 1 through 12 {
+@for $i from 0 through 12 {
 	.u-flex-#{$i} {
 		flex: $i;
 	}
@@ -152,3 +169,8 @@
 	}
 }
 
+// 重置nvue的默认关于flex的样式
+.u-reset-nvue {
+	flex-direction: row;
+	align-items: center;
+}

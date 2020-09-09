@@ -2,20 +2,21 @@
 	<view class="u-char-box">
 		<view class="u-char-flex">
 			<input :disabled="disabledKeyboard" :value="valueModel" type="number" :focus="focus" :maxlength="maxlength" class="u-input" @input="getVal"/>
-			<view v-for="(item, index) in maxlength" :key="index">
-				<view :class="[breathe && charArrLength == index ? 'u-breathe' : '', 'u-char-item', 
+			<view v-for="(item, index) in loopCharArr" :key="index">
+				<view :class="[breathe && charArrLength == index ? 'u-breathe' : '', 'u-char-item',
 				charArrLength === index && mode == 'box' ? 'u-box-active' : '',
 				mode === 'box' ? 'u-box' : '']" :style="{
 					fontWeight: bold ? 'bold' : 'normal',
 					fontSize: fontSize + 'rpx',
 					width: width + 'rpx',
 					height: width + 'rpx',
-					color: inactiveColor
+					color: inactiveColor,
+					borderColor: charArrLength === index && mode == 'box' ? activeColor : 'none'
 				}">
 					<view class="u-placeholder-line" :style="{
 							display: charArrLength === index ? 'block' : 'none',
 							height: width * 0.5 +'rpx'
-						}" 
+						}"
 						v-if="mode !== 'middleLine'"
 					></view>
 					<view v-if="mode === 'middleLine' && charArrLength <= index" :class="[breathe && charArrLength == index ? 'u-breathe' : '', charArrLength === index ? 'u-middle-line-active' : '']"
@@ -46,7 +47,7 @@
 	 * @property {Boolean} bold 字体和输入横线是否加粗（默认true）
 	 * @property {String Number} font-size 字体大小，单位rpx（默认60）
 	 * @property {String} active-color 当前激活输入框的样式（默认#2979ff）
-	 * @property {String} focus 非激活输入框的样式，文字颜色同此值（默认#606266）
+	 * @property {String} inactive-color 非激活输入框的样式，文字颜色同此值（默认#606266）
 	 * @property {String | Number} width 输入框宽度，单位rpx，高等于宽（默认80）
 	 * @property {Boolean} disabled-keyboard 禁止点击输入框唤起系统键盘（默认false）
 	 * @event {Function} change 输入内容发生改变时触发，具体见官网说明
@@ -99,7 +100,7 @@
 			// 激活样式
 			activeColor: {
 				type: String,
-				default: '#2979ff'
+				default: 'red'
 			},
 			// 未激活的样式
 			inactiveColor: {
@@ -118,13 +119,13 @@
 			}
 		},
 		watch: {
-			maxlength: {
-				// 此值设置为true，会在组件加载后无需maxlength变化就会执行一次本监听函数，无需再created生命周期中处理
-				immediate: true,
-				handler(val) {
-					this.maxlength = Number(val);
-				}
-			},
+			// maxlength: {
+			// 	// 此值设置为true，会在组件加载后无需maxlength变化就会执行一次本监听函数，无需再created生命周期中处理
+			// 	immediate: true,
+			// 	handler(val) {
+			// 		this.maxlength = Number(val);
+			// 	}
+			// }, 
 			value: {
 				immediate: true,
 				handler(val) {
@@ -154,6 +155,10 @@
 			},
 			charArrLength() {
 				return this.charArr.length;
+			},
+			// 根据长度，循环输入框的个数，因为头条小程序数值不能用于v-for
+			loopCharArr() {
+				return new Array(this.maxlength);
 			}
 		},
 		methods: {
@@ -175,6 +180,8 @@
 </script>
 
 <style scoped lang="scss">
+	@import "../../libs/css/style.components.scss";
+
 	@keyframes breathe {
 		0% {
 			opacity: 0.3;
@@ -194,7 +201,7 @@
 	}
 
 	.u-char-flex {
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		flex-wrap: wrap;
 		position: relative;
@@ -221,7 +228,7 @@
 		font-weight: bold;
 		color: $u-main-color;
 		line-height: 90rpx;
-		display: flex;
+		@include vue-flex;
 		justify-content: center;
 		align-items: center;
 	}
@@ -254,7 +261,9 @@
 	}
 
 	.u-placeholder-line {
+		/* #ifndef APP-NVUE */
 		display: none;
+		/* #endif */
 		position: absolute;
 		left: 50%;
 		top: 50%;

@@ -15,7 +15,7 @@
 		</view>
 		<view class="u-config-wrap">
 			<view class="u-config-title u-border-bottom">
-				参数配置
+				参数配置 
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">键盘开关</view>

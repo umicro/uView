@@ -15,6 +15,21 @@
 			return {
 				iconList: [
 					{
+						name: 'level'
+					},
+					{
+						name: 'woman'
+					},
+					{
+						name: 'man'
+					},
+					{
+						name: 'arrow-left-double'
+					},
+					{
+						name: 'arrow-right-double'
+					},
+					{
 						name: 'chat'
 					},
 					{
@@ -622,7 +637,6 @@
 		flex: 0 0 33.33333333%;
 		justify-content: center;
 		overflow: hidden;
-		padding: 0 6rpx;
 	}
 	
 	.u-icon-name {

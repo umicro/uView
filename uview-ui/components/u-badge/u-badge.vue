@@ -1,12 +1,17 @@
 <template>
-	<view v-if="show" class="u-badge-box" :class="[isDot ? 'u-badge-dot' : 'u-badge', size == 'mini' ? 'u-badge-mini' : '']" :style="[{
-		top: offset[0] + 'rpx',
-		right: offset[1] + 'rpx',
-		fontSize: fontSize + 'rpx',
-		position: absolute ? 'absolute' : 'static',
-		color: color,
-		backgroundColor: backgroundColor
-	}, boxStyle]">
+	<view v-if="show" class="u-badge" :class="[
+			isDot ? 'u-badge-dot' : '', 
+			size == 'mini' ? 'u-badge-mini' : '',
+			type ? 'u-badge--bg--' + type : ''
+		]" :style="[{
+			top: offset[0] + 'rpx',
+			right: offset[1] + 'rpx',
+			fontSize: fontSize + 'rpx',
+			position: absolute ? 'absolute' : 'static',
+			color: color,
+			backgroundColor: bgColor
+		}, boxStyle]"
+	>
 		{{showText}}
 	</view>
 </template>
@@ -127,26 +132,44 @@
 				// 如果count的值为0，并且showZero设置为false，不显示组件
 				if(this.count == 0 && this.showZero == false) return false;
 				else return true;
-			},
-			// 获取背景颜色，如果定义了bgColor参数，就放弃type主题色
-			backgroundColor() {
-				return this.bgColor ? this.bgColor : this.$u.color[this.type];
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.u-badge-box {
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-	}
+	@import "../../libs/css/style.components.scss";
 	
 	.u-badge {
+		/* #ifndef APP-NVUE */
+		display: inline-flex;
+		/* #endif */
+		justify-content: center;
+		align-items: center;
 		line-height: 24rpx;
 		padding: 4rpx 8rpx;
 		border-radius: 100rpx;
+		z-index: 9;
+		
+		&--bg--primary {
+			background-color: $u-type-primary;
+		}
+		
+		&--bg--error {
+			background-color: $u-type-error;
+		}
+		
+		&--bg--success {
+			background-color: $u-type-success;
+		}
+		
+		&--bg--info {
+			background-color: $u-type-info;
+		}
+		
+		&--bg--warning {
+			background-color: $u-type-warning;
+		}
 	}
 	
 	.u-badge-dot {
@@ -187,7 +210,7 @@
 	// }
 	
 	.u-info {
-		background: $u-type-info;
+		background-color: $u-type-info;
 		color: #fff;
 	}
 </style>
