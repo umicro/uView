@@ -249,14 +249,18 @@ export default {
 		// 确定搜索
 		search(e) {
 			this.$emit('search', e.detail.value);
-			// 收起键盘
-			uni.hideKeyboard();
+			try{
+				// 收起键盘
+				uni.hideKeyboard();
+			}catch(e){}
 		},
 		// 点击右边自定义按钮的事件
 		custom() {
 			this.$emit('custom', this.keyword);
-			// 收起键盘
-			uni.hideKeyboard();
+			try{
+				// 收起键盘
+				uni.hideKeyboard();
+			}catch(e){}
 		},
 		// 获取焦点
 		getFocus() {

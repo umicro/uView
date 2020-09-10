@@ -10,7 +10,7 @@
 				marginBottom: elLabelPosition == 'left' ? 0 : '10rpx',
 			}">
 				<!-- 为了块对齐 -->
-				<view class="u-form-item--left__content">
+				<view class="u-form-item--left__content" v-if="required || leftIcon || label">
 					<!-- nvue不支持伪元素before -->
 					<text v-if="required" class="u-form-item--left__content--required">*</text>
 					<view class="u-form-item--left__content__icon" v-if="leftIcon">

@@ -197,6 +197,7 @@
 		border-radius: 8rpx;
 		box-shadow: 0 2rpx 0rpx #888992;
 		font-weight: 500;
+		justify-content: center;
 	}
 
 	.u-carinput-hover {
