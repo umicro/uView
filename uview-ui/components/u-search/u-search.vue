@@ -22,8 +22,8 @@
 				@input="inputChange"
 				:disabled="disabled"
 				@focus="getFocus"
-				:maxlength="getMaxlength"
 				:focus="focus"
+				:maxlength="maxlength"
 				placeholder-class="u-placeholder-class"
 				:placeholder="placeholder"
 				:placeholder-style="`color: ${placeholderColor}`"
@@ -164,7 +164,7 @@ export default {
 		// 输入框最大能输入的长度，-1为不限制长度(来自uniapp文档)
 		maxlength: {
 			type: [Number, String],
-			default: -1
+			default: '-1'
 		},
 		// 搜索图标的颜色，默认同输入框字体颜色
 		searchIconColor: {
@@ -227,10 +227,6 @@ export default {
 			if (this.borderColor) return `1px solid ${this.borderColor}`;
 			else return 'none';
 		},
-		// 将maxlength转为数值
-		getMaxlength() {
-			return Number(this.maxlength);
-		}
 	},
 	methods: {
 		// 目前HX2.6.9 v-model双向绑定无效，故监听input事件获取输入框内容的变化
