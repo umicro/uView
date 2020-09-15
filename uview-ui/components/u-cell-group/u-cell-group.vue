@@ -1,7 +1,8 @@
 <template>
 	<view class="u-cell-box">
-		<view class="u-cell-title" v-if="title" :style="[titleStyle]">
-			{{title}}
+		<view class="u-cell-title" v-if="$slots.title || title" :style="[titleStyle]">
+			<slot name="title" v-if="$slots.title"></slot>
+			<text v-if="title">{{title}}</text>
 		</view>
 		<view class="u-cell-item-box" :class="{'u-border-bottom u-border-top': border}">
 			<slot />
