@@ -6,10 +6,12 @@
 
 [![star](https://gitee.com/xuqu/uView/badge/star.svg?theme=gvp)](https://gitee.com/xuqu/uView/stargazers)
 [![fork](https://gitee.com/xuqu/uView/badge/fork.svg?theme=gvp)](https://gitee.com/xuqu/uView/members)
-[![stars](https://img.shields.io/github/stars/YanxinNet/uView?style=social)](https://github.com/YanxinNet/uView)
-[![forks](https://img.shields.io/github/forks/YanxinNet/uView?style=social)](https://github.com/YanxinNet/uView)
-[![issues](https://img.shields.io/github/issues/YanxinNet/uView?style=flat-square)](https://github.com/YanxinNet/uView)
-[![license](https://img.shields.io/github/license/YanxinNet/uView?style=flat-square)](https://github.com/YanxinNet/uView)
+[![stars](https://img.shields.io/github/stars/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/YanxinNet/uView)
+[![forks](https://img.shields.io/github/forks/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/YanxinNet/uView)
+[![issues](https://img.shields.io/github/issues/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/YanxinNet/uView/issues)
+[![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uviewui.com)
+[![release](https://img.shields.io/github/v/release/YanxinNet/uView?style=flat-square)](https://gitee.com/xuqu/uView/releases)
+[![license](https://img.shields.io/github/license/YanxinNet/uView?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
 ## 说明
 
