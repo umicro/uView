@@ -5,14 +5,18 @@
 		marginTop: marginTop + 'rpx',
 		height: $u.addUnit(height)
 	}">
+		<u-line color="#d4d4d4" length="50"></u-line>
 		<!-- 加载中和没有更多的状态才显示两边的横线 -->
 		<view :class="status == 'loadmore' || status == 'nomore' ? 'u-more' : ''" class="u-load-more-inner">
-			<u-loading class="u-loadmore-icon" :color="iconColor" :mode="iconType == 'circle' ? 'circle' : 'flower'" :show="status == 'loading' && icon"></u-loading>
+			<view class="u-loadmore-icon-wrap">
+				<u-loading class="u-loadmore-icon" :color="iconColor" :mode="iconType == 'circle' ? 'circle' : 'flower'" :show="status == 'loading' && icon"></u-loading>
+			</view>
 			<!-- 如果没有更多的状态下，显示内容为dot（粗点），加载特定样式 -->
-			<view :style="[loadTextStyle]" :class="[(status == 'nomore' && isDot == true) ? 'u-dot-text' : 'u-more-text']" @tap="loadMore">
+			<view class="u-line-1" :style="[loadTextStyle]" :class="[(status == 'nomore' && isDot == true) ? 'u-dot-text' : 'u-more-text']" @tap="loadMore">
 				{{ showText }}
 			</view>
 		</view>
+		<u-line color="#d4d4d4" length="50"></u-line>
 	</view>
 </template>
 
@@ -40,7 +44,7 @@
 			//当前页面背景颜色，如果背景为非白色的时候，需要把此值设置为背景的颜色
 			bgColor: {
 				type: String,
-				default: '#ffffff'
+				default: 'transparent'
 			},
 			// 是否显示加载中的图标
 			icon: {
@@ -120,7 +124,6 @@
 					zIndex: 1,
 					backgroundColor: this.bgColor,
 					// 如果是加载中状态，动画和文字需要距离近一点
-					padding: this.status == 'loading' ? '0 8px' : '0 12px',
 				}
 			},
 			// 加载中圆圈动画的样式
@@ -157,38 +160,39 @@
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
 	
+	/* #ifdef MP */
+	// 在mp.scss中，赋予了u-line为flex: 1，这里需要一个明确的长度，所以重置掉它
+	// 在组件内部，把组件名(u-line)当做选择器，在微信开发工具会提示不合法，但不影响使用
+	u-line {
+		flex: none;
+	}
+	/* #endif */
+	
 	.u-load-more-wrap {
-		width: 100%;
 		@include vue-flex;
 		justify-content: center;
+		align-items: center;
 	}
 	
 	.u-load-more-inner {
 		@include vue-flex;
 		justify-content: center;
 		align-items: center;
+		padding: 0 12rpx;
 	}
 	
 	.u-more {
-		width: 60%;
 		position: relative;
 		@include vue-flex;
 		justify-content: center;
 	}
 	
-	.u-more::before {
-		content: ' ';
-		position: absolute;
-		border-bottom: 1px solid #d4d4d4;
-		-webkit-transform: scaleY(0.5);
-		transform: scaleY(0.5);
-		width: 100%;
-		top: 50%;
-		left: 0;
-	}
-	
 	.u-dot-text {
 		font-size: 28rpx;
+	}
+	
+	.u-loadmore-icon-wrap {
+		margin-right: 8rpx;
 	}
 	
 	.u-loadmore-icon {

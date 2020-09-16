@@ -6,7 +6,7 @@
 				<u-avatar 
 					:mode="mode" 
 					:size="size" 
-					:src="src" 
+					:src="''" 
 					:text="text"
 					:showLevel="showLevel"
 					:showSex="showSex"

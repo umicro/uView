@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<view class="u-m-t-50">
+		<view class="u-m-p-50">
 			<view class="u-demo-area u-flex u-row-center">
 				<u-dropdown :close-on-click-mask="mask" ref="uDropdown" :activeColor="activeColor" :borderBottom="borderBottom">
 					<u-dropdown-item @change="change" v-model="value1" title="距离" :options="options1"></u-dropdown-item>

@@ -341,7 +341,7 @@ export default {
 					if (this.autoUpload) this.uploadFile(listOldLength);
 				})
 				.catch(error => {
-					// this.$emit('on-error', error);
+					this.$emit('on-choose-fail', error);
 				});
 		},
 		// 提示用户消息

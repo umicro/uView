@@ -4,10 +4,9 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<view class="">
-					<u-radio-group :size="size" :width="width" :wrap="wrap" v-model="value" @change="radioGroupChange" :activeColor="activeColor">
-						<u-radio @change="radioChange" v-for="(item, index) in list" 
+					<u-radio-group :shape="shape" :size="size" :width="width" :wrap="wrap" v-model="value" @change="radioGroupChange" :activeColor="activeColor">
+						<u-radio @change="radioChange" v-for="(item, index) in list" :disabled="item.disabled"
 							:key="index" :name="item.name"
-							:shape="shape" :disabled="item.disabled"
 						>{{item.name}}</u-radio>
 					</u-radio-group>
 				</view>
@@ -22,7 +21,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">形状</view>
-				<u-subsection vibrateShort :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
+				<u-subsection vibrateShort current="1" :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">整体大小(单位rpx)</view>

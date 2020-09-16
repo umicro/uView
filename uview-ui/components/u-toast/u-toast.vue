@@ -142,24 +142,17 @@
 		color: #fff;
 		border-radius: 8rpx;
 		background: #585858;
-		height: 80rpx;
 		@include vue-flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 28rpx;
 		opacity: 0;
 		pointer-events: none;
-		padding:0 40rpx;
+		padding: 18rpx 40rpx;
 	}
 
 	.u-toast.u-show {
 		opacity: 1;
-	}
-
-	.u-text {
-		word-break: keep-all;
-		white-space: nowrap;
-		line-height: normal;
 	}
 
 	.u-icon {
@@ -172,19 +165,22 @@
 	.u-position-center {
 		left: 50%;
 		top: 50%;
-		transform: translateX(-50%) translateY(-50%);
+		transform: translate(-50%,-50%);
+		/* #ifndef APP-NVUE */
+		max-width: 70%;
+		/* #endif */
 	}
 
 	.u-position-top {
 		left: 50%;
 		top: 20%;
-		transform: translateX(-50%) translateY(-50%);
+		transform: translate(-50%,-50%);
 	}
 
 	.u-position-bottom {
 		left: 50%;
 		bottom: 20%;
-		transform: translateX(-50%) translateY(-50%);
+		transform: translate(-50%,-50%);
 	}
 
 	.u-type-primary {
