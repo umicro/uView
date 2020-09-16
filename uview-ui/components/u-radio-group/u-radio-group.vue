@@ -75,6 +75,25 @@
 			// 如果将children定义在data中，在微信小程序会造成循环引用而报错
 			this.children = [];
 		},
+		watch: {
+			// 当父组件需要子组件需要共享的参数发生了变化，手动通知子组件
+			parentData() {
+				if(this.children.length) {
+					this.children.map(child => {
+						// 判断子组件(u-radio)如果有updateParentData方法的话，就就执行(执行的结果是子组件重新从父组件拉取了最新的值)
+						typeof(child.updateParentData) == 'function' && child.updateParentData();
+					})
+				}
+			},
+		},
+		computed: {
+			// 这里computed的变量，都是子组件u-radio需要用到的，由于头条小程序的兼容性差异，子组件无法实时监听父组件参数的变化
+			// 所以需要手动通知子组件，这里返回一个parentData变量，供watch监听，在其中去通知每一个子组件重新从父组件(u-radio-group)
+			// 拉取父组件新的变化后的参数
+			parentData() {
+				return [this.disabled, this.activeColor, this.size, this.labelDisabled, this.shape, this.iconSize, this.width, this.wrap];
+			}
+		},
 		methods: {
 			// 该方法有子组件radio调用，当一个radio被选中的时候，给父组件设置value值(props传递的value)
 			setValue(val) {

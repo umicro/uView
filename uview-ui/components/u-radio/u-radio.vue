@@ -83,20 +83,14 @@
 					width: null,
 					height: null,
 					value: null,
+					wrap: null
 				}
 			};
 		},
 		created() {
 			this.parent = false;
 			// 支付宝小程序不支持provide/inject，所以使用这个方法获取整个父组件，在created定义，避免循环引用
-			this.parent = this.$u.$parent.call(this, 'u-radio-group');
-			if(this.parent) {
-				// 历遍parentData中的属性，将parent中的同名属性赋值给parentData
-				Object.keys(this.parentData).map(key => {
-					this.parentData[key] = this.parent[key];
-				});
-				this.parent.children.push(this);
-			}
+			this.updateParentData();
 		},
 		computed: {
 			// 是否禁用，如果父组件u-raios-group禁用的话，将会忽略子组件的配置
@@ -171,6 +165,9 @@
 			}
 		},
 		methods: {
+			updateParentData() {
+				this.getParentData('u-radio-group');
+			},
 			onClickLabel() {
 				if (!this.elLabelDisabled && !this.elDisabled) {
 					this.setRadioCheckedStatus();

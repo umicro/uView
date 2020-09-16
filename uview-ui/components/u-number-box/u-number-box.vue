@@ -181,6 +181,7 @@
 				inputVal: 1, // 输入框中的值，不能直接使用props中的value，因为应该改变props的状态
 				timer: null, // 用作长按的定时器
 				changeFromInner: false, // 值发生变化，是来自内部还是外部
+				timer: null, // 内部定时器
 			};
 		},
 		created() {
@@ -289,8 +290,18 @@
 			},
 			handleChange(value, type) {
 				if (this.disabled) return;
+				// 清除定时器，避免造成混乱
+				if(this.timer) {
+					clearTimeout(this.timer);
+					this.timer = null;
+				}
 				// 发出input事件，修改通过v-model绑定的值，达到双向绑定的效果
 				this.changeFromInner = true;
+				// 一定时间内，清除changeFromInner标记，否则内部值改变后
+				// 外部通过程序修改value值，将会无效
+				setTimeout(() => {
+					this.changeFromInner = false;
+				}, 150);
 				this.$emit('input', Number(value));
 				this.$emit(type, {
 					// 转为Number类型

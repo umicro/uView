@@ -172,7 +172,7 @@
 			},
 			emitEvent() {
 				this.$emit('change', {
-					value: this.value,
+					value: !this.value,
 					name: this.name
 				})
 				// 执行父组件u-checkbox-group的事件方法
@@ -193,14 +193,17 @@
 				}
 				// 如果原来为选中状态，那么可以取消
 				if (this.value == true) {
-					this.$emit('input', !this.value);
 					this.emitEvent();
-				} else if ((this.parent && checkedNum < this.parent.max) || !this.parent) {
+					this.$emit('input', !this.value);
+				} else {
+					// 如果超出最多可选项，提示
+					if(this.parent && checkedNum >= this.parent.max) {
+						return this.$u.toast(`最多可选${this.parent.max}项`);
+					}
 					// 如果原来为未选中状态，需要选中的数量少于父组件中设置的max值，才可以选中
-					this.$emit('input', !this.value);
 					this.emitEvent();
+					this.$emit('input', !this.value);
 				}
-
 			}
 		}
 	};

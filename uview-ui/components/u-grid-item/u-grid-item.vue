@@ -1,10 +1,10 @@
 <template>
-	<view class="u-grid-item" :hover-class="hoverClass"
+	<view class="u-grid-item" :hover-class="parentData.hoverClass"
 	 :hover-stay-time="200" @tap="click" :style="{
 			background: bgColor,
 			width: width,
 		}">
-		<view class="u-grid-item-box" :style="customStyle" :class="[showBorder ? 'u-border-right u-border-bottom' : '']">
+		<view class="u-grid-item-box" :style="customStyle" :class="[parentData.border ? 'u-border-right u-border-bottom' : '']">
 			<slot />
 		</view>
 	</view>
@@ -46,34 +46,34 @@
 		},
 		data() {
 			return {
-				hoverClass: '', // 按下去的时候，是否显示背景灰色
-				col: 1, // 父组件划分的宫格数
-				showBorder: false, // 是否显示边框，根据父组件决定
+				parentData: {
+					hoverClass: '', // 按下去的时候，是否显示背景灰色
+					col: 3, // 父组件划分的宫格数
+					border: true, // 是否显示边框，根据父组件决定
+				}
 			};
 		},
 		created() {
 			// 父组件的实例
-			this.parent = false;
+			this.updateParentData();
+			// this.parent在updateParentData()中定义
+			this.parent.children.push(this);
 		},
 		computed: {
 			// 每个grid-item的宽度
 			width() {
-				return 100 / Number(this.col) + '%';
+				return 100 / Number(this.parentData.col) + '%';
 			},
 		},
 		methods: {
+			// 获取父组件的参数
+			updateParentData() {
+				// 此方法写在mixin中
+				this.getParentData('u-grid');
+			},
 			click() {
 				this.$emit('click', this.index);
 				this.parent && this.parent.click(this.index);
-			}
-		},
-		mounted() {
-			// 获取父组件节点u-grid，将其参数，赋值给本组件相关变量
-			this.parent = this.$u.$parent.call(this, 'u-grid');
-			if(this.parent) {
-				this.col = this.parent.col;
-				this.showBorder = this.parent.border;
-				this.hoverClass = this.parent.hoverClass;
 			}
 		}
 	};

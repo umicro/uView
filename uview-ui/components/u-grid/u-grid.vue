@@ -42,7 +42,26 @@ export default {
 			index: 0,
 		}
 	},
+	watch: {
+		// 当父组件需要子组件需要共享的参数发生了变化，手动通知子组件
+		parentData() {
+			if(this.children.length) {
+				this.children.map(child => {
+					// 判断子组件(u-radio)如果有updateParentData方法的话，就就执行(执行的结果是子组件重新从父组件拉取了最新的值)
+					typeof(child.updateParentData) == 'function' && child.updateParentData();
+				})
+			}
+		},
+	},
+	created() {
+		// 如果将children定义在data中，在微信小程序会造成循环引用而报错
+		this.children = [];
+	},
 	computed: {
+		// 计算父组件的值是否发生变化
+		parentData() {
+			return [this.hoverClass, this.col, this.size, this.border];
+		},
 		// 宫格对齐方式
 		gridStyle() {
 			let style = {};
@@ -66,7 +85,6 @@ export default {
 			this.$emit('click', index);
 		}
 	}
-	
 };
 </script>
 

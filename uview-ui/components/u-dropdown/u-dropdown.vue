@@ -20,11 +20,14 @@
 			</view>
 		</view>
 		<view class="u-dropdown__content" :style="[contentStyle, {
-			transition: `opacity ${duration / 1000}s linear`
-		}]" @tap="maskClick"  @touchmove.stop.prevent>
+			transition: `opacity ${duration / 1000}s linear`,
+			top: $u.addUnit(height)
+		}]"
+		 @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
 				<slot></slot>
 			</view>
+			<view class="u-dropdown__content__mask"></view>
 		</view>
 	</view>
 </template>
@@ -57,7 +60,7 @@
 			duration: {
 				type: [Number, String],
 				default: 300
-			}, 
+			},
 			// 标题菜单的高度，单位任意，数值默认为rpx单位
 			height: {
 				type: [Number, String],
@@ -81,7 +84,7 @@
 				active: false, // 下拉菜单的状态
 				// 当前是第几个菜单处于激活状态，小程序中此处不能写成false或者""，否则后续将current赋值为0，
 				// 无能的TX没有使用===而是使用==判断，导致程序认为前后二者没有变化，从而不会触发视图更新
-				current: 99999, 
+				current: 99999,
 				// 外层内容的样式，初始时处于底层，且透明
 				contentStyle: {
 					zIndex: -1,
@@ -97,6 +100,7 @@
 				let style = {};
 				// 进行Y轴位移，展开状态时，恢复原位。收齐状态时，往上位移100%，进行隐藏
 				style.transform = `translateY(${this.active ? 0 : '-100%'})`
+				style['transition-duration'] = this.duration / 1000 + 's';
 				return style;
 			}
 		},
@@ -116,7 +120,7 @@
 			// 点击菜单
 			menuClick(index) {
 				// 判断是否被禁用
-				if(this.menuList[index].disabled) return ;
+				if (this.menuList[index].disabled) return;
 				// 如果点击时的索引和当前激活项索引相同，意味着点击了激活项，需要收起下拉菜单
 				if (index === this.current && this.closeOnClickSelf) {
 					this.close();
@@ -135,7 +139,6 @@
 				// 展开时，设置下拉内容的样式
 				this.contentStyle = {
 					zIndex: 11,
-					opacity: 1
 				}
 				// 标记展开状态以及当前展开项的索引
 				this.active = true;
@@ -162,7 +165,7 @@
 			// 点击遮罩
 			maskClick() {
 				// 如果不允许点击遮罩，直接返回
-				if(!this.closeOnClickMask) return;
+				if (!this.closeOnClickMask) return;
 				this.close();
 			},
 			// 外部手动设置某个菜单高亮
@@ -202,7 +205,7 @@
 					transition: transform .3s;
 					align-items: center;
 					@include vue-flex;
-					
+
 					&--rotate {
 						transform: rotate(180deg);
 					}
@@ -212,16 +215,25 @@
 
 		&__content {
 			position: absolute;
-			z-index: 11;
-			height: 100%;
+			z-index: 8;
 			width: 100%;
 			left: 0px;
+			bottom: 0;
 			overflow: hidden;
-			background: rgba(0, 0, 0, .3);
-			opacity: 0;
+
+			&__mask {
+				position: absolute;
+				z-index: 9;
+				background: rgba(0, 0, 0, .3);
+				width: 100%;
+				left: 0;
+				top: 0;
+				bottom: 0;
+			}
 
 			&__popup {
-				z-index: 11;
+				position: relative;
+				z-index: 10;
 				transition: all 0.3s;
 				transform: translate3D(0, -100%, 0);
 			}
