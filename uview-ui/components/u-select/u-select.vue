@@ -333,6 +333,7 @@ export default {
 		},
 		close() {
 			this.$emit('input', false);
+			this.$emit('cancel', this.selectValue);
 		},
 		// 点击确定或者取消
 		getResult(event = null) {
