@@ -21,6 +21,18 @@
 </template>
 
 <script>
+	/**
+	 * dropdown-item 下拉菜单
+	 * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
+	 * @tutorial http://uviewui.com/components/dropdown.html
+	 * @property {String | Number} v-model 双向绑定选项卡选择值
+	 * @property {String} title 菜单项标题
+	 * @property {Array[Object]} options 选项数据，如果传入了默认slot，此参数无效
+	 * @property {Boolean} disabled 是否禁用此选项卡（默认false）
+	 * @property {String | Number} duration 选项卡展开和收起的过渡时间，单位ms（默认300）
+	 * @property {String | Number} height 弹窗下拉内容的高度(内容超出将会滚动)（默认auto）
+	 * @example <u-dropdown-item title="标题"></u-dropdown-item>
+	 */
 	export default {
 		name: 'u-dropdown-item',
 		props: {
