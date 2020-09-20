@@ -31,8 +31,6 @@
  * @property {String} inactive-icon 未选中时的图标名，只能为uView的内置图标（默认star）
  * @property {String} gutter 星星之间的距离（默认10）
  * @property {String Number} min-count 最少选中星星的个数（默认0）
- * @property {Array} colors 颜色分级显示，可以用不同颜色区分评分层级
- * @property {Array} icons 图标分级显示，可以用不同类型的icon区分评分层级
  * @property {Boolean} allow-half 是否允许半星选择（默认false）
  * @event {Function} change 选中的星星发生变化时触发
  * @example <u-rate :count="count" :current="2"></u-rate>
@@ -108,14 +106,12 @@ export default {
 			type: String,
 			default: 'uicon'
 		},
-		// 颜色分级显示，可以用不同颜色区分评分层级
 		colors: {
 			type: Array,
 			default() {
 				return []
 			}
 		},
-		// 图标分级显示，可以用不同类型的icon区分评分层级
 		icons: {
 			type: Array,
 			default() {
@@ -153,8 +149,9 @@ export default {
 		},
 		elActiveIcon() {
 			const len = this.icons.length
-			if (len) {
+			if (len && len <= this.count) {
 				const step = Math.round(this.activeIndex / Math.round(this.count / len))
+				if (step < 1) return this.icons[0]
 				if (step > len) return this.icons[len - 1]
 				return this.icons[step - 1]
 			}
@@ -162,8 +159,9 @@ export default {
 		},
 		elActiveColor() {
 			const len = this.colors.length
-			if (len) {
+			if (len && len <= this.count) {
 				const step = Math.round(this.activeIndex / Math.round(this.count / len))
+				if (step < 1) return this.colors[0]
 				if (step > len) return this.colors[len - 1]
 				return this.colors[step - 1]
 			}

@@ -6,7 +6,7 @@
 				<u-rate v-model="value" :count="count" @change="change"
 				:active-color="activeColor" :inaction-color="inactiveColor"
 				:active-icon="activeIcon" :inactive-icon="inactiveIcon"
-				:disabled="disabled"></u-rate>
+				:disabled="disabled" :colors="colors" :icons="icons"></u-rate>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -28,6 +28,10 @@
 			<view class="u-config-item">
 				<view class="u-item-title">自定义图标</view>
 				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="iconChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">是否分层</view>
+				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="decimalChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否禁用</view>
@@ -53,7 +57,9 @@
 				count: 5,
 				customIcon: false,
 				plain: false,
-				value: 0
+				value: 0,
+				colors: [],
+				icons: []
 			}
 		},
 		watch: {
@@ -91,6 +97,15 @@
 				} else {
 					this.activeColor = '#FA3534';
 					this.inactiveColor = '#b2b2b2';
+				}
+			},
+			decimalChange(index) {
+				if(index == 0) {
+					this.colors = ['#ffc454', '#ffb409', '#ff9500'];
+					this.icons = ['thumb-down-fill', 'thumb-down-fill', 'thumb-up-fill', 'thumb-up-fill'];
+				} else {
+					this.colors = [];
+					this.icons = [];
 				}
 			},
 			iconChange(index) {
