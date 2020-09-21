@@ -5,7 +5,7 @@
 			<view class="u-model">
 				<view v-if="showTitle" class="u-model__title u-line-1" :style="[titleStyle]">{{ title }}</view>
 				<view class="u-model__content">
-					<view :style="[contentStyle]" v-if="$slots.default">
+					<view :style="[contentStyle]" v-if="$slots.default  || $slots.$default">
 						<slot />
 					</view>
 					<view v-else class="u-model__content__message" :style="[contentStyle]">{{ content }}</view>

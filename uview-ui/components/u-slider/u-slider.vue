@@ -15,7 +15,7 @@
 			<view class="u-slider__button-wrap" @touchstart="onTouchStart" 
 				@touchmove="onTouchMove" @touchend="onTouchEnd" 
 				@touchcancel="onTouchEnd">
-				<slot v-if="$slots.default"/>
+				<slot v-if="$slots.default  || $slots.$default"/>
 				<view v-else class="u-slider__button" :style="[blockStyle, {
 					height: blockWidth + 'rpx',
 					width: blockWidth + 'rpx',
