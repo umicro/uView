@@ -100,7 +100,7 @@
 			// 激活样式
 			activeColor: {
 				type: String,
-				default: 'red'
+				default: '#2979ff'
 			},
 			// 未激活的样式
 			inactiveColor: {

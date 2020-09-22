@@ -17,7 +17,9 @@
 
 uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水
 
-## [点击加群交流反馈：1129077272](https://qm.qq.com/cgi-bin/qm/qr?k=1FfucLpozYbnb7FWo_KsqAdEi1mE3Qrf&jump_from=webapi)
+## [官方文档：https://www.uviewui.com](https://www.uviewui.com)
+
+### [点击加群交流反馈：1129077272](https://qm.qq.com/cgi-bin/qm/qr?k=1FfucLpozYbnb7FWo_KsqAdEi1mE3Qrf&jump_from=webapi)
 
 ## 特性
 
@@ -38,8 +40,6 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 
 
 ## 友情链接
-
-<br>
 
 #### **vue-admin-beautiful** —— [企业级、通用型中后台前端解决方案（基于vue/cli 4 最新版，同时支持电脑，手机，平板）](https://github.com/chuzhixin/vue-admin-beautiful)
 
