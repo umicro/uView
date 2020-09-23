@@ -21,7 +21,8 @@
 		</view>
 		<view class="u-dropdown__content" :style="[contentStyle, {
 			transition: `opacity ${duration / 1000}s linear`,
-			top: $u.addUnit(height)
+			top: $u.addUnit(height),
+			height: contentHeight + 'px'
 		}]"
 		 @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
@@ -33,6 +34,23 @@
 </template>
 
 <script>
+	/**
+	 * dropdown 下拉菜单
+	 * @description 该组件一般用于向下展开菜单，同时可切换多个选项卡的场景
+	 * @tutorial http://uviewui.com/components/dropdown.html
+	 * @property {String} active-color 标题和选项卡选中的颜色（默认#2979ff）
+	 * @property {String} inactive-color 标题和选项卡未选中的颜色（默认#606266）
+	 * @property {Boolean} close-on-click-mask 点击遮罩是否关闭菜单（默认true）
+	 * @property {Boolean} close-on-click-self 点击当前激活项标题是否关闭菜单（默认true）
+	 * @property {String | Number} duration 选项卡展开和收起的过渡时间，单位ms（默认300）
+	 * @property {String | Number} height 标题菜单的高度，单位任意（默认80）
+	 * @property {String | Number} border-radius 菜单展开内容下方的圆角值，单位任意（默认0）
+	 * @property {Boolean} border-bottom 标题菜单是否显示下边框（默认false）
+	 * @property {String | Number} title-size 标题的字体大小，单位任意，数值默认为rpx单位（默认28）
+	 * @event {Function} open 下拉菜单被打开时触发
+	 * @event {Function} close 下拉菜单被关闭时触发
+	 * @example <u-dropdown></u-dropdown>
+	 */
 	export default {
 		name: 'u-dropdown',
 		props: {
@@ -75,6 +93,11 @@
 			titleSize: {
 				type: [Number, String],
 				default: 28
+			},
+			// 下拉出来的内容部分的圆角值
+			borderRadius: {
+				type: [Number, String],
+				default: 0
 			}
 		},
 		data() {
@@ -91,7 +114,8 @@
 					opacity: 0
 				},
 				// 让某个菜单保持高亮的状态
-				highlightIndex: 99999
+				highlightIndex: 99999,
+				contentHeight: 0
 			}
 		},
 		computed: {
@@ -101,12 +125,16 @@
 				// 进行Y轴位移，展开状态时，恢复原位。收齐状态时，往上位移100%，进行隐藏
 				style.transform = `translateY(${this.active ? 0 : '-100%'})`
 				style['transition-duration'] = this.duration / 1000 + 's';
+				style.borderRadius = `0 0 ${this.$u.addUnit(this.borderRadius)} ${this.$u.addUnit(this.borderRadius)}`;
 				return style;
 			}
 		},
 		created() {
 			// 引用所有子组件(u-dropdown-item)的this，不能在data中声明变量，否则在微信小程序会造成循环引用而报错
 			this.children = [];
+		},
+		mounted() {
+			this.getContentHeight();
 		},
 		methods: {
 			init() {
@@ -171,6 +199,20 @@
 			// 外部手动设置某个菜单高亮
 			highlight(index = undefined) {
 				this.highlightIndex = index !== undefined ? index : 99999;
+			},
+			// 获取下拉菜单内容的高度
+			getContentHeight() {
+				// 这里的原理为，因为dropdown组件是相对定位的，它的下拉出来的内容，必须给定一个高度
+				// 才能让遮罩占满菜单一下，直到屏幕底部的高度
+				// this.$u.sys()为uView封装的获取设备信息的方法
+				let windowHeight = this.$u.sys().windowHeight;
+				this.$uGetRect('.u-dropdown__menu').then(res => {
+					// 这里获取的是dropdown的尺寸，在H5上，uniapp获取尺寸是有bug的(以前提出修复过，后来又出现了此bug，目前hx2.8.11版本)
+					// H5端bug表现为元素尺寸的top值为导航栏底部到到元素的上边沿的距离，但是元素的bottom值确是导航栏顶部到元素底部的距离
+					// 二者是互相矛盾的，本质原因是H5端导航栏非原生，uni的开发者大意造成
+					// 这里取菜单栏的botton值合理的，不能用res.top，否则页面会造成滚动
+					this.contentHeight = windowHeight - res.bottom;
+				})
 			}
 		}
 	}
@@ -182,6 +224,7 @@
 	.u-dropdown {
 		flex: 1;
 		width: 100%;
+		position: relative;
 
 		&__menu {
 			@include vue-flex;
@@ -220,6 +263,7 @@
 			left: 0px;
 			bottom: 0;
 			overflow: hidden;
+			
 
 			&__mask {
 				position: absolute;
@@ -236,6 +280,7 @@
 				z-index: 10;
 				transition: all 0.3s;
 				transform: translate3D(0, -100%, 0);
+				overflow: hidden;
 			}
 		}
 

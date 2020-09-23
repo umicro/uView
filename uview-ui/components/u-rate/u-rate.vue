@@ -150,6 +150,9 @@ export default {
 		},
 		elActiveIcon() {
 			const len = this.icons.length
+			// 此处规则类似于下方的elActiveColor参数，都是根据一定的规则，显示不同的图标
+			// 结果可能如此：icons参数传递了3个图标，当选中两个时，用第一个图标，4个时，用第二个图标
+			// 第三个时，用第三个图标作为激活的图标
 			if (len && len <= this.count) {
 				const step = Math.round(this.activeIndex / Math.round(this.count / len))
 				if (step < 1) return this.icons[0]
@@ -160,6 +163,8 @@ export default {
 		},
 		elActiveColor() {
 			const len = this.colors.length
+			// 如果有设置colors参数(此参数用于将图标分段，比如一共5颗星，colors传3个颜色值，那么根据一定的规则，2颗星可能为第一个颜色
+			// 4颗星为第二个颜色值，5颗星为第三个颜色值)
 			if (len && len <= this.count) {
 				const step = Math.round(this.activeIndex / Math.round(this.count / len))
 				if (step < 1) return this.colors[0]

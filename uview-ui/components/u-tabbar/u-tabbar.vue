@@ -120,9 +120,9 @@
 		},
 		data() {
 			return {
-				// 由于安卓太菜了，通过css居中凸起按钮的外层元素有误差，故通过js计算将其其中
+				// 由于安卓太菜了，通过css居中凸起按钮的外层元素有误差，故通过js计算将其居中
 				midButtonLeft: '50%',
-				pageUrl: '', // 当前
+				pageUrl: '', // 当前页面URL
 			}
 		},
 		created() {
