@@ -372,16 +372,16 @@ export default {
 			if (this.disabled) return;
 			if (this.uploading) return;
 
+			// 全部上传完成
+			if (index >= this.lists.length) {
+				this.$emit('on-uploaded', this.lists, this.index);
+				return;
+			}
+
 			// 检查是否是已上传或者正在上传中
 			if (this.lists[index].progress == 100) {
 				// if (this.autoUpload == false) this.uploadFile(index + 1);
 				this.uploadFile(index + 1);
-				return;
-			}
-
-			// 全部上传完成
-			if (index >= this.lists.length) {
-				this.$emit('on-uploaded', this.lists, this.index);
 				return;
 			}
 			
