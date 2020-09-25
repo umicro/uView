@@ -12,7 +12,7 @@
 				:custom-prefix="customPrefix"
 				:show-decimal-icon="showDecimalIcon(index)"
 				:percent="decimal"
-				:inactiveColor="inactiveColor"
+				:inactive-color="inactiveColor"
 			></u-icon>
 		</view>
 	</view>
