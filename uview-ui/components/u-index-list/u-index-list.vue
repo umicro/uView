@@ -5,7 +5,7 @@
 			<slot />
 			<view v-if="showSidebar" class="u-index-bar__sidebar" @touchstart.stop.prevent="onTouchMove" @touchmove.stop.prevent="onTouchMove"
 			 @touchend.stop.prevent="onTouchStop" @touchcancel.stop.prevent="onTouchStop">
-				<view v-for="(item, index) in indexList" :key="index" class="u-index-bar__index" :style="{zIndex: zIndex + 1, color: activeAnchorIndex === index ? activeColor : ''}"
+				<view v-for="(item, index) in indexList" :key="index" class="u-index-bar__index" :class="{activated: activeAnchorIndex === index }" :style="{zIndex: zIndex + 1, color: activeAnchorIndex === index ? activeColor : ''}"
 				 :data-index="index">
 					{{ item }}
 				</view>
