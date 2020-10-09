@@ -101,6 +101,15 @@ export default {
 		cloneData(data) {
 			return JSON.parse(JSON.stringify(data));
 		},
+		
+		//重新渲染数据
+		reloadData(){
+			this.leftList = [];
+			this.rightList = [];
+			this.tempList = this.cloneData(this.copyFlowList);
+			this.splitData();
+		},
+		
 		// 清空数据列表
 		clear() {
 			this.leftList = [];
