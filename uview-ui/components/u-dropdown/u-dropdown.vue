@@ -134,7 +134,6 @@
 			this.children = [];
 		},
 		mounted() {
-			this.getContentHeight();
 		},
 		methods: {
 			init() {
@@ -162,6 +161,7 @@
 			},
 			// 打开下拉菜单
 			open(index) {
+				this.getContentHeight()
 				// 重置高亮索引，否则会造成多个菜单同时高亮
 				// this.highlightIndex = [];
 				// 展开时，设置下拉内容的样式
@@ -180,6 +180,7 @@
 			},
 			// 设置下拉菜单处于收起状态
 			close() {
+				this.contentHeight=0
 				this.$emit('close', this.current);
 				// 设置为收起状态，同时current归位，设置为空字符串
 				this.active = false;
