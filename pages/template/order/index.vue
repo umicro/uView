@@ -278,7 +278,8 @@ export default {
 					name: '待收货'
 				},
 				{
-					name: '待评价'
+					name: '待评价',
+					count: 12
 				}
 			],
 			current: 0,
