@@ -11,7 +11,7 @@
 					width: width + 'rpx',
 					height: width + 'rpx',
 					color: inactiveColor,
-					borderColor: charArrLength === index && mode == 'box' ? activeColor : 'none'
+					borderColor: charArrLength === index && mode == 'box' ? activeColor : inactiveColor
 				}">
 					<view class="u-placeholder-line" :style="{
 							display: charArrLength === index ? 'block' : 'none',

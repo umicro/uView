@@ -4,8 +4,8 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-tabs v-if="control" bg-color="#fafafa" :bold="bold" :active-color="activeColor" :list="list" 
-				@change="change" :current="current" :is-scroll="isScroll"></u-tabs>
+				<u-tabs v-if="control" bg-color="#fafafa" :bold="bold" :active-color="activeColor" :list="list"
+				@change="change" :current="current" :is-scroll="isScroll" :offset="offset"></u-tabs>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -38,9 +38,11 @@
 			return {
 				list: [],
 				data: [{
-					name: '关注'
+					name: '关注',
+					count: 100
 				}, {
-					name:  '推荐'
+					name:  '推荐',
+					count: 7
 				}, {
 					name: '电影'
 				},{
@@ -62,7 +64,8 @@
 				tabCountIndex: 0,
 				activeColor: this.$u.color['primary'],
 				bold: true,
-				control: true
+				control: true,
+				offset: [5, -5]
 			}
 		},
 		onLoad() {
@@ -75,17 +78,20 @@
 					this.list = [];
 					this.list.push(this.data[0]);
 					this.list.push(this.data[1]);
+					this.offset = [5, 60]
 				} else if(index == 1) {
 					this.list = [];
 					this.list.push(this.data[0]);
 					this.list.push(this.data[1]);
 					this.list.push(this.data[2]);
+					this.offset = [5, 20]
 				} else {
 					this.list = [];
 					this.list.push(this.data[0]);
 					this.list.push(this.data[1]);
 					this.list.push(this.data[2]);
 					this.list.push(this.data[3]);
+					this.offset = [5, 5]
 				}
 				this.tabCountIndex = index;
 				this.isScroll = false;
@@ -99,6 +105,7 @@
 				if(index == 0) {
 					this.isScroll = true;
 					this.list = this.data;
+					this.offset = [5, -5]
 				} else {
 					this.isScroll = false;
 					this.countChange(this.tabCountIndex);
@@ -135,6 +142,6 @@
 
 <style lang="scss" scoped>
 	.u-config-wrap {
-		
+
 	}
 </style>

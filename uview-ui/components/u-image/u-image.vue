@@ -162,12 +162,16 @@ export default {
 		};
 	},
 	watch: {
-		src(n) {
-			if(!n) {
-				// 如果传入null或者''，或者false，或者undefined，标记为错误状态
-				this.isError = true;
-			} else {
-				this.isError = false;
+		src: {
+			immediate: true,
+			handler (n) {
+				if(!n) {
+					// 如果传入null或者''，或者false，或者undefined，标记为错误状态
+					this.isError = true;
+					this.loading = false;
+				} else {
+					this.isError = false;
+				}
 			}
 		}
 	},

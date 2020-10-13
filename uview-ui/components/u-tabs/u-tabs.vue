@@ -8,6 +8,7 @@
 				<view class="u-scroll-box" :class="{'u-tabs-scorll-flex': !isScroll}">
 					<view class="u-tab-item u-line-1" :id="'u-tab-item-' + index" v-for="(item, index) in list" :key="index" @tap="clickTab(index)"
 					 :style="[tabItemStyle(index)]">
+						<u-badge :count="item[count] || item['count'] || 0" :offset="offset" size="mini"></u-badge>
 						{{ item[name] || item['name']}}
 					</view>
 					<view v-if="showBar" class="u-tab-bar" :style="[tabBarStyle]"></view>
@@ -20,7 +21,7 @@
 <script>
 	/**
 	 * tabs 标签
-	 * @description 该组件，是一个tabs标签组件，在标签多的时候，可以配置为左右滑动，标签少的时候，可以禁止滑动。 该组件的一个特点是配置为滚动模式时，激活的tab会自动移动到组件的中间位置。 
+	 * @description 该组件，是一个tabs标签组件，在标签多的时候，可以配置为左右滑动，标签少的时候，可以禁止滑动。 该组件的一个特点是配置为滚动模式时，激活的tab会自动移动到组件的中间位置。
 	 * @tutorial https://www.uviewui.com/components/tabs.html
 	 * @property {Boolean} is-scroll tabs是否可以左右拖动（默认true）
 	 * @property {Array} list 标签数组，元素为对象，如[{name: '推荐'}]
@@ -38,7 +39,9 @@
 	 * @property {String Number} item-width 标签的宽度（默认auto）
 	 * @property {String Number} gutter 单个tab标签的左右内边距之和，单位rpx（默认40）
 	 * @property {String} bg-color tabs导航栏的背景颜色（默认#ffffff）
-	 * @property {String} name 组件内部读取的list参数中的属性名，见官网说明（默认name）
+	 * @property {String} name 组件内部读取的list参数中的属性名（tab名称），见官网说明（默认name）
+	 * @property {String} count 组件内部读取的list参数中的属性名（badge徽标数），同name属性的使用，见官网说明（默认count）
+	 * @property {Array} offset 设置badge徽标数的位置偏移，格式为 [x, y]，也即设置的为top和right的值，单位rpx（默认[5, 20]）
 	 * @property {Boolean} bold 激活选项的字体是否加粗（默认true）
 	 * @event {Function} change 点击标签时触发
 	 * @example <u-tabs ref="tabs" :list="list" :is-scroll="false"></u-tabs>
@@ -108,10 +111,22 @@
 				type: String,
 				default: '#ffffff'
 			},
-			// 读取传入的数组对象的属性
+			// 读取传入的数组对象的属性(tab名称)
 			name: {
 				type: String,
 				default: 'name'
+			},
+			// 读取传入的数组对象的属性(徽标数)
+			count: {
+				type: String,
+				default: 'count'
+			},
+			// 徽标数位置偏移
+			offset: {
+				type: Array,
+				default: () => {
+					return [5, 20]
+				}
 			},
 			// 活动tab字体是否加粗
 			bold: {
@@ -290,7 +305,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	view,
 	scroll-view {
 		box-sizing: border-box;

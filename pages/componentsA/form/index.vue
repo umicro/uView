@@ -402,7 +402,7 @@ export default {
 			}
 		},
 		labelPositionChange(index) {
-			this.labelPosition = index == 0 ? 'left' : 'right';
+			this.labelPosition = index == 0 ? 'left' : 'top';
 		},
 		codeChange(text) {
 			this.codeTips = text;
