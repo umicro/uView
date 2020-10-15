@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-number-box v-model="value" :bg-color="bgColor" :color="color" :min="0"
-				:step="step" :disabled="disabled" @change="change"></u-number-box>
+				:step="step" :disabled="disabled" @change="change" @focus="focus"></u-number-box>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -64,6 +64,9 @@ export default {
 		},
 		change(e) {
 			//console.log(e.value);
+		},
+		focus() {
+			console.log('focus');
 		}
 	}
 };

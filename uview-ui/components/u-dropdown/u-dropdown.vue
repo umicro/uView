@@ -14,7 +14,7 @@
 					<view class="u-dropdown__menu__item__arrow" :class="{
 						'u-dropdown__menu__item__arrow--rotate': index === current
 					}">
-						<u-icon :custom-style="{display: 'flex'}" name="arrow-down" size="26" :color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'"></u-icon>
+						<u-icon :custom-style="{display: 'flex'}" :name="menuIcon" :size="$u.addUnit(menuIconSize)" :color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'"></u-icon>
 					</view>
 				</view>
 			</view>
@@ -98,6 +98,16 @@
 			borderRadius: {
 				type: [Number, String],
 				default: 0
+			},
+			// 菜单右侧的icon图标
+			menuIcon: {
+				type: String,
+				default: 'arrow-down'
+			},
+			// 菜单右侧图标的大小
+			menuIconSize: {
+				type: [Number, String],
+				default: 26
 			}
 		},
 		data() {

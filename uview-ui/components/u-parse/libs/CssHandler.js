@@ -57,7 +57,10 @@ parser.prototype.Comment = function() {
 }
 parser.prototype.Ignore = function(c) {
 	if (c == '{') this.floor++;
-	else if (c == '}' && !--this.floor) this.state = this.Space;
+	else if (c == '}' && !--this.floor) {
+		this.list = [];
+		this.state = this.Space;
+	}
 }
 parser.prototype.Name = function(c) {
 	if (cfg.blankChar[c]) {
