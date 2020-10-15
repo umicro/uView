@@ -33,7 +33,7 @@ var cfg = {
 	// 将被移除的标签
 	ignoreTags: makeMap('area,base,canvas,frame,iframe,input,link,map,meta,param,script,source,style,svg,textarea,title,track,wbr'),
 	// 只能被 rich-text 显示的标签
-	richOnlyTags: makeMap('a,colgroup,fieldset,legend,table'),
+	richOnlyTags: makeMap('a,colgroup,fieldset,legend'),
 	// 自闭合的标签
 	selfClosingTags: makeMap('area,base,br,col,circle,ellipse,embed,frame,hr,img,input,line,link,meta,param,path,polygon,rect,source,track,use,wbr'),
 	// 信任的标签

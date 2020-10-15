@@ -178,6 +178,7 @@ page {
 	font-size: 30rpx;
 	margin-top: 5px;
 	color: $u-main-color;
+	word-break: break-all;
 }
 
 .demo-tag {
