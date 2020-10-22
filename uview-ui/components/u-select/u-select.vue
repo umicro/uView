@@ -268,7 +268,7 @@ export default {
 					label: tmp ? tmp[this.labelName] : null
 				};
 				// 判断是否存在额外的参数，如果存在，就返回
-				if(tmp && tmp.extra) data.extra = tmp.extra;
+				if(tmp && tmp.extra !== undefined) data.extra = tmp.extra;
 				this.selectValue.push(data)
 			}
 		},
