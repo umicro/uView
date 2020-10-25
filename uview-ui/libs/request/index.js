@@ -23,7 +23,8 @@ class Request {
 		options.responseType = options.responseType || this.config.responseType;
 		options.url = options.url || '';
 		options.params = options.params || {};
-		options.header = Object.assign(this.config.header, options.header);
+		// 使用深度合并, 避免自定义请求header污染默认配置
+		options.header = deepMerge(this.config.header, options.header);
 		options.method = options.method || this.config.method;
 
 		return new Promise((resolve, reject) => {
@@ -37,7 +38,11 @@ class Request {
 				if(this.config.originalData) {
 					// 判断是否存在拦截器
 					if (this.interceptor.response && typeof this.interceptor.response === 'function') {
-						let resInterceptors = this.interceptor.response(response);
+						let resInterceptors = this.interceptor.response({
+                            ...response,
+                            config: this.config,
+                            customHeader: options.header
+                        });
 						// 如果拦截器不返回false，就将拦截器返回的内容给this.$u.post的then回调
 						if (resInterceptors !== false) {
 							resolve(resInterceptors);
