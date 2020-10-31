@@ -2,7 +2,7 @@
 	<view :class="'interlayer '+(c||'')" :style="s">
 		<block v-for="(n, i) in nodes" v-bind:key="i">
 			<!--图片-->
-			<view v-if="n.name=='img'" :class="'_img '+n.attrs.class" :style="n.attrs.style" :data-attrs="n.attrs" @tap="imgtap">
+			<view v-if="n.name=='img'" :class="'_img '+n.attrs.class" :style="n.attrs.style" :data-attrs="n.attrs" @tap.stop="imgtap">
 				<rich-text v-if="ctrl[i]!=0" :nodes="[{attrs:{src:loading&&(ctrl[i]||0)<2?loading:(lazyLoad&&!ctrl[i]?placeholder:(ctrl[i]==3?errorImg:n.attrs.src||'')),alt:n.attrs.alt||'',width:n.attrs.width||'',style:'-webkit-touch-callout:none;max-width:100%;display:block'+(n.attrs.height?';height:'+n.attrs.height:'')},name:'img'}]" />
 				<image class="_image" :src="lazyLoad&&!ctrl[i]?placeholder:n.attrs.src" :lazy-load="lazyLoad"
 				 :show-menu-by-longpress="!n.attrs.ignore" :data-i="i" :data-index="n.attrs.i" data-source="img" @load="loadImg"
@@ -15,7 +15,7 @@
 			<!--#endif-->
 			<!--视频-->
 			<view v-else-if="((n.lazyLoad&&!n.attrs.autoplay)||(n.name=='video'&&!loadVideo))&&ctrl[i]==undefined" :id="n.attrs.id"
-			 :class="'_video '+(n.attrs.class||'')" :style="n.attrs.style" :data-i="i" @tap="_loadVideo" />
+			 :class="'_video '+(n.attrs.class||'')" :style="n.attrs.style" :data-i="i" @tap.stop="_loadVideo" />
 			<video v-else-if="n.name=='video'" :id="n.attrs.id" :class="n.attrs.class" :style="n.attrs.style" :autoplay="n.attrs.autoplay||ctrl[i]==0"
 			 :controls="n.attrs.controls" :loop="n.attrs.loop" :muted="n.attrs.muted" :poster="n.attrs.poster" :src="n.attrs.source[ctrl[i]||0]"
 			 :unit-id="n.attrs['unit-id']" :data-id="n.attrs.id" :data-i="i" data-source="video" @error="error" @play="play" />
@@ -26,7 +26,7 @@
 			 @play.native="play" />
 			<!--链接-->
 			<view v-else-if="n.name=='a'" :id="n.attrs.id" :class="'_a '+(n.attrs.class||'')" hover-class="_hover" :style="n.attrs.style"
-			 :data-attrs="n.attrs" @tap="linkpress">
+			 :data-attrs="n.attrs" @tap.stop="linkpress">
 				<trees class="_span" c="_span" :nodes="n.children" />
 			</view>
 			<!--广告-->

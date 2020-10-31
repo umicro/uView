@@ -3,7 +3,7 @@
 			alignItems: uAlignItem,
 			justifyContent: uJustify
 		}"
-		@tap.stop.prevent="click"
+		@tap="click"
 	>
 		<slot />
 	</view>
@@ -36,6 +36,11 @@
 			align: {
 				type: String,
 				default: 'center'
+			},
+			// 是否阻止事件传播
+			stop: {
+				type: Boolean,
+				default: true
 			}
 		},
 		computed: {
@@ -51,7 +56,7 @@
 			}
 		},
 		methods: {
-			click() {
+			click(e) {
 				this.$emit('click');
 			}
 		}

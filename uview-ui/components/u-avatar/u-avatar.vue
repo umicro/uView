@@ -134,7 +134,7 @@
         },
 		computed: {
 			wrapStyle() {
-				let style = {};
+				let style = {};  
 				style.height = this.size == 'large' ? '120rpx' : this.size == 'default' ?
 				'90rpx' : this.size == 'mini' ? '70rpx' : this.size + 'rpx';
 				style.width = style.height;

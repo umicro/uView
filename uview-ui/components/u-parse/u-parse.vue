@@ -18,6 +18,7 @@
 </template>
 
 <script>
+	var search;
 	// #ifndef H5 || APP-PLUS-NVUE || MP-360
 	import trees from './libs/trees';
 	var cache = {},
@@ -66,7 +67,7 @@
 	 * @event {Function} imgtap 图片点击事件
 	 * @event {Function} linkpress 链接点击事件
 	 * @author JinYufeng
-	 * @version 20201014
+	 * @version 20201029
 	 * @listens MIT
 	 */
 	export default {
@@ -173,6 +174,7 @@
 			// #ifndef H5 || APP-PLUS-NVUE || MP-360
 			if (dom) this.document = new dom(this);
 			// #endif
+			if (search) this.search = args => search(this, args);
 			// #ifdef APP-PLUS-NVUE
 			this.document = this.$refs.web;
 			setTimeout(() => {
@@ -225,7 +227,7 @@
 				this.$refs.web.evalJs(
 					'var t=document.getElementsByTagName("title");t.length&&e({action:"getTitle",title:t[0].innerText});for(var o,n=document.getElementsByTagName("style"),r=1;o=n[r++];)o.innerHTML=o.innerHTML.replace(/body/g,"#parser");for(var a,c=document.getElementsByTagName("img"),s=[],i=0==c.length,d=0,l=0,g=0;a=c[l];l++)parseInt(a.style.width||a.getAttribute("width"))>' +
 					windowWidth + '&&(a.style.height="auto"),a.onload=function(){++d==c.length&&(i=!0)},a.onerror=function(){++d==c.length&&(i=!0),' + (cfg.errorImg ? 'this.src="' + cfg.errorImg + '",' : '') +
-					'e({action:"error",source:"img",target:this})},a.hasAttribute("ignore")||"A"==a.parentElement.nodeName||(a.i=g++,s.push(a.getAttribute("original-src")||a.src||a.getAttribute("data-src")),a.onclick=function(){e({action:"preview",img:{i:this.i,src:this.src}})});e({action:"getImgList",imgList:s});for(var u,m=document.getElementsByTagName("a"),f=0;u=m[f];f++)u.onclick=function(){var t,o=this.getAttribute("href");if("#"==o[0]){var n=document.getElementById(o.substr(1));n&&(t=n.offsetTop)}return e({action:"linkpress",href:o,offset:t}),!1};for(var h,y=document.getElementsByTagName("video"),v=0;h=y[v];v++)h.style.maxWidth="100%",h.onerror=function(){e({action:"error",source:"video",target:this})}' +
+					'e({action:"error",source:"img",target:this})},a.hasAttribute("ignore")||"A"==a.parentElement.nodeName||(a.i=g++,s.push(a.getAttribute("original-src")||a.src||a.getAttribute("data-src")),a.onclick=function(t){t.stopPropagation(),e({action:"preview",img:{i:this.i,src:this.src}})});e({action:"getImgList",imgList:s});for(var u,m=document.getElementsByTagName("a"),f=0;u=m[f];f++)u.onclick=function(m){m.stopPropagation();var t,o=this.getAttribute("href");if("#"==o[0]){var n=document.getElementById(o.substr(1));n&&(t=n.offsetTop)}return e({action:"linkpress",href:o,offset:t}),!1};for(var h,y=document.getElementsByTagName("video"),v=0;h=y[v];v++)h.style.maxWidth="100%",h.onerror=function(){e({action:"error",source:"video",target:this})}' +
 					(this.autopause ? ',h.onplay=function(){for(var e,t=0;e=y[t];t++)e!=this&&e.pause()}' : '') +
 					';for(var _,p=document.getElementsByTagName("audio"),w=0;_=p[w];w++)_.onerror=function(){e({action:"error",source:"audio",target:this})};' +
 					(this.autoscroll ? 'for(var T,E=document.getElementsByTagName("table"),B=0;T=E[B];B++){var N=document.createElement("div");N.style.overflow="scroll",T.parentNode.replaceChild(N,T),N.appendChild(T)}' : '') +
@@ -272,24 +274,29 @@
 					uni.setNavigationBarTitle({
 						title: title[0].innerText
 					})
+				// 填充 domain
+				var fill = target => {
+					var src = target.getAttribute('src');
+					if (this.domain && src) {
+						if (src[0] == '/') {
+							if (src[1] == '/')
+								target.src = (this.domain.includes('://') ? this.domain.split('://')[0] : '') + ':' + src;
+							else target.src = this.domain + src;
+						} else if (!src.includes('://') && src.indexOf('data:') != 0) target.src = this.domain + '/' + src;
+					}
+				}
 				// 图片处理
 				this.imgList.length = 0;
 				var imgs = this.rtf.getElementsByTagName('img');
 				for (let i = 0, j = 0, img; img = imgs[i]; i++) {
 					if (parseInt(img.style.width || img.getAttribute('width')) > windowWidth)
 						img.style.height = 'auto';
-					var src = img.getAttribute('src');
-					if (this.domain && src) {
-						if (src[0] == '/') {
-							if (src[1] == '/')
-								img.src = (this.domain.includes('://') ? this.domain.split('://')[0] : '') + ':' + src;
-							else img.src = this.domain + src;
-						} else if (!src.includes('://')) img.src = this.domain + '/' + src;
-					}
+					fill(img);
 					if (!img.hasAttribute('ignore') && img.parentElement.nodeName != 'A') {
 						img.i = j++;
 						_ts.imgList.push(img.getAttribute('original-src') || img.src || img.getAttribute('data-src'));
-						img.onclick = function() {
+						img.onclick = function(e) {
+							e.stopPropagation();
 							var preview = true;
 							this.ignore = () => preview = false;
 							_ts.$emit('imgtap', this);
@@ -318,7 +325,8 @@
 				// 链接处理
 				var links = this.rtf.getElementsByTagName('a');
 				for (var link of links) {
-					link.onclick = function() {
+					link.onclick = function(e) {
+						e.stopPropagation();
 						var jump = true,
 							href = this.getAttribute('href');
 						_ts.$emit('linkpress', {
@@ -346,6 +354,7 @@
 				var videos = this.rtf.getElementsByTagName('video');
 				_ts.videoContexts = videos;
 				for (let video, i = 0; video = videos[i++];) {
+					fill(video);
 					video.style.maxWidth = '100%';
 					video.onerror = function() {
 						_ts.$emit('error', {
@@ -361,13 +370,15 @@
 				}
 				// 音频处理
 				var audios = this.rtf.getElementsByTagName('audio');
-				for (var audio of audios)
+				for (var audio of audios) {
+					fill(audio);
 					audio.onerror = function() {
 						_ts.$emit('error', {
 							source: 'audio',
 							target: this
 						});
 					}
+				}
 				// 表格处理
 				if (this.autoscroll) {
 					var tables = this.rtf.getElementsByTagName('table');
@@ -626,7 +637,7 @@
 	/* #ifdef MP-WEIXIN */
 	:host {
 		display: block;
-		overflow: scroll;
+		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 	}
 

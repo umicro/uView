@@ -39,6 +39,10 @@ module.exports = {
 				});
 			}
 		},
+		// 阻止事件冒泡
+		preventEvent(e) {
+			e && e.stopPropagation && e.stopPropagation()
+		}
 	},
 	onReachBottom() {
 		uni.$emit('uOnReachBottom')
