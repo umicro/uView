@@ -3,8 +3,8 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-row :justify="justify">
-					<u-col :span="span" :offset="offset" @click="click">
+				<u-row :justify="justify" @click="rowClick">
+					<u-col :span="span" :offset="offset" @click="click" stop>
 						<view class="demo-layout bg-purple-dark">
 
 						</view>
@@ -54,6 +54,12 @@
 			}
 		},
 		methods: {
+			click() {
+				console.log('col click');
+			},
+			rowClick() {
+				console.log('row click');
+			},
 			spanChange(e) {
 				switch (e) {
 					case 0:

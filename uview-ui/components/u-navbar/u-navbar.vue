@@ -14,7 +14,8 @@
 					    class="u-title u-line-1"
 					    :style="{
 							color: titleColor,
-							fontSize: titleSize + 'rpx'
+							fontSize: titleSize + 'rpx',
+							fontWeight: titleBold ? 'bold' : 'normal'
 						}">
 						{{ title }}
 					</view>
@@ -114,6 +115,11 @@
 			titleColor: {
 				type: String,
 				default: '#606266'
+			},
+			// 标题字体是否加粗
+			titleBold: {
+				type: Boolean,
+				default: false
 			},
 			// 标题的字体大小
 			titleSize: {
