@@ -18,7 +18,7 @@
 				height: isShow ? height + 'px' : '0'
 			}]">
 			<view class="u-collapse-content" :id="elId" :style="[bodyStyle]">
-				<slot></slot>
+				<text><slot></slot><text>
 			</view>
 		</view>
 	</view>
