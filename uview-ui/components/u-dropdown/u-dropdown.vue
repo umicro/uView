@@ -21,8 +21,7 @@
 		</view>
 		<view class="u-dropdown__content" :style="[contentStyle, {
 			transition: `opacity ${duration / 1000}s linear`,
-			top: $u.addUnit(height),
-			height: contentHeight + 'px'
+			top: $u.addUnit(height)
 		}]"
 		 @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
@@ -121,7 +120,9 @@
 				// 外层内容的样式，初始时处于底层，且透明
 				contentStyle: {
 					zIndex: -1,
-					opacity: 0
+					opacity: 0,
+					// content默认高度0px
+					height: '0px'
 				},
 				// 让某个菜单保持高亮的状态
 				highlightIndex: 99999,
@@ -177,6 +178,8 @@
 				// 展开时，设置下拉内容的样式
 				this.contentStyle = {
 					zIndex: 11,
+					// open时设置content高度
+					height: this.contentHeight + 'px'
 				}
 				// 标记展开状态以及当前展开项的索引
 				this.active = true;
@@ -197,7 +200,9 @@
 				// 下拉内容的样式进行调整，不透明度设置为0
 				this.contentStyle = {
 					zIndex: -1,
-					opacity: 0
+					opacity: 0,
+					// close时重置content高度为0px，以免遮挡其他内容
+					height: '0px'
 				}
 			},
 			// 点击遮罩
