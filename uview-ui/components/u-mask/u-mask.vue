@@ -16,7 +16,7 @@
 	 * @property {String Number} z-index z-index 层级（默认1070）
 	 * @property {Object} custom-style 自定义样式对象，见上方说明
 	 * @property {String Number} duration 动画时长，单位毫秒（默认300）
-	 * @property {Boolean} zoom 是否使用scale对这招进行缩放（默认true）
+	 * @property {Boolean} zoom 是否使用scale对遮罩进行缩放（默认true）
 	 * @property {Boolean} mask-click-able 遮罩是否可点击，为false时点击不会发送click事件（默认true）
 	 * @event {Function} click mask-click-able为true时，点击遮罩发送此事件
 	 * @example <u-mask :show="show" @click="show = false"></u-mask>

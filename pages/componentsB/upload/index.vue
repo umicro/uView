@@ -53,7 +53,7 @@
 	export default {
 		data() {
 			return {
-				action: 'http://www.tp5.com',
+				action: 'http://127.0.0.1:7001/upload',
 				// 预置上传列表
 				fileList: [],
 				// fileList: [{

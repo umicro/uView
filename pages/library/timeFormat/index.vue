@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<view class="u-no-demo-here">时间戳为：{{timestamp}}</view>
+				<view class="u-no-demo-here">输入时间：{{timestamp}}</view>
 				<view class="u-demo-result-line">
 					{{result}}
 				</view>
@@ -28,7 +28,7 @@
 	export default {
 		data() {
 			return {
-				timestamp: '1582711721',
+				timestamp: '2020-11-02T02:59:24.732Z',
 				result: null
 			}
 		},

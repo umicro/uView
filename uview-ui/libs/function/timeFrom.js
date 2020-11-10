@@ -6,13 +6,14 @@ import timeFormat from '../../libs/function/timeFormat.js';
  * @param String | Boolean format 如果为时间格式字符串，超出一定时间范围，返回固定的时间格式；
  * 如果为布尔值false，无论什么时间，都返回多久以前的格式
  */
-function timeFrom(timestamp = null, format = 'yyyy-mm-dd') {
-	if (timestamp == null) timestamp = Number(new Date());
-	timestamp = parseInt(timestamp);
-	// 判断用户输入的时间戳是秒还是毫秒,一般前端js获取的时间戳是毫秒(13位),后端传过来的为秒(10位)
-	if (timestamp.toString().length == 10) timestamp *= 1000;
-	var timer = (new Date()).getTime() - timestamp;
-	timer = parseInt(timer / 1000);
+function timeFrom(dateTime = null, format = 'yyyy-mm-dd') {
+	// 如果为null,则格式化当前时间
+	if (!dateTime) dateTime = Number(new Date());
+	// 如果dateTime长度为10或者13，则为秒和毫秒的时间戳，如果超过13位，则为其他的时间格式
+	if (dateTime.toString().length == 10) dateTime *= 1000;
+	let timestamp = + new Date(Number(dateTime));
+
+	let timer = (Number(new Date()) - timestamp) / 1000;
 	// 如果小于5分钟,则返回"刚刚",其他以此类推
 	let tips = '';
 	switch (true) {

@@ -262,6 +262,7 @@ export default {
 		// 如果是与屏幕之间不留空隙，应该设置左右边距为0
 		margin-left: 0 !important;
 		margin-right: 0 !important;
+		width: 100%;
 	}
 	
 	&--border:after {
