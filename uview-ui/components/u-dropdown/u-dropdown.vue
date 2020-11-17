@@ -221,8 +221,9 @@
 					// H5端bug表现为元素尺寸的top值为导航栏底部到到元素的上边沿的距离，但是元素的bottom值确是导航栏顶部到元素底部的距离
 					// 二者是互相矛盾的，本质原因是H5端导航栏非原生，uni的开发者大意造成
 					// 这里取菜单栏的botton值合理的，不能用res.top，否则页面会造成滚动
-					// 如果dropdown在tabbar下方 则windowHeight - res.bottom < 0
-        					this.contentHeight = windowHeight - res.bottom > 0 ? windowHeight - res.bottom : windowHeight
+          // this.contentHeight = windowHeight - res.bottom;
+          // 如果dropdown在tabbar下方 则windowHeight - res.bottom < 0
+          this.contentHeight = windowHeight - res.bottom > 0 ? windowHeight - res.bottom : windowHeight
 				})
 			}
 		}
@@ -231,35 +232,42 @@
 
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
+
 	.u-dropdown {
 		flex: 1;
 		width: 100%;
 		position: relative;
+
 		&__menu {
 			@include vue-flex;
 			position: relative;
 			z-index: 11;
 			height: 80rpx;
+
 			&__item {
 				flex: 1;
 				@include vue-flex;
 				justify-content: center;
 				align-items: center;
+
 				&__text {
 					font-size: 28rpx;
 					color: $u-content-color;
 				}
+
 				&__arrow {
 					margin-left: 6rpx;
 					transition: transform .3s;
 					align-items: center;
 					@include vue-flex;
+
 					&--rotate {
 						transform: rotate(180deg);
 					}
 				}
 			}
 		}
+
 		&__content {
 			position: absolute;
 			z-index: 8;
@@ -268,6 +276,7 @@
 			bottom: 0;
 			overflow: hidden;
 			
+
 			&__mask {
 				position: absolute;
 				z-index: 9;
@@ -277,6 +286,7 @@
 				top: 0;
 				bottom: 0;
 			}
+
 			&__popup {
 				position: relative;
 				z-index: 10;
@@ -285,5 +295,6 @@
 				overflow: hidden;
 			}
 		}
+
 	}
 </style>
