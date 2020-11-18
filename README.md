@@ -78,6 +78,7 @@ Vue.use(uView);
 ```css
 /* App.vue */
 <style lang="scss">
+/* 注意声明lang="scss"！ */
 @import "uview-ui/index.scss";
 </style>
 ```
