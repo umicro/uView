@@ -37,7 +37,7 @@ class Request {
 				if(this.config.originalData) {
 					// 判断是否存在拦截器
 					if (this.interceptor.response && typeof this.interceptor.response === 'function') {
-						let resInterceptors = this.interceptor.response(response);
+						let resInterceptors = this.interceptor.response(response, options);
 						// 如果拦截器不返回false，就将拦截器返回的内容给this.$u.post的then回调
 						if (resInterceptors !== false) {
 							resolve(resInterceptors);
@@ -52,7 +52,7 @@ class Request {
 				} else {
 					if (response.statusCode == 200) {
 						if (this.interceptor.response && typeof this.interceptor.response === 'function') {
-							let resInterceptors = this.interceptor.response(response.data);
+							let resInterceptors = this.interceptor.response(response.data, options);
 							if (resInterceptors !== false) {
 								resolve(resInterceptors);
 							} else {
