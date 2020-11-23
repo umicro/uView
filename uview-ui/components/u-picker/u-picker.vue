@@ -147,6 +147,12 @@ export default {
 				};
 			}
 		},
+		// interval 分钟间隔
+		// 一般也只有分钟会有间隔的考虑
+		minuteInterval: {
+			type: Number,
+			default: 1
+		},
 		// 当mode=selector或者mode=multiSelector时，提供的数组
 		range: {
 			type: Array,
@@ -346,13 +352,15 @@ export default {
 			return +num < 10 ? '0' + num : String(num);
 		},
 		// 生成递进的数组
-		generateArray: function(start, end) {
+		generateArray: function(start, end, interval) {
 			// 转为数值格式，否则用户给end-year等传递字符串值时，下面的end+1会导致字符串拼接，而不是相加
 			start = Number(start);
 			end = Number(end);
 			end = end > start ? end : start;
-			// 生成数组，获取其中的索引，并剪出来
-			return [...Array(end + 1).keys()].slice(start);
+			// 判断是否有间隔数，没有则生成数组，获取其中的索引，并剪出来
+			// 有间隔数就按间隔返回新数组
+			const resArr = [...Array(end + 1).keys()].slice(start)
+			return interval ? resArr.filter(i => i%interval===0) : resArr;
 		},
 		getIndex: function(arr, val) {
 			let index = arr.indexOf(val);
@@ -456,7 +464,7 @@ export default {
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.hours, this.hour));
 		},
 		setMinutes() {
-			this.minutes = this.generateArray(0, 59);
+			this.minutes = this.generateArray(0, 59, this.minuteInterval);
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.minutes, this.minute));
 		},
 		setSeconds() {
