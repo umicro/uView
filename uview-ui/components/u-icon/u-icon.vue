@@ -17,6 +17,7 @@
 			marginBottom: labelPos == 'top' ? $u.addUnit(marginBottom) : 0,
 		}">{{ label }}
 		</text>
+		<u-badge v-if="count != null || dot" :id-dot="dot" :count="count" :offset="[-5, -20]"></u-badge>
 	</view>
 </template>
 
@@ -55,6 +56,14 @@
 export default {
 	name: 'u-icon',
 	props: {
+		dot: {
+			type: Boolean,
+			default: false
+		},
+		count: {
+			type: [Number, String],
+			default: null
+		},
 		// 图标类名
 		name: {
 			type: String,
@@ -271,7 +280,7 @@ export default {
 .u-icon {
 	display: inline-flex;
 	align-items: center;
-
+	position: relative;
 	&--left {
 		flex-direction: row-reverse;
 		align-items: center;
