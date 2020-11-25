@@ -17,6 +17,10 @@ class Request {
 				// 返回一个处于pending状态中的Promise，来取消原promise，避免进入then()回调
 				return new Promise(()=>{});
 			}
+			// 支持Promise返回
+			if (interceptorRequest.then) {
+				return interceptorRequest;
+			}
 			this.options = interceptorRequest;
 		}
 		options.dataType = options.dataType || this.config.dataType;
