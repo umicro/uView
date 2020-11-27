@@ -198,16 +198,16 @@ export default {
 			this.$emit('click');
 		},
 		// 图片加载失败
-		onErrorHandler() {
+		onErrorHandler(e) {
 			this.loading = false;
 			this.isError = true;
-			this.$emit('error');
+			this.$emit('error', e);
 		},
 		// 图片加载完成，标记loading结束
-		onLoadHandler() {
+		onLoadHandler(e) {
 			this.loading = false;
 			this.isError = false;
-			this.$emit('load');
+			this.$emit('load', e);
 			// 如果不需要动画效果，就不执行下方代码，同时移除加载时的背景颜色
 			// 否则无需fade效果时，png图片依然能看到下方的背景色
 			if (!this.fade) return this.removeBgColor();
