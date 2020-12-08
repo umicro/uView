@@ -229,10 +229,8 @@ export default {
 		// 当没有传bgColor变量时，按钮按下去的颜色类名
 		getHoverClass() {
 			// 如果开启水波纹效果，则不启用hover-class效果
-			if (this.loading || this.disabled || this.ripple || this.hoverClass) return '';
-			let hoverClass = '';
-			hoverClass = this.plain ? 'u-' + this.type + '-plain-hover' : 'u-' + this.type + '-hover';
-			return hoverClass;
+			if (this.loading || this.disabled || this.ripple) return '';
+			return this.hoverClass;
 		},
 		// 在'primary', 'success', 'error', 'warning'类型下，不显示边框，否则会造成四角有毛刺现象
 		showHairLineBorder() {
