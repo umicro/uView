@@ -57,7 +57,7 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 - [升级指南](https://uviewui.com/components/changelog.html)
 - [关于我们](https://uviewui.com/cooperation/about.html)
 
-## 交流反馈
+## 交流反馈与技术支持
 
 欢迎加入我们的QQ群交流反馈：[点此跳转](https://www.uviewui.com/components/addQQGroup.html)
 
