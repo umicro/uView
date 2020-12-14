@@ -32,7 +32,7 @@
 		</view>
 
 		<view class="u-cell__value" :style="[valueStyle]">
-			<block class="u-cell__value" v-if="value">{{ value }}</block>
+			<block class="u-cell__value" v-if="value || value===0">{{ value }}</block>
 			<slot v-else></slot>
 		</view>
 		<view class="u-flex u-cell_right" v-if="$slots['right-icon']">
