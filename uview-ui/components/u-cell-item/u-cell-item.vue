@@ -6,7 +6,7 @@
 		hover-stay-time="150"
 		:hover-class="hoverClass"
 		:style="{
-			backgroundColor: bgColor
+			backgroundColor: bgColor, padding: padding ? padding : '26rpx 32rpx'
 		}"
 	>
 		<u-icon :size="iconSize" :name="icon" v-if="icon" :custom-style="iconStyle" class="u-cell__left-icon-wrap"></u-icon>
@@ -71,6 +71,11 @@
 export default {
 	name: 'u-cell-item',
 	props: {
+		// 修改内边距
+		padding: {
+			type: String,
+			default: null
+		},
 		// 左侧图标名称(只能uView内置图标)，或者图标src
 		icon: {
 			type: String,
@@ -218,7 +223,6 @@ export default {
 	box-sizing: border-box;
 	/* #endif */
 	width: 100%;
-	padding: 26rpx 32rpx;
 	font-size: 28rpx;
 	line-height: 54rpx;
 	color: $u-content-color;
