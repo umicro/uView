@@ -21,7 +21,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
-				<u-subsection vibrateShort :list="['浅拷贝', '深拷贝']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['浅拷贝', '深拷贝']" @change="modeChange"></u-subsection>
 			</view>
 		</view>
 	</view>

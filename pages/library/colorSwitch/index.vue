@@ -14,11 +14,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">GRB转HEX</view>
-				<u-subsection vibrateShort :list="['rgb(12,57,231)', 'rgb(15,148,32)', 'rgb(91,52,210)']" @change="rgbToHexChange"></u-subsection>
+				<u-subsection :list="['rgb(12,57,231)', 'rgb(15,148,32)', 'rgb(91,52,210)']" @change="rgbToHexChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">HEX转GRB</view>
-				<u-subsection vibrateShort :list="['#0edc8a', '#d0a73c', '#3308dd']" @change="hexToRgbChange"></u-subsection>
+				<u-subsection :list="['#0edc8a', '#d0a73c', '#3308dd']" @change="hexToRgbChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">颜色渐变(rgb(21,21,21)-rgb(56,56,56)，分10份)</view>

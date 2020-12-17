@@ -12,19 +12,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
-				<u-subsection vibrateShort :list="['number', 'dot']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['number', 'dot']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">方向</view>
-				<u-subsection vibrateShort :list="['横向', '竖向']" @change="directionChange"></u-subsection>
+				<u-subsection :list="['横向', '竖向']" @change="directionChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义图标</view>
-				<u-subsection vibrateShort :list="['否', '是']" @change="iconChange"></u-subsection>
+				<u-subsection :list="['否', '是']" @change="iconChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">当前步值</view>
-				<u-subsection vibrateShort :list="['1', '2', '3', '4']" @change="stepChange"></u-subsection>
+				<u-subsection :list="['1', '2', '3', '4']" @change="stepChange"></u-subsection>
 			</view>
 		</view>
 	</view>

@@ -17,7 +17,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">修改globalData为如下值</view>
-				<u-subsection vibrateShort :list="['雅蓝', '皓白', '橘黄']" @change="globalDataChange"></u-subsection>
+				<u-subsection :list="['雅蓝', '皓白', '橘黄']" @change="globalDataChange"></u-subsection>
 			</view>
 		</view>
 	</view>

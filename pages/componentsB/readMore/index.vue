@@ -20,11 +20,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">超出高度隐藏</view>
-				<u-subsection vibrateShort current="1"  :list="['100', '200', '400']" @change="showHeightChange"></u-subsection>
+				<u-subsection current="1"  :list="['100', '200', '400']" @change="showHeightChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">展开后可关闭</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="toggleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="toggleChange"></u-subsection>
 			</view>
 		</view>
 	</view>

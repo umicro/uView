@@ -90,15 +90,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否显示边框</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="borderChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="borderChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否可滑动</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="isSwiperChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="isSwiperChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">修改列数</view>
-				<u-subsection vibrateShort :list="['3', '4']" @change="colChange"></u-subsection>
+				<u-subsection :list="['3', '4']" @change="colChange"></u-subsection>
 			</view>
 		</view>
 	</view>

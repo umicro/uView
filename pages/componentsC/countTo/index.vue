@@ -25,23 +25,23 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :current="current" :list="['启动', '暂停', '继续', '重置']" @change="statusChange"></u-subsection>
+				<u-subsection :current="current" :list="['启动', '暂停', '继续', '重置']" @change="statusChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">目标值</view>
-				<u-subsection vibrateShort :list="[608, 5604, 45617]" @change="endValChange"></u-subsection>
+				<u-subsection :list="[608, 5604, 45617]" @change="endValChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">滚动时间</view>
-				<u-subsection vibrateShort current="1" :list="[1000, 2000, 3000]" @change="durationChange"></u-subsection>
+				<u-subsection current="1" :list="[1000, 2000, 3000]" @change="durationChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示小数</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="decimalsChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="decimalsChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">字体加粗</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="boldChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="boldChange"></u-subsection>
 			</view>
 		</view>
 	</view>

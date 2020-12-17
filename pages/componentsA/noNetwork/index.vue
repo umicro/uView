@@ -13,11 +13,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义提示语</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="tipsChange"></u-subsection>
+				<u-subsection :current="1" :list="['是', '否']" @change="tipsChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义图标</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="imageChange"></u-subsection>
+				<u-subsection :current="1" :list="['是', '否']" @change="imageChange"></u-subsection>
 			</view>
 		</view>
 	</view>
