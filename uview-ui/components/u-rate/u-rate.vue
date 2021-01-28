@@ -11,6 +11,7 @@
 				}"
 				:custom-prefix="customPrefix"
 				:show-decimal-icon="showDecimalIcon(index)"
+        		:inactive-color="inactiveColor"
 				:percent="decimal"
 				:inactive-color="inactiveColor"
 			></u-icon>
