@@ -309,7 +309,7 @@
 				this.today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
 
 				if (this.mode === 'date') {
-					const value = this.defaultValue ? new Date(this.defaultValue) : now;
+					const value = this.defaultValue ? new Date(this.defaultValue.replace(/\-/g, '/')) : now;
 					this.year = value.getFullYear();
 					this.month = value.getMonth() + 1;
 					this.day = value.getDate();
@@ -326,8 +326,8 @@
 
 				if (this.mode === 'range') {
 					const [startDate = '', endDate = ''] = this.defaultValue;
-					const startTime = startDate ? new Date(startDate) : now;
-					const endTime = endDate && new Date(endDate);
+					const startTime = startDate ? new Date(startDate.replace(/\-/g, '/')) : now;
+					const endTime = endDate && new Date(endDate.replace(/\-/g, '/'));
 					this.year = startTime.getFullYear();
 					this.month = startTime.getMonth() + 1;
 					this.day = startTime.getDate();
