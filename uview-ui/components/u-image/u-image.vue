@@ -8,6 +8,7 @@
 			@load="onLoadHandler"
 			:lazy-load="lazyLoad"
 			class="u-image__image"
+			:show-menu-by-longpress="showMenuByLongpress"
 			:style="{
 				borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius)
 			}"

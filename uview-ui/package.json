@@ -1,6 +1,6 @@
 {
 	"name": "uview-ui",
-	"version": "1.8.2",
+	"version": "1.8.3",
 	"description": "uView UI，是uni-app生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水",
 	"main": "index.js",
 	"keywords": [

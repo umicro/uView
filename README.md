@@ -19,7 +19,7 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 
 ## [官方文档：https://www.uviewui.com](https://www.uviewui.com)
 
-### [点击加群交流反馈：863820668](https://jq.qq.com/?_wv=1027&k=uyZUkSlo)
+### [点击加群交流反馈：1129077272](https://qm.qq.com/cgi-bin/qm/qr?k=1FfucLpozYbnb7FWo_KsqAdEi1mE3Qrf&jump_from=webapi)
 
 ## 特性
 
@@ -78,7 +78,6 @@ Vue.use(uView);
 ```css
 /* App.vue */
 <style lang="scss">
-/* 注意声明lang="scss"！ */
 @import "uview-ui/index.scss";
 </style>
 ```
@@ -124,7 +123,7 @@ Vue.use(uView);
 
 ## 捐赠uView的研发
 
-uView文档和源码全部开源免费，如果您认为uView帮到了您的开发工作，您可以捐赠uView的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
+uView文档内容和框架源码全部开源免费，如果您认为uView帮到了您的开发工作，您可以捐赠uView的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
 
 <img src="https://uviewui.com/common/wechat.png" width="220" >
 <img style="margin-left: 100px;" src="https://uviewui.com/common/alipay.png" width="220" >
