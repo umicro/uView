@@ -131,7 +131,7 @@ export default {
 	}
 	
 	&--bordercolor--error {
-		border-color: $u-type-primary;
+		border-color: $u-type-error;
 	}
 	
 	&--bordercolor--info {
