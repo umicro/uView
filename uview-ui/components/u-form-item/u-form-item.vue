@@ -266,7 +266,13 @@
 
 			// 过滤出符合要求的rule规则
 			getFilteredRule(triggerType = '',rules) {
-				rules = rules || this.getRules();
+				// 判断传入的规则，使用的是form传入的规则还是从当前组件传入的规则
+				if(rules.length){
+					rules = rules;
+				}else{
+					rules =  this.getRules();
+				}
+				
 				// 整体验证表单时，triggerType为空字符串，此时返回所有规则进行验证
 				if (!triggerType) return rules;
 				// 历遍判断规则是否有对应的事件，比如blur，change触发等的事件
