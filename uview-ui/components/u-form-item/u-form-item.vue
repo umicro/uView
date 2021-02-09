@@ -285,7 +285,7 @@
 			validation(trigger, callback = () => {}) {
 				// 根据传入的prop的文字,切割出来后，递归获取数据
 				const propsFields = this.prop.split('.')
-				// 递归花去数据 替换之前的获取过去方式，因为有动态表单数据后，无法获取值
+				// 递归获取数据 替换之前的获取过去方式，因为有动态表单数据后，无法获取值
 				this.fieldValue = propsFields.reduce((current, item) => {
 					return current[item]
 				}, this.parent.model)
