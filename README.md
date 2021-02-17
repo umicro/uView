@@ -19,7 +19,12 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 
 ## [官方文档：https://www.uviewui.com](https://www.uviewui.com)
 
-### [点击加群交流反馈：1129077272](https://qm.qq.com/cgi-bin/qm/qr?k=1FfucLpozYbnb7FWo_KsqAdEi1mE3Qrf&jump_from=webapi)
+### 官方1群：1042987248（已满）
+### 官方2群：249718512（已满）
+### 官方3群：1129077272（已满）
+### 官方4群：1084514613（已满）
+### 官方5群：863820668（已满）
+### [点击加6群交流反馈：745721078](https://qm.qq.com/cgi-bin/qm/qr?k=nSvu1k6AFqHVvZhgN9FEavJPXIMyYCxY&jump_from=webapi)
 
 ## 特性
 
