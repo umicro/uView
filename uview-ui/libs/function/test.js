@@ -9,7 +9,7 @@ function email(value) {
  * 验证手机格式
  */
 function mobile(value) {
-	return /^1[23456789]\d{9}$/.test(value)
+	return /^1[3-9]\d{9}$/.test(value)
 }
 
 /**
