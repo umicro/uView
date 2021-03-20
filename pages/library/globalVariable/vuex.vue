@@ -17,7 +17,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">修改vuex变量为如下值</view>
-				<u-subsection vibrateShort :list="['墨绿', '黛蓝', '浅紫']" @change="vuexChange"></u-subsection>
+				<u-subsection :list="['墨绿', '黛蓝', '浅紫']" @change="vuexChange"></u-subsection>
 			</view>
 		</view>
 	</view>

@@ -10,27 +10,27 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">数值显示</view>
-				<u-subsection current="1" vibrateShort :list="[0, 8, 15, 106, 209]" @change="countChange"></u-subsection>
+				<u-subsection current="1" :list="[0, 8, 15, 106, 209]" @change="countChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题选择</view>
-				<u-subsection vibrateShort current="2" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+				<u-subsection current="2" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示点</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">尺寸</view>
-				<u-subsection vibrateShort :list="['default', 'mini']" @change="sizeChange"></u-subsection>
+				<u-subsection :list="['default', 'mini']" @change="sizeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">位置偏移</view>
-				<u-subsection vibrateShort current="1" :list="['[20, 20]', '[-8, -8]', '[-20, -20]']" @change="offsetChange"></u-subsection>
+				<u-subsection current="1" :list="['[20, 20]', '[-8, -8]', '[-20, -20]']" @change="offsetChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">中心点与父右上角重合</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="isCenterChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="isCenterChange"></u-subsection>
 			</view>
 		</view>
 	</view>

@@ -16,11 +16,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">生成图片质量</view>
-				<u-subsection vibrateShort :current="1" :list="['0.3', '0.7', '1']" @change="qualityChange"></u-subsection>
+				<u-subsection :current="1" :list="['0.3', '0.7', '1']" @change="qualityChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义参数</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection :current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view> -->
 	</view>

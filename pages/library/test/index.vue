@@ -40,19 +40,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">邮箱</view>
-				<u-subsection vibrateShort :list="email" @change="emailChange"></u-subsection>
+				<u-subsection :list="email" @change="emailChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">手机号</view>
-				<u-subsection vibrateShort :list="mobile" @change="mobileChange"></u-subsection>
+				<u-subsection :list="mobile" @change="mobileChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">中文</view>
-				<u-subsection vibrateShort :list="chinese" @change="chineseChange"></u-subsection>
+				<u-subsection :list="chinese" @change="chineseChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">整数</view>
-				<u-subsection vibrateShort :list="digits" @change="digitsChange"></u-subsection>
+				<u-subsection :list="digits" @change="digitsChange"></u-subsection>
 			</view>
 		</view>
 	</view>

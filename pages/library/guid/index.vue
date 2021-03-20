@@ -14,15 +14,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">长度</view>
-				<u-subsection vibrateShort current="2" :list="['10', '16', '32', 'rfc4122标准']" @change="lengthChange"></u-subsection>
+				<u-subsection current="2" :list="['10', '16', '32', 'rfc4122标准']" @change="lengthChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">首字符为"u"</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="fristUChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="fristUChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">取值基数(进制)</view>
-				<u-subsection vibrateShort current="3" :list="['二', '八', '十', '六十二']" @change="radixChange"></u-subsection>
+				<u-subsection current="3" :list="['二', '八', '十', '六十二']" @change="radixChange"></u-subsection>
 			</view>
 		</view>
 	</view>

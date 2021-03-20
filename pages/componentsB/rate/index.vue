@@ -15,31 +15,31 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">初始值</view>
-				<u-subsection vibrateShort :list="[1, 2, 3, 4]" @change="currentChange"></u-subsection>
+				<u-subsection :list="[1, 2, 3, 4]" @change="currentChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">镂空状态</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="plainChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="plainChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义图标</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="iconChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="iconChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否分层</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="decimalChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="decimalChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否禁用</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">星星数量</view>
-				<u-subsection vibrateShort current="1" :list="[4, 5, 6]" @change="countChange"></u-subsection>
+				<u-subsection current="1" :list="[4, 5, 6]" @change="countChange"></u-subsection>
 			</view>
 		</view>
 	</view>

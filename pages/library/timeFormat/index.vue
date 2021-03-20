@@ -15,9 +15,9 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">格式</view>
-				<u-subsection vibrateShort :list="['yyyy-mm-dd', 'yyyy年-mm月-dd日']" @change="format1Change"></u-subsection>
+				<u-subsection :list="['yyyy-mm-dd', 'yyyy年-mm月-dd日']" @change="format1Change"></u-subsection>
 				<view style="margin-top: 50rpx;">
-					<u-subsection vibrateShort  :list="['mm-dd', 'yyyy-mm-dd hh:MM']" @change="format2Change"></u-subsection>
+					<u-subsection  :list="['mm-dd', 'yyyy-mm-dd hh:MM']" @change="format2Change"></u-subsection>
 				</view>
 			</view>
 		</view>

@@ -14,7 +14,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">源字符串</view>
-				<u-subsection vibrateShort :list="['Take me', 'to', 'your heart']" @change="getResult"></u-subsection>
+				<u-subsection :list="['Take me', 'to', 'your heart']" @change="getResult"></u-subsection>
 			</view>
 		</view>
 	</view>

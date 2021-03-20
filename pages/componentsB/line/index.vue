@@ -13,19 +13,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">颜色</view>
-				<u-subsection vibrateShort :list="['primary', 'success', 'warning', 'error', 'info']" @change="colorChange"></u-subsection>
+				<u-subsection :list="['primary', 'success', 'warning', 'error', 'info']" @change="colorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">线条类型</view>
-				<u-subsection vibrateShort :list="['实线', '方形虚线', '圆点虚线']" @change="borderStyleChange"></u-subsection>
+				<u-subsection :list="['实线', '方形虚线', '圆点虚线']" @change="borderStyleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">细边</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="hairLineChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="hairLineChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">方向</view>
-				<u-subsection vibrateShort :list="['水平', '垂直']" @change="directionChange"></u-subsection>
+				<u-subsection :list="['水平', '垂直']" @change="directionChange"></u-subsection>
 			</view>
 		</view>
 	</view>

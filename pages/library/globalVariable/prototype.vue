@@ -17,7 +17,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">修改vuePrototype为如下值</view>
-				<u-subsection vibrateShort :list="['鹅黄', '橙黄', '茶绿']" @change="vuePrototypeChange"></u-subsection>
+				<u-subsection :list="['鹅黄', '橙黄', '茶绿']" @change="vuePrototypeChange"></u-subsection>
 			</view>
 		</view>
 	</view>

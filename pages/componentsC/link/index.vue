@@ -12,11 +12,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">下划线</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="underLineChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="underLineChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view>
 	</view>

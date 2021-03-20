@@ -23,26 +23,26 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">更换图标</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="iconChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="iconChange"></u-subsection>
 			</view>
-			<!-- QQ小程序无法动态切换slot -->
-			<!-- #ifndef MP-QQ -->
+			<!-- 小程序无法动态切换slot -->
+			<!-- #ifndef MP -->
 			<view class="u-config-item">
 				<view class="u-item-title">自定义右侧内容</view>
-				<u-subsection vibrateShort :list="['文字', 'Switch组件', 'Badge组件']" @change="rightSlotChange"></u-subsection>
+				<u-subsection :list="['文字', 'Switch组件', 'Badge组件']" @change="rightSlotChange"></u-subsection>
 			</view>
 			<!-- #endif -->
 			<view class="u-config-item">
 				<view class="u-item-title">描述信息</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="lableChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="lableChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">更换标题</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="titleChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="titleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">右侧箭头</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="arrowChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="arrowChange"></u-subsection>
 			</view>
 		</view>
 	</view>

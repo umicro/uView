@@ -22,17 +22,17 @@
 				titleStyle
 			]"
 		>
-			<block v-if="title">{{ title }}</block>
+			<block v-if="title !== ''">{{ title }}</block>
 			<slot name="title" v-else></slot>
 
 			<view class="u-cell__label" v-if="label || $slots.label" :style="[labelStyle]">
-				<block v-if="label">{{ label }}</block>
+				<block v-if="label !== ''">{{ label }}</block>
 				<slot name="label" v-else></slot>
 			</view>
 		</view>
 
 		<view class="u-cell__value" :style="[valueStyle]">
-			<block class="u-cell__value" v-if="value">{{ value }}</block>
+			<block class="u-cell__value" v-if="value !== ''">{{ value }}</block>
 			<slot v-else></slot>
 		</view>
 		<view class="u-flex u-cell_right" v-if="$slots['right-icon']">

@@ -11,27 +11,27 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection vibrateShort :list="['light', 'dark', 'plain']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['light', 'dark', 'plain']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示内容</view>
-				<u-subsection vibrateShort :list="['蒹葭苍苍', '白露为霜', '在水一方']" @change="textChange"></u-subsection>
+				<u-subsection :list="['蒹葭苍苍', '白露为霜', '在水一方']" @change="textChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题选择</view>
-				<u-subsection vibrateShort current="2" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+				<u-subsection current="2" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">形状</view>
-				<u-subsection vibrateShort :list="['square', 'circle', 'circleLeft', 'circleRight']" @change="shapeChange"></u-subsection>
+				<u-subsection :list="['square', 'circle', 'circleLeft', 'circleRight']" @change="shapeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">尺寸</view>
-				<u-subsection vibrateShort :list="['default', 'mini']" @change="sizeChange"></u-subsection>
+				<u-subsection :list="['default', 'mini']" @change="sizeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">关闭图标</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="closeableChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="closeableChange"></u-subsection>
 			</view>
 		</view>
 	</view>

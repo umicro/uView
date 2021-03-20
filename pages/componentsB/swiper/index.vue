@@ -14,19 +14,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">指示器模式</view>
-				<u-subsection vibrateShort :list="['round', 'rect', 'number', 'none']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['round', 'rect', 'number', 'none']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">标题</view>
-				<u-subsection vibrateShort current="1" :list="['显示', '隐藏']" @change="titleChange"></u-subsection>
+				<u-subsection current="1" :list="['显示', '隐藏']" @change="titleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">指示器位置</view>
-				<u-subsection vibrateShort current="3" :list="['上左', '上右', '下左', '下中', '下右']" @change="indicatorPosChange"></u-subsection>
+				<u-subsection current="3" :list="['上左', '上右', '下左', '下中', '下右']" @change="indicatorPosChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">3D效果</view>
-				<u-subsection vibrateShort current="1" :list="['开启', '关闭']" @change="effect3dChange"></u-subsection>
+				<u-subsection current="1" :list="['开启', '关闭']" @change="effect3dChange"></u-subsection>
 			</view>
 		</view>
 	</view>

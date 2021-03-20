@@ -18,27 +18,27 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :list="['关闭', '打开']" @change="modelChange"></u-subsection>
+				<u-subsection :list="['关闭', '打开']" @change="modelChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">颜色</view>
-				<u-subsection vibrateShort :list="['primary', 'error', 'warning', 'success']" @change="colorChange"></u-subsection>
+				<u-subsection :list="['primary', 'error', 'warning', 'success']" @change="colorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">尺寸(单位rpx)</view>
-				<u-subsection vibrateShort current="1" :list="['40', '60', '80']" @change="sizeChange"></u-subsection>
+				<u-subsection current="1" :list="['40', '60', '80']" @change="sizeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">加载中</view>
-				<u-subsection vibrateShort :list="['否', '是']" @change="loadingChange"></u-subsection>
+				<u-subsection :list="['否', '是']" @change="loadingChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">禁用</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">异步控制</view>
-				<u-subsection vibrateShort :list="['关闭', '打开']" @change="asyncChange"></u-subsection>
+				<u-subsection :list="['关闭', '打开']" @change="asyncChange"></u-subsection>
 			</view>
 		</view>
 	</view>
