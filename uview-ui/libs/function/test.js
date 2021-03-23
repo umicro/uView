@@ -2,14 +2,14 @@
  * 验证电子邮箱格式
  */
 function email(value) {
-	return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(value);
+	return /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/.test(value);
 }
 
 /**
  * 验证手机格式
  */
 function mobile(value) {
-	return /^1[23456789]\d{9}$/.test(value)
+	return /^1[3-9]\d{9}$/.test(value)
 }
 
 /**
