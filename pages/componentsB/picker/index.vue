@@ -16,6 +16,7 @@
 					:range="range"
 					:range-key="rangKey"
 					@columnchange="columnchange"
+					:endToday="endToday"
 				></u-picker>
 			</view>
 		</view>
@@ -40,6 +41,10 @@
 			<view class="u-config-item">
 				<view class="u-item-title">默认地区</view>
 				<u-subsection :list="['广东-深圳-宝安', '海南-三亚-海棠']" @change="defaultRegionChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">截止日期为今天</view>
+				<u-subsection :list="['关闭', '开启']" @change="endTodayChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -68,7 +73,8 @@ export default {
 				city: true,
 				area: true,
 				timestamp: true
-			}
+			},
+			endToday: false
 		};
 	},
 	computed: {
@@ -113,6 +119,11 @@ export default {
 				this.params.minute = false;
 				this.params.second = false;
 			}
+			this.mode = 'time';
+			this.show = true;
+		},
+		endTodayChange (index) {
+			this.endToday = index === 1;
 			this.mode = 'time';
 			this.show = true;
 		},

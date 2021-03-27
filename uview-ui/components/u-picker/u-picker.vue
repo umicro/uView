@@ -181,6 +181,11 @@ export default {
 			type: [String, Number],
 			default: 2050
 		},
+		// 是否小于今天
+		endToday: {
+			type: Boolean,
+			default: false
+		},
 		// "取消"按钮的颜色
 		cancelColor: {
 			type: String,
@@ -310,7 +315,10 @@ export default {
 		// watch监听月份的变化，实时变更日的天数，因为不同月份，天数不一样
 		// 一个月可能有30，31天，甚至闰年2月的29天，平年2月28天
 		yearAndMonth(val) {
-			if (this.params.year) this.setDays();
+			if (this.params.year) {
+				this.setDays();
+				this.endToday && this.setMonths();
+			}
 		},
 		// 微信和QQ小程序由于一些奇怪的原因(故同时对所有平台均初始化一遍)，需要重新初始化才能显示正确的值
 		value(n) {
@@ -428,17 +436,40 @@ export default {
 		// 设置picker的某一列值
 		setYears() {
 			// 获取年份集合
-			this.years = this.generateArray(this.startYear, this.endYear);
+			this.years = this.generateArray(this.startYear, this.endToday ? new Date().getFullYear() : this.endYear);
 			// 设置this.valueArr某一项的值，是为了让picker预选中某一个值
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.years, this.year));
 		},
+		_setMonths () {
+			// 当前年则要限制结束月份是当前月份
+			const date = new Date();
+			if (this.endToday && this.year === date.getFullYear()) {
+				this.months = this.generateArray(1, date.getMonth() + 1);
+			} else {
+				this.months = this.generateArray(1, 12);
+			}
+		},
 		setMonths() {
-			this.months = this.generateArray(1, 12);
+			this._setMonths();
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.months, this.month));
 		},
-		setDays() {
-			let totalDays = new Date(this.year, this.month, 0).getDate();
+		_setDays () {
+			// 当前年，当前月，则限制日份
+			const date = new Date();
+			let totalDays;
+			if (
+				this.endToday &&
+				this.year === date.getFullYear() &&
+				this.month === date.getMonth() + 1
+			) {
+				totalDays = new Date(this.year, this.month, date.getDate()).getDate();
+			} else {
+				totalDays = new Date(this.year, this.month, 0).getDate();
+			}
 			this.days = this.generateArray(1, totalDays);
+		},
+		setDays() {
+			this._setDays()
 			let index = 0;
 			// 这里不能使用类似setMonths()中的this.valueArr.splice(this.valueArr.length - 1, xxx)做法
 			// 因为this.month和this.year变化时，会触发watch中的this.setDays()，导致this.valueArr.length计算有误
