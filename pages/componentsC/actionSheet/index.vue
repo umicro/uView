@@ -15,11 +15,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">取消按钮</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="cancelChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="cancelChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">点击遮罩关闭</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="maskClickChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="maskClickChange"></u-subsection>
 			</view>
 		</view>
 	</view>

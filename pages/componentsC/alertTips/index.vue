@@ -14,19 +14,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">左侧图标</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="showIconChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="showIconChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">关闭图标</view>
-				<u-subsection vibrateShort current="1" :list="['显示', '隐藏']" @change="closeAbleChange"></u-subsection>
+				<u-subsection current="1" :list="['显示', '隐藏']" @change="closeAbleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题</view>
-				<u-subsection vibrateShort current="3" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+				<u-subsection current="3" :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :current="current" :list="['开启', '关闭']" @change="showChange"></u-subsection>
+				<u-subsection :current="current" :list="['开启', '关闭']" @change="showChange"></u-subsection>
 			</view>
 		</view>
 	</view>

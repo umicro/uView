@@ -15,23 +15,23 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">调整时间</view>
-				<u-subsection vibrateShort :list="['60', '86400', '983272']" @change="timestampChange"></u-subsection>
+				<u-subsection :list="['60', '86400', '983272']" @change="timestampChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">分隔符</view>
-				<u-subsection vibrateShort :list="['英文冒号', '中文名称']" @change="separatorChange"></u-subsection>
+				<u-subsection :list="['英文冒号', '中文名称']" @change="separatorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示天</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="showDaysChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="showDaysChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">字体大小</view>
-				<u-subsection vibrateShort current="1" :list="['26', '30', '34']" @change="fontSizeChange"></u-subsection>
+				<u-subsection current="1" :list="['26', '30', '34']" @change="fontSizeChange"></u-subsection>
 			</view>
 		</view>
 	</view>

@@ -12,19 +12,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择(为满足演示需要，切换会有抖动，非性能问题)</view>
-				<u-subsection vibrateShort mode="button" :list="['button', 'subsection']" @change="modeChange"></u-subsection>
+				<u-subsection mode="button" :list="['button', 'subsection']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">Current值</view>
-				<u-subsection vibrateShort mode="button" :list="[0, 1, 2]" @change="currentChange"></u-subsection>
+				<u-subsection mode="button" :list="[0, 1, 2]" @change="currentChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">活动选项字颜色</view>
-				<u-subsection vibrateShort mode="button" :list="['primary', 'success', 'error', 'warning']" @change="colorChange"></u-subsection>
+				<u-subsection mode="button" :list="['primary', 'success', 'error', 'warning']" @change="colorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">字体加粗</view>
-				<u-subsection vibrateShort mode="button" :list="['是', '否']" @change="boldChange"></u-subsection>
+				<u-subsection mode="button" :list="['是', '否']" @change="boldChange"></u-subsection>
 			</view>
 		</view>
 	</view>

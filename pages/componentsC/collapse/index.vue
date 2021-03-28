@@ -17,15 +17,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">手风琴模式</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="accordionChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="accordionChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">右侧箭头</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="arrowChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="arrowChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view>
 	</view>

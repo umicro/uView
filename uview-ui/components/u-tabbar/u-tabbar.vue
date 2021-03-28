@@ -22,7 +22,7 @@
 						:custom-prefix="item.customIcon ? 'custom-icon' : 'uicon'"
 					></u-icon>
 					<u-badge :count="item.count" :is-dot="item.isDot"
-						v-if="item.count"
+						v-if="item.count || item.isDot"
 						:offset="[-2, getOffsetRight(item.count, item.isDot)]"
 					></u-badge>
 				</view>
@@ -295,6 +295,8 @@
 					bottom: 14rpx;
 					left: 50%;
 					transform: translateX(-50%);
+					width: 100%;
+					text-align: center;
 				}
 			}
 

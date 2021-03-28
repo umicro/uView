@@ -13,19 +13,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">提示内容</view>
-				<u-subsection vibrateShort :list="['没有更多了', '到底了']" @change="textChange"></u-subsection>
+				<u-subsection :list="['没有更多了', '到底了']" @change="textChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">单边线宽</view>
-				<u-subsection vibrateShort current="1" :list="['50', '150', '250']" @change="halfWidthChange"></u-subsection>
+				<u-subsection current="1" :list="['50', '150', '250']" @change="halfWidthChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">横线颜色</view>
-				<u-subsection vibrateShort :list="['#dcdfe6', 'primary', 'error', 'warning', 'success']" @change="borderColorChange"></u-subsection>
+				<u-subsection :list="['#dcdfe6', 'primary', 'error', 'warning', 'success']" @change="borderColorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">内容样式</view>
-				<u-subsection vibrateShort :list="['默认', '自定义']" @change="contentChange"></u-subsection>
+				<u-subsection :list="['默认', '自定义']" @change="contentChange"></u-subsection>
 			</view>
 		</view>
 	</view>

@@ -13,19 +13,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题</view>
-				<u-subsection vibrateShort :current="4" :list="['primary', 'success', 'error', 'warning', 'default']" @change="typeChange"></u-subsection>
+				<u-subsection :current="4" :list="['primary', 'success', 'error', 'warning', 'default']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">结束后自动跳转</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="urlChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="urlChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">位置</view>
-				<u-subsection vibrateShort current="1" :list="['顶部', '中部', '底部']" @change="positionChange"></u-subsection>
+				<u-subsection current="1" :list="['顶部', '中部', '底部']" @change="positionChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示图标</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="iconChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="iconChange"></u-subsection>
 			</view>
 		</view>
 	</view>

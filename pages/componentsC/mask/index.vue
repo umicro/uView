@@ -20,19 +20,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :current="current" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+				<u-subsection :current="current" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">缩放效果</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="zoomChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="zoomChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">内容填充</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">动画时长(ms)</view>
-				<u-subsection vibrateShort current="1" :list="['100', '300', '800']" @change="durationChange"></u-subsection>
+				<u-subsection current="1" :list="['100', '300', '800']" @change="durationChange"></u-subsection>
 			</view>
 		</view>
 	</view>

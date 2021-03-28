@@ -20,15 +20,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
-				<u-subsection vibrateShort :list="['节流', '防抖']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['节流', '防抖']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">时间间隔</view>
-				<u-subsection vibrateShort current="1" :list="['500ms', '1000ms', '2000ms']" @change="timeoutChange"></u-subsection>
+				<u-subsection current="1" :list="['500ms', '1000ms', '2000ms']" @change="timeoutChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">执行时机</view>
-				<u-subsection vibrateShort :list="['开始处', '结束处']" @change="immediateChange"></u-subsection>
+				<u-subsection :list="['开始处', '结束处']" @change="immediateChange"></u-subsection>
 			</view>
 		</view>
 	</view>

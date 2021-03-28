@@ -17,7 +17,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection vibrateShort :list="['左空格', '全部空格', '两边空格', '右空格']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['左空格', '全部空格', '两边空格', '右空格']" @change="modeChange"></u-subsection>
 			</view>
 		</view>
 	</view>

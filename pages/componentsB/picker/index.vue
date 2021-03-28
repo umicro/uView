@@ -16,6 +16,8 @@
 					:range="range"
 					:range-key="rangKey"
 					@columnchange="columnchange"
+					:datePoint="datePoint"
+					:datePointType="datePointType"
 				></u-picker>
 			</view>
 		</view>
@@ -23,23 +25,56 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">Picker开关</view>
-				<u-subsection vibrateShort :current="status" :list="['显示', '隐藏']" @change="statusChange"></u-subsection>
+				<u-subsection :current="status" :list="['显示', '隐藏']" @change="statusChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection vibrateShort :list="['单列', '多列', '时间', '地区']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['单列', '多列', '时间', '地区']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">默认时间</view>
-				<u-subsection vibrateShort :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']" @change="defaultTimeChange"></u-subsection>
+				<u-subsection :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']" @change="defaultTimeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示时分秒</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="minSecChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="minSecChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">默认地区</view>
-				<u-subsection vibrateShort :list="['广东-深圳-宝安', '海南-三亚-海棠']" @change="defaultRegionChange"></u-subsection>
+				<u-subsection :list="['广东-深圳-宝安', '海南-三亚-海棠']" @change="defaultRegionChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">时间点</view>
+				<view class="u-flex">
+					<input
+						type="text"
+						class="point-input u-p-t-10 u-p-b-10 u-text-center u-m-r-10"
+						v-model="pointDates.year"
+						placeholder="请输入年份"
+					/>
+					<input
+						type="text"
+						class="point-input u-p-t-10 u-p-b-10 u-text-center u-m-r-10"
+						v-model="pointDates.month"
+						placeholder="请输入月份"
+					/>
+					<input
+						type="text"
+						class="point-input u-p-t-10 u-p-b-10 u-text-center u-m-r-10"
+						v-model="pointDates.day"
+						placeholder="请输入日份"
+					/>
+				</view>
+				<view class="u-m-t-20">
+					<u-subsection
+						:list="['默认', '开始', '结束']"
+						@change="datePointTypeChange"
+					></u-subsection>
+				</view>
+				<view
+					class="point-btn u-text-center u-m-t-20"
+					@click="pointDateChange"
+				>显示</view>
 			</view>
 		</view>
 	</view>
@@ -68,7 +103,10 @@ export default {
 				city: true,
 				area: true,
 				timestamp: true
-			}
+			},
+			pointDates: { year: '', month: '', day: '' },
+			datePoint: [],
+			datePointType: ''
 		};
 	},
 	computed: {
@@ -113,6 +151,14 @@ export default {
 				this.params.minute = false;
 				this.params.second = false;
 			}
+			this.mode = 'time';
+			this.show = true;
+		},
+		datePointTypeChange (index) {
+			this.datePointType = ['start', 'end'][index - 1] || ''
+		},
+		pointDateChange(index) {
+			this.datePoint = [this.pointDates.year, this.pointDates.month, this.pointDates.day]
 			this.mode = 'time';
 			this.show = true;
 		},
@@ -195,5 +241,17 @@ export default {
 
 .input-wrap {
 	display: flex;
+}
+.point {
+	&-input {
+		border: 1px solid #eee;
+		border-radius: 5rpx;
+	}
+	&-btn {
+		padding: 15rpx;
+		min-width: 100rpx;
+		border-radius: 5rpx;
+		background-color: #eeeeef;
+	}
 }
 </style>

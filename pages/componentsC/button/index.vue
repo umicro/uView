@@ -12,31 +12,31 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题选择</view>
-				<u-subsection vibrateShort :list="['default', 'primary', 'error', 'warning', 'success']" @change="typeChange"></u-subsection>
+				<u-subsection :list="['default', 'primary', 'error', 'warning', 'success']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">尺寸大小</view>
-				<u-subsection vibrateShort :list="['默认', '中等', '迷你']" @change="sizeChange"></u-subsection>
+				<u-subsection :list="['默认', '中等', '迷你']" @change="sizeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">形状</view>
-				<u-subsection vibrateShort :list="['直角', '圆角']" @change="shapeChange"></u-subsection>
+				<u-subsection :list="['直角', '圆角']" @change="shapeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">镂空</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="plainChange"></u-subsection>
+				<u-subsection :current="1" :list="['是', '否']" @change="plainChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">水波纹(感觉哪里有问题？点击顶部的按钮试试)</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="rippleChange"></u-subsection>
+				<u-subsection :current="1" :list="['是', '否']" @change="rippleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">细边框</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="hairLineChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="hairLineChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">加载中</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="loadingChange"></u-subsection>
+				<u-subsection :current="1" :list="['是', '否']" @change="loadingChange"></u-subsection>
 			</view>
 		</view>
 	</view>

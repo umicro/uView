@@ -17,11 +17,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题</view>
-				<u-subsection vibrateShort :list="['primary', 'success', 'error', 'warning', 'info']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['primary', 'success', 'error', 'warning', 'info']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">常用颜色</view>
-				<u-subsection vibrateShort :list="['主要文字', '常规文字', '次要文字', '占位文字', '边框颜色']" @change="colorChange"></u-subsection>
+				<u-subsection :list="['主要文字', '常规文字', '次要文字', '占位文字', '边框颜色']" @change="colorChange"></u-subsection>
 			</view>
 		</view>
 	</view>

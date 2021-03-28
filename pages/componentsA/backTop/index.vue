@@ -17,19 +17,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
-				<u-subsection vibrateShort :list="['圆形', '方形']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['圆形', '方形']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">组件位置</view>
-				<u-subsection vibrateShort :list="['默认', '自定义']" @change="positionChange"></u-subsection>
+				<u-subsection :list="['默认', '自定义']" @change="positionChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示组件的滚动条距离</view>
-				<u-subsection vibrateShort current="1" :list="['200', '400', '600']" @change="scrollTopChange"></u-subsection>
+				<u-subsection current="1" :list="['200', '400', '600']" @change="scrollTopChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view>
 	</view>

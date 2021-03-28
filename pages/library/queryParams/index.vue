@@ -15,7 +15,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否带问号</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="prefixChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="prefixChange"></u-subsection>
 			</view>
 		</view>
 	</view>

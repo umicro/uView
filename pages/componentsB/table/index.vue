@@ -38,11 +38,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">边框颜色</view>   
-				<u-subsection vibrateShort :list="['gray', 'primary', 'warning']" @change="borderColorChange"></u-subsection>
+				<u-subsection :list="['gray', 'primary', 'warning']" @change="borderColorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">对齐方式</view>
-				<u-subsection vibrateShort current="1" :list="['左', '中', '右']" @change="alignChange"></u-subsection>
+				<u-subsection current="1" :list="['左', '中', '右']" @change="alignChange"></u-subsection>
 			</view>
 		</view>
 	</view>

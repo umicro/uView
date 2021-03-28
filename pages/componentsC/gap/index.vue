@@ -16,15 +16,15 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">背景颜色</view>
-				<u-subsection vibrateShort :list="['default', 'primary', 'error', 'warning', 'success']" @change="bgColorChange"></u-subsection>
+				<u-subsection :list="['default', 'primary', 'error', 'warning', 'success']" @change="bgColorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">高度</view>
-				<u-subsection vibrateShort :list="['30', '50', '70']" @change="heightChange"></u-subsection>
+				<u-subsection :list="['30', '50', '70']" @change="heightChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">上下外边距</view>
-				<u-subsection vibrateShort :list="['30', '50', '70']" @change="marginChange"></u-subsection>
+				<u-subsection :list="['30', '50', '70']" @change="marginChange"></u-subsection>
 			</view>
 		</view>
 	</view>

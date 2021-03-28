@@ -178,14 +178,14 @@ export default {
 		// 获取评分组件盒子的布局信息
 		getElRectById() {
 			// uView封装的获取节点的方法，详见文档
-			this.$u.getRect('#' + this.elId).then(res => {
+			this.$uGetRect('#' + this.elId).then(res => {
 				this.starBoxLeft = res.left
 			})
 		},
 		// 获取单个星星的尺寸
 		getElRectByClass() {
 			// uView封装的获取节点的方法，详见文档
-			this.$u.getRect('.' + this.elClass).then(res => {
+			this.$uGetRect('.' + this.elClass).then(res => {
 				this.starWidth = res.width
 				// 把每个星星右边到组件盒子左边的距离放入数组中
 				for (let i = 0; i < this.count; i++) {

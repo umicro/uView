@@ -12,19 +12,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
-				<u-subsection vibrateShort :list="['圆圈', '花朵']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['圆圈', '花朵']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">颜色(只对圆圈模式有效)</view>
-				<u-subsection vibrateShort :list="['default', 'primary', 'error', 'warning', 'success']" @change="colorChange"></u-subsection>
+				<u-subsection :list="['default', 'primary', 'error', 'warning', 'success']" @change="colorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">尺寸(单位rpx)</view>
-				<u-subsection vibrateShort current="1" :list="['28', '34', '40']" @change="sizeChange"></u-subsection>
+				<u-subsection current="1" :list="['28', '34', '40']" @change="sizeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否显示</view>
-				<u-subsection vibrateShort current="1" :list="['否', '是']" @change="showChange"></u-subsection>
+				<u-subsection current="1" :list="['否', '是']" @change="showChange"></u-subsection>
 			</view>
 		</view>
 	</view>
