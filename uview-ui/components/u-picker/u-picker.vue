@@ -248,6 +248,14 @@ export default {
 		confirmText: {
 			type: String,
 			default: '确认'
+		},
+		datePoint: {
+			type: Array,
+			default: () => []
+		},
+		datePointType: {
+			type: String,
+			default: ''
 		}
 	},
 	data() {
@@ -310,7 +318,10 @@ export default {
 		// watch监听月份的变化，实时变更日的天数，因为不同月份，天数不一样
 		// 一个月可能有30，31天，甚至闰年2月的29天，平年2月28天
 		yearAndMonth(val) {
-			if (this.params.year) this.setDays();
+			if (this.params.year) {
+				this.setDays();
+				this.isPoint && this._setMonths()
+			}
 		},
 		// 微信和QQ小程序由于一些奇怪的原因(故同时对所有平台均初始化一遍)，需要重新初始化才能显示正确的值
 		value(n) {
@@ -359,6 +370,64 @@ export default {
 			// 如果index为-1(即找不到index值)，~(-1)=-(-1)-1=0，导致条件不成立
 			return ~index ? index : 0;
 		},
+		handlePointDate (time) {
+			// 获取年日月时分秒
+			if (this.isPoint) {
+				const
+					year = time.getFullYear(),
+					month = time.getMonth() + 1,
+					day = time.getDate();
+				// 获取传过来的时间点，没有值的话，用默认值的时间
+				this.pointYear = Number(this.datePoint[0]) || year;
+				this.pointMonth = Number(this.datePoint[1]) || month;
+				this.pointDay = Number(this.datePoint[2]) || day;
+				// 判断默认值的时间是否和设置的时间点范围有冲突
+				if (this.datePointType === 'start') {
+					this.year = year >= this.pointYear ? year : this.pointYear;
+					// 当默认年大于的话，日可以直接用默认值；等于的话得一个一个判断
+					if (year > this.pointYear) {
+						this.day = day;
+						this.month = month;
+					} else if (year === this.pointYear) {
+						this.month = month >= this.pointMonth ? month : this.pointMonth;
+						// 月份判断也要和年份类似
+						if (month > this.pointMonth) {
+							this.day = day;
+						} else if (month === this.pointMonth && day >= this.pointDay) {
+							this.day = day;
+						} else {
+							this.day = this.pointDay;
+						}
+					} else {
+						this.day = this.pointDay;
+						this.month = this.pointMonth;
+					}
+				} else {
+					// 和上面类似
+					this.year = year <= this.pointYear ? year : this.pointYear;
+					if (year < this.pointYear) {
+						this.day = day;
+						this.month = month;
+					} else if (year === this.pointYear) {
+						this.month = month <= this.pointMonth ? month : this.pointMonth;
+						if (month < this.pointMonth) {
+							this.day = day;
+						} else if (month === this.pointMonth && day <= this.pointDay) {
+							this.day = day;
+						} else {
+							this.day = this.pointDay;
+						}
+					} else {
+						this.day = this.pointDay;
+						this.month = this.pointMonth;
+					}
+				}
+			} else {
+				this.year = time.getFullYear();
+				this.month = time.getMonth() + 1;
+				this.day = time.getDate();
+			}
+		},
 		//日期时间处理
 		initTimeValue() {
 			// 格式化时间，在IE浏览器(uni不存在此情况)，无法识别日期间的"-"间隔符号
@@ -367,10 +436,9 @@ export default {
 			let time = null;
 			if (fdate) time = new Date(fdate);
 			else time = new Date();
-			// 获取年日月时分秒
-			this.year = time.getFullYear();
-			this.month = Number(time.getMonth()) + 1;
-			this.day = time.getDate();
+			// 是否设置了时间点
+			this.isPoint = this.datePoint.length && this.datePointType.length
+			this.handlePointDate(time);
 			this.hour = time.getHours();
 			this.minute = time.getMinutes();
 			this.second = time.getSeconds();
@@ -425,20 +493,49 @@ export default {
 			}
 			this.$forceUpdate();
 		},
+		_setYears() {
+			const _g = this.generateArray
+			if (this.isPoint) {
+				this.years = this.datePointType === 'start' ? _g(this.pointYear, this.endYear) : _g(this.startYear, this.pointYear);
+			} else {
+				this.years = _g(this.startYear, this.endYear);
+			}
+		},
 		// 设置picker的某一列值
 		setYears() {
 			// 获取年份集合
-			this.years = this.generateArray(this.startYear, this.endYear);
+			this._setYears()
 			// 设置this.valueArr某一项的值，是为了让picker预选中某一个值
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.years, this.year));
 		},
+		_setMonths() {
+			if (this.isPoint && this.year === this.pointYear) {
+				const _g = this.generateArray;
+				this.months = this.datePointType === 'start' ? _g(this.pointMonth, 12) : _g(1, this.pointMonth)
+			} else {
+				this.months = this.generateArray(1, 12);
+			}
+		},
 		setMonths() {
-			this.months = this.generateArray(1, 12);
+			this._setMonths();
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.months, this.month));
 		},
+		_setDays() {
+			let
+				_g = this.generateArray,
+				totalDays = new Date(this.year, this.month, 0).getDate();
+			if (
+				this.isPoint &&
+				this.year === this.pointYear &&
+				this.month === this.pointMonth
+			) {
+				this.days = this.datePointType === 'start' ? _g(this.pointDay, totalDays) : _g(1, this.pointDay);
+			} else {
+				this.days = _g(1, totalDays)
+			};
+		},
 		setDays() {
-			let totalDays = new Date(this.year, this.month, 0).getDate();
-			this.days = this.generateArray(1, totalDays);
+			this._setDays()
 			let index = 0;
 			// 这里不能使用类似setMonths()中的this.valueArr.splice(this.valueArr.length - 1, xxx)做法
 			// 因为this.month和this.year变化时，会触发watch中的this.setDays()，导致this.valueArr.length计算有误
