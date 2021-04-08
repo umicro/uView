@@ -398,8 +398,12 @@ export default {
 						// promise返回成功，不进行动作，继续上传
 					}).catch(err => {
 						// 进入catch回调的话，继续下一张
+						beforeResponse = false;
 						return this.uploadFile(index + 1);
 					})
+					if (beforeResponse === false) {
+						return;
+					}
 				} else if(beforeResponse === false) {
 					// 如果返回false，继续下一张图片的上传
 					return this.uploadFile(index + 1);
