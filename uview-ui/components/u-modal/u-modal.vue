@@ -244,6 +244,7 @@
 		overflow: hidden;
 		font-size: 32rpx;
 		background-color: #fff;
+		line-height: initial;
 
 		&__btn--hover {
 			background-color: rgb(230, 230, 230);
