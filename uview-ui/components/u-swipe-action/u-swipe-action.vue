@@ -109,9 +109,6 @@ export default {
 	},
 	computed: {
 		movableViewWidth() {
-			if(!this.movableAreaWidth) {
-				return 'calc(100% + ' + (this.allBtnWidth + 'px') + ')';
-			}
 			return this.movableAreaWidth + this.allBtnWidth + 'px';
 		},
 		innerBtnWidth() {
