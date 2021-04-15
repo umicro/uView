@@ -22,7 +22,8 @@
 		<view class="u-dropdown__content" :style="[contentStyle, {
 			transition: `opacity ${duration / 1000}s linear`,
 			top: $u.addUnit(height),
-			height: contentHeight + 'px'
+			height: '100vh',
+			pointerEvents: active ? 'auto' : 'none'
 		}]"
 		 @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
@@ -125,7 +126,6 @@
 				},
 				// 让某个菜单保持高亮的状态
 				highlightIndex: 99999,
-				contentHeight: 0
 			}
 		},
 		computed: {
@@ -142,9 +142,6 @@
 		created() {
 			// 引用所有子组件(u-dropdown-item)的this，不能在data中声明变量，否则在微信小程序会造成循环引用而报错
 			this.children = [];
-		},
-		mounted() {
-			this.getContentHeight();
 		},
 		methods: {
 			init() {
@@ -209,20 +206,6 @@
 			// 外部手动设置某个菜单高亮
 			highlight(index = undefined) {
 				this.highlightIndex = index !== undefined ? index : 99999;
-			},
-			// 获取下拉菜单内容的高度
-			getContentHeight() {
-				// 这里的原理为，因为dropdown组件是相对定位的，它的下拉出来的内容，必须给定一个高度
-				// 才能让遮罩占满菜单一下，直到屏幕底部的高度
-				// this.$u.sys()为uView封装的获取设备信息的方法
-				let windowHeight = this.$u.sys().windowHeight;
-				this.$uGetRect('.u-dropdown__menu').then(res => {
-					// 这里获取的是dropdown的尺寸，在H5上，uniapp获取尺寸是有bug的(以前提出修复过，后来又出现了此bug，目前hx2.8.11版本)
-					// H5端bug表现为元素尺寸的top值为导航栏底部到到元素的上边沿的距离，但是元素的bottom值确是导航栏顶部到元素底部的距离
-					// 二者是互相矛盾的，本质原因是H5端导航栏非原生，uni的开发者大意造成
-					// 这里取菜单栏的botton值合理的，不能用res.top，否则页面会造成滚动
-					this.contentHeight = windowHeight - res.bottom;
-				})
 			}
 		}
 	}
@@ -230,42 +213,35 @@
 
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
-
 	.u-dropdown {
 		flex: 1;
 		width: 100%;
 		position: relative;
-
 		&__menu {
 			@include vue-flex;
 			position: relative;
 			z-index: 11;
 			height: 80rpx;
-
 			&__item {
 				flex: 1;
 				@include vue-flex;
 				justify-content: center;
 				align-items: center;
-
 				&__text {
 					font-size: 28rpx;
 					color: $u-content-color;
 				}
-
 				&__arrow {
 					margin-left: 6rpx;
 					transition: transform .3s;
 					align-items: center;
 					@include vue-flex;
-
 					&--rotate {
 						transform: rotate(180deg);
 					}
 				}
 			}
 		}
-
 		&__content {
 			position: absolute;
 			z-index: 8;
@@ -273,7 +249,6 @@
 			left: 0px;
 			bottom: 0;
 			overflow: hidden;
-			
 
 			&__mask {
 				position: absolute;
@@ -284,7 +259,6 @@
 				top: 0;
 				bottom: 0;
 			}
-
 			&__popup {
 				position: relative;
 				z-index: 10;
@@ -293,6 +267,5 @@
 				overflow: hidden;
 			}
 		}
-
 	}
 </style>
