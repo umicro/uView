@@ -121,7 +121,7 @@
 			// 设置radio的状态，要求radio的name等于parent的value时才为选中状态
 			iconStyle() {
 				let style = {};
-				if (this.elActiveColor && this.parentData.value == this.name && !this.elDisabled) {
+				if (this.elActiveColor && this.parentData.value === this.name && !this.elDisabled) {
 					style.borderColor = this.elActiveColor;
 					style.backgroundColor = this.elActiveColor;
 				}
@@ -181,7 +181,7 @@
 			},
 			emitEvent() {
 				// u-radio的name不等于父组件的v-model的值时(意味着未选中)，才发出事件，避免多次点击触发事件
-				if(this.parentData.value != this.name) this.$emit('change', this.name);
+				if(this.parentData.value !== this.name) this.$emit('change', this.name);
 			},
 			// 改变组件选中状态
 			// 这里的改变的依据是，更改本组件的parentData.value值为本组件的name值，同时通过父组件遍历所有u-radio实例
