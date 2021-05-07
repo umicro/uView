@@ -50,7 +50,7 @@ class Request {
 						resolve(response);
 					}
 				} else {
-					if (response.statusCode == 200) {
+					if (response.statusCode >= 200 && response.statusCode <= 300) {
 						if (this.interceptor.response && typeof this.interceptor.response === 'function') {
 							let resInterceptors = this.interceptor.response(response.data);
 							if (resInterceptors !== false) {
