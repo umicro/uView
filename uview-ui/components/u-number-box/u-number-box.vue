@@ -260,12 +260,16 @@
 				// 减
 				if (type === 'minus') {
 					value = this.calcMinus(this.inputVal, this.step);
+					// 判断是否小于最小值
+					if (value < this.min) {
+					  return
+					}
 				} else if (type === 'plus') {
 					value = this.calcPlus(this.inputVal, this.step);
-				}
-				// 判断是否小于最小值和大于最大值
-				if (value < this.min || value > this.max) {
-					return;
+					// 判断是否大于最大值
+					if (value > this.max) {
+					  return
+					}
 				}
 				this.inputVal = value;
 				this.handleChange(value, type);
