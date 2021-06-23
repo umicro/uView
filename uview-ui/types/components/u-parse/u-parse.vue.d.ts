@@ -10,31 +10,27 @@ export interface UParse extends Vue {
 
   /**
    * 是否允许播放视频时自动暂停其他视频
-   * @options false
    * @default true
    */
   autopause?: boolean;
 
   /**
    * 是否自动给 table 加一个滚动层（使表格可以单独滚动）
-   * @options true
    * @default false
    */
   autoscroll?: boolean;
 
   /**
    * 是否自动将 title 标签的内容设置到页面标题
-   * @options false
    * @default true
    */
   autosetTitle?: boolean;
 
   /**
    * 压缩等级，可以选择是否移除 id 和 class(不建议修改)
-   * @options 1 / 2 / 3
    * @default 0
    */
-  compress?: number;
+  compress?: 0 | 1 | 2 | 3;
 
   /**
    * 主域名，设置后将给链接自动拼接上主域名或协议名
@@ -43,7 +39,6 @@ export interface UParse extends Vue {
 
   /**
    * 是否开启图片懒加载
-   * @options true
    * @default false
    */
   'lazy-load'?: boolean;
@@ -55,14 +50,12 @@ export interface UParse extends Vue {
 
   /**
    * 是否允许长按复制内容
-   * @options true
    * @default false
    */
   selectable?: boolean;
 
   /**
    * 是否使用渐显动画
-   * @options true
    * @default false
    */
   'show-with-animation'?: boolean;
@@ -74,14 +67,12 @@ export interface UParse extends Vue {
 
   /**
    * 是否使用页面内锚点
-   * @options true
    * @default false
    */
   'use-anchor'?: boolean;
 
   /**
    * 是否使用缓存，设置后多次打开不用重复解析
-   * @options true
    * @default false
    */
   'use-cache'?: boolean;

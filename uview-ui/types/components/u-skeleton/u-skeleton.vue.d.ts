@@ -17,7 +17,6 @@ export interface USkeleton extends Vue {
 
   /**
    * 骨架块是否显示动画效果
-   * @options true
    * @default false
    */
   animation?: boolean;
@@ -30,7 +29,6 @@ export interface USkeleton extends Vue {
 
   /**
    * 是否显示骨架组件，请求完成后，将此值设置为"false"
-   * @options false
    * @default true
    */
   loading?: boolean;

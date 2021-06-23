@@ -29,18 +29,16 @@ export interface UForm extends Vue {
   /**
    * 表单域提示文字的位置，"left"-左侧，"top"-文档
    * @version 1.4.6
-   * @options top
    * @default left
    */
-  'label-position'?: string;
+  'label-position'?: 'top' | 'left';
 
   /**
    * 提示文字的宽度，单位rpx
    * @version 1.4.6
-   * @options 数值 / auto
    * @default 90
    */
-  'label-width'?: string | number;
+  'label-width'?: 'auto' | number;
 
   /**
    * "lable"的样式，对象形式
@@ -51,10 +49,9 @@ export interface UForm extends Vue {
   /**
    * "lable"的对齐方式
    * @version 1.4.6
-   * @options center / right
    * @default left
    */
-  'label-align'?: string;
+  'label-align'?: 'center' | 'right' | 'left';
 
   /**
    * 调用此方法，设置校验规则

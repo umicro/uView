@@ -5,10 +5,35 @@ import Vue from 'vue';
 export interface UCol extends Vue {
   /**
    * 栅格占据的列数，总12等分
-   * @options 1-12
    * @default 0
    */
-  span?: string | number;
+  span?:
+    | '0'
+    | '1'
+    | '2'
+    | '3'
+    | '4'
+    | '5'
+    | '6'
+    | '7'
+    | '8'
+    | '9'
+    | '10'
+    | '11'
+    | '12'
+    | 0
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12;
 
   /**
    * 分栏左边偏移，计算方式与"span"相同
@@ -19,10 +44,9 @@ export interface UCol extends Vue {
   /**
    * 文字水平对齐方式
    * @version 1.5.5
-   * @options center / right
    * @default left
    */
-  'text-align'?: string;
+  'text-align'?: 'center' | 'right' | 'left';
 
   /**
    * col被点击，会阻止事件冒泡到row

@@ -10,10 +10,9 @@ export interface UPicker extends Vue {
 
   /**
    * 模式选择，region-地区模式，time-时间模式，selector-单列模式，multiSelector-多列模式
-   * @options region / selector / multiSelector
    * @default time
    */
-  mode?: string;
+  mode?: 'region' | 'selector' | 'multiSelector' | 'time';
 
   /**
    * 可选的开始年份，mode=time时有效
@@ -29,7 +28,6 @@ export interface UPicker extends Vue {
 
   /**
    * 是否开启底部安全区适配 /components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明
-   * @options true
    * @default false
    */
   'safe-area-inset-bottom'?: boolean;
@@ -69,14 +67,12 @@ export interface UPicker extends Vue {
 
   /**
    * 是否允许通过点击遮罩关闭Picker
-   * @options false
    * @default true
    */
   'mask-close-able'?: boolean;
 
   /**
    * 时间模式时，是否显示后面的年月日中文提示
-   * @options false
    * @default true
    */
   'show-time-tag'?: boolean;

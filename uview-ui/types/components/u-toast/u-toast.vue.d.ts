@@ -23,10 +23,9 @@ export interface UToastParams {
 
   /**
    * 主题类型，不填默认为"default"
-   * @options primary / success / error / warning / info
    * @default default
    */
-  type?: string;
+  type?: 'primary' | 'success' | 'error' | 'warning' | 'info' | 'default';
 
   /**
    * toast的持续时间，单位ms
@@ -41,17 +40,15 @@ export interface UToastParams {
 
   /**
    * 是否显示显示"type"对应的图标，为"false"不显示图标
-   * @options false
    * @default true
    */
   icon?: boolean;
 
   /**
    * toast出现的位置
-   * @options top / bottom
    * @default center
    */
-  position?: string;
+  position?: 'top' | 'bottom' | 'center';
 
   /**
    * toast结束后执行的回调方法
@@ -61,7 +58,6 @@ export interface UToastParams {
 
   /**
    * toast结束后，跳转tab页面时需要配置为"true"
-   * @options true
    * @default false
    */
   isTab?: boolean;
@@ -69,7 +65,6 @@ export interface UToastParams {
   /**
    * toast结束后，是否返回上一页，优先级低于"url"参数
    * @version 1.4.0
-   * @options true
    * @default false
    */
   back?: boolean;

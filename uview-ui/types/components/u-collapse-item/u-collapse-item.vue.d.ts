@@ -15,14 +15,12 @@ export interface UCollapseItem extends Vue {
 
   /**
    * 面板是否可以打开或收起
-   * @options true
    * @default false
    */
   disabled?: boolean;
 
   /**
    * 设置某个面板的初始状态是否打开
-   * @options true
    * @default false
    */
   open?: boolean;

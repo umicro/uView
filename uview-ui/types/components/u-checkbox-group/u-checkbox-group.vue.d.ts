@@ -11,7 +11,6 @@ export interface UCheckboxGroup extends Vue {
 
   /**
    * 是否禁用所有"checkbox"
-   * @options true
    * @default false
    */
   disabled?: boolean;
@@ -30,10 +29,9 @@ export interface UCheckboxGroup extends Vue {
 
   /**
    * 形状，见文档说明
-   * @options square
    * @default circle
    */
-  shape?: string;
+  shape?: 'square' | 'circle';
 
   /**
    * 选中时的颜色，应用到所有子"Checkbox"组件
@@ -43,7 +41,6 @@ export interface UCheckboxGroup extends Vue {
 
   /**
    * 是否禁止点击文本操作"checkbox"
-   * @options true
    * @default false
    */
   'label-disabled'?: boolean;
@@ -58,7 +55,6 @@ export interface UCheckboxGroup extends Vue {
   /**
    * 是否每个"checkbox"占一行
    * @version 1.3.0
-   * @options true
    * @default false
    */
   wrap?: boolean;

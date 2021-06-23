@@ -10,14 +10,12 @@ export interface UBadge extends Vue {
 
   /**
    * 不展示数字，只有一个小点
-   * @options true
    * @default false
    */
   'is-dot'?: boolean;
 
   /**
    * 组件是否绝对定位，为"true"时，"offset"参数才有效
-   * @options false
    * @default true
    */
   absolute?: boolean;
@@ -30,24 +28,21 @@ export interface UBadge extends Vue {
 
   /**
    * 使用预设的背景颜色
-   * @options success / primary / warning / info
    * @default error
    */
-  type?: string;
+  type?: 'success' | 'primary' | 'warning' | 'error' | 'info';
 
   /**
    * 当数值为 0 时，是否展示 Badge
-   * @options true
    * @default false
    */
   'show-zero'?: boolean;
 
   /**
    * Badge的尺寸，设为"mini"会得到小一号的"Badge"
-   * @options mini
    * @default default
    */
-  size?: string;
+  size?: 'mini' | 'default';
 
   /**
    * 设置badge的位置偏移，格式为 [x, y]，也即设置的为"top"和"right"的值，单位rpx。"absolute"为"true"时有效
@@ -68,7 +63,6 @@ export interface UBadge extends Vue {
 
   /**
    * 组件中心点是否和父组件右上角重合，优先级比"offset"高，如设置，"offset"参数会失效
-   * @options true
    * @default false
    */
   'is-center'?: boolean;

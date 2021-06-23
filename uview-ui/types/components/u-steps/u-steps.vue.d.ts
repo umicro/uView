@@ -5,10 +5,9 @@ import Vue from 'vue';
 export interface USteps extends Vue {
   /**
    * 设置模式
-   * @options number
    * @default dot
    */
-  mode?: string;
+  mode?: 'dot' | 'number';
 
   /**
    * 数轴条数据，数组。具体见文档示例
@@ -18,10 +17,10 @@ export interface USteps extends Vue {
 
   /**
    * type主题
-   * @options info / success / error / warning
    * @default primary
+   * @deprecated 1.3.7起废弃
    */
-  'type(1.3.7起已废弃)'?: string;
+  type?: 'info' | 'success' | 'error' | 'warning' | 'primary';
 
   /**
    * 设置当前处于第几步
@@ -32,10 +31,9 @@ export interface USteps extends Vue {
   /**
    * row-横向，column-竖向
    * @version 1.5.1
-   * @options column
    * @default row
    */
-  direction?: string;
+  direction?: 'column' | 'row';
 
   /**
    * 已完成步骤的激活颜色，如设置，"type"值会失效

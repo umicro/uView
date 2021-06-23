@@ -22,21 +22,18 @@ export interface USwipeAction extends Vue {
 
   /**
    * 是否禁止某个swipeAction滑动
-   * @options true
    * @default false
    */
   disabled?: boolean;
 
   /**
    * 是否使手机发生短促震动，目前只在iOS的微信小程序和微信小程序开发工具有效
-   * @options true
    * @default false
    */
   'vibrate-short'?: boolean;
 
   /**
    * 打开或者关闭某个组件
-   * @options true
    * @default false
    */
   show?: boolean;

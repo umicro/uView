@@ -10,16 +10,14 @@ export interface ULineProgress extends Vue {
 
   /**
    * 进度条两端是否为半圆
-   * @options false
    * @default true
    */
   round?: boolean;
 
   /**
    * 如设置，"active-color"值将会失效
-   * @options success / primary / error / info / warning
    */
-  type?: string;
+  type?: 'success' | 'primary' | 'error' | 'info' | 'warning';
 
   /**
    * 进度条激活部分的颜色
@@ -35,7 +33,6 @@ export interface ULineProgress extends Vue {
 
   /**
    * 是否在进度条内部显示当前的百分比值数值
-   * @options false
    * @default true
    */
   'show-percent'?: boolean;
@@ -48,14 +45,12 @@ export interface ULineProgress extends Vue {
 
   /**
    * 是否显示进度条激活部分的条纹
-   * @options true
    * @default false
    */
   striped?: boolean;
 
   /**
    * 条纹是否具有动态效果
-   * @options true
    * @default false
    */
   'striped-active'?: boolean;

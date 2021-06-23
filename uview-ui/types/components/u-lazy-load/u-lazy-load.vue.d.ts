@@ -37,14 +37,12 @@ export interface ULazyLoad extends Vue {
 
   /**
    * 图片加载成功时，淡入淡出的css动画效果
-   * @options linear /  ease / ease-in / ease-out
    * @default ease-in-out
    */
-  effect?: string;
+  effect?: 'linear' | 'ease' | 'ease-in' | 'ease-out' | 'ease-in-out';
 
   /**
    * 图片加载成功时，是否启用淡入淡出效果
-   * @options false
    * @default true
    */
   'is-effect'?: boolean;

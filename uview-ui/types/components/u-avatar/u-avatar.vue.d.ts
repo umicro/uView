@@ -22,10 +22,9 @@ export interface UAvatar extends Vue {
 
   /**
    * 显示类型，见文档说明
-   * @options square
    * @default circle
    */
-  mode?: string;
+  mode?: 'square' | 'circle';
 
   /**
    * 用文字替代图片，级别优先于"src"
@@ -41,7 +40,6 @@ export interface UAvatar extends Vue {
   /**
    * 是否显示右上角的性别图标
    * @version 1.5.6
-   * @options true
    * @default false
    */
   'show-sex'?: boolean;
@@ -49,10 +47,9 @@ export interface UAvatar extends Vue {
   /**
    * 右上角性别图标，可传入图片路径，或内置图标名
    * @version 1.5.6
-   * @options woman
    * @default man
    */
-  'sex-icon'?: string;
+  'sex-icon'?: 'woman' | 'man' | string;
 
   /**
    * 性别图标的背景颜色
@@ -64,7 +61,6 @@ export interface UAvatar extends Vue {
   /**
    * 是否显示右下角的等级图标
    * @version 1.5.6
-   * @options true
    * @default false
    */
   'show-level'?: boolean;

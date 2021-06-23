@@ -31,44 +31,39 @@ export interface UCellItem extends Vue {
 
   /**
    * 是否显示cell的下边框
-   * @options false
    * @default true
    */
   'border-bottom'?: boolean;
 
   /**
    * 是否显示cell的上边框
-   * @options true
    * @default false
    */
   'border-top'?: boolean;
 
   /**
-   * "border-bottom"为"true"时，Cell列表中间的条目的下边框是否与左边有一个间隔 <span data-v-c922b936="" class="badge error" style="vertical-align: top;">1.4.0已废弃</span>
-   * @options false
+   * "border-bottom"为"true"时，Cell列表中间的条目的下边框是否与左边有一个间隔
    * @default true
+   * @deprecated 1.4.0已废弃
    */
   'border-gap'?: boolean;
 
   /**
    * 是否开启点击反馈，"none"为无效果，见文档说明
-   * @options none
    */
-  'hover-class'?: string;
+  'hover-class'?: 'none' | string;
 
   /**
    * 是否显示右侧箭头，开启的话，将会默认带上点击反馈，可通过"hover-class"配置
-   * @options false
    * @default true
    */
   arrow?: boolean;
 
   /**
    * 箭头方向，可选值为
-   * @options up / down
    * @default right
    */
-  'arrow-direction'?: string;
+  'arrow-direction'?: 'up' | 'down' | 'right';
 
   /**
    * 标题样式，对象形式
@@ -77,7 +72,6 @@ export interface UCellItem extends Vue {
 
   /**
    * 是否显示左边表示必填的星号
-   * @options true
    * @default false
    */
   required?: boolean;
@@ -116,7 +110,6 @@ export interface UCellItem extends Vue {
 
   /**
    * 是否使内容垂直居中
-   * @options true
    * @default false
    */
   center?: boolean;

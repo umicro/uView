@@ -10,17 +10,15 @@ export interface USwiper extends Vue {
 
   /**
    * 是否显示标题文字，需要配合"list"参数，见文档说明
-   * @options true
    * @default false
    */
   title?: boolean;
 
   /**
    * 指示器模式，见文档说明
-   * @options rect / dot / number / none
    * @default round
    */
-  mode?: string;
+  mode?: 'rect' | 'dot' | 'number' | 'none' | 'round';
 
   /**
    * 轮播图组件高度，单位rpx
@@ -30,21 +28,18 @@ export interface USwiper extends Vue {
 
   /**
    * 指示器的位置
-   * @options topLeft / topCenter / topRight / bottomLeft / bottomRight
    * @default bottomCenter
    */
-  'indicator-pos'?: string;
+  'indicator-pos'?: 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'bottomCenter';
 
   /**
    * 是否开启3D效果
-   * @options true
    * @default false
    */
   effect3d?: boolean;
 
   /**
    * 是否自动播放
-   * @options false
    * @default true
    */
   autoplay?: boolean;
@@ -57,7 +52,6 @@ export interface USwiper extends Vue {
 
   /**
    * 是否衔接播放，见文档说明
-   * @options false
    * @default true
    */
   circular?: boolean;

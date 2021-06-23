@@ -5,30 +5,28 @@ import Vue from 'vue';
 export interface ULoadmore extends Vue {
   /**
    * 组件状态
-   * @options loading / nomore
    * @default loadmore
    */
-  status?: string;
+  status?: 'loading' | 'nomore' | 'loadmore';
 
   /**
    * 组件背景颜色，在页面是非白色时会用到(1.7.0起废弃此参数，默认为transparent)
    * @default #ffffff
+   * @deprecated 1.7.0起废弃
    */
   'bg-color'?: string;
 
   /**
    * 加载中时是否显示图标
-   * @options false
    * @default true
    */
   icon?: boolean;
 
   /**
    * 加载中时的图标类型，
-   * @options flower
    * @default circle
    */
-  'icon-type'?: string;
+  'icon-type'?: 'flower' | 'circle';
 
   /**
    * "icon-type"为"circle"时有效，加载中的动画图标的颜色
@@ -38,7 +36,6 @@ export interface ULoadmore extends Vue {
 
   /**
    * "status"为"nomore"时，内容显示为一个"●"
-   * @options true
    * @default false
    */
   'is-dot'?: boolean;

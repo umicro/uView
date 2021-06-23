@@ -20,7 +20,6 @@ export interface UDropdownItem extends Vue {
 
   /**
    * 是否禁用此选项卡
-   * @options true
    * @default false
    */
   disabled?: boolean;

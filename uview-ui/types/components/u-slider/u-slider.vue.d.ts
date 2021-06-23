@@ -64,14 +64,12 @@ export interface USlider extends Vue {
 
   /**
    * 是否禁用滑块
-   * @options true
    * @default false
    */
   disabled?: boolean;
 
   /**
    * 是否使用slot传入自定义滑块
-   * @options true
    * @default false
    */
   'use-slot'?: boolean;

@@ -10,7 +10,6 @@ export interface URadioGroup extends Vue {
 
   /**
    * 是否禁用所有"radio"
-   * @options true
    * @default false
    */
   disabled?: boolean;
@@ -18,7 +17,6 @@ export interface URadioGroup extends Vue {
   /**
    * 是否禁止点击文本操作"radio"
    * @version 1.5.2
-   * @options true
    * @default false
    */
   'label-disabled'?: boolean;
@@ -26,10 +24,9 @@ export interface URadioGroup extends Vue {
   /**
    * 形状，见文档说明
    * @version 1.5.2
-   * @options square
    * @default circle
    */
-  shape?: string;
+  shape?: 'square' | 'circle';
 
   /**
    * 图标大小，单位rpx
@@ -60,7 +57,6 @@ export interface URadioGroup extends Vue {
   /**
    * 是否每个"radio"占一行
    * @version 1.3.0
-   * @options true
    * @default false
    */
   wrap?: boolean;

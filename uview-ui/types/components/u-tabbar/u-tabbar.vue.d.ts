@@ -10,7 +10,6 @@ export interface UTabbar extends Vue {
 
   /**
    * 是否显示组件
-   * @options false
    * @default true
    */
   show?: boolean;
@@ -59,7 +58,6 @@ export interface UTabbar extends Vue {
 
   /**
    * 是否需要中部凸起的按钮，配置了此值，依然需要配置"list"参数中需凸起项的"midButton"为"true"，见文档说明
-   * @options true
    * @default false
    */
   'mid-button'?: boolean;
@@ -71,7 +69,6 @@ export interface UTabbar extends Vue {
 
   /**
    * 是否显示顶部的边框
-   * @options false
    * @default true
    */
   'border-top'?: boolean;
@@ -79,7 +76,6 @@ export interface UTabbar extends Vue {
   /**
    * 是否隐藏原生tabbar
    * @version 1.5.6
-   * @options false
    * @default true
    */
   'hide-tab-bar'?: boolean;

@@ -5,7 +5,6 @@ import Vue, { VNode } from 'vue';
 export interface UModal extends Vue {
   /**
    * 是否显示模态框，请赋值给"v-model"
-   * @options true
    * @default false
    */
   show?: boolean;
@@ -27,7 +26,7 @@ export interface UModal extends Vue {
    * @options 百分比 / auto
    * @default 600
    */
-  width?: string | number;
+  width?: 'auto' | string | number;
 
   /**
    * 模态框内容，如传入"slot"内容，则此参数无效
@@ -37,21 +36,18 @@ export interface UModal extends Vue {
 
   /**
    * 是否显示标题
-   * @options false
    * @default true
    */
   'show-title'?: boolean;
 
   /**
    * 是否显示确认按钮
-   * @options false
    * @default true
    */
   'show-confirm-button'?: boolean;
 
   /**
    * 是否显示取消按钮
-   * @options true
    * @default false
    */
   'show-cancel-button'?: boolean;
@@ -108,21 +104,18 @@ export interface UModal extends Vue {
 
   /**
    * 是否开启缩放模式
-   * @options false
    * @default true
    */
   zoom?: boolean;
 
   /**
    * 是否异步关闭，只对确定按钮有效，见文档说明
-   * @options true
    * @default false
    */
   'async-close'?: boolean;
 
   /**
    * 是否允许点击遮罩关闭Modal
-   * @options true
    * @default false
    */
   'mask-close-able'?: boolean;

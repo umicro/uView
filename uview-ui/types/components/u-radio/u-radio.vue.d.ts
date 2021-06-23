@@ -20,19 +20,16 @@ export interface uURadio extends Vue {
 
   /**
    * 形状，见文档说明
-   * @options circle / square
    */
-  shape?: string;
+  shape?: 'circle' | 'square';
 
   /**
    * 是否禁用
-   * @options false / true
    */
   disabled?: boolean;
 
   /**
    * 是否禁止点击文本操作"radio"
-   * @options true / false
    */
   'label-disabled'?: boolean;
 

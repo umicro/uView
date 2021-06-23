@@ -5,7 +5,6 @@ import Vue, { VNode } from 'vue';
 export interface UMask extends Vue {
   /**
    * 是否显示遮罩
-   * @options true
    * @default false
    */
   show?: boolean;
@@ -29,14 +28,12 @@ export interface UMask extends Vue {
 
   /**
    * 是否使用"scale"对遮罩进行缩放
-   * @options false
    * @default true
    */
   zoom?: boolean;
 
   /**
    * 遮罩是否可点击，为"false"时点击不会发送"click"事件
-   * @options false
    * @default true
    */
   'mask-click-able'?: boolean;

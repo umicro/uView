@@ -81,10 +81,9 @@ export interface UIcon extends Vue {
 
   /**
    * "label"相对于图标的位置(left和top为1.4.1新增)
-   * @options bottom / top / left
    * @default right
    */
-  'label-pos'?: string;
+  'label-pos'?: 'bottom' | 'top' | 'left' | 'right';
 
   /**
    * 图标的样式，可以设置字体大小，颜色等，对象形式，"size"和"color"优先级高于此参数
@@ -114,7 +113,6 @@ export interface UIcon extends Vue {
   /**
    * 是否为DecimalIcon
    * @version 1.7.2
-   * @options true
    * @default false
    */
   'show-decimal-icon'?: boolean;

@@ -24,8 +24,7 @@ export interface UAvatarCropperRouteParams {
 
   /**
    * 输出的图片类型，如果'png'类型发现裁剪的图片太大，改成"jpg"即可
-   * @options png
    * @default jpg
    */
-  'file-type'?: string;
+  'file-type'?: 'png' | 'jpg' | string;
 }

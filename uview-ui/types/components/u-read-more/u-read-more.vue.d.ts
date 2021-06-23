@@ -11,7 +11,6 @@ export interface UReadMore extends Vue {
 
   /**
    * 展开后是否显示收起按钮
-   * @options true
    * @default false
    */
   toggle?: boolean;

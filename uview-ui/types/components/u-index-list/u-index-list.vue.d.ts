@@ -22,7 +22,6 @@ export interface UIndexList extends Vue {
 
   /**
    * 是否开启锚点自动吸顶
-   * @options false
    * @default true
    */
   sticky?: boolean;

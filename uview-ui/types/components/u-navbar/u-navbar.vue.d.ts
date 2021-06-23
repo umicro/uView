@@ -69,7 +69,6 @@ export interface UNavbar extends Vue {
 
   /**
    * 是否显示导航栏左边返回图标和辅助文字
-   * @options false
    * @default true
    */
   'is-back'?: boolean;
@@ -82,14 +81,12 @@ export interface UNavbar extends Vue {
 
   /**
    * 导航栏是否固定在顶部
-   * @options false
    * @default true
    */
   'is-fixed'?: boolean;
 
   /**
    * 导航栏底部是否显示下边框，如定义了较深的背景颜色，可取消此值
-   * @options false
    * @default true
    */
   'border-bottom'?: boolean;
@@ -103,14 +100,12 @@ export interface UNavbar extends Vue {
   /**
    * 沉浸式，允许fixed定位后导航栏塌陷，仅fixed定位下生效
    * @version 1.5.6
-   * @options true
    * @default false
    */
   immersive?: boolean;
 
   /**
    * 导航栏标题字体是否加粗 <span data-v-c922b936="" class="badge tip" style="vertical-align: top;">1.7.8</span>
-   * @options true
    * @default false
    */
   'title-bold'?: boolean;

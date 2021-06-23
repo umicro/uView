@@ -5,7 +5,6 @@ import Vue, { VNode } from 'vue';
 export interface UIndexAnchor extends Vue {
   /**
    * 是否使用自定义内容的插槽
-   * @options true
    * @default false
    */
   'use-slot'?: boolean;

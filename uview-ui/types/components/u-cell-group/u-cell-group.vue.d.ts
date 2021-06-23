@@ -10,7 +10,6 @@ export interface UCellGroup extends Vue {
 
   /**
    * 是否显示外边框
-   * @options false
    * @default true
    */
   border?: boolean;

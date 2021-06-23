@@ -15,17 +15,15 @@ export interface UAlertTips extends Vue {
 
   /**
    * 关闭按钮(默认为叉号icon图标)
-   * @options true
    * @default false
    */
   'close-able'?: boolean;
 
   /**
    * 使用预设的颜色
-   * @options success / primary / error / info
    * @default warning
    */
-  type?: string;
+  type?: 'success' | 'primary' | 'warning' | 'error' | 'info';
 
   /**
    * 用文字替代关闭图标，"close-able"为"true"时有效
@@ -34,14 +32,12 @@ export interface UAlertTips extends Vue {
 
   /**
    * 是否显示左边的辅助图标
-   * @options true
    * @default false
    */
   'show-icon'?: boolean;
 
   /**
    * 显示或隐藏组件
-   * @options false
    * @default true
    */
   show?: boolean;

@@ -16,7 +16,6 @@ export interface UActionSheet extends Vue {
 
   /**
    * 是否显示底部的取消按钮
-   * @options false
    * @default true
    */
   'cancel-btn'?: boolean;
@@ -29,14 +28,12 @@ export interface UActionSheet extends Vue {
 
   /**
    * 点击遮罩是否可以关闭
-   * @options false
    * @default true
    */
   'mask-close-able'?: boolean;
 
   /**
    * 是否开启底部安全区适配 /components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明
-   * @options true
    * @default false
    */
   'safe-area-inset-bottom'?: boolean;

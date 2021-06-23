@@ -29,21 +29,18 @@ export interface UUpload extends Vue {
 
   /**
    * 如果需要自定义选择图片的按钮，设置为"true"
-   * @options true
    * @default false
    */
   'custom-btn'?: boolean;
 
   /**
    * 是否显示进度条
-   * @options false
    * @default true
    */
   'show-progress'?: boolean;
 
   /**
    * 是否启用(显示/隐藏)组件
-   * @options true
    * @default false
    */
   disabled?: boolean;
@@ -86,21 +83,18 @@ export interface UUpload extends Vue {
 
   /**
    * 是否可以通过"uni.previewImage"预览已选择的图片
-   * @options false
    * @default true
    */
   'preview-full-image'?: boolean;
 
   /**
    * 是否开启图片多选，部分安卓机型不支持
-   * @options false
    * @default true
    */
   multiple?: boolean;
 
   /**
    * 是否显示删除图片的按钮
-   * @options false
    * @default true
    */
   deletable?: boolean;
@@ -124,21 +118,18 @@ export interface UUpload extends Vue {
 
   /**
    * 选择完图片是否自动上传，见文档说明
-   * @options false
    * @default true
    */
   'auto-upload'?: boolean;
 
   /**
    * 特殊情况下是否自动提示toast，见文档说明
-   * @options false
    * @default true
    */
   'show-tips'?: boolean;
 
   /**
    * 是否显示组件内部的图片预览
-   * @options false
    * @default true
    */
   'show-upload-list'?: boolean;
@@ -164,7 +155,6 @@ export interface UUpload extends Vue {
   /**
    * 如果上传后服务端返回的值为"json"字符串的话，是否自动转为"json"
    * @version 1.3.7
-   * @options false
    * @default true
    */
   'to-json'?: boolean;

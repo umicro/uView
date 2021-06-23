@@ -5,7 +5,6 @@ import Vue, { VNode } from 'vue';
 export interface UCard extends Vue {
   /**
    * 卡片与屏幕两侧是否留空隙
-   * @options true
    * @default fasle
    */
   full?: boolean;
@@ -46,7 +45,6 @@ export interface UCard extends Vue {
 
   /**
    * 是否显示边框
-   * @options false
    * @default true
    */
   border?: boolean;
@@ -85,14 +83,12 @@ export interface UCard extends Vue {
 
   /**
    * 是否显示头部的下边框
-   * @options false
    * @default true
    */
   'head-border-bottom'?: boolean;
 
   /**
    * 是否显示底部的上边框
-   * @options false
    * @default true
    */
   'foot-border-top'?: boolean;
@@ -110,7 +106,6 @@ export interface UCard extends Vue {
 
   /**
    * 缩略图是否为圆形
-   * @options true
    * @default false
    */
   'thumb-circle'?: boolean;
@@ -124,7 +119,6 @@ export interface UCard extends Vue {
   /**
    * 是否显示头部
    * @version 1.3.5
-   * @options false
    * @default true
    */
   'show-head'?: boolean;
@@ -132,7 +126,6 @@ export interface UCard extends Vue {
   /**
    * 是否显示尾部
    * @version 1.3.5
-   * @options false
    * @default true
    */
   'show-foot'?: boolean;

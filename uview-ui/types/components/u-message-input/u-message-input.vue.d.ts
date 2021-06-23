@@ -11,17 +11,15 @@ export interface UMessageInput extends Vue {
 
   /**
    * 是否用圆点填充
-   * @options true
    * @default false
    */
   'dot-fill'?: boolean;
 
   /**
    * 模式选择，见文档"基本使用"说明
-   * @options bottomLine / middleLine
    * @default box
    */
-  mode?: string;
+  mode?: 'bottomLine' | 'middleLine' | 'box';
 
   /**
    * 预置值
@@ -30,21 +28,18 @@ export interface UMessageInput extends Vue {
 
   /**
    * 是否开启呼吸效果，见文档说明
-   * @options false
    * @default true
    */
   breathe?: boolean;
 
   /**
    * 是否自动获取焦点
-   * @options true
    * @default false
    */
   focus?: boolean;
 
   /**
    * 字体和输入横线是否加粗
-   * @options false
    * @default true
    */
   bold?: boolean;
@@ -75,7 +70,6 @@ export interface UMessageInput extends Vue {
 
   /**
    * 禁止点击输入框唤起系统键盘
-   * @options true
    * @default false
    */
   'disabled-keyboard'?: boolean;

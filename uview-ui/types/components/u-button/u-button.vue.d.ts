@@ -5,14 +5,12 @@ import Vue from 'vue';
 export interface UButton extends Vue {
   /**
    * 按钮的大小
-   * @options medium / mini
    * @default default
    */
-  size?: string;
+  size?: 'medium' | 'mini' | 'default';
 
   /**
    * 是否开启点击水波纹效果
-   * @options true
    * @default false
    */
   ripple?: boolean;
@@ -25,51 +23,44 @@ export interface UButton extends Vue {
 
   /**
    * 按钮的样式类型
-   * @options primary / success / info/ warning / error
    * @default default
    */
-  type?: string;
+  type?: 'primary' | 'success' | 'info' | 'warning' | 'error' | 'default';
 
   /**
    * 按钮是否镂空，背景色透明
-   * @options true
    * @default false
    */
   plain?: boolean;
 
   /**
    * 是否禁用
-   * @options true
    * @default false
    */
   disabled?: boolean;
 
   /**
    * 是否显示按钮的细边框
-   * @options false
    * @default true
    */
   'hair-line'?: boolean;
 
   /**
    * 按钮外观形状，见文档说明
-   * @options circle
    * @default square
    */
-  shape?: string;
+  shape?: 'circle' | 'square';
 
   /**
    * 按钮名称前是否带 loading 图标
-   * @options true
    * @default false
    */
   loading?: boolean;
 
   /**
-   * 用于 "&lt;form&gt;" 组件，点击分别会触发 "&lt;form&gt;" 组件的 submit/reset 事件
-   * @options submit / reset
+   * 用于 "form" 组件，点击分别会触发 "form" 组件的 submit/reset 事件
    */
-  'form-type'?: string;
+  'form-type'?: 'submit' | 'reset';
 
   /**
    * 开放能力
@@ -102,24 +93,21 @@ export interface UButton extends Vue {
 
   /**
    * 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效
-   * @options true
    * @default false
    */
   'app-parameter'?: boolean;
 
   /**
    * 指定是否阻止本节点的祖先节点出现点击态
-   * @options true
    * @default false
    */
   'hover-stop-propagation'?: boolean;
 
   /**
    * 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文
-   * @options zh_CN \ zh_TW
    * @default en
    */
-  lang?: string;
+  lang?: 'zh_CN' | 'zh_TW' | 'en' | string;
 
   /**
    * 会话来源，open-type="contact"时有效

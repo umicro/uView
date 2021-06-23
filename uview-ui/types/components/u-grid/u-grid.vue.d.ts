@@ -11,24 +11,21 @@ export interface UGrid extends Vue {
 
   /**
    * 是否显示宫格的边框
-   * @options false
    * @default true
    */
   border?: boolean;
 
   /**
    * 宫格的对齐方式，用于控制只有一两个宫格时的对齐场景
-   * @options center / right
    * @default left
    */
-  align?: string;
+  align?: 'center' | 'right' | 'left';
 
   /**
    * 样式类名，按下时有效，样式必须写在根目录的"App.vue"或通过其引入的全局样式中才有效，"none"为无效果，作用于头部标题区域
-   * @options none / 其他
    * @default u-hover-class
    */
-  'hover-class'?: string;
+  'hover-class'?: 'none' | 'u-hover-class' | string;
 
   /**
    * 点击宫格触发

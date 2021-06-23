@@ -5,10 +5,9 @@ import Vue, { VNode } from 'vue';
 export interface UField extends Vue {
   /**
    * 输入框的类型
-   * @options textarea
    * @default text
    */
-  type?: string;
+  type?: 'textarea' | 'text';
 
   /**
    * "label"左边的图标，限uView的图标名称
@@ -18,7 +17,6 @@ export interface UField extends Vue {
   /**
    * 是否显示field的下边框
    * @version 1.3.9
-   * @options false
    * @default true
    */
   'border-bottom'?: boolean;
@@ -26,7 +24,6 @@ export interface UField extends Vue {
   /**
    * 是否显示field的上边框
    * @version 1.3.9
-   * @options true
    * @default false
    */
   'border-top'?: boolean;
@@ -44,7 +41,6 @@ export interface UField extends Vue {
 
   /**
    * 是否必填，左边显示红色"*"号
-   * @options true
    * @default false
    */
   required?: boolean;
@@ -56,14 +52,12 @@ export interface UField extends Vue {
 
   /**
    * 是否密码输入方式(用点替换文字)，"type"为"text"时有效
-   * @options true
    * @default false
    */
   password?: boolean;
 
   /**
    * 是否显示右侧清空内容的图标控件(输入框有内容，且获得焦点时才显示)，点击可清空输入框内容
-   * @options false
    * @default true
    */
   clearable?: boolean;
@@ -76,17 +70,15 @@ export interface UField extends Vue {
 
   /**
    * "label"的文字对齐方式
-   * @options center / right
    * @default left
    */
-  'label-align'?: string;
+  'label-align'?: 'center' | 'right' | 'left';
 
   /**
    * 输入框内容对齐方式
-   * @options center / right
    * @default left
    */
-  'input-align'?: string;
+  'input-align'?: 'center' | 'right' | 'left';
 
   /**
    * 左边通过"icon"配置的图标的颜色
@@ -107,8 +99,6 @@ export interface UField extends Vue {
 
   /**
    * 是否自动增高输入区域，"type"为"textarea"时有效
-   * @options false
-   * @default true
    */
   'auto-height'?: boolean;
 
@@ -129,21 +119,18 @@ export interface UField extends Vue {
 
   /**
    * 是否自动获得焦点
-   * @options true
    * @default false
    */
   focus?: boolean;
 
   /**
    * 如果"type"为"textarea"，且在一个"position:fixed"的区域，需要指明为"true"
-   * @options true
    * @default false
    */
   fixed?: boolean;
 
   /**
    * 是否不可输入
-   * @options true
    * @default false
    */
   disabled?: boolean;
@@ -163,9 +150,7 @@ export interface UField extends Vue {
   /**
    * 是否自动去除两端的空格
    * @version 1.5.8
-   * @options false
    * @default true
-   */
   trim?: boolean;
 
   /**

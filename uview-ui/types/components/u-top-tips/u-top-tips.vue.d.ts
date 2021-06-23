@@ -27,10 +27,9 @@ export interface UTopTipParams {
 
   /**
    * 主题选择
-   * @options success / info / warning / error
    * @default primary
    */
-  type?: string;
+  type?: 'success' | 'info' | 'warning' | 'error' | 'primary';
 
   /**
    * 显示的时间，单位ms

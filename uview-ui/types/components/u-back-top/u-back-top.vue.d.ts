@@ -5,10 +5,9 @@ import Vue, { VNode } from 'vue';
 export interface UBackTop extends Vue {
   /**
    * 按钮形状
-   * @options square
    * @default circle
    */
-  mode?: string;
+  mode?: 'square' | 'circle';
 
   /**
    * uView内置图标名称，或图片路径

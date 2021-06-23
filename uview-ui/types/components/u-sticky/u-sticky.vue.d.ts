@@ -16,7 +16,6 @@ export interface USticky extends Vue {
 
   /**
    * 是否开启吸顶功能
-   * @options false
    * @default true
    */
   enable?: boolean;

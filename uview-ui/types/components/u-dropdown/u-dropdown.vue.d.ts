@@ -17,14 +17,12 @@ export interface UDropdown extends Vue {
 
   /**
    * 点击遮罩是否关闭菜单
-   * @options false
    * @default true
    */
   'close-on-click-mask'?: boolean;
 
   /**
    * 点击当前激活项标题是否关闭菜单
-   * @options false
    * @default true
    */
   'close-on-click-self'?: boolean;
@@ -43,7 +41,6 @@ export interface UDropdown extends Vue {
 
   /**
    * 标题菜单是否显示下边框
-   * @options true
    * @default false
    */
   'border-bottom'?: boolean;
@@ -64,10 +61,9 @@ export interface UDropdown extends Vue {
   /**
    * 标题菜单右侧的图标
    * @version 1.7.6
-   * @options arrow-down-fill
    * @default arrow-down
    */
-  'menu-icon'?: string;
+  'menu-icon'?: 'arrow-down-fill' | 'arrow-down';
 
   /**
    * 标题菜单右侧的图标的大小，单位任意，数值默认为rpx单位

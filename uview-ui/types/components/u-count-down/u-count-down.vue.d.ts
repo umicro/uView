@@ -11,17 +11,15 @@ export interface UCountDown extends Vue {
 
   /**
    * 是否自动开始倒计时，如果为"false"，需手动调用开始方法。见文档说明
-   * @options false
    * @default true
    */
   autoplay?: boolean;
 
   /**
    * 分隔符，"colon"为英文冒号，"zh"为中文
-   * @options zh
    * @default colon
    */
-  separator?: string;
+  separator?: 'zh' | 'colon' | string;
 
   /**
    * 分隔符的字体大小，单位rpx
@@ -43,7 +41,6 @@ export interface UCountDown extends Vue {
 
   /**
    * 是否显示倒计时数字的边框
-   * @options true
    * @default false
    */
   'show-border'?: boolean;
@@ -74,28 +71,24 @@ export interface UCountDown extends Vue {
 
   /**
    * 是否显示倒计时的"天"部分
-   * @options false
    * @default true
    */
   'show-days'?: boolean;
 
   /**
    * 是否显示倒计时的"时"部分
-   * @options false
    * @default true
    */
   'show-hours'?: boolean;
 
   /**
    * 是否显示倒计时的"分"部分
-   * @options false
    * @default true
    */
   'show-minutes'?: boolean;
 
   /**
    * 是否显示倒计时的"秒"部分
-   * @options false
    * @default true
    */
   'show-seconds'?: boolean;
@@ -103,7 +96,6 @@ export interface UCountDown extends Vue {
   /**
    * 当"天"的部分为0时，隐藏该字段
    * @version 1.4.4
-   * @options false
    * @default true
    */
   'hide-zero-day'?: boolean;

@@ -5,7 +5,6 @@ import Vue from 'vue';
 export interface UDivider extends Vue {
   /**
    * 文字左或右边线条宽度，数值或百分比，数值时单位为rpx
-   * @options 150
    */
   'half-width'?: string | number;
 
@@ -41,10 +40,9 @@ export interface UDivider extends Vue {
 
   /**
    * 将线条设置主题色
-   * @options info \ success \ warning \ error
    * @default primary
    */
-  type?: string;
+  type?: 'info' | 'success' | 'primary' | 'warning' | 'error';
 
   /**
    * 与前一个元素的距离，单位rpx
@@ -60,8 +58,6 @@ export interface UDivider extends Vue {
 
   /**
    * 是否使用slot传入内容，如果不传入，中间不会有空隙
-   * @options false
-   * @default true
    */
   'use-slot'?: boolean;
 

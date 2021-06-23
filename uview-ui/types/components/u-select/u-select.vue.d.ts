@@ -5,10 +5,9 @@ import Vue from 'vue';
 export interface USelect extends Vue {
   /**
    * 模式选择，"single-column"-单列模式，"mutil-column"-多列模式，"mutil-column-auto"-多列联动模式
-   * @options mutil-column / mutil-column-auto
    * @default single-column
    */
-  mode?: string;
+  mode?: 'mutil-column' | 'mutil-column-auto' | 'single-column';
 
   /**
    * 列数据，数组形式，见文档说明
@@ -17,14 +16,12 @@ export interface USelect extends Vue {
 
   /**
    * 布尔值变量，用于控制选择器的弹出与收起
-   * @options true
    * @default false
    */
   'v-model'?: boolean;
 
   /**
    * 是否开启底部安全区适配 /components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明
-   * @options true
    * @default false
    */
   'safe-area-inset-bottom'?: boolean;
@@ -48,7 +45,6 @@ export interface USelect extends Vue {
 
   /**
    * 是否允许通过点击遮罩关闭Picker
-   * @options false
    * @default true
    */
   'mask-close-able'?: boolean;

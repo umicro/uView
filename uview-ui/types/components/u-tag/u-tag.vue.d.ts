@@ -5,24 +5,21 @@ import Vue from 'vue';
 export interface UTag extends Vue {
   /**
    * 主题类型
-   * @options success / info / warning / error
    * @default primary
    */
-  type?: string;
+  type?: 'success' | 'info' | 'warning' | 'error' | 'primary';
 
   /**
    * 标签大小
-   * @options mini
    * @default default
    */
-  size?: string;
+  size?: 'mini' | 'default';
 
   /**
    * 标签形状
-   * @options circle / circleLeft / circleRight
    * @default square
    */
-  shape?: string;
+  shape?: 'circle' | 'circleLeft' | 'circleRight' | 'number';
 
   /**
    * 标签的文字内容
@@ -56,21 +53,18 @@ export interface UTag extends Vue {
 
   /**
    * 模式选择，见文档说明
-   * @options dark / plain
    * @default light
    */
-  mode?: string;
+  mode?: 'dark' | 'plain' | 'light';
 
   /**
    * 是否可关闭，设置为"true"，文字右边会出现一个关闭图标
-   * @options true
    * @default false
    */
   closeable?: boolean;
 
   /**
    * 标签显示与否
-   * @options false
    * @default true
    */
   show?: boolean;

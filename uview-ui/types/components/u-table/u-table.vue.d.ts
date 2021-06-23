@@ -17,10 +17,9 @@ export interface UTable extends Vue {
 
   /**
    * 单元格的内容对齐方式，作用类似css的"text-align"
-   * @options left / right
    * @default center
    */
-  align?: string;
+  align?: 'left' | 'right' | 'center';
 
   /**
    * 单元格的内边距，同css的"padding"写法

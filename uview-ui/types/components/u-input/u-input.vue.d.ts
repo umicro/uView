@@ -5,14 +5,12 @@ import Vue from 'vue';
 export interface UInput extends Vue {
   /**
    * 模式选择，见文档说明
-   * @options select / password / textarea / number
    * @default text
    */
-  type?: string;
+  type?: 'select' | 'password' | 'textarea' | 'number' | 'text';
 
   /**
    * 是否显示右侧的清除图标，type = select时无效
-   * @options false
    * @default true
    */
   clearable?: boolean;
@@ -24,10 +22,9 @@ export interface UInput extends Vue {
 
   /**
    * 输入框文字的对齐方式
-   * @options center / right
    * @default left
    */
-  'input-align'?: string;
+  'input-align'?: 'center' | 'left' | 'right';
 
   /**
    * placeholder显示值
@@ -37,7 +34,6 @@ export interface UInput extends Vue {
 
   /**
    * 是否禁用输入框
-   * @options true
    * @default false
    */
   disabled?: boolean;
@@ -67,28 +63,24 @@ export interface UInput extends Vue {
 
   /**
    * 是否自动获得焦点
-   * @options true
    * @default false
    */
   focus?: boolean;
 
   /**
    * 如果"type"为"textarea"，且在一个"position:fixed"的区域，需要指明为"true"
-   * @options true
    * @default false
    */
   fixed?: boolean;
 
   /**
    * "type"为"password"时，是否显示右侧的密码查看图标
-   * @options false
    * @default true
    */
   'password-icon'?: boolean;
 
   /**
    * 是否显示边框
-   * @options true
    * @default false
    */
   border?: boolean;
@@ -101,7 +93,6 @@ export interface UInput extends Vue {
 
   /**
    * 是否自动增高输入区域，"type"为"textarea"时有效
-   * @options false
    * @default true
    */
   'auto-height'?: boolean;
@@ -136,7 +127,6 @@ export interface UInput extends Vue {
   /**
    * 是否自动去除两端的空格
    * @version 1.5.8
-   * @options false
    * @default true
    */
   trim?: boolean;

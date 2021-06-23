@@ -5,14 +5,12 @@ import Vue, { VNode } from 'vue';
 export interface UCollapse extends Vue {
   /**
    * 是否手风琴模式
-   * @options false
    * @default true
    */
   accordion?: boolean;
 
   /**
    * 是否显示标题右侧的箭头
-   * @options false
    * @default true
    */
   arrow?: boolean;
@@ -41,10 +39,9 @@ export interface UCollapse extends Vue {
 
   /**
    * 样式类名，按下时有效，样式必须写在根目录的"App.vue"或通过其引入的全局样式中才有效，"none"为无效果，作用于头部标题区域
-   * @options none / 其他
    * @default u-hover-class
    */
-  'hover-class'?: string;
+  'hover-class'?: 'u-hover-class' | 'none' | string;
 
   /**
    * 重新初始化内部高度计算，用于异步获取内容的情形，请结合this.$nextTick()使用

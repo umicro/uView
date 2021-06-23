@@ -16,7 +16,6 @@ export interface USection extends Vue {
 
   /**
    * 是否显示右边的内容
-   * @options false
    * @default true
    */
   right?: boolean;
@@ -24,7 +23,6 @@ export interface USection extends Vue {
   /**
    * 是否显示左边的竖条
    * @version 1.3.3
-   * @options false
    * @default true
    */
   'show-line'?: boolean;
@@ -37,7 +35,6 @@ export interface USection extends Vue {
 
   /**
    * 主标题是否加粗
-   * @options false
    * @default true
    */
   bold?: boolean;
@@ -63,7 +60,6 @@ export interface USection extends Vue {
   /**
    * 是否显示右边箭头
    * @version 1.6.0
-   * @options false
    * @default true
    */
   arrow?: boolean;

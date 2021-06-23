@@ -5,7 +5,6 @@ import Vue from 'vue';
 export interface UTabsSwiper extends Vue {
   /**
    * tabs是否可以左右拖动
-   * @options false
    * @default true
    */
   'is-scroll'?: boolean;
@@ -83,14 +82,12 @@ export interface UTabsSwiper extends Vue {
 
   /**
    * 激活选项的字体是否加粗
-   * @options false
    * @default true
    */
   bold?: boolean;
 
   /**
    * 是否显示底部的滑块
-   * @options false
    * @default true
    */
   'show-bar'?: boolean;

@@ -15,16 +15,14 @@ export interface UFormItem extends Vue {
 
   /**
    * 是否显示下边框，如不需要下边框，需同时将"u-form"的同名参数设置为"false"
-   * @options true / false
    * @default true
    */
   'border-bottom'?: boolean;
 
   /**
    * 表单域提示文字的位置，"left"-左侧，"top"-文档，如设置，将覆盖"u-form"的同名参数
-   * @options left / top
    */
-  'label-position'?: string;
+  'label-position'?: 'left' | 'top';
 
   /**
    * 提示文字的宽度，单位rpx，如设置，将覆盖"u-form"的同名参数
@@ -64,7 +62,6 @@ export interface UFormItem extends Vue {
   /**
    * 是否显示左边的"*"号，这里仅起展示作用，如需校验必填，请通过"rules"配置必填规则
    * @version 1.3.5
-   * @options true
    * @default false
    */
   required?: boolean;

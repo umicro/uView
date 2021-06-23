@@ -5,14 +5,12 @@ import Vue from 'vue';
 export interface USwitch extends Vue {
   /**
    * 是否处于加载中
-   * @options true
    * @default false
    */
   loading?: boolean;
 
   /**
    * 是否禁用
-   * @options true
    * @default false
    */
   disabled?: boolean;
@@ -37,7 +35,6 @@ export interface USwitch extends Vue {
 
   /**
    * 是否使手机发生短促震动，目前只在iOS的微信小程序和微信小程序开发工具有效
-   * @options true
    * @default false
    */
   'vibrate-short'?: boolean;

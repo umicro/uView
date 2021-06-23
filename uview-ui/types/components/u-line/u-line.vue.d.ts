@@ -17,14 +17,12 @@ export interface ULine extends Vue {
 
   /**
    * 线条的方向，"row"-横向，"col"-竖向
-   * @options col
    * @default row
    */
-  direction?: string;
+  direction?: 'col' | 'row';
 
   /**
    * 是否显示细线条
-   * @options false
    * @default true
    */
   'hair-line'?: boolean;
@@ -37,8 +35,7 @@ export interface ULine extends Vue {
   /**
    * 线条类型，见文档说明
    * @version 1.3.7
-   * @options dashed / dotted
    * @default solid
    */
-  'border-style'?: string;
+  'border-style'?: 'dashed' | 'dotted' | 'solid';
 }

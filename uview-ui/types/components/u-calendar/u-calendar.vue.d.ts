@@ -5,35 +5,30 @@ import Vue, { VNode } from 'vue';
 export interface UCalendar extends Vue {
   /**
    * 选择日期的模式，date-为单个日期，range-为选择日期范围
-   * @options range
    * @default date
    */
-  mode?: string;
+  mode?: 'range' | 'date';
 
   /**
    * 布尔值变量，用于控制日历的弹出与收起
-   * @options true
    * @default false
    */
   'v-model'?: boolean;
 
   /**
    * 是否开启底部安全区适配 /components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明
-   * @options true
    * @default false
    */
   'safe-area-inset-bottom'?: boolean;
 
   /**
    * 是否显示顶部的切换年份方向的按钮
-   * @options false
    * @default true
    */
   'change-year'?: boolean;
 
   /**
    * 是否显示顶部的切换月份方向的按钮
-   * @options false
    * @default true
    */
   'change-month'?: boolean;
@@ -70,7 +65,6 @@ export interface UCalendar extends Vue {
 
   /**
    * 是否允许通过点击遮罩关闭日历
-   * @options false
    * @default true
    */
   'mask-close-able'?: boolean;
@@ -137,10 +131,9 @@ export interface UCalendar extends Vue {
 
   /**
    * 底部确定按钮的主题
-   * @options default / success / info/ warning / error
    * @default primary
    */
-  'btn-type'?: string;
+  'btn-type'?: 'default' | 'success' | 'primary' | 'info' | 'warning' | 'error';
 
   /**
    * 顶部提示文字，如设置名为"tooltip"的"slot"，此参数将失效
@@ -150,7 +143,6 @@ export interface UCalendar extends Vue {
 
   /**
    * 是否显示右上角的关闭图标
-   * @options false
    * @default true
    */
   closeable?: boolean;

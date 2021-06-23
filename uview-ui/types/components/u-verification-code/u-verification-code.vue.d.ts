@@ -29,7 +29,6 @@ export interface UVerificationCode extends Vue {
 
   /**
    * 是否在H5刷新或各端返回再进入时继续倒计时
-   * @options true
    * @default false
    */
   'keep-running'?: boolean;

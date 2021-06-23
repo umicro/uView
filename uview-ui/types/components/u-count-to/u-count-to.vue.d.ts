@@ -23,7 +23,6 @@ export interface UCountTo extends Vue {
 
   /**
    * 是否自动开始滚动
-   * @options false
    * @default true
    */
   autoplay?: boolean;
@@ -36,7 +35,6 @@ export interface UCountTo extends Vue {
 
   /**
    * 滚动结束时，是否缓动结尾，见文档说明
-   * @options false
    * @default true
    */
   'use-easing'?: boolean;
@@ -60,7 +58,6 @@ export interface UCountTo extends Vue {
 
   /**
    * 字体是否加粗
-   * @options true
    * @default false
    */
   bold?: boolean;

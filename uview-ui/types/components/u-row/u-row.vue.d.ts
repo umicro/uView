@@ -11,17 +11,24 @@ export interface URow extends Vue {
 
   /**
    * 水平排列方式(微信小程序暂不支持)
-   * @options end(或flex-end) / center / around(或space-around) / between(或space-between)
    * @default start(或flex-start)
    */
-  justify?: string;
+  justify?:
+    | 'end'
+    | 'flex-end'
+    | 'center'
+    | 'around'
+    | 'space-around'
+    | 'between'
+    | 'space-between'
+    | 'start'
+    | 'flex-start';
 
   /**
    * 垂直排列方式
-   * @options top / bottom
    * @default center
    */
-  align?: string;
+  align?: 'top' | 'bottom' | 'center';
 
   /**
    * row被点击

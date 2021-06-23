@@ -17,7 +17,6 @@ export interface ULink extends Vue {
 
   /**
    * 是否显示下划线
-   * @options true
    * @default false
    */
   'under-line'?: boolean;

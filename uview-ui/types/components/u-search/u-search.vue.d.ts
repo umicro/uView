@@ -10,10 +10,9 @@ export interface USearch extends Vue {
 
   /**
    * 搜索框形状，round-圆形，square-方形
-   * @options square
    * @default round
    */
-  shape?: string;
+  shape?: 'square' | 'round';
 
   /**
    * 搜索框背景颜色
@@ -34,21 +33,18 @@ export interface USearch extends Vue {
 
   /**
    * 是否启用清除控件
-   * @options false
    * @default true
    */
   clearabled?: boolean;
 
   /**
    * 是否自动获得焦点
-   * @options true
    * @default false
    */
   focus?: boolean;
 
   /**
    * 是否显示右侧控件(右侧的"搜索"按钮)
-   * @options false
    * @default true
    */
   'show-action'?: boolean;
@@ -66,21 +62,18 @@ export interface USearch extends Vue {
 
   /**
    * 输入框内容水平对齐方式
-   * @options center / right
    * @default left
    */
-  'input-align'?: string;
+  'input-align'?: 'center' | 'right' | 'left';
 
   /**
    * 是否启用输入框
-   * @options true
    * @default false
    */
   disabled?: boolean;
 
   /**
    * 是否开启动画，见文档说明
-   * @options true
    * @default false
    */
   animation?: boolean;

@@ -28,10 +28,9 @@ export interface USubsection extends Vue {
 
   /**
    * 模式选择，见文档"模式选择"说明
-   * @options subsection
    * @default button
    */
-  mode?: string;
+  mode?: 'subsection' | 'button';
 
   /**
    * 字体大小，单位rpx
@@ -47,14 +46,12 @@ export interface USubsection extends Vue {
 
   /**
    * 是否开启动画效果，见文档说明
-   * @options false
    * @default true
    */
   animation?: boolean;
 
   /**
    * 激活选项的字体是否加粗
-   * @options false
    * @default true
    */
   bold?: boolean;

@@ -35,7 +35,6 @@ export interface UNumberBox extends Vue {
 
   /**
    * 是否禁用操作，禁用后无法加减或手动修改输入框的值
-   * @options true
    * @default false
    */
   disabled?: boolean;
@@ -71,7 +70,6 @@ export interface UNumberBox extends Vue {
 
   /**
    * 是否禁止输入框手动输入值
-   * @options true
    * @default false
    */
   'disabled-input'?: boolean;
@@ -85,7 +83,6 @@ export interface UNumberBox extends Vue {
   /**
    * 是否开启长按连续递增或递减
    * @version 1.4.5
-   * @options false
    * @default true
    */
   'long-press'?: boolean;
@@ -100,7 +97,6 @@ export interface UNumberBox extends Vue {
   /**
    * 是否只能输入正整数
    * @version 1.5.6
-   * @options false
    * @default true
    */
   'positive-integer'?: boolean;

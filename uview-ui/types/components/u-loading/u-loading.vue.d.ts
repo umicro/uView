@@ -5,10 +5,9 @@ import Vue from 'vue';
 export interface ULoading extends Vue {
   /**
    * 模式选择，见文档说明
-   * @options flower
    * @default circle
    */
-  mode?: string;
+  mode?: 'flower' | 'circle';
 
   /**
    * 动画活动区域的颜色，只对 mode = circle 模式有效
@@ -24,7 +23,6 @@ export interface ULoading extends Vue {
 
   /**
    * 是否显示动画
-   * @options false
    * @default true
    */
   show?: boolean;

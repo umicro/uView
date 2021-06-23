@@ -40,9 +40,8 @@ export interface UCircleProgress extends Vue {
 
   /**
    * 如设置，"active-color"值将会失效
-   * @options success / primary / error / info / warning
    */
-  type?: string;
+  type?: 'success' | 'primary' | 'error' | 'info' | 'warning';
 
   /**
    * 整个组件背景颜色，默认为白色

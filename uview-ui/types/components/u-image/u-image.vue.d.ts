@@ -28,10 +28,9 @@ export interface UImage extends Vue {
 
   /**
    * 图片形状，circle-圆形，square-方形
-   * @options circle
    * @default square
    */
-  shape?: string;
+  shape?: 'circle' | 'square';
 
   /**
    * 圆角值，单位任意，如果为数值，则为rpx单位
@@ -65,28 +64,23 @@ export interface UImage extends Vue {
 
   /**
    * 是否显示加载中的图标或者自定义的slot
-   * @options false
    * @default true
    */
   'show-loading'?: boolean;
 
   /**
    * 是否显示加载错误的图标或者自定义的slot
-   * @options false
    * @default true
    */
   'show-error'?: boolean;
 
   /**
    * 是否需要淡入效果
-   * @options false
-   * @default true
    */
   fade?: boolean;
 
   /**
    * 只支持网络资源，只对微信小程序有效
-   * @options true
    * @default false
    */
   webp?: boolean;

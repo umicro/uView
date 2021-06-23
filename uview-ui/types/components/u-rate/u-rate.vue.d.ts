@@ -24,7 +24,6 @@ export interface URate extends Vue {
 
   /**
    * 是否禁止用户操作
-   * @options true
    * @default false
    */
   disabled?: boolean;

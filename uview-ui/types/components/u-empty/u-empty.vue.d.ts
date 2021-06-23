@@ -48,21 +48,20 @@ export interface UEmpty extends Vue {
 
   /**
    * 图标的宽度，单位rpx
-   * @version 1.4.2起废弃
    * @default 240
+   * @deprecated 1.4.2起废弃
    */
   'img-width'?: string | number;
 
   /**
    * 图标的高度，单位rpx
-   * @version 1.4.2起废弃
    * @default auto
+   * @deprecated 1.4.2起废弃
    */
   'img-height'?: string;
 
   /**
    * 是否显示组件
-   * @options false
    * @default true
    */
   show?: boolean;

@@ -5,14 +5,12 @@ import Vue from 'vue';
 export interface UPopup extends Vue {
   /**
    * 弹出方向
-   * @options top / right / bottom / center
    * @default left
    */
-  mode?: string;
+  mode?: 'top' | 'right' | 'bottom' | 'center' | 'left';
 
   /**
    * 是否显示遮罩
-   * @options false
    * @default true
    */
   mask?: boolean;
@@ -25,21 +23,18 @@ export interface UPopup extends Vue {
 
   /**
    * 是否开启缩放动画，只在"mode"为"center"时有效
-   * @options false
    * @default true
    */
   zoom?: boolean;
 
   /**
    * 是否开启底部安全区适配 /components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明
-   * @options true
    * @default false
    */
   'safe-area-inset-bottom'?: boolean;
 
   /**
    * 点击遮罩是否可以关闭弹出层
-   * @options false
    * @default true
    */
   'mask-close-able'?: boolean;
@@ -63,7 +58,6 @@ export interface UPopup extends Vue {
 
   /**
    * 是否显示关闭图标
-   * @options true
    * @default false
    */
   closeable?: boolean;
@@ -76,10 +70,9 @@ export interface UPopup extends Vue {
 
   /**
    * 自定义关闭图标位置，top-left为左上角，top-right为右上角，bottom-left为左下角，bottom-right为右下角
-   * @options top-left / bottom-left / bottom-right
    * @default top-right
    */
-  'close-icon-pos'?: string;
+  'close-icon-pos'?: 'top-left' | 'bottom-left' | 'bottom-right' | 'top-right';
 
   /**
    * 关闭图标的颜色

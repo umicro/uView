@@ -5,21 +5,18 @@ import Vue, { VNode } from 'vue';
 export interface UKeyboard extends Vue {
   /**
    * 键盘类型，见文档"基本使用"的说明
-   * @options car / card
    * @default number
    */
-  mode?: string;
+  mode?: 'car' | 'card' | 'number';
 
   /**
    * 是否显示"."按键，只在mode=number时有效
-   * @options false
    * @default true
    */
   'dot-enabled'?: boolean;
 
   /**
    * 是否显示键盘顶部工具条
-   * @options false
    * @default true
    */
   tooltip?: boolean;
@@ -31,28 +28,24 @@ export interface UKeyboard extends Vue {
 
   /**
    * 是否显示工具条中间的文字
-   * @options false
    * @default true
    */
   'show-tips'?: boolean;
 
   /**
    * 是否显示工具条左边的"取消"按钮
-   * @options false
    * @default true
    */
   'cancel-btn'?: boolean;
 
   /**
    * 是否显示工具条右边的"完成"按钮
-   * @options false
    * @default true
    */
   'confirm-btn'?: boolean;
 
   /**
    * 是否显示遮罩
-   * @options false
    * @default true
    */
   mask?: boolean;
@@ -65,21 +58,18 @@ export interface UKeyboard extends Vue {
 
   /**
    * 是否打乱键盘按键的顺序
-   * @options true
    * @default false
    */
   random?: boolean;
 
   /**
    * 是否开启底部安全区适配 /components/safeAreaInset.html#关于uview某些组件safe-area-inset参数的说明
-   * @options true
    * @default false
    */
   'safe-area-inset-bottom'?: boolean;
 
   /**
    * 是否允许点击遮罩收起键盘
-   * @options false
    * @default true
    */
   'mask-close-able'?: boolean;

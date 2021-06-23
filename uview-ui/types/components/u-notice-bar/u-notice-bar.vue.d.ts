@@ -10,35 +10,30 @@ export interface UNoticeBar extends Vue {
 
   /**
    * 显示的主题
-   * @options primary / info / error / success / none
    * @default warning
    */
-  type?: string;
+  type?: 'primary' | 'info' | 'error' | 'success' | 'none' | 'warning';
 
   /**
    * 是否显示小喇叭图标
-   * @options false
    * @default true
    */
   'volume-icon'?: boolean;
 
   /**
    * 是否显示右边的向右箭头
-   * @options true
    * @default false
    */
   'more-icon'?: boolean;
 
   /**
    * 是否显示关闭图标
-   * @options true
    * @default false
    */
   'close-icon'?: boolean;
 
   /**
    * 是否自动播放
-   * @options false
    * @default true
    */
   autoplay?: boolean;
@@ -58,11 +53,10 @@ export interface UNoticeBar extends Vue {
    * @options vertical(垂直滚动)
    * @default horizontal(水平滚动)
    */
-  mode?: string;
+  mode?: 'vertical' | 'horizontal';
 
   /**
    * 是否显示
-   * @options false
    * @default true
    */
   show?: boolean;
@@ -93,21 +87,18 @@ export interface UNoticeBar extends Vue {
 
   /**
    * "mode"为"horizontal"时，指明是否水平衔接滚动
-   * @options false
    * @default true
    */
   'is-circular'?: boolean;
 
   /**
    * 播放状态，play - 播放，paused - 暂停
-   * @options paused
    * @default play
    */
-  'play-state'?: string;
+  'play-state'?: 'paused' | 'play';
 
   /**
    * 是否禁止通过手动滑动切换通知，只有mode = vertical，或者mode = horizontal且is-circular = false时有效；只支持App 2.5.5+、H5 2.5.5+、支付宝小程序、字节跳动小程序
-   * @options false
    * @default true
    */
   'disable-touch'?: boolean;
@@ -126,7 +117,6 @@ export interface UNoticeBar extends Vue {
 
   /**
    * "list"为空数组时，是否显示组件
-   * @options false
    * @default true
    */
   'no-list-hidden'?: boolean;
