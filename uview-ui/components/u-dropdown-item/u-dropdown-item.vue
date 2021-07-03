@@ -123,7 +123,13 @@
 		},
 		mounted() {
 			this.init();
-		}
+		},
+		beforeDestroy(){
+			let  index =  this.parent.menuList.findIndex(item=>item.title==this.title)
+			if(index!==-1){
+				this.parent.menuList.splice(index)
+			}
+		},	
 	}
 </script>
 
