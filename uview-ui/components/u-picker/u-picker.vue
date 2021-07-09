@@ -2,10 +2,10 @@
 	<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto" :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex">
 		<view class="u-datetime-picker">
 			<view class="u-picker-header" @touchmove.stop.prevent="">
-				<view class="u-btn-picker u-btn-picker--tips" 
-					:style="{ color: cancelColor }" 
-					hover-class="u-opacity" 
-					:hover-stay-time="150" 
+				<view class="u-btn-picker u-btn-picker--tips"
+					:style="{ color: cancelColor }"
+					hover-class="u-opacity"
+					:hover-stay-time="150"
 					@tap="getResult('cancel')"
 				>{{cancelText}}</view>
 				<view class="u-picker__title">{{ title }}</view>
@@ -21,7 +21,7 @@
 				</view>
 			</view>
 			<view class="u-picker-body">
-				<picker-view v-if="mode == 'region'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+				<picker-view v-if="mode == 'region'" :value="valueArr" @change="change" class="u-picker-view" :mask-style="maskStyle" mask-class="uni-picker-view-mask" @pickstart="pickstart" @pickend="pickend">
 					<picker-view-column v-if="!reset && params.province">
 						<view class="u-column-item" v-for="(item, index) in provinces" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
@@ -38,7 +38,7 @@
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else-if="mode == 'time'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+				<picker-view v-else-if="mode == 'time'" :value="valueArr" @change="change" class="u-picker-view" :mask-style="maskStyle" mask-class="uni-picker-view-mask" @pickstart="pickstart" @pickend="pickend">
 					<picker-view-column v-if="!reset && params.year">
 						<view class="u-column-item" v-for="(item, index) in years" :key="index">
 							{{ item }}
@@ -76,14 +76,14 @@
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else-if="mode == 'selector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+				<picker-view v-else-if="mode == 'selector'" :value="valueArr" @change="change" class="u-picker-view" :mask-style="maskStyle" mask-class="uni-picker-view-mask" @pickstart="pickstart" @pickend="pickend">
 					<picker-view-column v-if="!reset">
 						<view class="u-column-item" v-for="(item, index) in range" :key="index">
 							<view class="u-line-1">{{ getItemValue(item, 'selector') }}</view>
 						</view>
 					</picker-view-column>
 				</picker-view>
-				<picker-view v-else-if="mode == 'multiSelector'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+				<picker-view v-else-if="mode == 'multiSelector'" :value="valueArr" @change="change" class="u-picker-view" :mask-style="maskStyle" mask-class="uni-picker-view-mask" @pickstart="pickstart" @pickend="pickend">
 					<picker-view-column v-if="!reset" v-for="(item, index) in range" :key="index">
 						<view class="u-column-item" v-for="(item1, index1) in item" :key="index1">
 							<view class="u-line-1">{{ getItemValue(item1, 'multiSelector') }}</view>
@@ -118,6 +118,7 @@ import areas from '../../libs/util/area.js';
  * @property {String} default-region 默认选中的地区，中文形式，mode=region时有效
  * @property {String} default-code 默认选中的地区，编号形式，mode=region时有效
  * @property {Boolean} mask-close-able 是否允许通过点击遮罩关闭Picker（默认true）
+ * @property {String} mask-style 设置蒙层的样式
  * @property {String Number} z-index 弹出时的z-index值（默认1075）
  * @property {Array} default-selector 数组形式，其中每一项表示选择了range对应项中的第几个
  * @property {Array} range 自定义选择的数据，mode=selector或mode=multiSelector时有效
@@ -223,6 +224,11 @@ export default {
 		maskCloseAble: {
 			type: Boolean,
 			default: true
+		},
+		// 蒙层的样式
+		maskStyle: {
+			type: String,
+			default: ''
 		},
 		// 通过双向绑定控制组件的弹出与收起
 		value: {
