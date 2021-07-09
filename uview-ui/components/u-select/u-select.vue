@@ -36,7 +36,7 @@
 					</view>
 				</view>
 				<view class="u-select__body">
-					<picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend">
+					<picker-view @change="columnChange" class="u-select__body__picker-view" :mask-style="maskStyle" mask-class="uni-picker-view-mask" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend">
 						<picker-view-column v-for="(item, index) in columnData" :key="index">
 							<view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
 								<view class="u-line-1">{{ item1[labelName] }}</view>
@@ -64,6 +64,7 @@
 	 * @property {String} cancel-text 取消按钮的文字
 	 * @property {String} default-value 提供的默认选中的下标，见官网说明
 	 * @property {Boolean} mask-close-able 是否允许通过点击遮罩关闭Picker(默认true)
+	 * @property {String} mask-style 设置蒙层的样式
 	 * @property {String Number} z-index 弹出时的z-index值(默认10075)
 	 * @property {String} value-name 自定义list数据的value属性名 1.3.6
 	 * @property {String} label-name 自定义list数据的label属性名 1.3.6
@@ -114,6 +115,11 @@ export default {
 		maskCloseAble: {
 			type: Boolean,
 			default: true
+		},
+		// 蒙层的样式
+		maskStyle: {
+			type: String,
+			default: ''
 		},
 		// 提供的默认选中的下标
 		defaultValue: {
