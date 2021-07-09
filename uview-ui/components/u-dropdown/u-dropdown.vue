@@ -20,9 +20,9 @@
 			</view>
 		</view>
 		<view class="u-dropdown__content" :style="[contentStyle, {
-			transition: `opacity ${duration / 1000}s linear`,
+			transition: `opacity ${duration / 1000}s linear, height ${duration / 1000}s linear`,
 			top: $u.addUnit(height),
-			height: contentHeight + 'px'
+			height: active ? contentHeight + 'px' : '0'
 		}]"
 		 @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
@@ -273,7 +273,7 @@
 			left: 0px;
 			bottom: 0;
 			overflow: hidden;
-			
+
 
 			&__mask {
 				position: absolute;
