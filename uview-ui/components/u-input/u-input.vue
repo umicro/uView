@@ -84,9 +84,9 @@ import Emitter from '../../libs/util/emitter.js';
  * @property {String} input-align 输入框文字的对齐方式(默认left)
  * @property {String} placeholder placeholder显示值(默认 '请输入内容')
  * @property {Boolean} disabled 是否禁用输入框(默认false)
- * @property {String Number} maxlength 输入框的最大可输入长度(默认140)
+ * @property {String Number} maxlength 输入框的最大可输入长度，设置为-1的时候不限制最大长度(默认140)
  * @property {String Number} selection-start 光标起始位置，自动聚焦时有效，需与selection-end搭配使用（默认-1）
- * @property {String Number} maxlength 光标结束位置，自动聚焦时有效，需与selection-start搭配使用（默认-1）
+ * @property {String Number} selection-end 光标结束位置，自动聚焦时有效，需与selection-start搭配使用（默认-1）
  * @property {String Number} cursor-spacing 指定光标与键盘的距离，单位px(默认0)
  * @property {String} placeholderStyle placeholder的样式，字符串形式，如"color: red;"(默认 "color: #c0c4cc;")
  * @property {String} confirm-type 设置键盘右下角按钮的文字，仅在type为text时生效(默认done)
