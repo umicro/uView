@@ -394,9 +394,9 @@ export default {
 				let beforeResponse = this.beforeUpload.bind(this.$u.$parent.call(this))(index, this.lists);
 				// 判断是否返回了promise
 				if (!!beforeResponse && typeof beforeResponse.then === 'function') {
-          // promise 或 async 返回 false，或进入 catch 回调，继续下一张；否则不进行动作，继续上传
-          const result = await beforeResponse.catch(() => false);
-          if (result === false) return this.uploadFile(index + 1);
+					// promise 或 async 返回 false，或进入 catch 回调，继续下一张；否则不进行动作，继续上传
+					const result = await beforeResponse.catch(() => false);
+					if (result === false) return this.uploadFile(index + 1);
 				} else if(beforeResponse === false) {
 					// 如果返回false，继续下一张图片的上传
 					return this.uploadFile(index + 1);
