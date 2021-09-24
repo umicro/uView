@@ -14,11 +14,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection vibrateShort :list="['方框', '下划线', '中划线']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['方框', '下划线', '中划线']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">输入长度</view>
-				<u-subsection vibrateShort :list="[4, 5, 6]" @change="maxLengthChange"></u-subsection>
+				<u-subsection :list="[4, 5, 6]" @change="maxLengthChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<!-- #ifdef MP-WEIXIN -->
@@ -27,19 +27,19 @@
 				<!-- #ifndef MP-WEIXIN -->
 				<view class="u-item-title">初始值</view>
 				<!-- #endif -->
-				<u-subsection vibrateShort :list="['空', '23', '678']" @change="valueChange"></u-subsection>
+				<u-subsection :list="['空', '23', '678']" @change="valueChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">呼吸灯效果</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="breatheChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="breatheChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否加粗</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="boldChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="boldChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">点替代输入值</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="dotFillChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="dotFillChange"></u-subsection>
 			</view>
 		</view>
 	</view>

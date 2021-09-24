@@ -31,15 +31,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">加载状态</view>
-				<u-subsection vibrateShort :current="current" :list="['请求中', '请求结束']" @change="loadingChange"></u-subsection>
+				<u-subsection :current="current" :list="['请求中', '请求结束']" @change="loadingChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">骨架动画</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="animationChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="animationChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view>
 	</view>

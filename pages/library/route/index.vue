@@ -12,15 +12,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">类型</view>
-				<u-subsection vibrateShort :list="['navigateTo', 'switchTab', 'navigateBack']" @change="typeChange"></u-subsection>
+				<u-subsection :list="['navigateTo', 'switchTab', 'navigateBack']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">携带参数(针对type=navigateTo)</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="paramsChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="paramsChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">窗口动画(App且type=navigateTo||navigateBack时有效)</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="animateChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="animateChange"></u-subsection>
 			</view>
 		</view>
 	</view>

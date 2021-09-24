@@ -10,7 +10,7 @@ export default {
 		desc: 'Collection of many commonly used pages and layouts, reducing the repetitive work of developers, allowing you to focus on logic and get twice the result with half the effort'
 	},
 	nav: {
-		components: 'Comonents',
+		components: 'Components',
 		js: 'JS',
 		template: 'Template'
 	},

@@ -62,7 +62,7 @@
 			height: {
 				type: [Number, String],
 				default: 'auto'
-			}
+			},
 		},
 		data() {
 			return {

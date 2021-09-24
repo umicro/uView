@@ -3,8 +3,8 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
-				<u-row :justify="justify">
-					<u-col :span="span" :offset="offset" @click="click">
+				<u-row :justify="justify" @click="rowClick">
+					<u-col :span="span" :offset="offset" @click="click" stop>
 						<view class="demo-layout bg-purple-dark">
 
 						</view>
@@ -28,16 +28,16 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">每个栅格占用栏数(演示共3个栅格)</view>
-				<u-subsection vibrateShort :current="2" :list="[1, 2, 3, 4]" @change="spanChange"></u-subsection>
+				<u-subsection :current="2" :list="[1, 2, 3, 4]" @change="spanChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">分栏偏移</view>
-				<u-subsection vibrateShort :list="[0, 1, 2, 3]" @change="offsetChange"></u-subsection>
+				<u-subsection :list="[0, 1, 2, 3]" @change="offsetChange"></u-subsection>
 			</view>
 			<!-- #ifndef MP -->
 			<view class="u-config-item">
 				<view class="u-item-title">水平排列方式(微信小程序无效)</view>
-				<u-subsection vibrateShort :list="['start', 'end', 'around', 'between']" @change="justifyChange"></u-subsection>
+				<u-subsection :list="['start', 'end', 'around', 'between']" @change="justifyChange"></u-subsection>
 			</view>
 			<!-- #endif -->
 		</view>
@@ -54,6 +54,12 @@
 			}
 		},
 		methods: {
+			click() {
+				console.log('col click');
+			},
+			rowClick() {
+				console.log('row click');
+			},
 			spanChange(e) {
 				switch (e) {
 					case 0:

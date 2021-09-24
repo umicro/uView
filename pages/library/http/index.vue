@@ -17,7 +17,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">请求方式</view>
-				<u-subsection vibrateShort :list="['get', 'post']" @change="getResult"></u-subsection>
+				<u-subsection :list="['get', 'post']" @change="getResult"></u-subsection>
 			</view>
 		</view>
 	</view>

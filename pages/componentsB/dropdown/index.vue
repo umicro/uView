@@ -24,15 +24,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">下边框</view>
-				<u-subsection vibrateShort current="1" :list="['有', '无']" @change="borderChange"></u-subsection>
+				<u-subsection current="1" :list="['有', '无']" @change="borderChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">激活颜色</view>
-				<u-subsection vibrateShort :list="['#2979ff', '#ff9900', '#19be6b']" @change="activeColorChange"></u-subsection>
+				<u-subsection :list="['#2979ff', '#ff9900', '#19be6b']" @change="activeColorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">遮罩是否可点击</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="maskChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="maskChange"></u-subsection>
 			</view> 
 		</view>
 	</view>

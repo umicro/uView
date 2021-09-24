@@ -9,7 +9,7 @@
 			<u-icon name="minus" :size="size"></u-icon>
 		</view>
 		<input :disabled="disabledInput || disabled" :cursor-spacing="getCursorSpacing" :class="{ 'u-input-disabled': disabled }"
-		    v-model="inputVal" class="u-number-input" @blur="onBlur"
+		    v-model="inputVal" class="u-number-input" @blur="onBlur" @focus="onFocus"
 		    type="number" :style="{
 				color: color,
 				fontSize: size + 'rpx',
@@ -287,6 +287,10 @@
 					this.inputVal = val;
 				})
 				this.handleChange(val, 'blur');
+			},
+			// 输入框获得焦点事件
+			onFocus() {
+				this.$emit('focus');
 			},
 			handleChange(value, type) {
 				if (this.disabled) return;

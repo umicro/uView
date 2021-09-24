@@ -31,19 +31,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">上传方式</view>
-				<u-subsection vibrateShort current="1" :list="['自动上传', '手动上传']" @change="autoUploadChange"></u-subsection>
+				<u-subsection current="1" :list="['自动上传', '手动上传']" @change="autoUploadChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义控件(进度条和删除按钮)</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="controlChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="controlChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">最大上传数量</view>
-				<u-subsection vibrateShort current="1" :list="['1', '2', '4']" @change="maxCountChange"></u-subsection>
+				<u-subsection current="1" :list="['1', '2', '4']" @change="maxCountChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式(预览区域和上传按钮)</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -53,7 +53,7 @@
 	export default {
 		data() {
 			return {
-				action: 'http://www.tp5.com',
+				action: 'http://127.0.0.1:7001/upload',
 				// 预置上传列表
 				fileList: [],
 				// fileList: [{

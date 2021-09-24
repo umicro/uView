@@ -21,15 +21,14 @@ if (!String.prototype.padStart) {
 	}
 }
 
-function timeFormat(timestamp = null, fmt = 'yyyy-mm-dd') {
-	// 其他更多是格式化有如下:
-	// yyyy:mm:dd|yyyy:mm|yyyy年mm月dd日|yyyy年mm月dd日 hh时MM分等,可自定义组合
-	timestamp = parseInt(timestamp);
+// 其他更多是格式化有如下:
+// yyyy:mm:dd|yyyy:mm|yyyy年mm月dd日|yyyy年mm月dd日 hh时MM分等,可自定义组合
+function timeFormat(dateTime = null, fmt = 'yyyy-mm-dd') {
 	// 如果为null,则格式化当前时间
-	if (!timestamp) timestamp = Number(new Date());
-	// 判断用户输入的时间戳是秒还是毫秒,一般前端js获取的时间戳是毫秒(13位),后端传过来的为秒(10位)
-	if (timestamp.toString().length == 10) timestamp *= 1000;
-	let date = new Date(timestamp);
+	if (!dateTime) dateTime = Number(new Date());
+	// 如果dateTime长度为10或者13，则为秒和毫秒的时间戳，如果超过13位，则为其他的时间格式
+	if (dateTime.toString().length == 10) dateTime *= 1000;
+	let date = new Date(dateTime);
 	let ret;
 	let opt = {
 		"y+": date.getFullYear().toString(), // 年

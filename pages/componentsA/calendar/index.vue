@@ -19,15 +19,15 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :current="showBtnStatus" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+				<u-subsection :current="showBtnStatus" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式</view>
-				<u-subsection vibrateShort current="1" :list="['单个日期', '日期范围']" @change="modeChange"></u-subsection>
+				<u-subsection current="1" :list="['单个日期', '日期范围']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 		</view>
 	</view>

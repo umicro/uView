@@ -52,31 +52,31 @@
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">标题长度</view>
-					<u-subsection vibrateShort :list="['短', '中', '长']" @change="titleChange"></u-subsection>
+					<u-subsection :list="['短', '中', '长']" @change="titleChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">隐藏左侧返回区域</view>
-					<u-subsection current="1" vibrateShort :list="['是', '否']" @change="backChange"></u-subsection>
+					<u-subsection current="1" :list="['是', '否']" @change="backChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">自定义左侧内容</view>
-					<u-subsection current="1" vibrateShort :list="['是', '否']" @change="leftChange"></u-subsection>
+					<u-subsection current="1" :list="['是', '否']" @change="leftChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">自定义右侧内容</view>
-					<u-subsection :current="slotRightCurrent" vibrateShort :list="['是', '否']" @change="rightChange"></u-subsection>
+					<u-subsection :current="slotRightCurrent" :list="['是', '否']" @change="rightChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">传入整体slot</view>
-					<u-subsection vibrateShort :list="['无', '搜索框', '搜索+按钮', '搜索+图标']" @change="searchChange"></u-subsection>
+					<u-subsection :list="['无', '搜索框', '搜索+按钮', '搜索+图标']" @change="searchChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">完全自定义传入内容</view>
-					<u-subsection current="1" vibrateShort :list="['是', '否']" @change="customChange"></u-subsection>
+					<u-subsection current="1" :list="['是', '否']" @change="customChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">背景色</view>
-					<u-subsection vibrateShort :list="['渐变', '#39CCCC', '#B471CC', '#001f3f']" @change="bgColorChange"></u-subsection>
+					<u-subsection :list="['渐变', '#39CCCC', '#B471CC', '#001f3f']" @change="bgColorChange"></u-subsection>
 				</view>
 			</view>
 		</view>

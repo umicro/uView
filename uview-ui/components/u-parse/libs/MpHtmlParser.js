@@ -1,7 +1,7 @@
 /**
  * html 解析器
  * @tutorial https://github.com/jin-yufeng/Parser
- * @version 20200828
+ * @version 20201029
  * @author JinYufeng
  * @listens MIT
  */
@@ -25,10 +25,7 @@ function MpHtmlParser(data, options = {}) {
 	// 工具函数
 	this.bubble = () => {
 		for (var i = this.STACK.length, item; item = this.STACK[--i];) {
-			if (cfg.richOnlyTags[item.name]) {
-				if (item.name == 'table' && !Object.hasOwnProperty.call(item, 'c')) item.c = 1;
-				return false;
-			}
+			if (cfg.richOnlyTags[item.name]) return false;
 			item.c = 1;
 		}
 		return true;
@@ -210,12 +207,15 @@ MpHtmlParser.prototype.setNode = function() {
 				if (attrs.colspan || attrs.rowspan)
 					for (var k = this.STACK.length, item; item = this.STACK[--k];)
 						if (item.name == 'table') {
-							item.c = void 0;
+							item.flag = 1;
 							break;
 						}
 		}
 		if (attrs.align) {
-			styleObj['text-align'] = attrs.align;
+			if (node.name == 'table') {
+				if (attrs.align == 'center') styleObj['margin-inline-start'] = styleObj['margin-inline-end'] = 'auto';
+				else styleObj['float'] = attrs.align;
+			} else styleObj['text-align'] = attrs.align;
 			attrs.align = void 0;
 		}
 		// 压缩 style
@@ -308,10 +308,12 @@ MpHtmlParser.prototype.remove = function(node) {
 	// 处理 svg
 	var handleSvg = () => {
 		var src = this.data.substring(j, this.i + 1);
-		if (!node.attrs.xmlns) src = ' xmlns="http://www.w3.org/2000/svg"' + src;
-		var i = j;
-		while (this.data[j] != '<') j--;
-		src = this.data.substring(j, i).replace("viewbox", "viewBox") + src;
+		node.attrs.xmlns = 'http://www.w3.org/2000/svg';
+		for (var key in node.attrs) {
+			if (key == 'viewbox') src = ` viewBox="${node.attrs.viewbox}"` + src;
+			else if (key != 'style') src = ` ${key}="${node.attrs[key]}"` + src;
+		}
+		src = '<svg' + src;
 		var parent = this.parent();
 		if (node.attrs.width == '100%' && parent && (parent.attrs.style || '').includes('inline'))
 			parent.attrs.style = 'width:300px;max-width:100%;' + parent.attrs.style;
@@ -319,7 +321,7 @@ MpHtmlParser.prototype.remove = function(node) {
 			name: 'img',
 			attrs: {
 				src: 'data:image/svg+xml;utf8,' + src.replace(/#/g, '%23'),
-				style: (/vertical[^;]+/.exec(node.attrs.style) || []).shift(),
+				style: node.attrs.style,
 				ignore: 'T'
 			}
 		})
@@ -400,35 +402,78 @@ MpHtmlParser.prototype.popNode = function(node) {
 				}
 		}
 	}
-	// 处理表格的边框
+	// 处理表格
 	if (node.name == 'table') {
-		var padding = attrs.cellpadding,
-			spacing = attrs.cellspacing,
-			border = attrs.border;
+		var padding = parseFloat(attrs.cellpadding),
+			spacing = parseFloat(attrs.cellspacing),
+			border = parseFloat(attrs.border);
 		if (node.c) {
-			this.bubble();
-			attrs.style = (attrs.style || '') + ';display:table';
-			if (!padding) padding = 2;
-			if (!spacing) spacing = 2;
+			if (isNaN(padding)) padding = 2;
+			if (isNaN(spacing)) spacing = 2;
 		}
 		if (border) attrs.style = `border:${border}px solid gray;${attrs.style || ''}`;
-		if (spacing) attrs.style = `border-spacing:${spacing}px;${attrs.style || ''}`;
-		if (border || padding || node.c)
+		if (node.flag && node.c) {
+			// 有 colspan 或 rowspan 且含有链接的表格转为 grid 布局实现
+			attrs.style = `${attrs.style || ''};${spacing ? `;grid-gap:${spacing}px` : ';border-left:0;border-top:0'}`;
+			var row = 1,
+				col = 1,
+				colNum,
+				trs = [],
+				children = [],
+				map = {};
 			(function f(ns) {
-				for (var i = 0, n; n = ns[i]; i++) {
-					if (n.type == 'text') continue;
-					var style = n.attrs.style || '';
-					if (node.c && n.name[0] == 't') {
-						n.c = 1;
-						style += ';display:table-' + (n.name == 'th' || n.name == 'td' ? 'cell' : (n.name == 'tr' ? 'row' : 'row-group'));
-					}
-					if (n.name == 'th' || n.name == 'td') {
-						if (border) style = `border:${border}px solid gray;${style}`;
-						if (padding) style = `padding:${padding}px;${style}`;
-					} else f(n.children || []);
-					if (style) n.attrs.style = style;
+				for (var i = 0; i < ns.length; i++) {
+					if (ns[i].name == 'tr') trs.push(ns[i]);
+					else f(ns[i].children || []);
 				}
-			})(childs)
+			})(node.children)
+			for (let i = 0; i < trs.length; i++) {
+				for (let j = 0, td; td = trs[i].children[j]; j++) {
+					if (td.name == 'td' || td.name == 'th') {
+						while (map[row + '.' + col]) col++;
+						var cell = {
+							name: 'div',
+							c: 1,
+							attrs: {
+								style: (td.attrs.style || '') + (border ? `;border:${border}px solid gray` + (spacing ? '' :
+									';border-right:0;border-bottom:0') : '') + (padding ? `;padding:${padding}px` : '')
+							},
+							children: td.children
+						}
+						if (td.attrs.colspan) {
+							cell.attrs.style += ';grid-column-start:' + col + ';grid-column-end:' + (col + parseInt(td.attrs.colspan));
+							if (!td.attrs.rowspan) cell.attrs.style += ';grid-row-start:' + row + ';grid-row-end:' + (row + 1);
+							col += parseInt(td.attrs.colspan) - 1;
+						}
+						if (td.attrs.rowspan) {
+							cell.attrs.style += ';grid-row-start:' + row + ';grid-row-end:' + (row + parseInt(td.attrs.rowspan));
+							if (!td.attrs.colspan) cell.attrs.style += ';grid-column-start:' + col + ';grid-column-end:' + (col + 1);
+							for (var k = 1; k < td.attrs.rowspan; k++) map[(row + k) + '.' + col] = 1;
+						}
+						children.push(cell);
+						col++;
+					}
+				}
+				if (!colNum) {
+					colNum = col - 1;
+					attrs.style += `;grid-template-columns:repeat(${colNum},auto)`
+				}
+				col = 1;
+				row++;
+			}
+			node.children = children;
+		} else {
+			attrs.style = `border-spacing:${spacing}px;${attrs.style || ''}`;
+			if (border || padding)
+				(function f(ns) {
+					for (var i = 0, n; n = ns[i]; i++) {
+						if (n.name == 'th' || n.name == 'td') {
+							if (border) n.attrs.style = `border:${border}px solid gray;${n.attrs.style || ''}`;
+							if (padding) n.attrs.style = `padding:${padding}px;${n.attrs.style || ''}`;
+						} else f(n.children || []);
+					}
+				})(childs)
+		}
 		if (this.options.autoscroll) {
 			var table = Object.assign({}, node);
 			node.name = 'div';

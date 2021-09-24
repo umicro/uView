@@ -9,6 +9,10 @@
 			// 注意，需要在/main.js中实例化Vue之后引入如下(详见文档说明)：
 			// import httpInterceptor from '@/common/http.interceptor.js'
 			// Vue.use(httpInterceptor, app)
+			// process.env.VUE_APP_PLATFORM 为通过js判断平台名称的方法，结果分别如下：
+			/**
+			 * h5，app-plus(nvue下也为app-plus)，mp-weixin，mp-alipay......
+			 */
 		},
 	}
 </script>
@@ -16,5 +20,4 @@
 <style lang="scss">
 	@import "uview-ui/index.scss";
 	@import "common/demo.scss";
-	/*每个页面公共css */
 </style>

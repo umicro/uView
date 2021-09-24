@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-number-box v-model="value" :bg-color="bgColor" :color="color" :min="0"
-				:step="step" :disabled="disabled" @change="change"></u-number-box>
+				:step="step" :disabled="disabled" @change="change" @focus="focus"></u-number-box>
 			</view>
 		</view>
 		<view class="u-config-wrap">
@@ -13,19 +13,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">初始值</view>
-				<u-subsection vibrateShort :list="[1, 5, 18]" @change="valueChange"></u-subsection>
+				<u-subsection :list="[1, 5, 18]" @change="valueChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否禁用</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">步进值</view>
-				<u-subsection vibrateShort :list="[1, 3, 5, 8]" @change="stepChange"></u-subsection>
+				<u-subsection :list="[1, 3, 5, 8]" @change="stepChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -64,6 +64,9 @@ export default {
 		},
 		change(e) {
 			//console.log(e.value);
+		},
+		focus() {
+			console.log('focus');
 		}
 	}
 };

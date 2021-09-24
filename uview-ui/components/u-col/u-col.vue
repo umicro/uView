@@ -9,7 +9,7 @@
 		justifyContent: uJustify,
 		textAlign: textAlign
 	}"
-	 @tap.stop.prevent="click">
+	 @tap="click">
 		<slot></slot>
 	</view>
 </template>
@@ -51,6 +51,11 @@
 			textAlign: {
 				type: String,
 				default: 'left'
+			},
+			// 是否阻止事件传播
+			stop: {
+				type: Boolean,
+				default: true
 			}
 		},
 		data() {
@@ -81,7 +86,7 @@
 			}
 		},
 		methods: {
-			click() {
+			click(e) {
 				this.$emit('click');
 			}
 		}
