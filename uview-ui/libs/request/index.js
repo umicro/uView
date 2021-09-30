@@ -28,8 +28,8 @@ class Request {
 
 		return new Promise((resolve, reject) => {
 			options.complete = (response) => {
-				// 请求返回后，隐藏loading(如果请求返回快的话，可能会没有loading)
-				uni.hideLoading();
+				// 如果请求在loadingTime时间以外才响应，才需要隐藏loading(如果请求返回快的话，可能会没有loading)
+				this.config.showLoading && !this.config.timer && uni.hideLoading();
 				// 清除定时器，如果请求回来了，就无需loading
 				clearTimeout(this.config.timer);
 				this.config.timer = null;
