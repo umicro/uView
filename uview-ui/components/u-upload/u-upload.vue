@@ -21,7 +21,7 @@
 				<u-icon class="u-icon" :name="delIcon" size="20" :color="delColor"></u-icon>
 			</view>
 			<u-line-progress
-				v-if="showProgress && item.progress > 0 && item.progress !=100 && !item.error"
+				v-if="showProgress && item.progress > 0 && item.progress != 100 && !item.error"
 				:show-percent="false"
 				height="16"
 				class="u-progress"
