@@ -273,7 +273,7 @@
 			// 校验数据
 			validation(trigger, callback = () => {}) {
 				// 检验之间，先获取需要校验的值
-				this.fieldValue = this.parent.model[this.prop];
+				this.fieldValue = this.getFieldValue();
 				// blur和change是否有当前方式的校验规则
 				let rules = this.getFilteredRule(trigger);
 				// 判断是否有验证规则，如果没有规则，也调用回调方法，否则父组件u-form会因为
@@ -298,6 +298,19 @@
 					// 调用回调方法
 					callback(this.validateMessage);
 				});
+			},
+
+			/**
+			 * 检验之前，先获取需要校验的值
+			 * 解决：当form属性嵌套对象时未取到值的问题
+			 * fix: [#I2AYUY](https://gitee.com/xuqu/uView/issues/I2AYUY)
+			 */
+			getFieldValue() {
+				const fields = this.prop.split('.');
+				const value = fields.reduce((pre, cur) => {
+					return pre && pre[cur];
+				}, this.parent.model);
+				return value;
 			},
 
 			// 清空当前的u-form-item
