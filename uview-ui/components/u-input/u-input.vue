@@ -50,6 +50,7 @@
 			:selection-end="uSelectionEnd"
 			:selection-start="uSelectionStart"
 			:show-confirm-bar="showConfirmbar"
+			:adjust-position="adjustPosition"
 			@focus="onFocus"
 			@blur="handleBlur"
 			@input="handleInput"
@@ -213,6 +214,11 @@ export default {
 		showConfirmbar:{
 			type:Boolean,
 			default:true
+		},
+		// 弹出键盘时是否自动调节高度，uni-app默认值是true
+		adjustPosition: {
+			type: Boolean,
+			default: true
 		}
 	},
 	data() {
