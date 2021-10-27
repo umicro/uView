@@ -4,13 +4,13 @@
 <h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView</h3>
 <h3 align="center">多平台快速开发的UI框架</h3>
 
-[![star](https://gitee.com/xuqu/uView/badge/star.svg?theme=gvp)](https://gitee.com/xuqu/uView/stargazers)
-[![fork](https://gitee.com/xuqu/uView/badge/fork.svg?theme=gvp)](https://gitee.com/xuqu/uView/members)
-[![stars](https://img.shields.io/github/stars/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/YanxinNet/uView)
-[![forks](https://img.shields.io/github/forks/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/YanxinNet/uView)
-[![issues](https://img.shields.io/github/issues/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/YanxinNet/uView/issues)
+[![star](https://gitee.com/umicro/uView/badge/star.svg?theme=gvp)](https://gitee.com/umicro/uView/stargazers)
+[![fork](https://gitee.com/umicro/uView/badge/fork.svg?theme=gvp)](https://gitee.com/umicro/uView/members)
+[![stars](https://img.shields.io/github/stars/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
+[![forks](https://img.shields.io/github/forks/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/umicro/uView)
+[![issues](https://img.shields.io/github/issues/YanxinNet/uView?style=flat-square&logo=GitHub)](https://github.com/umicro/uView/issues)
 [![Website](https://img.shields.io/badge/uView-up-blue?style=flat-square)](https://uviewui.com)
-[![release](https://img.shields.io/github/v/release/YanxinNet/uView?style=flat-square)](https://gitee.com/xuqu/uView/releases)
+[![release](https://img.shields.io/github/v/release/YanxinNet/uView?style=flat-square)](https://gitee.com/umicro/uView/releases)
 [![license](https://img.shields.io/github/license/YanxinNet/uView?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
 ## 说明
