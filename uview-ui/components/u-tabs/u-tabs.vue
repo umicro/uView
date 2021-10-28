@@ -29,7 +29,8 @@
 	 * @property {String Number} height 导航栏的高度，单位rpx（默认80）
 	 * @property {String Number} font-size tab文字大小，单位rpx（默认30）
 	 * @property {String Number} duration 滑块移动一次所需的时间，单位秒（默认0.5）
-	 * @property {String} active-color 滑块和激活tab文字的颜色（默认#2979ff）
+	 * @property {String} active-text-color 激活tab文字的颜色（默认#2979ff）
+ 	 * @property {String} active-bar-color 滑块激活的颜色（默认#2979ff）
 	 * @property {String} inactive-color tabs文字颜色（默认#303133）
 	 * @property {String Number} bar-width 滑块宽度，单位rpx（默认40）
 	 * @property {Object} active-item-style 活动tabs item的样式，对象形式
@@ -81,8 +82,13 @@
 				type: [String, Number],
 				default: 0.5
 			},
-			// 选中项的主题颜色
-			activeColor: {
+			// 选中项的文字颜色
+			activeTextColor: {
+				type: String,
+				default: '#2979ff'
+			},
+			// 选中项的滑块颜色
+			activeBarColor: {
 				type: String,
 				default: '#2979ff'
 			},
@@ -200,7 +206,7 @@
 					transform: `translate(${this.scrollBarLeft}px, -100%)`,
 					// 滑块在页面渲染后第一次滑动时，无需动画效果
 					'transition-duration': `${this.barFirstTimeMove ? 0 : this.duration }s`,
-					'background-color': this.activeColor,
+					'background-color': this.activeBarColor,
 					height: this.barHeight + 'rpx',
 					opacity: this.barFirstTimeMove ? 0 : 1,
 					// 设置一个很大的值，它会自动取能用的最大值，不用高度的一半，是因为高度可能是单数，会有小数出现
@@ -224,7 +230,7 @@
 					// 字体加粗
 					if (index == this.currentIndex && this.bold) style.fontWeight = 'bold';
 					if (index == this.currentIndex) {
-						style.color = this.activeColor;
+						style.color = this.activeTextColor;
 						// 给选中的tab item添加外部自定义的样式
 						style = Object.assign(style, this.activeItemStyle);
 					} else {
