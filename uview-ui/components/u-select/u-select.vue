@@ -36,7 +36,7 @@
 					</view>
 				</view>
 				<view class="u-select__body">
-					<picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend">
+					<picker-view @change="columnChange" class="u-select__body__picker-view" :value="defaultSelector" @pickstart="pickstart" @pickend="pickend" v-if="value">
 						<picker-view-column v-for="(item, index) in columnData" :key="index">
 							<view class="u-select__body__picker-view__item" v-for="(item1, index1) in item" :key="index1">
 								<view class="u-line-1">{{ item1[labelName] }}</view>
