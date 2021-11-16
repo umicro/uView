@@ -340,6 +340,8 @@ export default {
 			if (this.moving) return;
 			// #endif
 			if (event) this.$emit(event, this.selectValue);
+			// 重置default-value默认值
+			this.$set(this, 'defaultSelector', [0]);
 			this.close();
 		},
 		selectHandler() {
