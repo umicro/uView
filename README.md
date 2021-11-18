@@ -61,10 +61,10 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 
 ## 链接
 
-- [官方文档](https://uviewui.com/)
-- [更新日志](https://uviewui.com/components/changelog.html)
-- [升级指南](https://uviewui.com/components/changelog.html)
-- [关于我们](https://uviewui.com/cooperation/about.html)
+- [官方文档](https://v1.uviewui.com/)
+- [更新日志](https://v1.uviewui.com/components/changelog.html)
+- [升级指南](https://v1.uviewui.com/components/changelog.html)
+- [关于我们](https://v1.uviewui.com/cooperation/about.html)
 
 ## 交流反馈
 

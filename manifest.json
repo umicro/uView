@@ -93,7 +93,7 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "wxc256e348c4032ebd",
+        "appid" : "",
         "setting" : {
             "urlCheck" : true,
             "es6" : false,
@@ -121,7 +121,7 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true,
-        "appid" : "tt2bc55d78b4ff50bf"
+        "appid" : ""
     },
     "h5" : {
         "template" : "template.h5.html",
