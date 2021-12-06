@@ -39,7 +39,7 @@
 				style.padding = this.parent.padding;
 				style.borderBottom = `solid 1px ${this.parent.borderColor}`;
 				style.borderRight = `solid 1px ${this.parent.borderColor}`;
-				Object.assign(style, this.parent.style);
+				Object.assign(style, this.parent.thStyle);
 				this.thStyle = style;
 			}
 		}
