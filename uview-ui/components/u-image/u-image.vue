@@ -172,6 +172,7 @@ export default {
 					this.loading = false;
 				} else {
 					this.isError = false;
+					this.loading = true;
 				}
 			}
 		}
