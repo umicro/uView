@@ -278,12 +278,13 @@ export default {
 			let columnIndex = e.detail.value;
 			// 由于后面是需要push进数组的，所以需要先清空数组
 			this.selectValue = [];
+			this.defaultSelector = columnIndex;
 			if(this.mode == 'mutil-column-auto') {
 				// 对比前后两个数组，寻找变更的是哪一列，如果某一个元素不同，即可判定该列发生了变化
 				this.lastSelectIndex.map((val, idx) => {
 					if (val != columnIndex[idx]) index = idx;
 				});
-				this.defaultSelector = columnIndex;
+				
 				for (let i = index + 1; i < this.columnNum; i++) {
 					// 当前变化列的下一列的数据，需要获取上一列的数据，同时需要指定是上一列的第几个的children，再往后的
 					// 默认是队列的第一个为默认选项
