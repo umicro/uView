@@ -334,6 +334,8 @@ export default {
 		},
 		close() {
 			this.$emit('input', false);
+			// 重置default-value默认值
+			this.$set(this, 'defaultSelector', [0]);
 		},
 		// 点击确定或者取消
 		getResult(event = null) {
