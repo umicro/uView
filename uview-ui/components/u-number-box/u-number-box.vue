@@ -10,7 +10,7 @@
 		</view>
 		<input :disabled="disabledInput || disabled" :cursor-spacing="getCursorSpacing" :class="{ 'u-input-disabled': disabled }"
 		    v-model="inputVal" class="u-number-input" @blur="onBlur" @focus="onFocus"
-		    type="number" :style="{
+		    :type="positiveInteger?'number':'digit'" :style="{
 				color: color,
 				fontSize: size + 'rpx',
 				background: bgColor,
