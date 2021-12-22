@@ -1,7 +1,8 @@
 {
-	"easycom": {
-		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
-	},
+//	"easycom": {
+//	// 如果您是通过uni_modules形式引入uView，可以忽略此配置
+//		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+//	},
 	// "condition": { //模式配置，仅开发期间生效
 	// 	"current": 0, //当前激活的模式(list 的索引项)
 	// 	"list": [{
@@ -20,7 +21,7 @@
 		},
 		// avatarCropper-头像裁剪
 		{
-			"path": "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+			"path": "uni_modules/uview-ui/components/u-avatar-cropper/u-avatar-cropper",
 			"style": {
 				"navigationBarTitleText": "头像裁剪",
 				"navigationBarBackgroundColor": "#000000"
@@ -42,7 +43,7 @@
 		},
 		// fullScreen-压窗屏
 		{
-			"path": "uview-ui/components/u-full-screen/u-full-screen",
+			"path": "uni_modules/uview-ui/components/u-full-screen/u-full-screen",
 			"style": {
 				"navigationStyle": "custom",
 				"app-plus": {
@@ -760,7 +761,7 @@
 					}
 				},
 				// waterfall瀑布流
-				// #ifndef MP-TOUTIAO 
+				// #ifndef MP-TOUTIAO
 				{
 					"path": "waterfall/index",
 					"style": {

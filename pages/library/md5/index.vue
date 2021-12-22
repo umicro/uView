@@ -21,7 +21,7 @@
 </template>
 
 <script>
-	import md5Libs from "uview-ui/libs/function/md5";
+	import md5Libs from "@/uni_modules/uview-ui/libs/function/md5";
 	export default {
 		data() {
 			return {

@@ -18,6 +18,6 @@
 </script>
 
 <style lang="scss">
-	@import "uview-ui/index.scss";
+	@import "@/uni_modules/uview-ui/index.scss";
 	@import "common/demo.scss";
 </style>

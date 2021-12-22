@@ -9,7 +9,7 @@ App.mpType = 'app';
 Vue.prototype.vuePrototype = '枣红';
 
 // 引入全局uView
-import uView from 'uview-ui';
+import uView from '@/uni_modules/uview-ui';
 Vue.use(uView);
 
 // 此处为演示vuex使用，非uView的功能部分
@@ -20,7 +20,7 @@ let vuexStore = require('@/store/$u.mixin.js');
 Vue.mixin(vuexStore);
 
 // 引入uView对小程序分享的mixin封装
-let mpShare = require('uview-ui/libs/mixin/mpShare.js');
+let mpShare = require('@/uni_modules/uview-ui/libs/mixin/mpShare.js');
 Vue.mixin(mpShare);
 
 // i18n部分的配置
