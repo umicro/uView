@@ -2,7 +2,7 @@
     "name" : "uView",
     "appid" : "__UNI__6655525",
     "description" : "多平台快速开发的UI框架",
-    "versionName" : "1.8.4",
+    "versionName" : "1.8.5",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
