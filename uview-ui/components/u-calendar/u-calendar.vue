@@ -288,6 +288,14 @@
 			},
 			init() {
 				let now = new Date();
+				let minDate = new Date(this.minDate);
+				if (now < minDate) {
+					now = minDate;
+				}
+				let maxDate = new Date(this.maxDate);
+				if (now > maxDate) {
+					now = maxDate;
+				}
 				this.year = now.getFullYear();
 				this.month = now.getMonth() + 1;
 				this.day = now.getDate();
