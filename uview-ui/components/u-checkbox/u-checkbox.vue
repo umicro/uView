@@ -4,6 +4,7 @@
 			<u-icon class="u-checkbox__icon-wrap__icon" name="checkbox-mark" :size="checkboxIconSize" :color="iconColor"/>
 		</view>
 		<view class="u-checkbox__label" @tap="onClickLabel" :style="{
+			width: isWrap?'100%':'auto',
 			fontSize: $u.addUnit(labelSize)
 		}">
 			<slot />
@@ -88,6 +89,10 @@
 			this.parent && this.parent.children.push(this);
 		},
 		computed: {
+			// 是否占整行，如果父组件u-checkbox-group需要换行的话，子组件label应该占整行
+			isWrap() {
+				return this.parent ? this.parent.wrap : false;
+			},
 			// 是否禁用，如果父组件u-checkbox-group禁用的话，将会忽略子组件的配置
 			isDisabled() {
 				return this.disabled !== '' ? this.disabled : this.parent ? this.parent.disabled : false;
