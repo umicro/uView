@@ -28,6 +28,7 @@
 			:selection-start="uSelectionStart"
 			:cursor-spacing="getCursorSpacing"
 			:show-confirm-bar="showConfirmbar"
+			:disable-default-padding="disableDefaultPadding"
 			@input="handleInput"
 			@blur="handleBlur"
 			@focus="onFocus"
@@ -213,6 +214,11 @@ export default {
 		showConfirmbar:{
 			type:Boolean,
 			default:true
+		}
+		// textarea是否去掉 iOS 下的默认内边距
+		disableDefaultPadding:{
+		    type:Boolean,
+			default:false
 		}
 	},
 	data() {
