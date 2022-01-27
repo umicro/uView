@@ -301,8 +301,8 @@
 			},
 
 			// 清空当前的u-form-item
-			resetField() {
-				this.parent.model[this.prop] = this.initialValue;
+			resetField(model) {//传入要操作表单的model对象
+				model[this.prop] = this.initialValue;
 				// 设置为`success`状态，只是为了清空错误标记
 				this.validateState = 'success';
 			}
@@ -323,7 +323,8 @@
 					this.parent.fields.push(this);
 					this.errorType = this.parent.errorType;
 					// 设置初始值
-					this.initialValue = this.fieldValue;
+					// this.initialValue = this.fieldValue;// 此句无法获取初始化值，永远为空
+					this.initialValue = this.parent.model[this.prop];//获取初始值
 					// 添加表单校验，这里必须要写在$nextTick中，因为u-form的rules是通过ref手动传入的
 					// 不在$nextTick中的话，可能会造成执行此处代码时，父组件还没通过ref把规则给u-form，导致规则为空
 					this.$nextTick(() => {

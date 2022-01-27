@@ -91,9 +91,9 @@ export default {
 			this.rules = rules;
 		},
 		// 清空所有u-form-item组件的内容，本质上是调用了u-form-item组件中的resetField()方法
-		resetFields() {
+		resetFields(model) {//传入操作表单model
 			this.fields.map(field => {
-				field.resetField();
+				field.resetField(model);
 			});
 		},
 		// 校验全部数据
