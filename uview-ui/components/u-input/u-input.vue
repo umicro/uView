@@ -28,6 +28,7 @@
 			:selection-start="uSelectionStart"
 			:cursor-spacing="getCursorSpacing"
 			:show-confirm-bar="showConfirmbar"
+            :adjust-position="uadjustPosition"
 			@input="handleInput"
 			@blur="handleBlur"
 			@focus="onFocus"
@@ -50,6 +51,7 @@
 			:selection-end="uSelectionEnd"
 			:selection-start="uSelectionStart"
 			:show-confirm-bar="showConfirmbar"
+            :adjust-position="uadjustPosition"
 			@focus="onFocus"
 			@blur="handleBlur"
 			@input="handleInput"
@@ -98,6 +100,7 @@ import Emitter from '../../libs/util/emitter.js';
  * @property {String} border-color 输入框的边框颜色(默认#dcdfe6)
  * @property {Boolean} auto-height 是否自动增高输入区域，type为textarea时有效(默认true)
  * @property {String Number} height 高度，单位rpx(text类型时为70，textarea时为100)
+ * @property {Boolean} uadjustPosition 是否键盘弹出时向上顶起页面(默认true)
  * @example <u-input v-model="value" :type="type" :border="border" />
  */
 export default {
@@ -213,7 +216,12 @@ export default {
 		showConfirmbar:{
 			type:Boolean,
 			default:true
-		}
+        },
+        //是否开启弹出键盘上推页面
+        uadjustPosition:{
+            type:Boolean,
+            default:true
+        }
 	},
 	data() {
 		return {
@@ -320,7 +328,7 @@ export default {
 		},
 		onFocus(event) {
 			this.focused = true;
-			this.$emit('focus');
+			this.$emit('focus',event);
 		},
 		onConfirm(e) {
 			this.$emit('confirm', e.detail.value);
