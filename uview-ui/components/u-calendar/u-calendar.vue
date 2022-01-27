@@ -1,5 +1,5 @@
 <template>
-	<u-popup closeable :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto"
+	<u-popup :maskCloseAble="maskCloseAble" mode="bottom" :popup="false" v-model="value" length="auto"
 	 :safeAreaInsetBottom="safeAreaInsetBottom" @close="close" :z-index="uZIndex" :border-radius="borderRadius" :closeable="closeable">
 		<view class="u-calendar">
 			<view class="u-calendar__header">
@@ -34,7 +34,9 @@
 				<view class="u-calendar__content__item" :class="{
 					'u-hover-class':openDisAbled(year,month,index+1),
 					'u-calendar__content--start-date': (mode == 'range' && startDate==`${year}-${month}-${index+1}`) || mode== 'date',
-					'u-calendar__content--end-date':(mode== 'range' && endDate==`${year}-${month}-${index+1}`) || mode == 'date'
+					'u-calendar__content--start-date_circle': (mode == 'range' && startDate==`${year}-${month}-${index+1}`) || mode== 'date',
+					'u-calendar__content--end-date':(mode== 'range' && endDate==`${year}-${month}-${index+1}` && activeShape === 'circle') || mode == 'date',
+					'u-calendar__content--end-date_circle':(mode== 'range' && endDate==`${year}-${month}-${index+1}` && activeShape === 'circle') || mode == 'date'
 				}" :style="{backgroundColor: getColor(index,1)}" v-for="(item, index) in daysArr" :key="index"
 				 @tap="dateClick(index)">
 					<view class="u-calendar__content__item__inner" :style="{color: getColor(index,2)}">
@@ -77,6 +79,7 @@
 	 * @property {String} year-arrow-color 年份切换按钮箭头颜色(默认#909399)
 	 * @property {String} color 日期字体的默认颜色(默认#303133)
 	 * @property {String} active-bg-color 起始/结束日期按钮的背景色(默认#2979ff)
+	 * @property {String} active-shape 起始/结束日期按钮的形状(默认 'square')
 	 * @property {String Number} z-index 弹出时的z-index值(默认10075)
 	 * @property {String} active-color 起始/结束日期按钮的字体颜色(默认#ffffff)
 	 * @property {String} range-bg-color 起始/结束日期之间的区域的背景颜色(默认rgba(41,121,255,0.13))
@@ -88,7 +91,7 @@
 	 * @property {Boolean} closeable 是否显示右上角的关闭图标(默认true)
 	 * @example <u-calendar v-model="show" :mode="mode"></u-calendar>
 	 */
-	
+
 	export default {
 		name: 'u-calendar',
 		props: {
@@ -150,6 +153,10 @@
 				type: [Number, String],
 				default: ''
 			},
+			defaultValue: {
+				type: [Array, String],
+				default: ''
+			},
 			// 弹窗顶部左右两边的圆角值
 			borderRadius: {
 				type: [String, Number],
@@ -170,6 +177,10 @@
 				type: String,
 				default: '#303133'
 			},
+			activeShape: {
+				type: String,
+				default: 'square'
+			},
 			// 选中|起始结束日期背景色
 			activeBgColor: {
 				type: String,
@@ -184,7 +195,7 @@
 			rangeBgColor: {
 				type: String,
 				default: 'rgba(41,121,255,0.13)'
-			}, 
+			},
 			// 范围内日期字体颜色
 			rangeColor: {
 				type: String,
@@ -229,10 +240,10 @@
 		data() {
 			return {
 				// 星期几,值为1-7
-				weekday: 1, 
+				weekday: 1,
 				weekdayArr:[],
 				// 当前月有多少天
-				days: 0, 
+				days: 0,
 				daysArr:[],
 				showTitle: '',
 				year: 2020,
@@ -255,6 +266,9 @@
 			};
 		},
 		computed: {
+			rangeChange() {
+				return `${this.minDate}-${this.maxDate}`;
+			},
 			dataChange() {
 				return `${this.mode}-${this.minDate}-${this.maxDate}`;
 			},
@@ -264,12 +278,16 @@
 			}
 		},
 		watch: {
-			dataChange(val) {
-				this.init()
+			rangeChange: {
+				immediate: true,
+				handler() {
+					this.min = this.initDate(this.minDate);
+					this.max = this.initDate(this.maxDate || this.today);
+				}
+			},
+			value(val) {
+				val && this.init()
 			}
-		},
-		created() {
-			this.init()
 		},
 		methods: {
 			getColor(index, type) {
@@ -288,21 +306,42 @@
 			},
 			init() {
 				let now = new Date();
-				this.year = now.getFullYear();
-				this.month = now.getMonth() + 1;
-				this.day = now.getDate();
 				this.today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
-				this.activeDate = this.today;
-				this.min = this.initDate(this.minDate);
-				this.max = this.initDate(this.maxDate || this.today);
-				this.startDate = "";
-				this.startYear = 0;
-				this.startMonth = 0;
-				this.startDay = 0;
-				this.endYear = 0;
-				this.endMonth = 0;
-				this.endDay = 0;
-				this.endDate = "";
+
+				if (this.mode === 'date') {
+					const value = this.defaultValue ? new Date(this.defaultValue.replace(/\-/g, '/')) : now;
+					this.year = value.getFullYear();
+					this.month = value.getMonth() + 1;
+					this.day = value.getDate();
+					this.activeDate = this.defaultValue || this.today;
+					this.startDate = "";
+					this.startYear = 0;
+					this.startMonth = 0;
+					this.startDay = 0;
+					this.endYear = 0;
+					this.endMonth = 0;
+					this.endDay = 0;
+					this.endDate = "";
+				}
+
+				if (this.mode === 'range') {
+					const [startDate = '', endDate = ''] = this.defaultValue;
+					const startTime = startDate ? new Date(startDate.replace(/\-/g, '/')) : now;
+					const endTime = endDate && new Date(endDate.replace(/\-/g, '/'));
+					this.year = startTime.getFullYear();
+					this.month = startTime.getMonth() + 1;
+					this.day = startTime.getDate();
+					this.activeDate = startDate;
+					this.startDate = startDate;
+					this.startYear = startTime.getFullYear();
+					this.startMonth = startTime.getMonth() + 1;
+					this.startDay = startTime.getDate();
+					this.endYear = endDate ? endTime.getFullYear() : 0;
+					this.endMonth = endDate ? (endTime.getMonth() + 1) : 0;
+					this.endDay = endDate ? endTime.getDate() : 0;
+					this.endDate = endDate;
+				}
+
 				this.isStart = true;
 				this.changeData();
 			},
@@ -397,6 +436,7 @@
 					let date = `${this.year}-${this.month}-${day}`;
 					if (this.mode == 'date') {
 						this.activeDate = date;
+						this.$emit('active-change', date);
 					} else {
 						let compare = new Date(date.replace(/\-/g, '/')).getTime() < new Date(this.startDate.replace(/\-/g, '/')).getTime()
 						if (this.isStart || compare) {
@@ -417,6 +457,7 @@
 							this.endDay = this.day;
 							this.isStart = true;
 						}
+						this.$emit('active-change', [this.startDate, this.endDate]);
 					}
 				}
 			},
@@ -488,17 +529,17 @@
 
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-calendar {
 		color: $u-content-color;
-		
+
 		&__header {
 			width: 100%;
 			box-sizing: border-box;
 			font-size: 30rpx;
 			background-color: #fff;
 			color: $u-main-color;
-			
+
 			&__text {
 				margin-top: 30rpx;
 				padding: 0 60rpx;
@@ -507,14 +548,14 @@
 				align-items: center;
 			}
 		}
-		
+
 		&__action {
 			padding: 40rpx 0 40rpx 0;
-			
+
 			&__icon {
 				margin: 0 16rpx;
 			}
-			
+
 			&__text {
 				padding: 0 16rpx;
 				color: $u-main-color;
@@ -523,20 +564,20 @@
 				font-weight: bold;
 			}
 		}
-	
+
 		&__week-day {
 			@include vue-flex;
 			align-items: center;
 			justify-content: center;
 			padding: 6px 0;
 			overflow: hidden;
-			
+
 			&__text {
 				flex: 1;
 				text-align: center;
 			}
 		}
-	
+
 		&__content {
 			width: 100%;
 			@include vue-flex;
@@ -545,17 +586,25 @@
 			box-sizing: border-box;
 			background-color: #fff;
 			position: relative;
-			
+
 			&--end-date {
 				border-top-right-radius: 8rpx;
 				border-bottom-right-radius: 8rpx;
 			}
-			
+			&--end-date_circle {
+				border-top-right-radius: 100%;
+				border-bottom-right-radius: 100%;
+			}
+
 			&--start-date {
 				border-top-left-radius: 8rpx;
 				border-bottom-left-radius: 8rpx;
 			}
-			
+			&--start-date_circle {
+				border-top-left-radius: 100%;
+				border-bottom-left-radius: 100%;
+			}
+
 			&__item {
 				width: 14.2857%;
 				@include vue-flex;
@@ -565,7 +614,7 @@
 				overflow: hidden;
 				position: relative;
 				z-index: 2;
-				
+
 				&__inner {
 					height: 84rpx;
 					@include vue-flex;
@@ -575,7 +624,7 @@
 					font-size: 32rpx;
 					position: relative;
 					border-radius: 50%;
-					
+
 					&__desc {
 						width: 100%;
 						font-size: 24rpx;
@@ -588,7 +637,7 @@
 						bottom: 2rpx;
 					}
 				}
-				
+
 				&__tips {
 					width: 100%;
 					font-size: 24rpx;
@@ -602,7 +651,7 @@
 					z-index: 2;
 				}
 			}
-			
+
 			&__bg-month {
 				position: absolute;
 				font-size: 130px;
@@ -614,7 +663,7 @@
 				z-index: 1;
 			}
 		}
-	
+
 		&__bottom {
 			width: 100%;
 			@include vue-flex;
@@ -626,11 +675,11 @@
 			box-sizing: border-box;
 			font-size: 24rpx;
 			color: $u-tips-color;
-			
+
 			&__choose {
 				height: 50rpx;
 			}
-			
+
 			&__btn {
 				width: 100%;
 			}
