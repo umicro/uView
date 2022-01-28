@@ -88,7 +88,7 @@
 	 * @property {Boolean} closeable 是否显示右上角的关闭图标(默认true)
 	 * @example <u-calendar v-model="show" :mode="mode"></u-calendar>
 	 */
-	
+
 	export default {
 		name: 'u-calendar',
 		props: {
@@ -184,7 +184,7 @@
 			rangeBgColor: {
 				type: String,
 				default: 'rgba(41,121,255,0.13)'
-			}, 
+			},
 			// 范围内日期字体颜色
 			rangeColor: {
 				type: String,
@@ -224,15 +224,20 @@
 			toolTip: {
 				type: String,
 				default: '选择日期'
+			},
+			// 默认选中值, 目前仅用于range模式，date模式未处理
+			defaulteDate: {
+				type:Array,
+				default:[]
 			}
 		},
 		data() {
 			return {
 				// 星期几,值为1-7
-				weekday: 1, 
+				weekday: 1,
 				weekdayArr:[],
 				// 当前月有多少天
-				days: 0, 
+				days: 0,
 				daysArr:[],
 				showTitle: '',
 				year: 2020,
@@ -264,6 +269,29 @@
 			}
 		},
 		watch: {
+            value(val) {
+                if(val){
+                    // 每次打开弹出更新默认选中
+                    if(this.mode == 'range' && this.defaulteDate.length == 2){
+                        const v = this.defaulteDate;
+                        const start = v[0].substring(0,v[0].indexOf(' '));
+                        const end = v[1].substring(0,v[1].indexOf(' '));
+                        // console.log(this.removeFormat(start),this.removeFormat(end));
+                        // 开始日期
+                        const start_time = new Date(start);
+                        this.startYear = start_time.getFullYear();
+                        this.startMonth = start_time.getMonth() + 1;
+                        this.startDay = start_time.getDate();
+                        // 结束日期
+                        const end_time = new Date(end);
+                        this.endYear = end_time.getFullYear();
+                        this.endMonth = end_time.getMonth() + 1;
+                        this.endDay = end_time.getDate();
+                        this.startDate = this.removeFormat(start);
+                        this.endDate = this.removeFormat(end);
+                    }
+                }
+            },
 			dataChange(val) {
 				this.init()
 			}
@@ -272,6 +300,15 @@
 			this.init()
 		},
 		methods: {
+			// 去除零
+			removeFormat(time) {
+                const date = time.split('-');
+                const v = [];
+                for(const d of date){
+                    v.push(Number(d));
+                }
+                return v.join('-');
+			},
 			getColor(index, type) {
 				let color = type == 1 ? '' : this.color;
 				let day = index + 1
@@ -488,17 +525,17 @@
 
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-calendar {
 		color: $u-content-color;
-		
+
 		&__header {
 			width: 100%;
 			box-sizing: border-box;
 			font-size: 30rpx;
 			background-color: #fff;
 			color: $u-main-color;
-			
+
 			&__text {
 				margin-top: 30rpx;
 				padding: 0 60rpx;
@@ -507,14 +544,14 @@
 				align-items: center;
 			}
 		}
-		
+
 		&__action {
 			padding: 40rpx 0 40rpx 0;
-			
+
 			&__icon {
 				margin: 0 16rpx;
 			}
-			
+
 			&__text {
 				padding: 0 16rpx;
 				color: $u-main-color;
@@ -523,20 +560,20 @@
 				font-weight: bold;
 			}
 		}
-	
+
 		&__week-day {
 			@include vue-flex;
 			align-items: center;
 			justify-content: center;
 			padding: 6px 0;
 			overflow: hidden;
-			
+
 			&__text {
 				flex: 1;
 				text-align: center;
 			}
 		}
-	
+
 		&__content {
 			width: 100%;
 			@include vue-flex;
@@ -545,17 +582,17 @@
 			box-sizing: border-box;
 			background-color: #fff;
 			position: relative;
-			
+
 			&--end-date {
 				border-top-right-radius: 8rpx;
 				border-bottom-right-radius: 8rpx;
 			}
-			
+
 			&--start-date {
 				border-top-left-radius: 8rpx;
 				border-bottom-left-radius: 8rpx;
 			}
-			
+
 			&__item {
 				width: 14.2857%;
 				@include vue-flex;
@@ -565,7 +602,7 @@
 				overflow: hidden;
 				position: relative;
 				z-index: 2;
-				
+
 				&__inner {
 					height: 84rpx;
 					@include vue-flex;
@@ -575,7 +612,7 @@
 					font-size: 32rpx;
 					position: relative;
 					border-radius: 50%;
-					
+
 					&__desc {
 						width: 100%;
 						font-size: 24rpx;
@@ -588,7 +625,7 @@
 						bottom: 2rpx;
 					}
 				}
-				
+
 				&__tips {
 					width: 100%;
 					font-size: 24rpx;
@@ -602,7 +639,7 @@
 					z-index: 2;
 				}
 			}
-			
+
 			&__bg-month {
 				position: absolute;
 				font-size: 130px;
@@ -614,7 +651,7 @@
 				z-index: 1;
 			}
 		}
-	
+
 		&__bottom {
 			width: 100%;
 			@include vue-flex;
@@ -626,11 +663,11 @@
 			box-sizing: border-box;
 			font-size: 24rpx;
 			color: $u-tips-color;
-			
+
 			&__choose {
 				height: 50rpx;
 			}
-			
+
 			&__btn {
 				width: 100%;
 			}

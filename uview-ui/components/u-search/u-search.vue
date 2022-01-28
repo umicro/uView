@@ -35,12 +35,13 @@
 					backgroundColor: bgColor,
 				}, inputStyle]"
 			/>
-			<view class="u-close-wrap" v-if="keyword && clearabled && focused" @tap="clear">
-				<u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
+			<!-- focused -->
+			<view class="u-close-wrap" v-if="keyword && clearabled " @tap="clear">
+				<u-icon class="u-clear-icon" custom-prefix="custom-icon" name="delete-icon" size="34" color="#c0c4cc"></u-icon>
 			</view>
 		</view>
-		<view :style="[actionStyle]" class="u-action" 
-			:class="[showActionBtn || show ? 'u-action-active' : '']" 
+		<view :style="[actionStyle]" class="u-action"
+			:class="[showActionBtn || show ? 'u-action-active' : '']"
 			@tap.stop.prevent="custom"
 		>{{ actionText }}</view>
 	</view>
@@ -295,7 +296,9 @@ export default {
 .u-content {
 	@include vue-flex;
 	align-items: center;
-	padding: 0 18rpx;
+	// padding: 0 18rpx;
+	// 左侧调整为20
+	padding: 0 18rpx 0 20rpx;
 	flex: 1;
 }
 
@@ -308,7 +311,9 @@ export default {
 	flex: 1;
 	font-size: 28rpx;
 	line-height: 1;
-	margin: 0 10rpx;
+	// margin: 0 10rpx;
+	// 调整左侧为16rpx
+	margin: 0 10rpx 0 16rpx;
 	color: $u-tips-color;
 }
 

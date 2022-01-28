@@ -6,32 +6,41 @@
 		}" :class="{
 			'u-border-top': borderTop
 		}">
-			<view class="u-tabbar__content__item" v-for="(item, index) in list" :key="index" :class="{
-				'u-tabbar__content__circle': midButton &&item.midButton
-			}" @tap.stop="clickHandler(index)" :style="{
-				backgroundColor: bgColor
-			}">
-				<view :class="[
-					midButton && item.midButton ? 'u-tabbar__content__circle__button' : 'u-tabbar__content__item__button'
-				]">
-					<u-icon
-						:size="midButton && item.midButton ? midButtonSize : iconSize"
-						:name="elIconPath(index)"
-						img-mode="scaleToFill"
-						:color="elColor(index)"
-						:custom-prefix="item.customIcon ? 'custom-icon' : 'uicon'"
-					></u-icon>
-					<u-badge :count="item.count" :is-dot="item.isDot"
-						v-if="item.count || item.isDot"
-						:offset="[-2, getOffsetRight(item.count, item.isDot)]"
-					></u-badge>
-				</view>
-				<view class="u-tabbar__content__item__text" :style="{
-					color: elColor(index)
-				}">
-					<text class="u-line-1">{{item.text}}</text>
-				</view>
-			</view>
+            <view class="u-tabbar__content__item" v-for="(item, index) in list" :key="index" :class="{
+                'u-tabbar__content__circle': midButton &&item.midButton
+            }" @tap.stop="clickHandler(index)" :style="{
+                backgroundColor: bgColor
+            }">
+                <view v-if="showIcon">
+                    <view :class="[
+                    midButton && item.midButton ? 'u-tabbar__content__circle__button' : 'u-tabbar__content__item__button'
+                    ]">
+                        <u-icon
+                            :size="midButton && item.midButton ? midButtonSize : iconSize"
+                            :name="elIconPath(index)"
+                            img-mode="scaleToFill"
+                            :color="elColor(index)"
+                            :custom-prefix="item.customIcon ? 'custom-icon' : 'uicon'"
+                        ></u-icon>
+                        <u-badge :count="item.count" :is-dot="item.isDot"
+                            v-if="item.count"
+                            :offset="[-2, getOffsetRight(item.count, item.isDot)]"
+                        ></u-badge>
+                    </view>
+                    <view class="u-tabbar__content__item__text" :style="{
+                        color: elColor(index)
+                    }">
+                        <text class="u-line-1">{{item.text}}</text>
+                    </view>
+                </view>
+                <view v-else>
+                    <view class="u-tabbar__content__item__text-only" :style="{
+                        color: elColor(index)
+                    }">
+                        <text class="u-line-1">{{item.text}}</text>
+                    </view>
+                </view>
+            </view>
 			<view v-if="midButton" class="u-tabbar__content__circle__border" :class="{
 				'u-border': borderTop,
 			}" :style="{
@@ -117,6 +126,11 @@
 				type: Boolean,
 				default: true
 			},
+            // 是否展示tab图标
+            showIcon:{
+                type:Boolean,
+                default: true
+            }
 		},
 		data() {
 			return {
@@ -231,6 +245,7 @@
 
 <style scoped lang="scss">
 	@import "../../libs/css/style.components.scss";
+
 	.u-fixed-placeholder {
 		/* #ifndef APP-NVUE */
 		box-sizing: content-box;
@@ -298,6 +313,19 @@
 					width: 100%;
 					text-align: center;
 				}
+
+                // 仅文字模式
+                &__text-only {
+                    color: $u-content-color;
+					font-size: 48rpx;
+					line-height: 50rpx;
+					// position: absolute;
+					// bottom: 14rpx;
+					// left: 50%;
+					// transform: translateX(-50%);
+					width: 100%;
+					text-align: center;
+                }
 			}
 
 			&__circle {

@@ -3,18 +3,25 @@
 		class="u-input"
 		:class="{
 			'u-input--border': border,
-			'u-input--error': validateState
+			'u-input--error': validateState,
+            'u-input--disabled': disabled
 		}"
 		:style="{
-			padding: `0 ${border ? 20 : 0}rpx`,
+			// 20 -> 32 增加默认边距为24rpx
+			padding: type == 'textarea' ?'0 15rpx': `0 ${border ? 16 : 0}rpx 0 ${border ? 24 : 0}rpx`,
 			borderColor: borderColor,
 			textAlign: inputAlign
 		}"
 		@tap.stop="inputClick"
 	>
+		<!-- :disable-default-padding="true" 针对IOS系统下textarea存在的默认边距进行禁用处理 -->
 		<textarea
 			v-if="type == 'textarea'"
 			class="u-input__input u-input__textarea"
+            :class="{
+                'u-input__input--disabled': disabled
+            }"
+			:disable-default-padding="true"
 			:style="[getStyle]"
 			:value="defaultValue"
 			:placeholder="placeholder"
@@ -33,9 +40,12 @@
 			@focus="onFocus"
 			@confirm="onConfirm"
 		/>
-		<input
+        <input
 			v-else
 			class="u-input__input"
+            :class="{
+                'u-input__input--disabled': disabled
+            }"
 			:type="type == 'password' ? 'text' : type"
 			:style="[getStyle]"
 			:value="defaultValue"
@@ -55,17 +65,21 @@
 			@input="handleInput"
 			@confirm="onConfirm"
 		/>
-		<view class="u-input__right-icon u-flex">
+		<view class="u-input__right-icon u-flex" :style="{height:`${height}rpx`}">
 			<view class="u-input__right-icon__clear u-input__right-icon__item" @tap="onClear" v-if="clearable && value != '' && focused">
-				<u-icon size="32" name="close-circle-fill" color="#c0c4cc"/>
+				<!-- 32 -> 28 清除按钮默认值修改为28,与全局表单删除icon样式一致 -->
+				<u-icon custom-prefix="custom-icon" size="28" name="delete-icon" color="#C8C8C8"/>
 			</view>
 			<view class="u-input__right-icon__clear u-input__right-icon__item" v-if="passwordIcon && type == 'password'">
-				<u-icon size="32" :name="!showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword"/>
+				<!-- 32 -> 26 password模式密码图标 -->
+				<u-icon  size="26" :name="!showPassword ? 'eye' : 'eye-fill'" color="#c0c4cc" @click="showPassword = !showPassword"/>
 			</view>
 			<view class="u-input__right-icon--select u-input__right-icon__item" v-if="type == 'select'" :class="{
 				'u-input__right-icon--select--reverse': selectOpen
 			}">
-				<u-icon name="arrow-down-fill" size="26" color="#c0c4cc"></u-icon>
+				<!-- 26 -> 12 默认值修改为12 -->
+				<!-- c0c4cc -> 909299 -->
+				<u-icon custom-prefix="custom-icon" name="arrow-down" size="12" color="#909299"></u-icon>
 			</view>
 		</view>
 	</view>
@@ -342,18 +356,26 @@ export default {
 	position: relative;
 	flex: 1;
 	@include vue-flex;
+	align-items: center;
 
 	&__input {
 		//height: $u-form-item-height;
 		font-size: 28rpx;
-		color: $u-main-color;
+		// color: $u-main-color;
+		color: #606266;
 		flex: 1;
+
+        &--disabled{
+            color: #ccc;
+            // padding-left: 8px; 禁用状态移除边距
+        }
 	}
 
 	&__textarea {
 		width: auto;
 		font-size: 28rpx;
-		color: $u-main-color;
+		// color: $u-main-color;
+		color: #606266;
 		padding: 10rpx 0;
 		line-height: normal;
 		flex: 1;
@@ -365,6 +387,13 @@ export default {
 		border: 1px solid $u-form-item-border-color;
 	}
 
+    &--disabled {
+        background-color: #f5f5f5;
+    	border-radius: 6rpx;
+    	border-radius: 4px;
+    	// border: 1px solid $u-form-item-border-color;
+    }
+
 	&--error {
 		border-color: $u-type-error!important;
 	}
@@ -372,7 +401,7 @@ export default {
 	&__right-icon {
 
 		&__item {
-			margin-left: 10rpx;
+			margin-left: 46rpx;
 		}
 
 		&--select {

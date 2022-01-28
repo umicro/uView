@@ -3,7 +3,7 @@
 		<block v-for="(n, i) in nodes" v-bind:key="i">
 			<!--图片-->
 			<view v-if="n.name=='img'" :class="'_img '+n.attrs.class" :style="n.attrs.style" :data-attrs="n.attrs" @tap.stop="imgtap">
-				<rich-text v-if="ctrl[i]!=0" :nodes="[{attrs:{src:loading&&(ctrl[i]||0)<2?loading:(lazyLoad&&!ctrl[i]?placeholder:(ctrl[i]==3?errorImg:n.attrs.src||'')),alt:n.attrs.alt||'',width:n.attrs.width||'',style:'-webkit-touch-callout:none;max-width:100%;display:block'+(n.attrs.height?';height:'+n.attrs.height:'')},name:'img'}]" />
+				<!-- <rich-text v-if="ctrl[i]!=0" :nodes="[{attrs:{src:loading&&(ctrl[i]||0)<2?loading:(lazyLoad&&!ctrl[i]?placeholder:(ctrl[i]==3?errorImg:n.attrs.src||'')),alt:n.attrs.alt||'',width:n.attrs.width||'',style:'-webkit-touch-callout:none;max-width:100%;display:block'+(n.attrs.height?';height:'+n.attrs.height:'')},name:'img'}]" /> -->
 				<image class="_image" :src="lazyLoad&&!ctrl[i]?placeholder:n.attrs.src" :lazy-load="lazyLoad"
 				 :show-menu-by-longpress="!n.attrs.ignore" :data-i="i" :data-index="n.attrs.i" data-source="img" @load="loadImg"
 				 @error="error" />
@@ -304,6 +304,10 @@
 		display: inline-block;
 		max-width: 100%;
 		overflow: hidden;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	/* #ifdef MP-WEIXIN */
@@ -390,9 +394,10 @@
 	._image {
 		display: block;
 		width: 100%;
-		height: 360px;
-		margin-top: -360px;
-		opacity: 0;
+		height: 100%;
+		/* height: 360px; */
+		/* margin-top: -360px; */
+		/* opacity: 0; */
 	}
 
 	._ins {
