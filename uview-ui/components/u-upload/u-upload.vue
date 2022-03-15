@@ -421,6 +421,9 @@ export default {
 				name: this.name,
 				formData: this.formData,
 				header: this.header,
+				// #ifdef MP-ALIPAY
+				fileType:'image',
+				// #endif
 				success: res => {
 					// 判断是否json字符串，将其转为json格式
 					let data = this.toJson && this.$u.test.jsonString(res.data) ? JSON.parse(res.data) : res.data;
