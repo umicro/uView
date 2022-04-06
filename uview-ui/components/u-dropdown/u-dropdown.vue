@@ -8,13 +8,13 @@
 			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
 				<view class="u-flex">
 					<text class="u-dropdown__menu__item__text" :style="{
-						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex == index) ? activeColor : inactiveColor,
+						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex.includes(index)) ? activeColor : inactiveColor,
 						fontSize: $u.addUnit(titleSize)
 					}">{{item.title}}</text>
 					<view class="u-dropdown__menu__item__arrow" :class="{
 						'u-dropdown__menu__item__arrow--rotate': index === current
 					}">
-						<u-icon :custom-style="{display: 'flex'}" :name="menuIcon" :size="$u.addUnit(menuIconSize)" :color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'"></u-icon>
+						<u-icon :custom-style="{display: 'flex'}" :name="menuIcon" :size="$u.addUnit(menuIconSize)" :color="index === current || highlightIndex.includes(index) ? activeColor : '#c0c4cc'"></u-icon>
 					</view>
 				</view>
 			</view>
@@ -123,8 +123,8 @@
 					zIndex: -1,
 					opacity: 0
 				},
-				// 让某个菜单保持高亮的状态
-				highlightIndex: 99999,
+				// 让某个菜单保持高亮的状态 支持多个菜单高亮
+				highlightIndex: [9999],
 				contentHeight: 0
 			}
 		},
@@ -173,7 +173,7 @@
 			// 打开下拉菜单
 			open(index) {
 				// 重置高亮索引，否则会造成多个菜单同时高亮
-				// this.highlightIndex = 9999;
+				// this.highlightIndex = [9999];
 				// 展开时，设置下拉内容的样式
 				this.contentStyle = {
 					zIndex: 11,
@@ -208,7 +208,7 @@
 			},
 			// 外部手动设置某个菜单高亮
 			highlight(index = undefined) {
-				this.highlightIndex = index !== undefined ? index : 99999;
+				this.highlightIndex = index !== undefined ? index : [9999];
 			},
 			// 获取下拉菜单内容的高度
 			getContentHeight() {
