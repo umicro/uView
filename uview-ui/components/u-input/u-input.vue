@@ -28,6 +28,7 @@
 			:selection-start="uSelectionStart"
 			:cursor-spacing="getCursorSpacing"
 			:show-confirm-bar="showConfirmbar"
+      :adjust-position="adjustPosition"
 			@input="handleInput"
 			@blur="handleBlur"
 			@focus="onFocus"
