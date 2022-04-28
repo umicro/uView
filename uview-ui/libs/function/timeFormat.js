@@ -28,7 +28,9 @@ function timeFormat(dateTime = null, fmt = 'yyyy-mm-dd') {
 	if (!dateTime) dateTime = Number(new Date());
 	// 如果dateTime长度为10或者13，则为秒和毫秒的时间戳，如果超过13位，则为其他的时间格式
 	if (dateTime.toString().length == 10) dateTime *= 1000;
-	let date = new Date(dateTime);
+	// ios的Date不识别'-', 替换成'/'兼容
+	const { platform } = uni.getSystemInfoSync();
+	let date = new Date(typeof dateTime === 'string' && platform === 'ios' ? dateTime.replace(/-/g, "/") : dateTime);
 	let ret;
 	let opt = {
 		"y+": date.getFullYear().toString(), // 年
