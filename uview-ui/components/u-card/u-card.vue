@@ -23,7 +23,7 @@
 					<image
 						:src="thumb"
 						class="u-card__head--left__thumb"
-						mode="aspectfull"
+						mode="aspectFill"
 						v-if="thumb"
 						:style="{ 
 							height: thumbWidth + 'rpx', 
