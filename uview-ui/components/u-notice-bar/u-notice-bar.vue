@@ -68,8 +68,8 @@
  * @property {String Number} font-size 字体大小，单位rpx（默认28）
  * @property {Boolean} is-circular mode为horizontal时，指明是否水平衔接滚动（默认true）
  * @property {String} play-state 播放状态，play - 播放，paused - 暂停（默认play）
- * @property {String Nubmer} border-radius 通知栏圆角（默认为0）
- * @property {String Nubmer} padding 内边距，字符串，与普通的内边距css写法一直（默认"18rpx 24rpx"）
+ * @property {String Number} border-radius 通知栏圆角（默认为0）
+ * @property {String Number} padding 内边距，字符串，与普通的内边距css写法一直（默认"18rpx 24rpx"）
  * @property {Boolean} no-list-hidden 列表为空时，是否显示组件（默认false）
  * @property {Boolean} disable-touch 是否禁止通过手动滑动切换通知，只有mode = vertical，或者mode = horizontal且is-circular = false时有效（默认true）
  * @event {Function} click 点击通告文字触发，只有mode = vertical，或者mode = horizontal且is-circular = false时有效
