@@ -113,7 +113,7 @@
 					style.right = this.offset[1] + 'rpx';
 					style.transform = "translateY(0) translateX(0)";
 				}
-				// 如果尺寸为mini，后接上scal()
+				// 如果尺寸为mini，后接上scale()
 				if(this.size == 'mini') {
 					style.transform = style.transform + " scale(0.8)";
 				}

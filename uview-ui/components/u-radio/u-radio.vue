@@ -94,7 +94,7 @@
 			this.parent.children.push(this);
 		},
 		computed: {
-			// 是否禁用，如果父组件u-raios-group禁用的话，将会忽略子组件的配置
+			// 是否禁用，如果父组件u-radio-group禁用的话，将会忽略子组件的配置
 			elDisabled() {
 				return this.disabled !== '' ? this.disabled : this.parentData.disabled !== null ? this.parentData.disabled : false;
 			},

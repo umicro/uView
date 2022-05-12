@@ -44,7 +44,7 @@
 	 * @property {Boolean} show-title 是否显示标题（默认true）
 	 * @property {Boolean} async-close 是否异步关闭，只对确定按钮有效（默认false）
 	 * @property {Boolean} show-confirm-button 是否显示确认按钮（默认true）
-	 * @property {Stringr | Number} negative-top modal往上偏移的值
+	 * @property {String | Number} negative-top modal往上偏移的值
 	 * @property {Boolean} show-cancel-button 是否显示取消按钮（默认false）
 	 * @property {Boolean} mask-close-able 是否允许点击遮罩关闭modal（默认false）
 	 * @property {String} confirm-text 确认按钮的文字内容（默认"确认"）
