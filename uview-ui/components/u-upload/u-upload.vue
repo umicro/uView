@@ -373,16 +373,20 @@ export default {
 		async uploadFile(index = 0) {
 			if (this.disabled) return;
 			if (this.uploading) return;
+
 			// 全部上传完成
 			if (index >= this.lists.length) {
 				this.$emit('on-uploaded', this.lists, this.index);
 				return;
 			}
+
 			// 检查是否是已上传或者正在上传中
 			if (this.lists[index].progress == 100) {
-				if (this.autoUpload == false) this.uploadFile(index + 1);
+				// if (this.autoUpload == false) this.uploadFile(index + 1);
+				this.uploadFile(index + 1);
 				return;
 			}
+			
 			// 执行before-upload钩子
 			if(this.beforeUpload && typeof(this.beforeUpload) === 'function') {
 				// 执行回调，同时传入索引和文件列表当作参数
