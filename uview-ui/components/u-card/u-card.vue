@@ -28,7 +28,7 @@
 						:style="{ 
 							height: thumbWidth + 'rpx', 
 							width: thumbWidth + 'rpx', 
-							borderRadius: thumbCircle ? '100rpx' : '6rpx' 
+							borderRadius: thumbCircle ? '50%' : '6rpx' 
 						}"
 					></image>
 					<text
