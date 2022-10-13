@@ -171,9 +171,9 @@
 			}
 		},
 		watch: {
-			// 如果外部的list发生变化，判断长度是否被修改，如果前后长度不一致，重置uCurrent值，避免溢出
-			list(nVal, oVal) {
-				if(nVal.length !== oVal.length) this.uCurrent = 0;
+			// 如果外部的list发生变化，如果uCurrent大于等于新的list的长度，重置uCurrent值，避免溢出
+			list(nVal) {
+				if(this.uCurrent >= nVal.length) this.uCurrent = 0;
 			},
 			// 监听外部current的变化，实时修改内部依赖于此测uCurrent值，如果更新了current，而不是更新uCurrent，
 			// 就会错乱，因为指示器是依赖于uCurrent的
