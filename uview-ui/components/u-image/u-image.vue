@@ -18,7 +18,7 @@
 			class="u-image__loading"
 			:style="{
 				borderRadius: shape == 'circle' ? '50%' : $u.addUnit(borderRadius),
-				backgroundColor: this.bgColor
+				backgroundColor: bgColor
 			}"
 		>
 			<slot v-if="$slots.loading" name="loading" />
