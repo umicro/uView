@@ -15,7 +15,7 @@
 				<u-icon class="u-clear-icon" :size="30" :name="searchIcon" :color="searchIconColor ? searchIconColor : color"></u-icon>
 			</view>
 			<input
-				confirm-type="search"
+				:confirm-type="confirmType"
 				@blur="blur"
 				:value="value"
 				@confirm="search"
@@ -39,8 +39,8 @@
 				<u-icon class="u-clear-icon" name="close-circle-fill" size="34" color="#c0c4cc"></u-icon>
 			</view>
 		</view>
-		<view :style="[actionStyle]" class="u-action" 
-			:class="[showActionBtn || show ? 'u-action-active' : '']" 
+		<view :style="[actionStyle]" class="u-action"
+			:class="[showActionBtn || show ? 'u-action-active' : '']"
 			@tap.stop.prevent="custom"
 		>{{ actionText }}</view>
 	</view>
@@ -190,7 +190,12 @@ export default {
 		searchIcon: {
 			type: String,
 			default: 'search'
-		}
+		},
+    // 设置键盘右下角按钮的文字，合法值包括但不限于：search、done、send、next、go
+    confirmType: {
+      type: String,
+      default: 'search'
+    }
 	},
 	data() {
 		return {
