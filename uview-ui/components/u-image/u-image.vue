@@ -7,6 +7,7 @@
 			@error="onErrorHandler"
 			@load="onLoadHandler"
 			:lazy-load="lazyLoad"
+			:show-menu-by-longpress="showMenuByLongpress"
 			class="u-image__image"
 			:show-menu-by-longpress="showMenuByLongpress"
 			:style="{
@@ -105,7 +106,7 @@ export default {
 		// 开启长按图片显示识别微信小程序码菜单
 		showMenuByLongpress: {
 			type: Boolean,
-			default: true
+			default: false
 		},
 		// 加载中的图标，或者小图片
 		loadingIcon: {
