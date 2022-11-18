@@ -8,11 +8,11 @@ class Request {
 	}
 
 	// 主要请求部分
-	request(options = {}) {
+	async request(options = {}) {
 		// 检查请求拦截
 		if (this.interceptor.request && typeof this.interceptor.request === 'function') {
 			let tmpConfig = {};
-			let interceptorRequest = this.interceptor.request(options);
+			let interceptorRequest = await this.interceptor.request(options);
 			if (interceptorRequest === false) {
 				// 返回一个处于pending状态中的Promise，来取消原promise，避免进入then()回调
 				return new Promise(()=>{});
@@ -27,7 +27,7 @@ class Request {
 		options.method = options.method || this.config.method;
 
 		return new Promise((resolve, reject) => {
-			options.complete = (response) => {
+			options.complete = async (response) => {
 				// 请求返回后，隐藏loading(如果请求返回快的话，可能会没有loading)
 				uni.hideLoading();
 				// 清除定时器，如果请求回来了，就无需loading
@@ -37,7 +37,7 @@ class Request {
 				if(this.config.originalData) {
 					// 判断是否存在拦截器
 					if (this.interceptor.response && typeof this.interceptor.response === 'function') {
-						let resInterceptors = this.interceptor.response(response);
+						let resInterceptors = await this.interceptor.response(response);
 						// 如果拦截器不返回false，就将拦截器返回的内容给this.$u.post的then回调
 						if (resInterceptors !== false) {
 							resolve(resInterceptors);
@@ -52,7 +52,7 @@ class Request {
 				} else {
 					if (response.statusCode == 200) {
 						if (this.interceptor.response && typeof this.interceptor.response === 'function') {
-							let resInterceptors = this.interceptor.response(response.data);
+							let resInterceptors = await this.interceptor.response(response.data);
 							if (resInterceptors !== false) {
 								resolve(resInterceptors);
 							} else {
@@ -92,11 +92,6 @@ class Request {
 			}
 			uni.request(options);
 		})
-		// .catch(res => {
-		// 	// 如果返回reject()，不让其进入this.$u.post().then().catch()后面的catct()
-		// 	// 因为很多人都会忘了写后面的catch()，导致报错捕获不到catch
-		// 	return new Promise(()=>{});
-		// })
 	}
 
 	constructor() {
