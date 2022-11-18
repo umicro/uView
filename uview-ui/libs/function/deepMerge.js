@@ -10,7 +10,7 @@ function deepMerge(target = {}, source = {}) {
 			if (typeof target[prop] !== 'object') {
 				target[prop] = source[prop];
 			} else {
-				if (typeof source[prop] !== 'object') {
+				if (typeof source[prop] !== 'object' || target[prop] === null) {
 					target[prop] = source[prop];
 				} else {
 					if (target[prop].concat && source[prop].concat) {
