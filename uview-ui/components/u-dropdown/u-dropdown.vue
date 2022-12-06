@@ -143,9 +143,7 @@
 			// 引用所有子组件(u-dropdown-item)的this，不能在data中声明变量，否则在微信小程序会造成循环引用而报错
 			this.children = [];
 		},
-		mounted() {
-			this.getContentHeight();
-		},
+		
 		methods: {
 			init() {
 				// 当某个子组件内容变化时，触发父组件的init，父组件再让每一个子组件重新初始化一遍
@@ -172,6 +170,8 @@
 			},
 			// 打开下拉菜单
 			open(index) {
+				// 打开后才设置内容高度，以修复issue # 608
+				this.getContentHeight()
 				// 重置高亮索引，否则会造成多个菜单同时高亮
 				// this.highlightIndex = 9999;
 				// 展开时，设置下拉内容的样式
@@ -190,6 +190,8 @@
 			},
 			// 设置下拉菜单处于收起状态
 			close() {
+				// 收起的时候将高度设为0，以修复issue # 608
+				this.contentHeight = 0
 				this.$emit('close', this.current);
 				// 设置为收起状态，同时current归位，设置为空字符串
 				this.active = false;
