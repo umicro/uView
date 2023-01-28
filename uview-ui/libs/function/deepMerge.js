@@ -1,7 +1,7 @@
 import deepClone from "./deepClone";
 
 // JS对象深度合并
-function deepMerge(target = {}, source = {}) {
+function _merge(target = {}, source = {}) {
 	target = deepClone(target);
 	if (typeof target !== 'object' || typeof source !== 'object') return false;
 	for (var prop in source) {
@@ -25,6 +25,12 @@ function deepMerge(target = {}, source = {}) {
 		}
 	}
 	return target;
+}
+
+function deepMerge() {
+  return [...arguments].reduce((target, current) => {
+    return _merge(target, current)
+  })
 }
 
 export default deepMerge;
