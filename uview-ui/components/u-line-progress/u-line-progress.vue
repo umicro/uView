@@ -10,9 +10,9 @@
 			striped && stripedActive ? 'u-striped-active' : ''
 		]" class="u-active" :style="[progressStyle]">
 			<slot v-if="$slots.default || $slots.$default" />
-			<block v-else-if="showPercent">
+			<template v-else-if="showPercent">
 				{{percent + '%'}}
-			</block>
+			</template>
 		</view>
 	</view>
 </template>
@@ -102,7 +102,7 @@
 
 <style lang="scss" scoped>
 	@import "../../libs/css/style.components.scss";
-	
+
 	.u-progress {
 		overflow: hidden;
 		height: 15px;
