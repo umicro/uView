@@ -46,6 +46,11 @@
 				type: [String, Number],
 				default: ''
 			},
+			// 菜单的icon
+			icon: {
+				type: String,
+				default: ''
+			},
 			// 选项数据，如果传入了默认slot，此参数无效
 			options: {
 				type: Array,
@@ -107,7 +112,8 @@
 					// 父组件无法监听children的变化，故将子组件的title，传入父组件的menuList数组中
 					parent.menuList.push({
 						title: this.title,
-						disabled: this.disabled
+						disabled: this.disabled,
+						icon: this.icon || ""
 					});
 				}
 			},
