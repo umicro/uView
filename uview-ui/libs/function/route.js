@@ -28,7 +28,7 @@ class Router {
 	// 整合路由参数
 	mixinParam(url, params) {
 		url = url && this.addRootPath(url)
-		
+
 		// 使用正则匹配，主要依据是判断是否有"/","?","="等，如“/page/index/index?name=mary"
 		// 如果有url中有get参数，转换后无需带上"?"
 		let query = ''
@@ -54,12 +54,12 @@ class Router {
 			mergeConfig.url = this.mixinParam(options, params)
 			mergeConfig.type = 'navigateTo'
 		} else {
-			mergeConfig = uni.$u.deepMerge(options, this.config)
+			mergeConfig = uni.$u.deepMerge(this.config, options)
 			// 否则正常使用mergeConfig中的url和params进行拼接
 			mergeConfig.url = this.mixinParam(options.url, options.params)
 		}
-		
-		if(params.intercept) {
+
+		if (params.intercept) {
 			this.config.intercept = params.intercept
 		}
 		// params参数也带给拦截器
