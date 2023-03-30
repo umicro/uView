@@ -58,21 +58,6 @@
 				default: true
 			}
 		},
-		data() {
-			return {
-				gutter: 20, // 给col添加间距，左右边距各占一半，从父组件u-row获取
-			}
-		},
-		created() {
-			this.parent = false;
-		},
-		mounted() {
-			// 获取父组件实例，并赋值给对应的参数
-			this.parent = this.$u.$parent.call(this, 'u-row');
-			if (this.parent) {
-				this.gutter = this.parent.gutter;
-			}
-		},
 		computed: {
 			uJustify() {
 				if (this.justify == 'end' || this.justify == 'start') return 'flex-' + this.justify;
@@ -83,7 +68,12 @@
 				if (this.align == 'top') return 'flex-start';
 				if (this.align == 'bottom') return 'flex-end';
 				else return this.align;
-			}
+			},
+      // 给col添加间距，左右边距各占一半，从父组件u-row获取
+      gutter() {
+        const parent = this.$u.$parent.call(this, 'u-row')
+        return parent ? parent.gutter : 20
+      }
 		},
 		methods: {
 			click(e) {
