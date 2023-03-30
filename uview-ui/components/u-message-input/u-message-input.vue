@@ -129,6 +129,9 @@
 			value: {
 				immediate: true,
 				handler(val) {
+					if(val===null){
+						val ="";
+					}
 					// 转为字符串
 					val = String(val);
 					// 超出部分截掉
@@ -174,6 +177,9 @@
 				if (String(value).length == this.maxlength) {
 					this.$emit('finish', value);
 				}
+			},
+			clear(){
+				this.valueModel="";
 			}
 		}
 	}
