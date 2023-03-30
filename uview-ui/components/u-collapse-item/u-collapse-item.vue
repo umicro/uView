@@ -1,18 +1,18 @@
 <template>
 	<view class="u-collapse-item" :style="[itemStyle]">
 		<view :hover-stay-time="200" class="u-collapse-head" @tap.stop="headClick" :hover-class="hoverClass" :style="[headStyle]">
-			<block v-if="!$slots['title-all']">
-				<view v-if="!$slots['title']" class="u-collapse-title u-line-1" :style="[{ textAlign: align ? align : 'left' },
-					isShow && activeStyle && !arrow ? activeStyle : '']">
-					{{ title }}
-				</view>
-				<slot v-else name="title" />
-				<view class="u-icon-wrap">
-					<u-icon v-if="arrow" :color="arrowColor" :class="{ 'u-arrow-down-icon-active': isShow }"
-					 class="u-arrow-down-icon" name="arrow-down"></u-icon>
-				</view>
-			</block>
-			<slot v-else name="title-all" />
+			<slot name="title-all">
+                <slot name="title" >
+                    <view class="u-collapse-title u-line-1" :style="[{ textAlign: align ? align : 'left' },
+                    	isShow && activeStyle && !arrow ? activeStyle : '']">
+                    	{{ title }}
+                    </view>
+                </slot>
+                <view class="u-icon-wrap">
+                	<u-icon v-if="arrow" :color="arrowColor" :class="{ 'u-arrow-down-icon-active': isShow }"
+                	 class="u-arrow-down-icon" name="arrow-down"></u-icon>
+                </view>
+            </slot>
 		</view>
 		<view class="u-collapse-body" :style="[{
 				height: isShow ? height + 'px' : '0'
