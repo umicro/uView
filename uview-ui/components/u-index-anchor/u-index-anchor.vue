@@ -19,6 +19,7 @@
 	 * @tutorial https://www.uviewui.com/components/indexList.html#indexanchor-props
 	 * @property {Boolean} use-slot 是否使用自定义内容的插槽（默认false）
 	 * @property {String Number} index 索引字符，如果定义了use-slot，此参数自动失效
+	 * @property {String} title 自定义索引标题，但index是必须的，如果使用自定义标题，将显示自定义标题
 	 * @property {Object} custStyle 自定义样式，对象形式，如"{color: 'red'}"
 	 * @event {Function} default 锚点位置显示内容，默认为索引字符
 	 * @example <u-index-anchor :index="item" />
@@ -34,6 +35,9 @@
 				type: String,
 				default: ''
 			},
+			title: {
+      	type: String
+    	},
 			customStyle: {
 				type: Object,
 				default () {
