@@ -10,10 +10,11 @@ module.exports = {
 		// 查询节点信息
 		// 目前此方法在支付宝小程序中无法获取组件跟接点的尺寸，为支付宝的bug(2020-07-21)
 		// 解决办法为在组件根部再套一个没有任何作用的view元素
-		$uGetRect(selector, all) {
+		// 修复页面跳转前后this指向不一致的问题
+		$uGetRect(selector, all, that) {
 			return new Promise(resolve => {
 				uni.createSelectorQuery().
-				in(this)[all ? 'selectAll' : 'select'](selector)
+				in(that?that:this)[all ? 'selectAll' : 'select'](selector)
 					.boundingClientRect(rect => {
 						if (all && Array.isArray(rect) && rect.length) {
 							resolve(rect)
