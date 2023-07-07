@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast" />
-				<u-loadmore :status="status" bg-color="rgb(250, 250, 250)" :loadText="loadText"
+				<u-loadmore :status="status" :loadText="loadText"
 				:icon-type="iconType" :is-dot="isDot" @loadmore="loadmore"/>
 			</view>
 		</view>
@@ -14,19 +14,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection :current="current" vibrateShort :list="['加载前', '加载中', '加载后', '没有更多']" @change="statusChange"></u-subsection>
+				<u-subsection :current="current" :list="['加载前', '加载中', '加载后', '没有更多']" @change="statusChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义提示语</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="loadTextChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="loadTextChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">加载中图标样式</view>
-				<u-subsection vibrateShort :list="['circle', 'flower']" @change="styleChange"></u-subsection>
+				<u-subsection :list="['circle', 'flower']" @change="styleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">没有更多时用点替代</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="isDotChange"></u-subsection>
 			</view>
 		</view>
 	</view>

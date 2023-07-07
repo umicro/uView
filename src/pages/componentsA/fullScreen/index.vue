@@ -15,7 +15,7 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :current="current" :list="['打开', '关闭']" @change="openModal"></u-subsection>
+				<u-subsection :current="current" :list="['打开', '关闭']" @change="openModal"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -37,7 +37,7 @@
 			openModal(index) {
 				// 可以传递参数
 				if(index == 0) {
-					this.$u.route("/uview-ui/components/u-full-screen/u-full-screen?id=1");
+					this.$u.route("pages/example/u-full-screen?id=1");
 				}
 			}
 		}

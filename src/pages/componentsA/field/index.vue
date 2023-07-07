@@ -30,23 +30,23 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">右侧按钮</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="showBtnChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="showBtnChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示错误信息</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="errorMessageChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="errorMessageChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否必填</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="requiredChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="requiredChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示左图标和右箭头</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="customChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="customChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">第一个输入框为textarea类型</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="textareaChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="textareaChange"></u-subsection>
 			</view>
 		</view>
 	</view>

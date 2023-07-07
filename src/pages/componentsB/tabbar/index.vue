@@ -7,28 +7,27 @@
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">状态</view>
-					<u-subsection vibrateShort :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+					<u-subsection :list="['显示', '隐藏']" @change="showChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">凸起按钮</view>
-					<u-subsection vibrateShort :list="['显示', '隐藏']" @change="minButtonChange"></u-subsection>
+					<u-subsection :list="['显示', '隐藏']" @change="minButtonChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">背景色</view>
-					<u-subsection vibrateShort :list="['#ffffff', '#1f1f1d']" @change="bgColorChange"></u-subsection>
+					<u-subsection :list="['#ffffff', '#1f1f1d']" @change="bgColorChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">顶部边框</view>
-					<u-subsection vibrateShort :list="['显示', '隐藏']" @change="borderTopChange"></u-subsection>
+					<u-subsection :list="['显示', '隐藏']" @change="borderTopChange"></u-subsection>
 				</view>
 				<view class="u-config-item">
 					<view class="u-item-title">提示角标</view>
-					<u-subsection vibrateShort :list="['显示', '隐藏']" @change="badgeChange"></u-subsection>
+					<u-subsection :list="['显示', '隐藏']" @change="badgeChange"></u-subsection>
 				</view>
 			</view>
 		</view>
 		<u-tabbar
-		    :beforeSwitch="beforeSwitch"
 		    v-model="current"
 		    :show="show"
 		    :bg-color="bgColor"

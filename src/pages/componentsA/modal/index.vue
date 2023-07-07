@@ -9,7 +9,7 @@
 					:show-title="showTitle" :async-close="asyncClose"
 					@confirm="confirm" :content="content"
 				>
-					<!-- #ifndef MP-WEIXIN -->
+					<!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
 					<view class="warp" style="margin: 30rpx;" v-if="contentSlot">
 						<image class="logo" src="https://uviewui.com/common/logo.png" style="width: 220rpx;" mode="widthFix"></image>
 					</view>
@@ -21,21 +21,21 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :current="current" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
+				<u-subsection :current="current" :list="['显示', '隐藏']" @change="showChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否显示标题</view>
-				<u-subsection vibrateShort current="0" :list="['是', '否']" @change="titleChange"></u-subsection>
+				<u-subsection current="0" :list="['是', '否']" @change="titleChange"></u-subsection>
 			</view>
 			<!-- #ifndef MP-WEIXIN -->
 			<view class="u-config-item">
 				<view class="u-item-title">自定义内容</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="contentChange"></u-subsection>
 			</view>
 			<!-- #endif -->
 			<view class="u-config-item">
 				<view class="u-item-title">异步关闭</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="asyncChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="asyncChange"></u-subsection>
 			</view>
 		</view>
 	</view>

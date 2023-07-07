@@ -278,7 +278,8 @@ export default {
 					name: '待收货'
 				},
 				{
-					name: '待评价'
+					name: '待评价',
+					count: 12
 				}
 			],
 			current: 0,
@@ -348,7 +349,7 @@ export default {
 		// tab栏切换
 		change(index) {
 			this.swiperCurrent = index;
-			this.getOrderList();
+			this.getOrderList(index);
 		},
 		transition({ detail: { dx } }) {
 			this.$refs.tabs.setDx(dx);

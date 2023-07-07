@@ -28,35 +28,35 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">形状</view>
-				<u-subsection vibrateShort :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
+				<u-subsection :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">整体大小(单位rpx)</view>
-				<u-subsection vibrateShort current="1" :list="['30', '40', '50']" @change="sizeChange"></u-subsection>
+				<u-subsection current="1" :list="['30', '40', '50']" @change="sizeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">激活颜色</view>
-				<u-subsection vibrateShort :list="['primary', 'error', 'warning', 'success', 'info']" @change="activeColorChange"></u-subsection>
+				<u-subsection :list="['primary', 'error', 'warning', 'success', 'info']" @change="activeColorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">默认选中第一个</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="defaultChooseChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="defaultChooseChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">每个占一行</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="wrapChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="wrapChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">每个宽度50%</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="widthChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="widthChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">最大选择数量</view>
-				<u-subsection vibrateShort current="2" :list="['1', '2', '3']" @change="maxChange"></u-subsection>
+				<u-subsection current="2" :list="['1', '2', '3']" @change="maxChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">禁用第一个</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="disabledChange"></u-subsection>
 			</view>
 		</view>
 	</view>

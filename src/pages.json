@@ -1,6 +1,6 @@
 {
 	"easycom": {
-		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
 	// "condition": { //模式配置，仅开发期间生效
 	// 	"current": 0, //当前激活的模式(list 的索引项)
@@ -20,7 +20,7 @@
 		},
 		// avatarCropper-头像裁剪
 		{
-			"path": "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+			"path": "pages/example/u-avatar-cropper",
 			"style": {
 				"navigationBarTitleText": "头像裁剪",
 				"navigationBarBackgroundColor": "#000000"
@@ -42,7 +42,7 @@
 		},
 		// fullScreen-压窗屏
 		{
-			"path": "uview-ui/components/u-full-screen/u-full-screen",
+			"path": "pages/example/u-full-screen",
 			"style": {
 				"navigationStyle": "custom",
 				"app-plus": {
@@ -55,166 +55,166 @@
 		}
 	],
 	"subPackages": [{
-			"root": "pages/componentsC",
-			"pages": [
-				// test-测试
-				{
-					"path": "test/index",
-					"style": {
-						// "navigationBarTitleText": "navbar-自定义导航栏",
-						"navigationStyle": "custom" ,// 隐藏系统导航栏
-						"navigationBarTextStyle": "white" // 状态栏字体为白色
-					}
-				},
-				// gap-间隔槽
-				{
-					"path": "gap/index",
-					"style": {
-						"navigationBarTitleText": "gap-间隔槽"
-					}
-				},
-				// subsection分段器
-				{
-					"path": "subsection/index",
-					"style": {
-						"navigationBarTitleText": "subsection-分段器"
-					}
-				},
-				// section 查看更多
-				{
-					"path": "section/index",
-					"style": {
-						"navigationBarTitleText": "section-查看更多"
-					}
-				},
-				// link链接
-				{
-					"path": "link/index",
-					"style": {
-						"navigationBarTitleText": "link-链接"
-					}
-				},
-				// mask遮罩层
-				{
-					"path": "mask/index",
-					"style": {
-						"navigationBarTitleText": "mask-遮罩层"
-					}
-				},
-				// countTo数字滚动
-				{
-					"path": "countTo/index",
-					"style": {
-						"navigationBarTitleText": "countTo-数字滚动"
-					}
-				},
-				// color颜色
-				{
-					"path": "color/index",
-					"style": {
-						"navigationBarTitleText": "color-颜色"
-					}
-				},
-				// countDown倒计时
-				{
-					"path": "countDown/index",
-					"style": {
-						"navigationBarTitleText": "countDown-倒计时"
-					}
-				},
-				// progress进度条
-				{
-					"path": "progress/index",
-					"style": {
-						"navigationBarTitleText": "progress-进度条"
-					}
-				},
-				// alertTips警告提示
-				{
-					"path": "alertTips/index",
-					"style": {
-						"navigationBarTitleText": "alertTips-警告提示"
-					}
-				},
-				// badge 徽标数
-				{
-					"path": "badge/index",
-					"style": {
-						"navigationBarTitleText": "badge-徽标数"
-					}
-				},
-				// button按钮
-				{
-					"path": "button/index",
-					"style": {
-						"navigationBarTitleText": "button-按钮"
-					}
-				},
-				// collapse折叠面板
-				{
-					"path": "collapse/index",
-					"style": {
-						"navigationBarTitleText": "collapse-折叠面板"
-					}
-				},
-				// actionSheet操作菜单
-				{
-					"path": "actionSheet/index",
-					"style": {
-						"navigationBarTitleText": "actionSheet-操作菜单"
-					}
-				},
-				// messageInput验证码输入
-				{
-					"path": "messageInput/index",
-					"style": {
-						"navigationBarTitleText": "messageInput-验证码输入"
-					}
-				},
-				// popup弹窗
-				{
-					"path": "popup/index",
-					"style": {
-						"navigationBarTitleText": "popup-弹窗"
-					}
-				},
-				// listCell
-				{
-					"path": "cell/index",
-					"style": {
-						"navigationBarTitleText": "listCell-列表"
-					}
-				},
-				// numberBox数字输入框
-				{
-					"path": "numberBox/index",
-					"style": {
-						"navigationBarTitleText": "numberBox-步进器"
-					}
-				},
-				// grid宫格布局
-				{
-					"path": "grid/index",
-					"style": {
-						"navigationBarTitleText": "grid-宫格布局"
-					}
-				},
-				// layout栅格布局
-				{
-					"path": "layout/index",
-					"style": {
-						"navigationBarTitleText": "layout-栅格布局"
-					}
-				},
-				// 加载更多
-				{
-					"path": "loadmore/index",
-					"style": {
-						"navigationBarTitleText": "loadmore-加载更多"
-					}
+		"root": "pages/componentsC",
+		"pages": [
+			// test-测试
+			{
+				"path": "test/index",
+				"style": {
+					// "navigationBarTitleText": "navbar-自定义导航栏",
+					"navigationStyle": "custom" ,// 隐藏系统导航栏
+					"navigationBarTextStyle": "white" // 状态栏字体为白色
 				}
-			]
-		},
+			},
+			// gap-间隔槽
+			{
+				"path": "gap/index",
+				"style": {
+					"navigationBarTitleText": "gap-间隔槽"
+				}
+			},
+			// subsection分段器
+			{
+				"path": "subsection/index",
+				"style": {
+					"navigationBarTitleText": "subsection-分段器"
+				}
+			},
+			// section 查看更多
+			{
+				"path": "section/index",
+				"style": {
+					"navigationBarTitleText": "section-查看更多"
+				}
+			},
+			// link链接
+			{
+				"path": "link/index",
+				"style": {
+					"navigationBarTitleText": "link-链接"
+				}
+			},
+			// mask遮罩层
+			{
+				"path": "mask/index",
+				"style": {
+					"navigationBarTitleText": "mask-遮罩层"
+				}
+			},
+			// countTo数字滚动
+			{
+				"path": "countTo/index",
+				"style": {
+					"navigationBarTitleText": "countTo-数字滚动"
+				}
+			},
+			// color颜色
+			{
+				"path": "color/index",
+				"style": {
+					"navigationBarTitleText": "color-颜色"
+				}
+			},
+			// countDown倒计时
+			{
+				"path": "countDown/index",
+				"style": {
+					"navigationBarTitleText": "countDown-倒计时"
+				}
+			},
+			// progress进度条
+			{
+				"path": "progress/index",
+				"style": {
+					"navigationBarTitleText": "progress-进度条"
+				}
+			},
+			// alertTips警告提示
+			{
+				"path": "alertTips/index",
+				"style": {
+					"navigationBarTitleText": "alertTips-警告提示"
+				}
+			},
+			// badge 徽标数
+			{
+				"path": "badge/index",
+				"style": {
+					"navigationBarTitleText": "badge-徽标数"
+				}
+			},
+			// button按钮
+			{
+				"path": "button/index",
+				"style": {
+					"navigationBarTitleText": "button-按钮"
+				}
+			},
+			// collapse折叠面板
+			{
+				"path": "collapse/index",
+				"style": {
+					"navigationBarTitleText": "collapse-折叠面板"
+				}
+			},
+			// actionSheet操作菜单
+			{
+				"path": "actionSheet/index",
+				"style": {
+					"navigationBarTitleText": "actionSheet-操作菜单"
+				}
+			},
+			// messageInput验证码输入
+			{
+				"path": "messageInput/index",
+				"style": {
+					"navigationBarTitleText": "messageInput-验证码输入"
+				}
+			},
+			// popup弹窗
+			{
+				"path": "popup/index",
+				"style": {
+					"navigationBarTitleText": "popup-弹窗"
+				}
+			},
+			// listCell
+			{
+				"path": "cell/index",
+				"style": {
+					"navigationBarTitleText": "listCell-列表"
+				}
+			},
+			// numberBox数字输入框
+			{
+				"path": "numberBox/index",
+				"style": {
+					"navigationBarTitleText": "numberBox-步进器"
+				}
+			},
+			// grid宫格布局
+			{
+				"path": "grid/index",
+				"style": {
+					"navigationBarTitleText": "grid-宫格布局"
+				}
+			},
+			// layout栅格布局
+			{
+				"path": "layout/index",
+				"style": {
+					"navigationBarTitleText": "layout-栅格布局"
+				}
+			},
+			// 加载更多
+			{
+				"path": "loadmore/index",
+				"style": {
+					"navigationBarTitleText": "loadmore-加载更多"
+				}
+			}
+		]
+	},
 		{
 			"root": "pages/template",
 			"pages": [
@@ -835,11 +835,11 @@
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
 		"list": [{
-				"pagePath": "pages/example/components"
-				// "iconPath": "static/uview/example/component.png",
-				// "selectedIconPath": "static/uview/example/component_select.png",
-				// "text": "组件"
-			},
+			"pagePath": "pages/example/components"
+			// "iconPath": "static/uview/example/component.png",
+			// "selectedIconPath": "static/uview/example/component_select.png",
+			// "text": "组件"
+		},
 			{
 				"pagePath": "pages/example/js"
 				// "iconPath": "static/uview/example/js.png",

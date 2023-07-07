@@ -14,7 +14,7 @@
 						 :percent="item.progress"></u-line-progress>
 					</view>
 				</view>
-				<u-upload ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload" :file-list="fileList"
+				<u-upload @on-choose-fail="onChooseFail" :before-remove="beforeRemove" ref="uUpload" :custom-btn="customBtn" :show-upload-list="showUploadList" :action="action" :auto-upload="autoUpload" :file-list="fileList"
 				 :show-progress="showProgress" :deletable="deletable" :max-count="maxCount" @on-list-change="onListChange">
 					<view v-if="customBtn" slot="addBtn" class="slot-btn" hover-class="slot-btn__hover" hover-stay-time="150">
 						<u-icon name="photo" size="60" :color="$u.color['lightColor']"></u-icon>
@@ -31,19 +31,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">上传方式</view>
-				<u-subsection vibrateShort current="1" :list="['自动上传', '手动上传']" @change="autoUploadChange"></u-subsection>
+				<u-subsection current="1" :list="['自动上传', '手动上传']" @change="autoUploadChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义控件(进度条和删除按钮)</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="controlChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="controlChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">最大上传数量</view>
-				<u-subsection vibrateShort current="1" :list="['1', '2', '4']" @change="maxCountChange"></u-subsection>
+				<u-subsection current="1" :list="['1', '2', '4']" @change="maxCountChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式(预览区域和上传按钮)</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="customStyleChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -53,7 +53,7 @@
 	export default {
 		data() {
 			return {
-				action: 'http://www.tp5.com',
+				action: 'http://127.0.0.1:7001/upload',
 				// 预置上传列表
 				fileList: [],
 				// fileList: [{
@@ -72,7 +72,7 @@
 			}
 		},
 		onLoad() {
-			
+
 		},
 		methods: {
 			reUpload() {
@@ -100,7 +100,7 @@
 				if (index == 0) {
 					this.showUploadList = false;
 					this.customBtn = true;
-					
+
 				} else {
 					this.showUploadList = true;
 					this.customBtn = false;
@@ -140,6 +140,12 @@
 				// console.log('onListChange', lists);
 				this.lists = lists;
 			},
+			beforeRemove(index, lists) {
+				return true;
+			},
+			onChooseFail(e) {
+				// console.log(e);
+			}
 		}
 	}
 </script>
@@ -151,14 +157,14 @@
 		margin-left: -14rpx;
 		margin-right: -14rpx;
 	}
-	
+
 	.u-add-wrap {
 		flex-direction: column;
 		color: $u-content-color;
 		font-size: 28rpx;
 	}
-	
-	/deep/ .slot-btn {
+
+	::v-deep .slot-btn {
 		width: 329rpx;
 		height: 140rpx;
 		display: flex;

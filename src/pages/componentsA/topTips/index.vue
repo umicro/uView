@@ -13,11 +13,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题选择</view>
-				<u-subsection vibrateShort :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
+				<u-subsection :list="['primary', 'success', 'error', 'warning', 'info']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示时间</view>
-				<u-subsection vibrateShort current="1" :list="['长', '正常', '短']" @change="durationChange"></u-subsection>
+				<u-subsection current="1" :list="['长', '正常', '短']" @change="durationChange"></u-subsection>
 			</view>
 		</view>
 	</view>

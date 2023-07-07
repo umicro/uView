@@ -23,7 +23,7 @@
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="结算方式" prop="payType" label-width="150">
 				<u-radio-group v-model="radio" @change="radioGroupChange" :width="radioCheckWidth" :wrap="radioCheckWrap">
-					<u-radio shape="circle" v-model="item.checked" v-for="(item, index) in radioList" :key="index" :name="item.name">{{ item.name }}</u-radio>
+					<u-radio shape="circle" v-for="(item, index) in radioList" :key="index" :name="item.name">{{ item.name }}</u-radio>
 				</u-radio-group>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="所在地区" prop="region" label-width="150">
@@ -44,7 +44,7 @@
 				<u-switch v-model="model.remember" slot="right"></u-switch>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
-				<u-upload width="160"></u-upload>
+				<u-upload width="160" height="160"></u-upload>
 			</u-form-item>
 		</u-form>
 		<view class="agreement">
@@ -64,19 +64,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">label对齐方式</view>
-				<u-subsection vibrateShort :list="['左边', '上方']" @change="labelPositionChange"></u-subsection>
+				<u-subsection :list="['左边', '上方']" @change="labelPositionChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">边框</view>
-				<u-subsection vibrateShort :current="borderCurrent" :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
+				<u-subsection :current="borderCurrent" :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">radio、checkbox样式</view>
-				<u-subsection vibrateShort :list="['自适应', '换行', '50%宽度']" @change="radioCheckboxChange"></u-subsection>
+				<u-subsection :list="['自适应', '换行', '50%宽度']" @change="radioCheckboxChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">错误提示方式</view>
-				<u-subsection vibrateShort :list="['message', 'toast', '下划线', '输入框']" @change="errorChange"></u-subsection>
+				<u-subsection :list="['message', 'toast', '下划线', '输入框']" @change="errorChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -402,7 +402,7 @@ export default {
 			}
 		},
 		labelPositionChange(index) {
-			this.labelPosition = index == 0 ? 'left' : 'right';
+			this.labelPosition = index == 0 ? 'left' : 'top';
 		},
 		codeChange(text) {
 			this.codeTips = text;

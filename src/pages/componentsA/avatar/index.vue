@@ -21,23 +21,23 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection vibrateShort :list="['圆形', '圆角方形']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['圆形', '圆角方形']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">性别选择</view>
-				<u-subsection vibrateShort :list="['男', '女', '不显示']" @change="sexChange"></u-subsection>
+				<u-subsection :list="['男', '女', '不显示']" @change="sexChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">等级</view>
-				<u-subsection vibrateShort :list="['显示', '不显示']" @change="levelChange"></u-subsection>
+				<u-subsection :list="['显示', '不显示']" @change="levelChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义内容</view>
-				<u-subsection vibrateShort current="0" :list="['图片', '文字']" @change="styleChange"></u-subsection>
+				<u-subsection current="0" :list="['图片', '文字']" @change="styleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">尺寸</view>
-				<u-subsection vibrateShort current="1" :list="['large', 'default', 'mini', 160]" @change="sizeChange"></u-subsection>
+				<u-subsection current="1" :list="['large', 'default', 'mini', 160]" @change="sizeChange"></u-subsection>
 			</view> 
 		</view>
 	</view>

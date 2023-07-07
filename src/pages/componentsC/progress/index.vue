@@ -20,19 +20,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection vibrateShort :current="current" :list="['线型', '圆型']" @change="modeChange"></u-subsection>
+				<u-subsection :current="current" :list="['线型', '圆型']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">增减</view>
-				<u-subsection vibrateShort :list="['减少30%', '增加30%']" @change="calcChange"></u-subsection>
+				<u-subsection :list="['减少30%', '增加30%']" @change="calcChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义样式(线型时有效)</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="styleChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">动态条纹(线型时有效)</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="stripedChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="stripedChange"></u-subsection>
 			</view>
 		</view>
 	</view>

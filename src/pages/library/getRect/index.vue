@@ -24,11 +24,11 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">元素</view>
-				<u-subsection vibrateShort :list="['第一个节点', '第2个节点']" @change="elChange"></u-subsection>
+				<u-subsection :list="['第一个节点', '第2个节点']" @change="elChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">指定元素置顶</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="topChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="topChange"></u-subsection>
 			</view>
 		</view>
 	</view>

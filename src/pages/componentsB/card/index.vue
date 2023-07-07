@@ -27,19 +27,19 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">左上角图标</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="thumbChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="thumbChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">内边距</view>
-				<u-subsection vibrateShort current="1" :list="['20', '30', '40']" @change="paddingChange"></u-subsection>
+				<u-subsection current="1" :list="['20', '30', '40']" @change="paddingChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">底部</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="bottomChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="bottomChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">外边框</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="borderChange"></u-subsection>
 			</view>
 		</view>
 	</view>

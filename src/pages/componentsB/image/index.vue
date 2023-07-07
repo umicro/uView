@@ -3,7 +3,7 @@
 		<view class="u-demo-wrap">
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area u-flex u-row-center">
-				<u-image border-radius="100%" :shape="shape" ref="uImage" :width="width" :height="height" :src="src" mode="aspectFill">
+				<u-image :shape="shape" ref="uImage" :width="width" :height="height" :src="src" mode="aspectFill">
 					<u-loading size="44" mode="flower" slot="loading" v-if="loadingSlot"></u-loading>
 					<view v-if="errorSlot" slot="error" style="font-size: 24rpx;">加载失败</view>
 				</u-image>
@@ -13,19 +13,22 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection :current="statusCurrent" vibrateShort :list="['加载成功', '加载中', '加载失败']" @change="statusChange"></u-subsection>
+				<u-subsection :current="statusCurrent" :list="['加载成功', '加载中', '加载失败']" @change="statusChange"></u-subsection>
 			</view>
+			<!-- 微信小程序中，无法动态切换slot，所以隐藏此部分的演示 -->
+			<!-- #ifndef MP-WEIXIN -->
 			<view class="u-config-item">
 				<view class="u-item-title">加载中状态</view>
-				<u-subsection vibrateShort :list="['默认', '自定义']" @change="loadingChange"></u-subsection>
+				<u-subsection :list="['默认', '自定义']" @change="loadingChange"></u-subsection>
 			</view>
+			<!-- #endif -->
 			<view class="u-config-item">
 				<view class="u-item-title">加载失败状态</view>
-				<u-subsection vibrateShort :list="['默认', '自定义']" @change="errorChange"></u-subsection>
+				<u-subsection :list="['默认', '自定义']" @change="errorChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">形状</view>
-				<u-subsection vibrateShort :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
+				<u-subsection :list="['方形', '圆形']" @change="shapeChange"></u-subsection>
 			</view>
 		</view>
 	</view>

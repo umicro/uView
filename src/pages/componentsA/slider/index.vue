@@ -11,7 +11,7 @@
 					@end="end"
 					@moving="moving"
 				>
-					<!-- #ifndef MP-WEIXIN -->
+					<!-- #ifndef MP-WEIXIN || MP-TOUTIAO -->
 					<view class="" v-if="useSlot">
 						<view class="badge-button">
 							{{value}}
@@ -28,25 +28,25 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">自定义颜色</view>
-				<u-subsection vibrateShort :list="['primary', 'warning', 'error', 'success']" @change="typeChange"></u-subsection>
+				<u-subsection :list="['primary', 'warning', 'error', 'success']" @change="typeChange"></u-subsection>
 			</view>
 			<!-- #ifndef MP-WEIXIN -->
 			<view class="u-config-item">
 				<view class="u-item-title">自定义传入内容</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="slotChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="slotChange"></u-subsection>
 			</view>
 			<!-- #endif -->
 			<view class="u-config-item">
 				<view class="u-item-title">自定义尺寸</view>
-				<u-subsection vibrateShort current="1" :list="['是', '否']" @change="sizeChange"></u-subsection>
+				<u-subsection current="1" :list="['是', '否']" @change="sizeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">步进值</view>
-				<u-subsection vibrateShort :list="['1', '10', '20']" @change="stepChange"></u-subsection>
+				<u-subsection :list="['1', '10', '20']" @change="stepChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">最大最小值</view>
-				<u-subsection vibrateShort :list="['0-100', '40-80']" @change="minMaxchange"></u-subsection>
+				<u-subsection :list="['0-100', '40-80']" @change="minMaxchange"></u-subsection>
 			</view>
 		</view>
 	</view>

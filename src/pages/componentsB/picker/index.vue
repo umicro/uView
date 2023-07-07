@@ -23,23 +23,23 @@
 			<view class="u-config-title u-border-bottom">参数配置</view>
 			<view class="u-config-item">
 				<view class="u-item-title">Picker开关</view>
-				<u-subsection vibrateShort :current="status" :list="['显示', '隐藏']" @change="statusChange"></u-subsection>
+				<u-subsection :current="status" :list="['显示', '隐藏']" @change="statusChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">模式选择</view>
-				<u-subsection vibrateShort :list="['单列', '多列', '时间', '地区']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['单列', '多列', '时间', '地区']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">默认时间</view>
-				<u-subsection vibrateShort :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']" @change="defaultTimeChange"></u-subsection>
+				<u-subsection :list="['2019-12-11 20:15:35', '2020-02-05 13:09:42']" @change="defaultTimeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">显示时分秒</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="minSecChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="minSecChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">默认地区</view>
-				<u-subsection vibrateShort :list="['广东-深圳-宝安', '海南-三亚-海棠']" @change="defaultRegionChange"></u-subsection>
+				<u-subsection :list="['广东-深圳-宝安', '海南-三亚-海棠']" @change="defaultRegionChange"></u-subsection>
 			</view>
 		</view>
 	</view>

@@ -15,27 +15,27 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">主题</view>
-				<u-subsection vibrateShort :current="3" :list="['primary', 'success', 'error', 'warning', 'none']" @change="typeChange"></u-subsection>
+				<u-subsection :current="3" :list="['primary', 'success', 'error', 'warning', 'none']" @change="typeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">滚动模式</view>
-				<u-subsection vibrateShort :current="current" :list="['水平', '垂直']" @change="modeChange"></u-subsection>
+				<u-subsection :current="current" :list="['水平', '垂直']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否衔接(水平模式有效)</view>
-				<u-subsection vibrateShort :list="['是', '否']" @change="isCircularChange"></u-subsection>
+				<u-subsection :list="['是', '否']" @change="isCircularChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :list="['播放', '暂停']" @change="playStateChange"></u-subsection>
+				<u-subsection :list="['播放', '暂停']" @change="playStateChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">速度</view>
-				<u-subsection vibrateShort :current="1" :list="['慢', '正常', '快']" @change="speedChange"></u-subsection>
+				<u-subsection :current="1" :list="['慢', '正常', '快']" @change="speedChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">图标</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="iconChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="iconChange"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -114,7 +114,12 @@
 				this.toast(`点击了关闭图标`);
 			},
 			click(index) {
-				this.toast(`点击了第${index + 1}条消息`);
+				if(this.mode == 'horizontal' && this.isCircular) {
+					this.toast('此模式无法获取Index值');
+				} else {
+					this.toast(`点击了第${index + 1}条消息`);
+				}
+				
 			},
 			getMore() {
 				this.toast(`点击了更多图标`);

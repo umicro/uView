@@ -17,11 +17,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">吸顶高度</view>
-				<u-subsection vibrateShort :list="[0, 120, 200]" @change="offsetTopChange"></u-subsection>
+				<u-subsection :list="[0, 120, 200]" @change="offsetTopChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">状态</view>
-				<u-subsection vibrateShort :list="['允许吸顶', '禁止吸顶']" @change="enableChange"></u-subsection>
+				<u-subsection :list="['允许吸顶', '禁止吸顶']" @change="enableChange"></u-subsection>
 			</view>
 		</view>
 	</view>

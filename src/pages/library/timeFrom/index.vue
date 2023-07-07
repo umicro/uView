@@ -18,9 +18,9 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">时间</view>
-				<u-subsection vibrateShort :list="timeArr1" @change="timeArr1Change"></u-subsection>
+				<u-subsection :list="timeArr1" @change="timeArr1Change"></u-subsection>
 				<u-gap></u-gap>
-				<u-subsection vibrateShort style="margin-top: 40rpx;" :list="timeArr2" @change="timeArr2Change"></u-subsection>
+				<u-subsection style="margin-top: 40rpx;" :list="timeArr2" @change="timeArr2Change"></u-subsection>
 			</view>
 		</view>
 	</view>
@@ -29,25 +29,24 @@
 <script>
 	export default {
 		data() {
+			// 微信小程序无法动态修改u-subsection的list参数，导致onLoad中赋值timeArr1，timeArr2无效，故在data中直接赋值
+			let nowTime = Number(+ new Date());
+			let threeDayAgo = nowTime - 2 * 86400000;
+			let arr1 = [0, 0], arr2 = [0, 0];
+			[0, 0].map((val, index) => {
+				arr1[index] = this.$u.timeFormat(this.$u.random(threeDayAgo, nowTime), 'yyyy/mm/dd hh:MM:ss');
+				arr2[index] = this.$u.timeFormat(this.$u.random(threeDayAgo, nowTime), 'yyyy/mm/dd hh:MM:ss');
+			})
 			return {
-				timeArr1: [0, 0],
-				timeArr2: [0, 0],
+				timeArr1: arr1,
+				timeArr2: arr2,
 				result: null
 			}
 		},
 		onLoad() {
-			this.getRandomTime();
 			this.timeArr1Change(0);
 		},
 		methods: {
-			getRandomTime() {
-				let nowTime = Number(+ new Date());
-				let threeDayAgo = nowTime - 2 * 86400000;
-				this.timeArr1.map((val, index) => {
-					this.timeArr1[index] = this.$u.timeFormat(this.$u.random(threeDayAgo, nowTime), 'yyyy/mm/dd hh:MM:ss');
-					this.timeArr2[index] = this.$u.timeFormat(this.$u.random(threeDayAgo, nowTime), 'yyyy/mm/dd hh:MM:ss');
-				})
-			},
 			timeArr1Change(index) {
 				this.result = this.$u.timeFrom((new Date(this.timeArr1[index])).getTime());
 			},

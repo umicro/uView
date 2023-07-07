@@ -19,23 +19,23 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">键盘开关</view>
-				<u-subsection vibrateShort :current="show == true ? 0 : 1" :list="['开', '关']" @change="statusChange"></u-subsection>
+				<u-subsection :current="show == true ? 0 : 1" :list="['开', '关']" @change="statusChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">键盘类型</view>
-				<u-subsection vibrateShort :list="['数字键盘', '身份证键盘', '车牌号键盘']" @change="modeChange"></u-subsection>
+				<u-subsection :list="['数字键盘', '身份证键盘', '车牌号键盘']" @change="modeChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">打乱顺序</view>
-				<u-subsection vibrateShort :current="1" :list="['是', '否']" @change="randomChange"></u-subsection>
+				<u-subsection :current="1" :list="['是', '否']" @change="randomChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">上方工具条</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="tooltipChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="tooltipChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">是否显示遮罩</view>
-				<u-subsection vibrateShort :list="['显示', '隐藏']" @change="maskChange"></u-subsection>
+				<u-subsection :list="['显示', '隐藏']" @change="maskChange"></u-subsection>
 			</view>
 		</view>
 	</view>
