@@ -24,6 +24,7 @@
 				@focus="getFocus"
 				:focus="focus"
 				:maxlength="maxlength"
+				:adjust-position="adjustPosition"
 				placeholder-class="u-placeholder-class"
 				:placeholder="placeholder"
 				:placeholder-style="`color: ${placeholderColor}`"
@@ -190,6 +191,11 @@ export default {
 		searchIcon: {
 			type: String,
 			default: 'search'
+		},
+		// 弹出键盘时是否自动调节高度，uni-app默认值是true
+		adjustPosition: {
+			type: Boolean,
+			default: true
 		}
 	},
 	data() {
