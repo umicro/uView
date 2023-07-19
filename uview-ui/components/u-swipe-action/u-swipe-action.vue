@@ -183,8 +183,6 @@ export default {
 						this.emitCloseEvent();
 					} else {
 						this.moveX = -this.allBtnWidth;
-						this.status = true;
-						this.emitOpenEvent();
 					}
 				}
 			});
@@ -208,10 +206,11 @@ export default {
 		},
 		// 点击内容触发事件
 		contentClick() {
-			// 点击内容时，如果当前为打开状态，收起组件
+			// 点击内容时，如果当前为打开状态，收起组件，并触发close事件
 			if (this.status == true) {
-				this.status = 'close';
+				this.status = false;
 				this.moveX = 0;
+				this.emitCloseEvent();
 			}
 			this.$emit('content-click', this.index);
 		}
