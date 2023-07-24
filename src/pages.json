@@ -663,6 +663,13 @@
 		{
 			"root": "pages/componentsB",
 			"pages": [
+				// dropdown-下拉菜单
+				{
+					"path": "dropdown/index",
+					"style": {
+						"navigationBarTitleText": "dropdown-下拉菜单"
+					}
+				},
 				// tabbar-底部导航栏
 				{
 					"path": "tabbar/index",
