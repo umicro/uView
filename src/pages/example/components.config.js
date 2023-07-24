@@ -219,14 +219,14 @@ export default [{
 			icon: 'mask',
 			title: 'Mask 遮罩层',
 			title_en: 'Mask',
-		}, 
+		},
 		// #ifndef MP-TOUTIAO
 		{
 			path: '/pages/componentsA/noNetwork/index',
 			icon: 'noNetwork',
 			title: 'NoNetwork 无网络提示',
 			title_en: 'NoNetwork',
-		}, 
+		},
 		// #endif
 		{
 			path: '/pages/componentsC/grid/index',
@@ -253,7 +253,7 @@ export default [{
 			icon: 'sticky',
 			title: 'Sticky 吸顶',
 			title_en: 'Sticky',
-		}, 
+		},
 		// #ifndef MP-TOUTIAO
 		{
 			path: '/pages/componentsB/waterfall/index',
@@ -296,7 +296,7 @@ export default [{
 			icon: 'tabs',
 			title: 'Tabs 标签',
 			title_en: 'Tabs',
-		}, 
+		},
 		// #ifndef MP-ALIPAY
 		{
 			path: '/pages/template/order/index',
@@ -351,7 +351,7 @@ export default [{
 			title_en: 'AvatarCropper',
 		}, {
 			path: '/pages/componentsC/loadmore/index',
-			icon: 'loadmore', 
+			icon: 'loadmore',
 			title: 'Loadmore 加载更多',
 			title_en: 'Loadmore',
 		}, {
