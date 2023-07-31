@@ -115,7 +115,7 @@ export default {
 			return uni.upx2px(this.btnWidth);
 		},
 		allBtnWidth() {
-			return uni.upx2px(this.btnWidth) * this.options.length;
+			return uni.upx2px(this.btnWidth) * this.options.length + 1;
 		},
 		btnStyle() {
 			return style => {
