@@ -225,7 +225,7 @@ export default {
 				let num = 1;
 				let column = this.list;
 				// 只要有元素并且第一个元素有children属性，继续历遍
-				while(column[0][this.childName]) {
+				while(column[0][this.childName].length>0) {
 					column = column[0] ? column[0][this.childName] : {};
 					num ++;
 				}
