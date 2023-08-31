@@ -9,7 +9,7 @@
 			backgroundColor: bgColor
 		}"
 	>
-		<u-icon :size="iconSize" :name="icon" v-if="icon" :custom-style="iconStyle" class="u-cell__left-icon-wrap"></u-icon>
+		<u-icon :size="iconSize" :name="icon" v-if="icon" :custom-style="iconStyle" :custom-prefix="customIcon" class="u-cell__left-icon-wrap"></u-icon>
 		<view class="u-flex" v-else>
 			<slot name="icon"></slot>
 		</view>
@@ -71,6 +71,10 @@
 export default {
 	name: 'u-cell-item',
 	props: {
+		customIcon: {
+			type: String,
+			default: 'uicon'
+		},
 		// 左侧图标名称(只能uView内置图标)，或者图标src
 		icon: {
 			type: String,

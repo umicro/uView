@@ -17,6 +17,7 @@
 				<text class="u-action-sheet-item__subtext u-line-1" v-if="item.subText">{{item.subText}}</text>
 			</view>
 		</block>
+		<slot />
 		<view class="u-gab" v-if="cancelBtn">
 		</view>
 		<view @touchmove.stop.prevent class="u-actionsheet-cancel u-action-sheet-item" hover-class="u-hover-class"
