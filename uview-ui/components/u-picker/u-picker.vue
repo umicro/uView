@@ -21,7 +21,7 @@
 				</view>
 			</view>
 			<view class="u-picker-body">
-				<picker-view v-if="mode == 'region'" :value="valueArr" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
+				<picker-view v-if="mode == 'region'" :value="valueArr" :indicator-style="indicatorStyle" @change="change" class="u-picker-view" @pickstart="pickstart" @pickend="pickend">
 					<picker-view-column v-if="!reset && params.province">
 						<view class="u-column-item" v-for="(item, index) in provinces" :key="index">
 							<view class="u-line-1">{{ item.label }}</view>
@@ -106,6 +106,7 @@ import areas from '../../libs/util/area.js';
  * @tutorial https://www.uviewui.com/components/picker.html
  * @property {Object} params 需要显示的参数，见官网说明
  * @property {String} mode 模式选择，region-地区类型，time-时间类型（默认time）
+ * @property {String} indicatorStyle 设置选择器中间选中框的样式(默认height: 37rpx;)
  * @property {String Number} start-year 可选的开始年份，mode=time时有效（默认1950）
  * @property {String Number} end-year 可选的结束年份，mode=time时有效（默认2050）
  * @property {Boolean} safe-area-inset-bottom 是否开启底部安全区适配（默认false）
@@ -153,6 +154,11 @@ export default {
 			default() {
 				return [];
 			}
+		},
+	    // 设置选择器中间选中框的样式
+		indicatorStyle: {
+		type: String,
+		default: "height: 37rpx;",
 		},
 		// 当mode=selector或者mode=multiSelector时，提供的默认选中的下标
 		defaultSelector: {
