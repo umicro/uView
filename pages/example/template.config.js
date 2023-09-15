@@ -21,11 +21,11 @@ export default [
 				title: 'WxCenter 仿微信个人中心',
 				title_en: 'WxCenter',
 			},
-			// {
-			// 	path: '/pages/template/douyin/index',
-			// 	icon: 'douyin',
-			// 	title: 'Douyin 仿抖音',
-			// },
+			{
+				path: '/pages/template/douyin/index',
+				icon: 'douyin',
+				title: 'Douyin 仿抖音',
+			},
 			{
 				path: '/pages/template/keyboardPay/index',
 				icon: 'keyboardPay',

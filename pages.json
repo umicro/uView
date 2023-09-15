@@ -234,12 +234,13 @@
 					}
 				},
 				// douyin 仿抖音
-				// {
-				// 	"path": "douyin/index",
-				// 	"style": {
-				// 		"navigationBarTitleText": "douyin 仿抖音"
-				// 	}
-				// },
+				{
+					"path": "douyin/index",
+					"style": {
+						"navigationBarTitleText": "douyin 仿抖音",
+						"navigationStyle": "custom"
+					}
+				},
 				// mallMenu商城分类
 				{
 					"path": "mallMenu/index2",
