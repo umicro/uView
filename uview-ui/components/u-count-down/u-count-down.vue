@@ -10,7 +10,7 @@
 			:style="{fontSize: separatorSize + 'rpx', color: separatorColor, paddingBottom: separator == 'colon' ? '4rpx' : 0}"
 			v-if="showDays && (hideZeroDay || (!hideZeroDay && d != '00'))"
 		>
-			{{ separator == 'colon' ? ':' : '天' }}
+			{{ separator == 'colon' ? ':' : dayLabel }}
 		</view>
 		<view class="u-countdown-item" :style="[itemStyle]" v-if="showHours">
 			<view class="u-countdown-time" :style="{ fontSize: fontSize + 'rpx', color: color}">
@@ -22,7 +22,7 @@
 			:style="{fontSize: separatorSize + 'rpx', color: separatorColor, paddingBottom: separator == 'colon' ? '4rpx' : 0}"
 			v-if="showHours"
 		>
-			{{ separator == 'colon' ? ':' : '时' }}
+			{{ separator == 'colon' ? ':' : hourLabel }}
 		</view>
 		<view class="u-countdown-item" :style="[itemStyle]" v-if="showMinutes">
 			<view class="u-countdown-time" :style="{ fontSize: fontSize + 'rpx', color: color}">
@@ -34,7 +34,7 @@
 			:style="{fontSize: separatorSize + 'rpx', color: separatorColor, paddingBottom: separator == 'colon' ? '4rpx' : 0}"
 			v-if="showMinutes"
 		>
-			{{ separator == 'colon' ? ':' : '分' }}
+			{{ separator == 'colon' ? ':' : minuteLabel }}
 		</view>
 		<view class="u-countdown-item" :style="[itemStyle]" v-if="showSeconds">
 			<view class="u-countdown-time" :style="{ fontSize: fontSize + 'rpx', color: color}">
@@ -46,7 +46,7 @@
 			:style="{fontSize: separatorSize + 'rpx', color: separatorColor, paddingBottom: separator == 'colon' ? '4rpx' : 0}"
 			v-if="showSeconds && separator == 'zh'"
 		>
-			秒
+			{{ secondLabel }}
 		</view>
 	</view>
 </template>
@@ -158,6 +158,26 @@ export default {
 		hideZeroDay: {
 			type: Boolean,
 			default: false
+		},
+		// 天的单位
+		dayLabel: {
+			type: String,
+			default: "天",
+		},
+		// 小时的单位
+		hourLabel: {
+			type: String,
+			default: "时"
+		},
+		// 分钟的单位
+		minuteLabel: {
+			type: String,
+			default: "分"
+		},
+		// 秒的单位
+		secondLabel: {
+			type: String,
+			default: "秒"
 		}
 	},
 	watch: {
