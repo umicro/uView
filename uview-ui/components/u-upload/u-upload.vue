@@ -394,12 +394,9 @@ export default {
 				let beforeResponse = this.beforeUpload.bind(this.$u.$parent.call(this))(index, this.lists);
 				// 判断是否返回了promise
 				if (!!beforeResponse && typeof beforeResponse.then === 'function') {
-					await beforeResponse.then(res => {
-						// promise返回成功，不进行动作，继续上传
-					}).catch(err => {
-						// 进入catch回调的话，继续下一张
-						return this.uploadFile(index + 1);
-					})
+					// promise 或 async 返回 false，或进入 catch 回调，继续下一张；否则不进行动作，继续上传
+					const result = await beforeResponse.catch(() => false);
+					if (result === false) return this.uploadFile(index + 1);
 				} else if(beforeResponse === false) {
 					// 如果返回false，继续下一张图片的上传
 					return this.uploadFile(index + 1);
@@ -476,13 +473,10 @@ export default {
 							let beforeResponse = this.beforeRemove.bind(this.$u.$parent.call(this))(index, this.lists);
 							// 判断是否返回了promise
 							if (!!beforeResponse && typeof beforeResponse.then === 'function') {
-								await beforeResponse.then(res => {
-									// promise返回成功，不进行动作，继续上传
-									this.handlerDeleteItem(index);
-								}).catch(err => {
-									// 如果进入promise的reject，终止删除操作
-									this.showToast('已终止移除');
-								})
+								// promise 或 async 返回 false，或进入 catch 回调，终止删除操作；否则执行删除
+								const result = await beforeResponse.catch(() => false);
+								if (result === false) return this.showToast('已终止移除');
+								this.handlerDeleteItem(index);
 							} else if(beforeResponse === false) {
 								// 返回false，终止删除
 								this.showToast('已终止移除');
