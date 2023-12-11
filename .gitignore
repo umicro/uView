@@ -3,3 +3,4 @@
 /.idea/*
 deploy.sh
 .hbuilderx/
+*.DS_Store
