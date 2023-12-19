@@ -1,6 +1,7 @@
 <template>
-	<view v-if="visibleSync" :style="[customStyle, {
-		zIndex: uZindex - 1
+	<view v-if="visible" :style="[customStyle, {
+		zIndex: uZindex - 1,
+		display: visibleSync?'':'none'
 	}]" class="u-drawer" hover-stop-propagation>
 		<u-mask :duration="duration" :custom-style="maskCustomStyle" :maskClickAble="maskCloseAble" :z-index="uZindex - 2" :show="showDrawer && mask" @click="maskClick"></u-mask>
 		<view
@@ -65,6 +66,7 @@
  * @property {String} close-icon-pos 自定义关闭图标位置（默认top-right）
  * @property {String} close-icon-color 关闭图标的颜色（默认#909399）
  * @property {Number | String} close-icon-size 关闭图标的大小，单位rpx（默认30）
+ * @property {Boolean} remove-when-hide 关闭时是否移除（默认true）
  * @event {Function} open 弹出层打开
  * @event {Function} close 弹出层收起
  * @example <u-popup v-model="show"><view>出淤泥而不染，濯清涟而不妖</view></u-popup>
@@ -193,10 +195,16 @@ export default {
 		duration: {
 			type: [String, Number],
 			default: 250
+		},
+		// 关闭时是否移除（默认true）
+		removeWhenHide: {
+			type: Boolean,
+			default: true,
 		}
 	},
 	data() {
 		return {
+			visible: false,
 			visibleSync: false,
 			showDrawer: false,
 			timer: null,
@@ -273,7 +281,14 @@ export default {
 				this.close();
 			}
 			this.closeFromInner = false;
-		}
+		},
+		visibleSync(visibleSync) {
+			if (this.removeWhenHide) {
+				this.visible = visibleSync;
+			} else {
+				this.visible = true;
+			}
+		},
 	},
 	mounted() {
 		// 组件渲染完成时，检查value是否为true，如果是，弹出popup
