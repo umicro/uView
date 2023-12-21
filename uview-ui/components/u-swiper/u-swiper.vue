@@ -178,7 +178,10 @@
 			// 监听外部current的变化，实时修改内部依赖于此测uCurrent值，如果更新了current，而不是更新uCurrent，
 			// 就会错乱，因为指示器是依赖于uCurrent的
 			current(n) {
-				this.uCurrent = n;
+				// list长度不为0，则 初始uCurrent 为1 , 否则默认为 0
+				if(this.list.length){
+					this.uCurrent = n;
+				}
 			}
 		},
 		data() {

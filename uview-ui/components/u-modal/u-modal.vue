@@ -208,6 +208,7 @@
 		methods: {
 			confirm() {
 				// 异步关闭
+				if(this.loading) return
 				if (this.asyncClose) {
 					this.loading = true;
 				} else {
