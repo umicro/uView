@@ -77,6 +77,10 @@
 			}
 		},
 		props: {
+			// 传递需要校验的对象
+			target: {
+				type: Object,
+			},
 			// input的label提示语
 			label: {
 				type: String,
@@ -273,7 +277,12 @@
 			// 校验数据
 			validation(trigger, callback = () => {}) {
 				// 检验之间，先获取需要校验的值
-				this.fieldValue = this.parent.model[this.prop];
+				if (this.target) {
+					this.fieldValue = this.target[this.prop];
+				} else {
+					this.fieldValue = this.parent.model[this.prop];
+				}
+
 				// blur和change是否有当前方式的校验规则
 				let rules = this.getFilteredRule(trigger);
 				// 判断是否有验证规则，如果没有规则，也调用回调方法，否则父组件u-form会因为
