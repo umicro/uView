@@ -56,6 +56,8 @@
  * countDown 倒计时
  * @description 该组件一般使用于某个活动的截止时间上，通过数字的变化，给用户明确的时间感受，提示用户进行某一个行为操作。
  * @tutorial https://www.uviewui.com/components/countDown.html
+ * @property {Boolean} positive  如果为true,则表示正计时而不是倒计时
+ * @property {Number} maxiumTime  如果 positive 为 true， 则表示顺计时的最大时间，如果到达此时间，则触发 end 消息, 小于等于0表示始终不触发 end 消息
  * @property {String Number} timestamp 倒计时，单位为秒
  * @property {Boolean} autoplay 是否自动开始倒计时，如果为false，需手动调用开始方法。见官网说明（默认true）
  * @property {String} separator 分隔符，colon为英文冒号，zh为中文（默认colon）
@@ -79,7 +81,17 @@
 export default {
 	name: 'u-count-down',
 	props: {
-		// 倒计时的时间，秒为单位
+		// 如果为 true, 则表示正计时
+		positive: {
+			type: Boolean,
+			default: false,
+		},
+		// 如果 positive 为 true， 则表示顺计时的最大时间，如果到达此时间，则触发 end 消息, 小于等于0表示始终不触发 end 消息
+		maxiumTime: {
+			type: Number,
+			default: 86400,
+		},
+		// 顺/倒计时的开始时间，秒为单位, 
 		timestamp: {
 			type: [Number, String],
 			default: 0
@@ -166,6 +178,16 @@ export default {
 			// 如果倒计时间发生变化，清除定时器，重新开始倒计时
 			this.clearTimer();
 			this.start();
+		},
+		positive(newVal, oldVal) {
+			// 如果倒计时间发生变化，清除定时器，重新开始倒计时
+			this.clearTimer();
+			this.start();
+		},
+		maxiumTime(newVal, oldVal) {
+			// 如果倒计时间发生变化，清除定时器，重新开始倒计时
+			this.clearTimer();
+			this.start();
 		}
 	},
 	data() {
@@ -217,19 +239,35 @@ export default {
 			this.seconds = Number(this.timestamp);
 			this.formatTime(this.seconds);
 			this.timer = setInterval(() => {
-				this.seconds--;
+				if (this.positive) this.seconds ++;
+				else this.seconds--;
 				// 发出change事件
 				this.$emit('change', this.seconds);
-				if (this.seconds < 0) {
-					return this.end();
+				if (this.positive) { //顺计时
+					if (this.seconds > this.maxiumTime && this.maxiumTime > 0) {
+						return this.end();
+					}
+				}
+				else {  //倒计时
+					if (this.seconds < 0) {
+						return this.end();
+					}
 				}
 				this.formatTime(this.seconds);
 			}, 1000);
 		},
 		// 格式化时间
 		formatTime(seconds) {
-			// 小于等于0的话，结束倒计时
-			seconds <= 0 && this.end();
+			if (this.positive) { //顺计时
+				if (this.seconds >= this.maxiumTime && this.maxiumTime > 0) {
+					this.end();
+				}
+			}
+			else {  //倒计时
+				if (this.seconds <= 0) { // 小于等于0的话，结束倒计时			
+					this.end();
+				}
+			}
 			let [day, hour, minute, second] = [0, 0, 0, 0];
 			day = Math.floor(seconds / (60 * 60 * 24));
 			// 判断是否显示“天”参数，如果不显示，将天部分的值，加入到小时中

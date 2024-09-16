@@ -266,7 +266,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../../libs/css/style.components.scss";
-@import '../../iconfont.css';
+@import '../../iconfont.scss';
 
 .u-icon {
 	display: inline-flex;
