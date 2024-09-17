@@ -4,7 +4,8 @@
   "description": "<p align=\"center\">\r     <img alt=\"logo\" src=\"https://uviewui.com/common/logo.png\" width=\"120\" height=\"120\" style=\"margin-bottom: 10px;\">\r </p>\r <h3 align=\"center\" style=\"margin: 30px 0 30px;font-weight: bold;font-size:40px;\">uView</h3>\r <h3 align=\"center\">多平台快速开发的UI框架</h3>",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"deploy": "node deploy"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/YanxinNet/uView#readme",
   "dependencies": {
-    "vue-i18n": "^8.20.0"
+    "vue-i18n": "^8.20.0",
+	"anve-upload-upyun": "^1.0.8"
   }
 }

@@ -3,3 +3,5 @@
 /.idea/*
 deploy.sh
 .hbuilderx/
+
+deploy
