@@ -4,7 +4,7 @@
 			<u-icon
 				:name="activeIndex > index ? elActiveIcon : inactiveIcon"
 				@click="click(index + 1, $event)"
-				:color="activeIndex > index ? elActiveColor : inactiveColor"
+				:color="disabled ? '#c8c9cc' : activeIndex > index ? elActiveColor : inactiveColor"
 				:custom-style="{
 					fontSize: size + 'rpx',
 					padding: `0 ${gutter / 2 + 'rpx'}`
