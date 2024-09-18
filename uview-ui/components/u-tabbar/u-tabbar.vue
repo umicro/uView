@@ -7,7 +7,7 @@
 			'u-border-top': borderTop
 		}">
 			<view class="u-tabbar__content__item" v-for="(item, index) in list" :key="index" :class="{
-				'u-tabbar__content__circle': midButton &&item.midButton
+				'u-tabbar__content__circle': midButton &&item.midButton, 'active': index === value
 			}" @tap.stop="clickHandler(index)" :style="{
 				backgroundColor: bgColor
 			}">
