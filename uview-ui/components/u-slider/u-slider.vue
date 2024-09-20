@@ -12,8 +12,8 @@
 				}
 			]"
 		>
-			<view class="u-slider__button-wrap" @touchstart="onTouchStart" 
-				@touchmove="onTouchMove" @touchend="onTouchEnd" 
+			<view class="u-slider__button-wrap" @touchstart="onTouchStart"
+				@touchmove="onTouchMove" @touchend="onTouchEnd"
 				@touchcancel="onTouchEnd">
 				<slot v-if="$slots.default  || $slots.$default"/>
 				<view v-else class="u-slider__button" :style="[blockStyle, {
@@ -213,7 +213,6 @@ export default {
 .u-slider {
 	position: relative;
 	border-radius: 999px;
-	border-radius: 999px;
 	background-color: #ebedf0;
 }
 
@@ -230,7 +229,6 @@ export default {
 .u-slider__gap {
 	position: relative;
 	border-radius: inherit;
-	transition: width 0.2s;
 	transition: width 0.2s;
 	background-color: #1989fa;
 }

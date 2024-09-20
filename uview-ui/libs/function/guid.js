@@ -6,7 +6,7 @@
  * v-for的时候,推荐使用后端返回的id而不是循环的index
  * @param {Number} len uuid的长度
  * @param {Boolean} firstU 将返回的首字母置为"u"
- * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
+ * @param {Number} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
  */
 function guid(len = 32, firstU = true, radix = null) {
 	let chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
@@ -29,7 +29,7 @@ function guid(len = 32, firstU = true, radix = null) {
 			}
 		}
 	}
-	// 移除第一个字符,并用u替代,因为第一个字符为数值时,该guuid不能用作id或者class
+	// 移除第一个字符,并用u替代,因为第一个字符为数值时,该guid不能用作id或者class
 	if (firstU) {
 		uuid.shift();
 		return 'u' + uuid.join('');

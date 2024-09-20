@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+    - name: 创建一个新issue
+      url: https://new-issue.uviewui.com/
+      about: 请使用接下来的链接创建新issue。
+    - name: Create new issue
+      url: https://new-issue.uviewui.com/?lang=en
+      about: Please use the following link to create a new issue.

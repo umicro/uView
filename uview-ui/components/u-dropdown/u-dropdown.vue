@@ -171,7 +171,8 @@
 			},
 			// 打开下拉菜单
 			open(index) {
-				this.getContentHeight()
+				// 嵌套popup使用时可能获取不到正确的高度，重新计算
+				if (this.contentHeight < 1) this.getContentHeight()
 				// 重置高亮索引，否则会造成多个菜单同时高亮
 				// this.highlightIndex = [];
 				// 展开时，设置下拉内容的样式

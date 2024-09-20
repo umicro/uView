@@ -4,7 +4,7 @@
 			background: bgColor
 		}">
 		<scroll-view scroll-x class="u-scroll-view" :scroll-left="scrollLeft" scroll-with-animation :style="{ zIndex: zIndex + 1 }">
-			<view class="u-tabs-scroll-box" :class="{'u-tabs-scorll-flex': !isScroll}">
+			<view class="u-tabs-scroll-box" :class="{'u-tabs-scroll-flex': !isScroll}">
 				<view class="u-tabs-item" :style="[tabItemStyle(index)]"
 				 v-for="(item, index) in getTabs" :key="index" :class="[preId + index]" @tap="emit(index)">
 					<u-badge :count="item[count] || item['count'] || 0" :offset="offset" size="mini"></u-badge>
@@ -428,12 +428,12 @@
 		position: relative;
 	}
 
-	.u-tabs-scorll-flex {
+	.u-tabs-scroll-flex {
 		@include vue-flex;
 		justify-content: space-between;
 	}
 
-	.u-tabs-scorll-flex .u-tabs-item {
+	.u-tabs-scroll-flex .u-tabs-item {
 		flex: 1;
 	}
 
