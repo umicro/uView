@@ -1,5 +1,5 @@
 <template>
-	<view class="u-switch" :class="[value == true ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']" @tap="onClick"
+	<view class="u-switch" :class="[value == this.activeValue ? 'u-switch--on' : '', disabled ? 'u-switch--disabled' : '']" @tap="onClick"
 	 :style="[switchStyle]">
 		<view class="u-switch__node node-class" :style="{
 			width: $u.addUnit(this.size),
@@ -55,7 +55,7 @@
 			},
 			// 通过v-model双向绑定的值
 			value: {
-				type: Boolean,
+				type: [Boolean, String, Number],
 				default: false
 			},
 			// 是否使手机发生短促震动，目前只在iOS的微信小程序有效(2020-05-06)
@@ -76,18 +76,21 @@
 		},
 		data() {
 			return {
-
+				
 			}
+		},
+		mounted(){
+			this.$emit('input', this.activeValue );
 		},
 		computed: {
 			switchStyle() {
 				let style = {};
 				style.fontSize = this.size + 'rpx';
-				style.backgroundColor = this.value ? this.activeColor : this.inactiveColor;
+				style.backgroundColor = this.value == this.activeValue ? this.activeColor : this.inactiveColor;
 				return style;
 			},
 			loadingColor() {
-				return this.value ? this.activeColor : null;
+				return this.value == this.activeValue ? this.activeColor : null;
 			}
 		},
 		methods: {
@@ -95,10 +98,10 @@
 				if (!this.disabled && !this.loading) {
 					// 使手机产生短促震动，微信小程序有效，APP(HX 2.6.8)和H5无效
 					if(this.vibrateShort) uni.vibrateShort();
-					this.$emit('input', !this.value);
+					this.$emit('input', this.value== this.activeValue ? this.inactiveValue: this.activeValue );
 					// 放到下一个生命周期，因为双向绑定的value修改父组件状态需要时间，且是异步的
 					this.$nextTick(() => {
-						this.$emit('change', this.value ? this.activeValue : this.inactiveValue);
+						this.$emit('change', this.value);
 					})
 				}
 			}
