@@ -8,7 +8,7 @@
 			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
 				<view class="u-flex">
 					<text class="u-dropdown__menu__item__text" :style="{
-						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex == index) ? activeColor : inactiveColor,
+						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex.indexOf(index))>-1 ? activeColor : inactiveColor,
 						fontSize: $u.addUnit(titleSize)
 					}">{{item.title}}</text>
 					<view class="u-dropdown__menu__item__arrow" :class="{
@@ -124,7 +124,7 @@
 					opacity: 0
 				},
 				// 让某个菜单保持高亮的状态
-				highlightIndex: 99999,
+				highlightIndex: [],
 				contentHeight: 0
 			}
 		},
@@ -144,7 +144,6 @@
 			this.children = [];
 		},
 		mounted() {
-			this.getContentHeight();
 		},
 		methods: {
 			init() {
@@ -175,7 +174,7 @@
 				// 嵌套popup使用时可能获取不到正确的高度，重新计算
 				if (this.contentHeight < 1) this.getContentHeight()
 				// 重置高亮索引，否则会造成多个菜单同时高亮
-				// this.highlightIndex = 9999;
+				// this.highlightIndex = [];
 				// 展开时，设置下拉内容的样式
 				this.contentStyle = {
 					zIndex: 11,
@@ -192,6 +191,7 @@
 			},
 			// 设置下拉菜单处于收起状态
 			close() {
+				this.contentHeight=0
 				this.$emit('close', this.current);
 				// 设置为收起状态，同时current归位，设置为空字符串
 				this.active = false;
@@ -208,9 +208,9 @@
 				if (!this.closeOnClickMask) return;
 				this.close();
 			},
-			// 外部手动设置某个菜单高亮
-			highlight(index = undefined) {
-				this.highlightIndex = index !== undefined ? index : 99999;
+			// 外部手动设置多个菜单高亮(传来数组)
+			highlight(index) {
+				this.highlightIndex = (Array.isArray(index) ? index : []);
 			},
 			// 获取下拉菜单内容的高度
 			getContentHeight() {

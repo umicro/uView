@@ -36,6 +36,11 @@ export default {
 		idKey: {
 			type: String,
 			default: 'id'
+		},
+		//是否是新增,这个由父组件动态传入
+		isAdd:{
+			type:Boolean,
+			default:false
 		}
 	},
 	data() {
@@ -48,11 +53,27 @@ export default {
 	},
 	watch: {
 		copyFlowList(nVal, oVal) {
+			if(this.isAdd){
 			// 取差值，即这一次数组变化新增的部分
 			let startIndex = Array.isArray(oVal) && oVal.length > 0 ? oVal.length : 0;
 			// 拼接上原有数据
 			this.tempList = this.tempList.concat(this.cloneData(nVal.slice(startIndex)));
 			this.splitData();
+			}else{
+				//如果不是新增就要初始化重新渲染
+				this.leftList=[],
+				this.rightList=[],
+				this.tempList = this.cloneData(nVal);
+				//如果只传来长度为1的数组那就直接放到左侧 如使用splitData会导致放到右边(wx)
+				if(this.tempList.length==1){
+					let item = this.tempList[0];
+					if(item){
+						this.leftList.push(item)
+					}
+				}else{
+					this.splitData();
+				}
+			}
 		}
 	},
 	mounted() {
@@ -101,6 +122,7 @@ export default {
 		cloneData(data) {
 			return JSON.parse(JSON.stringify(data));
 		},
+		
 		// 清空数据列表
 		clear() {
 			this.leftList = [];
