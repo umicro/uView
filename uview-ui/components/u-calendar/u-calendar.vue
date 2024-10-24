@@ -224,6 +224,16 @@
 			toolTip: {
 				type: String,
 				default: '选择日期'
+			},
+			//默认开始日期
+			defaultStartDate: {
+				type: String,
+				default: ''
+			},
+			//默认结束日期
+			defaultEndDate: {
+				type: String,
+				default: ''
 			}
 		},
 		data() {
@@ -337,6 +347,10 @@
 			formatNum: function(num) {
 				return num < 10 ? '0' + num : num + '';
 			},
+			//反向格式化数字
+			formatNumReverse: function (num) {
+				return num > 10 ? num : parseInt(num);
+			},
 			//一个月有多少天
 			getMonthDay(year, month) {
 				let days = new Date(year, month, 0).getDate();
@@ -390,6 +404,7 @@
 				this.weekday = this.getWeekday(this.year, this.month);
 				this.weekdayArr=this.generateArray(1,this.weekday)
 				this.showTitle = `${this.year}年${this.month}月`;
+				if (this.defaultStartDate) this.setDate(this.defaultStartDate, this.defaultEndDate)
 				if (this.isChange && this.mode == 'date') {
 					this.btnFix(true);
 				}
@@ -484,6 +499,20 @@
 						endDate: endDate,
 						endWeek: endWeek
 					});
+				}
+			},
+			setDate(startDate, endDate = null) {
+				const defaultStartDateArr = startDate.split('-')
+				this.startYear = defaultStartDateArr[0]
+				this.startMonth = this.formatNumReverse(defaultStartDateArr[1])
+				this.startDay = this.formatNumReverse(defaultStartDateArr[2])
+				this.startDate = this.activeDate = `${this.startYear}-${this.startMonth}-${this.startDay}`
+				if (endDate) {
+					const defaultEndDateArr = endDate.split('-')
+					this.endYear = defaultEndDateArr[0]
+					this.endMonth = this.formatNumReverse(defaultEndDateArr[1])
+					this.endDay = this.formatNumReverse(defaultEndDateArr[2])
+					this.endDate = `${this.endYear}-${this.endMonth}-${this.endDay}`
 				}
 			}
 		}
