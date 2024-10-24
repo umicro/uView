@@ -74,7 +74,7 @@
 			},
 			inactiveIcon() {
 				let icon = this.customIcon ? 'heart' : 'star';
-				return this.plain ? icon : icon + '-fill'
+				return this.disabled ? icon : this.plain ? icon : icon + '-fill'
 			}
 		},
 		methods: {
