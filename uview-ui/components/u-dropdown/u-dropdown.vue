@@ -19,7 +19,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="u-dropdown__content" :style="[contentStyle, {
+		<view v-if="contentStyle.zIndex > 0" class="u-dropdown__content" :style="[contentStyle, {
 			transition: `opacity ${duration / 1000}s linear`,
 			top: $u.addUnit(height),
 			height: contentHeight + 'px'
@@ -180,15 +180,17 @@
 				this.contentStyle = {
 					zIndex: 11,
 				}
-				// 标记展开状态以及当前展开项的索引
-				this.active = true;
-				this.current = index;
-				// 历遍所有的子元素，将索引匹配的项标记为激活状态，因为子元素是通过v-if控制切换的
-				// 之所以不是因display: none，是因为nvue没有display这个属性
-				this.children.map((val, idx) => {
-					val.active = index == idx ? true : false;
+				this.$nextTick(()=>{
+					// 标记展开状态以及当前展开项的索引
+					this.active = true;
+					this.current = index;
+					// 历遍所有的子元素，将索引匹配的项标记为激活状态，因为子元素是通过v-if控制切换的
+					// 之所以不是因display: none，是因为nvue没有display这个属性
+					this.children.map((val, idx) => {
+						val.active = index == idx ? true : false;
+					})
+					this.$emit('open', this.current);
 				})
-				this.$emit('open', this.current);
 			},
 			// 设置下拉菜单处于收起状态
 			close() {
