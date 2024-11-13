@@ -32,7 +32,8 @@
 	 * @property {String Number} height 导航栏的高度，单位rpx（默认80）
 	 * @property {String Number} font-size tab文字大小，单位rpx（默认30）
 	 * @property {String Number} swiper-width tabs组件外部swiper的宽度，默认为屏幕宽度，单位rpx（默认750）
-	 * @property {String} active-color 滑块和激活tab文字的颜色（默认#2979ff）
+	 * @property {String} active-text-color 激活tab文字的颜色（默认#2979ff）
+	 * @property {String} active-bar-color 滑块激活的颜色（默认#2979ff）
 	 * @property {String} inactive-color tabs文字颜色（默认#303133）
 	 * @property {String Number} bar-width 滑块宽度，单位rpx（默认40）
 	 * @property {String Number} bar-height 滑块高度，单位rpx（默认6）
@@ -88,8 +89,13 @@
 				type: [String, Number],
 				default: 750
 			},
-			// 选中项的主题颜色
-			activeColor: {
+			// 选中项的文字颜色
+			activeTextColor: {
+				type: String,
+				default: '#2979ff'
+			},
+			// 选中项的滑块颜色
+			activeBarColor: {
 				type: String,
 				default: '#2979ff'
 			},
@@ -216,7 +222,7 @@
 						height: this.height + 'rpx',
 						lineHeight: this.height + 'rpx',
 						padding: `0 ${this.gutter / 2}rpx`,
-						color: this.tabsInfo.length > 0 ? (this.tabsInfo[index] ? this.tabsInfo[index].color : this.activeColor) : this.inactiveColor,
+						color: this.tabsInfo.length > 0 ? (this.tabsInfo[index] ? this.tabsInfo[index].color : this.activeTextColor) : this.inactiveColor,
 						fontSize: this.fontSize + 'rpx',
 						zIndex: this.zIndex + 2,
 						fontWeight: (index == this.getCurrent && this.bold) ? 'bold' : 'normal'
@@ -234,7 +240,7 @@
 					width: this.barWidthPx + 'px',
 					height: this.barHeight + 'rpx',
 					borderRadius: '100px',
-					backgroundColor: this.activeColor,
+					backgroundColor: this.activeBarColor,
 					left: this.scrollBarLeft + 'px'
 				};
 				return Object.assign(style, this.barStyle);

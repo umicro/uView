@@ -4,7 +4,7 @@
 			<view class="u-demo-title">演示效果</view>
 			<view class="u-demo-area">
 				<u-toast ref="uToast"></u-toast>
-				<u-tabs v-if="control" bg-color="#fafafa" :bold="bold" :active-color="activeColor" :list="list"
+				<u-tabs v-if="control" bg-color="#fafafa" :bold="bold" :active-text-color="activeTextColor" :active-bar-color="activeBarColor" :list="list"
 				@change="change" :current="current" :is-scroll="isScroll" :offset="offset"></u-tabs>
 			</view>
 		</view>
@@ -22,7 +22,11 @@
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">活动选项字颜色</view>
-				<u-subsection mode="button" :list="['primary', 'success', 'error', 'warning']" @change="colorChange"></u-subsection>
+				<u-subsection mode="button" :list="['primary', 'success', 'error', 'warning']" @change="textChange"></u-subsection>
+			</view>
+			<view class="u-config-item">
+				<view class="u-item-title">活动选项滑块颜色</view>
+				<u-subsection mode="button" :list="['primary', 'success', 'error', 'warning']" @change="barChange"></u-subsection>
 			</view>
 			<view class="u-config-item">
 				<view class="u-item-title">字体加粗</view>
@@ -62,7 +66,8 @@
 				sectionCurrent: 0,
 				isScroll: true,
 				tabCountIndex: 0,
-				activeColor: this.$u.color['primary'],
+				activeTextColor: this.$u.color['primary'],
+				activeBarColor: this.$u.color['primary'],
 				bold: true,
 				control: true,
 				offset: [5, -5]
@@ -114,7 +119,7 @@
 					this.control = true;
 				})
 			},
-			colorChange(e) {
+			textChange(e) {
 				let color = 'primary';
 				switch(e) {
 					case 0:
@@ -126,7 +131,21 @@
 					case 3:
 						color = 'warning';break;
 				}
-				this.activeColor = this.$u.color[color];
+				this.activeTextColor = this.$u.color[color];
+			},
+			barChange(e) {
+				let color = 'primary';
+				switch(e) {
+					case 0:
+						color = 'primary';break;
+					case 1:
+						color = 'success';break;
+					case 2:
+						color = 'error';break;
+					case 3:
+						color = 'warning';break;
+				}
+				this.activeBarColor = this.$u.color[color];
 			},
 			boldChange(e) {
 				switch(e) {
