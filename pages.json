@@ -53,10 +53,20 @@
 				}
 			}
 		}
-	],
+    ],
 	"subPackages": [{
 			"root": "pages/componentsC",
 			"pages": [
+				// 动态表单的测试
+				{
+				    "path" : "dynamicForm/dynamicForm",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "动态表单的测试",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				},
 				// test-测试
 				{
 					"path": "test/index",

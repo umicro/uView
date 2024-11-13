@@ -142,6 +142,11 @@
 			required: {
 				type: Boolean,
 				default: false
+			},
+			// 当前组件的验证器，主要用户动态表单验证使用
+			rule: {
+				type: Array,
+				default: ()=>[]
 			}
 		},
 		data() {
@@ -260,8 +265,14 @@
 			},
 
 			// 过滤出符合要求的rule规则
-			getFilteredRule(triggerType = '') {
-				let rules = this.getRules();
+			getFilteredRule(triggerType = '',rules) {
+				// 判断传入的规则，使用的是form传入的规则还是从当前组件传入的规则
+				if(rules.length){
+					rules = rules;
+				}else{
+					rules =  this.getRules();
+				}
+				
 				// 整体验证表单时，triggerType为空字符串，此时返回所有规则进行验证
 				if (!triggerType) return rules;
 				// 历遍判断规则是否有对应的事件，比如blur，change触发等的事件
@@ -272,10 +283,16 @@
 
 			// 校验数据
 			validation(trigger, callback = () => {}) {
-				// 检验之间，先获取需要校验的值
-				this.fieldValue = this.parent.model[this.prop];
-				// blur和change是否有当前方式的校验规则
-				let rules = this.getFilteredRule(trigger);
+				// 根据传入的prop的文字,切割出来后，递归获取数据
+				const propsFields = this.prop.split('.')
+				// 递归获取数据 替换之前的获取过去方式，因为有动态表单数据后，无法获取值
+				this.fieldValue = propsFields.reduce((current, item) => {
+					return current[item]
+				}, this.parent.model)
+				
+				// let rules = this.getFilteredRule(trigger);
+				//  blur和change是否有当前方式的校验规则,如果this.rule 存在则过滤this.rule 否则过滤全局
+				let rules = this.getFilteredRule(trigger,this.rule);
 				// 判断是否有验证规则，如果没有规则，也调用回调方法，否则父组件u-form会因为
 				// 对count变量的统计错误而无法进入上一层的回调
 				if (!rules || rules.length === 0) {
