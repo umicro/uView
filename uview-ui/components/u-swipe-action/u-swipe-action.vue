@@ -10,7 +10,7 @@
 				:disabled="disabled"
 				:x="moveX"
 				:style="{
-					width: movableViewWidth ? movableViewWidth : '100%'
+					width: movableAreaWidth ? movableViewWidth : '100%'
 				}"
 			>
 				<view
