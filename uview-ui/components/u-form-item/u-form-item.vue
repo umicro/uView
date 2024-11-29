@@ -212,8 +212,7 @@
 			// label的下划线
 			elBorderBottom() {
 				// 子组件的borderBottom默认为空字符串，如果不等于空字符串，意味着子组件设置了值，优先使用子组件的值
-				return this.borderBottom !== '' ? this.borderBottom : this.parentData.borderBottom ? this.parentData.borderBottom :
-					true;
+				return this.borderBottom !== '' ? this.borderBottom : this.parentData.borderBottom;
 			}
 		},
 		methods: {
