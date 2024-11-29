@@ -223,7 +223,9 @@
 					// H5端bug表现为元素尺寸的top值为导航栏底部到到元素的上边沿的距离，但是元素的bottom值确是导航栏顶部到元素底部的距离
 					// 二者是互相矛盾的，本质原因是H5端导航栏非原生，uni的开发者大意造成
 					// 这里取菜单栏的botton值合理的，不能用res.top，否则页面会造成滚动
-					this.contentHeight = windowHeight - res.bottom;
+          // this.contentHeight = windowHeight - res.bottom;
+          // 如果dropdown在tabbar下方 则windowHeight - res.bottom < 0
+          this.contentHeight = windowHeight - res.bottom > 0 ? windowHeight - res.bottom : windowHeight
 				})
 			}
 		}
