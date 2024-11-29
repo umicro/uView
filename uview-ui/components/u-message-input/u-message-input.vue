@@ -158,7 +158,7 @@
 			},
 			// 根据长度，循环输入框的个数，因为头条小程序数值不能用于v-for
 			loopCharArr() {
-				return new Array(this.maxlength);
+				return new Array(Number(this.maxlength));
 			}
 		},
 		methods: {
