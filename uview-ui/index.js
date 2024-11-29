@@ -5,7 +5,7 @@ import mixin from './libs/mixin/mixin.js'
 // 全局挂载引入http相关请求拦截插件
 import http from './libs/request'
 
-function wranning(str) {
+function warning(str) {
 	// 开发环境进行信息输出,主要是一些报错信息
 	// 这个环境的来由是在程序编写时候,点击hx编辑器运行调试代码的时候,详见:
 	// 	https://uniapp.dcloud.io/frame?id=%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e5%92%8c%e7%94%9f%e4%ba%a7%e7%8e%af%e5%a2%83
@@ -89,7 +89,7 @@ const $u = {
 	os,
 	type2icon,
 	randomArray,
-	wranning,
+	warning,
 	get: http.get,
 	post: http.post,
 	put: http.put,
