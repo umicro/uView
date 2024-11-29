@@ -129,7 +129,9 @@
 			},
 			// 保存时间戳，为了防止倒计时尚未结束，H5刷新或者各端的右上角返回上一页再进来
 			setTimeToStorage() {
-				if(!this.keepRunning || !this.timer) return;
+				// fix bug 这里不能判断this.timer，setTimeToStoreage是在定义timer之前执行的
+				if(!this.keepRunning) return;
+				// if(!this.keepRunning || !this.timer) return;
 				// 记录当前的时间戳，为了下次进入页面，如果还在倒计时内的话，继续倒计时
 				// 倒计时尚未结束，结果大于0；倒计时已经开始，就会小于初始值，如果等于初始值，说明没有开始倒计时，无需处理
 				if(this.secNum > 0 && this.secNum <= this.seconds) {
