@@ -353,11 +353,11 @@ export default {
 	//border-radius: 10rpx;
 	/* #ifndef APP-NVUE */
 	display: inline-flex;		
+	flex-direction: row;
 	/* #endif */
 	// 避免边框某些场景可能被“裁剪”，不能设置为hidden
 	overflow: visible;
 	line-height: 1;
-	@include vue-flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
