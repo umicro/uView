@@ -22,13 +22,14 @@
 		<view class="u-dropdown__content" :style="[contentStyle, {
 			transition: `opacity ${duration / 1000}s linear`,
 			top: $u.addUnit(height),
-			height: contentHeight + 'px'
+			height: contentHeight + 'px',
+			pointerEvents: active ? 'auto' : 'none'
 		}]"
 		 @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
 				<slot></slot>
 			</view>
-			<view class="u-dropdown__content__mask"></view>
+			<view v-if="active" class="u-dropdown__content__mask"></view>
 		</view>
 	</view>
 </template>
@@ -143,9 +144,6 @@
 			// 引用所有子组件(u-dropdown-item)的this，不能在data中声明变量，否则在微信小程序会造成循环引用而报错
 			this.children = [];
 		},
-		mounted() {
-			this.getContentHeight();
-		},
 		methods: {
 			init() {
 				// 当某个子组件内容变化时，触发父组件的init，父组件再让每一个子组件重新初始化一遍
@@ -157,6 +155,7 @@
 			},
 			// 点击菜单
 			menuClick(index) {
+				this.getContentHeight();
 				// 判断是否被禁用
 				if (this.menuList[index].disabled) return;
 				// 如果点击时的索引和当前激活项索引相同，意味着点击了激活项，需要收起下拉菜单
@@ -275,7 +274,7 @@
 			left: 0px;
 			bottom: 0;
 			overflow: hidden;
-			
+
 
 			&__mask {
 				position: absolute;
