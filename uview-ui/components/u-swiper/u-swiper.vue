@@ -27,7 +27,7 @@
 				top: indicatorPos == 'topLeft' || indicatorPos == 'topCenter' || indicatorPos == 'topRight' ? '12rpx' : 'auto',
 				bottom: indicatorPos == 'bottomLeft' || indicatorPos == 'bottomCenter' || indicatorPos == 'bottomRight' ? '12rpx' : 'auto',
 				justifyContent: justifyContent,
-				padding: `0 ${effect3d ? '74rpx' : '24rpx'}`
+				padding: `0 ${effect3d ? '74rpx' : '0'}`
 			}">
 			<block v-if="mode == 'rect'">
 				<view class="u-indicator-item-rect" :class="{ 'u-indicator-item-rect-active': index == uCurrent }" v-for="(item, index) in list"
