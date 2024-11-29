@@ -48,7 +48,7 @@
 				arr: [],
 				scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
 				timer: null, // 定时器
-				
+				isSwichMenu: false // 当前是否点击切换菜单
 			}
 		},
 		onLoad() {
@@ -68,6 +68,7 @@
 				this.$nextTick(function(){
 					this.scrollRightTop = this.arr[index];
 					this.current = index;
+					this.isSwichMenu = true;
 					this.leftMenuStatus(index);
 				})
 			},
@@ -148,6 +149,10 @@
 					await this.getElRect('menu-scroll-view', 'menuHeight');
 				}
 				setTimeout(() => { // 节流
+					if (this.isSwichMenu) { // 如果当前是切换 tab 状态，滚动不再与 menu 交互 
+						this.isSwichMenu = false;
+						return;
+					}
 					this.timer = null;
 					// scrollHeight为右边菜单垂直中点位置
 					let scrollHeight = e.detail.scrollTop + this.menuHeight / 2;
