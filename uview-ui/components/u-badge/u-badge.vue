@@ -108,10 +108,14 @@
 					style.right = 0;
 					// Y轴-50%，意味着badge向上移动了badge自身高度一半，X轴50%，意味着向右移动了自身宽度一半
 					style.transform = "translateY(-50%) translateX(50%)";
+				} else if(this.isDot) {
+					style.top = 4 + 'rpx';
+					style.right = 0;
+					style.transform = "translateY(0) translateX(0)";
 				} else {
 					style.top = this.offset[0] + 'rpx';
 					style.right = this.offset[1] + 'rpx';
-					style.transform = "translateY(0) translateX(0)";
+					style.transform = `translateY(${this.offset[0]}) translateX(0)`;
 				}
 				// 如果尺寸为mini，后接上scale()
 				if(this.size == 'mini') {
@@ -146,10 +150,12 @@
 		/* #endif */
 		justify-content: center;
 		align-items: center;
-		line-height: 24rpx;
-		padding: 4rpx 8rpx;
+		line-height: 20rpx;
+		padding: 5rpx 8rpx;
 		border-radius: 100rpx;
 		z-index: 9;
+		min-width: 32rpx;
+		border: 1px solid #FA3534;
 		
 		&--bg--primary {
 			background-color: $u-type-primary;
@@ -175,6 +181,8 @@
 	.u-badge-dot {
 		height: 16rpx;
 		width: 16rpx;
+		padding: 0;
+		min-width: 16rpx;
 		border-radius: 100rpx;
 		line-height: 1;
 	}
