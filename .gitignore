@@ -5,3 +5,4 @@ deploy.sh
 .hbuilderx/
 
 deploy
+.DS_Store
