@@ -9,6 +9,7 @@
 			<view class="u-steps__item" 
 				:class="['u-steps__item--' + direction]" 
 				v-for="(item, index) in list" :key="index"
+				@click="stepClick(index)"
 			>
 				<view
 					class="u-steps__item__num"
@@ -104,6 +105,12 @@ export default {
 	data() {
 		return {};
 	},
+	methods: {
+	  // 单个step点击事件
+	  stepClick(index) {
+		this.$emit('stepClick', index)
+	  }
+    }
 };
 </script>
 
